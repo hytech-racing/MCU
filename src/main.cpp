@@ -150,164 +150,103 @@ const uint16_t LAUNCH_GO_THRESHOLD = 900;
 const uint16_t LAUNCH_STOP_THRESHOLD = 600;
 float launch_rate_target = 0.0;
 
-void setup() {
-  // no torque can be provided on startup
+inline void set_all_inverters_dc_on(bool input);
+inline void calculate_pedal_implausibilities();
 
+inline float max_allowed_torque(float maxwatts, float rpm);
+inline void set_inverter_torques_regen_only();
+inline void set_all_inverters_disabled();
+inline void set_all_inverters_no_torque();
+bool check_all_inverters_quit_dc_on();
+inline void check_TS_active();
+bool check_all_inverters_system_ready();
 
-  mcu_status.set_max_torque(0);
-  mcu_status.set_torque_mode(0);
-  mcu_status.set_software_is_ok(true);
+inline void set_inverter_torques();
+uint8_t check_all_inverters_error();
+bool check_all_inverters_quit_inverter_on();
+inline void set_all_inverters_inverter_enable(bool input);
+inline void set_all_inverters_no_torque();
 
-  set_all_inverters_disabled();
+inline void set_all_inverters_driver_enable(bool input);
 
-
-  //   IMU set up
-  IMU.regWrite(MSC_CTRL, 0xC1);  // Enable Data Ready, set polarity
-  delay(20);
-  IMU.regWrite(FLTR_CTRL, 0x504); // Set digital filter
-  delay(20);
-  IMU.regWrite(DEC_RATE, 0), // Disable decimation
-               delay(20);
-
-  pinMode(BRAKE_LIGHT_CTRL, OUTPUT);
-
-  // change to input if comparator is PUSH PULL
-  pinMode(INVERTER_EN, OUTPUT);
-  pinMode(INVERTER_24V_EN, OUTPUT);
-
-  pinMode(WATCHDOG_INPUT, OUTPUT);
-  // the initial state of the watchdog is high
-  // this is reflected in the static watchdog_state
-  // starting high
-  digitalWrite(WATCHDOG_INPUT, HIGH);
-  pinMode(SOFTWARE_OK, OUTPUT);
-  digitalWrite(SOFTWARE_OK, HIGH);
-
-  pinMode(ECU_CLK, OUTPUT);
-  pinMode(ECU_SDI, INPUT);
-  pinMode(ECU_SDO, OUTPUT);
-
-#if DEBUG
-  Serial.begin(115200);
-#endif
-  FRONT_INV_CAN.begin();
-  FRONT_INV_CAN.setBaudRate(500000);
-  REAR_INV_CAN.begin();
-  REAR_INV_CAN.setBaudRate(500000);
-  TELEM_CAN.begin();
-  TELEM_CAN.setBaudRate(500000);
-  FRONT_INV_CAN.enableMBInterrupts();
-  REAR_INV_CAN.enableMBInterrupts();
-  TELEM_CAN.enableMBInterrupts();
-  FRONT_INV_CAN.onReceive(parse_front_inv_can_message);
-  REAR_INV_CAN.onReceive(parse_rear_inv_can_message);
-  TELEM_CAN.onReceive(parse_telem_can_message);
-  delay(500);
-
-#if DEBUG
-  Serial.println("CAN system and serial communication initialized");
-#endif
-
-
-  // these are false by default
-  mcu_status.set_bms_ok_high(false);
-  mcu_status.set_imd_ok_high(false);
-
-  digitalWrite(INVERTER_24V_EN, HIGH);
-  digitalWrite(INVERTER_EN, HIGH);
-  mcu_status.set_inverters_error(false);
-
-
-
-  // present action for 5s
-  delay(5000);
-
-  set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
-  mcu_status.set_max_torque(TORQUE_3);
-  mcu_status.set_torque_mode(3);
-
-  /* Set up total discharge readings */
-  //setup_total_discharge();
-
+bool check_TS_over_HV_threshold() {
+  for (uint8_t inv = 0; inv < 4; inv++) {
+    if (mc_energy[inv].get_dc_bus_voltage() < MIN_HV_VOLTAGE) {
+      return false;
+    }
+  }
+  return true;
 }
 
-void loop() {
-  FRONT_INV_CAN.events();
-  REAR_INV_CAN.events();
-  TELEM_CAN.events();
-
-  read_all_adcs();
-  //read_steering_spi_values();
-  read_status_values();
-  read_imu();
-
-  send_CAN_mcu_status();
-  send_CAN_mcu_pedal_readings();
-  send_CAN_mcu_load_cells();
-  send_CAN_mcu_potentiometers();
-  send_CAN_mcu_analog_readings();
-  send_CAN_imu_accelerometer();
-  send_CAN_imu_gyroscope();
-  send_CAN_inverter_setpoints();
-
-  //  /* Finish restarting the inverter when timer expires */
-  check_all_inverters_error();
-  reset_inverters();
-  //
-  //  /* handle state functionality */
-  state_machine();
-  software_shutdown();
-
-
-
-  if (timer_debug.check()) {
-    Serial.println("ERROR");
-    Serial.println(check_all_inverters_error());
-    Serial.println(mc_energy[0].get_dc_bus_voltage());
-    Serial.println(mc_temps[0].get_diagnostic_number());
-    Serial.println(mc_temps[1].get_diagnostic_number());
-    Serial.println(mc_temps[2].get_diagnostic_number());
-    Serial.println(mc_temps[3].get_diagnostic_number());
-    Serial.println();
-    Serial.println(mcu_pedal_readings.get_accelerator_pedal_1());
-    Serial.println(mcu_pedal_readings.get_accelerator_pedal_2());
-    Serial.println(mcu_pedal_readings.get_brake_pedal_1());
-    Serial.println(mcu_pedal_readings.get_brake_pedal_2());
-    //calculate_pedal_implausibilities();
-//    Serial.println(mcu_status.get_no_accel_implausability());
-//    Serial.println(mcu_status.get_no_brake_implausability());
-//    Serial.println(mcu_status.get_no_accel_brake_implausability());
-//    int brake1 = map(round(mcu_pedal_readings.get_brake_pedal_1()), START_BRAKE_PEDAL_1, END_BRAKE_PEDAL_1, 0, 2140);
-//    int brake2 = map(round(mcu_pedal_readings.get_brake_pedal_2()), START_BRAKE_PEDAL_2, END_BRAKE_PEDAL_2, 0, 2140);
-//    Serial.println(brake1);
-//    Serial.println(brake2);
-    Serial.println();
-    Serial.println("LOAD CELLS");
-    Serial.println(mcu_load_cells.get_FL_load_cell());
-    Serial.println(mcu_load_cells.get_FR_load_cell());
-    Serial.println(mcu_load_cells.get_RL_load_cell());
-    Serial.println(mcu_load_cells.get_RR_load_cell());
-    Serial.println(torque_setpoint_array[0]);
-    Serial.println(torque_setpoint_array[1]);
-    Serial.println(torque_setpoint_array[2]);
-    Serial.println(torque_setpoint_array[3]);
-    Serial.println("MOTOR TEMPS");
-    Serial.println(mc_temps[0].get_motor_temp());
-    Serial.println(mc_temps[1].get_motor_temp());
-    Serial.println(mc_temps[2].get_motor_temp());
-    Serial.println(mc_temps[3].get_motor_temp());
-    Serial.println(mc_temps[3].get_igbt_temp());
-    Serial.println("IMU");
-    Serial.println(imu_accelerometer.get_vert_accel());
-    Serial.println(imu_gyroscope.get_yaw());
-    Serial.println("dial");
-    Serial.println(dashboard_status.get_dial_state());
+// if TS is below HV threshold, return to Tractive System Not Active
+/* Handle changes in state */
+void set_state(MCU_STATE new_state) {
+  if (mcu_status.get_state() == new_state) {
+    return;
   }
 
+  // exit logic
+  switch (mcu_status.get_state()) {
+    case MCU_STATE::STARTUP: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: break;
+    case MCU_STATE::ENABLING_INVERTER:
+      timer_inverter_enable.reset();
+      break;
+    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
+      // make dashboard stop buzzer
+      mcu_status.set_activate_buzzer(false);
+      mcu_status.write(msg.buf);
+      msg.id = ID_MCU_STATUS;
+      msg.len = sizeof(mcu_status);
+      TELEM_CAN.write(msg);
+      break;
+    case MCU_STATE::READY_TO_DRIVE: {
+        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
+        break;
+      }
+  }
+
+  mcu_status.set_state(new_state);
+
+  // entry logic
+  switch (new_state) {
+    case MCU_STATE::STARTUP: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: {
+        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
+        break;
+      }
+    case MCU_STATE::ENABLING_INVERTER: {
+        Serial.println("MCU Sent enable command");
+        timer_inverter_enable.reset();
+        break;
+      }
+    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
+      // make dashboard sound buzzer
+      mcu_status.set_activate_buzzer(true);
+      mcu_status.write(msg.buf);
+      msg.id = ID_MCU_STATUS;
+      msg.len = sizeof(mcu_status);
+      TELEM_CAN.write(msg);
+
+      timer_ready_sound.reset();
+      Serial.println("RTDS enabled");
+      break;
+    case MCU_STATE::READY_TO_DRIVE:
+      Serial.println("Ready to drive");
+      break;
+  }
 }
-
-
-
+inline void check_TS_active() {
+  if (!check_TS_over_HV_threshold()) {
+#if DEBUG
+    Serial.println("Setting state to TS Not Active, because TS is below HV threshold");
+#endif
+    set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
+    inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
+  }
+}
 inline void send_CAN_inverter_setpoints() {
   if (timer_CAN_inverter_setpoints_send.check()) {
     mc_setpoints_command[0].write(msg.buf);
@@ -509,25 +448,9 @@ inline void state_machine() {
 /* Shared state functinality */
 
 
-bool check_TS_over_HV_threshold() {
-  for (uint8_t inv = 0; inv < 4; inv++) {
-    if (mc_energy[inv].get_dc_bus_voltage() < MIN_HV_VOLTAGE) {
-      return false;
-    }
-  }
-  return true;
-}
 
-// if TS is below HV threshold, return to Tractive System Not Active
-inline void check_TS_active() {
-  if (!check_TS_over_HV_threshold()) {
-#if DEBUG
-    Serial.println("Setting state to TS Not Active, because TS is below HV threshold");
-#endif
-    set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
-    inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
-  }
-}
+
+
 
 
 /* Implementation of software shutdown */
@@ -646,65 +569,7 @@ inline void power_off_inverter() {
 }
 
 
-/* Handle changes in state */
-void set_state(MCU_STATE new_state) {
-  if (mcu_status.get_state() == new_state) {
-    return;
-  }
 
-  // exit logic
-  switch (mcu_status.get_state()) {
-    case MCU_STATE::STARTUP: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: break;
-    case MCU_STATE::ENABLING_INVERTER:
-      timer_inverter_enable.reset();
-      break;
-    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
-      // make dashboard stop buzzer
-      mcu_status.set_activate_buzzer(false);
-      mcu_status.write(msg.buf);
-      msg.id = ID_MCU_STATUS;
-      msg.len = sizeof(mcu_status);
-      TELEM_CAN.write(msg);
-      break;
-    case MCU_STATE::READY_TO_DRIVE: {
-        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
-        break;
-      }
-  }
-
-  mcu_status.set_state(new_state);
-
-  // entry logic
-  switch (new_state) {
-    case MCU_STATE::STARTUP: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: {
-        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
-        break;
-      }
-    case MCU_STATE::ENABLING_INVERTER: {
-        Serial.println("MCU Sent enable command");
-        timer_inverter_enable.reset();
-        break;
-      }
-    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
-      // make dashboard sound buzzer
-      mcu_status.set_activate_buzzer(true);
-      mcu_status.write(msg.buf);
-      msg.id = ID_MCU_STATUS;
-      msg.len = sizeof(mcu_status);
-      TELEM_CAN.write(msg);
-
-      timer_ready_sound.reset();
-      Serial.println("RTDS enabled");
-      break;
-    case MCU_STATE::READY_TO_DRIVE:
-      Serial.println("Ready to drive");
-      break;
-  }
-}
 
 inline float float_map(float x, float in_min, float in_max, float out_min, float out_max)
 {
@@ -1031,6 +896,7 @@ inline void set_inverter_torques() {
 
       break;
     case 4:
+    {
       // Copy pasted from mode 2 with additional derating for endurance
       for (int i = 0; i < 4; i++) {
         speed_setpoint_array[i] = MAX_ALLOWED_SPEED;
@@ -1059,7 +925,9 @@ inline void set_inverter_torques() {
         torque_setpoint_array[3] = (int16_t)((float)mcu_load_cells.get_RR_load_cell() / (float)total_load_cells * (float)total_torque / 2.0);
       }
       break;
+    }
     case 5:
+    {
       for (int i = 0; i < 4; i++) {
         speed_setpoint_array[i] = MAX_ALLOWED_SPEED;
       }
@@ -1085,6 +953,10 @@ inline void set_inverter_torques() {
         torque_setpoint_array[2] = (int16_t)((float)mcu_load_cells.get_RL_load_cell() / (float)total_load_cells * (float)total_torque / 2.0);
         torque_setpoint_array[3] = (int16_t)((float)mcu_load_cells.get_RR_load_cell() / (float)total_load_cells * (float)total_torque / 2.0);
       }
+      break;
+    }
+    default:
+      Serial.println("uh oh");
       break;
   }
 
@@ -1533,4 +1405,159 @@ inline float max_allowed_torque(float maxwatts, float rpm) {
   float angularspeed = (abs(rpm) + 1) / 60 * 2 * 3.1415;
   float maxnm = min(maxwatts / angularspeed, 20);
   return maxnm / 9.8 * 1000;
+}
+void setup() {
+  // no torque can be provided on startup
+
+
+  mcu_status.set_max_torque(0);
+  mcu_status.set_torque_mode(0);
+  mcu_status.set_software_is_ok(true);
+
+  set_all_inverters_disabled();
+
+
+  //   IMU set up
+  IMU.regWrite(MSC_CTRL, 0xC1);  // Enable Data Ready, set polarity
+  delay(20);
+  IMU.regWrite(FLTR_CTRL, 0x504); // Set digital filter
+  delay(20);
+  IMU.regWrite(DEC_RATE, 0), // Disable decimation
+               delay(20);
+
+  pinMode(BRAKE_LIGHT_CTRL, OUTPUT);
+
+  // change to input if comparator is PUSH PULL
+  pinMode(INVERTER_EN, OUTPUT);
+  pinMode(INVERTER_24V_EN, OUTPUT);
+
+  pinMode(WATCHDOG_INPUT, OUTPUT);
+  // the initial state of the watchdog is high
+  // this is reflected in the static watchdog_state
+  // starting high
+  digitalWrite(WATCHDOG_INPUT, HIGH);
+  pinMode(SOFTWARE_OK, OUTPUT);
+  digitalWrite(SOFTWARE_OK, HIGH);
+
+  pinMode(ECU_CLK, OUTPUT);
+  pinMode(ECU_SDI, INPUT);
+  pinMode(ECU_SDO, OUTPUT);
+
+#if DEBUG
+  Serial.begin(115200);
+#endif
+  FRONT_INV_CAN.begin();
+  FRONT_INV_CAN.setBaudRate(500000);
+  REAR_INV_CAN.begin();
+  REAR_INV_CAN.setBaudRate(500000);
+  TELEM_CAN.begin();
+  TELEM_CAN.setBaudRate(500000);
+  FRONT_INV_CAN.enableMBInterrupts();
+  REAR_INV_CAN.enableMBInterrupts();
+  TELEM_CAN.enableMBInterrupts();
+  FRONT_INV_CAN.onReceive(parse_front_inv_can_message);
+  REAR_INV_CAN.onReceive(parse_rear_inv_can_message);
+  TELEM_CAN.onReceive(parse_telem_can_message);
+  delay(500);
+
+#if DEBUG
+  Serial.println("CAN system and serial communication initialized");
+#endif
+
+
+  // these are false by default
+  mcu_status.set_bms_ok_high(false);
+  mcu_status.set_imd_ok_high(false);
+
+  digitalWrite(INVERTER_24V_EN, HIGH);
+  digitalWrite(INVERTER_EN, HIGH);
+  mcu_status.set_inverters_error(false);
+
+
+
+  // present action for 5s
+  delay(5000);
+
+  set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
+  mcu_status.set_max_torque(TORQUE_3);
+  mcu_status.set_torque_mode(3);
+
+  /* Set up total discharge readings */
+  //setup_total_discharge();
+
+}
+
+void loop() {
+  FRONT_INV_CAN.events();
+  REAR_INV_CAN.events();
+  TELEM_CAN.events();
+
+  read_all_adcs();
+  //read_steering_spi_values();
+  read_status_values();
+  read_imu();
+
+  send_CAN_mcu_status();
+  send_CAN_mcu_pedal_readings();
+  send_CAN_mcu_load_cells();
+  send_CAN_mcu_potentiometers();
+  send_CAN_mcu_analog_readings();
+  send_CAN_imu_accelerometer();
+  send_CAN_imu_gyroscope();
+  send_CAN_inverter_setpoints();
+
+  //  /* Finish restarting the inverter when timer expires */
+  check_all_inverters_error();
+  reset_inverters();
+  //
+  //  /* handle state functionality */
+  state_machine();
+  software_shutdown();
+
+
+
+  if (timer_debug.check()) {
+    Serial.println("ERROR");
+    Serial.println(check_all_inverters_error());
+    Serial.println(mc_energy[0].get_dc_bus_voltage());
+    Serial.println(mc_temps[0].get_diagnostic_number());
+    Serial.println(mc_temps[1].get_diagnostic_number());
+    Serial.println(mc_temps[2].get_diagnostic_number());
+    Serial.println(mc_temps[3].get_diagnostic_number());
+    Serial.println();
+    Serial.println(mcu_pedal_readings.get_accelerator_pedal_1());
+    Serial.println(mcu_pedal_readings.get_accelerator_pedal_2());
+    Serial.println(mcu_pedal_readings.get_brake_pedal_1());
+    Serial.println(mcu_pedal_readings.get_brake_pedal_2());
+    //calculate_pedal_implausibilities();
+//    Serial.println(mcu_status.get_no_accel_implausability());
+//    Serial.println(mcu_status.get_no_brake_implausability());
+//    Serial.println(mcu_status.get_no_accel_brake_implausability());
+//    int brake1 = map(round(mcu_pedal_readings.get_brake_pedal_1()), START_BRAKE_PEDAL_1, END_BRAKE_PEDAL_1, 0, 2140);
+//    int brake2 = map(round(mcu_pedal_readings.get_brake_pedal_2()), START_BRAKE_PEDAL_2, END_BRAKE_PEDAL_2, 0, 2140);
+//    Serial.println(brake1);
+//    Serial.println(brake2);
+    Serial.println();
+    Serial.println("LOAD CELLS");
+    Serial.println(mcu_load_cells.get_FL_load_cell());
+    Serial.println(mcu_load_cells.get_FR_load_cell());
+    Serial.println(mcu_load_cells.get_RL_load_cell());
+    Serial.println(mcu_load_cells.get_RR_load_cell());
+    Serial.println(torque_setpoint_array[0]);
+    Serial.println(torque_setpoint_array[1]);
+    Serial.println(torque_setpoint_array[2]);
+    Serial.println(torque_setpoint_array[3]);
+    Serial.println("MOTOR TEMPS");
+    Serial.println(mc_temps[0].get_motor_temp());
+    Serial.println(mc_temps[1].get_motor_temp());
+    Serial.println(mc_temps[2].get_motor_temp());
+    Serial.println(mc_temps[3].get_motor_temp());
+    Serial.println(mc_temps[3].get_igbt_temp());
+    Serial.println("IMU");
+    Serial.println(imu_accelerometer.get_vert_accel());
+    Serial.println(imu_gyroscope.get_yaw());
+    Serial.println("dial");
+    Serial.println(dashboard_status.get_dial_state());
+  }
+
 }
