@@ -88,7 +88,7 @@ Metro timer_read_imu = Metro(20);
 
 Metro timer_inverter_enable = Metro(5000);
 Metro timer_reset_inverter = Metro(5000);
-Metro timer_watchdog_timer = Metro(10);
+Metro timer_watchdog_timer = Metro(7);
 
 elapsedMillis pedal_implausability_duration;
 
@@ -169,84 +169,11 @@ inline void set_all_inverters_no_torque();
 
 inline void set_all_inverters_driver_enable(bool input);
 
-bool check_TS_over_HV_threshold() {
-  for (uint8_t inv = 0; inv < 4; inv++) {
-    if (mc_energy[inv].get_dc_bus_voltage() < MIN_HV_VOLTAGE) {
-      return false;
-    }
-  }
-  return true;
-}
+bool check_TS_over_HV_threshold();
 
-// if TS is below HV threshold, return to Tractive System Not Active
-/* Handle changes in state */
-void set_state(MCU_STATE new_state) {
-  if (mcu_status.get_state() == new_state) {
-    return;
-  }
 
-  // exit logic
-  switch (mcu_status.get_state()) {
-    case MCU_STATE::STARTUP: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: break;
-    case MCU_STATE::ENABLING_INVERTER:
-      timer_inverter_enable.reset();
-      break;
-    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
-      // make dashboard stop buzzer
-      mcu_status.set_activate_buzzer(false);
-      mcu_status.write(msg.buf);
-      msg.id = ID_MCU_STATUS;
-      msg.len = sizeof(mcu_status);
-      TELEM_CAN.write(msg);
-      break;
-    case MCU_STATE::READY_TO_DRIVE: {
-        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
-        break;
-      }
-  }
+void set_state(MCU_STATE new_state);
 
-  mcu_status.set_state(new_state);
-
-  // entry logic
-  switch (new_state) {
-    case MCU_STATE::STARTUP: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
-    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: {
-        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
-        break;
-      }
-    case MCU_STATE::ENABLING_INVERTER: {
-        Serial.println("MCU Sent enable command");
-        timer_inverter_enable.reset();
-        break;
-      }
-    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
-      // make dashboard sound buzzer
-      mcu_status.set_activate_buzzer(true);
-      mcu_status.write(msg.buf);
-      msg.id = ID_MCU_STATUS;
-      msg.len = sizeof(mcu_status);
-      TELEM_CAN.write(msg);
-
-      timer_ready_sound.reset();
-      Serial.println("RTDS enabled");
-      break;
-    case MCU_STATE::READY_TO_DRIVE:
-      Serial.println("Ready to drive");
-      break;
-  }
-}
-inline void check_TS_active() {
-  if (!check_TS_over_HV_threshold()) {
-#if DEBUG
-    Serial.println("Setting state to TS Not Active, because TS is below HV threshold");
-#endif
-    set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
-    inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
-  }
-}
 inline void send_CAN_inverter_setpoints() {
   if (timer_CAN_inverter_setpoints_send.check()) {
     mc_setpoints_command[0].write(msg.buf);
@@ -448,9 +375,25 @@ inline void state_machine() {
 /* Shared state functinality */
 
 
+bool check_TS_over_HV_threshold() {
+  for (uint8_t inv = 0; inv < 4; inv++) {
+    if (mc_energy[inv].get_dc_bus_voltage() < MIN_HV_VOLTAGE) {
+      return false;
+    }
+  }
+  return true;
+}
 
-
-
+// if TS is below HV threshold, return to Tractive System Not Active
+inline void check_TS_active() {
+  if (!check_TS_over_HV_threshold()) {
+#if DEBUG
+    Serial.println("Setting state to TS Not Active, because TS is below HV threshold");
+#endif
+    set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
+    inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
+  }
+}
 
 
 /* Implementation of software shutdown */
@@ -569,7 +512,65 @@ inline void power_off_inverter() {
 }
 
 
+/* Handle changes in state */
+void set_state(MCU_STATE new_state) {
+  if (mcu_status.get_state() == new_state) {
+    return;
+  }
 
+  // exit logic
+  switch (mcu_status.get_state()) {
+    case MCU_STATE::STARTUP: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: break;
+    case MCU_STATE::ENABLING_INVERTER:
+      timer_inverter_enable.reset();
+      break;
+    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
+      // make dashboard stop buzzer
+      mcu_status.set_activate_buzzer(false);
+      mcu_status.write(msg.buf);
+      msg.id = ID_MCU_STATUS;
+      msg.len = sizeof(mcu_status);
+      TELEM_CAN.write(msg);
+      break;
+    case MCU_STATE::READY_TO_DRIVE: {
+        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
+        break;
+      }
+  }
+
+  mcu_status.set_state(new_state);
+
+  // entry logic
+  switch (new_state) {
+    case MCU_STATE::STARTUP: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE: break;
+    case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE: {
+        inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY;
+        break;
+      }
+    case MCU_STATE::ENABLING_INVERTER: {
+        Serial.println("MCU Sent enable command");
+        timer_inverter_enable.reset();
+        break;
+      }
+    case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
+      // make dashboard sound buzzer
+      mcu_status.set_activate_buzzer(true);
+      mcu_status.write(msg.buf);
+      msg.id = ID_MCU_STATUS;
+      msg.len = sizeof(mcu_status);
+      TELEM_CAN.write(msg);
+
+      timer_ready_sound.reset();
+      Serial.println("RTDS enabled");
+      break;
+    case MCU_STATE::READY_TO_DRIVE:
+      Serial.println("Ready to drive");
+      break;
+  }
+}
 
 inline float float_map(float x, float in_min, float in_max, float out_min, float out_max)
 {
@@ -956,8 +957,8 @@ inline void set_inverter_torques() {
       break;
     }
     default:
-      Serial.println("uh oh");
-      break;
+        Serial.println("uh oh");
+        break;
   }
 
 
@@ -1406,6 +1407,7 @@ inline float max_allowed_torque(float maxwatts, float rpm) {
   float maxnm = min(maxwatts / angularspeed, 20);
   return maxnm / 9.8 * 1000;
 }
+
 void setup() {
   // no torque can be provided on startup
 
@@ -1543,6 +1545,12 @@ void loop() {
     Serial.println(mcu_load_cells.get_FR_load_cell());
     Serial.println(mcu_load_cells.get_RL_load_cell());
     Serial.println(mcu_load_cells.get_RR_load_cell());
+    Serial.println("SUS POTS");
+    Serial.println(mcu_front_potentiometers.get_pot1());
+    Serial.println(mcu_front_potentiometers.get_pot3());
+    Serial.println(mcu_rear_potentiometers.get_pot4());
+    Serial.println(mcu_rear_potentiometers.get_pot6());
+    
     Serial.println(torque_setpoint_array[0]);
     Serial.println(torque_setpoint_array[1]);
     Serial.println(torque_setpoint_array[2]);
@@ -1561,3 +1569,4 @@ void loop() {
   }
 
 }
+
