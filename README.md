@@ -93,9 +93,9 @@ classDiagram
 
 #### level 2 portable components: interfaces, logic and structure
 
-Reason for abstraction: these components can be a part of a shared library between all boards. 
+Reason for abstraction: these components allow us to have board portable pieces so that when newer iterations of boards are made, the same components that the previous iteration handled can be kept while only the hardware specific code changes. 
 
-For instance, if our dashboard firmware needed to know about the state of our pedals for displaying whether or not they are implausible, all we would need to do to integrate it would be to create an instance of the class
+For instance, when a new MCU board is created with a new steering sensor input, code within the controller components will not need to change, only that a new sensor component will be used within the state machine to feed the controller input.
 
 below are some hypothetical component class definitions.
 ```mermaid
