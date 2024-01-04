@@ -4,7 +4,7 @@ new MCU code:
 - driver definition:
     - code required to purely unpack / pack data into internal structs / classes for use by components or logic
     - I think the best way to handle the driver level is that all the drivers 
-- state machine 
+
 - architecture:
 
     - over-arching state machine
@@ -29,7 +29,7 @@ Levels represent the layer of abstraction they are on. The reason for keeping tr
 
 
 #### level 1: state machine goals for interface design and implementation
-- Reason for abstraction: allows for easy swapping and adding of different portable components and better [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) from [business logic](https://www.techtarget.com/whatis/definition/business-logic) of the car to the business logic of the component.
+- __Reason for abstraction__: allows for easy swapping and adding of different portable components and better [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) from [business logic](https://www.techtarget.com/whatis/definition/business-logic) of the car to the business logic of the component.
 
 
 Any firmware project that needs to have different states needs each component that creates outputs and / or controls real components of the car needs can be thought of as each component being controlled by the state machine. What I am thinking is that in a similar fashion to the shared bus, each component can contain a shared pointer to the state machine. The component can know what state the car is in and based on the state it can determine how to behave. Obviously the state machine also needs to know about what the component is doing as well to determine the state, so the component also needs to be able to pass back data to the state machine. 
@@ -93,7 +93,7 @@ classDiagram
 
 #### level 2 portable components: interfaces, logic and structure
 
-Reason for abstraction: these components allow us to have board portable pieces so that when newer iterations of boards are made, the same components that the previous iteration handled can be kept while only the hardware specific code changes. 
+- __Reason for abstraction__: these components allow us to have board portable pieces so that when newer iterations of boards are made, the same components that the previous iteration handled can be kept while only the hardware specific code changes. 
 
 For instance, when a new MCU board is created with a new steering sensor input, code within the controller components will not need to change, only that a new sensor component will be used within the state machine to feed the controller input.
 
@@ -142,13 +142,22 @@ classDiagram
 ```
 
 #### level 3 SPI / i2c data bus abstraction from hardware specific implementations
-- idea for abstract of the shared bus sensors. This is currently aimed at our use of a SPI bus. The read data functions are what convert the data gotten from the shared bus to the real-world values for each one of the sensors. This was being attempted with ADC_SPI versus STEERING_SPI using just copies of the class. 
+
+- __Reason for abstraction__: this allows us to create a specific type of component that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other components.
+
+This is currently aimed at our use of a SPI bus. The read data functions are what convert the data gotten from the shared bus to the real-world values for each one of the sensors. This was being attempted with ADC_SPI versus STEERING_SPI using just copies of the class. 
 
 ```mermaid
 ---
 title: shared data bus abstraction
 ---
 classDiagram
+    class component{
+        <<Abstract>>
+        -component_state state_
+        +component_state get_state()
+        +void set_state()
+    }
     
     class Sensor~SharedDataBusType~{
         <<Abstract>>
@@ -165,6 +174,7 @@ classDiagram
     class CurrentSensor~SharedDataBusType~{
         float readCurrent()
     }
+    component <|-- Sensor : implements
     Sensor <|-- LoadSensor : implements
     Sensor <|-- SteeringSensor : implements
     Sensor <|-- CurrentSensor : implements
