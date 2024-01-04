@@ -197,6 +197,7 @@ inline void send_CAN_inverter_setpoints() {
     REAR_INV_CAN.write(msg);
   }
 }
+
 inline void send_CAN_mcu_status() {
   if (timer_CAN_mcu_status_send.check()) {
     // Send Main Control Unit status message
