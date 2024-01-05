@@ -49,13 +49,7 @@ title: state machine and component state abstraction
 ---
 classDiagram
 
-    class component_state{
-        <<enumeration>>
-        INITIALIZING
-        ACTIVE
-        STOPPED
-        ERROR
-    }
+    
     class car_state{
         <<enumeration>>
         STARTUP
@@ -65,26 +59,27 @@ classDiagram
     }
     class StateMachine {
         
-        component* bms
-        component* vectornav
-        component* pedals
-        component* dashboard
-        component* drivetrain
+        BMSComponent* bms
+        VectornavComponent* vectornav
+        PedalsComponent* pedals
+        DashComponent* dashboard
+
+
+        InverterComponent* left_front
+        InverterComponent* right_front
+        InverterComponent* left_rear
+        InverterComponent* right_rear
+
+        TorqueVectoringControllerComponent* tvc
+        LaunchControlComponent* launch_control
 
         car_state state
         void init()
         void loop()
-        bool set_state(car_state)
+        bool set_state(car_state state)
     }
     
-    class component{
-        <<Abstract>>
-        component_state state
-    }
 
-
-    component_state "1" *-- component : contains
-    component_state "N" *-- StateMachine : contains
     car_state "1" *-- StateMachine : contains
 
 ```
@@ -103,13 +98,7 @@ below are some hypothetical component class definitions.
 title: components
 ---
 classDiagram
-    class component{
-        <<Abstract>>
-        -component_state state_
-        +component_state get_state()
-        +void set_state()
-    }
-    class pedal_handler{
+    class PedalsComponent{
         -void validate_accel_pedals()
         -void validate_brake_pedals()
 
@@ -118,7 +107,7 @@ classDiagram
         +float get_desired_throttle()
         +void validate()
     } 
-    class torque_vectoring_controller {
+    class TorqueVectoringControllerComponent{
         
         +void init(torque_vectoring_params params)
         +void set_state_estimate(car_state state)
@@ -128,20 +117,18 @@ classDiagram
         -void run_pid()
     }
     
-    class launch_controller {
+    class LaunchControlComponent{
         
         +void init(launch_control_params params)
         +void set_state_estimate(car_state state)
         +torque_cmds get_torque_cmds(float desired_throttle)
         -void pull_from_table(float current_speed)
     }
-    component <|-- pedal_handler : implements
-    component <|-- torque_vectoring_controller : implements
-    component <|-- launch_controller : implements
+    
     
 ```
 
-#### level 3 SPI / i2c data bus abstraction from hardware specific implementations
+#### level 2 SPI / i2c data bus abstraction from hardware specific implementations
 
 - __Reason for abstraction__: this allows us to create a specific type of component that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other components.
 
@@ -152,12 +139,6 @@ This is currently aimed at our use of a SPI bus. The read data functions are wha
 title: shared data bus abstraction
 ---
 classDiagram
-    class component{
-        <<Abstract>>
-        -component_state state_
-        +component_state get_state()
-        +void set_state()
-    }
     
     class Sensor~SharedDataBusType~{
         <<Abstract>>
@@ -174,14 +155,9 @@ classDiagram
     class CurrentSensor~SharedDataBusType~{
         float readCurrent()
     }
-    component <|-- Sensor : implements
+
     Sensor <|-- LoadSensor : implements
     Sensor <|-- SteeringSensor : implements
     Sensor <|-- CurrentSensor : implements
-
-```
-
-```mermaid
-flowchart TD
 
 ```
