@@ -136,13 +136,12 @@ This is currently aimed at our use of a SPI bus. The read data functions are wha
 
 ```mermaid
 ---
-title: shared data bus abstraction
+title: shared data bus class inheritting
 ---
 classDiagram
     
     class Sensor~SharedDataBusType~{
-        <<Abstract>>
-        const shared_ptr~SharedBusType~ bus
+        SharedBusType* bus
         Sensor<SharedDataBusType>(const SharedDataBusType& bus)
     }
 
