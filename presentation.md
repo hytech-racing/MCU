@@ -7,36 +7,34 @@ Hytech Racing: a firmware refocus
 Agenda:
 
 Overview
-Board Job Descriptions
+Main ECU Job Description
 Motivation for change
 Generic Structure
 Main ECU refactor
 Proposed Timeline
 
-- Overview:
-
 This presentation contains a car firmware study to show what we have currently and understand what we handle through code, what we need to change and why, how we could restructure and change, an example implementation of the change and an estimated timeline.
 
-- Board Job Descriptions:
+- Board Job Description:
 
 main ecu:
 
-- reads imu data from SPI
-- reads load cell data
-- reads pedal data
-- reads steering data
-- reads dashboard data
-- reads bms data
-- reads current data
-- reads voltage data
-- reads potentiometer data
+imu data from SPI
+load cell data
+pedal data
+steering data
+dashboard data
+bms data
+current data
+voltage data
+potentiometer data
 
-- handles launch mode inverter controller
-- handles skidpad mode inverter controller
-- handles autocross inverter controller
-- handles endurance inverter controller
-- handles pedal evaluation logic
-- handles watchdog logic
+launch mode inverter controller
+skidpad mode inverter controller
+autocross inverter controller
+endurance inverter controller
+pedal evaluation logic
+watchdog logic
 - manages a car state machine
 - manages a drivetrain state machine
 
@@ -48,3 +46,20 @@ main ecu:
 - commands brake light
 - commands 4 inverters
 - sends telemetry data
+
+
+- hardware abstraction
+
+component definition
+
+benefits:
+1. testability
+2. portability
+
+- Rule of Separation
+
+" Separate policy from mechanism; separate interfaces from engines "
+- The Art of Unix Programming: Chapter 1
+
+
+
