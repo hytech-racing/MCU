@@ -4,7 +4,6 @@
 
    Rev 12
 */
-#include "component"
 #include <stdint.h>
 #include <FlexCAN_T4.h>
 #include <HyTech_CAN.h>
