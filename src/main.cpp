@@ -4,6 +4,9 @@
 
    Rev 12
 */
+#include "Logger.h"
+
+#include <Arduino.h>
 #include <stdint.h>
 #include <FlexCAN_T4.h>
 #include <HyTech_CAN.h>
@@ -1484,6 +1487,7 @@ void setup() {
   mcu_status.set_max_torque(TORQUE_3);
   mcu_status.set_torque_mode(3);
 
+  
   /* Set up total discharge readings */
   //setup_total_discharge();
 

@@ -21,7 +21,7 @@ class MCUStateMachine {
         /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
         /// @param current_millis the current millis() call
         void tick_state_machine(unsigned long current_millis);
-        void get_state();
+        MCU_STATE get_state();
     private:
         void set_state_(MCU_STATE new_state);
 
@@ -33,7 +33,5 @@ class MCUStateMachine {
         /// @param prev_state the state in which we are leaving
         void handle_exit_logic_(MCU_STATE prev_state);
         MCU_STATE current_state_;
-        
-        
 
 };
