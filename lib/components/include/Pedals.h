@@ -17,7 +17,7 @@ class PedalsComponent {
         PedalsComponent(){
             // Setting of min and maxes for pedals via config file
         };
-        PedalsComponentInterface PedalsComponent::evaluate_pedals(
+        PedalsComponentInterface evaluate_pedals(
                 const PedalsDriverInterface& pedal_data);
 
     private:

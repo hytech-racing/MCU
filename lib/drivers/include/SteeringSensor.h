@@ -1,14 +1,14 @@
 #include "ADC_SPI.h"
-
-class SteeringDriver {
+#include "SteeringSensor.h"
+class SteeringSensor {
     public:
-        SteeringDriver(const ADC_SPI* sensor, int data_channel) {
+        SteeringSensor (const ADC_SPI* sensor, int data_channel) {
             sensor_ = sensor;
             channel_ = data_channel;
             // other params set here for scaling
         };
 
-        float get_steering_angle(); 
+        SteeringDriverInterface get_steering_data(); 
     private:
         float scale_to_degrees_(int steer_val);
         
