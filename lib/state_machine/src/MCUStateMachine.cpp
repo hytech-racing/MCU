@@ -8,16 +8,18 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
         break;
 
     case MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE:
-
+    {
         // if TS is above HV threshold, move to Tractive System Active
-        if (drivetrain_->hv_over_threshold_on_any_inverter())
+        if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
 
             set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
         }
         break;
+    }
 
     case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE:
+    {
         if (!drivetrain_->hv_over_threshold_on_all_inverters())
         {
             set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
@@ -33,95 +35,94 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
             set_state(MCU_STATE::ENABLING_INVERTER);
         }
         break;
+    }
 
-    // TODO: below in the scope of this function
     case MCU_STATE::ENABLING_INVERTER:
-        check_TS_active();
-        // inverter enabling timed out
-        if (timer_inverter_enable.check())
+    {
+        // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
+        //      the drivetrain state machine handling
+        if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-
+            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            break;
+        }
+        // inverter enabling timed out
+        if (drivetrain_->inverter_enable_timeout(current_millis))
+        {
             set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
         }
 
-        switch (inverter_startup_state)
+        // TODO may wanna move this out of here
+        auto drivetrain_state = drivetrain_->handle_state_machine();
+        if (drivetrain_state == DRIVETRAIN_STATE::RTD)
         {
-        case INVERTER_STARTUP_STATE::WAIT_SYSTEM_READY:
-            if (check_all_inverters_system_ready())
-            {
-                set_all_inverters_dc_on(true);
-                inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_QUIT_DC_ON;
-            }
-            break;
-
-        case INVERTER_STARTUP_STATE::WAIT_QUIT_DC_ON:
-            if (check_all_inverters_quit_dc_on())
-            {
-                set_all_inverters_no_torque();
-                set_all_inverters_driver_enable(true);
-                set_all_inverters_inverter_enable(true);
-                inverter_startup_state = INVERTER_STARTUP_STATE::WAIT_QUIT_INVERTER_ON;
-            }
-            break;
-
-        case INVERTER_STARTUP_STATE::WAIT_QUIT_INVERTER_ON:
-            if (check_all_inverters_quit_inverter_on())
-            {
-
-                set_state(MCU_STATE::WAITING_READY_TO_DRIVE_SOUND);
-            }
-            break;
+            set_state(MCU_STATE::WAITING_READY_TO_DRIVE_SOUND);
         }
         break;
+    }
 
     case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
-        check_TS_active();
+    {
+        // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
+        //      the drivetrain state machine handling
+        if (drivetrain_->hv_over_threshold_on_drivetrain())
+        {
+            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            break;
+        }
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
-        if (timer_ready_sound.check())
+        if (buzzer_->done())
         {
 
             set_state(MCU_STATE::READY_TO_DRIVE);
         }
         break;
+    }
 
     case MCU_STATE::READY_TO_DRIVE:
-        check_TS_active();
-
-        if (check_all_inverters_error())
+    {
+        // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
+        //      the drivetrain state machine handling
+        if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_all_inverters_disabled();
+            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            break;
+        }
+
+        if (drivetrain_->drivetrain_error_occured())
+        {
+            drivetrain_->disable();
             set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
         }
 
-        calculate_pedal_implausibilities();
+        auto pedals_data = pedals_->evaluate_pedals();
+        auto dashboard_data = dashboard_->evaluate_dashboard();
 
+        // TODO: below in the scope of this function
         if (
-            pedal_implausability_duration <= 100 &&
-            mcu_status.get_bms_ok_high() &&
-            mcu_status.get_imd_ok_high()
+            bms_->ok_high() &&
+            imd_->ok_high())
+        {
 
-        )
-        {
-            set_inverter_torques();
-        }
-        else if (mcu_status.get_bms_ok_high() && mcu_status.get_imd_ok_high())
-        {
-            set_inverter_torques_regen_only();
+            // TODO make controller mux between torque controllers and handle passing of data
+            //      into controller mux from pedals, steering, etc.
+            // set_inverter_torques();
+            auto controller_mux_->get_drivetrain_input(pedals_data, dashboard_data);
         }
         else
         {
-            Serial.println("not calculating torque");
-            Serial.printf("no brake implausibility: %d\n", mcu_status.get_no_brake_implausability());
-            Serial.printf("no accel implausibility: %d\n", mcu_status.get_no_accel_implausability());
-            Serial.printf("no accel brake implausibility: %d\n", mcu_status.get_no_accel_brake_implausability());
-            Serial.printf("software is ok: %d\n", mcu_status.get_software_is_ok());
-            Serial.printf("get bms ok high: %d\n", mcu_status.get_bms_ok_high());
-            Serial.printf("get imd ok high: %d\n", mcu_status.get_imd_ok_high());
-            set_all_inverters_no_torque();
+            drivetrain_->command_drivetrain_no_torque();
+            logger_->hal_println("not calculating torque");
+            logger_->hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
+            logger_->hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
+            logger_->hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
+            logger_->hal_printf("get bms ok high: %d\n", bms_->ok_high());
+            logger_->hal_printf("get imd ok high: %d\n", imd_->ok_high());
         }
 
         break;
+    }
     }
 }
 
