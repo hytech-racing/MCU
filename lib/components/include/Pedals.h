@@ -21,6 +21,8 @@ class PedalsComponent {
         PedalsComponentInterface evaluate_pedals(
                 const PedalsDriverInterface& pedal_data);
 
+        bool mech_brake_active();
+
     private:
         std::tuple<int, int> linearize_accel_pedal_values_(int accel1, int accel2);
         bool evaluate_accel_implausibilities_(int accel1, int accel2);
