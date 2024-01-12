@@ -5,9 +5,9 @@ struct SteeringDriverInterface {
     int steeringChannel2;
 };
 
-class Steering {
+class SteeringComponent {
     public:
-        Steering(){
+        SteeringComponent(){
             // TODO change scaling factors with params
         }
         float get_desired_angle(const SteeringDriverInterface& data);

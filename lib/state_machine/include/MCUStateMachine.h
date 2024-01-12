@@ -18,8 +18,11 @@ enum class MCU_STATE
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerComponent *buzzer, DrivetrainComponent *drivetrain)
+    MCUStateMachine(BuzzerComponent *buzzer, DrivetrainComponent *drivetrain, DashboardComponent *dashboard)
     {
+        buzzer_ = buzzer;
+        drivetrain_ = drivetrain;
+        dashboard_ = dashboard;
     }
 
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
@@ -43,5 +46,5 @@ private:
     BuzzerComponent *buzzer_;
     DrivetrainComponent *drivetrain_;
     DashboardComponent *dashboard_;
-    PedalsComponent* pedals_;
+    PedalsComponent *pedals_;
 };
