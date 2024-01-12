@@ -1,3 +1,6 @@
+#ifndef DRIVETRAIN
+#define DRIVETRAIN
+
 #include "Inverter.h"
 
 #include <array>
@@ -46,3 +49,6 @@ private:
     DRIVETRAIN_STATE state_;
     std::array<const InverterComponent *, 4> inverterComponents_;
 };
+
+
+#endif /* DRIVETRAIN */

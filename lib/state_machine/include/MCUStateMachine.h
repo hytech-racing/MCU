@@ -1,3 +1,6 @@
+#ifndef MCUSTATEMACHINE
+#define MCUSTATEMACHINE
+
 #include "SteeringSensor.h"
 #include "Logger.h"
 #include "Inverter.h"
@@ -48,3 +51,6 @@ private:
     DashboardComponent *dashboard_;
     PedalsComponent *pedals_;
 };
+
+
+#endif /* MCUSTATEMACHINE */

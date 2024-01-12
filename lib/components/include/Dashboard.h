@@ -1,5 +1,8 @@
 
 // The driver interface is used/returned by the driver
+
+#ifndef DASHBOARD
+#define DASHBOARD
 struct DashDriverInterface {
     int dial_position;
     bool start_button;
@@ -41,3 +44,6 @@ class DashComponent {
         
         
 };
+
+
+#endif /* DASHBOARD */

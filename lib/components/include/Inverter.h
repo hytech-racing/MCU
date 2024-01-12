@@ -1,3 +1,5 @@
+#ifndef INVERTER
+#define INVERTER
 
 class InverterComponent{
     public:
@@ -12,3 +14,8 @@ class InverterComponent{
         
 
 };
+
+
+
+
+#endif /* INVERTER */

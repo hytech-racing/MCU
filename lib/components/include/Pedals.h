@@ -1,3 +1,5 @@
+#ifndef PEDALS
+#define PEDALS
 #include <math.h>
 #include <tuple>
 
@@ -51,3 +53,6 @@ private:
     PedalsParams accelParams_;
     PedalsParams brakeParams_;
 };
+
+
+#endif /* PEDALS */
