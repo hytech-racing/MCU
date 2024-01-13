@@ -1,13 +1,17 @@
 #ifndef __MCU_STATE_MACHINE__
 #define __MCU_STATE_MACHINE__
 
-#include "SteeringSensor.h"
 #include "Logger.h"
 #include "Inverter.h"
 #include "Pedals.h"
-#include "Steering.h"
+#include "Drivetrain.h"
 #include "Buzzer.h"
-#include "Dashboard.h"
+
+
+#include "DashboardDriver.h"
+#include "AMSDriver.h"
+#include "IMDDriver.h"
+#include "ControllerMux.h"
 enum class MCU_STATE
 {
     STARTUP = 0,
@@ -21,7 +25,7 @@ enum class MCU_STATE
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerComponent *buzzer, DrivetrainComponent *drivetrain, DashboardComponent *dashboard)
+    MCUStateMachine(BuzzerController *buzzer, DrivetrainComponent *drivetrain, DashDriver *dashboard)
     {
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
@@ -34,23 +38,29 @@ public:
     MCU_STATE get_state() { return current_state_; }
 
 private:
-    void set_state_(MCU_STATE new_state);
+    void set_state_(MCU_STATE new_state, unsigned long curr_time);
 
     /// @brief the function run upon the entry of the car into a new state
     /// @param new_state the state in which we are entering
-    void handle_entry_logic_(MCU_STATE new_state);
+    void handle_entry_logic_(MCU_STATE new_state, unsigned long curr_time);
 
     /// @brief function run upon the exit of a state
     /// @param prev_state the state in which we are leaving
-    void handle_exit_logic_(MCU_STATE prev_state);
+    void handle_exit_logic_(MCU_STATE prev_state, unsigned long curr_time);
     MCU_STATE current_state_;
 
     /// @brief components within state machine
-    BuzzerComponent *buzzer_;
+    BuzzerController *buzzer_;
     DrivetrainComponent *drivetrain_;
-    DashboardComponent *dashboard_;
     PedalsComponent *pedals_;
+
+    /// @brief drivers within state machine
+    DashDriver *dashboard_;
+    AMSDriver *bms_;
+    IMDDriver *imd_;
+
+    ControllerMux * controller_mux_;
+
 };
 
-
-#endif /* __MCU_STATE_MACHINE__ */
+#endif /* MCUSTATEMACHINE */

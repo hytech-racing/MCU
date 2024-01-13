@@ -2,7 +2,7 @@
 
 void MCUStateMachine::tick_state_machine(unsigned long current_millis)
 {
-    switch (mcu_status.get_state())
+    switch (get_state())
     {
     case MCU_STATE::STARTUP:
         break;
@@ -13,26 +13,26 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
 
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
         }
         break;
     }
 
     case MCU_STATE::TRACTIVE_SYSTEM_ACTIVE:
     {
-        if (!drivetrain_->hv_over_threshold_on_all_inverters())
+        if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
 
-        if (drivetrain_->all_inverters_ready())
+        if (drivetrain_->drivetrain_ready())
         {
             drivetrain_->enable_drivetrain_hv(current_millis);
         }
         if (dashboard_->start_button_pressed() && pedals_->mech_brake_active())
         {
-            set_state(MCU_STATE::ENABLING_INVERTER);
+            set_state_(MCU_STATE::ENABLING_INVERTER, current_millis);
         }
         break;
     }
@@ -43,20 +43,20 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
         //      the drivetrain state machine handling
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
         // inverter enabling timed out
         if (drivetrain_->inverter_enable_timeout(current_millis))
         {
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
         }
 
         // TODO may wanna move this out of here
-        auto drivetrain_state = drivetrain_->handle_state_machine();
+        auto drivetrain_state = drivetrain_->handle_state_machine(current_millis);
         if (drivetrain_state == DRIVETRAIN_STATE::RTD)
         {
-            set_state(MCU_STATE::WAITING_READY_TO_DRIVE_SOUND);
+            set_state_(MCU_STATE::WAITING_READY_TO_DRIVE_SOUND, current_millis);
         }
         break;
     }
@@ -67,15 +67,15 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
         //      the drivetrain state machine handling
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
-        if (buzzer_->done())
+        if (buzzer_->done(current_millis))
         {
 
-            set_state(MCU_STATE::READY_TO_DRIVE);
+            set_state_(MCU_STATE::READY_TO_DRIVE, current_millis);
         }
         break;
     }
@@ -86,39 +86,37 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
         //      the drivetrain state machine handling
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
 
         if (drivetrain_->drivetrain_error_occured())
         {
             drivetrain_->disable();
-            set_state(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE);
+            set_state_(MCU_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
         }
 
-        auto pedals_data = pedals_->evaluate_pedals();
-        auto dashboard_data = dashboard_->evaluate_dashboard();
+        PedalsDriverInterface data;
+        Dashboard_status dash_data;
+        auto pedals_data = pedals_->evaluate_pedals(data);
+        auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
 
         // TODO: below in the scope of this function
         if (
             bms_->ok_high() &&
             imd_->ok_high())
         {
-
-            // TODO make controller mux between torque controllers and handle passing of data
-            //      into controller mux from pedals, steering, etc.
-            // set_inverter_torques();
-            auto controller_mux_->get_drivetrain_input(pedals_data, dashboard_data);
+            drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
         }
         else
         {
             drivetrain_->command_drivetrain_no_torque();
-            logger_->hal_println("not calculating torque");
-            logger_->hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
-            logger_->hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
-            logger_->hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
-            logger_->hal_printf("get bms ok high: %d\n", bms_->ok_high());
-            logger_->hal_printf("get imd ok high: %d\n", imd_->ok_high());
+            hal_println("not calculating torque");
+            hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
+            hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
+            hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
+            hal_printf("get bms ok high: %d\n", bms_->ok_high());
+            hal_printf("get imd ok high: %d\n", imd_->ok_high());
         }
 
         break;
@@ -126,20 +124,20 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
     }
 }
 
-void MCUStateMachine::set_state(MCU_STATE new_state)
+void MCUStateMachine::set_state_(MCU_STATE new_state, unsigned long curr_time)
 {
     hal_println("running exit logic");
-    handle_exit_logic_(current_state_);
+    handle_exit_logic_(current_state_, curr_time);
 
     current_state_ = new_state;
 
     hal_println("running entry logic");
-    handle_entry_logic_(new_state);
+    handle_entry_logic_(new_state, curr_time);
 }
 
 void MCUStateMachine::handle_exit_logic_(MCU_STATE prev_state, unsigned long curr_time)
 {
-    switch (mcu_status.get_state())
+    switch (get_state())
     {
     case MCU_STATE::STARTUP:
         break;
@@ -151,8 +149,6 @@ void MCUStateMachine::handle_exit_logic_(MCU_STATE prev_state, unsigned long cur
 
         break;
     case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
-        // make dashboard stop buzzer
-        buzzer_->deactivate_buzzer();
         break;
     case MCU_STATE::READY_TO_DRIVE:
     {
@@ -177,7 +173,7 @@ void MCUStateMachine::handle_entry_logic_(MCU_STATE new_state, unsigned long cur
     }
     case MCU_STATE::ENABLING_INVERTER:
     {
-        inverter_->request_enable_inverter();
+        drivetrain_->request_enable(curr_time);
         hal_println("MCU Sent enable command");
         break;
     }
