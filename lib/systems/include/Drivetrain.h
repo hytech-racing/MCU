@@ -13,7 +13,20 @@ enum class DRIVETRAIN_STATE
     RTD = 3
 };
 
+struct DrivetrainCommand
+{
+    float torque_lf;
+    float speed_lf;
 
+    float torque_rf;
+    float speed_rf;
+    
+    float torque_lr;
+    float speed_lr;
+    
+    float torque_rr;
+    float speed_rr;
+};
 
 class DrivetrainComponent
 {
@@ -31,6 +44,7 @@ public:
     /// @brief changes state of the all the inverters startup process to WAIT_QUIT_DC_ON
     /// @param curr_time current system tick time (millis())
     void enable_drivetrain_hv(unsigned long curr_time);
+    void request_enable(unsigned long curr_time);
     void command_drivetrain_no_torque();
     void start_drivetrain(unsigned long curr_time);
     bool hv_over_threshold_on_drivetrain();
@@ -39,6 +53,8 @@ public:
     bool inverter_enable_timeout(unsigned long curr_time);
     bool drivetrain_error_occured();
     DRIVETRAIN_STATE handle_state_machine(unsigned long curr_time);
+
+    void command_drivetrain(const DrivetrainCommand& data);
 private:
     void set_drivetrain_driver_enable_(bool in);
     void set_drivetrain_enable_inverters_(bool in);

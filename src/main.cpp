@@ -328,8 +328,6 @@ inline void state_machine() {
       }
       break;
 
-    drivetrain_->handle_state_machine
-
 
     case MCU_STATE::WAITING_READY_TO_DRIVE_SOUND:
       check_TS_active();
