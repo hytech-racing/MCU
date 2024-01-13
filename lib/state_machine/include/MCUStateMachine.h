@@ -1,5 +1,5 @@
-#ifndef MCUSTATEMACHINE
-#define MCUSTATEMACHINE
+#ifndef __MCU_STATE_MACHINE__
+#define __MCU_STATE_MACHINE__
 
 #include "Logger.h"
 #include "Inverter.h"

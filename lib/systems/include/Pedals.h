@@ -1,5 +1,5 @@
-#ifndef PEDALS
-#define PEDALS
+#ifndef __PEDALS_H__
+#define __PEDALS_H__
 #include <math.h>
 #include <tuple>
 
@@ -55,4 +55,5 @@ private:
 };
 
 
-#endif /* PEDALS */
+#endif /* __PEDALS_H__ */
+#pragma once
