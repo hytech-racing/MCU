@@ -45,5 +45,5 @@ class SteeringComponent {
         float difference_thresh = 1.0f;
 };
 
-#endif
+#endif /* __STEERING_H__ */
 #pragma once

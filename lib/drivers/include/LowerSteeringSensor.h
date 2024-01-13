@@ -2,36 +2,40 @@
 #ifndef __LOWER_STEERING_SENSOR_H__
 #define __LOWER_STEERING_SENSOR_H__
 
-#include "ADC_SPI.h"
+// #include "ADC_SPI.h"
+#include "ADCDriver.h"
 
 class LowerSteeringSensor {
     public:
-        LowerSteeringSensor (const ADC_SPI* sensor, int data_channel) {
-            sensor_ = sensor;
+        LowerSteeringSensor (const ADCDriver* adc, int data_channel, float slope, float offset) {
+            _adc_driver = adc;
             channel_ = data_channel;
+            steering_calibration_slope = slope;
+            steering_calibration_offset = offset;
             // other params set here for scaling
         }
 
         void read_sensor() {
-            angle_degree = (sensor_->read_channel(channel_) * steering_calibration_slope + steering_calibration_offset);
+            angle_degree = (_adc_driver->get_adc_channel(channel_) * steering_calibration_slope + steering_calibration_offset);
         }
 
-        float get_steering_angle() {
+        void set_steering_angle() {
             return angle_degree;
         }
 
     private:
-        float scale_to_degrees_(int steer_val);
+        // float scale_to_degrees_(int steer_val);
         
         // pointer to shared data bus
-        const ADC_SPI * sensor_;
+        // const ADC_SPI * sensor_;
+        const ADCDriver* _adc_driver;
         
         int channel_;
 
-        float steering_calibration_slope = -0.111;
-        float steering_calibration_offset = 260.0;
+        float steering_calibration_slope;
+        float steering_calibration_offset;
         float angle_degree;
 };
 
-#endif
+#endif /* __LOWER_STEERING_SENSOR_H__ */
 #pragma once

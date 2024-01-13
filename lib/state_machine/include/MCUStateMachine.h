@@ -1,5 +1,5 @@
-#ifndef MCUSTATEMACHINE
-#define MCUSTATEMACHINE
+#ifndef __MCU_STATE_MACHINE__
+#define __MCU_STATE_MACHINE__
 
 #include "SteeringSensor.h"
 #include "Logger.h"
@@ -53,4 +53,4 @@ private:
 };
 
 
-#endif /* MCUSTATEMACHINE */
+#endif /* __MCU_STATE_MACHINE__ */
