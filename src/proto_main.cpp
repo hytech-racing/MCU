@@ -1,6 +1,6 @@
-// /* Prototype main function for logic soothing */
+/* Prototype main function for logic soothing */
 
-// /* Include files */
+/* Include files */
 #include <Arduino.h>
 #include "MCUStateMachine.h"
 #include "FlexCAN_T4.h"

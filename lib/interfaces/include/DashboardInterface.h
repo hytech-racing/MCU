@@ -1,5 +1,5 @@
-#ifndef DASHBOARDDRIVER
-#define DASHBOARDDRIVER
+#ifndef __DASHBOARD_DRIVER__
+#define __DASHBOARD_DRIVER__
 
 #include "Dashboard_status.h"
 // The driver interface is used/returned by the driver
@@ -19,10 +19,11 @@ struct DashComponentInterface
     // enum for dial position read by controller mux
     DialMode dial_mode;
 };
-class DashDriver
+
+class DashboardInterface
 {
 public:
-    DashDriver(){
+    DashboardInterface(){
 
     };
     DashComponentInterface evaluate_dashboard(
@@ -32,4 +33,4 @@ public:
 private:
 };
 
-#endif /* DASHBOARDDRIVER */
+#endif /* __DASHBOARD_DRIVER__ */
