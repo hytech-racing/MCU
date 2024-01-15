@@ -18,7 +18,7 @@ private:
     const int SPI_PIN_CLK;
     const int SPI_SPEED;
 
-    AnalogChannel* myChannels[ADC128_NUM_CHANNELS];
+    AnalogChannel myChannels[ADC128_NUM_CHANNELS];
 public:
 // Constructors
     ADC128(const int SPI_PIN_CS_, const int SPI_PIN_SDI_, const int SPI_PIN_SDO_, const int SPI_PIN_CLK_, const int SPI_SPEED_)
@@ -33,7 +33,7 @@ public:
 
         for (int i = 0; i < ADC128_NUM_CHANNELS; i++)
         {
-            channels[i] = new AnalogChannel(this);
+            channels[i] = AnalogChannel();
         }
 
         pinMode(SPI_PIN_CS, OUTPUT);
@@ -60,7 +60,7 @@ public:
         SPI.beginTransaction(SPISettings(SPI_SPEED, MSBFIRST, SPI_MODE3));
 
         uint16_t value = SPI.transfer16(channelIndex << 11);
-        channels[channelIndex]->lastSample = (value & 0x0FFF);
+        channels[channelIndex].lastSample = (value & 0x0FFF);
 
         SPI.endTransaction();
 	    digitalWrite(SPI_PIN_CS, HIGH);
@@ -75,7 +75,7 @@ public:
         for (int channelIndex = 0; channelIndex < ADC128_NUM_CHANNELS; channelIndex++)
         {
             uint16_t value = SPI.transfer16(channelIndex << 11);
-            channels[channelIndex]->lastSample = (value & 0x0FFF);
+            channels[channelIndex].lastSample = (value & 0x0FFF);
         }
         
         SPI.endTransaction();
