@@ -4,8 +4,6 @@
 #include <tuple>
 #include <algorithm>
 
-class AnalogMultiSensor;
-
 class AnalogChannel
 {
 private:
@@ -43,13 +41,14 @@ public:
     }
 };
 
+template <std::size_t N>
 class AnalogMultiSensor
 {
 private:
 public:
 // Data
-    AnalogChannel* channels;
-    int numChannels;
+    AnalogChannel channels[N];
+    const int numChannels = N;
 // Constructors
 
 // Functions

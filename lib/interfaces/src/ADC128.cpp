@@ -9,7 +9,7 @@
 
 #define ADC128_NUM_CHANNELS 8
 
-class ADC128 : public AnalogMultiSensor
+class ADC128 : public AnalogMultiSensor<ADC128_NUM_CHANNELS>
 {
 private:
     const int SPI_PIN_CS;
@@ -17,8 +17,6 @@ private:
     const int SPI_PIN_SDO;
     const int SPI_PIN_CLK;
     const int SPI_SPEED;
-
-    AnalogChannel myChannels[ADC128_NUM_CHANNELS];
 public:
 // Constructors
     ADC128(const int SPI_PIN_CS_, const int SPI_PIN_SDI_, const int SPI_PIN_SDO_, const int SPI_PIN_CLK_, const int SPI_SPEED_)
@@ -28,8 +26,6 @@ public:
     , SPI_PIN_CLK(SPI_PIN_CLK_)
     , SPI_SPEED(SPI_SPEED_)
     {
-        numChannels = ADC128_NUM_CHANNELS;
-        channels = myChannels;
 
         for (int i = 0; i < ADC128_NUM_CHANNELS; i++)
         {
