@@ -1,7 +1,38 @@
 #include "MCUInterface.h"
 
-MCUInterface::MCUInterface(/* args */) {
-}
+/* Static members */
+/* CAN bus */
+FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> MCUInterface::FRONT_INV_CAN;
+FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> MCUInterface::REAR_INV_CAN;
+FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> MCUInterface::TELEM_CAN;
+CAN_message_t MCUInterface::msg;
+
+/* CAN messages */
+// MCU onboard readings
+MCU_status                  MCUInterface::mcu_status;
+MCU_pedal_readings          MCUInterface::mcu_pedal_readings;
+MCU_load_cells              MCUInterface::mcu_load_cells;
+MCU_front_potentiometers    MCUInterface::mcu_front_potentiometers;
+MCU_rear_potentiometers     MCUInterface::mcu_rear_potentiometers;
+MCU_analog_readings         MCUInterface::mcu_analog_readings;
+IMU_accelerometer           MCUInterface::imu_accelerometer;
+IMU_gyroscope               MCUInterface::imu_gyroscope;
+// Motor control
+MC_status                   MCUInterface::mc_status[4];
+MC_temps                    MCUInterface::mc_temps[4];
+MC_energy                   MCUInterface::mc_energy[4];
+MC_setpoints_command        MCUInterface::mc_setpoints_command[4];
+// ACU CAN
+BMS_coulomb_counts          MCUInterface::bms_coulomb_counts;
+BMS_status                  MCUInterface::bms_status;
+BMS_temperatures            MCUInterface::bms_temperatures;
+BMS_voltages                MCUInterface::bms_voltages;
+// Dashboard CAN
+Dashboard_status            MCUInterface::dashboard_status;
+
+/* Member functions */
+// MCUInterface::MCUInterface(/* args */) {
+// }
 
 // Initialize MCU communication
 void MCUInterface::init() {
@@ -14,9 +45,9 @@ void MCUInterface::init() {
     FRONT_INV_CAN.enableMBInterrupts();
     REAR_INV_CAN.enableMBInterrupts();
     TELEM_CAN.enableMBInterrupts();
-    FRONT_INV_CAN.onReceive(parse_front_inv_can_message);
-    REAR_INV_CAN.onReceive(parse_rear_inv_can_message);
-    TELEM_CAN.onReceive(parse_telem_can_message);
+    FRONT_INV_CAN.onReceive(parse_front_inv_CAN_message);
+    REAR_INV_CAN.onReceive(parse_rear_inv_CAN_message);
+    TELEM_CAN.onReceive(parse_telem_CAN_message);
     delay(500);
 }
 
@@ -49,7 +80,7 @@ void MCUInterface::measure_shutdown_circuit_voltage() {
 
 /* Send CAN message */
 // Inverter setpoints
-void MCUInterface::send_CAN_inverter_setpoint() {
+void MCUInterface::send_CAN_inverter_setpoints() {
     // FL inverter
     mc_setpoints_command[0].write(msg.buf);
     msg.id = ID_MC1_SETPOINTS_COMMAND;
@@ -140,4 +171,93 @@ void MCUInterface::send_CAN_bms_coulomb_counts() {
     msg.id = ID_BMS_COULOMB_COUNTS;
     msg.len = sizeof(bms_coulomb_counts);
     TELEM_CAN.write(msg);
+}
+
+/* Poll CAN message */
+void MCUInterface::poll_CAN() {
+    FRONT_INV_CAN.events();
+    REAR_INV_CAN.events();
+    TELEM_CAN.events();
+}
+
+/* Process CAN message */
+// Front inverter
+void MCUInterface::parse_front_inv_CAN_message(const CAN_message_t &RX_msg) {
+    CAN_message_t rx_msg = RX_msg;
+    switch (rx_msg.id) {
+        case ID_MC1_STATUS:
+            mc_status[0].load(rx_msg.buf);
+            break;
+        case ID_MC2_STATUS:
+            mc_status[1].load(rx_msg.buf);
+            break;
+        case ID_MC1_TEMPS:
+            mc_temps[0].load(rx_msg.buf);
+            break;
+        case ID_MC2_TEMPS:
+            mc_temps[1].load(rx_msg.buf);
+            break;
+        case ID_MC1_ENERGY:
+            mc_energy[0].load(rx_msg.buf);
+            break;
+        case ID_MC2_ENERGY:
+            mc_energy[1].load(rx_msg.buf);
+            break;
+        default:
+            break;
+    }
+}
+
+// Rear inverter
+void MCUInterface::parse_rear_inv_CAN_message(const CAN_message_t &Rx_msg) {
+    CAN_message_t rx_msg = Rx_msg;
+    switch (rx_msg.id) {
+        case ID_MC3_STATUS:
+            mc_status[2].load(rx_msg.buf);
+            break;
+        case ID_MC4_STATUS:
+            mc_status[3].load(rx_msg.buf);
+            break;
+        case ID_MC3_TEMPS:
+            mc_temps[2].load(rx_msg.buf);
+            break;
+        case ID_MC4_TEMPS:
+            mc_temps[3].load(rx_msg.buf);
+            break;
+        case ID_MC3_ENERGY:
+            mc_energy[2].load(rx_msg.buf);
+            break;
+        case ID_MC4_ENERGY:
+            mc_energy[3].load(rx_msg.buf);
+            break;        
+        default:
+            break;
+    }
+}
+
+// Telemetry
+void MCUInterface::parse_telem_CAN_message(const CAN_message_t &RX_msg) {
+    CAN_message_t rx_msg = RX_msg;
+    switch (rx_msg.id) {
+        case ID_BMS_TEMPERATURES:              
+            bms_temperatures.load(rx_msg.buf);
+            break;
+        case ID_BMS_VOLTAGES:
+            bms_voltages.load(rx_msg.buf);
+            break;
+        case ID_BMS_COULOMB_COUNTS:
+            bms_coulomb_counts.load(rx_msg.buf);
+            break;
+        case ID_BMS_STATUS:
+            bms_status.load(rx_msg.buf);
+            // BMS heartbeat timer
+            // timer_bms_heartbeat.reset();
+            // timer_bms_heartbeat.interval(BMS_HEARTBEAT_TIMEOUT);
+            break;
+        case ID_DASHBOARD_STATUS:
+            dashboard_status.load(rx_msg.buf);
+            break;
+        default:
+            break;
+  }
 }

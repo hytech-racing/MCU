@@ -5,20 +5,25 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 
-#define INV_CAN_SPEED 500000
-#define TELEM_CAN_SPEED 1000000
+#define INV_CAN_SPEED       500000
+#define TELEM_CAN_SPEED     1000000
+
+#define BMS_OK_READ         5   // SHDN_D_READ
+#define IMD_OK_READ         4   // SHDN_C_READ
+#define BSPD_OK_READ        6   // SHDN_E_READ
+#define SOFTWARE_OK_READ    25  // SHDN_F_READ Watchdog Combined
+#define BOTS_OK_READ        3   // SHDN_B_READ
 
 class MCUInterface
 {
-
 public:
-    MCUInterface(/* args */);
+    MCUInterface() = default;
 
     void init();
 
     void read_mcu_status();    
     
-    void send_CAN_inverter_setpoint()
+    void send_CAN_inverter_setpoints();
     void send_CAN_mcu_status();
     void send_CAN_mcu_pedal_readings();
     void send_CAN_mcu_load_cells();
@@ -27,6 +32,12 @@ public:
     void send_CAN_imu_accelerometer();
     void send_CAN_imu_gyroscope();
     void send_CAN_bms_coulomb_counts();
+
+    void poll_CAN();
+    static void parse_front_inv_CAN_message(const CAN_message_t &RX_msg);
+    static void parse_rear_inv_CAN_message(const CAN_message_t &Rx_msg);
+    static void parse_telem_CAN_message(const CAN_message_t &Rx_msg);
+
 
     // void set_mcu_status();
 
@@ -76,8 +87,5 @@ private:
     uint16_t shutdown_d_above_threshold;
     uint16_t shutdown_e_above_threshold;
 };
-
-
-
 
 #endif /* __MCU_INTERFACE__ */
