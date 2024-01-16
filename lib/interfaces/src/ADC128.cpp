@@ -2,14 +2,14 @@
 #include <SPI.h>
 
 // Definitions
-#define DEFAULT_ADC128_SPI_SDI 12
-#define DEFAULT_ADC128_SPI_SDO 11
-#define DEFAULT_ADC128_SPI_CLK 13
-#define DEFAULT_ADC128_SPI_SPEED 2000000
+#define ADC128_DEFAULT_SPI_SDI 12
+#define ADC128_DEFAULT_SPI_SDO 11
+#define ADC128_DEFAULT_SPI_CLK 13
+#define ADC128_DEFAULT_SPI_SPEED 2000000
 
 #define ADC128_NUM_CHANNELS 8
 
-class ADC128 : public AnalogMultiSensor<ADC128_NUM_CHANNELS>
+class ADC128 : public AnalogMultiSensor
 {
 private:
     const int SPI_PIN_CS;
@@ -17,6 +17,7 @@ private:
     const int SPI_PIN_SDO;
     const int SPI_PIN_CLK;
     const int SPI_SPEED;
+    AnalogChannel channels[ADC128_NUM_CHANNELS];
 public:
 // Constructors
     ADC128(const int SPI_PIN_CS_, const int SPI_PIN_SDI_, const int SPI_PIN_SDO_, const int SPI_PIN_CLK_, const int SPI_SPEED_)
@@ -26,7 +27,6 @@ public:
     , SPI_PIN_CLK(SPI_PIN_CLK_)
     , SPI_SPEED(SPI_SPEED_)
     {
-
         for (int i = 0; i < ADC128_NUM_CHANNELS; i++)
         {
             channels[i] = AnalogChannel();
@@ -43,9 +43,16 @@ public:
         // digitalWrite(SPI_PIN_CLK, HIGH);
     }
     ADC128(const int SPI_PIN_CS_)
-    : ADC128(SPI_PIN_CS_, DEFAULT_ADC128_SPI_SDI, DEFAULT_ADC128_SPI_SDO, DEFAULT_ADC128_SPI_CLK, DEFAULT_ADC128_SPI_SPEED) {}
+    : ADC128(SPI_PIN_CS_, ADC128_DEFAULT_SPI_SDI, ADC128_DEFAULT_SPI_SDO, ADC128_DEFAULT_SPI_CLK, ADC128_DEFAULT_SPI_SPEED) {}
 
 // Functions
+    AnalogChannel* getChannel(int channelIndex)
+    {
+        if (channelIndex < 0 || channelIndex >= ADC128_NUM_CHANNELS)
+            return NULL;
+        return channels + channelIndex;
+    }
+
     void sampleChannel(int channelIndex)
     {
         if (channelIndex < 0 || channelIndex >= ADC128_NUM_CHANNELS)

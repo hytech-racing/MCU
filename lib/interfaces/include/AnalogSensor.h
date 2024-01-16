@@ -6,7 +6,6 @@
 
 class AnalogChannel
 {
-private:
 public:
 // Data
     float scale;
@@ -41,17 +40,11 @@ public:
     }
 };
 
-template <std::size_t N>
 class AnalogMultiSensor
 {
-private:
 public:
-// Data
-    AnalogChannel channels[N];
-    const int numChannels = N;
-// Constructors
-
 // Functions
+    virtual AnalogChannel* getChannel(int channelIndex);
     virtual void sampleChannel(int channelIndex);
     virtual void sampleAll();
 };
