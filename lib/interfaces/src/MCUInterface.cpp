@@ -2,10 +2,10 @@
 
 /* Static members */
 /* CAN bus */
-FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> MCUInterface::FRONT_INV_CAN;
-FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> MCUInterface::REAR_INV_CAN;
-FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> MCUInterface::TELEM_CAN;
-CAN_message_t MCUInterface::msg;
+// FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> MCUInterface::FRONT_INV_CAN;
+// FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> MCUInterface::REAR_INV_CAN;
+// FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> MCUInterface::TELEM_CAN;
+// CAN_message_t MCUInterface::msg;
 
 /* CAN messages */
 // MCU onboard readings
@@ -36,17 +36,13 @@ Dashboard_status            MCUInterface::dashboard_status;
 
 // Initialize MCU communication
 void MCUInterface::init() {
-    FRONT_INV_CAN.begin();
-    FRONT_INV_CAN.setBaudRate(INV_CAN_SPEED);
-    REAR_INV_CAN.begin();
-    REAR_INV_CAN.setBaudRate(INV_CAN_SPEED);
+    INV_CAN.begin();
+    INV_CAN.setBaudRate(INV_CAN_SPEED);
     TELEM_CAN.begin();
     TELEM_CAN.setBaudRate(TELEM_CAN_SPEED);
-    FRONT_INV_CAN.enableMBInterrupts();
-    REAR_INV_CAN.enableMBInterrupts();
+    INV_CAN.enableMBInterrupts();
     TELEM_CAN.enableMBInterrupts();
-    FRONT_INV_CAN.onReceive(parse_front_inv_CAN_message);
-    REAR_INV_CAN.onReceive(parse_rear_inv_CAN_message);
+    INV_CAN.onReceive(parse_inv_CAN_message);
     TELEM_CAN.onReceive(parse_telem_CAN_message);
     delay(500);
 }
@@ -85,22 +81,22 @@ void MCUInterface::send_CAN_inverter_setpoints() {
     mc_setpoints_command[0].write(msg.buf);
     msg.id = ID_MC1_SETPOINTS_COMMAND;
     msg.len = sizeof(mc_setpoints_command[0]);
-    FRONT_INV_CAN.write(msg);
+    INV_CAN.write(msg);
     // FR inverter
     mc_setpoints_command[1].write(msg.buf);
     msg.id = ID_MC2_SETPOINTS_COMMAND;
     msg.len = sizeof(mc_setpoints_command[1]);
-    FRONT_INV_CAN.write(msg);
+    INV_CAN.write(msg);
     // RL inverter
     mc_setpoints_command[2].write(msg.buf);
     msg.id = ID_MC3_SETPOINTS_COMMAND;
     msg.len = sizeof(mc_setpoints_command[2]);
-    REAR_INV_CAN.write(msg);
+    INV_CAN.write(msg);
     // RR inverter
     mc_setpoints_command[3].write(msg.buf);
     msg.id = ID_MC4_SETPOINTS_COMMAND;
     msg.len = sizeof(mc_setpoints_command[3]);
-    REAR_INV_CAN.write(msg);
+    INV_CAN.write(msg);
 }
 
 // MCU status
@@ -175,63 +171,30 @@ void MCUInterface::send_CAN_bms_coulomb_counts() {
 
 /* Poll CAN message */
 void MCUInterface::poll_CAN() {
-    FRONT_INV_CAN.events();
-    REAR_INV_CAN.events();
+    INV_CAN.events();
     TELEM_CAN.events();
 }
 
 /* Process CAN message */
-// Front inverter
-void MCUInterface::parse_front_inv_CAN_message(const CAN_message_t &RX_msg) {
+// Inverter
+void MCUInterface::parse_inv_CAN_message(const CAN_message_t &RX_msg) {
     CAN_message_t rx_msg = RX_msg;
     switch (rx_msg.id) {
-        case ID_MC1_STATUS:
-            mc_status[0].load(rx_msg.buf);
-            break;
-        case ID_MC2_STATUS:
-            mc_status[1].load(rx_msg.buf);
-            break;
-        case ID_MC1_TEMPS:
-            mc_temps[0].load(rx_msg.buf);
-            break;
-        case ID_MC2_TEMPS:
-            mc_temps[1].load(rx_msg.buf);
-            break;
-        case ID_MC1_ENERGY:
-            mc_energy[0].load(rx_msg.buf);
-            break;
-        case ID_MC2_ENERGY:
-            mc_energy[1].load(rx_msg.buf);
-            break;
-        default:
-            break;
-    }
-}
-
-// Rear inverter
-void MCUInterface::parse_rear_inv_CAN_message(const CAN_message_t &Rx_msg) {
-    CAN_message_t rx_msg = Rx_msg;
-    switch (rx_msg.id) {
-        case ID_MC3_STATUS:
-            mc_status[2].load(rx_msg.buf);
-            break;
-        case ID_MC4_STATUS:
-            mc_status[3].load(rx_msg.buf);
-            break;
-        case ID_MC3_TEMPS:
-            mc_temps[2].load(rx_msg.buf);
-            break;
-        case ID_MC4_TEMPS:
-            mc_temps[3].load(rx_msg.buf);
-            break;
-        case ID_MC3_ENERGY:
-            mc_energy[2].load(rx_msg.buf);
-            break;
-        case ID_MC4_ENERGY:
-            mc_energy[3].load(rx_msg.buf);
-            break;        
-        default:
-            break;
+        // Front
+        case ID_MC1_STATUS:     mc_status[0].load(rx_msg.buf);      break;
+        case ID_MC2_STATUS:     mc_status[1].load(rx_msg.buf);      break;
+        case ID_MC1_TEMPS:      mc_temps[0].load(rx_msg.buf);       break;
+        case ID_MC2_TEMPS:      mc_temps[1].load(rx_msg.buf);       break;
+        case ID_MC1_ENERGY:     mc_energy[0].load(rx_msg.buf);      break;
+        case ID_MC2_ENERGY:     mc_energy[1].load(rx_msg.buf);      break;
+        // Rear
+        case ID_MC3_STATUS:     mc_status[2].load(rx_msg.buf);      break;
+        case ID_MC4_STATUS:     mc_status[3].load(rx_msg.buf);      break;
+        case ID_MC3_TEMPS:      mc_temps[2].load(rx_msg.buf);       break;
+        case ID_MC4_TEMPS:      mc_temps[3].load(rx_msg.buf);       break;
+        case ID_MC3_ENERGY:     mc_energy[2].load(rx_msg.buf);      break;
+        case ID_MC4_ENERGY:     mc_energy[3].load(rx_msg.buf);      break;  
+        default:                break;
     }
 }
 
@@ -261,3 +224,6 @@ void MCUInterface::parse_telem_CAN_message(const CAN_message_t &RX_msg) {
             break;
   }
 }
+
+FlexCAN_T4<TEENSY_INV_CAN, RX_SIZE_256, TX_SIZE_16> INV_CAN;
+FlexCAN_T4<TEENSY_TELEM_CAN, RX_SIZE_256, TX_SIZE_16> TELEM_CAN;
