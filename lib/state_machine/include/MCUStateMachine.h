@@ -12,7 +12,7 @@
 #include "AMSInterface.h"
 #include "IMDInterface.h"
 #include "ControllerMux.h"
-enum class MCU_STATE
+enum class CAR_STATE
 {
     STARTUP = 0,
     TRACTIVE_SYSTEM_NOT_ACTIVE = 1,
@@ -35,19 +35,19 @@ public:
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
     /// @param current_millis the current millis() call
     void tick_state_machine(unsigned long current_millis);
-    MCU_STATE get_state() { return current_state_; }
+    CAR_STATE get_state() { return current_state_; }
 
 private:
-    void set_state_(MCU_STATE new_state, unsigned long curr_time);
+    void set_state_(CAR_STATE new_state, unsigned long curr_time);
 
     /// @brief the function run upon the entry of the car into a new state
     /// @param new_state the state in which we are entering
-    void handle_entry_logic_(MCU_STATE new_state, unsigned long curr_time);
+    void handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time);
 
     /// @brief function run upon the exit of a state
     /// @param prev_state the state in which we are leaving
-    void handle_exit_logic_(MCU_STATE prev_state, unsigned long curr_time);
-    MCU_STATE current_state_;
+    void handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time);
+    CAR_STATE current_state_;
 
     /// @brief components within state machine
     BuzzerController *buzzer_;
