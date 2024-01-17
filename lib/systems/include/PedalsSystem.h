@@ -1,5 +1,5 @@
-#ifndef __PEDALS_H__
-#define __PEDALS_H__
+#ifndef PEDALSSYSTEM
+#define PEDALSSYSTEM
 #include <math.h>
 #include <tuple>
 
@@ -10,7 +10,7 @@ struct PedalsDriverInterface
     int brakePedalPosition1;
     int brakePedalPosition2;
 };
-struct PedalsComponentInterface
+struct PedalsSystemInterface
 {
     bool accelImplausible;
     bool brakeImplausible;
@@ -32,13 +32,13 @@ struct PedalsParams
     int end_sense_2;
 }; 
 
-class PedalsComponent
+class PedalsSystem
 {
 public:
-    PedalsComponent(){
+    PedalsSystem(){
         // Setting of min and maxes for pedals via config file
     };
-    PedalsComponentInterface evaluate_pedals(
+    PedalsSystemInterface evaluate_pedals(
         const PedalsDriverInterface &pedal_data);
 
     bool mech_brake_active();
@@ -55,5 +55,5 @@ private:
 };
 
 
-#endif /* __PEDALS_H__ */
-#pragma once
+#endif /* PEDALSSYSTEM */
+

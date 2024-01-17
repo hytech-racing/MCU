@@ -1,9 +1,9 @@
-#ifndef INVERTER
-#define INVERTER
+#ifndef INVERTERSYSTEM
+#define INVERTERSYSTEM
 
-class InverterComponent{
+class InverterSystem{
     public:
-        InverterComponent(unsigned long init_time){
+        InverterSystem(unsigned long init_time){
 
         }
         void request_enable_inverter(unsigned long cur_time_ms);
@@ -18,4 +18,4 @@ class InverterComponent{
 
 
 
-#endif /* INVERTER */
+#endif /* INVERTERSYSTEM */

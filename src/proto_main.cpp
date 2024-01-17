@@ -11,16 +11,16 @@
 
 BuzzerController buzzer(500);
 
-DashDriver dash_interface;
+DashboardInterface dash_interface;
 
-InverterComponent lf_inv(100);
-InverterComponent rf_inv(100);
+InverterSystem lf_inv(100);
+InverterSystem rf_inv(100);
 
-InverterComponent lr_inv(100);
-InverterComponent rr_inv(100);
+InverterSystem lr_inv(100);
+InverterSystem rr_inv(100);
 
 
-DrivetrainComponent drivetrain({&lf_inv, &rf_inv, &lr_inv, &rr_inv});
+DrivetrainSystem drivetrain({&lf_inv, &rf_inv, &lr_inv, &rr_inv});
 MCUStateMachine state_machine(&buzzer, &drivetrain, &dash_interface);
 
 

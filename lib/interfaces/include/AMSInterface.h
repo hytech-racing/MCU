@@ -1,5 +1,5 @@
-#ifndef __AMS_INTERFACE__
-#define __AMS_INTERFACE__
+#ifndef AMSINTERFACE
+#define AMSINTERFACE
 
 class AMSInterface
 {
@@ -10,4 +10,4 @@ class AMSInterface
     private:
 };
 
-#endif /* __AMS_INTERFACE__ */
+#endif /* AMSINTERFACE */

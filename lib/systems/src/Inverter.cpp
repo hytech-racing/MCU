@@ -1,6 +1,6 @@
-#include "Inverter.h"
+#include "InverterSystem.h"
 
-void InverterComponent::request_enable_inverter(unsigned long cur_time_ms)
+void InverterSystem::request_enable_inverter(unsigned long cur_time_ms)
 {
 
 }

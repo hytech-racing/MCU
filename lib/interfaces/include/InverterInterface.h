@@ -1,0 +1,6 @@
+#ifndef INVERTERINTERFACE
+#define INVERTERINTERFACE
+
+// #include ""
+
+#endif /* INVERTERINTERFACE */

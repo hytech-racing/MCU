@@ -1,8 +1,8 @@
 #include "DashboardInterface.h"
 
-DashComponentInterface DashboardInterface::evaluate_dashboard(const Dashboard_status &data) 
+DashSystemInterface DashboardInterface::evaluate_dashboard(const Dashboard_status &data) 
 {
-    DashComponentInterface out;
+    DashSystemInterface out;
     out.dial_mode = static_cast<DialMode>(data.get_dial_state());
     return out;
 }

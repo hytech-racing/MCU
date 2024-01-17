@@ -1,7 +1,7 @@
-#ifndef DRIVETRAIN
-#define DRIVETRAIN
+#ifndef DRIVETRAINSYSTEM
+#define DRIVETRAINSYSTEM
 
-#include "Inverter.h"
+#include "InverterSystem.h"
 
 #include <array>
 
@@ -28,13 +28,13 @@ struct DrivetrainCommand
     float speed_rr;
 };
 
-class DrivetrainComponent
+class DrivetrainSystem
 {
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
-    /// @param inverterComponents inverter pointers
-    DrivetrainComponent(const std::array<const InverterComponent *, 4> &inverterComponents)
-        : inverterComponents_(inverterComponents)
+    /// @param inverters inverter pointers
+    DrivetrainSystem(const std::array<const InverterSystem *, 4> &inverters)
+        : inverters_(inverters)
     {
         state_ = DRIVETRAIN_STATE::WAIT_SYSTEM_READY;
     }
@@ -63,8 +63,8 @@ private:
     void set_state_(DRIVETRAIN_STATE new_state);
 
     DRIVETRAIN_STATE state_;
-    std::array<const InverterComponent *, 4> inverterComponents_;
+    std::array<const InverterSystem *, 4> inverters_;
 };
 
 
-#endif /* DRIVETRAIN */
+#endif /* DRIVETRAINSYSTEM */

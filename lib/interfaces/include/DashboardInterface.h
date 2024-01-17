@@ -14,7 +14,7 @@ enum DialMode
     ENDURANCE
 };
 
-struct DashComponentInterface
+struct DashSystemInterface
 {
     // enum for dial position read by controller mux
     DialMode dial_mode;
@@ -26,7 +26,7 @@ public:
     DashboardInterface(){
 
     };
-    DashComponentInterface evaluate_dashboard(
+    DashSystemInterface evaluate_dashboard(
         const Dashboard_status &can_data);
     bool start_button_pressed();
 

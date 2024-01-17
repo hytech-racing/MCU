@@ -1,6 +1,6 @@
-#include "Drivetrain.h"
+#include "DrivetrainSystem.h"
 
-DRIVETRAIN_STATE DrivetrainComponent::handle_state_machine(unsigned long curr_time)
+DRIVETRAIN_STATE DrivetrainSystem::handle_state_machine(unsigned long curr_time)
 {
   switch (state_)
   {

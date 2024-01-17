@@ -1,15 +1,15 @@
 #ifndef CONTROLLERMUX
 #define CONTROLLERMUX
 
-#include "Pedals.h"
-#include "DashboardDriver.h"
-#include "Drivetrain.h"
+#include "PedalsSystem.h"
+#include "DashboardInterface.h"
+#include "DrivetrainSystem.h"
 
 class ControllerMux
 {
     public:
         ControllerMux() {}
-        DrivetrainCommand get_drivetrain_input(const PedalsComponentInterface& pedals_data_input, const DashComponentInterface& dash_input);
+        DrivetrainCommand get_drivetrain_input(const PedalsSystemInterface& pedals_data_input, const DashSystemInterface& dash_input);
     private:
 };
 

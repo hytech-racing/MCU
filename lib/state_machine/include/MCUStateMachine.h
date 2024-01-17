@@ -2,15 +2,15 @@
 #define __MCU_STATE_MACHINE__
 
 #include "Logger.h"
-#include "Inverter.h"
-#include "Pedals.h"
-#include "Drivetrain.h"
+#include "InverterSystem.h"
+#include "PedalsSystem.h"
+#include "DrivetrainSystem.h"
 #include "Buzzer.h"
 
 
-#include "DashboardDriver.h"
-#include "AMSDriver.h"
-#include "IMDDriver.h"
+#include "DashboardInterface.h"
+#include "AMSInterface.h"
+#include "IMDInterface.h"
 #include "ControllerMux.h"
 enum class MCU_STATE
 {
@@ -25,7 +25,7 @@ enum class MCU_STATE
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerController *buzzer, DrivetrainComponent *drivetrain, DashDriver *dashboard)
+    MCUStateMachine(BuzzerController *buzzer, DrivetrainSystem *drivetrain, DashboardInterface *dashboard)
     {
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
@@ -51,13 +51,13 @@ private:
 
     /// @brief components within state machine
     BuzzerController *buzzer_;
-    DrivetrainComponent *drivetrain_;
-    PedalsComponent *pedals_;
+    DrivetrainSystem *drivetrain_;
+    PedalsSystem *pedals_;
 
     /// @brief drivers within state machine
-    DashDriver *dashboard_;
-    AMSDriver *bms_;
-    IMDDriver *imd_;
+    DashboardInterface *dashboard_;
+    AMSInterface *bms_;
+    IMDInterface *imd_;
 
     ControllerMux * controller_mux_;
 
