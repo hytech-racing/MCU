@@ -9,6 +9,7 @@
 #include "ADC_SPI.h"
 // #include "MessageHandler.h"
 #include "MCUInterface.h"
+#include "AMSInterface.h"
 
 
 
@@ -33,7 +34,8 @@
 // CAN_message_t msg;
 // MessageHandler<FlexCAN_T4_Base, CAN_message_t> msg_writer(&FRONT_INV_CAN, &msg, 100, millis());
 
-MCUInterface main_ecu;
+AMSInterface ams_interface;
+MCUInterface main_ecu(&ams_interface);
 
 void setup() {
     main_ecu.init();

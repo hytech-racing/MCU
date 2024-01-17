@@ -9,26 +9,26 @@
 
 /* CAN messages */
 // MCU onboard readings
-MCU_status                  MCUInterface::mcu_status;
-MCU_pedal_readings          MCUInterface::mcu_pedal_readings;
-MCU_load_cells              MCUInterface::mcu_load_cells;
-MCU_front_potentiometers    MCUInterface::mcu_front_potentiometers;
-MCU_rear_potentiometers     MCUInterface::mcu_rear_potentiometers;
-MCU_analog_readings         MCUInterface::mcu_analog_readings;
-IMU_accelerometer           MCUInterface::imu_accelerometer;
-IMU_gyroscope               MCUInterface::imu_gyroscope;
-// Motor control
-MC_status                   MCUInterface::mc_status[4];
-MC_temps                    MCUInterface::mc_temps[4];
-MC_energy                   MCUInterface::mc_energy[4];
-MC_setpoints_command        MCUInterface::mc_setpoints_command[4];
-// ACU CAN
-BMS_coulomb_counts          MCUInterface::bms_coulomb_counts;
-BMS_status                  MCUInterface::bms_status;
-BMS_temperatures            MCUInterface::bms_temperatures;
-BMS_voltages                MCUInterface::bms_voltages;
-// Dashboard CAN
-Dashboard_status            MCUInterface::dashboard_status;
+// MCU_status                  MCUInterface::mcu_status;
+// MCU_pedal_readings          MCUInterface::mcu_pedal_readings;
+// MCU_load_cells              MCUInterface::mcu_load_cells;
+// MCU_front_potentiometers    MCUInterface::mcu_front_potentiometers;
+// MCU_rear_potentiometers     MCUInterface::mcu_rear_potentiometers;
+// MCU_analog_readings         MCUInterface::mcu_analog_readings;
+// IMU_accelerometer           MCUInterface::imu_accelerometer;
+// IMU_gyroscope               MCUInterface::imu_gyroscope;
+// // Motor control
+// MC_status                   MCUInterface::mc_status[4];
+// MC_temps                    MCUInterface::mc_temps[4];
+// MC_energy                   MCUInterface::mc_energy[4];
+// MC_setpoints_command        MCUInterface::mc_setpoints_command[4];
+// // ACU CAN
+// BMS_coulomb_counts          MCUInterface::bms_coulomb_counts;
+// BMS_status                  MCUInterface::bms_status;
+// BMS_temperatures            MCUInterface::bms_temperatures;
+// BMS_voltages                MCUInterface::bms_voltages;
+// // Dashboard CAN
+// Dashboard_status            MCUInterface::dashboard_status;
 
 /* Member functions */
 // MCUInterface::MCUInterface(/* args */) {
@@ -49,6 +49,7 @@ void MCUInterface::init() {
 
 /* Read shutdown system values */
 void MCUInterface::read_mcu_status() {
+
     measure_shutdown_circuit_input();
     measure_shutdown_circuit_voltage();  
     
@@ -72,6 +73,13 @@ void MCUInterface::measure_shutdown_circuit_voltage() {
     mcu_status.set_shutdown_d_above_threshold(digitalRead(BMS_OK_READ));
     mcu_status.set_shutdown_e_above_threshold(digitalRead(BSPD_OK_READ));
     
+}
+
+/* Write brake light */
+void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
+
+    digitalWrite(BRAKE_LIGHT_CTRL, brake_pedal_is_active);
+
 }
 
 /* Send CAN message */
@@ -216,6 +224,7 @@ void MCUInterface::parse_telem_CAN_message(const CAN_message_t &RX_msg) {
             // BMS heartbeat timer
             // timer_bms_heartbeat.reset();
             // timer_bms_heartbeat.interval(BMS_HEARTBEAT_TIMEOUT);
+            AMSInterface::set_heartbeat(millis());
             break;
         case ID_DASHBOARD_STATUS:
             dashboard_status.load(rx_msg.buf);
