@@ -3,7 +3,7 @@
 
 #include <tuple>
 
-enum steeringStatus_s
+enum SteeringStatus_s
 {
     STEERING_NOMINAL = 0,   // all sensors are nominal
     STEERING_MARGINAL = 1,  // one or more sensors is reporting a warning
@@ -16,8 +16,8 @@ class SteeringInterface
 private:
 public:  
     /// @brief Calculate steering angle and status (nominal, marginal, degraded, error). DOES NOT SAMPLE.
-    /// @return Steering angle (0 is centered, negative is left), steeringStatus_s
-    virtual std::tuple<float, steeringStatus_s> getSteeringAngle();
+    /// @return Steering angle (0 is centered, negative is left), SteeringStatus_s
+    virtual std::tuple<float, SteeringStatus_s> getSteeringAngle();
 };
 
 #endif /* __STEERINGINTERFACE_H__ */

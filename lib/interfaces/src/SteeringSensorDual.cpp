@@ -23,7 +23,7 @@ public:
     , secondarySensor(secondarySensor_) {}
 
 // Functions
-    std::tuple<float, steeringStatus_s> getSteeringAngle()
+    std::tuple<float, SteeringStatus_s> getSteeringAngle()
     {
         auto [primaryAngle, primaryStatus] = primarySensor->getAngleAndStatus();
         auto [secondaryAngle, secondaryStatus] = secondarySensor->convert();
