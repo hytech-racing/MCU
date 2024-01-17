@@ -4,6 +4,12 @@
 #include <tuple>
 #include <algorithm>
 
+enum analogSensorStatus_s
+{
+    ANALOG_SENSOR_GOOD = 0,
+    ANALOG_SENSOR_CLAMPED = 1,
+};
+
 class AnalogChannel
 {
 public:
@@ -30,12 +36,12 @@ public:
     
 // Functions
     // Returns conversion result and whether result was clamped
-    std::tuple<float, bool> convert()
+    std::tuple<float, analogSensorStatus_s> convert()
     {
         lastConversion = lastSample * scale + offset;
         return {
             clamp ? std::min(std::max(lastConversion, clampLow), clampHigh) : lastConversion,
-            clamp ? lastConversion > clampHigh || lastConversion < clampLow : false
+            clamp ? ((lastConversion > clampHigh || lastConversion < clampLow) ? ANALOG_SENSOR_CLAMPED : ANALOG_SENSOR_GOOD) : ANALOG_SENSOR_GOOD
         };
     }
 };
