@@ -35,7 +35,8 @@ public:
     : AnalogChannel(1.0, 0.0, false, __FLT_MIN__, __FLT_MAX__) {}
     
 // Functions
-    // Returns conversion result and whether result was clamped
+    /// @brief Calculate sensor output and whether result is in sensor's defined bounds. DOES NOT SAMPLE.
+    /// @return Sensor's calculated output in real units, whether the result was clamped
     std::tuple<float, analogSensorStatus_s> convert()
     {
         lastConversion = lastSample * scale + offset;
@@ -50,8 +51,14 @@ class AnalogMultiSensor
 {
 public:
 // Functions
+    /// @brief Getter for AnalogChannels stored in the AnalogMultiSensor
+    /// @param channelIndex 
+    /// @return A pointer to the channel at the requested index
     virtual AnalogChannel* getChannel(int channelIndex);
+    /// @brief Commands the underlying sensor at the requested index to sample and store the result
+    /// @param channelIndex 
     virtual void sampleChannel(int channelIndex);
+    /// @brief Commands the underlying sensor to sample all channels and store the results
     virtual void sampleAll();
 };
 

@@ -15,20 +15,18 @@ class SteeringSensorDual : SteeringInterface
 {
 private:
     UpperSteeringSensor* primarySensor;
-    AnalogMultiSensor* secondarySensorADC;
-    const int secondarySensorChannelIndex;
+    AnalogChannel* secondarySensor;
 public:
 // Constructors
-    SteeringSensorDual(UpperSteeringSensor* primarySensor_, AnalogMultiSensor* secondarySensorADC_, const int secondarySensorChannelIndex_)
+    SteeringSensorDual(UpperSteeringSensor* primarySensor_, AnalogChannel* secondarySensor_)
     : primarySensor(primarySensor_)
-    , secondarySensorADC(secondarySensorADC_)
-    , secondarySensorChannelIndex(secondarySensorChannelIndex_) {}
+    , secondarySensor(secondarySensor_) {}
 
 // Functions
     std::tuple<float, steeringStatus_s> getSteeringAngle()
     {
         auto [primaryAngle, primaryStatus] = primarySensor->getAngleAndStatus();
-        auto [secondaryAngle, secondaryStatus] = secondarySensorADC->getChannel(secondarySensorChannelIndex)->convert();
+        auto [secondaryAngle, secondaryStatus] = secondarySensor->convert();
 
         // Both sensors are nominal
         if ((primaryStatus == UPPER_STEERING_NOMINAL) && (secondaryStatus == ANALOG_SENSOR_GOOD))

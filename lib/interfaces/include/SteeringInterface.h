@@ -14,8 +14,9 @@ enum steeringStatus_s
 class SteeringInterface
 {
 private:
-public:
-    // Returns steering angle and whether the measurement is valid, i.e., redundant sensors agree
+public:  
+    /// @brief Calculate steering angle and status (nominal, marginal, degraded, error). DOES NOT SAMPLE.
+    /// @return Steering angle (0 is centered, negative is left), steeringStatus_s
     virtual std::tuple<float, steeringStatus_s> getSteeringAngle();
 };
 
