@@ -58,6 +58,7 @@ void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer)
         CAN_message_t recvd_msg;
         uint8_t buf[sizeof(CAN_message_t)];
         rx_buffer.pop_front(buf, sizeof(CAN_message_t));
+        memmove(&recvd_msg, buf, sizeof(recvd_msg));
         switch (recvd_msg.id)
         {
         case ID_MC1_STATUS:
