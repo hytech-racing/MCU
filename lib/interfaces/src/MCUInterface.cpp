@@ -36,6 +36,11 @@
 
 // Initialize MCU communication
 void MCUInterface::init() {
+    CAN_init();
+    mcu_status_init();
+}
+
+void MCUInterface::CAN_init() {
     INV_CAN.begin();
     INV_CAN.setBaudRate(INV_CAN_SPEED);
     TELEM_CAN.begin();
@@ -45,6 +50,11 @@ void MCUInterface::init() {
     INV_CAN.onReceive(parse_inv_CAN_message);
     TELEM_CAN.onReceive(parse_telem_CAN_message);
     delay(500);
+}
+
+void mcu_status_init() {
+    mcu_status.set_bms_ok_high(false);
+    mcu_status.set_imd_ok_high(false);
 }
 
 /* Read shutdown system values */

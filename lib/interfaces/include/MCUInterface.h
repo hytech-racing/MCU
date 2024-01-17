@@ -24,6 +24,8 @@ public:
     // MCUInterface(FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16>* can1, FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16>* can2): inv_can_(can1), telem_can_(can2) {};
 
     void init();
+    void CAN_init();
+    void mcu_status_init();
 
     /* Read from Main ECU */
     void read_mcu_status();
