@@ -1,35 +1,70 @@
 #include "DrivetrainSystem.h"
 
-DRIVETRAIN_STATE DrivetrainSystem::handle_state_machine(unsigned long curr_time)
+bool DrivetrainSystem::inverter_init_timeout(unsigned long curr_time)
 {
-  switch (state_)
-  {
-  case DRIVETRAIN_STATE::WAIT_SYSTEM_READY:
-    if (drivetrain_ready())
-    {
-      enable_drivetrain_hv(curr_time);
-      set_state_(DRIVETRAIN_STATE::WAIT_QUIT_DC_ON);
-    }
-    break;
+    return ((int)(curr_time - drivetrain_initialization_phase_start_time_) > init_time_limit_ms_);
+}
 
-  case DRIVETRAIN_STATE::WAIT_QUIT_DC_ON:
-    if (check_drivetrain_quit_dc_on_())
-    {
-      command_drivetrain_no_torque();
-      set_drivetrain_driver_enable_(true);
-      set_drivetrain_enable_inverters_(true);
-      set_state_(DRIVETRAIN_STATE::WAIT_QUIT_INVERTER_ON);
-    }
-    break;
+// command functions
+void DrivetrainSystem::enable_drivetrain_hv(unsigned long curr_time)
+{
 
-  case DRIVETRAIN_STATE::WAIT_QUIT_INVERTER_ON:
-    if (check_drivetrain_quit_dc_on_())
+    for (auto inv_pointer : inverters_)
     {
-      set_state_(DRIVETRAIN_STATE::RTD);
+        inv_pointer->request_enable_hv();
     }
-    break;
-  case DRIVETRAIN_STATE::RTD:
-    break;
-  }
-  return state_;
+    drivetrain_initialization_phase_start_time_ = curr_time;
+}
+
+void DrivetrainSystem::request_enable()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->request_enable_inverter();
+    }
+}
+
+void DrivetrainSystem::command_drivetrain_no_torque()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->handle_system_command();
+    }
+}
+
+// feedback functions
+bool DrivetrainSystem::drivetrain_ready()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        if (!inv_pointer->inverter_system_ready())
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool DrivetrainSystem::check_drivetrain_quit_dc_on()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        if (!inv_pointer->dc_quit_on())
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool DrivetrainSystem::drivetrain_enabled()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        if (!inv_pointer->quit_inverter_on())
+        {
+            return false;
+        }
+    }
+    return true;
 }

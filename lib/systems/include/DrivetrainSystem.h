@@ -1,20 +1,11 @@
 #ifndef DRIVETRAINSYSTEM
 #define DRIVETRAINSYSTEM
 
-#include "InverterSystem.h"
-
+#include "InverterInterface.h"
 #include <array>
 
-enum class DRIVETRAIN_STATE
-{
-    WAIT_SYSTEM_READY = 0,
-    WAIT_QUIT_DC_ON = 1,
-    WAIT_QUIT_INVERTER_ON = 2,
-    RTD = 3
-};
-
 struct DrivetrainCommand
-{
+{ 
     float torque_lf;
     float speed_lf;
 
@@ -33,37 +24,43 @@ class DrivetrainSystem
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<const InverterSystem *, 4> &inverters)
-        : inverters_(inverters)
+    DrivetrainSystem(const std::array<InverterInterface *, 4> &inverters, int init_time_limit_ms )
+        : inverters_(inverters),init_time_limit_ms_(init_time_limit_ms)
     {
-        state_ = DRIVETRAIN_STATE::WAIT_SYSTEM_READY;
     }
 
-    
-
-    /// @brief changes state of the all the inverters startup process to WAIT_QUIT_DC_ON
-    /// @param curr_time current system tick time (millis())
-    void enable_drivetrain_hv(unsigned long curr_time);
-    void request_enable(unsigned long curr_time);
-    void command_drivetrain_no_torque();
-    void start_drivetrain(unsigned long curr_time);
-    bool hv_over_threshold_on_drivetrain();
+    // startup phase 1
+    // status check for start of enable
     bool drivetrain_ready();
+    /// @param curr_time current system tick time (millis()) that sets the init phase start time
+    void enable_drivetrain_hv(unsigned long curr_time);
+    
+    // startup phase 2
+    bool check_drivetrain_quit_dc_on();
+
+
+    // on entry logic
+    void request_enable();
+    void command_drivetrain_no_torque();
+    
+    // final check for drivetrain initialization to check if quit inverter on
+    bool drivetrain_enabled();
+    
+    // check to see if init time limit has passed 
+    bool inverter_init_timeout(unsigned long curr_time);
+
+    bool hv_over_threshold_on_drivetrain();
     void disable();
-    bool inverter_enable_timeout(unsigned long curr_time);
     bool drivetrain_error_occured();
-    DRIVETRAIN_STATE handle_state_machine(unsigned long curr_time);
 
     void command_drivetrain(const DrivetrainCommand& data);
 private:
-    void set_drivetrain_driver_enable_(bool in);
-    void set_drivetrain_enable_inverters_(bool in);
-    
-    bool check_drivetrain_quit_dc_on_();
-    void set_state_(DRIVETRAIN_STATE new_state);
 
-    DRIVETRAIN_STATE state_;
-    std::array<const InverterSystem *, 4> inverters_;
+
+    std::array<InverterInterface *, 4> inverters_;
+    int init_time_limit_ms_;
+    unsigned long drivetrain_initialization_phase_start_time_;
+    
 };
 
 

@@ -10,10 +10,12 @@ struct PedalsDriverInterface
     int brakePedalPosition1;
     int brakePedalPosition2;
 };
+
 struct PedalsSystemInterface
 {
     bool accelImplausible;
     bool brakeImplausible;
+    bool brakeAndAccelPressedImplausibility;
     bool isBraking;
     int requestedTorque;
 };
@@ -36,11 +38,12 @@ class PedalsSystem
 {
 public:
     PedalsSystem(){
+        implausibilityStartTime_ = 0;
         // Setting of min and maxes for pedals via config file
     };
     PedalsSystemInterface evaluate_pedals(
-        const PedalsDriverInterface &pedal_data);
-
+        const PedalsDriverInterface &pedal_data, unsigned long curr_time);
+    bool max_duration_of_implausibility_exceeded(unsigned long curr_time);
     bool mech_brake_active();
 
 private:
@@ -52,6 +55,7 @@ private:
     bool pedal_is_active_(int sense1, int sense_2, const PedalsParams& pedalParams, float percent_threshold); 
     PedalsParams accelParams_;
     PedalsParams brakeParams_;
+    unsigned long implausibilityStartTime_;
 };
 
 

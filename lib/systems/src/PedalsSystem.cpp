@@ -1,12 +1,33 @@
 #include "PedalsSystem.h"
 
-PedalsSystemInterface PedalsSystem::evaluate_pedals(const PedalsDriverInterface &data)
+// TODO parameterize percentages in constructor
+PedalsSystemInterface PedalsSystem::evaluate_pedals(const PedalsDriverInterface &data, unsigned long curr_time)
 {
     PedalsSystemInterface out;
     out.accelImplausible = evaluate_pedal_implausibilities_(data.accelPedalPosition1, data.accelPedalPosition2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(data.brakePedalPosition1, data.brakePedalPosition2, brakeParams_, 0.25);
+    out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(data);
+    bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
+
+    if (implausibility && (implausibilityStartTime_ == 0)){
+        implausibilityStartTime_ = curr_time;
+    } else if (!implausibility)
+    {
+        implausibilityStartTime_ = 0;
+    }
 
     return out;
+}
+
+// TODO parameterize duration in constructor
+bool PedalsSystem::max_duration_of_implausibility_exceeded(unsigned long curr_time)
+{
+    if(implausibilityStartTime_ !=0){
+        return ((curr_time - implausibilityStartTime_) > 100);
+    } else {
+        return false;
+    }
+    
 }
 
 bool PedalsSystem::evaluate_pedal_implausibilities_(int sense_1, int sense_2, const PedalsParams &params, float max_percent_diff)
