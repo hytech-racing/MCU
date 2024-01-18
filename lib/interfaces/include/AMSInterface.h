@@ -7,6 +7,8 @@
 #define PACK_CHARGE_CRIT_TOTAL_THRESHOLD        420
 #define PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  35000
 
+#define SOFTWARE_OK     28
+
 class AMSInterface
 {
 public:
@@ -19,6 +21,10 @@ public:
         cell_voltage_alpha(0.8) {};
 
     void init();
+
+    void set_software_is_ok();
+    void set_software_is_not_ok();
+    bool software_is_ok();
     
     bool ok_high();
     bool heartbeat_check(unsigned long curr_time);

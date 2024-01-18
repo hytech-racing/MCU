@@ -9,7 +9,24 @@ unsigned long AMSInterface::last_heartbeat_time = millis();
 
 /* Initialize */
 void AMSInterface::init() {
+    set_software_is_ok();
+
+    pinMode(SOFTWARE_OK, OUTPUT);
+    digitalWrite(SOFTWARE_OK, HIGH);
+
     mcu_->mcu_status.set_bms_ok_high(false);
+}
+
+void AMSInterface::set_software_is_ok() {
+    mcu_->mcu_status.set_software_is_ok(true);
+}
+
+void AMSInterface::set_software_is_not_ok() {
+    mcu_->mcu_status.set_software_is_ok(false);
+}
+
+bool AMSInterface::software_is_ok() {
+    return mcu_->mcu_status.get_software_is_ok();
 }
 
 /* Check if AMS is ok */
@@ -23,12 +40,12 @@ bool AMSInterface::heartbeat_check(unsigned long curr_time) {
 }
 
 /* Check if lowest cell temperature is below threshold */
-bool is_below_pack_charge_critical_low_thresh() {
+bool AMSInterface::is_below_pack_charge_critical_low_thresh() {
     return (mcu_->bms_voltages.get_low() < PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD);
 }
 
 /* Check if total pack charge is above threshold */
-bool is_above_pack_charge_critical_total_thresh() {
+bool AMSInterface::is_above_pack_charge_critical_total_thresh() {
     return (mcu_->bms_voltages.get_total() < PACK_CHARGE_CRIT_TOTAL_THRESHOLD);
 }
 
