@@ -9,8 +9,12 @@ void WatchdogInterface::init() {
     pinMode(WATCHDOG_INPUT, OUTPUT);
     // pinMode(SOFTWARE_OK, OUTPUT);
 
-    digitalWrite(WATCHDOG_INPUT, HIGH);    
+    // digitalWrite(WATCHDOG_INPUT, HIGH);
     // digitalWrite(SOFTWARE_OK, HIGH);
+}
+
+void WatchdogInterface::set_start_state() {
+    digitalWrite(WATCHDOG_INPUT, HIGH);
 }
 
 /*  */

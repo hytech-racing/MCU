@@ -15,6 +15,8 @@ public:
 
     void init();
 
+    void set_start_state();
+
     // void set_software_is_ok();
     // void set_software_is_not_ok();
 

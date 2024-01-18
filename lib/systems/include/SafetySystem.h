@@ -10,7 +10,14 @@ public:
     SafetySystem(AMSInterface *ams, WatchdogInterface *wd): ams_(ams), wd_(wd) {};
 
     void init();
+
+    void software_shutdown();
+
+
 private:
+    void software_ok_init();
+    void watchdog_init();
+
     AMSInterface *ams_;
     WatchdogInterface *wd_;
 };

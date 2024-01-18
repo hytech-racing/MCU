@@ -10,6 +10,9 @@
 // #include "MessageHandler.h"
 #include "MCUInterface.h"
 #include "AMSInterface.h"
+#include "WatchdogInterface.h"
+
+#include "SafetySystem.h"
 
 
 
@@ -36,9 +39,24 @@
 
 AMSInterface ams_interface;
 MCUInterface main_ecu(&ams_interface);
+WatchdogInterface wd_interface(&main_ecu);
+
+SafetySystem safety_system(&ams_interface, wd_interface);
+
+
 
 void setup() {
-    main_ecu.init();
+    main_ecu.init();        // CAN_init()
+                            // mcu_status_init()
+
+    wd_interface.init();    // pinMode(WD_INPUT)
+    ams_interface.init();   // pinMode(SW_OK)
+
+    safety_system.init();   // dW(SW_OK)
+                            // dW(WD_INPUT)
+                            // ams set sw is ok
+
+
 }
 
 void loop() {

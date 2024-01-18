@@ -22,12 +22,15 @@ public:
 
     void init();
 
+    void set_start_state();
+    void set_state_ok_high(bool is_ok);
+
     void set_software_is_ok();
     void set_software_is_not_ok();
     bool software_is_ok();
     
     bool ok_high();
-    bool heartbeat_check(unsigned long curr_time);
+    bool heartbeat_received(unsigned long curr_time);
     bool is_below_pack_charge_critical_low_thresh();
     bool is_above_pack_charge_critical_total_thresh();
 

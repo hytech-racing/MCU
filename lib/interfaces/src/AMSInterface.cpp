@@ -9,12 +9,23 @@ unsigned long AMSInterface::last_heartbeat_time = millis();
 
 /* Initialize */
 void AMSInterface::init() {
-    set_software_is_ok();
+    // set_software_is_ok();    // SafetySystem init
 
     pinMode(SOFTWARE_OK, OUTPUT);
-    digitalWrite(SOFTWARE_OK, HIGH);
+    // digitalWrite(SOFTWARE_OK, HIGH);
 
-    mcu_->mcu_status.set_bms_ok_high(false);
+    // mcu_->mcu_status.set_bms_ok_high(false);     // MCUInterface init (?)
+}
+
+void AMSInterface::set_start_state() {
+    digitalWrite(SOFTWARE_OK, HIGH);
+}
+
+void AMSInterface::set_state_ok_high(bool ok_high) {
+    if (ok_high)
+        digitalWrite(SOFTWARE_OK, HIGH);
+    else
+        digitalWrite(SOFTWARE_OK, LOW);
 }
 
 void AMSInterface::set_software_is_ok() {
@@ -35,7 +46,7 @@ bool AMSInterface::ok_high() {
 }
 
 /* Check if AMS heartbeat is received */
-bool AMSInterface::heartbeat_check(unsigned long curr_time) {
+bool AMSInterface::heartbeat_received(unsigned long curr_time) {
     return ((curr_time - last_heartbeat_time) < HEARTBEAT_INTERVAL);
 }
 
