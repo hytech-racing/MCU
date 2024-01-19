@@ -28,7 +28,7 @@ void DrivetrainSystem::command_drivetrain_no_torque()
 {
     for (auto inv_pointer : inverters_)
     {
-        inv_pointer->handle_system_command();
+        inv_pointer->command_no_torque();
     }
 }
 

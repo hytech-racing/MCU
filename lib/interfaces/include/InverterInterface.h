@@ -25,8 +25,16 @@ class InverterInterface
 
         }
         
+        void update_inverter();
+        void request_enable_hv();
+        void request_enable_inverter();
+        void command_no_torque();
+        
         void handle_command(const InverterCommand& command);
         
+        bool inverter_system_ready();
+        bool dc_quit_on();
+        bool quit_inverter_on();
 
 };
 

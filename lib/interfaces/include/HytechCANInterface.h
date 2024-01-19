@@ -18,7 +18,6 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
-
 struct AllMsgs
 {
     std::tuple<bool, MC_status> mc_1_status = {false, MC_status()};
