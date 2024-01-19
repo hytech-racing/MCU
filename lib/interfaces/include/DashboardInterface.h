@@ -15,13 +15,13 @@ class DashboardInterface
 {
 private:
 public:
-    DialMode_s getDialMode();
-    bool nightModeButtonPressed();
-    bool inverterResetButtonPressed();
-    bool torqueVectoringOffButtonPressed();
-    bool startButtonPressed();
-    bool torqueButtonPressed();
-    bool specialButtonPressed();
+    virtual DialMode_s getDialMode();
+    virtual bool nightModeButtonPressed();
+    virtual bool inverterResetButtonPressed();
+    virtual bool torqueVectoringOffButtonPressed();
+    virtual bool startButtonPressed();
+    virtual bool torqueButtonPressed();
+    virtual bool specialButtonPressed();
 };
 
 #endif /* __DASHBOARDINTERFACE_H__ */
