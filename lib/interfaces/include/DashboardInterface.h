@@ -1,36 +1,27 @@
-#ifndef __DASHBOARD_DRIVER__
-#define __DASHBOARD_DRIVER__
+#ifndef __DASHBOARDINTERFACE_H__
+#define __DASHBOARDINTERFACE_H__
 
-#include "Dashboard_status.h"
-// The driver interface is used/returned by the driver
-
-enum DialMode
+enum DialMode_s
 {
     MODE_1,
     MODE_2,
     ACCEL_LAUNCH_CONTROL,
     SKIDPAD,
     AUTOCROSS,
-    ENDURANCE
-};
-
-struct DashSystemInterface
-{
-    // enum for dial position read by controller mux
-    DialMode dial_mode;
+    ENDURANCE,
 };
 
 class DashboardInterface
 {
-public:
-    DashboardInterface(){
-
-    };
-    DashSystemInterface evaluate_dashboard(
-        const Dashboard_status &can_data);
-    bool start_button_pressed();
-
 private:
+public:
+    virtual DialMode_s getDialMode();
+    virtual bool nightModeButtonPressed();
+    virtual bool inverterResetButtonPressed();
+    virtual bool torqueVectoringOffButtonPressed();
+    virtual bool startButtonPressed();
+    virtual bool torqueButtonPressed();
+    virtual bool specialButtonPressed();
 };
 
-#endif /* __DASHBOARD_DRIVER__ */
+#endif /* __DASHBOARDINTERFACE_H__ */
