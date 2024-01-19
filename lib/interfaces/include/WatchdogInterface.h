@@ -1,0 +1,5 @@
+#ifndef __WATCHDOG_INTERFACE__
+#define __WATCHDOG_INTERFACE__
+
+
+#endif /* __WATCHDOG_INTERFACE__ */

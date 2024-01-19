@@ -1,5 +1,0 @@
-#ifndef TELEMETRYDRIVER
-#define TELEMETRYDRIVER
-
-
-#endif /* TELEMETRYDRIVER */

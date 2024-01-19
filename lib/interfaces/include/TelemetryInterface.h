@@ -1,0 +1,5 @@
+#ifndef __TELEMETRY_INTERFACE__
+#define __TELEMETRY_INTERFACE__
+
+
+#endif /* __TELEMETRY_INTERFACE__ */

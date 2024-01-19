@@ -44,7 +44,7 @@
 // Call the ADIS16460 IMU class
 ADIS16460 IMU(IMU_CS, IMU_DATAREADY, IMU_RESET); // Chip Select, Data Ready, Reset Pin Assignments
 
-// Outbound CAN messages
+// Outbound CAN message/*  */s
 MCU_pedal_readings mcu_pedal_readings;
 MCU_status mcu_status{};
 MCU_load_cells mcu_load_cells{};
