@@ -1,13 +1,28 @@
-#ifndef ANALOGSENSOR
-#define ANALOGSENSOR
+#ifndef __ANALOGSENSOR_H__
+#define __ANALOGSENSOR_H__
 
 #include <tuple>
 #include <algorithm>
 
-enum AnalogSensorStatus_s
+enum AnalogSensorStatus_e
 {
     ANALOG_SENSOR_GOOD = 0,
     ANALOG_SENSOR_CLAMPED = 1,
+};
+
+struct AnalogConversion_s
+{
+    int raw;
+    float conversion;
+    AnalogSensorStatus_e status;
+};
+
+template <int N>
+struct AnalogConversionPacket_s
+{
+    int raws[N];
+    float conversions[N];
+    AnalogSensorStatus_e statuses[N];
 };
 
 class AnalogChannel
@@ -20,7 +35,6 @@ public:
     float clampLow;
     float clampHigh;
     int lastSample;
-    float lastConversion;
 
 // Constructors
     AnalogChannel(float scale_, float offset_, bool clamp_, float clampLow_, float clampHigh_)
@@ -37,29 +51,39 @@ public:
 // Functions
     /// @brief Calculate sensor output and whether result is in sensor's defined bounds. DOES NOT SAMPLE.
     /// @return Sensor's calculated output in real units, whether the result was clamped (AnalogSensorStatus_s)
-    std::tuple<float, AnalogSensorStatus_s> convert()
+    AnalogConversion_s convert()
     {
-        lastConversion = lastSample * scale + offset;
+        float conversion = lastSample * scale + offset;
         return {
-            clamp ? std::min(std::max(lastConversion, clampLow), clampHigh) : lastConversion,
-            clamp ? ((lastConversion > clampHigh || lastConversion < clampLow) ? ANALOG_SENSOR_CLAMPED : ANALOG_SENSOR_GOOD) : ANALOG_SENSOR_GOOD
+            lastSample,
+            clamp ? std::min(std::max(conversion, clampLow), clampHigh) : conversion,
+            clamp ? ((conversion > clampHigh || conversion < clampLow) ? ANALOG_SENSOR_CLAMPED : ANALOG_SENSOR_GOOD) : ANALOG_SENSOR_GOOD
         };
     }
 };
 
+template <int N>
 class AnalogMultiSensor
 {
 public:
 // Functions
-    /// @brief Getter for AnalogChannels stored in the AnalogMultiSensor
-    /// @param channelIndex 
-    /// @return A pointer to the channel at the requested index
-    virtual AnalogChannel* getChannel(int channelIndex);
-    /// @brief Commands the underlying sensor at the requested index to sample and store the result
-    /// @param channelIndex 
-    virtual void sampleChannel(int channelIndex);
-    /// @brief Commands the underlying sensor to sample all channels and store the results
-    virtual void sampleAll();
+
+    /// @brief Performs unit conversions on all channels
+    /// @return Packet of <N> channel conversions and statuses
+    AnalogConversionPacket_s<N> convert()
+    {
+        AnalogConversionPacket_s<N> packet;
+        for (int i = 0; i < N; i++)
+        {
+            AnalogConversion_s conversion = channels[i].convert();
+            packet.raws[i] = conversion.raw;
+            packet.conversions[i] = conversion.conversion;
+            packet.statuses[i] = conversion.status;
+        }
+        return packet;
+    }
+    /// @brief Commands the underlying device to sample all channels and internally store the results
+    virtual void sample();
 };
 
-#endif /* ANALOGSENSOR */
+#endif /* __ANALOGSENSOR_H__ */

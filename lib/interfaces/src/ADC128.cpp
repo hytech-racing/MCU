@@ -9,7 +9,7 @@
 
 #define ADC128_NUM_CHANNELS 8
 
-class ADC128 : public AnalogMultiSensor
+class ADC128 : public AnalogMultiSensor<ADC128_NUM_CHANNELS>
 {
 private:
     const int SPI_PIN_CS;
@@ -46,30 +46,7 @@ public:
     : ADC128(SPI_PIN_CS_, ADC128_DEFAULT_SPI_SDI, ADC128_DEFAULT_SPI_SDO, ADC128_DEFAULT_SPI_CLK, ADC128_DEFAULT_SPI_SPEED) {}
 
 // Functions
-    AnalogChannel* getChannel(int channelIndex)
-    {
-        if (channelIndex < 0 || channelIndex >= ADC128_NUM_CHANNELS)
-            return NULL;
-        return channels + channelIndex;
-    }
-
-    void sampleChannel(int channelIndex)
-    {
-        if (channelIndex < 0 || channelIndex >= ADC128_NUM_CHANNELS)
-            return;
-
-        digitalWrite(SPI_PIN_CLK, HIGH);
-        digitalWrite(SPI_PIN_CS, LOW);
-        SPI.beginTransaction(SPISettings(SPI_SPEED, MSBFIRST, SPI_MODE3));
-
-        uint16_t value = SPI.transfer16(channelIndex << 11);
-        channels[channelIndex].lastSample = (value & 0x0FFF);
-
-        SPI.endTransaction();
-	    digitalWrite(SPI_PIN_CS, HIGH);
-    }
-
-    void sampleAll()
+    void sample()
     {
         digitalWrite(SPI_PIN_CLK, HIGH);
         digitalWrite(SPI_PIN_CS, LOW);

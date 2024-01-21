@@ -12,14 +12,14 @@
 #define TC_RL 2
 #define TC_RR 3
 
-enum TCLaunchState_s
+enum TCLaunchState_e
 {
     TC_LAUNCH_NOT_READY = 0,
     TC_LAUNCH_READY = 1,
     TC_LAUNCHING = 2,
 };
 
-enum TCVectoringMode_s
+enum TCVectoringMode_e
 {
     TC_VECTOR_MODE_NONE = 0,
 };

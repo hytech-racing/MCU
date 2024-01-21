@@ -3,7 +3,7 @@
 
 #include <tuple>
 
-enum PedalsStatus_s
+enum PedalsStatus_e
 {
     PEDALS_NOMINAL = 0,
     PEDALS_MARGINAL = 1,
@@ -16,7 +16,7 @@ private:
 public:
     /// @brief Calculate pedal positions and status (nominal, marginal, implausible). DOES NOT SAMPLE.
     /// @return Accel percent (0.0 - 1.0), brake percent (0.0 - 1.0), PedalsStatus_s
-    virtual std::tuple<float, float, PedalsStatus_s> getPedalsAndStatus();
+    virtual std::tuple<float, float, PedalsStatus_e> getPedalsAndStatus();
 };
 
 #endif /* __PEDALSINTERFACE_H__ */

@@ -23,7 +23,7 @@ public:
     , brakeSensor1(brakeSensor1_)
     , brakeSensor2(brakeSensor2_) {}
 // Functions
-    std::tuple<float, float, PedalsStatus_s> getPedalsAndStatus()
+    std::tuple<float, float, PedalsStatus_e> getPedalsAndStatus()
     {
         // Intentionally not checking whether these channels are being clamped
         // because this is expected at both ends of the pedal travel

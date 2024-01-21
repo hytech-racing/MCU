@@ -14,7 +14,7 @@
 #define ORBIS_BR10_BITMASK_DETAILED_DIST_NEAR       (0b1 << 7)
 #define ORBIS_BR10_BITMASK_DETAILED                 (ORBIS_BR10_BITMASK_DETAILED_COUNTER_ERROR | ORBIS_BR10_BITMASK_DETAILED_SPEED_HIGH | ORBIS_BR10_BITMASK_DETAILED_TEMP_RANGE | ORBIS_BR10_BITMASK_DETAILED_DIST_FAR | ORBIS_BR10_BITMASK_DETAILED_DIST_NEAR)
 
-class orbisBR10 : UpperSteeringSensor
+class orbisBR10 : SteeringEncoderInterface
 {
 private:
 // Data
@@ -60,23 +60,24 @@ public:
         }
     }
 
-    std::tuple<float, upperSteeringStatus_s> getAngleAndStatus()
+    SteeringEncoderConversion_s convert()
     {
-        std::tuple<float, bool> conversion = channel.convert();
-        upperSteeringStatus_s returnStatus;
+        SteeringEncoderConversion_s returnConversion;               // struct to be returned
+        AnalogConversion_s internalConversion = channel.convert();  // internal conversion result
+
         if (status & (ORBIS_BR10_BITMASK_GENERAL_ERROR | ORBIS_BR10_BITMASK_DETAILED_COUNTER_ERROR))
         {
-            returnStatus = UPPER_STEERING_ERROR;
+            returnConversion.status = STEERING_ENCODER_ERROR;
         }
-        else if (status == 0 || std::get<1>(conversion))
+        else if (status == 0 && internalConversion.status == ANALOG_SENSOR_GOOD)
         {
-            returnStatus = UPPER_STEERING_NOMINAL;
+            returnConversion.status = STEERING_ENCODER_NOMINAL;
         }
         else
         {
-            returnStatus = UPPER_STEERING_MARGINAL;
+            returnConversion.status = STEERING_ENCODER_MARGINAL;
         }
-        return {std::get<0>(conversion), returnStatus};
+        return ;
     }
 
     void setOffset(float newOffset)
