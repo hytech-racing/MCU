@@ -64,10 +64,10 @@ MC_energy mc_energy[4];
 MC_setpoints_command mc_setpoints_command[4];
 
 // Inbound CAN messages
-BMS_coulomb_counts bms_coulomb_counts{};
-BMS_status bms_status{};
-BMS_temperatures bms_temperatures{};
-BMS_voltages bms_voltages{};
+BMS_coulomb_counts bms_coulomb_counts{};  // AMSInterface
+BMS_status bms_status{};                  // AMSInterface
+BMS_temperatures bms_temperatures{};      // AMSInerface
+BMS_voltages bms_voltages{};              // AMSInterface
 Dashboard_status dashboard_status{};
 
 //Timers
@@ -1417,7 +1417,7 @@ void setup() {
 
   mcu_status.set_max_torque(0);
   mcu_status.set_torque_mode(0);
-  mcu_status.set_software_is_ok(true);
+  mcu_status.set_software_is_ok(true);  // SafetySystem init
 
   set_all_inverters_disabled();
 
@@ -1436,13 +1436,13 @@ void setup() {
   pinMode(INVERTER_EN, OUTPUT);
   pinMode(INVERTER_24V_EN, OUTPUT);
 
-  pinMode(WATCHDOG_INPUT, OUTPUT);
+  pinMode(WATCHDOG_INPUT, OUTPUT);      // WatchdogInterface init
   // the initial state of the watchdog is high
   // this is reflected in the static watchdog_state
   // starting high
-  digitalWrite(WATCHDOG_INPUT, HIGH);
-  pinMode(SOFTWARE_OK, OUTPUT);
-  digitalWrite(SOFTWARE_OK, HIGH);
+  digitalWrite(WATCHDOG_INPUT, HIGH);   // SafetySystem init
+  pinMode(SOFTWARE_OK, OUTPUT);         // AMSInterface init
+  digitalWrite(SOFTWARE_OK, HIGH);      // SafetySystem init
 
   pinMode(ECU_CLK, OUTPUT);
   pinMode(ECU_SDI, INPUT);
@@ -1471,8 +1471,8 @@ void setup() {
 
 
   // these are false by default
-  mcu_status.set_bms_ok_high(false);
-  mcu_status.set_imd_ok_high(false);
+  mcu_status.set_bms_ok_high(false);  // MCUInterface init
+  mcu_status.set_imd_ok_high(false);  // MCUInterface init
 
   digitalWrite(INVERTER_24V_EN, HIGH);
   digitalWrite(INVERTER_EN, HIGH);

@@ -7,7 +7,9 @@
 class SafetySystem
 {
 public:
-    SafetySystem(AMSInterface *ams, WatchdogInterface *wd): ams_(ams), wd_(wd) {};
+    SafetySystem(AMSInterface *ams, WatchdogInterface *wd): 
+        ams_(ams), 
+        wd_(wd) {};
 
     void init();
 
@@ -15,13 +17,10 @@ public:
 
 
 private:
-    void software_ok_init();
-    void watchdog_init();
 
-    AMSInterface *ams_;
-    WatchdogInterface *wd_;
+    AMSInterface        *ams_;
+    WatchdogInterface   *wd_;
 };
-
 
 
 

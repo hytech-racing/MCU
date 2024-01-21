@@ -23,10 +23,9 @@ public:
     void init();
 
     void set_start_state();
-    void set_state_ok_high(bool is_ok);
+    void set_state_ok_high(bool ok_high);
 
-    void set_software_is_ok();
-    void set_software_is_not_ok();
+    void set_software_is_ok(bool is_ok);
     bool software_is_ok();
     
     bool ok_high();
@@ -44,7 +43,6 @@ private:
     MCUInterface *mcu_;
     /* AMS heartbeat check */
     static unsigned long last_heartbeat_time;
-    // unsigned long heartbeat_interval;   // milliseconds
     /* Power limiting data */
     float bms_high_temp;
     float bms_low_voltage;

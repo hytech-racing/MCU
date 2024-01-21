@@ -17,15 +17,6 @@ void WatchdogInterface::set_start_state() {
     digitalWrite(WATCHDOG_INPUT, HIGH);
 }
 
-/*  */
-// void SafetyInterface::set_software_is_ok() {
-//     mcu_->mcu_status.set_software_is_ok(true);
-// }
-
-// void SafetyInterface::set_software_is_not_ok() {
-//     mcu_->mcu_status.set_software_is_ok(false);
-// }
-
 void WatchdogInterface::kick_watchdog(unsigned long curr_time) {
     if ((curr_time - watchdog_time) > WATCHDOG_KICK_INTERVAL) {
         watchdog_state = !watchdog_state;
@@ -34,6 +25,4 @@ void WatchdogInterface::kick_watchdog(unsigned long curr_time) {
     }
 }
 
-// bool SafetyInterface::software_is_ok() {
-//     return mcu_->mcu_status.get_software_is_ok();
-// }
+

@@ -1,16 +1,8 @@
 #include "SafetySystem.h"
 
 void SafetySystem::init() {
-    software_ok_init();
-    watchdog_init();
-}
-
-void SafetySystem::software_ok_init() {
     ams_->set_start_state();
     ams_->set_software_is_ok();
-}
-
-void SafetySystem::watchdog_init() {
     wd_->set_start_state();
 }
 

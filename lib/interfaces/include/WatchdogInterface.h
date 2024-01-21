@@ -17,12 +17,7 @@ public:
 
     void set_start_state();
 
-    // void set_software_is_ok();
-    // void set_software_is_not_ok();
-
     void kick_watchdog(unsigned long curr_time);
-
-    // bool software_is_ok();
 
 
 private:
