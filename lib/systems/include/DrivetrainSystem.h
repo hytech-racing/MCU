@@ -19,12 +19,13 @@ struct DrivetrainCommand
     float speed_rr;
 };
 
+template<typename InverterType>
 class DrivetrainSystem
 {
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterInterface *, 4> &inverters, int init_time_limit_ms )
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms )
         : inverters_(inverters),init_time_limit_ms_(init_time_limit_ms)
     {
     }
@@ -57,11 +58,11 @@ public:
 private:
 
 
-    std::array<InverterInterface *, 4> inverters_;
+    std::array<InverterType*, 4> inverters_;
     int init_time_limit_ms_;
     unsigned long drivetrain_initialization_phase_start_time_;
     
 };
 
-
+#include "DrivetrainSystem.tpp"
 #endif /* DRIVETRAINSYSTEM */
