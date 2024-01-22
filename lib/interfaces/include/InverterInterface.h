@@ -7,7 +7,9 @@
 #include "MC_energy.h"
 #include "MC_status.h"
 #include "MC_temps.h"
-#include "HyTechCANmsg.h"
+
+#include "FlexCAN_T4.h"
+
 
 struct InverterCommand
 {
@@ -57,6 +59,8 @@ public:
     }
 
 private:
+
+    void write_cmd_msg_to_queue_(const MC_setpoints_command &msg);
     uint16_t dc_bus_voltage_;
     bool quit_dc_on_;
     bool quit_inverter_on_;

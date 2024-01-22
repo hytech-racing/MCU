@@ -18,6 +18,16 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
+
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN1_txBuffer;
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN2_txBuffer;
+
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN3_txBuffer;
+
+
 struct AllMsgs
 {
     std::tuple<bool, MC_status> mc_1_status = {false, MC_status()};
@@ -92,13 +102,14 @@ template <typename bufferType>
 void send_all_CAN_msgs(bufferType& buffer, FlexCAN_T4_Base * can_interface)
 {
     CAN_message_t msg;
-    std::size_t index = buffer.front;
-    while(!buffer.isEmpty()) {
-        const auto& variant = buffer.dequeue();
-        msg.id = variant.id;
-        variant.msg_class.write(msg.buf);
-        msg.len = variant.size;
+    while(buffer.available())
+    {
+        CAN_message_t msg;
+        uint8_t buf[sizeof(CAN_message_t)];
+        buffer.pop_front(buf, sizeof(CAN_message_t));
+        memmove(&msg, buf, sizeof(msg));
         can_interface->write(msg);
+
     }
 }
 

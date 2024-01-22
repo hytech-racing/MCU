@@ -14,7 +14,7 @@
 #include "HyTechCANmsg.h"
 #include "HytechCANInterface.h"
 
-using CircularBufferType = CircularBuffer<10, ht_can_msg<MC_setpoints_command>>;
+using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
 CircularBufferType buffer;
 
 using InverterInterfaceType = InverterInterface<CircularBufferType>;
@@ -35,8 +35,8 @@ auto drivetrain = DrivetrainSystemType({&lf_inv, &rf_inv, &lr_inv, &rr_inv}, 500
 MCUStateMachine<DrivetrainSystemType> state_machine(&buzzer, &drivetrain, &dash_interface);
 
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> FRONT_INV_CAN;
-CAN_message_t msg;
-MessageHandler<FlexCAN_T4_Base, CAN_message_t> msg_writer(&FRONT_INV_CAN, &msg, 100, millis());
+// CAN_message_t msg;
+// MessageHandler<FlexCAN_T4_Base, CAN_message_t> msg_writer(&FRONT_INV_CAN, &msg, 100, millis());
 
 void setup()
 {
@@ -61,7 +61,7 @@ void loop()
         // dash.receive(std::get<1>(received_can_msgs.dashboard_status));
     // }
     
-    msg_writer.handle_sending(millis());
+    // msg_writer.handle_sending(millis());
     // msg_writer.test();
     state_machine.get_state();
     send_all_CAN_msgs(buffer, &FRONT_INV_CAN);
