@@ -2,20 +2,16 @@
 #define INVERTERINTERFACE
 
 #include <stdint.h>
-#include <tuple>
-#include <variant>
+
 #include "MC_setpoints_command.h"
 #include "MC_energy.h"
 #include "MC_status.h"
 #include "MC_temps.h"
-#include "FlexCAN_T4.h"
-#include "CircularBuffer.h"
+#include "HyTechCANmsg.h"
 
 struct InverterCommand
 {
-    bool enable_hv;
-    bool inverter_enable;
-    bool driver_enable;
+
     int16_t speed_setpoint;
     int16_t positive_torque_limit;
     int16_t negative_torque_limit;
@@ -23,27 +19,51 @@ struct InverterCommand
 template <typename message_queue>
 class InverterInterface
 {
-    public:
-        InverterInterface(message_queue* msg_queue){
-            
-        }
-        
-        void request_enable_inverter();
-        void command_no_torque();
-        
-        void handle_command(const InverterCommand& command);
+public:
+    InverterInterface(message_queue *msg_output_queue, uint32_t can_id)
+    {
+        msg_queue_ = msg_output_queue;
+        can_id_ = can_id;
+    }
 
-        bool inverter_system_ready();
-        bool dc_quit_on();
-        bool quit_inverter_on();
-        void request_enable_hv();
+    uint32_t get_id() { return can_id_; };
 
-        /// @brief function to get the latest message to output
-        /// @return tuple that says whether or not the message needs to be sent and the message itself
+    void request_enable_hv();
+    void request_enable_inverter();
+    void command_no_torque();
 
-    private: 
-        message_queue * msg_queue;
+    void handle_command(const InverterCommand &command);
+
+    void handle_receive(const MC_energy &msg);
+    void handle_receive(const MC_status &msg);
+    void handle_receive(const MC_temps &msg);
+
+
+
+    bool inverter_system_ready()
+    {
+        return system_ready_;
+    }
+    bool dc_quit_on()
+    {
+        return quit_dc_on_;
+    }
+    bool quit_inverter_on(){
+        return quit_inverter_on_;
+    }
+    uint16_t dc_bus_voltage()
+    {
+        return dc_bus_voltage_;
+    }
+
+private:
+    uint16_t dc_bus_voltage_;
+    bool quit_dc_on_;
+    bool quit_inverter_on_;
+    bool system_ready_;
+    message_queue *msg_queue_;
+    uint32_t can_id_;
 };
 
-// #include "InverterInterface.tpp"
+#include "InverterInterface.tpp"
 #endif /* INVERTERINTERFACE */

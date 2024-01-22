@@ -1,3 +1,4 @@
+#include "DrivetrainSystem.h"
 
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::inverter_init_timeout(unsigned long curr_time)
@@ -36,6 +37,17 @@ void DrivetrainSystem<InverterType>::command_drivetrain_no_torque()
 }
 
 // feedback functions
+template <typename InverterType>
+bool DrivetrainSystem<InverterType>::hv_over_threshold_on_drivetrain()
+{
+    for(auto inv_pointer : inverters_)
+    {
+        if(!(inv_pointer->dc_bus_voltage() > min_hv_voltage_)){
+            return false;
+        }
+    }
+    return true;
+}
 template<typename InverterType> 
 bool DrivetrainSystem<InverterType>::drivetrain_ready()
 {

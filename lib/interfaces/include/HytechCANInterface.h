@@ -88,4 +88,18 @@ void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer)
     }
 }
 
+template <typename bufferType>
+void send_all_CAN_msgs(bufferType& buffer, FlexCAN_T4_Base * can_interface)
+{
+    CAN_message_t msg;
+    std::size_t index = buffer.front;
+    while(!buffer.isEmpty()) {
+        const auto& variant = buffer.dequeue();
+        msg.id = variant.id;
+        variant.msg_class.write(msg.buf);
+        msg.len = variant.size;
+        can_interface->write(msg);
+    }
+}
+
 #endif /* HYTECHCANINTERFACE */

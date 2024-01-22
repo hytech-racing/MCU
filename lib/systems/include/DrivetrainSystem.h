@@ -28,6 +28,8 @@ public:
     DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms )
         : inverters_(inverters),init_time_limit_ms_(init_time_limit_ms)
     {
+
+        // TODO set min_hv_voltage_
     }
 
     // startup phase 1
@@ -57,7 +59,7 @@ public:
     void command_drivetrain(const DrivetrainCommand& data);
 private:
 
-
+    uint16_t min_hv_voltage_;
     std::array<InverterType*, 4> inverters_;
     int init_time_limit_ms_;
     unsigned long drivetrain_initialization_phase_start_time_;

@@ -9,7 +9,7 @@ class ControllerMux
 {
     public:
         ControllerMux() {}
-        DrivetrainCommand get_drivetrain_input(const PedalsSystemInterface& pedals_data_input, const DashSystemInterface& dash_input);
+        // DrivetrainCommand get_drivetrain_input(const PedalsSystemInterface& pedals_data_input, const DashSystemInterface& dash_input);
     private:
 };
 

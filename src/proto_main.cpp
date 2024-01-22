@@ -2,34 +2,37 @@
 
 /* Include files */
 #include <Arduino.h>
-// #include "MCUStateMachine.h"
+
+#include "MCUStateMachine.h"
 #include "FlexCAN_T4.h"
 #include "InverterInterface.h"
 #include "ADC_SPI.h"
 #include "MessageHandler.h"
-
+#include "DrivetrainSystem.h"
 
 #include "CircularBuffer.h"
-
+#include "HyTechCANmsg.h"
 #include "HytechCANInterface.h"
 
-using CircularBufferType = CircularBuffer<10, MC_setpoints_command>;
+using CircularBufferType = CircularBuffer<10, ht_can_msg<MC_setpoints_command>>;
 CircularBufferType buffer;
 
-// BuzzerController buzzer(500);
+using InverterInterfaceType = InverterInterface<CircularBufferType>;
 
-// DashboardInterface dash_interface;
+BuzzerController buzzer(500);
 
-InverterInterface<CircularBufferType> lf_inv(&buffer);
-InverterInterface<CircularBufferType> rf_inv(&buffer);
+DashboardInterface dash_interface;
 
-InverterInterface<CircularBufferType> lr_inv(&buffer);
-InverterInterface<CircularBufferType> rr_inv(&buffer);
+InverterInterfaceType lf_inv(&buffer, 69);
+InverterInterfaceType rf_inv(&buffer, 69);
 
-// DashboardInterface dash;
+InverterInterfaceType lr_inv(&buffer, 69);
+InverterInterfaceType rr_inv(&buffer, 69);
 
-// DrivetrainSystem drivetrain({&lf_inv, &rf_inv, &lr_inv, &rr_inv}, 5000);
-// MCUStateMachine state_machine(&buzzer, &drivetrain, &dash_interface);
+using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
+
+auto drivetrain = DrivetrainSystemType({&lf_inv, &rf_inv, &lr_inv, &rr_inv}, 5000);
+MCUStateMachine<DrivetrainSystemType> state_machine(&buzzer, &drivetrain, &dash_interface);
 
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> FRONT_INV_CAN;
 CAN_message_t msg;
@@ -60,5 +63,6 @@ void loop()
     
     msg_writer.handle_sending(millis());
     // msg_writer.test();
-    // state_machine.get_state();
+    state_machine.get_state();
+    send_all_CAN_msgs(buffer, &FRONT_INV_CAN);
 }
