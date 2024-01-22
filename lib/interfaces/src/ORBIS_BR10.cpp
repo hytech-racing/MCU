@@ -1,4 +1,4 @@
-#include "UpperSteeringSensor.h"
+#include "SteeringEncoderInterface.h"
 #include <Arduino.h>
 
 // Definitions

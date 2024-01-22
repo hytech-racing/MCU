@@ -17,7 +17,6 @@ private:
     const int SPI_PIN_SDO;
     const int SPI_PIN_CLK;
     const int SPI_SPEED;
-    AnalogChannel channels[ADC128_NUM_CHANNELS];
 public:
 // Constructors
     ADC128(const int SPI_PIN_CS_, const int SPI_PIN_SDI_, const int SPI_PIN_SDO_, const int SPI_PIN_CLK_, const int SPI_SPEED_)

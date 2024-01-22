@@ -1,82 +1,92 @@
-#include "PedalsSystem.h"
+#include <PedalsSystem.h>
+#include <cmath>
 
-// TODO parameterize percentages in constructor
-PedalsSystemInterface PedalsSystem::evaluate_pedals(const PedalsDriverInterface &data, unsigned long curr_time)
+PedalsSystemOutput_s PedalsSystem::evaluate(AnalogConversion_s* accel1, AnalogConversion_s* accel2, AnalogConversion_s* brake1, AnalogConversion_s* brake2)
 {
-    PedalsSystemInterface out;
-    out.accelImplausible = evaluate_pedal_implausibilities_(data.accelPedalPosition1, data.accelPedalPosition2, accelParams_, 0.1);
-    out.brakeImplausible = evaluate_pedal_implausibilities_(data.brakePedalPosition1, data.brakePedalPosition2, brakeParams_, 0.25);
-    out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(data);
-    bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
+    PedalsSystemOutput_s output;
 
-    if (implausibility && (implausibilityStartTime_ == 0)){
-        implausibilityStartTime_ = curr_time;
-    } else if (!implausibility)
-    {
-        implausibilityStartTime_ = 0;
-    }
+    float accelAverage = (accel1->conversion + accel2->conversion) / 2.0;
+    float brakeAverage = (brake1->conversion + brake2->conversion) / 2.0;
 
-    return out;
-}
+    bool accelInRange1 = (accel1->raw < parameters.pedalsRawTooHigh) && (accel1->raw > parameters.pedalsRawTooLow);
+    bool accelInRange2 = (accel2->raw < parameters.pedalsRawTooHigh) && (accel2->raw > parameters.pedalsRawTooLow);
+    bool brakeInRange1 = (brake1->raw < parameters.pedalsRawTooHigh) && (brake1->raw > parameters.pedalsRawTooLow);
+    bool brakeInRange2 = (brake2->raw < parameters.pedalsRawTooHigh) && (brake2->raw > parameters.pedalsRawTooLow);
 
-// TODO parameterize duration in constructor
-bool PedalsSystem::max_duration_of_implausibility_exceeded(unsigned long curr_time)
-{
-    if(implausibilityStartTime_ !=0){
-        return ((curr_time - implausibilityStartTime_) > 100);
-    } else {
-        return false;
-    }
-    
-}
+    if (accelInRange1 && accelInRange2)
+        output.accelPercent = accelAverage;
+    else if (accelInRange1)
+        output.accelPercent = accel1->conversion;
+    else if (accelInRange2)
+        output.accelPercent = accel2->conversion;
+    else
+        output.accelPercent = 0.0;
 
-bool PedalsSystem::evaluate_pedal_implausibilities_(int sense_1, int sense_2, const PedalsParams &params, float max_percent_diff)
-{
-    // FSAE EV.5.5
-    // FSAE T.4.2.10
-    bool pedal_1_less_than_min = (sense_1 < params.min_sense_1);
-    bool pedal_2_less_than_min = (sense_2 < params.min_sense_2);
-    bool pedal_1_greater_than_max = (sense_1 > params.max_sense_1);
-    bool pedal_2_greater_than_max = (sense_2 > params.max_sense_2);
+    if (brakeInRange1 && brakeInRange2)
+        output.brakePercent = brakeAverage;
+    else if (brakeInRange1)
+        output.brakePercent = brake1->conversion;
+    else if (brakeInRange2)
+        output.brakePercent = brake2->conversion;
+    else
+        output.brakePercent = 0.0;
 
-    // check that the pedals are reading within 10% of each other
+    // Check instantaneous implausibility
     // T.4.2.4
-    float scaled_pedal_1 = (sense_1 - params.start_sense_1) / (params.end_sense_1 - params.start_sense_1);
-    float scaled_pedal_2 = (sense_2 - params.start_sense_2) / (params.end_sense_2 - params.start_sense_2);
-    bool sens_not_within_req_percent = (fabs(scaled_pedal_1 - scaled_pedal_2) > max_percent_diff);
-
-    if (
-        pedal_1_less_than_min ||
-        pedal_2_less_than_min ||
-        pedal_1_greater_than_max ||
-        pedal_2_greater_than_max)
+    // T.4.2.10
+    float accelDeviation = std::abs(accel1->conversion - accel2->conversion) / accelAverage;
+    if ((accelDeviation >= parameters.pedalsImplausiblePercent) || !accelInRange1 || !accelInRange2)
     {
-        return true;
+        output.accelStatus = PEDALS_IMPLAUSIBLE;
     }
-    else if (sens_not_within_req_percent)
+    else if (accelDeviation >= parameters.pedalsMarginalPercent && accelDeviation < parameters.pedalsImplausiblePercent)
     {
-        return true;
+        output.accelStatus = PEDALS_MARGINAL;
     }
     else
     {
-        return false;
+        output.accelStatus = PEDALS_NOMINAL;
     }
-}
 
-bool PedalsSystem::evaluate_brake_and_accel_pressed_(const PedalsDriverInterface &data)
-{
+    float brakeDeviation = std::abs(brake1->conversion - brake2->conversion) / brakeAverage;
+    if ((brakeDeviation >= parameters.pedalsImplausiblePercent) || !brakeInRange1 || !brakeInRange2)
+    {
+        output.brakeStatus = PEDALS_IMPLAUSIBLE;
+    }
+    else if (brakeDeviation >= parameters.pedalsMarginalPercent && brakeDeviation < parameters.pedalsImplausiblePercent)
+    {
+        output.brakeStatus = PEDALS_MARGINAL;
+    }
+    else
+    {
+        output.brakeStatus = PEDALS_NOMINAL;
+    }
 
-    bool accel_pressed = pedal_is_active_(data.accelPedalPosition1, data.accelPedalPosition2, accelParams_, 0.1);
-    bool brake_pressed = pedal_is_active_(data.brakePedalPosition1, data.brakePedalPosition2, brakeParams_, 0.05);
-    
-    return (accel_pressed && brake_pressed);
+    // Check if both pedals are pressed
+    bool accelPressed = output.accelPercent > parameters.accelPressedThreshold;
+    bool brakePressed = output.brakePercent > parameters.brakePressedThreshold;
+    if (accelPressed && brakePressed)
+        output.pedalsCommand = PEDALS_BOTH_PRESSED;
+    else if (accelPressed)
+        output.pedalsCommand = PEDALS_ACCEL_PRESSED;
+    else if (brakePressed)
+        output.pedalsCommand = PEDALS_BRAKE_PRESSED;
+    else
+        output.pedalsCommand = PEDALS_NONE_PRESSED;
 
-}
+    // Check for persistent implausibility
+    if ((output.accelStatus == PEDALS_IMPLAUSIBLE) || (output.brakeStatus == PEDALS_IMPLAUSIBLE))
+    {
+        if (implausibilityDetectedTime == 0)
+            implausibilityDetectedTime = millis();
+        if (millis() - implausibilityDetectedTime >= PEDALS_IMPLAUSIBLE_DURATION)
+            output.persistentImplausibilityDetected = true;
+    }
+    else
+    {
+        implausibilityDetectedTime = 0;
+        output.persistentImplausibilityDetected = false;
+    }
 
-bool PedalsSystem::pedal_is_active_(int sense_1, int sense_2, const PedalsParams &pedalParams, float percent_threshold)
-{
-    bool pedal_1_is_active = (sense_1 > (((pedalParams.end_sense_1 - pedalParams.start_sense_1) * percent_threshold) + pedalParams.start_sense_1));
-    bool pedal_2_is_active = (sense_2 > (((pedalParams.end_sense_2 - pedalParams.start_sense_2) * percent_threshold) + pedalParams.start_sense_2));
-
-    return (pedal_1_is_active || pedal_2_is_active);
+    return output;
 }

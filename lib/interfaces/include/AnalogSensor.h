@@ -20,9 +20,7 @@ struct AnalogConversion_s
 template <int N>
 struct AnalogConversionPacket_s
 {
-    int raws[N];
-    float conversions[N];
-    AnalogSensorStatus_e statuses[N];
+    AnalogConversion_s conversions[N];
 };
 
 class AnalogChannel
@@ -66,8 +64,9 @@ template <int N>
 class AnalogMultiSensor
 {
 public:
+// Data
+    AnalogChannel channels[N];
 // Functions
-
     /// @brief Performs unit conversions on all channels
     /// @return Packet of <N> channel conversions and statuses
     AnalogConversionPacket_s<N> convert()
@@ -75,10 +74,7 @@ public:
         AnalogConversionPacket_s<N> packet;
         for (int i = 0; i < N; i++)
         {
-            AnalogConversion_s conversion = channels[i].convert();
-            packet.raws[i] = conversion.raw;
-            packet.conversions[i] = conversion.conversion;
-            packet.statuses[i] = conversion.status;
+            packet.conversions[i] = channels[i].convert();
         }
         return packet;
     }
