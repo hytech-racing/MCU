@@ -1,8 +1,6 @@
 #ifndef INVERTERSYSTEM
 #define INVERTERSYSTEM
 
-
-
 class InverterSystem
 {
 public:

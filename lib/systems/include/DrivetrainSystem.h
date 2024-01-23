@@ -1,22 +1,23 @@
 #ifndef DRIVETRAINSYSTEM
 #define DRIVETRAINSYSTEM
 
-#include "InverterInterface.h"
+#include "InverterSystem.h"
+#include "Utility.h"
 #include <array>
 
-struct DrivetrainCommand
+struct DrivetrainCommand_s
 { 
-    float torque_lf;
-    float speed_lf;
+    float speeds[NUM_MOTORS];
+    float posTorqueLimits[NUM_MOTORS];
+    float negTorqueLimits[NUM_MOTORS];
+};
 
-    float torque_rf;
-    float speed_rf;
-    
-    float torque_lr;
-    float speed_lr;
-    
-    float torque_rr;
-    float speed_rr;
+struct DrivetrainDynamicReport_s
+{
+    float measuredSpeeds[NUM_MOTORS];
+    float measuredTorques[NUM_MOTORS];
+    float measuredTorqueCurrents[NUM_MOTORS];
+    float measuredMagnetizingCurrents[NUM_MOTORS];
 };
 
 class DrivetrainSystem
@@ -24,7 +25,7 @@ class DrivetrainSystem
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterInterface *, 4> &inverters, int init_time_limit_ms )
+    DrivetrainSystem(const std::array<InverterInterface *, NUM_MOTORS> &inverters, int init_time_limit_ms )
         : inverters_(inverters),init_time_limit_ms_(init_time_limit_ms)
     {
     }
@@ -57,7 +58,7 @@ public:
 private:
 
 
-    std::array<InverterInterface *, 4> inverters_;
+    std::array<InverterInterface *, NUM_MOTORS> inverters_;
     int init_time_limit_ms_;
     unsigned long drivetrain_initialization_phase_start_time_;
     
