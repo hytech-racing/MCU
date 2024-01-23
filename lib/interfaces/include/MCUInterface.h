@@ -5,6 +5,9 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 
+#include "DrivetrainSystem.h"
+#include "AMSInterface.h"
+
 #define INV_CAN_SPEED       500000
 #define TELEM_CAN_SPEED     1000000
 #define TEENSY_INV_CAN      CAN2
@@ -99,7 +102,7 @@ public:
 
     // Loop
     // nah
-
+    
     void send_CAN_mcu_status();
 
 
@@ -109,7 +112,14 @@ private:
     void measure_shutdown_circuit_voltage();
     void update_CAN_msg();
 
-    MCU_status *mcu_status_;
+    /* Outbound CAN message */
+    MCU_status mcu_status_;
+
+    /* Associated interface */
+    AMSInterface *ams_;
+
+    /* Associated system */
+    DrivetrainSystem *drive_train_;
 
     /* Shutdown circuit input */
     bool bms_ok_high;

@@ -77,7 +77,7 @@ void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
 // MCU status
 void MCUInterface::send_CAN_mcu_status(CAN_message_t &msg) {
     update_CAN_msg();
-    mcu_status_->write(msg.buf);
+    mcu_status_.write(msg.buf);
     msg.id = ID_MCU_STATUS;
     msg.len = sizeof(mcu_status);
     // TELEM_CAN.write(msg);
@@ -94,6 +94,15 @@ void MCUInterface::update_CAN_msg() {
     mcu_status.set_shutdown_c_above_threshold(shutdown_c_above_threshold);
     mcu_status.set_shutdown_d_above_threshold(shutdown_d_above_threshold);
     mcu_status.set_shutdown_e_above_threshold(shutdown_e_above_threshold);
+    // State machine set state
+        // fsm.set_mcu_status_state();
+        // mcu_->mcu_status_.set_state(fsm_state);
+    // Drivetrain set inverters error
+    mcu_status.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
+    // AMSInterface set
+    mcu_status.set_software_is_ok(ams_->software_is_ok());
+    mcu_status.set_pack_charge_critical(ams_->pack_charge_is_critical());
+
 }
 
 
