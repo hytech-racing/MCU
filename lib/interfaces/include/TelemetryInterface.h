@@ -1,11 +1,8 @@
 #ifndef __TELEMETRY_INTERFACE_H__
 #define __TELEMETRY_INTERFACE_H__
 
-#include "FlexCAN_T4.h"
-#include "HyTech_CAN.h"
-
-#include "AnalogSensor.h"
-#include "UpperSteeringSensor.h"
+// #include "FlexCAN_T4.h"
+// #include "HyTech_CAN.h"
 
 class TelemetryInterface
 {
@@ -34,9 +31,5 @@ private:
     MCU_rear_potentiometers     mcu_rear_potentiometers_;
     MCU_analog_readings         mcu_analog_readings_;    
 };
-
-
-
-
 
 #endif /* __TELEMETRY_INTERFACE_H__ */

@@ -2,13 +2,8 @@
 #define __MCU_INTERFACE_H__
 
 #include <stdint.h>
-#include "FlexCAN_T4.h"
-#include "HyTech_CAN.h"
-
-#define INV_CAN_SPEED       500000
-#define TELEM_CAN_SPEED     1000000
-#define TEENSY_INV_CAN      CAN2
-#define TEENSY_TELEM_CAN    CAN3
+// #include "FlexCAN_T4.h"
+// #include "HyTech_CAN.h"
 
 #define BMS_OK_READ         5   // SHDN_D_READ
 #define IMD_OK_READ         4   // SHDN_C_READ
@@ -39,6 +34,7 @@ public:
     void update_mcu_status_CAN_fsm();
     // Systems
     void update_mcu_status_CAN_drivetrain();
+    void update_mcu_status_CAN_safety();
     void update_mcu_status_CAN_buzzer();
     void update_mcu_status_CAN_pedals();
     // Interfaces

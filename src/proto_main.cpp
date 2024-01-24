@@ -42,13 +42,13 @@ FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN;
 CAN_message_t msg;
 
 AMSInterface ams_interface;
-MCUInterface main_ecu(&ams_interface);
-WatchdogInterface wd_interface(&main_ecu);
-DashboardInterface dashboard();
+MCUInterface main_ecu;
+WatchdogInterface wd_interface;
+DashboardInterface dashboard;
 InverterInterface inv_interface[4];
-TelemetryInterface telem_interface();
+TelemetryInterface telem_interface;
 
-SafetySystem safety_system(&ams_interface, wd_interface);
+SafetySystem safety_system(&ams_interface, &wd_interface);
 
 /* CAN functions */
 void init_all_CAN();
@@ -80,10 +80,19 @@ void setup() {
 
 void loop() {
 
+    /* Interfaaces retrieve values */
+    // Distribute incoming CAN messages
     dispatch_all_CAN();
+    // Sensors sample and cache
+    main_ecu.read_mcu_status();
 
+    /* Tick state machine */
+    
+    /* Update CAN messages */
+    update_all_CAN();
 
-
+    /* Software state monitoring */
+    safety_system.software_shutdown();
 }
 
 void init_all_CAN() {
@@ -269,3 +278,30 @@ void send_CAN_50Hz() {
     telem_interface.send_CAN_mcu_rear_potentiometers(msg);
     TELEM_CAN.write(msg);
 }
+
+void update_all_CAN() {
+    update_CAN_mcu();
+    update_CAN_telemetry();
+}
+
+void update_CAN_mcu() {
+    // State machine
+    update_mcu_status_CAN_fsm();
+    // Systems
+    update_mcu_status_CAN_drivetrain();
+    update_mcu_status_CAN_safety();
+    update_mcu_status_CAN_buzzer();
+    update_mcu_status_CAN_pedals();
+    // Interfaces
+    update_mcu_status_CAN_ams();
+    update_mcu_status_CAN_dashboard();
+}
+
+void update_CAN_telemetry() {
+    // Interfaces
+    update_pedal_readings_CAN_msg();
+    update_load_cells_CAN_msg();
+    update_potentiometers_CAN_msg();
+    update_analog_readings_CAN_msg();
+}
+

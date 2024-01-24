@@ -156,18 +156,22 @@ void MCUInterface::update_mcu_status_CAN_drivetrain() {
     // Drivetrain returns struct in main loop
     mcu_status_.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
 }
+// SafetySystem
+void MCUInterface::update_mcu_status_CAN_safety() {
+    // SafetySystem returns struct in main loop
+    // mcu_status_.set_software_is_ok(ams_->software_is_ok());
+}
 // AMSInterface
 void MCUInterface::update_mcu_status_CAN_ams() {
     // AMSInterface returns struct in main loop
-    mcu_status_.set_software_is_ok(ams_->software_is_ok());
-    mcu_status_.set_pack_charge_critical(ams_->pack_charge_is_critical());
+    // mcu_status_.set_pack_charge_critical(ams_->pack_charge_is_critical());
 }
 // DashboardInterface(?)
 void MCUInterface::update_mcu_status_CAN_dashboard() {
     // DashboardInterface (?) returns struct in main loop
-    mcu_status_.set_torque_mode(dash_->get_torque_mode());
-    mcu_status_.set_max_torque(dash_->get_max_torque());
-    mcu_status_.toggle_launch_ctrl_active(dash_->launch_ctrl_btn_pressed());
+    // mcu_status_.set_torque_mode(dash_->get_torque_mode());
+    // mcu_status_.set_max_torque(dash_->get_max_torque());
+    // mcu_status_.toggle_launch_ctrl_active(dash_->launch_ctrl_btn_pressed());
 }
 // BuzzerSystem
 void MCUInterface::update_mcu_status_CAN_buzzer() {

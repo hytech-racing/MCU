@@ -1,8 +1,7 @@
 #ifndef __AMS_INTERFACE_H__
 #define __AMS_INTERFACE_H__
 
-#include "MCUInterface.h"
-#include "HyTech_CAN.h"
+// #include "HyTech_CAN.h"
 
 #define HEARTBEAT_INTERVAL                      20   // milliseconds
 #define PACK_CHARGE_CRIT_TOTAL_THRESHOLD        420
