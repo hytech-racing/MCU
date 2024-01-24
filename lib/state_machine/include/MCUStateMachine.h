@@ -6,12 +6,12 @@
 #include "PedalsSystem.h"
 #include "DrivetrainSystem.h"
 #include "Buzzer.h"
+#include "TorqueControllerMux.h"
 
 
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 #include "IMDInterface.h"
-#include "ControllerMux.h"
 enum class CAR_STATE
 {
     STARTUP = 0,
@@ -61,7 +61,7 @@ private:
     AMSInterface *bms_;
     IMDInterface *imd_;
 
-    ControllerMux * controller_mux_;
+    TorqueControllerMux* controller_mux_;
 
 };
 

@@ -1,3 +1,5 @@
+#if 0
+
 /*
    Teensy 4.1 Main Control Unit code
    Written by Liwei Sun which is why the code is so bad
@@ -1573,3 +1575,5 @@ void loop() {
   }
 
 }
+
+#endif

@@ -1,4 +1,9 @@
 #include "MCUStateMachine.h"
+#include "PedalsSystem.h"
+#include "SteeringSystem.h"
+#include "DashboardInterface.h"
+#include "AnalogSensorsInterface.h"
+#include "TorqueControllerMux.h"
 
 void MCUStateMachine::tick_state_machine(unsigned long current_millis)
 {
@@ -24,7 +29,7 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
-        if (dashboard_->start_button_pressed() && pedals_->mech_brake_active())
+        if (dashboard_->startButtonPressed() && pedals_->mech_brake_active())
         {
             set_state_(CAR_STATE::ENABLING_INVERTER, current_millis);
             break;
@@ -100,7 +105,7 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
         }
 
-        PedalsDriverInterface data;
+        PedalsSystemOutput_s pedalsData;
         Dashboard_status dash_data;
         auto pedals_data = pedals_->evaluate_pedals(data, current_millis);
         auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
@@ -111,7 +116,7 @@ void MCUStateMachine::tick_state_machine(unsigned long current_millis)
             imd_->ok_high() &&
             !pedals_->max_duration_of_implausibility_exceeded(current_millis))
         {
-            drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
+            // drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
         }
         else
         {

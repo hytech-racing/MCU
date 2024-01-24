@@ -15,7 +15,7 @@
 static DrivetrainCommand_s TCPowerLimitScaleDown(
     DrivetrainCommand_s command,
     DrivetrainDynamicReport_s* drivetrainData,
-    float powerLimit,
+    float powerLimit
 );
 
 /// @brief Apply a per-wheel torque limit
@@ -25,7 +25,7 @@ static DrivetrainCommand_s TCPowerLimitScaleDown(
 /// @return A torque-limited DrivetrainCommand_s
 static DrivetrainCommand_s TCTorqueLimit(
     DrivetrainCommand_s command,
-    float torqueLimits[NUM_MOTORS],
+    float torqueLimits[NUM_MOTORS]
 );
 
 /// @brief Never commands torque

@@ -6,7 +6,7 @@
 #include <PedalsSystem.h>
 #include <SteeringSystem.h>
 #include "DashboardInterface.h"
-#include "AnalogSensor.h"
+#include "AnalogSensorsInterface.h"
 
 enum TorqueControllerMode_e
 {
@@ -34,7 +34,7 @@ public:
         AnalogConversion_s* loadFLData,
         AnalogConversion_s* loadFRData,
         AnalogConversion_s* loadRLData,
-        AnalogConversion_s* loadRRData,
+        AnalogConversion_s* loadRRData
     );
 };
 

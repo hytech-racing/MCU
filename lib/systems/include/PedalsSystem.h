@@ -3,7 +3,7 @@
 #include <math.h>
 #include <tuple>
 
-#include "AnalogSensor.h"
+#include "AnalogSensorsInterface.h"
 
 // Definitions
 #define PEDALS_IMPLAUSIBLE_DURATION 100         // Implausibility must be caught within 100ms
@@ -75,7 +75,7 @@ public:
         AnalogConversion_s* accel1,
         AnalogConversion_s* accel2,
         AnalogConversion_s* brake1,
-        AnalogConversion_s* brake2,
+        AnalogConversion_s* brake2
     );
 };
 

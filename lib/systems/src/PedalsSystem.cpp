@@ -1,5 +1,5 @@
+#include <Arduino.h>
 #include <PedalsSystem.h>
-#include <cmath>
 
 PedalsSystemOutput_s PedalsSystem::evaluate(AnalogConversion_s* accel1, AnalogConversion_s* accel2, AnalogConversion_s* brake1, AnalogConversion_s* brake2)
 {
@@ -34,7 +34,7 @@ PedalsSystemOutput_s PedalsSystem::evaluate(AnalogConversion_s* accel1, AnalogCo
     // Check instantaneous implausibility
     // T.4.2.4
     // T.4.2.10
-    float accelDeviation = std::abs(accel1->conversion - accel2->conversion) / accelAverage;
+    float accelDeviation = abs(accel1->conversion - accel2->conversion) / accelAverage;
     if ((accelDeviation >= parameters.pedalsImplausiblePercent) || !accelInRange1 || !accelInRange2)
     {
         output.accelStatus = PEDALS_IMPLAUSIBLE;
@@ -48,7 +48,7 @@ PedalsSystemOutput_s PedalsSystem::evaluate(AnalogConversion_s* accel1, AnalogCo
         output.accelStatus = PEDALS_NOMINAL;
     }
 
-    float brakeDeviation = std::abs(brake1->conversion - brake2->conversion) / brakeAverage;
+    float brakeDeviation = abs(brake1->conversion - brake2->conversion) / brakeAverage;
     if ((brakeDeviation >= parameters.pedalsImplausiblePercent) || !brakeInRange1 || !brakeInRange2)
     {
         output.brakeStatus = PEDALS_IMPLAUSIBLE;

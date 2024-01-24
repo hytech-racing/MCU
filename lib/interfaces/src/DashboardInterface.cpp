@@ -2,7 +2,7 @@
 
 void DashboardInterface::read(const Dashboard_status &msg)
 {
-    data.dial_mode = static_cast<DialMode_s>(msg.get_dial_state());
+    data.dial_mode = static_cast<DialMode_e>(msg.get_dial_state());
 
     data.button.start = msg.get_start_btn();
     data.button.mark = msg.get_mark_btn();
@@ -14,12 +14,7 @@ void DashboardInterface::read(const Dashboard_status &msg)
 
 }
 
-void DashboardInterface::write()
-{
-
-}
-
-DialMode_s DashboardInterface::getDialMode() {return data.dial_mode;}
+DialMode_e DashboardInterface::getDialMode() {return data.dial_mode;}
 
 bool DashboardInterface::startButtonPressed() {return data.button.start;}
 bool DashboardInterface::specialButtonPressed() {return data.button.mark;}
@@ -35,16 +30,16 @@ bool DashboardInterface::safetySystemOK() {return data.ssok;}
 
 void DashboardInterface::soundBuzzer(bool state) {data.buzzer = state;}
 
-void DashboardInterface::amsLED(LEDColors_s color) {data.LED.ams = static_cast<int>(color);}
-void DashboardInterface::imdLED(LEDColors_s color) {data.LED.imd = static_cast<int>(color);}
-void DashboardInterface::modeLED(LEDColors_s color) {data.LED.mode = static_cast<int>(color);}
-void DashboardInterface::mcErrorLED(LEDColors_s color) {data.LED.mc_error = static_cast<int>(color);}
-void DashboardInterface::startLED(LEDColors_s color) {data.LED.start = static_cast<int>(color);}
-void DashboardInterface::InertiaSwitchLED(LEDColors_s color) {data.LED.inertia = static_cast<int>(color);}
-void DashboardInterface::mechanicalBrakeLED(LEDColors_s color) {data.LED.mech_brake = static_cast<int>(color);}
-void DashboardInterface::generalPurposeLED(LEDColors_s color) {data.LED.gen_purp = static_cast<int>(color);}
-void DashboardInterface::botsLED(LEDColors_s color) {data.LED.bots = static_cast<int>(color);}
-void DashboardInterface::cockpitBrbLED(LEDColors_s color) {data.LED.cockpit_brb = static_cast<int>(color);}
-void DashboardInterface::critChargeLED(LEDColors_s color) {data.LED.crit_charge = static_cast<int>(color);}
-void DashboardInterface::glvLED(LEDColors_s color) {data.LED.glv = static_cast<int>(color);}
-void DashboardInterface::launchControlLED(LEDColors_s color) {data.LED.launch_control = static_cast<int>(color);}
+void DashboardInterface::amsLED(LEDColors_e color) {data.LED.ams = static_cast<int>(color);}
+void DashboardInterface::imdLED(LEDColors_e color) {data.LED.imd = static_cast<int>(color);}
+void DashboardInterface::modeLED(LEDColors_e color) {data.LED.mode = static_cast<int>(color);}
+void DashboardInterface::mcErrorLED(LEDColors_e color) {data.LED.mc_error = static_cast<int>(color);}
+void DashboardInterface::startLED(LEDColors_e color) {data.LED.start = static_cast<int>(color);}
+void DashboardInterface::InertiaSwitchLED(LEDColors_e color) {data.LED.inertia = static_cast<int>(color);}
+void DashboardInterface::mechanicalBrakeLED(LEDColors_e color) {data.LED.mech_brake = static_cast<int>(color);}
+void DashboardInterface::generalPurposeLED(LEDColors_e color) {data.LED.gen_purp = static_cast<int>(color);}
+void DashboardInterface::botsLED(LEDColors_e color) {data.LED.bots = static_cast<int>(color);}
+void DashboardInterface::cockpitBrbLED(LEDColors_e color) {data.LED.cockpit_brb = static_cast<int>(color);}
+void DashboardInterface::critChargeLED(LEDColors_e color) {data.LED.crit_charge = static_cast<int>(color);}
+void DashboardInterface::glvLED(LEDColors_e color) {data.LED.glv = static_cast<int>(color);}
+void DashboardInterface::launchControlLED(LEDColors_e color) {data.LED.launch_control = static_cast<int>(color);}

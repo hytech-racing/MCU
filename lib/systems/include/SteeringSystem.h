@@ -2,7 +2,7 @@
 #define __STEERINGSYSTEM_H__
 
 #include "SteeringEncoderInterface.h"
-#include "AnalogSensor.h"
+#include "AnalogSensorsInterface.h"
 
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor

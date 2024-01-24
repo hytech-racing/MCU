@@ -2,6 +2,7 @@
 #define DRIVETRAINSYSTEM
 
 #include "InverterSystem.h"
+#include "InverterInterface.h"
 #include "Utility.h"
 #include <array>
 
@@ -54,7 +55,7 @@ public:
     void disable();
     bool drivetrain_error_occured();
 
-    void command_drivetrain(const DrivetrainCommand& data);
+    void command_drivetrain(const DrivetrainCommand_s& data);
 private:
 
 
