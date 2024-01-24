@@ -3,6 +3,9 @@
 void DashboardInterface::read(const Dashboard_status &msg)
 {
     data.dial_mode = static_cast<DialMode_e>(msg.get_dial_state());
+    
+    data.ssok = msg.get_ssok_above_threshold();
+    data.shutdown = msg.get_shutdown_h_above_threshold();
 
     data.button.start = msg.get_start_btn();
     data.button.mark = msg.get_mark_btn();
@@ -12,6 +15,11 @@ void DashboardInterface::read(const Dashboard_status &msg)
     data.button.torque_mode = msg.get_torque_mode_btn();
     data.button.led_dimmer = msg.get_led_dimmer_btn();
 
+}
+
+Dashboard_status DashboardInterface::write()
+{
+    Dashboard_status msg{};
 }
 
 DialMode_e DashboardInterface::getDialMode() {return data.dial_mode;}
