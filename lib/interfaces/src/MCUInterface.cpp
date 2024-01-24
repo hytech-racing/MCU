@@ -1,38 +1,75 @@
 #include "MCUInterface.h"
 
-/* Static members */
-/* CAN bus */
-// FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> MCUInterface::FRONT_INV_CAN;
-// FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> MCUInterface::REAR_INV_CAN;
-// FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> MCUInterface::TELEM_CAN;
-// CAN_message_t MCUInterface::msg;
+/* MCU_status CAN note */
+    // State machine
+    // mcu_status.get_state();                          // Might not need anymore (moved to state machine)
+    // mcu_status.get_mech_brake_active();              // Might not need anymore (moved to PedalInterface/System)
+    // mcu_status.get_bms_ok_high()                     // Called from state machine
+    // mcu_status.get_imd_ok_high()                     // Called from state machine
+    // mcu_status.get_no_brake_implausability();        // Moved to PedalInterface/System
+    // mcu_status.get_no_accel_implausability();        // Moved to PedalInterface/System
+    // mcu_status.get_no_accel_brake_implausability();  // Moved to PedalInterface/System
+    // mcu_status.get_software_is_ok();                 // Moved to AMSInterface
+    
+    // Software shutdown
+    // mcu_status.set_software_is_ok(true);     // Called from/call AMSInterface
+    // mcu_status.set_software_is_ok(false);    // Called from/call AMSInterface
+    // mcu_status.get_software_is_ok()          // Moved to AMSInterface
 
-/* CAN messages */
-// MCU onboard readings
-// MCU_status                  MCUInterface::mcu_status;
-// MCU_pedal_readings          MCUInterface::mcu_pedal_readings;
-// MCU_load_cells              MCUInterface::mcu_load_cells;
-// MCU_front_potentiometers    MCUInterface::mcu_front_potentiometers;
-// MCU_rear_potentiometers     MCUInterface::mcu_rear_potentiometers;
-// MCU_analog_readings         MCUInterface::mcu_analog_readings;
-// IMU_accelerometer           MCUInterface::imu_accelerometer;
-// IMU_gyroscope               MCUInterface::imu_gyroscope;
-// // Motor control
-// MC_status                   MCUInterface::mc_status[4];
-// MC_temps                    MCUInterface::mc_temps[4];
-// MC_energy                   MCUInterface::mc_energy[4];
-// MC_setpoints_command        MCUInterface::mc_setpoints_command[4];
-// // ACU CAN
-// BMS_coulomb_counts          MCUInterface::bms_coulomb_counts;
-// BMS_status                  MCUInterface::bms_status;
-// BMS_temperatures            MCUInterface::bms_temperatures;
-// BMS_voltages                MCUInterface::bms_voltages;
-// // Dashboard CAN
-// Dashboard_status            MCUInterface::dashboard_status;
+    // Parse telem CAN
+    // bms voltage
+    // mcu_status.set_pack_charge_critical(true);   // Called from/call AMSInterface
+    // dash
+    // mcu_status.get_torque_mode()                 // Moved to DashboardInterface(?)
+    // mcu_status.set_max_torque(TORQUE_2);         // Called from/call Dashboard/Inverter/Drivetrain/Whoever documents TORQUE
+    // mcu_status.set_torque_mode(2);               // Same as ^
+    // mcu_status.toggle_launch_ctrl_active();      // Called from/call DashboardInterface
+
+    // Set state
+    // mcu_status.get_state()                       // Moved to state machine
+    // mcu_status.set_activate_buzzer(false);       // Called from(?) state machine
+    // mcu_status.set_state(new_state);             // Called from/call state machine
+    // mcu_status.set_activate_buzzer(true);        // Called from state machine
+
+    // Set inverter torque
+    // mcu_status.get_max_torque()                  // Moved to whoever caches TORQUE
+
+    // Read all adcs                                // Setters called from/call PedalInterface/System
+    // mcu_status.set_brake_pedal_active(mcu_pedal_readings.get_brake_pedal_1() >= BRAKE_ACTIVE); // pedal interface
+    // mcu_status.get_brake_pedal_active()          // Moved to PedalInterface/System
+    // mcu_status.set_mech_brake_active(mcu_pedal_readings.get_brake_pedal_1() >= BRAKE_THRESHOLD_MECH_BRAKE_1);
+
+    // Check all inverters error
+    // mcu_status.set_inverters_error(true);        // See above
+
+    // Read mcu status
+    // already implemented
+
+    // Calculate pedal implausibilities
+    // mcu_status.set_no_accel_implausability(false);       // Called from/call PedalInterface/System
+    // mcu_status.set_no_brake_implausability(false);       // Same ^
+    // mcu_status.get_mech_brake_active()                   // Moved to PedalInterface/System
+    // mcu_status.set_no_accel_brake_implausability(false); // Called from/call PedalInterface/System
+    // mcu_status.get_no_accel_implausability()             // Moved to PedalInterface/System
+    // mcu_status.get_no_brake_implausability()             // Same ^
+    // mcu_status.get_no_accel_brake_implausability()       // Same ^
+
+    // Set up
+    // mcu_status.set_max_torque(0);            // Moved to whoever documents TORQUE (functionality-wise, no need to call)
+    // mcu_status.set_torque_mode(0);           // Same ^
+    // mcu_status.set_software_is_ok(true);     // Moved to AMSInterface
+    // mcu_status.set_bms_ok_high(false);       // MCUInterface
+    // mcu_status.set_imd_ok_high(false);       // Same ^
+    // mcu_status.set_inverters_error(false);   // Moved to InverterInterface(?)
+    // mcu_status.set_max_torque(TORQUE_3);     // See above
+    // mcu_status.set_torque_mode(3);           // Same ^
+
+    // Loop
+    // nah
 
 /* Member functions */
 
-/* Initialize shutdown circuit input reading */
+/* Initialize shutdown circuit input readings */
 void MCUInterface::init() {
     bms_ok_high = false;
     imd_ok_high = false;
@@ -76,33 +113,65 @@ void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
 /* Send CAN message */
 // MCU status
 void MCUInterface::send_CAN_mcu_status(CAN_message_t &msg) {
-    update_CAN_msg();
+    update_mcu_status_CAN();
     mcu_status_.write(msg.buf);
     msg.id = ID_MCU_STATUS;
-    msg.len = sizeof(mcu_status);
+    msg.len = sizeof(mcu_status_);
     // TELEM_CAN.write(msg);
 }
 
-void MCUInterface::update_CAN_msg() {
+/* Update MCU_status CAN */
+// MCUInterface
+void MCUInterface::update_mcu_status_CAN() {
     // Shutdown circuit input
-    mcu_status.set_bms_ok_high(bms_ok_high);
-    mcu_status.set_imd_ok_high(imd_ok_high);
-    mcu_status.set_bspd_ok_high(bspd_ok_high);
-    mcu_status.set_software_ok_high(software_ok_high);
+    mcu_status_.set_bms_ok_high(bms_ok_high);
+    mcu_status_.set_imd_ok_high(imd_ok_high);
+    mcu_status_.set_bspd_ok_high(bspd_ok_high);
+    mcu_status_.set_software_ok_high(software_ok_high);
     // Shutdown circuit voltage
-    mcu_status.set_shutdown_b_above_threshold(shutdown_b_above_threshold);
-    mcu_status.set_shutdown_c_above_threshold(shutdown_c_above_threshold);
-    mcu_status.set_shutdown_d_above_threshold(shutdown_d_above_threshold);
-    mcu_status.set_shutdown_e_above_threshold(shutdown_e_above_threshold);
-    // State machine set state
-        // fsm.set_mcu_status_state();
-        // mcu_->mcu_status_.set_state(fsm_state);
-    // Drivetrain set inverters error
-    mcu_status.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
-    // AMSInterface set
-    mcu_status.set_software_is_ok(ams_->software_is_ok());
-    mcu_status.set_pack_charge_critical(ams_->pack_charge_is_critical());
+    mcu_status_.set_shutdown_b_above_threshold(shutdown_b_above_threshold);
+    mcu_status_.set_shutdown_c_above_threshold(shutdown_c_above_threshold);
+    mcu_status_.set_shutdown_d_above_threshold(shutdown_d_above_threshold);
+    mcu_status_.set_shutdown_e_above_threshold(shutdown_e_above_threshold);
+}
 
+// Main loop
+// State machine
+void MCUInterface::update_mcu_status_CAN_fsm() {
+    // State machine returns struct in main loop
+        // mcu_status_.set_state(fsm_state);
+}
+//DriveTrain
+void MCUInterface::update_mcu_status_CAN_drivetrain() {
+    // Drivetrain returns struct in main loop
+    mcu_status_.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
+}
+// AMSInterface
+void MCUInterface::update_mcu_status_CAN_ams() {
+    // AMSInterface returns struct in main loop
+    mcu_status_.set_software_is_ok(ams_->software_is_ok());
+    mcu_status_.set_pack_charge_critical(ams_->pack_charge_is_critical());
+}
+// DashboardInterface(?)
+void MCUInterface::update_mcu_status_CAN_dashboard() {
+    // DashboardInterface (?) returns struct in main loop
+    mcu_status_.set_torque_mode(dash_->get_torque_mode());
+    mcu_status_.set_max_torque(dash_->get_max_torque());
+    mcu_status_.toggle_launch_ctrl_active(dash_->launch_ctrl_btn_pressed());
+}
+// BuzzerSystem
+void MCUInterface::update_mcu_status_CAN_buzzer() {
+    // Buzzer returns struct in main loop
+        // mcu_status_.set_activate_buzzer();
+}
+// PedalSystem
+void MCUInterface::update_mcu_status_CAN_pedals() {
+    // PedalSystem returns struct in main loop
+        // mcu_status_.set_brake_pedal_active();
+        // mcu_status_.set_mech_brake_active();
+        // mcu_status_.set_no_accel_implausability();
+        // mcu_status_.set_no_brake_implausability();
+        // mcu_status_.set_no_accel_brake_implausability();
 }
 
 
