@@ -43,6 +43,7 @@ AnalogConversionPacket_s<MCP3208_NUM_CHANNELS> ADC1Output;
 SteeringEncoderConversion_s steeringEncoderOutput;
 PedalsSystemOutput_s pedalsSystemOutput;
 SteeringSystemOutput_s steeringSystemOutput;
+DashboardInterfaceOutput_s dashboardOutput;
 
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> FRONT_INV_CAN;
 CAN_message_t msg;
@@ -91,13 +92,14 @@ void callback10()
 /// @brief 100hz periodic function
 void callback100()
 {
-    // Sample Sensors
+    // Sample Interfaces
     ADC1.sample();
     OrbisBR10.sample();
 
     // Convert Sensors
     ADC1Output = ADC1.convert();
     steeringEncoderOutput = OrbisBR10.convert();
+    dashboardOutput = dashoardInterface.convert();
 
     // Process Systems
     pedalsSystemOutput = pedalsSystem.evaluate(

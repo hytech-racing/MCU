@@ -49,62 +49,31 @@ struct DashLEDs_s
     uint8_t launch_control;
 };
 
-struct DashComponentInterface
+struct DashboardInterfaceOutput_s
 {
-    /* READ DATA */
-    // enum for dial position read by controller mux
     DialMode_e dial_mode;
-    // Buttons struct for better naming
-    DashButtons_s button;
-    bool ssok; // safety system OK (IMD?) RENAME
+    DashButtons_s buttons;
+    bool ssok;
     bool shutdown;
-
-    /* WRITTEN DATA */
-    bool buzzer;
-    DashLEDs_s LED;
 };
-
 
 class DashboardInterface
 {
 private:
-
-    DashComponentInterface data;
-
+    DashboardInterfaceOutput_s dashState;
 public:
-    Dashboard(){};
+// Constructors
+    Dashboard();
 
-    void read(const Dashboard_status &msg);
-
-    DialMode_e getDialMode();
-
-    bool startButtonPressed();
-    bool specialButtonPressed();
-    bool torqueButtonPressed();
-    bool inverterResetButtonPressed();
-    bool launchControlButtonPressed();
-    bool torqueLoadingButtonPressed();
-    bool nightModeButtonPressed();
-    bool torqueVectoringOffButtonPressed();
-
-    bool safetySystemOK();
-
-
-    void soundBuzzer(bool state);
-
-    void amsLED(LEDColors_e color);
-    void imdLED(LEDColors_e color);
-    void modeLED(LEDColors_e color);
-    void mcErrorLED(LEDColors_e color);
-    void startLED(LEDColors_e color);
-    void InertiaSwitchLED(LEDColors_e color);
-    void mechanicalBrakeLED(LEDColors_e color);
-    void generalPurposeLED(LEDColors_e color);
-    void botsLED(LEDColors_e color);
-    void cockpitBrbLED(LEDColors_e color);
-    void critChargeLED(LEDColors_e color);
-    void glvLED(LEDColors_e color);
-    void launchControlLED(LEDColors_e color);
+// Functions
+    /// @brief Send data to the dashboard
+    void set(
+        bool buzzerEnabled,
+        DashLED_s LEDsState
+    );
+    /// @brief Get the state of the dashboard's signals
+    /// @return DashboardInterfaceOutput_s
+    DashboardInterfaceOutput_s convert();
 };
 
 #endif /* __DASHBOARDINTERFACE_H__ */
