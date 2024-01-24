@@ -49,6 +49,7 @@ public:
     void send_CAN_bms_coulomb_counts(CAN_message_t &msg);
 
 private:
+    /* Private utility functions */
     update_CAN_msg();
 
     /* AMS CAN messages */

@@ -42,7 +42,7 @@ public:
     void update_mcu_status_CAN_dashboard();
 
     /* Send MCU_status CAN  */
-    void send_CAN_mcu_status();
+    void send_CAN_mcu_status(CAN_message_t &msg);
 
 
 private:

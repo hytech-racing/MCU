@@ -79,21 +79,21 @@ void AMSInterface::get_filtered_min_cell_voltage() {
     return filtered_min_cell_voltage;
 }
 
-void AMSInterface::retrieve_coulomb_count_CAN(BMS_coulomb_counts bms_coulomb_counts) {
-    bms_coulomb_counts_ = bms_coulomb_counts;
+void AMSInterface::retrieve_coulomb_count_CAN(CAN_message_t &recvd_msg) {
+    bms_coulomb_counts_.load(recvd_msg.buf);
 }
 
-void AMSInterface::retrieve_status_CAN(BMS_status bms_status) {
-    bms_status_ = bms_status;
+void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg) {
+    bms_status_.load(recvd_msg.buf);
     set_heartbeat(millis());
 }
 
-void AMSInterface::retrieve_temp_CAN(BMS_temperatures bms_temperatures) {
-    bms_temperatures_ = bms_temperatures;
+void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
+    bms_temperatures_.load(recvd_msg.buf);
 }
 
-void AMSInterface::retrieve_voltage_CAN(BMS_voltages bms_voltages) {
-    bms_voltages_ = bms_voltages;
+void AMSInterface::retrieve_voltage_CAN(CAN_message_t &recvd_msg) {
+    bms_voltages_.load(recvd_msg.buf);
 }
 
 void AMSInterface::send_CAN_bms_coulomb_counts(CAN_message_t &msg) {

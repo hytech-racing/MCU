@@ -52,8 +52,8 @@ SafetySystem safety_system(&ams_interface, wd_interface);
 
 /* CAN functions */
 void init_all_CAN();
-void process_all_CAN_buffer(AllMsgs &received_can_msgs);
-void dispatch_all_CAN(AllMsgs &received_can_msgs);
+void init_all_CAN_og();
+void dispatch_all_CAN();
 void send_CAN_1Hz();
 void send_CAN_10Hz();
 void send_CAN_20Hz();
@@ -104,6 +104,22 @@ void init_all_CAN() {
     TELEM_CAN.enableFIFOInterrupt();
     TELEM_CAN.onReceive(on_can3_receive);
     TELEM_CAN.mailboxStatus();
+}
+
+void init_all_CAN_og() {
+    //Inverter CAN line
+    INV_CAN.begin();
+    INV_CAN.setBaudRate(INV_CAN_SPEED);
+    INV_CAN.enableMBInterrupts();
+    INV_CAN.onReceive(parse_inv_CAN_message);
+
+    // Telemetry CAN line
+    TELEM_CAN.begin();
+    TELEM_CAN.setBaudRate(TELEM_CAN_SPEED);    
+    TELEM_CAN.enableMBInterrupts();    
+    TELEM_CAN.onReceive(parse_telem_CAN_message);
+
+    delay(500);
 }
 
 void dispatch_all_CAN(AllMsgs &received_can_msgs) {
@@ -172,86 +188,84 @@ void dispatch_telem_CAN() {
     }
 }
 
-void parse_telem_can_message(const CAN_message_t &RX_msg) {
-  CAN_message_t rx_msg = RX_msg;
-  switch (rx_msg.id) {
-    case ID_BMS_TEMPERATURES:              
-      ams_interface.retrieve_voltage_CAN(&rx_msg);
-      bms_temperatures.load(rx_msg.buf);
-      filtered_max_cell_temp  = filtered_max_cell_temp * cell_temp_alpha + (1.0 - cell_temp_alpha) * (bms_temperatures.get_high_temperature() / 100.0) ;              
-      break;
-    case ID_BMS_VOLTAGES:
-      bms_voltages.load(rx_msg.buf);
-      if (bms_voltages.get_low() < PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD || bms_voltages.get_total() < PACK_CHARGE_CRIT_TOTAL_THRESHOLD) {
-        mcu_status.set_pack_charge_critical(true);
-      } else mcu_status.set_pack_charge_critical(false);
-      filtered_min_cell_voltage = filtered_min_cell_voltage * cell_voltage_alpha + (1.0 - cell_voltage_alpha) * (bms_voltages.get_low() / 10000.0);
-      break;
-    case ID_BMS_COULOMB_COUNTS:            bms_coulomb_counts.load(rx_msg.buf);            break;
-    case ID_BMS_STATUS:
-      bms_status.load(rx_msg.buf);
-      // BMS heartbeat timer
-      timer_bms_heartbeat.reset();
-      timer_bms_heartbeat.interval(BMS_HEARTBEAT_TIMEOUT);
-      break;
-    case ID_DASHBOARD_STATUS:
-      dashboard_status.load(rx_msg.buf);
-      /* process dashboard buttons */
-      if (dashboard_status.get_torque_mode_btn()) {
-        switch (mcu_status.get_torque_mode()) {
-          case 1:
-            mcu_status.set_max_torque(TORQUE_2);
-            mcu_status.set_torque_mode(2); break;
-          case 2:
-            mcu_status.set_max_torque(TORQUE_3);
-            mcu_status.set_torque_mode(3); break;
-          case 3:
-            mcu_status.set_max_torque(TORQUE_1);
-            mcu_status.set_torque_mode(1); break;
-        }
-      }
-      if (dashboard_status.get_launch_ctrl_btn()) {
-        mcu_status.toggle_launch_ctrl_active();
-      }
-      if (dashboard_status.get_mc_cycle_btn()) {
-        inverter_restart = true;
-        timer_reset_inverter.reset();
-      }
-      // eliminate all action buttons to not process twice
-      dashboard_status.set_button_flags(0);
-      break;
+void parse_inv_CAN_message(const CAN_message_t &RX_msg) {
+    CAN_message_t rx_msg = RX_msg;
+    switch (rx_msg.id) {
+    // Motor status
+    case ID_MC1_STATUS:    inv_interface[0].retrieve_status_CAN(rx_msg);    break;
+    case ID_MC2_STATUS:    inv_interface[1].retrieve_status_CAN(rx_msg);    break;
+    case ID_MC3_STATUS:    inv_interface[2].retrieve_status_CAN(rx_msg);    break;
+    case ID_MC3_STATUS:    inv_interface[3].retrieve_status_CAN(rx_msg);    break;
+    // Motor temperature
+    case ID_MC1_TEMPS:     inv_interface[0].retrieve_status_CAN(rx_msg);    break;
+    case ID_MC2_TEMPS:     inv_interface[1].retrieve_status_CAN(rx_msg);    break;
+    case ID_MC3_TEMPS:     inv_interface[2].retrieve_status_CAN(rx_msg);    break;
+    case ID_MC4_TEMPS:     inv_interface[3].retrieve_status_CAN(rx_msg);    break;
+    // Motor energy
+    case ID_MC1_ENERGY:    inv_interface[0].retrieve_energy_CAN(rx_msg);    break;
+    case ID_MC2_ENERGY:    inv_interface[1].retrieve_energy_CAN(rx_msg);    break;
+    case ID_MC3_ENERGY:    inv_interface[2].retrieve_energy_CAN(rx_msg);    break;
+    case ID_MC4_ENERGY:    inv_interface[3].retrieve_energy_CAN(rx_msg);    break;
+    default:               break;
   }
 }
 
+void parse_telem_CAN_message(const CAN_message_t &RX_msg) {
+    CAN_message_t rx_msg = RX_msg;
+    switch (rx_msg.id)
+    {
+    // AMS CAN
+    case ID_BMS_COULOMB_COUNTS:
+        ams_interface.retrieve_coulomb_count_CAN(rx_msg);
+        break;
+    case ID_BMS_STATUS:
+        ams_interface.retrieve_status_CAN(rx_msg);
+        break;
+    case ID_BMS_TEMPERATURES:
+        ams_interface.retrieve_temp_CAN(rx_msg);
+        break;
+    case ID_BMS_VOLTAGES:
+        ams_interface.retrieve_voltage_CAN(rx_msg);
+        break;
+    // Dashboard status
+    case ID_DASHBOARD_STATUS:
+        dashboard.retrieve_CAN(rx_msg);
+        break;
+    default:
+        break;
+    }
+}
+
+/* Hardware timer (?) */
 void send_CAN_1Hz() {
     CAN_message_t msg;
-    ams_interface.send_CAN_bms_coulomb_counts(&msg);
+    ams_interface.send_CAN_bms_coulomb_counts(msg);
     TELEM_CAN.write(msg);
 }
 
 void send_CAN_10Hz() {
     
-    main_ecu.send_CAN_mcu_status(&msg);
+    main_ecu.send_CAN_mcu_status(msg);
     TELEM_CAN.write(msg);
 }
 
 void send_CAN_20Hz() {
-    telem_interface.send_CAN_mcu_pedal_readings(&msg);
+    telem_interface.send_CAN_mcu_pedal_readings(msg);
     TELEM_CAN.write(msg);    
-    telem_interface.send_CAN_mcu_analog_readings(&msg);
+    telem_interface.send_CAN_mcu_analog_readings(msg);
     TELEM_CAN.write(msg);
 }
 
 void send_CAN_50Hz() {
     for (int i = 0; i < 4; i++) {
-        inv_interface[i].send_CAN_inverter_setpoints(&msg);
+        inv_interface[i].send_CAN_inverter_setpoints(msg);
         TELEM_CAN.write(msg);
     }
 
-    telem_interface.send_CAN_mcu_load_cells(&msg);
+    telem_interface.send_CAN_mcu_load_cells(msg);
     TELEM_CAN.write(msg);
-    telem_interface.send_CAN_mcu_front_potentiometers(&msg);
+    telem_interface.send_CAN_mcu_front_potentiometers(msg);
     TELEM_CAN.write(msg);
-    telem_interface.send_CAN_mcu_rear_potentiometers(&msg);
+    telem_interface.send_CAN_mcu_rear_potentiometers(msg);
     TELEM_CAN.write(msg);
 }
