@@ -70,21 +70,10 @@ void setup()
     kiloTimer.begin(kiloCallback, 1'000);
 }
 
-// idle function
+// do not use
 void loop()
 {
-    AllMsgs received_can_msgs;
-    process_ring_buffer(received_can_msgs, CAN1_rxBuffer);
-    process_ring_buffer(received_can_msgs, CAN2_rxBuffer);
-    process_ring_buffer(received_can_msgs, CAN3_rxBuffer);
-
-    if(std::get<0>(received_can_msgs.dashboard_status)){
-        // dash.receive(std::get<1>(received_can_msgs.dashboard_status));
-    }
     
-    msg_writer.handle_sending(millis());
-    // msg_writer.test();
-    // state_machine.get_state();
 }
 
 /// @brief 1hz periodic function
@@ -131,7 +120,18 @@ void kiloCallback()
         kiloBusy = true; // Do not allow kiloCallback to be interrupted by itself
 
         // Do 1khz stuff here
+        AllMsgs received_can_msgs;
+        process_ring_buffer(received_can_msgs, CAN1_rxBuffer);
+        process_ring_buffer(received_can_msgs, CAN2_rxBuffer);
+        process_ring_buffer(received_can_msgs, CAN3_rxBuffer);
 
+        if(std::get<0>(received_can_msgs.dashboard_status)){
+            // dash.receive(std::get<1>(received_can_msgs.dashboard_status));
+        }
+        
+        msg_writer.handle_sending(millis());
+        // msg_writer.test();
+        // state_machine.get_state();
         
         // Callback chain
         if (kiloCounter % 10 == 0)
