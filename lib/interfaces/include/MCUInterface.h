@@ -30,6 +30,10 @@ public:
     /* Write to Main ECU */
     void set_brake_light(bool brake_pedal_is_active);   // Called from PedalInterface/System
 
+    /* Feed to state machine */
+    bool bms_ok_is_high();
+    bool imd_ok_is_high();
+
     /* Update MCU_status CAN (main loop) */
     // State machine
     void update_mcu_status_CAN_fsm();

@@ -13,39 +13,42 @@
 class AMSInterface
 {
 public:
-    AMSInterface(MCUInterface *mcu): 
-        mcu_(mcu),
-        last_heartbeat_time(time),
-        filtered_max_cell_temp(40.0),
-        filtered_min_cell_voltage(3.5),
-        cell_temp_alpha(0.8),
-        cell_voltage_alpha(0.8) {};
+    AMSInterface(float init_temp=40.0, float init_volt=3.5, float temp_alpha=0.8, float volt_alpha=0.8):        
+        filtered_max_cell_temp(init_temp),
+        filtered_min_cell_voltage(init_volt),
+        cell_temp_alpha(temp_alpha),
+        cell_voltage_alpha(volt_alpha) 
+    {
+        last_heartbeat_time = millis();
+    }
 
+    /* Initialize interface pin mode */
     void init();
 
+    /* Write to Main ECU */
+    // Initialize output value
     void set_start_state();
+    // Set output value
     void set_state_ok_high(bool ok_high);
-
-    void set_software_is_ok(bool is_ok);
-    bool software_is_ok();
     
-    bool ok_high();
+    /* Monitor AMS state */
+    void set_heartbeat(unsigned long curr_time);
     bool heartbeat_received(unsigned long curr_time);
     bool is_below_pack_charge_critical_low_thresh();
     bool is_below_pack_charge_critical_total_thresh();
-    bool pack_charge_is_critical();
+    bool pack_charge_is_critical();    
 
-    void set_pack_charge_critical(bool is_critical);
-    static void set_heartbeat(unsigned long curr_time);
-
+    /* IIR filtered AMS readings */
     float get_filtered_max_cell_temp();
     float get_filtered_min_cell_voltage();
 
-    void retrieve_coulomb_count_CAN(BMS_coulomb_counts bms_coulomb_counts);
-    void retrieve_status_CAN(BMS_status bms_status);
-    void retrieve_temp_CAN(BMS_temperatures bms_temperatures);
-    void retrieve_voltage_CAN(BMS_voltages bms_voltages);
+    /* Retrieve CAN */
+    void retrieve_coulomb_count_CAN(CAN_message_t &recvd_msg);
+    void retrieve_status_CAN(CAN_message_t &recvd_msg);
+    void retrieve_temp_CAN(CAN_message_t &recvd_msg);
+    void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
 
+    /* Send CAN */
     void send_CAN_bms_coulomb_counts(CAN_message_t &msg);
 
 private:
@@ -53,16 +56,17 @@ private:
     update_CAN_msg();
 
     /* AMS CAN messages */
+    // Inbound and outbound (not sure why, need to double check with Liwei)
     BMS_coulomb_counts  bms_coulomb_counts_;
+    // Outbound
     BMS_status          bms_status_;
     BMS_temperatures    bms_temperatures_;
     BMS_voltages        bms_voltages_;
-    /* Software OK status */
-    bool software_is_ok;
 
     /* AMS heartbeat check */
-    static unsigned long last_heartbeat_time;
-    /* Power limiting data */
+    unsigned long last_heartbeat_time;
+
+    /* IIR filter parameters */
     float bms_high_temp;
     float bms_low_voltage;
     float filtered_max_cell_temp;

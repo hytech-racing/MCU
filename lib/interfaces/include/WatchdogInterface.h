@@ -11,23 +11,26 @@
 class WatchdogInterface
 {
 public:
-    WatchdogInterface(MCUInterface *mcu): mcu_(mcu), watchdog_time(millis()) {};
+    WatchdogInterface(): watchdog_time(millis()), watchdog_state(HIGH) {};
 
+    /* Initialize interface pin mode */
     void init();
 
+    /* Write to Main ECU */
+    // Initialize output value
     void set_start_state();
 
+    /* Kick watchdog */
     void kick_watchdog(unsigned long curr_time);
 
 
 private:
-    MCUInterface *mcu_;
+    /* Watchdog last kicked time */
     unsigned long watchdog_time;
-    static bool watchdog_state;
+
+    /* Watchdog output state */
+    bool watchdog_state;
 
 };
-
-
-
 
 #endif /* __WATCHDOG_INTERFACE_H__ */

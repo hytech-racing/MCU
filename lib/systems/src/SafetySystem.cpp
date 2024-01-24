@@ -1,22 +1,28 @@
 #include "SafetySystem.h"
 
+/* Initialize SafetySystem */
 void SafetySystem::init() {
-    ams_->set_start_state();
-    ams_->set_software_is_ok();
+    // Initialize interface output
+    ams_->set_start_state();    
     wd_->set_start_state();
+    // Initial state is ok
+    software_is_ok = true;
 }
 
+/* Monitor AMS heartbeat and kick watchdog */
 void SafetySystem::software_shutdown() {
-    ams_->set_software_is_ok();
+    software_is_ok = true;
 
+    // If AMS heartbeat is not received within reasonable interval
+    // Set software is not ok
     if (!ams_->heartbeat_received(millis())) {
-        ams_->set_software_is_not_ok();
+        software_is_ok = false;
     }
-
-    if (ams_->software_is_ok())
+    if (software_is_ok)
         ams_->set_state_ok_high(true);
     else
         ams_->set_state_ok_high(false);
 
+    // Kick watchdog every software cycle
     wd_->kick_watchdog(millis());
 }

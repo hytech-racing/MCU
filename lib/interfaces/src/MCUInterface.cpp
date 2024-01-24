@@ -110,6 +110,16 @@ void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
 
 }
 
+/* Shutdown circuit input state */
+// BMS
+bool MCUInterface::bms_ok_is_high() {
+    return bms_ok_high;
+}
+// OKHS (IMD)
+bool MCUInterface::imd_ok_is_high() {
+    return imd_ok_high;
+}
+
 /* Send CAN message */
 // MCU status
 void MCUInterface::send_CAN_mcu_status(CAN_message_t &msg) {

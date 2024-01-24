@@ -11,17 +11,20 @@ public:
         ams_(ams), 
         wd_(wd) {};
 
+    /* Initialization */
     void init();
 
+    /* Monitor software state every cycle */
     void software_shutdown();
 
 
 private:
-
+    /* Associated interfaces */
     AMSInterface        *ams_;
     WatchdogInterface   *wd_;
+
+    /* Software ok status */
+    bool software_is_ok;
 };
-
-
 
 #endif /* __SAFETY_SYSTEM_H__ */

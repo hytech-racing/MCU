@@ -1,22 +1,16 @@
 #include "WatchdogInterface.h"
 
-/* Static members */
-bool WatchdogInterface::watchdog_state = HIGH;
-
+/* Pin mode output to watchdog WD */
 void WatchdogInterface::init() {
-    // set_software_is_ok();
-
     pinMode(WATCHDOG_INPUT, OUTPUT);
-    // pinMode(SOFTWARE_OK, OUTPUT);
-
-    // digitalWrite(WATCHDOG_INPUT, HIGH);
-    // digitalWrite(SOFTWARE_OK, HIGH);
 }
 
+/* Initial output to watchdog WD */
 void WatchdogInterface::set_start_state() {
     digitalWrite(WATCHDOG_INPUT, HIGH);
 }
 
+/* Toggle watchdog WD to kick dog */
 void WatchdogInterface::kick_watchdog(unsigned long curr_time) {
     if ((curr_time - watchdog_time) > WATCHDOG_KICK_INTERVAL) {
         watchdog_state = !watchdog_state;

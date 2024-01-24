@@ -1,21 +1,16 @@
 #include <AMSInterface.h>
 
-/* static members */
-void AMSInterface::set_heartbeat(unsigned long curr_time) {
-    last_heartbeat_time = curr_time;
-}
-
-unsigned long AMSInterface::last_heartbeat_time = millis();
-
-/* Initialize */
+/* Pin mode output to watchdog reset */
 void AMSInterface::init() {
     pinMode(SOFTWARE_OK, OUTPUT);
 }
 
+/* Initial ouput to watchdog reset */
 void AMSInterface::set_start_state() {
     digitalWrite(SOFTWARE_OK, HIGH);
 }
 
+/* Set value to watchdog reset */
 void AMSInterface::set_state_ok_high(bool ok_high) {
     if (ok_high)
         digitalWrite(SOFTWARE_OK, HIGH);
@@ -23,20 +18,9 @@ void AMSInterface::set_state_ok_high(bool ok_high) {
         digitalWrite(SOFTWARE_OK, LOW);
 }
 
-// SafetySystem
-void AMSInterface::set_software_is_ok(bool is_ok) {
-    software_is_ok = is_ok;
-}
-// SafetySystem
-bool AMSInterface::software_is_ok() {
-    return software_is_ok;
-}
-
-/* Check if AMS is ok */
-// SafetySystem (?)
-// Should be requested from MCUInterface instead
-bool AMSInterface::ok_high() {
-    return mcu_->mcu_status.get_bms_ok_high();
+/* Set AMS last heartbeat receive time */
+void AMSInterface::set_heartbeat(unsigned long curr_time) {
+    last_heartbeat_time = curr_time;
 }
 
 /* Check if AMS heartbeat is received */
@@ -79,6 +63,7 @@ void AMSInterface::get_filtered_min_cell_voltage() {
     return filtered_min_cell_voltage;
 }
 
+/* Retrieve CAN messages */
 void AMSInterface::retrieve_coulomb_count_CAN(CAN_message_t &recvd_msg) {
     bms_coulomb_counts_.load(recvd_msg.buf);
 }
@@ -96,6 +81,7 @@ void AMSInterface::retrieve_voltage_CAN(CAN_message_t &recvd_msg) {
     bms_voltages_.load(recvd_msg.buf);
 }
 
+/* Send CAN message */
 void AMSInterface::send_CAN_bms_coulomb_counts(CAN_message_t &msg) {
     update_CAN_msg();
     bms_coulomb_counts_.write(msg.buf);
@@ -104,5 +90,5 @@ void AMSInterface::send_CAN_bms_coulomb_counts(CAN_message_t &msg) {
 }
 
 void AMSInterface::update_CAN_msg() {
-    // do sth with bms_coulomb_counts
+    // do sth with bms_coulomb_counts_
 }
