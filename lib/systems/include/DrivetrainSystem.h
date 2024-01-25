@@ -4,6 +4,9 @@
 #include "InverterInterface.h"
 #include <array>
 
+
+// TODO will need an interface update to handle the speed feedback from inverters
+// TODO update to using better method for keeping track of which inverter is which (named map I think would be good)
 struct DrivetrainCommand
 { 
     float torque_lf;
