@@ -57,19 +57,7 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
 }
 
 template <typename message_queue>
-void InverterInterface<message_queue>::handle_receive(const MC_energy &msg)
+void InverterInterface<message_queue>::receive_status_msg(const CAN_message_t &msg)
 {
-}
-
-template <typename message_queue>
-void InverterInterface<message_queue>::handle_receive(const MC_status &msg)
-{
-    quit_dc_on_ = msg.get_quit_dc_on();
-    system_ready_ = msg.get_system_ready();
-    quit_inverter_on_ = msg.get_quit_inverter_on();
-}
-
-template <typename message_queue>
-void InverterInterface<message_queue>::handle_receive(const MC_temps &msg)
-{
+    status_.load(msg);
 }

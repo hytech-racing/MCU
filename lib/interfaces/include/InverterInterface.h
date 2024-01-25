@@ -36,9 +36,7 @@ public:
 
     void handle_command(const InverterCommand &command);
 
-    void handle_receive(const MC_energy &msg);
-    void handle_receive(const MC_status &msg);
-    void handle_receive(const MC_temps &msg);
+    void handle_receive();
 
 
 
@@ -66,6 +64,7 @@ private:
     bool quit_inverter_on_;
     bool system_ready_;
     message_queue *msg_queue_;
+    MC_status status_;
     uint32_t can_id_;
 };
 

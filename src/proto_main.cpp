@@ -57,10 +57,6 @@ void loop()
     process_ring_buffer(received_can_msgs, CAN2_rxBuffer);
     process_ring_buffer(received_can_msgs, CAN3_rxBuffer);
 
-    // if(std::get<0>(received_can_msgs.dashboard_status)){
-        // dash.receive(std::get<1>(received_can_msgs.dashboard_status));
-    // }
-    
     // msg_writer.handle_sending(millis());
     // msg_writer.test();
     state_machine.get_state();

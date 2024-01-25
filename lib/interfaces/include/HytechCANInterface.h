@@ -18,7 +18,6 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
-
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN1_txBuffer;
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
@@ -27,39 +26,13 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_txBuffer;
 
-
-struct AllMsgs
-{
-    std::tuple<bool, MC_status> mc_1_status = {false, MC_status()};
-    std::tuple<bool, MC_status> mc_2_status = {false, MC_status()};
-    std::tuple<bool, MC_status> mc_3_status = {false, MC_status()};
-    std::tuple<bool, MC_status> mc_4_status = {false, MC_status()};
-
-    std::tuple<bool, MC_temps> mc_1_temps = {false, MC_temps()};
-    std::tuple<bool, MC_temps> mc_2_temps = {false, MC_temps()};
-    std::tuple<bool, MC_temps> mc_3_temps = {false, MC_temps()};
-    std::tuple<bool, MC_temps> mc_4_temps = {false, MC_temps()};
-
-    std::tuple<bool, MC_energy> mc_1_energy = {false, MC_energy()};
-    std::tuple<bool, MC_energy> mc_2_energy = {false, MC_energy()};
-    std::tuple<bool, MC_energy> mc_3_energy = {false, MC_energy()};
-    std::tuple<bool, MC_energy> mc_4_energy = {false, MC_energy()};
-
-    std::tuple<bool, BMS_coulomb_counts> bms_coulomb_counts = {false, BMS_coulomb_counts()};
-    std::tuple<bool, BMS_status> bms_status = {false, BMS_status()};
-    std::tuple<bool, BMS_temperatures> bms_temperatures = {false, BMS_temperatures()};
-    std::tuple<bool, BMS_voltages> bms_voltages = {false, BMS_voltages()};
-    std::tuple<bool, Dashboard_status> dashboard_status = {false, Dashboard_status()};
-};
-
-// 
 void on_can1_receive(const CAN_message_t &msg);
 void on_can2_receive(const CAN_message_t &msg);
 void on_can3_receive(const CAN_message_t &msg);
 
 // reads from receive buffer updating the current message frame from a specific receive buffer
 template <typename BufferType>
-void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer)
+void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer, InverterInterface * front_left_inv)
 {
 
     while (rx_buffer.available())
@@ -71,8 +44,7 @@ void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer)
         switch (recvd_msg.id)
         {
         case ID_MC1_STATUS:
-            std::get<0>(current_message_frame.mc_1_status) = true;
-            std::get<1>(current_message_frame.mc_1_status).load(recvd_msg.buf);
+            front_left_inv->receive_status_msg(recvd_msg); 
             break;
         case ID_MC2_STATUS:
             std::get<0>(current_message_frame.mc_2_status) = true;
