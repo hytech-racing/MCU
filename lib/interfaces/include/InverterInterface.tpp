@@ -59,25 +59,25 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
 template <typename message_queue>
 void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
 {
-    // status_.load(msg);
     MC_status mc_status(&msg.buf[0]);
 
     system_ready_ = mc_status.get_system_ready();
     quit_dc_on_ = mc_status.get_quit_dc_on();
     quit_inverter_on_ = mc_status.get_quit_inverter_on();
-
+    speed_ = mc_status.get_speed();
 }
 
 // TODO fill this in with the correct receiving
 template <typename message_queue>
 void InverterInterface<message_queue>::receive_energy_msg(CAN_message_t &msg)
 {
-
+    MC_energy mc_energy(&msg.buf[0]);
+    dc_bus_voltage_ = mc_energy.get_dc_bus_voltage();
 }
 
-// TODO fill this in with the correct recving
 template <typename message_queue>
 void InverterInterface<message_queue>::receive_temp_msg(CAN_message_t &msg)
 {
-
+    MC_temps mc_temps(&msg.buf[0]);
+    // TODO use this (not currently being used in old main)
 }

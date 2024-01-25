@@ -40,12 +40,12 @@ public:
     void command_no_torque();
     void handle_command(const InverterCommand &command);
 
-    // TODO set this bool from status msg
+    
     bool inverter_system_ready()
     {
         return system_ready_;
     }
-    // TODO set this bool from status msg
+    
     bool dc_quit_on()
     {
         return quit_dc_on_;
@@ -63,6 +63,7 @@ public:
 
 private:
     void write_cmd_msg_to_queue_(const MC_setpoints_command &msg);
+    int16_t speed_;
     uint16_t dc_bus_voltage_;
     bool quit_dc_on_;
     bool quit_inverter_on_;
