@@ -15,7 +15,7 @@ public:
     void init();
 
     /* Monitor software state every cycle */
-    void software_shutdown();
+    void software_shutdown(unsigned long curr_time);
 
 
 private:

@@ -154,7 +154,7 @@ void MCUInterface::update_mcu_status_CAN_fsm() {
 //DriveTrain
 void MCUInterface::update_mcu_status_CAN_drivetrain() {
     // Drivetrain returns struct in main loop
-    mcu_status_.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
+    // mcu_status_.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
 }
 // SafetySystem
 void MCUInterface::update_mcu_status_CAN_safety() {

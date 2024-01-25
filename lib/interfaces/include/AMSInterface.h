@@ -1,7 +1,8 @@
 #ifndef __AMS_INTERFACE_H__
 #define __AMS_INTERFACE_H__
 
-// #include "HyTech_CAN.h"
+#include "FlexCAN_T4.h"
+#include "HyTech_CAN.h"
 
 #define HEARTBEAT_INTERVAL                      20   // milliseconds
 #define PACK_CHARGE_CRIT_TOTAL_THRESHOLD        420
@@ -52,7 +53,7 @@ public:
 
 private:
     /* Private utility functions */
-    update_CAN_msg();
+    void update_CAN_msg();
 
     /* AMS CAN messages */
     // Inbound and outbound (not sure why, need to double check with Liwei)

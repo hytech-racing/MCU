@@ -46,10 +46,10 @@ struct AllMsgs
     std::tuple<bool, MC_energy> mc_3_energy = {false, MC_energy()};
     std::tuple<bool, MC_energy> mc_4_energy = {false, MC_energy()};
 
-    std::tuple<bool, MC_setpoints> mc_1_setpoints = {false, MC_setpoints()};
-    std::tuple<bool, MC_setpoints> mc_2_setpoints = {false, MC_setpoints()};
-    std::tuple<bool, MC_setpoints> mc_3_setpoints = {false, MC_setpoints()};
-    std::tuple<bool, MC_setpoints> mc_4_setpoints = {false, MC_setpoints()};
+    // std::tuple<bool, MC_setpoints_command> mc_1_setpoints = {false, MC_setpoints()};
+    // std::tuple<bool, MC_setpoints_command> mc_2_setpoints = {false, MC_setpoints()};
+    // std::tuple<bool, MC_setpoints_command> mc_3_setpoints = {false, MC_setpoints()};
+    // std::tuple<bool, MC_setpoints_command> mc_4_setpoints = {false, MC_setpoints()};
 
     std::tuple<bool, BMS_coulomb_counts>    bms_coulomb_counts = {false, BMS_coulomb_counts()};
     std::tuple<bool, BMS_status>            bms_status = {false, BMS_status()};

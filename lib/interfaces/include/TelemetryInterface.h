@@ -1,8 +1,8 @@
 #ifndef __TELEMETRY_INTERFACE_H__
 #define __TELEMETRY_INTERFACE_H__
 
-// #include "FlexCAN_T4.h"
-// #include "HyTech_CAN.h"
+#include "FlexCAN_T4.h"
+#include "HyTech_CAN.h"
 
 class TelemetryInterface
 {

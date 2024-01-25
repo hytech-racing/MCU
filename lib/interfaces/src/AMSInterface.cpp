@@ -1,4 +1,4 @@
-#include <AMSInterface.h>
+#include "AMSInterface.h"
 
 /* Pin mode output to watchdog reset */
 void AMSInterface::init() {
@@ -57,7 +57,7 @@ float AMSInterface::get_filtered_max_cell_temp() {
 
 /* IIR filter and return filtered min cell voltage */
 // AMSSystem (?)
-void AMSInterface::get_filtered_min_cell_voltage() {
+float AMSInterface::get_filtered_min_cell_voltage() {
     bms_low_voltage = bms_voltages_.get_low() / 10000.0;
     filtered_min_cell_voltage = filtered_min_cell_voltage * cell_temp_alpha + (1.0 - cell_voltage_alpha) * bms_low_voltage;
     return filtered_min_cell_voltage;

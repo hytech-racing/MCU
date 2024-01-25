@@ -10,12 +10,12 @@ void SafetySystem::init() {
 }
 
 /* Monitor AMS heartbeat and kick watchdog */
-void SafetySystem::software_shutdown() {
+void SafetySystem::software_shutdown(unsigned long curr_time) {
     software_is_ok = true;
 
     // If AMS heartbeat is not received within reasonable interval
     // Set software is not ok
-    if (!ams_->heartbeat_received(millis())) {
+    if (!ams_->heartbeat_received(curr_time)) {
         software_is_ok = false;
     }
     if (software_is_ok)
@@ -24,5 +24,5 @@ void SafetySystem::software_shutdown() {
         ams_->set_state_ok_high(false);
 
     // Kick watchdog every software cycle
-    wd_->kick_watchdog(millis());
+    wd_->kick_watchdog(curr_time);
 }

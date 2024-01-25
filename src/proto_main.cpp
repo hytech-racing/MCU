@@ -6,13 +6,13 @@
 #include "FlexCAN_T4.h"
 // #include "HyTech_CAN.h"
 
-#include "ADC_SPI.h"
+// #include "ADC_SPI.h"
 // #include "MessageHandler.h"
 #include "MCUInterface.h"
 #include "AMSInterface.h"
 #include "WatchdogInterface.h"
-#include "DashboardInterface.h"
-#include "InverterInterface.h"
+// #include "DashboardInterface.h"
+// #include "InverterInterface.h"
 #include "TelemetryInterface.h"
 
 #include "SafetySystem.h"
@@ -44,8 +44,8 @@ CAN_message_t msg;
 AMSInterface ams_interface;
 MCUInterface main_ecu;
 WatchdogInterface wd_interface;
-DashboardInterface dashboard;
-InverterInterface inv_interface[4];
+// DashboardInterface dashboard;
+// InverterInterface inv_interface[4];
 TelemetryInterface telem_interface;
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -54,6 +54,14 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 void init_all_CAN();
 void init_all_CAN_og();
 void dispatch_all_CAN();
+void dispatch_inv_CAN();
+void dispatch_telem_CAN();
+void parse_inv_CAN_message(const CAN_message_t &RX_msg);
+void parse_telem_CAN_message(const CAN_message_t &RX_msg);
+void update_all_CAN();
+void update_CAN_mcu();
+void update_CAN_telemetry();
+
 void send_CAN_1Hz();
 void send_CAN_10Hz();
 void send_CAN_20Hz();
@@ -61,13 +69,16 @@ void send_CAN_50Hz();
 
 void setup() {
 
+    /* Record system time */
+    unsigned long curr_time = millis();
+
     /* Initialize CAN communication */
     init_all_CAN();
 
     /* Initialize interface */
     main_ecu.init();        // mcu_status_init()
 
-    wd_interface.init();    // pinMode(WD_INPUT)
+    wd_interface.init(curr_time);    // pinMode(WD_INPUT)
     ams_interface.init();   // pinMode(SW_OK)
 
     /* Initialize system */
@@ -79,6 +90,9 @@ void setup() {
 }
 
 void loop() {
+
+    /* Record system time */
+    unsigned long curr_time = millis();
 
     /* Interfaaces retrieve values */
     // Distribute incoming CAN messages
@@ -92,7 +106,7 @@ void loop() {
     update_all_CAN();
 
     /* Software state monitoring */
-    safety_system.software_shutdown();
+    safety_system.software_shutdown(curr_time);
 }
 
 void init_all_CAN() {
@@ -131,38 +145,38 @@ void init_all_CAN_og() {
     delay(500);
 }
 
-void dispatch_all_CAN(AllMsgs &received_can_msgs) {
+void dispatch_all_CAN() {
     dispatch_inv_CAN();
-    dispatch_telem_CAN()
+    dispatch_telem_CAN();
 }
 
 void dispatch_inv_CAN() {
-    while (CAN2_rxBuffer.available())
-    {
-        CAN_message_t recvd_msg;
-        uint8_t buf[sizeof(CAN_message_t)];
-        CAN2_rxBuffer.pop_front(buf, sizeof(CAN_message_t));
-        memmove(&recvd_msg, buf, sizeof(recvd_msg));
-        switch (recvd_msg.id)
-        {
-        // Motor status
-        case ID_MC1_STATUS:    inv_interface[0].retrieve_status_CAN(recvd_msg);    break;
-        case ID_MC2_STATUS:    inv_interface[1].retrieve_status_CAN(recvd_msg);    break;
-        case ID_MC3_STATUS:    inv_interface[2].retrieve_status_CAN(recvd_msg);    break;
-        case ID_MC3_STATUS:    inv_interface[3].retrieve_status_CAN(recvd_msg);    break;
-        // Motor temperature
-        case ID_MC1_TEMPS:     inv_interface[0].retrieve_status_CAN(recvd_msg);    break;
-        case ID_MC2_TEMPS:     inv_interface[1].retrieve_status_CAN(recvd_msg);    break;
-        case ID_MC3_TEMPS:     inv_interface[2].retrieve_status_CAN(recvd_msg);    break;
-        case ID_MC4_TEMPS:     inv_interface[3].retrieve_status_CAN(recvd_msg);    break;
-        // Motor energy
-        case ID_MC1_ENERGY:    inv_interface[0].retrieve_energy_CAN(recvd_msg);    break;
-        case ID_MC2_ENERGY:    inv_interface[1].retrieve_energy_CAN(recvd_msg);    break;
-        case ID_MC3_ENERGY:    inv_interface[2].retrieve_energy_CAN(recvd_msg);    break;
-        case ID_MC4_ENERGY:    inv_interface[3].retrieve_energy_CAN(recvd_msg);    break;
-        default:               break;
-        }
-    }
+    // while (CAN2_rxBuffer.available())
+    // {
+    //     CAN_message_t recvd_msg;
+    //     uint8_t buf[sizeof(CAN_message_t)];
+    //     CAN2_rxBuffer.pop_front(buf, sizeof(CAN_message_t));
+    //     memmove(&recvd_msg, buf, sizeof(recvd_msg));
+    //     switch (recvd_msg.id)
+    //     {
+    //     // Motor status
+    //     case ID_MC1_STATUS:    inv_interface[0].retrieve_status_CAN(recvd_msg);    break;
+    //     case ID_MC2_STATUS:    inv_interface[1].retrieve_status_CAN(recvd_msg);    break;
+    //     case ID_MC3_STATUS:    inv_interface[2].retrieve_status_CAN(recvd_msg);    break;
+    //     case ID_MC3_STATUS:    inv_interface[3].retrieve_status_CAN(recvd_msg);    break;
+    //     // Motor temperature
+    //     case ID_MC1_TEMPS:     inv_interface[0].retrieve_status_CAN(recvd_msg);    break;
+    //     case ID_MC2_TEMPS:     inv_interface[1].retrieve_status_CAN(recvd_msg);    break;
+    //     case ID_MC3_TEMPS:     inv_interface[2].retrieve_status_CAN(recvd_msg);    break;
+    //     case ID_MC4_TEMPS:     inv_interface[3].retrieve_status_CAN(recvd_msg);    break;
+    //     // Motor energy
+    //     case ID_MC1_ENERGY:    inv_interface[0].retrieve_energy_CAN(recvd_msg);    break;
+    //     case ID_MC2_ENERGY:    inv_interface[1].retrieve_energy_CAN(recvd_msg);    break;
+    //     case ID_MC3_ENERGY:    inv_interface[2].retrieve_energy_CAN(recvd_msg);    break;
+    //     case ID_MC4_ENERGY:    inv_interface[3].retrieve_energy_CAN(recvd_msg);    break;
+    //     default:               break;
+    //     }
+    // }
 }
 
 void dispatch_telem_CAN() {
@@ -188,9 +202,9 @@ void dispatch_telem_CAN() {
             ams_interface.retrieve_voltage_CAN(recvd_msg);
             break;
         // Dashboard status
-        case ID_DASHBOARD_STATUS:
-            dashboard.retrieve_CAN(recvd_msg);
-            break;
+        // case ID_DASHBOARD_STATUS:
+            // dashboard.retrieve_CAN(recvd_msg);
+            // break;
         default:
             break;
         }
@@ -198,25 +212,25 @@ void dispatch_telem_CAN() {
 }
 
 void parse_inv_CAN_message(const CAN_message_t &RX_msg) {
-    CAN_message_t rx_msg = RX_msg;
-    switch (rx_msg.id) {
-    // Motor status
-    case ID_MC1_STATUS:    inv_interface[0].retrieve_status_CAN(rx_msg);    break;
-    case ID_MC2_STATUS:    inv_interface[1].retrieve_status_CAN(rx_msg);    break;
-    case ID_MC3_STATUS:    inv_interface[2].retrieve_status_CAN(rx_msg);    break;
-    case ID_MC3_STATUS:    inv_interface[3].retrieve_status_CAN(rx_msg);    break;
-    // Motor temperature
-    case ID_MC1_TEMPS:     inv_interface[0].retrieve_status_CAN(rx_msg);    break;
-    case ID_MC2_TEMPS:     inv_interface[1].retrieve_status_CAN(rx_msg);    break;
-    case ID_MC3_TEMPS:     inv_interface[2].retrieve_status_CAN(rx_msg);    break;
-    case ID_MC4_TEMPS:     inv_interface[3].retrieve_status_CAN(rx_msg);    break;
-    // Motor energy
-    case ID_MC1_ENERGY:    inv_interface[0].retrieve_energy_CAN(rx_msg);    break;
-    case ID_MC2_ENERGY:    inv_interface[1].retrieve_energy_CAN(rx_msg);    break;
-    case ID_MC3_ENERGY:    inv_interface[2].retrieve_energy_CAN(rx_msg);    break;
-    case ID_MC4_ENERGY:    inv_interface[3].retrieve_energy_CAN(rx_msg);    break;
-    default:               break;
-  }
+//     CAN_message_t rx_msg = RX_msg;
+//     switch (rx_msg.id) {
+//     // Motor status
+//     case ID_MC1_STATUS:    inv_interface[0].retrieve_status_CAN(rx_msg);    break;
+//     case ID_MC2_STATUS:    inv_interface[1].retrieve_status_CAN(rx_msg);    break;
+//     case ID_MC3_STATUS:    inv_interface[2].retrieve_status_CAN(rx_msg);    break;
+//     case ID_MC3_STATUS:    inv_interface[3].retrieve_status_CAN(rx_msg);    break;
+//     // Motor temperature
+//     case ID_MC1_TEMPS:     inv_interface[0].retrieve_status_CAN(rx_msg);    break;
+//     case ID_MC2_TEMPS:     inv_interface[1].retrieve_status_CAN(rx_msg);    break;
+//     case ID_MC3_TEMPS:     inv_interface[2].retrieve_status_CAN(rx_msg);    break;
+//     case ID_MC4_TEMPS:     inv_interface[3].retrieve_status_CAN(rx_msg);    break;
+//     // Motor energy
+//     case ID_MC1_ENERGY:    inv_interface[0].retrieve_energy_CAN(rx_msg);    break;
+//     case ID_MC2_ENERGY:    inv_interface[1].retrieve_energy_CAN(rx_msg);    break;
+//     case ID_MC3_ENERGY:    inv_interface[2].retrieve_energy_CAN(rx_msg);    break;
+//     case ID_MC4_ENERGY:    inv_interface[3].retrieve_energy_CAN(rx_msg);    break;
+//     default:               break;
+//   }
 }
 
 void parse_telem_CAN_message(const CAN_message_t &RX_msg) {
@@ -237,9 +251,9 @@ void parse_telem_CAN_message(const CAN_message_t &RX_msg) {
         ams_interface.retrieve_voltage_CAN(rx_msg);
         break;
     // Dashboard status
-    case ID_DASHBOARD_STATUS:
-        dashboard.retrieve_CAN(rx_msg);
-        break;
+    // case ID_DASHBOARD_STATUS:
+        // dashboard.retrieve_CAN(rx_msg);
+        // break;
     default:
         break;
     }
@@ -247,7 +261,7 @@ void parse_telem_CAN_message(const CAN_message_t &RX_msg) {
 
 /* Hardware timer (?) */
 void send_CAN_1Hz() {
-    CAN_message_t msg;
+    // CAN_message_t msg;
     ams_interface.send_CAN_bms_coulomb_counts(msg);
     TELEM_CAN.write(msg);
 }
@@ -266,10 +280,10 @@ void send_CAN_20Hz() {
 }
 
 void send_CAN_50Hz() {
-    for (int i = 0; i < 4; i++) {
-        inv_interface[i].send_CAN_inverter_setpoints(msg);
-        TELEM_CAN.write(msg);
-    }
+    // for (int i = 0; i < 4; i++) {
+    //     inv_interface[i].send_CAN_inverter_setpoints(msg);
+    //     TELEM_CAN.write(msg);
+    // }
 
     telem_interface.send_CAN_mcu_load_cells(msg);
     TELEM_CAN.write(msg);
@@ -286,22 +300,22 @@ void update_all_CAN() {
 
 void update_CAN_mcu() {
     // State machine
-    update_mcu_status_CAN_fsm();
+    main_ecu.update_mcu_status_CAN_fsm();
     // Systems
-    update_mcu_status_CAN_drivetrain();
-    update_mcu_status_CAN_safety();
-    update_mcu_status_CAN_buzzer();
-    update_mcu_status_CAN_pedals();
+    main_ecu.update_mcu_status_CAN_drivetrain();
+    main_ecu.update_mcu_status_CAN_safety();
+    main_ecu.update_mcu_status_CAN_buzzer();
+    main_ecu.update_mcu_status_CAN_pedals();
     // Interfaces
-    update_mcu_status_CAN_ams();
-    update_mcu_status_CAN_dashboard();
+    main_ecu.update_mcu_status_CAN_ams();
+    main_ecu.update_mcu_status_CAN_dashboard();
 }
 
 void update_CAN_telemetry() {
     // Interfaces
-    update_pedal_readings_CAN_msg();
-    update_load_cells_CAN_msg();
-    update_potentiometers_CAN_msg();
-    update_analog_readings_CAN_msg();
+    telem_interface.update_pedal_readings_CAN_msg();
+    telem_interface.update_load_cells_CAN_msg();
+    telem_interface.update_potentiometers_CAN_msg();
+    telem_interface.update_analog_readings_CAN_msg();
 }
 

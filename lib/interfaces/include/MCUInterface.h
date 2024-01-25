@@ -2,8 +2,8 @@
 #define __MCU_INTERFACE_H__
 
 #include <stdint.h>
-// #include "FlexCAN_T4.h"
-// #include "HyTech_CAN.h"
+#include "FlexCAN_T4.h"
+#include "HyTech_CAN.h"
 
 #define BMS_OK_READ         5   // SHDN_D_READ
 #define IMD_OK_READ         4   // SHDN_C_READ

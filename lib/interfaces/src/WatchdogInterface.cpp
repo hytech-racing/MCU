@@ -1,7 +1,8 @@
 #include "WatchdogInterface.h"
 
 /* Pin mode output to watchdog WD */
-void WatchdogInterface::init() {
+void WatchdogInterface::init(unsigned long curr_time) {
+    watchdog_time = curr_time;
     pinMode(WATCHDOG_INPUT, OUTPUT);
 }
 

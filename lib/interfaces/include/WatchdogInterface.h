@@ -1,6 +1,9 @@
 #ifndef __WATCHDOG_INTERFACE_H__
 #define __WATCHDOG_INTERFACE_H__
 
+#include "FlexCAN_T4.h"
+#include "HyTech_CAN.h"
+
 #define WATCHDOG_INPUT  32
 
 #define WATCHDOG_KICK_INTERVAL  7    // milliseconds
@@ -8,10 +11,11 @@
 class WatchdogInterface
 {
 public:
-    WatchdogInterface(): watchdog_time(millis()), watchdog_state(HIGH) {};
+    WatchdogInterface() = default;
+    // WatchdogInterface(): watchdog_state(HIGH) {};
 
     /* Initialize interface pin mode */
-    void init();
+    void init(unsigned long curr_time);
 
     /* Write to Main ECU */
     // Initialize output value
