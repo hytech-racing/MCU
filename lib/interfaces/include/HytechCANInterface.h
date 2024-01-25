@@ -6,6 +6,14 @@
 
 #include "HyTech_CAN.h"
 
+struct CANInterfaces
+{
+    InverterInterface *front_left_inv;
+    InverterInterface *front_right_inv;
+    InverterInterface *rear_left_inv;
+    InverterInterface *rear_right_inv;
+};
+
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
 // the processing of the receive queue happens on every iteration of the loop
 // in the processing of the receive call, all of the messages received get de-serialized and passed to their interfaces
@@ -31,8 +39,13 @@ void on_can2_receive(const CAN_message_t &msg);
 void on_can3_receive(const CAN_message_t &msg);
 
 // reads from receive buffer updating the current message frame from a specific receive buffer
+// TODO ensure that all of the repeated interfaces are at the correct IDs
+// FL = MC1
+// FR = MC2
+// RL = MC3
+// RR = MC4
 template <typename BufferType>
-void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer, InverterInterface * front_left_inv)
+void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer, const CANInterfaces &interfaces)
 {
 
     while (rx_buffer.available())
@@ -43,45 +56,63 @@ void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer, 
         memmove(&recvd_msg, buf, sizeof(recvd_msg));
         switch (recvd_msg.id)
         {
+
+            // MC status msgs
         case ID_MC1_STATUS:
-            front_left_inv->receive_status_msg(recvd_msg); 
+            interfaces.front_left_inv->receive_status_msg(recvd_msg);
             break;
         case ID_MC2_STATUS:
-            std::get<0>(current_message_frame.mc_2_status) = true;
-            std::get<1>(current_message_frame.mc_2_status).load(recvd_msg.buf);
+            interfaces.front_right_inv->receive_status_msg(recvd_msg);
             break;
+        case ID_MC3_STATUS:
+            interfaces.rear_left_inv->receive_status_msg(recvd_msg);
+            break;
+        case ID_MC4_STATUS:
+            interfaces.rear_right_inv->receive_status_msg(recvd_msg);
+            break;
+
+            // MC temp msgs
         case ID_MC1_TEMPS:
-            std::get<0>(current_message_frame.mc_1_temps) = true;
-            std::get<1>(current_message_frame.mc_1_temps).load(recvd_msg.buf);
+            interfaces.front_left_inv->receive_temp_msg(recvd_msg);
             break;
         case ID_MC2_TEMPS:
-            std::get<0>(current_message_frame.mc_2_temps) = true;
-            std::get<1>(current_message_frame.mc_2_temps).load(recvd_msg.buf);
+            interfaces.front_right_inv->receive_temp_msg(recvd_msg);
             break;
+        case ID_MC3_TEMPS:
+            interfaces.rear_left_inv->receive_temp_msg(recvd_msg);
+            break;
+        case ID_MC4_TEMPS:
+            interfaces.rear_right_inv->receive_temp_msg(recvd_msg);
+            break;
+
+            // MC energy msgs
         case ID_MC1_ENERGY:
-            std::get<0>(current_message_frame.mc_1_energy) = true;
-            std::get<1>(current_message_frame.mc_1_energy).load(recvd_msg.buf);
+            interfaces.front_left_inv->receive_energy_msg(recvd_msg);
             break;
         case ID_MC2_ENERGY:
-            std::get<0>(current_message_frame.mc_2_energy) = true;
-            std::get<1>(current_message_frame.mc_2_energy).load(recvd_msg.buf);
+            interfaces.front_right_inv->receive_energy_msg(recvd_msg);
+            break;
+        case ID_MC3_ENERGY:
+            interfaces.rear_left_inv->receive_energy_msg(recvd_msg);
+            break;
+        case ID_MC4_ENERGY:
+            interfaces.rear_right_inv->receive_energy_msg(recvd_msg);
             break;
         }
     }
 }
 
 template <typename bufferType>
-void send_all_CAN_msgs(bufferType& buffer, FlexCAN_T4_Base * can_interface)
+void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
 {
     CAN_message_t msg;
-    while(buffer.available())
+    while (buffer.available())
     {
         CAN_message_t msg;
         uint8_t buf[sizeof(CAN_message_t)];
         buffer.pop_front(buf, sizeof(CAN_message_t));
         memmove(&msg, buf, sizeof(msg));
         can_interface->write(msg);
-
     }
 }
 
