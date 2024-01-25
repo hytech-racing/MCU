@@ -7,19 +7,13 @@
 
 // TODO will need an interface update to handle the speed feedback from inverters
 // TODO update to using better method for keeping track of which inverter is which (named map I think would be good)
+
 struct DrivetrainCommand
 { 
-    float torque_lf;
-    float speed_lf;
-
-    float torque_rf;
-    float speed_rf;
-    
-    float torque_lr;
-    float speed_lr;
-    
-    float torque_rr;
-    float speed_rr;
+    InverterCommand left_front_inverter_cmd;
+    InverterCommand right_front_inverter_cmd;
+    InverterCommand left_rear_inverter_cmd;
+    InverterCommand right_rear_inverter_cmd;
 };
 
 template<typename InverterType>

@@ -49,9 +49,18 @@ template <typename message_queue>
 void InverterInterface<message_queue>::handle_command(const InverterCommand &command)
 {
     MC_setpoints_command mc_setpoints_command;
-    mc_setpoints_command.set_speed_setpoint(command.speed_setpoint);
-    mc_setpoints_command.set_pos_torque_limit(command.positive_torque_limit);
-    mc_setpoints_command.set_neg_torque_limit(command.negative_torque_limit);
+    // TODO handle the correct conversion to the over the wire data from real-world data type
+    mc_setpoints_command.set_speed_setpoint(command.speed_setpoint_rpm);
+
+    if(command.torque_setpoint_nm < 0)
+    {
+        mc_setpoints_command.set_neg_torque_limit(abs(command.torque_setpoint_nm));
+        mc_setpoints_command.set_pos_torque_limit(0);
+    } else {
+        mc_setpoints_command.set_neg_torque_limit(0);
+        mc_setpoints_command.set_pos_torque_limit(command.torque_setpoint_nm);
+    }
+    
 
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }

@@ -12,10 +12,8 @@
 
 struct InverterCommand
 {
-
-    int16_t speed_setpoint;
-    int16_t positive_torque_limit;
-    int16_t negative_torque_limit;
+    float torque_setpoint_nm;
+    float speed_setpoint_rpm;
 };
 template <typename message_queue>
 class InverterInterface

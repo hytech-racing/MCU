@@ -36,6 +36,17 @@ void DrivetrainSystem<InverterType>::command_drivetrain_no_torque()
     }
 }
 
+template <typename InverterType>
+void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand& data)
+{
+
+    inverters_[0]->handle_command(data.left_front_inverter_cmd);
+    inverters_[1]->handle_command(data.right_front_inverter_cmd);
+    inverters_[2]->handle_command(data.left_rear_inverter_cmd);
+    inverters_[3]->handle_command(data.right_rear_inverter_cmd);
+    
+}
+
 // feedback functions
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::hv_over_threshold_on_drivetrain()
