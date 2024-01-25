@@ -77,6 +77,8 @@ public:
     void read(const Dashboard_status &msg);
 
     DialMode_s getDialMode();
+    
+    bool safetySystemOK();
 
     bool start_button_pressed();
     bool specialButtonPressed();
@@ -87,24 +89,21 @@ public:
     bool nightModeButtonPressed();
     bool torqueVectoringOffButtonPressed();
 
-    bool safetySystemOK();
-
-
     void soundBuzzer();
 
-    void amsLED(LEDColors_s color);
-    void imdLED(LEDColors_s color);
-    void modeLED(LEDColors_s color);
-    void mcErrorLED(LEDColors_s color);
-    void startLED(LEDColors_s color);
-    void InertiaSwitchLED(LEDColors_s color);
-    void mechanicalBrakeLED(LEDColors_s color);
-    void generalPurposeLED(LEDColors_s color);
+    // LEDs in same order as dash rev. 7 placement
     void botsLED(LEDColors_s color);
-    void cockpitBrbLED(LEDColors_s color);
-    void critChargeLED(LEDColors_s color);
-    void glvLED(LEDColors_s color);
     void launchControlLED(LEDColors_s color);
+    void modeLED(LEDColors_s color);
+    void mechanicalBrakeLED(LEDColors_s color);
+    void cockpitBrbLED(LEDColors_s color);
+    void InertiaSwitchLED(LEDColors_s color);
+    void glvLED(LEDColors_s color);
+    void critChargeLED(LEDColors_s color);
+    void startLED(LEDColors_s color);
+    void mcErrorLED(LEDColors_s color);
+    void imdLED(LEDColors_s color);
+    void amsLED(LEDColors_s color);
 };
 
 #endif /* DASHBOARDINTERFACE */
