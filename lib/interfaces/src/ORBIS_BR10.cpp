@@ -62,7 +62,8 @@
 
 //     std::tuple<float, upperSteeringStatus_s> getAngleAndStatus()
 //     {
-//         std::tuple<float, bool> conversion = channel.convert();
+//         // TODO @mikhail fix return
+//         // std::tuple<float, bool> conversion = channel.convert();
 //         upperSteeringStatus_s returnStatus;
 //         if (status & (ORBIS_BR10_BITMASK_GENERAL_ERROR | ORBIS_BR10_BITMASK_DETAILED_COUNTER_ERROR))
 //         {
