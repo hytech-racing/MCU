@@ -7,12 +7,15 @@
 #include "HyTech_CAN.h"
 
 #include "InverterInterface.h"
+
+
+template <typename circular_buffer>
 struct CANInterfaces
 {
-    InverterInterface *front_left_inv;
-    InverterInterface *front_right_inv;
-    InverterInterface *rear_left_inv;
-    InverterInterface *rear_right_inv;
+    InverterInterface<circular_buffer> *front_left_inv;
+    InverterInterface<circular_buffer> *front_right_inv;
+    InverterInterface<circular_buffer> *rear_left_inv;
+    InverterInterface<circular_buffer> *rear_right_inv;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
@@ -45,8 +48,8 @@ void on_can3_receive(const CAN_message_t &msg);
 // FR = MC2
 // RL = MC3
 // RR = MC4
-template <typename BufferType>
-void process_ring_buffer(BufferType &rx_buffer, const CANInterfaces &interfaces)
+template <typename BufferType, typename InterfaceType>
+void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
 {
 
     while (rx_buffer.available())

@@ -30,9 +30,9 @@ public:
     uint32_t get_id() { return can_id_; };
 
     // receive functions
-    void receive_energy_msg(const CAN_message_t &msg);
-    void receive_status_msg(const CAN_message_t &msg);
-    void receive_temp_msg(const CAN_message_t &msg);
+    void receive_energy_msg(CAN_message_t &msg);
+    void receive_status_msg(CAN_message_t &msg);
+    void receive_temp_msg(CAN_message_t &msg);
 
     // send msg functions
     void request_enable_hv();

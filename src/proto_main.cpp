@@ -10,8 +10,6 @@
 #include "MessageHandler.h"
 #include "DrivetrainSystem.h"
 
-// #include "CircularBuffer.h"
-#include "HyTechCANmsg.h"
 #include "HytechCANInterface.h"
 
 using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
@@ -29,10 +27,10 @@ InverterInterfaceType fr_inv(&buffer, 69);
 InverterInterfaceType rl_inv(&buffer, 69);
 InverterInterfaceType rr_inv(&buffer, 69);
 
-CANInterfaces can_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv};
+CANInterfaces<CircularBufferType> can_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv};
 
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
-auto drivetrain = DrivetrainSystemType({&lf_inv, &rf_inv, &lr_inv, &rr_inv}, 5000);
+auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, 5000);
 
 MCUStateMachine<DrivetrainSystemType> state_machine(&buzzer, &drivetrain, &dash_interface);
 
