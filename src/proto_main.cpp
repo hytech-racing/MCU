@@ -23,20 +23,20 @@ BuzzerController buzzer(500);
 
 DashboardInterface dash_interface;
 
-InverterInterfaceType lf_inv(&buffer, 69);
-InverterInterfaceType rf_inv(&buffer, 69);
+InverterInterfaceType fl_inv(&buffer, 69);
+InverterInterfaceType fr_inv(&buffer, 69);
 
-InverterInterfaceType lr_inv(&buffer, 69);
+InverterInterfaceType rl_inv(&buffer, 69);
 InverterInterfaceType rr_inv(&buffer, 69);
 
-using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
+CANInterfaces can_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv};
 
+using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&lf_inv, &rf_inv, &lr_inv, &rr_inv}, 5000);
+
 MCUStateMachine<DrivetrainSystemType> state_machine(&buzzer, &drivetrain, &dash_interface);
 
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> FRONT_INV_CAN;
-// CAN_message_t msg;
-// MessageHandler<FlexCAN_T4_Base, CAN_message_t> msg_writer(&FRONT_INV_CAN, &msg, 100, millis());
 
 void setup()
 {
@@ -52,13 +52,14 @@ void setup()
 
 void loop()
 {
-    AllMsgs received_can_msgs;
-    process_ring_buffer(received_can_msgs, CAN1_rxBuffer);
-    process_ring_buffer(received_can_msgs, CAN2_rxBuffer);
-    process_ring_buffer(received_can_msgs, CAN3_rxBuffer);
+
+    process_ring_buffer(CAN1_rxBuffer, can_interfaces);
+    process_ring_buffer(CAN2_rxBuffer, can_interfaces);
+    process_ring_buffer(CAN3_rxBuffer, can_interfaces);
 
     // msg_writer.handle_sending(millis());
     // msg_writer.test();
     state_machine.get_state();
     send_all_CAN_msgs(buffer, &FRONT_INV_CAN);
+
 }

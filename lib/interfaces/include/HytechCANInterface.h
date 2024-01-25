@@ -6,6 +6,7 @@
 
 #include "HyTech_CAN.h"
 
+#include "InverterInterface.h"
 struct CANInterfaces
 {
     InverterInterface *front_left_inv;
@@ -45,7 +46,7 @@ void on_can3_receive(const CAN_message_t &msg);
 // RL = MC3
 // RR = MC4
 template <typename BufferType>
-void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer, const CANInterfaces &interfaces)
+void process_ring_buffer(BufferType &rx_buffer, const CANInterfaces &interfaces)
 {
 
     while (rx_buffer.available())

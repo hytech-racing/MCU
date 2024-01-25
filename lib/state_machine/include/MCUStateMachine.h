@@ -2,7 +2,6 @@
 #define __MCU_STATE_MACHINE__
 
 #include "Logger.h"
-#include "InverterSystem.h"
 #include "PedalsSystem.h"
 #include "DrivetrainSystem.h"
 #include "Buzzer.h"
