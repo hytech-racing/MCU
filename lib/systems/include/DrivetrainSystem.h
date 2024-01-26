@@ -4,29 +4,29 @@
 #include "InverterInterface.h"
 #include <array>
 
+
+// TODO will need an interface update to handle the speed feedback from inverters
+// TODO update to using better method for keeping track of which inverter is which (named map I think would be good)
+
 struct DrivetrainCommand
 { 
-    float torque_lf;
-    float speed_lf;
-
-    float torque_rf;
-    float speed_rf;
-    
-    float torque_lr;
-    float speed_lr;
-    
-    float torque_rr;
-    float speed_rr;
+    InverterCommand left_front_inverter_cmd;
+    InverterCommand right_front_inverter_cmd;
+    InverterCommand left_rear_inverter_cmd;
+    InverterCommand right_rear_inverter_cmd;
 };
 
+template<typename InverterType>
 class DrivetrainSystem
 {
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterInterface *, 4> &inverters, int init_time_limit_ms )
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms )
         : inverters_(inverters),init_time_limit_ms_(init_time_limit_ms)
     {
+
+        // TODO set min_hv_voltage_
     }
 
     // startup phase 1
@@ -56,12 +56,12 @@ public:
     void command_drivetrain(const DrivetrainCommand& data);
 private:
 
-
-    std::array<InverterInterface *, 4> inverters_;
+    uint16_t min_hv_voltage_;
+    std::array<InverterType*, 4> inverters_;
     int init_time_limit_ms_;
     unsigned long drivetrain_initialization_phase_start_time_;
     
 };
 
-
+#include "DrivetrainSystem.tpp"
 #endif /* DRIVETRAINSYSTEM */

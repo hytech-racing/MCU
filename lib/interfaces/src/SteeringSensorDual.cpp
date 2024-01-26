@@ -25,29 +25,31 @@ public:
 // Functions
     std::tuple<float, SteeringStatus_s> getSteeringAngle()
     {
-        auto [primaryAngle, primaryStatus] = primarySensor->getAngleAndStatus();
-        auto [secondaryAngle, secondaryStatus] = secondarySensor->convert();
+        // structured bindings arent available yet TODO @mikail
+        // auto [primaryAngle, primaryStatus] = primarySensor->getAngleAndStatus();
+        // auto [secondaryAngle, secondaryStatus] = secondarySensor->convert();
 
         // Both sensors are nominal
-        if ((primaryStatus == UPPER_STEERING_NOMINAL) && (secondaryStatus == ANALOG_SENSOR_GOOD))
-        {
-            return {primaryAngle, STEERING_NOMINAL};
-        }
+        // TODO @mikhail pls fix these enums
+        // if ((primaryStatus == UPPER_STEERING_NOMINAL) && (secondaryStatus == ANALOG_SENSOR_GOOD))
+        // {
+        //     return {primaryAngle, STEERING_NOMINAL};
+        // }
 
-        // One or both sensors are marginal
-        // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
-        if ((primaryStatus == UPPER_STEERING_MARGINAL)
-            || (secondaryStatus == ANALOG_SENSOR_CLAMPED)
-            || ((std::abs(primaryAngle - secondaryAngle) > STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryAngle - secondaryAngle) < STEERING_DIVERGENCE_ERROR_THRESHOLD)))
-        {
-            return {primaryAngle, STEERING_MARGINAL};
-        }
+        // // One or both sensors are marginal
+        // // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
+        // if ((primaryStatus == UPPER_STEERING_MARGINAL)
+        //     || (secondaryStatus == ANALOG_SENSOR_CLAMPED)
+        //     || ((std::abs(primaryAngle - secondaryAngle) > STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryAngle - secondaryAngle) < STEERING_DIVERGENCE_ERROR_THRESHOLD)))
+        // {
+        //     return {primaryAngle, STEERING_MARGINAL};
+        // }
 
-        // Upper steering sensor reports error, lower sensor is nominal
-        if ((primaryStatus == UPPER_STEERING_ERROR) && (secondaryStatus == ANALOG_SENSOR_GOOD))
-        {
-            return {secondaryAngle, STEERING_DEGRADED};
-        }
+        // // Upper steering sensor reports error, lower sensor is nominal
+        // if ((primaryStatus == UPPER_STEERING_ERROR) && (secondaryStatus == ANALOG_SENSOR_GOOD))
+        // {
+        //     return {secondaryAngle, STEERING_DEGRADED};
+        // }
 
         // Fall through case
         // Complete failure of steering sensing

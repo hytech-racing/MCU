@@ -1,5 +1,5 @@
-#ifndef __DASHBOARDINTERFACE_H__
-#define __DASHBOARDINTERFACE_H__
+#ifndef DASHBOARDINTERFACE
+#define DASHBOARDINTERFACE
 
 #include "Dashboard_status.h"
 
@@ -47,7 +47,7 @@ struct DashLEDs_s
     uint8_t crit_charge;
     uint8_t glv;
     uint8_t launch_control;
-}
+};
 
 struct DashComponentInterface
 {
@@ -69,10 +69,10 @@ class DashboardInterface
 {
 private:
 
-    DashboardInterface data;
+    
 
 public:
-    Dashboard(){};
+    DashboardInterface(){}
 
     void read(const Dashboard_status &msg);
 
@@ -80,7 +80,7 @@ public:
     
     bool safetySystemOK();
 
-    bool startButtonPressed();
+    bool start_button_pressed();
     bool specialButtonPressed();
     bool torqueButtonPressed();
     bool inverterResetButtonPressed();
@@ -106,4 +106,4 @@ public:
     void amsLED(LEDColors_s color);
 };
 
-#endif /* __DASHBOARDINTERFACE_H__ */
+#endif /* DASHBOARDINTERFACE */

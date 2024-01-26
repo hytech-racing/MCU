@@ -4,7 +4,7 @@
 #include <tuple>
 #include <algorithm>
 
-enum AnalogSensorStatus_s
+enum class ANALOG_SENSOR_STATUS
 {
     ANALOG_SENSOR_GOOD = 0,
     ANALOG_SENSOR_CLAMPED = 1,
@@ -36,13 +36,13 @@ public:
     
 // Functions
     /// @brief Calculate sensor output and whether result is in sensor's defined bounds. DOES NOT SAMPLE.
-    /// @return Sensor's calculated output in real units, whether the result was clamped (AnalogSensorStatus_s)
-    std::tuple<float, AnalogSensorStatus_s> convert()
+    /// @return Sensor's calculated output in real units, whether the result was clamped (ANALOG_SENSOR_STATUS)
+    std::tuple<float, ANALOG_SENSOR_STATUS> convert()
     {
         lastConversion = lastSample * scale + offset;
         return {
             clamp ? std::min(std::max(lastConversion, clampLow), clampHigh) : lastConversion,
-            clamp ? ((lastConversion > clampHigh || lastConversion < clampLow) ? ANALOG_SENSOR_CLAMPED : ANALOG_SENSOR_GOOD) : ANALOG_SENSOR_GOOD
+            clamp ? ((lastConversion > clampHigh || lastConversion < clampLow) ? ANALOG_SENSOR_STATUS::ANALOG_SENSOR_CLAMPED : ANALOG_SENSOR_STATUS::ANALOG_SENSOR_GOOD) : ANALOG_SENSOR_STATUS::ANALOG_SENSOR_GOOD
         };
     }
 };

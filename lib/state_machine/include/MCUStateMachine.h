@@ -2,7 +2,6 @@
 #define __MCU_STATE_MACHINE__
 
 #include "Logger.h"
-#include "InverterSystem.h"
 #include "PedalsSystem.h"
 #include "DrivetrainSystem.h"
 #include "Buzzer.h"
@@ -24,10 +23,11 @@ enum class CAR_STATE
     READY_TO_DRIVE = 7
 };
 
+template <typename DrivetrainSystemType>
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerController *buzzer, DrivetrainSystem *drivetrain, DashboardInterface *dashboard)
+    MCUStateMachine(BuzzerController *buzzer, DrivetrainSystemType *drivetrain, DashboardInterface *dashboard)
     {
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
@@ -53,7 +53,7 @@ private:
 
     /// @brief components within state machine
     BuzzerController *buzzer_;
-    DrivetrainSystem *drivetrain_;
+    DrivetrainSystemType *drivetrain_;
     PedalsSystem *pedals_;
 
     /// @brief drivers within state machine
@@ -64,5 +64,5 @@ private:
     ControllerMux * controller_mux_;
 
 };
-
+#include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */
