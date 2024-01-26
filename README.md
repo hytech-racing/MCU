@@ -190,6 +190,6 @@ stateDiagram-v2
     rtd --> trac_sys_na: drivetrain voltage _not_ over threshold
     rtd --> trac_sys_a: drivetrain error occured
 ```
-### running the tests
+#### running the tests
 
-run the tests with `pio test -e test_env`
+This repo uses platformio testing for CI unit testing. these tests can be run locally with `pio test -e test_env`. The CI checks to ensure that the code both compiles for the teensy and ensures that the tests are passing.
