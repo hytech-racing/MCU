@@ -15,7 +15,7 @@ void tearDown(void)
 //   STR_TO_TEST = "";
 }
 
-void test_string_concat(void)
+void test_state_machine(void)
 {
 //   std::string hello = "Hello, ";
 //   std::string world = "world!";
@@ -26,7 +26,7 @@ int main(){
 //   delay(2000); // service delay
   UNITY_BEGIN();
 
-  RUN_TEST(test_string_concat);
+  RUN_TEST(test_state_machine);
   
 
   UNITY_END(); // stop unit testing

@@ -118,7 +118,6 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
         }
 
         PedalsDriverInterface data;
-        Dashboard_status dash_data;
         auto pedals_data = pedals_->evaluate_pedals(data, current_millis);
         // auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
 

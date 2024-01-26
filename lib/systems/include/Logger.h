@@ -2,8 +2,8 @@
 // allows for simple switching between std::cout and Serial.println() depending on
 // platform
 
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef LOGGER
+#define LOGGER
 
 #include <stddef.h>
 #include <stdint.h>
@@ -14,7 +14,9 @@
 #ifdef ARDUINO
 #include <Arduino.h>
 #else
+#include <cstdarg>
 #include <stdio.h>
+#include <iostream>
 #endif
 
 
@@ -22,4 +24,4 @@ void hal_print(const char s[]);
 void hal_println(const char s[]);
 void hal_printf(const char format[], ...);
 
-#endif
+#endif /* LOGGER */
