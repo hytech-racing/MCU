@@ -13,7 +13,7 @@ void tearDown(void)
 
 int main()
 {
-    //   delay(2000); // service delay
+
     UNITY_BEGIN();
 
     RUN_TEST(test_pedal_is_active);

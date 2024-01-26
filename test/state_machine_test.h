@@ -36,8 +36,6 @@ public:
 
 BuzzerController buzzer(500);
 
-
-
 DrivetrainMock drivetrain;
 
 DashboardInterface dash_interface;
