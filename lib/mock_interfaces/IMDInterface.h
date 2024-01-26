@@ -6,7 +6,8 @@ class IMDInterface
 {
     public:
         IMDInterface() {}
-        bool ok_high();
+        bool high;
+        bool ok_high() {return high;};
     private:
 };
 

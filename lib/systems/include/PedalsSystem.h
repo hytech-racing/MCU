@@ -44,7 +44,7 @@ public:
     PedalsSystemInterface evaluate_pedals(
         const PedalsDriverInterface &pedal_data, unsigned long curr_time);
     bool max_duration_of_implausibility_exceeded(unsigned long curr_time);
-    bool mech_brake_active();
+    bool mech_brake_active(const PedalsDriverInterface &data);
 
 private:
     std::tuple<int, int> linearize_accel_pedal_values_(int accel1, int accel2);

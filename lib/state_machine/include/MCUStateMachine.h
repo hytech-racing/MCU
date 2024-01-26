@@ -23,11 +23,11 @@ enum class CAR_STATE
     READY_TO_DRIVE = 7
 };
 
-template <typename DrivetrainSystemType>
+template <typename DrivetrainSysType>
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerController *buzzer, DrivetrainSystemType *drivetrain, DashboardInterface *dashboard)
+    MCUStateMachine(BuzzerController *buzzer, DrivetrainSysType *drivetrain, DashboardInterface *dashboard)
     {
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
@@ -53,7 +53,7 @@ private:
 
     /// @brief components within state machine
     BuzzerController *buzzer_;
-    DrivetrainSystemType *drivetrain_;
+    DrivetrainSysType *drivetrain_;
     PedalsSystem *pedals_;
 
     /// @brief drivers within state machine

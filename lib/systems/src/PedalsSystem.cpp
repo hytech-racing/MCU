@@ -63,6 +63,12 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(int sense_1, int sense_2, co
     }
 }
 
+// 
+bool PedalsSystem::mech_brake_active(const PedalsDriverInterface &data)
+{
+    return pedal_is_active_(data.brakePedalPosition1, data.brakePedalPosition2, brakeParams_, 0.05);
+}
+
 bool PedalsSystem::evaluate_brake_and_accel_pressed_(const PedalsDriverInterface &data)
 {
 
