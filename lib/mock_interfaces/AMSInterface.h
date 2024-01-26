@@ -1,0 +1,5 @@
+#ifndef AMSINTERFACE
+#define AMSINTERFACE
+
+
+#endif /* AMSINTERFACE */

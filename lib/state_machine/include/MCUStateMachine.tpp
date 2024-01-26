@@ -6,6 +6,7 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
     switch (get_state())
     {
     case CAR_STATE::STARTUP:
+        set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
         break;
 
     case CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE:
@@ -27,19 +28,19 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
         }
         if (dashboard_->start_button_pressed() && pedals_->mech_brake_active())
         {
-            set_state_(CAR_STATE::ENABLING_INVERTER, current_millis);
+            set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
             break;
         }
         break;
     }
 
-    case CAR_STATE::ENABLING_INVERTER:
+    case CAR_STATE::ENABLING_INVERTERS:
     {
         // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
         //      the drivetrain state machine handling
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
 
@@ -59,9 +60,11 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
             set_state_(CAR_STATE::WAITING_DRIVETRAIN_ENABLED, current_millis);
             break;
         }
-        else
+        else if(drivetrain_->inverter_init_timeout(current_millis))
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            break;
+        } else {
             break;
         }
         break;
@@ -72,9 +75,11 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
         {
             set_state_(CAR_STATE::WAITING_READY_TO_DRIVE_SOUND, current_millis);
         }
-        else
+        else if (drivetrain_->inverter_init_timeout(current_millis))
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            break;
+        } else {
             break;
         }
     }
@@ -82,9 +87,9 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
     {
         // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
         //      the drivetrain state machine handling
-        if (drivetrain_->hv_over_threshold_on_drivetrain())
+        if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
 
@@ -100,15 +105,16 @@ void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long cur
     {
         // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
         //      the drivetrain state machine handling
-        if (drivetrain_->hv_over_threshold_on_drivetrain())
+        if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
 
         if (drivetrain_->drivetrain_error_occured())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            break;
         }
 
         PedalsDriverInterface data;
@@ -163,7 +169,7 @@ void MCUStateMachine<DrivetrainSystemType>::handle_exit_logic_(CAR_STATE prev_st
         break;
     case CAR_STATE::TRACTIVE_SYSTEM_ACTIVE:
         break;
-    case CAR_STATE::ENABLING_INVERTER:
+    case CAR_STATE::ENABLING_INVERTERS:
         break;
     case CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON:
         break;
@@ -190,7 +196,7 @@ void MCUStateMachine<DrivetrainSystemType>::handle_entry_logic_(CAR_STATE new_st
     case CAR_STATE::TRACTIVE_SYSTEM_ACTIVE:
         break;
 
-    case CAR_STATE::ENABLING_INVERTER:
+    case CAR_STATE::ENABLING_INVERTERS:
     {
         break;
     }

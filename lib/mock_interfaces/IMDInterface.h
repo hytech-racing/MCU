@@ -1,0 +1,5 @@
+#ifndef IMDINTERFACE
+#define IMDINTERFACE
+
+
+#endif /* IMDINTERFACE */
