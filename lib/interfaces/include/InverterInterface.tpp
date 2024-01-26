@@ -74,6 +74,7 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     quit_dc_on_ = mc_status.get_quit_dc_on();
     quit_inverter_on_ = mc_status.get_quit_inverter_on();
     speed_ = mc_status.get_speed();
+    error_ = mc_status.get_error();
 }
 
 // TODO fill this in with the correct receiving

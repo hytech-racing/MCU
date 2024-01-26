@@ -97,3 +97,16 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled()
     }
     return true;
 }
+
+template<typename InverterType> 
+bool DrivetrainSystem<InverterType>::drivetrain_error_occured()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        if (inv_pointer->error())
+        {
+            return true;
+        }
+    }
+    return false;
+}

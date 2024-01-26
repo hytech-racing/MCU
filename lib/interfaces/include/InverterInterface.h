@@ -43,7 +43,10 @@ public:
     {
         return system_ready_;
     }
-    
+    bool error()
+    {
+        return error_;
+    }
     bool dc_quit_on()
     {
         return quit_dc_on_;
@@ -63,6 +66,7 @@ private:
     void write_cmd_msg_to_queue_(const MC_setpoints_command &msg);
     int16_t speed_;
     uint16_t dc_bus_voltage_;
+    bool error_;
     bool quit_dc_on_;
     bool quit_inverter_on_;
     bool system_ready_;
