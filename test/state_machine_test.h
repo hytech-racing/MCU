@@ -1,3 +1,5 @@
+#ifndef STATE_MACHINE_TEST
+#define STATE_MACHINE_TEST
 #include <unity.h>
 #include "MCUStateMachine.h"
 #include "PedalsSystem.h"
@@ -42,17 +44,6 @@ DashboardInterface dash_interface;
 
 MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface);
 
-void setUp(void)
-{
-    // set stuff up here
-}
-
-void tearDown(void)
-{
-    // clean stuff up here
-    //   STR_TO_TEST = "";
-}
-
 void test_state_machine_init_tick(void)
 {
     unsigned long sys_time = 1000;
@@ -61,13 +52,6 @@ void test_state_machine_init_tick(void)
     TEST_ASSERT_TRUE(state_machine.get_state() == CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
 }
 
-int main()
-{
-    //   delay(2000); // service delay
-    UNITY_BEGIN();
 
-    RUN_TEST(test_state_machine_init_tick);
-    
 
-    UNITY_END(); // stop unit testing
-}
+#endif /* STATE_MACHINE_TEST */

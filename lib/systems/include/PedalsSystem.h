@@ -37,7 +37,9 @@ struct PedalsParams
 class PedalsSystem
 {
 public:
-    PedalsSystem(){
+    PedalsSystem(const PedalsParams & accelParams, const PedalsParams & brakeParams) {
+        accelParams_ = accelParams;
+        brakeParams_ = brakeParams;
         implausibilityStartTime_ = 0;
         // Setting of min and maxes for pedals via config file
     };
