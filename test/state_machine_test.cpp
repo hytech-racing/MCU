@@ -53,10 +53,12 @@ void tearDown(void)
     //   STR_TO_TEST = "";
 }
 
-void test_state_machine(void)
+void test_state_machine_init_tick(void)
 {
     unsigned long sys_time = 1000;
+    TEST_ASSERT_TRUE(state_machine.get_state() == CAR_STATE::STARTUP);
     state_machine.tick_state_machine(sys_time);
+    TEST_ASSERT_TRUE(state_machine.get_state() == CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE);
 }
 
 int main()
@@ -64,7 +66,8 @@ int main()
     //   delay(2000); // service delay
     UNITY_BEGIN();
 
-    RUN_TEST(test_state_machine);
+    RUN_TEST(test_state_machine_init_tick);
+    
 
     UNITY_END(); // stop unit testing
 }
