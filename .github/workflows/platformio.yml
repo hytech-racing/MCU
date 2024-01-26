@@ -3,7 +3,7 @@ name: PlatformIO CI
 on: [push, pull_request]
 
 jobs:
-  test:
+  run_build_and_tests:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repository
@@ -16,6 +16,9 @@ jobs:
 
     - name: Install PlatformIO CLI
       run: pip install platformio
+    
+    - name: Run PlatformIO build for teensy
+      run: pio run -e teensy41
 
-    - name: Run PlatformIO Test
+    - name: Run Tests
       run: pio test -e test_env

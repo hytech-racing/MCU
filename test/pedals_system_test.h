@@ -12,19 +12,7 @@ author: Lucas Plant
 #include "PedalsSystem.h"
 #include <array>
 
-/*
-ToDo:
-    edit pedals system file to accommodate friend wrapper
-    methods to test:
-        constructor
-        evaluate pedals
-        linearize_accel_pedal_values_
-        evaluate pedal_implausibilities_
-        evaluate_brake_and_accel_pressed_
-        pedal_is_active
 
-
-*/
 struct PedalIsActiveTestCase
 {
     // defines input and output params
