@@ -1,7 +1,8 @@
 #ifndef __DASHBOARDINTERFACE_H__
 #define __DASHBOARDINTERFACE_H__
 
-#include "Dashboard_status.h"
+#include "DashboardInterface.h"
+#include <stdint.h>
 
 enum DialMode_e
 {
@@ -11,6 +12,13 @@ enum DialMode_e
     SKIDPAD,
     AUTOCROSS,
     ENDURANCE,
+};
+
+enum TorqueMode_e
+{
+    TORQUE_MODE_LOW = 0,
+    TORQUE_MODE_MED = 1,
+    TORQUE_MODE_HIGH = 2,
 };
 
 enum LEDColors_e
@@ -51,7 +59,8 @@ struct DashLEDs_s
 
 struct DashboardInterfaceOutput_s
 {
-    DialMode_e dial_mode;
+    DialMode_e dialMode;
+    TorqueMode_e torqueMode;
     DashButtons_s buttons;
     bool ssok;
     bool shutdown;
@@ -69,7 +78,7 @@ public:
     /// @brief Send data to the dashboard
     void set(
         bool buzzerEnabled,
-        DashLED_s LEDsState
+        DashLEDs_s LEDsState
     );
     /// @brief Get the state of the dashboard's signals
     /// @return DashboardInterfaceOutput_s

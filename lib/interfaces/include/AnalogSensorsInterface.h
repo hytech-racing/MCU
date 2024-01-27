@@ -3,6 +3,7 @@
 
 #include <tuple>
 #include <algorithm>
+#include <SysClock.h>
 
 enum AnalogSensorStatus_e
 {
@@ -52,10 +53,14 @@ public:
     AnalogConversion_s convert()
     {
         float conversion = lastSample * scale + offset;
+        float clampedConversion = std::min(std::max(conversion, clampLow), clampHigh);
+        AnalogSensorStatus_e returnStatus = ANALOG_SENSOR_GOOD;
+        if (clamp && (conversion > clampHigh || conversion < clampLow))
+            returnStatus = ANALOG_SENSOR_CLAMPED;
         return {
             lastSample,
-            clamp ? std::min(std::max(conversion, clampLow), clampHigh) : conversion,
-            clamp ? ((conversion > clampHigh || conversion < clampLow) ? ANALOG_SENSOR_CLAMPED : ANALOG_SENSOR_GOOD) : ANALOG_SENSOR_GOOD
+            clamp ? clampedConversion : conversion,
+            returnStatus
         };
     }
 };
@@ -63,23 +68,31 @@ public:
 template <int N>
 class AnalogMultiSensor
 {
+private:
 public:
 // Data
     AnalogChannel channels[N];
+    AnalogConversionPacket_s<N> data;
 // Functions
+    /// @brief Called by the main loop. Allows AnalogMultiSensor devices not owned by a single system to self-actualize sampling & conversion.
+    /// @param tick 
+    void tick(const SysTick_s &tick);
+
+    /// @brief Used by systems to get data out of this device when it's self-actualizing sampling & conversion.
+    /// @return Const ref to last data conversion.
+    const AnalogConversionPacket_s<N>& get();
+
     /// @brief Performs unit conversions on all channels
-    /// @return Packet of <N> channel conversions and statuses
-    AnalogConversionPacket_s<N> convert()
+    void convert()
     {
-        AnalogConversionPacket_s<N> packet;
         for (int i = 0; i < N; i++)
         {
-            packet.conversions[i] = channels[i].convert();
+            data.conversions[i] = channels[i].convert();
         }
-        return packet;
     }
+
     /// @brief Commands the underlying device to sample all channels and internally store the results
-    virtual void sample();
+    void sample();
 };
 
 #endif /* __ANALOGSENSOR_H__ */

@@ -71,78 +71,65 @@ void setup()
     kiloTimer.begin(kiloCallback, 1'000);
 }
 
-// do not use
 void loop()
 {
     
 }
 
-/// @brief 1hz periodic function
-void callback1()
-{
-
-}
-
-/// @brief 10hz periodic function
-void callback10()
-{
-
-}
-
 /// @brief 100hz periodic function
-void callback100()
-{
-    // Sample Interfaces
-    ADC1.sample();
-    OrbisBR10.sample();
+// void callback100()
+// {
+//     // Sample Interfaces
+//     ADC1.sample();
+//     OrbisBR10.sample();
 
-    // Convert Sensors
-    ADC1Output = ADC1.convert();
-    steeringEncoderOutput = OrbisBR10.convert();
-    dashboardOutput = dashoardInterface.convert();
+//     // Convert Sensors
+//     ADC1Output = ADC1.convert();
+//     steeringEncoderOutput = OrbisBR10.convert();
+//     dashboardOutput = dashoardInterface.convert();
 
-    // Process Systems
-    pedalsSystemOutput = pedalsSystem.evaluate(
-        &ADC1Output.conversions[MCU15_ACCEL1_CHANNEL],
-        &ADC1Output.conversions[MCU15_ACCEL2_CHANNEL],
-        &ADC1Output.conversions[MCU15_BRAKE1_CHANNEL],
-        &ADC1Output.conversions[MCU15_BRAKE2_CHANNEL]
-    );
-    steeringSystemOutput = steeringSystem.evaluate(
-        &steeringEncoderOutput,
-        &ADC1Output.conversions[MCU15_STEERING_CHANNEL]
-    );
-}
+//     // Process Systems
+//     pedalsSystemOutput = pedalsSystem.evaluate(
+//         &ADC1Output.conversions[MCU15_ACCEL1_CHANNEL],
+//         &ADC1Output.conversions[MCU15_ACCEL2_CHANNEL],
+//         &ADC1Output.conversions[MCU15_BRAKE1_CHANNEL],
+//         &ADC1Output.conversions[MCU15_BRAKE2_CHANNEL]
+//     );
+//     steeringSystemOutput = steeringSystem.evaluate(
+//         &steeringEncoderOutput,
+//         &ADC1Output.conversions[MCU15_STEERING_CHANNEL]
+//     );
+// }
 
 /// @brief 1khz primary periodic function
-void kiloCallback()
-{
-    if (!kiloBusy)
-    {
-        kiloBusy = true; // Do not allow kiloCallback to be interrupted by itself
+// void kiloCallback()
+// {
+//     if (!kiloBusy)
+//     {
+//         kiloBusy = true; // Do not allow kiloCallback to be interrupted by itself
 
-        // Do 1khz stuff here
-        AllMsgs received_can_msgs;
-        process_ring_buffer(received_can_msgs, CAN1_rxBuffer);
-        process_ring_buffer(received_can_msgs, CAN2_rxBuffer);
-        process_ring_buffer(received_can_msgs, CAN3_rxBuffer);
+//         // Do 1khz stuff here
+//         AllMsgs received_can_msgs;
+//         process_ring_buffer(received_can_msgs, CAN1_rxBuffer);
+//         process_ring_buffer(received_can_msgs, CAN2_rxBuffer);
+//         process_ring_buffer(received_can_msgs, CAN3_rxBuffer);
 
-        if(std::get<0>(received_can_msgs.dashboard_status)){
-            // dash.receive(std::get<1>(received_can_msgs.dashboard_status));
-        }
+//         if(std::get<0>(received_can_msgs.dashboard_status)){
+//             // dash.receive(std::get<1>(received_can_msgs.dashboard_status));
+//         }
         
-        msg_writer.handle_sending(millis());
-        // msg_writer.test();
-        // state_machine.get_state();
+//         msg_writer.handle_sending(millis());
+//         // msg_writer.test();
+//         // state_machine.get_state();
         
-        // Callback chain
-        if (kiloCounter % 10 == 0)
-            callback100();
-        if (kiloCounter % 100 == 0)
-            callback10();
-        if (kiloCounter % 1000 == 0)
-            callback1();
-        kiloCounter++;
-        kiloBusy = false;
-    }
-}
+//         // Callback chain
+//         if (kiloCounter % 10 == 0)
+//             callback100();
+//         if (kiloCounter % 100 == 0)
+//             callback10();
+//         if (kiloCounter % 1000 == 0)
+//             callback1();
+//         kiloCounter++;
+//         kiloBusy = false;
+//     }
+// }

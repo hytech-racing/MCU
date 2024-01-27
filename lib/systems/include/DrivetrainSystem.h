@@ -15,6 +15,7 @@ struct DrivetrainCommand_s
 
 struct DrivetrainDynamicReport_s
 {
+    float measuredPackVoltage;
     float measuredSpeeds[NUM_MOTORS];
     float measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];

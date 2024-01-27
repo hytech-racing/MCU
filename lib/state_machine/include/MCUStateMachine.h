@@ -1,6 +1,7 @@
 #ifndef __MCU_STATE_MACHINE__
 #define __MCU_STATE_MACHINE__
 
+#include "SysClock.h"
 #include "Logger.h"
 #include "InverterSystem.h"
 #include "PedalsSystem.h"
@@ -8,10 +9,10 @@
 #include "Buzzer.h"
 #include "TorqueControllerMux.h"
 
-
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 #include "IMDInterface.h"
+
 enum class CAR_STATE
 {
     STARTUP = 0,
@@ -36,7 +37,7 @@ public:
 
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
     /// @param current_millis the current millis() call
-    void tick_state_machine(unsigned long current_millis);
+    void tick_state_machine(const SysClock &sysClock);
     CAR_STATE get_state() { return current_state_; }
 
 private:

@@ -5,7 +5,7 @@ DashboardInterfaceOutput_s DashboardInterface::convert()
     return dashState;
 }
 
-void DashboardInterface::set(bool buzzerEnabled, DashLED_s LEDsState)
+void DashboardInterface::set(bool buzzerEnabled, DashLEDs_s LEDsState)
 {
 
 }

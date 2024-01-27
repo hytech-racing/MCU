@@ -1,32 +1,53 @@
 #include <SteeringSystem.h>
 
-SteeringSystemOutput_s SteeringSystem::evaluate(SteeringEncoderConversion_s* primaryConversion, AnalogConversion_s* secondaryConversion)
+void SteeringSystem::tick(const SysTick_s &tick, const AnalogConversion_s &secondaryConversion)
 {
-    // Both sensors are nominal
-    if ((primaryConversion->status == STEERING_ENCODER_NOMINAL) && (secondaryConversion->status == ANALOG_SENSOR_GOOD))
+    // System works at 100hz
+    // 1. Polls upper steering sensor
+    // 2. Computes internal state
+    if (tick.triggers.trigger100)
     {
-        return {primaryConversion->angle, STEERING_SYSTEM_NOMINAL};
-    }
+        // Poll upper steering sensor
+        primarySensor_.sample();
+        primaryConversion_ = primarySensor_.convert();
 
-    // One or both sensors are marginal
-    // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
-    if ((primaryConversion->status == STEERING_ENCODER_MARGINAL)
-        || (secondaryConversion->status == ANALOG_SENSOR_CLAMPED)
-        || ((std::abs(primaryConversion->angle - secondaryConversion->conversion) > STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryConversion->angle - secondaryConversion->conversion) < STEERING_DIVERGENCE_ERROR_THRESHOLD)))
-    {
-        return {primaryConversion->angle, STEERING_SYSTEM_MARGINAL};
-    }
+        // Compute internal state
 
-    // Upper steering sensor reports error, lower sensor is nominal
-    if ((primaryConversion->status == STEERING_ENCODER_ERROR) && (secondaryConversion->status == ANALOG_SENSOR_GOOD))
-    {
-        return {secondaryConversion->conversion, STEERING_SYSTEM_DEGRADED};
+        // Both sensors are nominal
+        if ((primaryConversion_.status == STEERING_ENCODER_NOMINAL) && (secondaryConversion.status == ANALOG_SENSOR_GOOD))
+        {
+            data_ = {
+                .angle = primaryConversion_.angle,
+                .status = STEERING_SYSTEM_NOMINAL
+            };
+        }
+        // One or both sensors are marginal
+        // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
+        else if ((primaryConversion_.status == STEERING_ENCODER_MARGINAL)
+            || (secondaryConversion.status == ANALOG_SENSOR_CLAMPED)
+            || ((std::abs(primaryConversion_.angle - secondaryConversion.conversion) > STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryConversion_.angle - secondaryConversion.conversion) < STEERING_DIVERGENCE_ERROR_THRESHOLD)))
+        {
+            data_ = {
+                .angle = primaryConversion_.angle,
+                .status = STEERING_SYSTEM_MARGINAL
+            };
+        }
+        // Upper steering sensor reports error, lower sensor is nominal
+        else if ((primaryConversion_.status == STEERING_ENCODER_ERROR) && (secondaryConversion.status == ANALOG_SENSOR_GOOD))
+        {
+            data_ = {
+                .angle = secondaryConversion.conversion,
+                .status = STEERING_SYSTEM_DEGRADED
+            };
+        }
+        // Fall through case
+        // Complete failure of steering sensing
+        else
+        {
+            data_ = {
+                .angle = 0.0,
+                .status = STEERING_SYSTEM_ERROR
+            };
+        }
     }
-
-    // Fall through case
-    // Complete failure of steering sensing
-    return {
-        .angle = 0.0, 
-        .status = STEERING_SYSTEM_ERROR,
-    };
 }

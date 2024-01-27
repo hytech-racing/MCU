@@ -22,7 +22,7 @@ enum SteeringSystemStatus_e
 };
 
 // Structs
-struct SteeringSystemOutput_s
+struct SteeringSystemData_s
 {
     float angle;
     SteeringSystemStatus_e status;
@@ -31,14 +31,26 @@ struct SteeringSystemOutput_s
 class SteeringSystem
 {
 private:
+    SteeringEncoderInterface& primarySensor_;
+    SteeringEncoderConversion_s primaryConversion_;
+    SteeringSystemData_s data_;
 public:
+    SteeringSystem(SteeringEncoderInterface &primarySensor) : primarySensor_(primarySensor) {}
+
     /// @brief Computes steering angle and status of the steering system.
     /// @param secondaryAngle The computed steering angle as reported by the secondary steering sensor.
     /// @return SteeringSystemOutput_s contains steering angle and SteeringSystemStatus_e
-    SteeringSystemOutput_s evaluate(
-        SteeringEncoderConversion_s* primaryConversion, 
-        AnalogConversion_s* secondaryConversion
+    void tick(
+        const SysTick_s &tick,
+        const AnalogConversion_s &secondaryConversion
     );
+
+    /// @brief Get a reference to the steering system's data
+    /// @return const SteeringSystemData_s&
+    const SteeringSystemData_s& getSteeringSystemData()
+    {
+        return data_;
+    }
 };
 
 #endif /* __STEERINGSYSTEM_H__ */

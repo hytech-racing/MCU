@@ -4,27 +4,27 @@
 #include "AnalogSensorsInterface.h"
 
 // Definitions
-#define MCP3208_DEFAULT_SPI_SDI 12
-#define MCP3208_DEFAULT_SPI_SDO 11
-#define MCP3208_DEFAULT_SPI_CLK 13
-#define MCP3208_DEFAULT_SPI_SPEED 2000000
-
-#define MCP3208_NUM_CHANNELS 8
+const int MCP3208_DEFAULT_SPI_SDI   = 12;
+const int MCP3208_DEFAULT_SPI_SDO   = 11;
+const int MCP3208_DEFAULT_SPI_CLK   = 13;
+const int MCP3208_DEFAULT_SPI_SPEED = 2000000;
+const int MCP3208_NUM_CHANNELS      = 8;
 
 class MCP3208 : public AnalogMultiSensor<MCP3208_NUM_CHANNELS>
 {
 private:
-    const int SPI_PIN_CS;
-    const int SPI_PIN_SDI;
-    const int SPI_PIN_SDO;
-    const int SPI_PIN_CLK;
-    const int SPI_SPEED;
+    const int spiPinCS_;
+    const int spiPinSDI_;
+    const int spiPinSDO_;
+    const int spiPinCLK_;
+    const int spiSpeed_;
 public:
 // Constructors
-    MCP3208(const int SPI_PIN_CS_, const int SPI_PIN_SDI_, const int SPI_PIN_SDO_, const int SPI_PIN_CLK_, const int SPI_SPEED_);
-    MCP3208(const int SPI_PIN_CS_);
+    MCP3208(const int spiPinCS, const int spiPinSDI, const int spiPinSDO, const int spiPinCLK, const int spiSpeed);
+    MCP3208(const int spiPinCS);
 
 // Functions
+    void tick(const SysTick_s &tick);
     void sample();
 };
 

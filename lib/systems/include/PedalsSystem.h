@@ -4,13 +4,14 @@
 #include <tuple>
 
 #include "AnalogSensorsInterface.h"
+#include <SysClock.h>
 
 // Definitions
-#define PEDALS_IMPLAUSIBLE_DURATION 100         // Implausibility must be caught within 100ms
-#define PEDALS_IMPLAUSIBLE_PERCENT 0.10         // 10% allowed deviation FSAE T.4.2.4
-#define PEDALS_MARGINAL_PERCENT 0.07            // Report pedals are marginal. Allows us to detect pedals may need recalibration
-#define PEDALS_RAW_TOO_LOW (0.5 / 5 * 4096)     // FSAE T.4.2.10 Pedals are implausible below 0.5V raw reading
-#define PEDALS_RAW_TOO_HIGH (4.5 / 5 * 4096)    // FSAE T.4.2.10 Pedals are implausible above 4.5V raw reading
+const int PEDALS_IMPLAUSIBLE_DURATION   = 100;                  // Implausibility must be caught within 100ms
+const float PEDALS_IMPLAUSIBLE_PERCENT  = 0.10;                 // 10% allowed deviation FSAE T.4.2.4
+const float PEDALS_MARGINAL_PERCENT     = 0.07;                 // Report pedals are marginal. Allows us to detect pedals may need recalibration
+const float PEDALS_RAW_TOO_LOW          = 0.5 / 5 * 4096;       // FSAE T.4.2.10 Pedals are implausible below 0.5V raw reading
+const float PEDALS_RAW_TOO_HIGH         = 4.5 / 5 * 4096;       // FSAE T.4.2.10 Pedals are implausible above 4.5V raw reading
 
 // Enums
 enum PedalsStatus_e
@@ -28,7 +29,7 @@ enum PedalsCommanded_e
     PEDALS_BOTH_PRESSED = 3,
 };
 
-struct PedalsSystemOutput_s
+struct PedalsSystemData_s
 {
     PedalsCommanded_e pedalsCommand;
     PedalsStatus_e accelStatus;
@@ -52,17 +53,18 @@ class PedalsSystem
 {
 private:
 // Data
-    PedalsSystemParameters_s parameters;
-    long implausibilityDetectedTime;
+    PedalsSystemParameters_s parameters_;
+    long implausibilityDetectedTime_;
+    PedalsSystemData_s data_;
 public:
 // Constructors
     PedalsSystem(PedalsSystemParameters_s* parametersExt)
     {
-        parameters = *parametersExt;
+        parameters_ = *parametersExt;
     }
     PedalsSystem()
     {
-        parameters = {
+        parameters_ = {
             .pedalsImplausiblePercent = PEDALS_IMPLAUSIBLE_PERCENT,
             .pedalsMarginalPercent = PEDALS_MARGINAL_PERCENT,
             .pedalsRawTooLow = PEDALS_RAW_TOO_LOW,
@@ -71,12 +73,17 @@ public:
     }
 
 // Functions
-    PedalsSystemOutput_s evaluate(
-        AnalogConversion_s* accel1,
-        AnalogConversion_s* accel2,
-        AnalogConversion_s* brake1,
-        AnalogConversion_s* brake2
+    void tick(
+        const SysTick_s &sysClock, 
+        const AnalogConversion_s &accel1, 
+        const AnalogConversion_s &accel2, 
+        const AnalogConversion_s &brake1, 
+        const AnalogConversion_s &brake2
     );
+    const PedalsSystemData_s& getPedalsSystemData()
+    {
+        return data_;
+    }
 };
 
 #endif /* __PEDALSSYSTEM_H__ */

@@ -14,11 +14,17 @@ enum TorqueControllerMode_e
     TCMUX_SAFE_MODE = 1,
 };
 
+struct TorqueMuxSelectionData_e
+{
+    TorqueControllerMode_e muxMode;
+    bool shiftAllowed; // is it safe to change mode?
+};
+
 class TorqueControllerMux
 {
 private:
-    TorqueControllerMode_e torqueCtrlMuxMode;
-    DashboardInterface* dashboardInterface;
+    TorqueControllerMode_e muxMode_;
+    DrivetrainCommand_s drivetrainCommand_;
 public:
 // Constructors
     TorqueControllerMux()
@@ -27,14 +33,14 @@ public:
     }
 // Functions
     DrivetrainCommand_s calculateDrivetrainCommand(
-        DrivetrainDynamicReport_s* drivetrainData,
-        PedalsSystemOutput_s* pedalsData,
-        SteeringSystemOutput_s* steeringData,
-        DashComponentInterface* dashboardData,
-        AnalogConversion_s* loadFLData,
-        AnalogConversion_s* loadFRData,
-        AnalogConversion_s* loadRLData,
-        AnalogConversion_s* loadRRData
+        const DrivetrainDynamicReport_s &drivetrainData,
+        const PedalsSystemData_s &pedalsData,
+        const SteeringSystemData_s &steeringData,
+        const DashboardInterface &dashboardData,
+        const AnalogConversion_s &loadFLData,
+        const AnalogConversion_s &loadFRData,
+        const AnalogConversion_s &loadRLData,
+        const AnalogConversion_s &loadRRData
     );
 };
 
