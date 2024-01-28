@@ -1,5 +1,0 @@
-#ifndef ANALOGSENSOR
-#define ANALOGSENSOR
-
-
-#endif /* ANALOGSENSOR */
