@@ -7,7 +7,6 @@ author: Lucas Plant
 
 #ifndef PEDALS_SYSTEM_TEST
 #define PEDALS_SYSTEM_TEST
-#include <unity.h>
 #include <string>
 #include "PedalsSystem.h"
 #include <array>

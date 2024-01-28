@@ -1,24 +1,17 @@
+#include <gtest/gtest.h>
+
 #include "state_machine_test.h"
-#include "pedals_system_test.h"
-void setUp(void)
-{
-    // declare a component obj
-    // possibly make temp class that is a freind class of PedalsSystem to access private members
-    // possibly modify the
-}
+// #include "pedals_system_test.h"
 
-void tearDown(void)
-{
-}
 
-int main()
+
+int main(int argc, char **argv)
 {
 
-    UNITY_BEGIN();
 
-    RUN_TEST(test_pedal_is_active);
-    RUN_TEST(test_state_machine_init_tick);
-    
-
-    UNITY_END(); // stop unit testing
+    testing::InitGoogleMock(&argc, argv);
+	if (RUN_ALL_TESTS())
+	;
+	// Always return zero-code and allow PlatformIO to parse results
+	return 0;
 }

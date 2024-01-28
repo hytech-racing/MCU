@@ -2,6 +2,7 @@
 #define __MCU_STATE_MACHINE__
 
 #include "Logger.h"
+
 #include "PedalsSystem.h"
 #include "DrivetrainSystem.h"
 #include "Buzzer.h"
@@ -27,11 +28,12 @@ template <typename DrivetrainSysType>
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerController *buzzer, DrivetrainSysType *drivetrain, DashboardInterface *dashboard)
+    MCUStateMachine(BuzzerController *buzzer, DrivetrainSysType *drivetrain, DashboardInterface *dashboard, PedalsSystem *pedals)
     {
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
         dashboard_ = dashboard;
+        pedals_ = pedals;
     }
 
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
