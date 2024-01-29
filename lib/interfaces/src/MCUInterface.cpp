@@ -201,19 +201,29 @@ void MCUInterface::update_mcu_status_CAN_pedals() {
 }
 
 /* Tick SysClock */
-void MCUInterface::tick(const SysTick_s &tick, CAN_message_t &msg) {
+void MCUInterface::tick(const SysTick_s &tick, 
+                        CAN_message_t &msg
+                        CAR_STATE fsm_state,
+                        bool inv_has_error,
+                        bool software_is_ok,
+                        // TCMux return
+                        bool buzzer_is_on,
+                        // Pedal system return
+                        bool pack_charge_is_critical,
+                        bool button_is_pressed) {
+
     if (tick.triggers.trigger10) {
         // State machine
-        update_mcu_status_CAN_fsm(CAR_STATE fsm_state);
+        update_mcu_status_CAN_fsm(fsm_state);
         // Systems
-        update_mcu_status_CAN_drivetrain(bool has_error);
-        update_mcu_status_CAN_safety(bool is_ok);
+        update_mcu_status_CAN_drivetrain(inv_has_error);
+        update_mcu_status_CAN_safety(software_is_ok);
         update_mcu_status_CAN_TCMux();
-        update_mcu_status_CAN_buzzer(bool is_on);
+        update_mcu_status_CAN_buzzer(buzzer_is_on);
         update_mcu_status_CAN_pedals();
         // Interfaces
-        update_mcu_status_CAN_ams(bool is_critical);    
-        update_mcu_status_CAN_dashboard(bool is_pressed);
+        update_mcu_status_CAN_ams(pack_charge_is_critical);    
+        update_mcu_status_CAN_dashboard(button_is_pressed);
         // Push into buffer
         send_CAN_mcu_status(msg);
     }

@@ -48,7 +48,18 @@ public:
     void send_CAN_mcu_status(CAN_message_t &msg);
 
     /* Tick SysClock to send CAN at 10Hz */
-    void tick(const SysTick_s &tick);
+    void tick(
+        const SysTick_s &tick,
+        CAN_message_t &msg
+        CAR_STATE fsm_state,
+        bool inv_has_error,
+        bool software_is_ok,
+        // TCMux return
+        bool buzzer_is_on,
+        // Pedal system return
+        bool pack_charge_is_critical,
+        bool button_is_pressed
+    );
 
 private:
     /* Private utility functions */
