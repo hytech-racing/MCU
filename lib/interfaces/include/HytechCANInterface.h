@@ -22,52 +22,29 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
-struct AllMsgs
-{
-    std::tuple<bool, MCU_status>                mcu_status = {false, MCU_status()};
-    std::tuple<bool, MCU_pedal_readings>        mcu_pedal_readings = {false, MCU_pedal_readings()};
-    std::tuple<bool, MCU_load_cells>            mcu_load_cells = {false, MCU_load_cells()};
-    std::tuple<bool, MCU_front_potentiometers>  mcu_front_potentiometers = {false, MCU_front_potentiometers()};
-    std::tuple<bool, MCU_rear_potentiometers>   mcu_rear_potentiometers = {false, MCU_rear_potentiometers()};
-    std::tuple<bool, MCU_analog_readings>       mcu_analog_readings = {false, MCU_analog_readings()};    
+// extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+//     CAN1_txBuffer;
 
-    std::tuple<bool, MC_status> mc_1_status = {false, MC_status()};
-    std::tuple<bool, MC_status> mc_2_status = {false, MC_status()};
-    std::tuple<bool, MC_status> mc_3_status = {false, MC_status()};
-    std::tuple<bool, MC_status> mc_4_status = {false, MC_status()};
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN2_txBuffer;
 
-    std::tuple<bool, MC_temps> mc_1_temps = {false, MC_temps()};
-    std::tuple<bool, MC_temps> mc_2_temps = {false, MC_temps()};
-    std::tuple<bool, MC_temps> mc_3_temps = {false, MC_temps()};
-    std::tuple<bool, MC_temps> mc_4_temps = {false, MC_temps()};
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN3_txBuffer;
 
-    std::tuple<bool, MC_energy> mc_1_energy = {false, MC_energy()};
-    std::tuple<bool, MC_energy> mc_2_energy = {false, MC_energy()};
-    std::tuple<bool, MC_energy> mc_3_energy = {false, MC_energy()};
-    std::tuple<bool, MC_energy> mc_4_energy = {false, MC_energy()};
-
-    // std::tuple<bool, MC_setpoints_command> mc_1_setpoints = {false, MC_setpoints()};
-    // std::tuple<bool, MC_setpoints_command> mc_2_setpoints = {false, MC_setpoints()};
-    // std::tuple<bool, MC_setpoints_command> mc_3_setpoints = {false, MC_setpoints()};
-    // std::tuple<bool, MC_setpoints_command> mc_4_setpoints = {false, MC_setpoints()};
-
-    std::tuple<bool, BMS_coulomb_counts>    bms_coulomb_counts = {false, BMS_coulomb_counts()};
-    std::tuple<bool, BMS_status>            bms_status = {false, BMS_status()};
-    std::tuple<bool, BMS_temperatures>      bms_temperatures = {false, BMS_temperatures()};
-    std::tuple<bool, BMS_voltages>          bms_voltages = {false, BMS_voltages()};
-
-    std::tuple<bool, Dashboard_status>      dashboard_status = {false, Dashboard_status()};
-};
-
-// 
 // void on_can1_receive(const CAN_message_t &msg);
 void on_can2_receive(const CAN_message_t &msg);
 void on_can3_receive(const CAN_message_t &msg);
 
 // reads from receive buffer updating the current message frame from a specific receive buffer
-template <typename BufferType>
-void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer)
+// TODO ensure that all of the repeated interfaces are at the correct IDs
+// FL = MC1
+// FR = MC2
+// RL = MC3
+// RR = MC4
+template <typename BufferType, typename InterfaceType>
+void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
 {
+
     while (rx_buffer.available())
     {
         CAN_message_t recvd_msg;
@@ -76,33 +53,62 @@ void process_ring_buffer(AllMsgs &current_message_frame, BufferType &rx_buffer)
         memmove(&recvd_msg, buf, sizeof(recvd_msg));
         switch (recvd_msg.id)
         {
+        // MC status msgs
         case ID_MC1_STATUS:
-            std::get<0>(current_message_frame.mc_1_status) = true;
-            std::get<1>(current_message_frame.mc_1_status).load(recvd_msg.buf);
+            interfaces.front_left_inv->receive_status_msg(recvd_msg);
             break;
         case ID_MC2_STATUS:
-            std::get<0>(current_message_frame.mc_2_status) = true;
-            std::get<1>(current_message_frame.mc_2_status).load(recvd_msg.buf);
+            interfaces.front_right_inv->receive_status_msg(recvd_msg);
             break;
+        case ID_MC3_STATUS:
+            interfaces.rear_left_inv->receive_status_msg(recvd_msg);
+            break;
+        case ID_MC4_STATUS:
+            interfaces.rear_right_inv->receive_status_msg(recvd_msg);
+            break;
+
+        // MC temp msgs
         case ID_MC1_TEMPS:
-            std::get<0>(current_message_frame.mc_1_temps) = true;
-            std::get<1>(current_message_frame.mc_1_temps).load(recvd_msg.buf);
+            interfaces.front_left_inv->receive_temp_msg(recvd_msg);
             break;
         case ID_MC2_TEMPS:
-            std::get<0>(current_message_frame.mc_2_temps) = true;
-            std::get<1>(current_message_frame.mc_2_temps).load(recvd_msg.buf);
+            interfaces.front_right_inv->receive_temp_msg(recvd_msg);
             break;
+        case ID_MC3_TEMPS:
+            interfaces.rear_left_inv->receive_temp_msg(recvd_msg);
+            break;
+        case ID_MC4_TEMPS:
+            interfaces.rear_right_inv->receive_temp_msg(recvd_msg);
+            break;
+
+        // MC energy msgs
         case ID_MC1_ENERGY:
-            std::get<0>(current_message_frame.mc_1_energy) = true;
-            std::get<1>(current_message_frame.mc_1_energy).load(recvd_msg.buf);
+            interfaces.front_left_inv->receive_energy_msg(recvd_msg);
             break;
         case ID_MC2_ENERGY:
-            std::get<0>(current_message_frame.mc_2_energy) = true;
-            std::get<1>(current_message_frame.mc_2_energy).load(recvd_msg.buf);
+            interfaces.front_right_inv->receive_energy_msg(recvd_msg);
             break;
-        default:
+        case ID_MC3_ENERGY:
+            interfaces.rear_left_inv->receive_energy_msg(recvd_msg);
+            break;
+        case ID_MC4_ENERGY:
+            interfaces.rear_right_inv->receive_energy_msg(recvd_msg);
             break;
         }
+    }
+}
+
+template <typename bufferType>
+void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
+{
+    CAN_message_t msg;
+    while (buffer.available())
+    {
+        CAN_message_t msg;
+        uint8_t buf[sizeof(CAN_message_t)];
+        buffer.pop_front(buf, sizeof(CAN_message_t));
+        memmove(&msg, buf, sizeof(msg));
+        can_interface->write(msg);
     }
 }
 

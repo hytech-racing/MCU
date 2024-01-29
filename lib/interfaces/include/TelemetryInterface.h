@@ -3,6 +3,8 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "SysClock.h"
+#include "AnalogSensorsInterface.h"
 
 class TelemetryInterface
 {
@@ -22,6 +24,9 @@ public:
     void send_CAN_mcu_front_potentiometers(CAN_message_t &msg);
     void send_CAN_mcu_rear_potentiometers(CAN_message_t &msg);
     void send_CAN_mcu_analog_readings(CAN_message_t &msg);
+
+    /* Tick SysClock to send CAN */
+    void tick(const SysTick_s &tick);
 
 private:
     /* Outbound telemetry CAN messages */

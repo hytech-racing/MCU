@@ -26,3 +26,8 @@ void SafetySystem::software_shutdown(unsigned long curr_time) {
     // Kick watchdog every software cycle
     wd_->kick_watchdog(curr_time);
 }
+
+/* Return software ok */
+bool SafetySystem::get_software_is_ok() {
+    return software_is_ok;
+}

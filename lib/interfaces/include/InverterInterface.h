@@ -15,6 +15,10 @@ struct InverterCommand
     float torque_setpoint_nm;
     float speed_setpoint_rpm;
 };
+
+    
+InverterInterface<CAN3_rxBuffer<uint>> interface(&CAN3_rxBuffer, 69);
+
 template <typename message_queue>
 class InverterInterface
 {

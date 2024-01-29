@@ -127,7 +127,6 @@ void MCUInterface::send_CAN_mcu_status(CAN_message_t &msg) {
     mcu_status_.write(msg.buf);
     msg.id = ID_MCU_STATUS;
     msg.len = sizeof(mcu_status_);
-    // TELEM_CAN.write(msg);
 }
 
 /* Update MCU_status CAN */
@@ -147,38 +146,51 @@ void MCUInterface::update_mcu_status_CAN() {
 
 // Main loop
 // State machine
-void MCUInterface::update_mcu_status_CAN_fsm() {
+void MCUInterface::update_mcu_status_CAN_fsm(CAR_STATE fsm_state) {
     // State machine returns struct in main loop
-        // mcu_status_.set_state(fsm_state);
+    // fsm.get_state()
+    // might not be compatible anymore, using new states
+    mcu_status_.set_state(fsm_state);
 }
 //DriveTrain
-void MCUInterface::update_mcu_status_CAN_drivetrain() {
+void MCUInterface::update_mcu_status_CAN_drivetrain(bool has_error) {
     // Drivetrain returns struct in main loop
-    // mcu_status_.set_inverters_error(drive_train_->get_error_list());     // could also be called has_error
+    // drivetrain.drive_error_occured()
+    mcu_status_.set_inverters_error(has_error);     // could also be called has_error
 }
 // SafetySystem
-void MCUInterface::update_mcu_status_CAN_safety() {
+void MCUInterface::update_mcu_status_CAN_safety(bool is_ok) {
     // SafetySystem returns struct in main loop
-    // mcu_status_.set_software_is_ok(ams_->software_is_ok());
+    // safety_system.get_software_is_ok()
+    mcu_status_.set_software_is_ok(is_ok);
 }
 // AMSInterface
-void MCUInterface::update_mcu_status_CAN_ams() {
+void MCUInterface::update_mcu_status_CAN_ams(bool is_critical) {
     // AMSInterface returns struct in main loop
-    // mcu_status_.set_pack_charge_critical(ams_->pack_charge_is_critical());
+    // ams_interface.pack_charge_is_critical()
+    mcu_status_.set_pack_charge_critical(is_critical);
 }
-// DashboardInterface(?)
-void MCUInterface::update_mcu_status_CAN_dashboard() {
-    // DashboardInterface (?) returns struct in main loop
+// TorqueControllerMux
+// Would need an agreement on
+void MCUInterface::update_mcu_status_CAN_TCMux() {
+    // TorqueControllerMux returns struct in main loop
     // mcu_status_.set_torque_mode(dash_->get_torque_mode());
-    // mcu_status_.set_max_torque(dash_->get_max_torque());
-    // mcu_status_.toggle_launch_ctrl_active(dash_->launch_ctrl_btn_pressed());
+    // mcu_status_.set_max_torque(dash_->get_max_torque())
+}
+// DashboardInterface
+void MCUInterface::update_mcu_status_CAN_dashboard(bool is_pressed) {
+    // DashboardInterface (?) returns struct in main loop
+    // dash.lauchControlButtonPressed()
+    mcu_status_.toggle_launch_ctrl_active(is_pressed);
 }
 // BuzzerSystem
-void MCUInterface::update_mcu_status_CAN_buzzer() {
+void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on) {
     // Buzzer returns struct in main loop
-        // mcu_status_.set_activate_buzzer();
+    // buzzer.buzzer_is_on()
+    mcu_status_.set_activate_buzzer(is_on);
 }
 // PedalSystem
+// Would need to agree on
 void MCUInterface::update_mcu_status_CAN_pedals() {
     // PedalSystem returns struct in main loop
         // mcu_status_.set_brake_pedal_active();
@@ -186,6 +198,25 @@ void MCUInterface::update_mcu_status_CAN_pedals() {
         // mcu_status_.set_no_accel_implausability();
         // mcu_status_.set_no_brake_implausability();
         // mcu_status_.set_no_accel_brake_implausability();
+}
+
+/* Tick SysClock */
+void MCUInterface::tick(const SysTick_s &tick, CAN_message_t &msg) {
+    if (tick.triggers.trigger10) {
+        // State machine
+        update_mcu_status_CAN_fsm(CAR_STATE fsm_state);
+        // Systems
+        update_mcu_status_CAN_drivetrain(bool has_error);
+        update_mcu_status_CAN_safety(bool is_ok);
+        update_mcu_status_CAN_TCMux();
+        update_mcu_status_CAN_buzzer(bool is_on);
+        update_mcu_status_CAN_pedals();
+        // Interfaces
+        update_mcu_status_CAN_ams(bool is_critical);    
+        update_mcu_status_CAN_dashboard(bool is_pressed);
+        // Push into buffer
+        send_CAN_mcu_status(msg);
+    }
 }
 
 

@@ -17,6 +17,9 @@ public:
     /* Monitor software state every cycle */
     void software_shutdown(unsigned long curr_time);
 
+    /* Exchange businsess logic values */
+    bool get_software_is_ok();
+
 
 private:
     /* Associated interfaces */

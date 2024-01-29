@@ -267,30 +267,38 @@ void send_CAN_1Hz() {
 }
 
 void send_CAN_10Hz() {
+    CAN_message_t msg;
     
     main_ecu.send_CAN_mcu_status(msg);
-    TELEM_CAN.write(msg);
+    CAN3_txBuffer.push_back(msg, sizeof(CAN_message_t));
 }
 
 void send_CAN_20Hz() {
+    CAN_message_t msg;
+
     telem_interface.send_CAN_mcu_pedal_readings(msg);
-    TELEM_CAN.write(msg);    
+    CAN3_txBuffer.push_back(msg, sizeof(CAN_message_t));
+
     telem_interface.send_CAN_mcu_analog_readings(msg);
-    TELEM_CAN.write(msg);
+    CAN3_txBuffer.push_back(msg, sizeof(CAN_message_t));
 }
 
 void send_CAN_50Hz() {
+    CAN_message_t msg;
+
     // for (int i = 0; i < 4; i++) {
     //     inv_interface[i].send_CAN_inverter_setpoints(msg);
-    //     TELEM_CAN.write(msg);
+    //     CAN2_txBuffer.push_back(msg, sizeof(CAN_message_t));
     // }
 
     telem_interface.send_CAN_mcu_load_cells(msg);
-    TELEM_CAN.write(msg);
+    CAN3_txBuffer.push_back(msg, sizeof(CAN_message_t));
+
     telem_interface.send_CAN_mcu_front_potentiometers(msg);
-    TELEM_CAN.write(msg);
+    CAN3_txBuffer.push_back(msg, sizeof(CAN_message_t));
+
     telem_interface.send_CAN_mcu_rear_potentiometers(msg);
-    TELEM_CAN.write(msg);
+    CAN3_txBuffer.push_back(msg, sizeof(CAN_message_t));
 }
 
 void update_all_CAN() {

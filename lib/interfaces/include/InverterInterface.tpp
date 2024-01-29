@@ -6,8 +6,8 @@ void InverterInterface<message_queue>::write_cmd_msg_to_queue_(const MC_setpoint
     CAN_message_t msg;
     msg.id = can_id_;
     msg.len = sizeof(msg_in);
-    uint8_t buf[sizeof(CAN_message_t)];
-    memmove(buf, &msg, sizeof(msg_in));
+    // uint8_t buf[sizeof(CAN_message_t)];
+    // memmove(buf, &msg, sizeof(msg_in));
     msg_in.write(msg.buf);
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }

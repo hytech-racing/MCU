@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "SysClock.h"
+#include "MCUStateMachine.h"
 
 #define BMS_OK_READ         5   // SHDN_D_READ
 #define IMD_OK_READ         4   // SHDN_C_READ
@@ -31,19 +33,22 @@ public:
 
     /* Update MCU_status CAN (main loop) */
     // State machine
-    void update_mcu_status_CAN_fsm();
+    void update_mcu_status_CAN_fsm(CAR_STATE fsm_state);
     // Systems
-    void update_mcu_status_CAN_drivetrain();
-    void update_mcu_status_CAN_safety();
-    void update_mcu_status_CAN_buzzer();
+    void update_mcu_status_CAN_drivetrain(bool has_error);
+    void update_mcu_status_CAN_safety(bool is_ok);
+    void update_mcu_status_CAN_TCMux();
+    void update_mcu_status_CAN_buzzer(bool is_on);
     void update_mcu_status_CAN_pedals();
     // Interfaces
-    void update_mcu_status_CAN_ams();
-    void update_mcu_status_CAN_dashboard();
+    void update_mcu_status_CAN_ams(bool is_critical);
+    void update_mcu_status_CAN_dashboard(bool is_pressed);
 
     /* Send MCU_status CAN  */
     void send_CAN_mcu_status(CAN_message_t &msg);
 
+    /* Tick SysClock to send CAN at 10Hz */
+    void tick(const SysTick_s &tick);
 
 private:
     /* Private utility functions */
