@@ -14,10 +14,12 @@
 #define BOTS_OK_READ        3   // SHDN_B_READ
 #define BRAKE_LIGHT_CTRL    7
 
+template<typename message_queue>
 class MCUInterface
 {
 public:
-    MCUInterface() = default;
+    MCUInterface(message_queue *msg_output_queue): 
+        msg_queue_(msg_output_queue) {};
 
     /* Initialize shutdown circuit input readings */
     void init();
@@ -69,6 +71,8 @@ private:
 
     /* Outbound CAN message */
     MCU_status mcu_status_;
+    /* CAN Tx buffer */
+    message_queue msg_queue_;
 
     /* Shutdown circuit input */
     bool bms_ok_high;

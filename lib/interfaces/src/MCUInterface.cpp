@@ -122,11 +122,16 @@ bool MCUInterface::imd_ok_is_high() {
 
 /* Send CAN message */
 // MCU status
-void MCUInterface::send_CAN_mcu_status(CAN_message_t &msg) {
+void MCUInterface::send_CAN_mcu_status() {
+
     update_mcu_status_CAN();
+
+    CAN_message_t msg;
     mcu_status_.write(msg.buf);
     msg.id = ID_MCU_STATUS;
     msg.len = sizeof(mcu_status_);
+
+    msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 
 /* Update MCU_status CAN */
