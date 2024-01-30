@@ -2,7 +2,7 @@
 
 /* Send CAN messages */
 // Pedal readings
-void TelemetryInterface::send_CAN_mcu_pedal_readings() {
+void TelemetryInterface::enqueue_CAN_mcu_pedal_readings() {
     
     CAN_message_t msg;
     mcu_pedal_readings_.write(msg.buf);
@@ -12,7 +12,7 @@ void TelemetryInterface::send_CAN_mcu_pedal_readings() {
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Loadcell readings
-void TelemetryInterface::send_CAN_mcu_load_cells() {
+void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
     
     CAN_message_t msg;
     mcu_load_cells_.write(msg.buf);
@@ -23,7 +23,7 @@ void TelemetryInterface::send_CAN_mcu_load_cells() {
 }
 // Suspension potentiometers
 // Front
-void TelemetryInterface::send_CAN_mcu_front_potentiometers() {
+void TelemetryInterface::enqueue_CAN_mcu_front_potentiometers() {
     
     CAN_message_t msg;
     mcu_front_potentiometers_.write(msg.buf);
@@ -33,7 +33,7 @@ void TelemetryInterface::send_CAN_mcu_front_potentiometers() {
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Rear
-void TelemetryInterface::send_CAN_mcu_rear_potentiometers() {
+void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
     
     CAN_message_t msg;
     mcu_rear_potentiometers_.write(msg.buf);
@@ -43,7 +43,7 @@ void TelemetryInterface::send_CAN_mcu_rear_potentiometers() {
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Analog sensor readings
-void TelemetryInterface::send_CAN_mcu_analog_readings() {
+void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
 
     CAN_message_t msg;
     mcu_analog_readings_.write(msg.buf);
@@ -108,17 +108,17 @@ void TelemetryInterface::tick(const SysTick_s &tick,
     if (tick.triggers.trigger50) {
         // Pedals
         update_pedal_readings_CAN_msg(adc1.conversions[2], adc1.conversions[1], adc1.conversions[5], adc1.conversions[3]);
-        send_CAN_mcu_pedal_readings();
+        enqueue_CAN_mcu_pedal_readings();
         // Analog readings
         update_analog_readings_CAN_msg(encoder, adc1.conversions[7], adc1.conversions[6], adc1.conversions[0], adc1.conversions[4]);
-        send_CAN_mcu_analog_readings();
+        enqueue_CAN_mcu_analog_readings();
         // Load cells
         update_load_cells_CAN_msg(adc2.conversions[2], adc3.conversions[2]);
-        send_CAN_mcu_load_cells();
+        enqueue_CAN_mcu_load_cells();
         // Pots
         update_potentiometers_CAN_msg(adc2.conversions[3]. adc3.conversions[3]);
-        send_CAN_mcu_front_potentiometers();
-        // send_CAN_mcu_rear_potentiometers();
+        enqueue_CAN_mcu_front_potentiometers();
+        // enqueue_CAN_mcu_rear_potentiometers();
     }
 
 }

@@ -3,6 +3,7 @@
 
 #include "AMSInterface.h"
 #include "WatchdogInterface.h"
+#include "SysClock.h"
 
 class SafetySystem
 {
@@ -15,7 +16,7 @@ public:
     void init();
 
     /* Monitor software state every cycle */
-    void software_shutdown(unsigned long curr_time);
+    void software_shutdown(const SysTick_s &tick);
 
     /* Exchange businsess logic values */
     bool get_software_is_ok();

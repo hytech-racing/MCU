@@ -19,13 +19,13 @@ void AMSInterface::set_state_ok_high(bool ok_high) {
 }
 
 /* Set AMS last heartbeat receive time */
-void AMSInterface::set_heartbeat(unsigned long curr_time) {
-    last_heartbeat_time = curr_time;
+void AMSInterface::set_heartbeat(const SysTick_s &tick) {
+    last_heartbeat_time = tick.millis;
 }
 
 /* Check if AMS heartbeat is received */
-bool AMSInterface::heartbeat_received(unsigned long curr_time) {
-    return ((curr_time - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+bool AMSInterface::heartbeat_received(const SysTick_s &tick) {
+    return ((tick.millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
 }
 
 /* Check if lowest cell temperature is below threshold */
@@ -68,9 +68,9 @@ void AMSInterface::retrieve_coulomb_count_CAN(CAN_message_t &recvd_msg) {
     bms_coulomb_counts_.load(recvd_msg.buf);
 }
 
-void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg) {
+void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg, const SysTick_s &tick) {
     bms_status_.load(recvd_msg.buf);
-    set_heartbeat(millis());
+    set_heartbeat(tick.millis);
 }
 
 void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
@@ -81,14 +81,4 @@ void AMSInterface::retrieve_voltage_CAN(CAN_message_t &recvd_msg) {
     bms_voltages_.load(recvd_msg.buf);
 }
 
-/* Send CAN message */
-void AMSInterface::send_CAN_bms_coulomb_counts(CAN_message_t &msg) {
-    update_CAN_msg();
-    bms_coulomb_counts_.write(msg.buf);
-    msg.id = ID_BMS_COULOMB_COUNTS;
-    msg.len = sizeof(bms_coulomb_counts_);
-}
 
-void AMSInterface::update_CAN_msg() {
-    // do sth with bms_coulomb_counts_
-}

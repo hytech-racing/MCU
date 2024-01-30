@@ -11,7 +11,8 @@ template<typename message_queue>
 class TelemetryInterface
 {
 public:
-    TelemetryInterface() = default;
+    TelemetryInterface(message_queue *msg_output_queue):
+        msg_queue_(msg_output_queue) {};
 
     /* Update CAN messages (main loop) */
     // Interfaces
@@ -37,12 +38,12 @@ public:
         const AnalogConversion_s &glv
     );
 
-    /* Send outbound telemetry CAN messages */    
-    void send_CAN_mcu_pedal_readings();
-    void send_CAN_mcu_load_cells();
-    void send_CAN_mcu_front_potentiometers();
-    void send_CAN_mcu_rear_potentiometers();
-    void send_CAN_mcu_analog_readings();
+    /* Enqueue outbound telemetry CAN messages */    
+    void enqueue_CAN_mcu_pedal_readings();
+    void enqueue_CAN_mcu_load_cells();
+    void enqueue_CAN_mcu_front_potentiometers();
+    void enqueue_CAN_mcu_rear_potentiometers();
+    void enqueue_CAN_mcu_analog_readings();
 
     /* Tick SysClock to send CAN */
     void tick(

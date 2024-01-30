@@ -48,8 +48,8 @@ public:
     void update_mcu_status_CAN_ams(bool is_critical);
     void update_mcu_status_CAN_dashboard(bool is_pressed);
 
-    /* Send MCU_status CAN  */
-    void send_CAN_mcu_status(CAN_message_t &msg);
+    /* Enqueue MCU_status CAN  */
+    void enqueue_CAN_mcu_status(CAN_message_t &msg);
 
     /* Tick SysClock to send CAN at 10Hz */
     void tick(

@@ -133,7 +133,7 @@ bool MCUInterface::imd_ok_is_high() {
 
 /* Send CAN message */
 // MCU status
-void MCUInterface::send_CAN_mcu_status() {
+void MCUInterface::enqueue_CAN_mcu_status() {
 
     CAN_message_t msg;
     mcu_status_.write(msg.buf);
@@ -240,7 +240,7 @@ void MCUInterface::tick(const SysTick_s &tick,
         // Internal values
         update_mcu_status_CAN();
         // Push into buffer
-        send_CAN_mcu_status();
+        enqueue_CAN_mcu_status();
     }
 }
 

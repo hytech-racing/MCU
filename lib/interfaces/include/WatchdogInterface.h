@@ -3,6 +3,7 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "SysClock.h"
 
 #define WATCHDOG_INPUT  32
 
@@ -15,14 +16,14 @@ public:
     // WatchdogInterface(): watchdog_state(HIGH) {};
 
     /* Initialize interface pin mode */
-    void init(unsigned long curr_time);
+    void init(const SysTick_s &tick);
 
     /* Write to Main ECU */
     // Initialize output value
     void set_start_state();
 
     /* Kick watchdog */
-    void kick_watchdog(unsigned long curr_time);
+    void kick_watchdog(const SysTick_s &tick);
 
 
 private:

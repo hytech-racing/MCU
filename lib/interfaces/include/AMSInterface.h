@@ -3,6 +3,7 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "SysClock.h"
 
 #define HEARTBEAT_INTERVAL                      20   // milliseconds
 #define PACK_CHARGE_CRIT_TOTAL_THRESHOLD        420
@@ -13,13 +14,13 @@
 class AMSInterface
 {
 public:
-    AMSInterface(float init_temp=40.0, float init_volt=3.5, float temp_alpha=0.8, float volt_alpha=0.8):        
+    AMSInterface(float init_temp=40.0, float init_volt=3.5, float temp_alpha=0.8, float volt_alpha=0.8, const SysTick_s &tick):        
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
         cell_voltage_alpha(volt_alpha) 
     {
-        last_heartbeat_time = millis();
+        last_heartbeat_time = tick.millis;
     }
 
     /* Initialize interface pin mode */
@@ -32,8 +33,8 @@ public:
     void set_state_ok_high(bool ok_high);
     
     /* Monitor AMS state */
-    void set_heartbeat(unsigned long curr_time);
-    bool heartbeat_received(unsigned long curr_time);
+    void set_heartbeat(const SysTick_s &tick);
+    bool heartbeat_received(const SysTick_s &tick);
     bool is_below_pack_charge_critical_low_thresh();
     bool is_below_pack_charge_critical_total_thresh();
     bool pack_charge_is_critical();    
@@ -44,20 +45,12 @@ public:
 
     /* Retrieve CAN */
     void retrieve_coulomb_count_CAN(CAN_message_t &recvd_msg);
-    void retrieve_status_CAN(CAN_message_t &recvd_msg);
+    void retrieve_status_CAN(CAN_message_t &recvd_msg, const SysTick_s &tick);
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
 
-    /* Send CAN */
-    void send_CAN_bms_coulomb_counts(CAN_message_t &msg);
-
 private:
-    /* Private utility functions */
-    void update_CAN_msg();
-
     /* AMS CAN messages */
-    // Inbound and outbound (not sure why, need to double check with Liwei)
-    BMS_coulomb_counts  bms_coulomb_counts_;
     // Outbound
     BMS_status          bms_status_;
     BMS_temperatures    bms_temperatures_;
