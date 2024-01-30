@@ -71,8 +71,19 @@
 
 /* Initialize shutdown circuit input readings */
 void MCUInterface::init() {
+    // Set pin mode
+    pinMode(BRAKE_LIGHT_CTRL, OUTPUT);
+    pinMode(INVERTER_EN, OUTPUT);
+    pinMode(INVERTER_24V_EN, OUTPUT);
+
+    // Set initial shutdown circuit readings
     bms_ok_high = false;
     imd_ok_high = false;
+
+    // Enable inverters (?)
+    // Should be called from drivetrain
+    digitalWrite(INVERTER_EN, HIGH);
+    digitalWrite(INVERTER_24V_EN, HIGH);
 }
 
 /* Read shutdown system values */
@@ -123,8 +134,6 @@ bool MCUInterface::imd_ok_is_high() {
 /* Send CAN message */
 // MCU status
 void MCUInterface::send_CAN_mcu_status() {
-
-    update_mcu_status_CAN();
 
     CAN_message_t msg;
     mcu_status_.write(msg.buf);
@@ -206,8 +215,7 @@ void MCUInterface::update_mcu_status_CAN_pedals() {
 }
 
 /* Tick SysClock */
-void MCUInterface::tick(const SysTick_s &tick, 
-                        CAN_message_t &msg
+void MCUInterface::tick(const SysTick_s &tick,
                         CAR_STATE fsm_state,
                         bool inv_has_error,
                         bool software_is_ok,
@@ -226,11 +234,13 @@ void MCUInterface::tick(const SysTick_s &tick,
         update_mcu_status_CAN_TCMux();
         update_mcu_status_CAN_buzzer(buzzer_is_on);
         update_mcu_status_CAN_pedals();
-        // Interfaces
+        // External Interfaces
         update_mcu_status_CAN_ams(pack_charge_is_critical);    
         update_mcu_status_CAN_dashboard(button_is_pressed);
+        // Internal values
+        update_mcu_status_CAN();
         // Push into buffer
-        send_CAN_mcu_status(msg);
+        send_CAN_mcu_status();
     }
 }
 

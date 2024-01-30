@@ -7,6 +7,7 @@
 #include "AnalogSensorsInterface.h"
 #include "SteeringEncoderInterface.h"
 
+template<typename message_queue>
 class TelemetryInterface
 {
 public:
@@ -37,17 +38,16 @@ public:
     );
 
     /* Send outbound telemetry CAN messages */    
-    void send_CAN_mcu_pedal_readings(CAN_message_t &msg);
-    void send_CAN_mcu_load_cells(CAN_message_t &msg);
-    void send_CAN_mcu_front_potentiometers(CAN_message_t &msg);
-    void send_CAN_mcu_rear_potentiometers(CAN_message_t &msg);
-    void send_CAN_mcu_analog_readings(CAN_message_t &msg);
+    void send_CAN_mcu_pedal_readings();
+    void send_CAN_mcu_load_cells();
+    void send_CAN_mcu_front_potentiometers();
+    void send_CAN_mcu_rear_potentiometers();
+    void send_CAN_mcu_analog_readings();
 
     /* Tick SysClock to send CAN */
     void tick(
-        const SysTick_s &tick, 
-        CAN_message_t &msg, 
-        const AnalogConversionPacket_s<8> &adc1, 
+        const SysTick_s &tick,
+        const AnalogConversionPacket_s<8> &adc1,
         const AnalogConversionPacket_s<4> &adc2,
         const AnalogConversionPacket_s<4> &adc3,
         const SteeringEncoderConversion_s &encoder
@@ -59,7 +59,9 @@ private:
     MCU_load_cells              mcu_load_cells_;
     MCU_front_potentiometers    mcu_front_potentiometers_;
     MCU_rear_potentiometers     mcu_rear_potentiometers_;
-    MCU_analog_readings         mcu_analog_readings_;    
+    MCU_analog_readings         mcu_analog_readings_;
+    /* CAN Tx buffer */
+    message_queue *msg_queue_;
 };
 
 #endif /* __TELEMETRY_INTERFACE_H__ */
