@@ -7,6 +7,7 @@ author: Lucas Plant
 
 #ifndef PEDALS_SYSTEM_TEST
 #define PEDALS_SYSTEM_TEST
+#include <gtest/gtest.h>
 #include <string>
 #include "PedalsSystem.h"
 #include <array>
@@ -25,7 +26,7 @@ struct PedalIsActiveTestCase
 
 
 
-void test_pedal_is_active(void)
+TEST(PedalsSystemTesting, test_pedal_is_active)
 {
     PedalsParams params_for_test = {1, 1, 10, 10, 1, 1, 9, 9};
     PedalsSystem pedals_system(params_for_test, params_for_test);
@@ -34,7 +35,7 @@ void test_pedal_is_active(void)
     for (const auto &test_case : test_cases)
     {
         auto out = pedals_system.mech_brake_active(test_case.pedalsinput);
-        TEST_ASSERT_EQUAL(test_case.expect_active, out);
+        EXPECT_EQ(test_case.expect_active, out);
     }
 }
 

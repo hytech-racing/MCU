@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "state_machine_test.h"
-// #include "pedals_system_test.h"
+#include "pedals_system_test.h"
 
 
 
