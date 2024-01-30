@@ -112,5 +112,24 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
     
 }
 
+TEST(MCUStateMachineTesting, test_state_machine_drivetrain_quit_test)
+{
+
+}
+
+TEST(MCUStateMachineTesting, test_state_machine_drivetrain_enable)
+{
+
+}
+
+TEST(MCUStateMachineTesting, test_state_machine_rtd_sound)
+{
+
+}
+
+TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions)
+{
+
+}
 
 #endif /* STATE_MACHINE_TEST */
