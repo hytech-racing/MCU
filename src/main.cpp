@@ -8,6 +8,7 @@
 #include "ADC_SPI.h"
 #include "MessageHandler.h"
 #include "DrivetrainSystem.h"
+#include "PedalsSystem.h"
 
 #include "HytechCANInterface.h"
 
@@ -31,7 +32,10 @@ CANInterfaces<CircularBufferType> can_interfaces = {&fl_inv, &fr_inv, &rl_inv, &
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, 5000);
 
-MCUStateMachine<DrivetrainSystemType> state_machine(&buzzer, &drivetrain, &dash_interface);
+PedalsParams params_for_test = {1, 1, 10, 10, 1, 1, 9, 9};
+PedalsSystem pedals(params_for_test, params_for_test);
+
+MCUStateMachine<DrivetrainSystemType> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals);
 
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> FRONT_INV_CAN;
 
