@@ -13,32 +13,20 @@
 #include "MCUInterface.h"
 #include "AMSInterface.h"
 #include "WatchdogInterface.h"
-// #include "DashboardInterface.h"
-// #include "InverterInterface.h"
+#include "DashboardInterface.h"
+#include "InverterInterface.h"
 #include "TelemetryInterface.h"
 /* Systems */
-#include "SafetySystem.h"
 #include "SysClock.h"
+#include "Buzzer.h"
+#include "SafetySystem.h"
+#include "DrivetrainSystem.h"
+#include "PedalsSystem.h"
+#include "TorqueControllerMux.h"
 /* State machine */
 #include "MCUStateMachine.h"
 
-
-
-// BuzzerController buzzer(500);
-
-// DashDriver dash_interface;
-
-// InverterComponent lf_inv(100);
-// InverterComponent rf_inv(100);
-
-// InverterComponent lr_inv(100);
-// InverterComponent rr_inv(100);
-
-
-// DrivetrainComponent drivetrain({&lf_inv, &rf_inv, &lr_inv, &rr_inv});
-// MCUStateMachine state_machine(&buzzer, &drivetrain, &dash_interface);
-
-
+/* External info sources */
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN;
@@ -48,28 +36,51 @@ using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_mes
 MCP3208 ADC1(ADC1_CS);
 MCP3208 ADC2(ADC2_CS);
 MCP3208 ADC3(ADC3_CS);
-OrbisBR10 Steering1(Serial5);
+OrbisBR10 steering1(Serial5);
 
 /* Declare interfaces */
+DashboardInterface dashboard;
 AMSInterface ams_interface;
-MCUInterface<CircularBufferType> main_ecu(&CAN3_txBuffer);
 WatchdogInterface wd_interface;
-// DashboardInterface dashboard;
-// InverterInterface inv_interface[4];
+MCUInterface<CircularBufferType> main_ecu(&CAN3_txBuffer);
 TelemetryInterface<CircularBufferType> telem_interface(&CAN3_txBuffer);
+using InverterInterfaceType = InverterInterface<CircularBufferType>;
+InverterInterfaceType fl_inv(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
+InverterInterfaceType fr_inv(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND);
+InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
+InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
 /* Declare systems */
-SafetySystem safety_system(&ams_interface, &wd_interface);
 SysClock sys_clock;
-SysTick_s curr_tick;
+BuzzerController buzzer(2000);
+SafetySystem safety_system(&ams_interface, &wd_interface);  // Tie ams and wd interface to safety system (by pointers)
+PedalsSystem pedals;
+SteeringSystem steering_system(steering1);  // Unify member reference and pointers? tied by reference in this case
+using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
+auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, 5000); // Tie inverter interfaces to drivetrain system (by pointers)
+// Hypothetical controllers, need more implementation details
+TorqueControllerSimple simple_mode;
+TorqueControllerSimple normal_force_mode;
+TorqueControllerSimple endurance_derating_mode;
+TorqueControllerSimple launch_control_mode;
+TorqueControllerSimple torque_vectoring_mode;
+TorqueControllerMux torque_controller_mux;  // would prob need to tie controllers to mux as well?
 /* Declare state machine */
-MCUStateMachine fsm;
+MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard);    // need more implemetation details. associated interfaces and systems tied by pointers
 
+/* Global instantiations */
+SysTick_s curr_tick;
+
+/* Function declarations */
 /* CAN functions */
 void init_all_CAN();
 void dispatch_all_CAN();
 void dispatch_inv_CAN();
 void dispatch_telem_CAN();
 void update_and_enqueue_all_CAN();
+/* External value readings */
+void sample_all_external_readings();
+/* Process all readings */
+void process_all_value_readings();
 
 void setup() {
 
@@ -80,16 +91,21 @@ void setup() {
     init_all_CAN();
 
     /* Initialize interface */
-    main_ecu.init();        // mcu_status_init()
-
-    wd_interface.init(curr_tick);    // pinMode(WD_INPUT)
-    ams_interface.init();   // pinMode(SW_OK)
+    main_ecu.init();    // pin mode, initial shutdown circuit readings, 
+    wd_interface.init(curr_tick);   // pin mode, initialize wd kick time
+    ams_interface.init();           // pin mode
 
     /* Initialize system */
-    safety_system.init();   // dW(SW_OK)
-                            // dW(WD_INPUT)
-                            // ams set sw is ok
+    safety_system.init();   // write software_ok high, write wd_input high, set software ok state true
+    // ControllerMux set initial max torque to 10 NM, torque mode to 0 (could be done at construction or have an init function)
+    // Drivetrain set all inverters disabled, write inv_en and inv_24V_en hight, set inverter_has_error to false if using
 
+    /* Present action for 5s */
+    delay(5000);
+
+    /* Set start up status */
+    // fsm either initialize state to STARTUP/TRACTIVE_SYSTEM_NOT_ACTIVE or enable external set state
+    // ControllerMux set max torque to 21 NM, torque mode to whatever makes most sense
 
 }
 
@@ -102,12 +118,20 @@ void loop() {
     // Distribute incoming CAN messages
     dispatch_all_CAN();
     // Sensors sample and cache
-    main_ecu.read_mcu_status();
-
-    /* Tick state machine */
+    sample_all_external_readings();
     
+    /* System process readings prior to ticking state machine */
+    process_all_value_readings();
+
     /* Update and enqueue CAN messages */
     update_and_enqueue_all_CAN();
+
+    /* Inverter procedure before entering state machine */
+    // Drivetrain check if inverters have error
+    // Drivetrain reset inverters
+
+    /* Tick state machine */
+    fsm.tick_state_machine(curr_tick);
 
     /* Tick safety system */
     safety_system.software_shutdown(curr_tick);
@@ -141,32 +165,32 @@ void dispatch_all_CAN() {
 }
 
 void dispatch_inv_CAN() {
-    // while (CAN2_rxBuffer.available())
-    // {
-    //     CAN_message_t recvd_msg;
-    //     uint8_t buf[sizeof(CAN_message_t)];
-    //     CAN2_rxBuffer.pop_front(buf, sizeof(CAN_message_t));
-    //     memmove(&recvd_msg, buf, sizeof(recvd_msg));
-    //     switch (recvd_msg.id)
-    //     {
-    //     // Motor status
-    //     case ID_MC1_STATUS:    inv_interface[0].retrieve_status_CAN(recvd_msg);    break;
-    //     case ID_MC2_STATUS:    inv_interface[1].retrieve_status_CAN(recvd_msg);    break;
-    //     case ID_MC3_STATUS:    inv_interface[2].retrieve_status_CAN(recvd_msg);    break;
-    //     case ID_MC3_STATUS:    inv_interface[3].retrieve_status_CAN(recvd_msg);    break;
-    //     // Motor temperature
-    //     case ID_MC1_TEMPS:     inv_interface[0].retrieve_status_CAN(recvd_msg);    break;
-    //     case ID_MC2_TEMPS:     inv_interface[1].retrieve_status_CAN(recvd_msg);    break;
-    //     case ID_MC3_TEMPS:     inv_interface[2].retrieve_status_CAN(recvd_msg);    break;
-    //     case ID_MC4_TEMPS:     inv_interface[3].retrieve_status_CAN(recvd_msg);    break;
-    //     // Motor energy
-    //     case ID_MC1_ENERGY:    inv_interface[0].retrieve_energy_CAN(recvd_msg);    break;
-    //     case ID_MC2_ENERGY:    inv_interface[1].retrieve_energy_CAN(recvd_msg);    break;
-    //     case ID_MC3_ENERGY:    inv_interface[2].retrieve_energy_CAN(recvd_msg);    break;
-    //     case ID_MC4_ENERGY:    inv_interface[3].retrieve_energy_CAN(recvd_msg);    break;
-    //     default:               break;
-    //     }
-    // }
+    while (CAN2_rxBuffer.available())
+    {
+        CAN_message_t recvd_msg;
+        uint8_t buf[sizeof(CAN_message_t)];
+        CAN2_rxBuffer.pop_front(buf, sizeof(CAN_message_t));
+        memmove(&recvd_msg, buf, sizeof(recvd_msg));
+        switch (recvd_msg.id)
+        {
+        // Motor status
+        case ID_MC1_STATUS:    fl_inv.receive_status_msg(recvd_msg);    break;
+        case ID_MC2_STATUS:    fr_inv.receive_status_msg(recvd_msg);    break;
+        case ID_MC3_STATUS:    rl_inv.receive_status_msg(recvd_msg);    break;
+        case ID_MC3_STATUS:    rr_inv.receive_status_msg(recvd_msg);    break;
+        // Motor temperature
+        case ID_MC1_TEMPS:     fl_inv.receive_temp_msg(recvd_msg);    break;
+        case ID_MC2_TEMPS:     fr_inv.receive_temp_msg(recvd_msg);    break;
+        case ID_MC3_TEMPS:     rl_inv.receive_temp_msg(recvd_msg);    break;
+        case ID_MC4_TEMPS:     rr_inv.receive_temp_msg(recvd_msg);    break;
+        // Motor energy
+        case ID_MC1_ENERGY:    fl_inv.receive_energy_msg(recvd_msg);    break;
+        case ID_MC2_ENERGY:    fr_inv.receive_energy_msg(recvd_msg);    break;
+        case ID_MC3_ENERGY:    rl_inv.receive_energy_msg(recvd_msg);    break;
+        case ID_MC4_ENERGY:    rr_inv.receive_energy_msg(recvd_msg);    break;
+        default:               break;
+        }
+    }
 }
 
 void dispatch_telem_CAN() {
@@ -202,6 +226,8 @@ void dispatch_telem_CAN() {
 }
 
 void update_and_enqueue_all_CAN() {
+    // Drivetrain system
+        // probably here as well
     // MCU interface
     main_ecu.tick(curr_tick,
                   fsm.get_state(),
@@ -218,5 +244,20 @@ void update_and_enqueue_all_CAN() {
                          ADC2.get(),
                          ADC3.get(),
                          Steering1.convert());
+}
+
+void sample_all_external_readings() {
+    // Tick all adcs
+    ADC1.tick();
+    ADC2.tick();
+    ADC3.tick();
+    // Tick steering system
+    steering1.tick();
+    // Read shutdown circuits    
+    main_ecu.read_mcu_status();
+}
+
+void process_all_value_readings() {
+    pedals.tick();
 }
 

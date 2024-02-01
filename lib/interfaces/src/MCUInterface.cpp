@@ -114,6 +114,20 @@ void MCUInterface::measure_shutdown_circuit_voltage() {
     
 }
 
+/* Write inverter enable */
+void MCUInterface::set_inverter_enable(bool enable) {
+
+    digitalWrite(INVERTER_EN, enable);
+
+}
+
+/* Write inverter 24V enable */
+void MCUInterface::set_inverter_24V_enable(bool enable_24V) {
+
+    digitalWrite(INVERTER_24V_EN, enable_24V);
+
+}
+
 /* Write brake light */
 void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
 

@@ -29,6 +29,8 @@ public:
     /* Read from Main ECU */
     void read_mcu_status();
     /* Write to Main ECU */
+    void set_inverter_enable(bool enable);              // Called from DrivetrainSystem
+    void set_inverter_24V_enable(bool enable_24V);      // Called from DrivetrainSystem
     void set_brake_light(bool brake_pedal_is_active);   // Called from PedalInterface/System
 
     /* Feed to state machine */
