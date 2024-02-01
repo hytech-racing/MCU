@@ -1,11 +1,7 @@
-#include "MCUStateMachine.h"
-#include "PedalsSystem.h"
-#include "SteeringSystem.h"
-#include "DashboardInterface.h"
-#include "AnalogSensorsInterface.h"
-#include "TorqueControllerMux.h"
 
-void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
+#include "MCUStateMachine.h"
+template <typename DrivetrainSystemType>
+void MCUStateMachine<DrivetrainSystemType>::tick_state_machine(unsigned long current_millis)
 {
     switch (get_state())
     {
@@ -17,7 +13,7 @@ void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
         // if TS is above HV threshold, move to Tractive System Active
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
         }
         break;
     }
@@ -26,12 +22,12 @@ void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
     {
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, tick.millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
-        if (dashboard_->startButtonPressed() && pedals_->mech_brake_active())
+        if (dashboard_->start_button_pressed() && pedals_->mech_brake_active())
         {
-            set_state_(CAR_STATE::ENABLING_INVERTER, tick.millis);
+            set_state_(CAR_STATE::ENABLING_INVERTER, current_millis);
             break;
         }
         break;
@@ -43,49 +39,59 @@ void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
         //      the drivetrain state machine handling
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
 
         if (drivetrain_->drivetrain_ready())
         {
-            // entry logic: drivetrain_->enable_drivetrain_hv(tick.millis);
-            set_state_(CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON, tick.millis);
+            // entry logic: drivetrain_->enable_drivetrain_hv(current_millis);
+            set_state_(CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON, current_millis);
             break;
         }
         break;
     }
 
-    case CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON: {
-        if (drivetrain_->check_drivetrain_quit_dc_on() && !drivetrain_->inverter_init_timeout(tick.millis)) {
-            set_state_(CAR_STATE::WAITING_DRIVETRAIN_ENABLED, tick.millis);
-            break;
-        } else {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
-            break;
-        } break;
-    } case CAR_STATE::WAITING_DRIVETRAIN_ENABLED: {
-        if (drivetrain_->drivetrain_enabled() && !drivetrain_->inverter_init_timeout(tick.millis)) {
-            set_state_(CAR_STATE::WAITING_READY_TO_DRIVE_SOUND, tick.millis);
-        } else {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
+    case CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON:
+    {
+        if (drivetrain_->check_drivetrain_quit_dc_on() && !drivetrain_->inverter_init_timeout(current_millis))
+        {
+            set_state_(CAR_STATE::WAITING_DRIVETRAIN_ENABLED, current_millis);
             break;
         }
-
-    } case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
+        else
+        {
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            break;
+        }
+        break;
+    }
+    case CAR_STATE::WAITING_DRIVETRAIN_ENABLED:
+    {
+        if (drivetrain_->drivetrain_enabled() && !drivetrain_->inverter_init_timeout(current_millis))
+        {
+            set_state_(CAR_STATE::WAITING_READY_TO_DRIVE_SOUND, current_millis);
+        }
+        else
+        {
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+            break;
+        }
+    }
+    case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
     {
         // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
         //      the drivetrain state machine handling
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
-        if (buzzer_->done(tick.millis))
+        if (buzzer_->done(current_millis))
         {
-            set_state_(CAR_STATE::READY_TO_DRIVE, tick.millis);
+            set_state_(CAR_STATE::READY_TO_DRIVE, current_millis);
         }
         break;
     }
@@ -96,25 +102,25 @@ void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
         //      the drivetrain state machine handling
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
 
         if (drivetrain_->drivetrain_error_occured())
         {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, tick.millis);
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
         }
 
-        PedalsSystemOutput_s pedalsData;
+        PedalsDriverInterface data;
         Dashboard_status dash_data;
-        auto pedals_data = pedals_->evaluate_pedals(data, tick.millis);
-        auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
+        auto pedals_data = pedals_->evaluate_pedals(data, current_millis);
+        // auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
 
         // TODO: below in the scope of this function
         if (
             bms_->ok_high() &&
             imd_->ok_high() &&
-            !pedals_->max_duration_of_implausibility_exceeded(tick.millis))
+            !pedals_->max_duration_of_implausibility_exceeded(current_millis))
         {
             // drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
         }
@@ -124,7 +130,7 @@ void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
             hal_println("not calculating torque");
             hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
             hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
-            hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(tick.millis));
+            hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
             hal_printf("get bms ok high: %d\n", bms_->ok_high());
             hal_printf("get imd ok high: %d\n", imd_->ok_high());
         }
@@ -134,7 +140,8 @@ void MCUStateMachine::tick_state_machine(const SysTick_s &tick)
     }
 }
 
-void MCUStateMachine::set_state_(CAR_STATE new_state, unsigned long curr_time)
+template <typename DrivetrainSystemType>
+void MCUStateMachine<DrivetrainSystemType>::set_state_(CAR_STATE new_state, unsigned long curr_time)
 {
     hal_println("running exit logic");
     handle_exit_logic_(current_state_, curr_time);
@@ -145,7 +152,8 @@ void MCUStateMachine::set_state_(CAR_STATE new_state, unsigned long curr_time)
     handle_entry_logic_(new_state, curr_time);
 }
 
-void MCUStateMachine::handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time)
+template <typename DrivetrainSystemType>
+void MCUStateMachine<DrivetrainSystemType>::handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time)
 {
     switch (get_state())
     {
@@ -170,8 +178,8 @@ void MCUStateMachine::handle_exit_logic_(CAR_STATE prev_state, unsigned long cur
     }
     }
 }
-
-void MCUStateMachine::handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time)
+template <typename DrivetrainSystemType>
+void MCUStateMachine<DrivetrainSystemType>::handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time)
 {
     switch (new_state)
     {
@@ -194,7 +202,6 @@ void MCUStateMachine::handle_entry_logic_(CAR_STATE new_state, unsigned long cur
     case CAR_STATE::WAITING_DRIVETRAIN_ENABLED:
     {
         drivetrain_->request_enable();
-        drivetrain_->command_drivetrain_no_torque();
         break;
     }
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:

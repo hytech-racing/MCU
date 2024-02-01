@@ -22,14 +22,17 @@ struct DrivetrainDynamicReport_s
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
 
+template<typename InverterType>
 class DrivetrainSystem
 {
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterInterface *, NUM_MOTORS> &inverters, int init_time_limit_ms )
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms )
         : inverters_(inverters),init_time_limit_ms_(init_time_limit_ms)
     {
+
+        // TODO set min_hv_voltage_
     }
 
     // startup phase 1
@@ -59,12 +62,12 @@ public:
     void command_drivetrain(const DrivetrainCommand_s& data);
 private:
 
-
-    std::array<InverterInterface *, NUM_MOTORS> inverters_;
+    uint16_t min_hv_voltage_;
+    std::array<InverterType*, 4> inverters_;
     int init_time_limit_ms_;
     unsigned long drivetrain_initialization_phase_start_time_;
     
 };
 
-
+#include "DrivetrainSystem.tpp"
 #endif /* DRIVETRAINSYSTEM */
