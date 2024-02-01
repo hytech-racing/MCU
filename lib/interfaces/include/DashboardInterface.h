@@ -1,8 +1,7 @@
 #ifndef __DASHBOARDINTERFACE_H__
 #define __DASHBOARDINTERFACE_H__
 
-#include "DashboardInterface.h"
-#include <stdint.h>
+#include "Dashboard_status.h"
 
 enum DialMode_e
 {
@@ -14,13 +13,6 @@ enum DialMode_e
     ENDURANCE,
 };
 
-enum TorqueMode_e
-{
-    TORQUE_MODE_LOW = 0,
-    TORQUE_MODE_MED = 1,
-    TORQUE_MODE_HIGH = 2,
-};
-
 enum LEDColors_e
 {
     OFF,
@@ -28,6 +20,22 @@ enum LEDColors_e
     YELLOW,
     RED,
 };
+
+enum DashLED_e
+{
+    BOTS_LED,
+    LAUNCH_CONTROL_LED,
+    MODE_LED,
+    MECH_BRAKE_LED,
+    COCKPIT_BRB_LED,
+    INERTIA_LED,
+    GLV_LED,
+    CRIT_CHARGE_LED,
+    START_LED,
+    MC_ERROR_LED,
+    IMD_LED,
+    AMS_LED,
+}
 
 struct DashButtons_s
 {
@@ -40,49 +48,55 @@ struct DashButtons_s
     bool led_dimmer;
 };
 
-struct DashLEDs_s
+struct DashComponentInterface_s
 {
-    uint8_t ams;
-    uint8_t imd;
-    uint8_t mode;
-    uint8_t mc_error;
-    uint8_t start;
-    uint8_t inertia;
-    uint8_t mech_brake;
-    uint8_t gen_purp;
-    uint8_t bots;
-    uint8_t cockpit_brb;
-    uint8_t crit_charge;
-    uint8_t glv;
-    uint8_t launch_control;
+    /* READ DATA */
+    // enum for dial position read by controller mux
+    DialMode_e dial_mode;
+    // Buttons struct for better naming
+    DashButtons_s button;
+    bool ssok; // safety system OK (IMD?) RENAME
+    bool shutdown;
+    bool buzzer_state;
+
+    /* WRITTEN DATA */
+    bool buzzer_cmd;
+    //making it an array of ints to support enumerated LEDs as well as
+    //gradient/value based LEDs
+    LEDColors_e LED[12];
 };
 
-struct DashboardInterfaceOutput_s
-{
-    DialMode_e dialMode;
-    TorqueMode_e torqueMode;
-    DashButtons_s buttons;
-    bool ssok;
-    bool shutdown;
-};
 
 class DashboardInterface
 {
 private:
-    DashboardInterfaceOutput_s dashState;
-public:
-// Constructors
-    Dashboard();
 
-// Functions
-    /// @brief Send data to the dashboard
-    void set(
-        bool buzzerEnabled,
-        DashLEDs_s LEDsState
-    );
-    /// @brief Get the state of the dashboard's signals
-    /// @return DashboardInterfaceOutput_s
-    DashboardInterfaceOutput_s convert();
+    DashComponentInterface_s _data;
+
+public:
+    Dashboard(){};
+
+    void read(DASHBOARD_STATE_t* msg);
+    DASHBOARD_MCU_STATE_t write();
+
+    DialMode_s getDialMode();
+    
+    bool safetySystemOK();
+
+    bool startButtonPressed();
+    bool specialButtonPressed();
+    bool torqueButtonPressed();
+    bool inverterResetButtonPressed();
+    bool launchControlButtonPressed();
+    bool torqueLoadingButtonPressed();
+    bool nightModeButtonPressed();
+    bool torqueVectoringOffButtonPressed();
+
+    void soundBuzzer();
+
+    // LEDs in same order as dash rev. 7 placement
+
+    void setLED(DashLED_e led, LEDColors_e color);
 };
 
 #endif /* __DASHBOARDINTERFACE_H__ */

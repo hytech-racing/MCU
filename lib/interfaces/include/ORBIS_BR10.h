@@ -21,15 +21,15 @@ class OrbisBR10 : SteeringEncoderInterface
 {
 private:
 // Data
-    HardwareSerial* serial;
-    int serialSpeed;
-    AnalogChannel channel;
-    int data;
-    char status;
+    HardwareSerial* serial_;
+    int serialSpeed_;
+    int data_;
+    float offset_;
+    char status_;
 public:
 // Constructors
-    OrbisBR10(HardwareSerial* serial_, int serialSpeed_);
-    OrbisBR10(HardwareSerial* serial_);
+    OrbisBR10(HardwareSerial* serial, int serialSpeed);
+    OrbisBR10(HardwareSerial* serial);
 
 // Functions
     void sample();
