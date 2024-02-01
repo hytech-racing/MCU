@@ -17,6 +17,23 @@ void TorqueControllerMux::tick(
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimit_);
 
+    // Tick torque button logic at 50hz
+    if (tick.triggers.trigger50)
+    {
+        // detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms
+        if (
+            torqueLimitButtonPressed_ 
+            && dashboardTorqueModeButtonPressed
+            && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS
+        )
+        {
+            // WOW C++ is ass
+            torqueLimit_ = static_cast<TorqueLimit_e>((static_cast<int>(torqueLimit_) + 1) % static_cast<int>(TCMUX_NUM_TORQUE_LIMITS));
+            torqueLimitButtonPressedTime_ = tick.millis;
+        }
+        torqueLimitButtonPressed_ = dashboardTorqueModeButtonPressed;
+    }
+
     // Tick TCMUX at 100hz
     if (tick.triggers.trigger100)
     {

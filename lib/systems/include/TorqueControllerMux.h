@@ -17,6 +17,7 @@ enum TorqueLimit_e
     TCMUX_LOW_TORQUE = 0,
     TCMUX_MID_TORQUE = 1,
     TCMUX_FULL_TORQUE = 2,
+    TCMUX_NUM_TORQUE_LIMITS = 3,
 };
 
 class TorqueControllerMux
@@ -36,7 +37,6 @@ private:
         {TCMUX_MID_TORQUE, 15.0},
         {TCMUX_FULL_TORQUE, 20.0}
     };
-    // DrivetrainCommand_s controllerOutputs_[static_cast<int>(TC_NUM_CONTROLLERS)];
     DrivetrainCommand_s controllerCommands_[static_cast<int>(TC_NUM_CONTROLLERS)];
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
@@ -44,6 +44,7 @@ private:
     DrivetrainCommand_s drivetrainCommand_;
     TorqueLimit_e torqueLimit_;
     bool torqueLimitButtonPressed_;
+    unsigned long torqueLimitButtonPressedTime_;
 public:
 // Constructors
     TorqueControllerMux()
