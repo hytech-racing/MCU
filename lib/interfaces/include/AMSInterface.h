@@ -14,18 +14,21 @@
 #define DEFAULT_TEMP_ALPHA      0.8
 #define DEFAULT_VOLTAGE_ALPHA   0.8
 
-#define SOFTWARE_OK 28
+#define DEFAULT_SOFTWARE_OK 28
 
 class AMSInterface
 {
 public:
-    AMSInterface(float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
+    AMSInterface(int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
+        pin_software_ok_(sw_ok_pin),
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
         cell_voltage_alpha(volt_alpha) {};
+    AMSInterface(int sw_ok_pin):
+        AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
     AMSInterface():
-        AMSInterface(DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
+        AMSInterface(DEFAULT_SOFTWARE_OK) {};
 
     /* Initialize interface pin mode */
     void init(const SysTick_s &tick);
@@ -70,6 +73,9 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
+
+    /* Hardware interface pins */
+    int pin_software_ok_;
 };
 
 #endif /* __AMS_INTERFACE_H__ */

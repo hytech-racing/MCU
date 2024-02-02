@@ -7,21 +7,31 @@
 #include "SysClock.h"
 #include "MCUStateMachine.h"
 
-#define BMS_OK_READ         5   // SHDN_D_READ
-#define IMD_OK_READ         4   // SHDN_C_READ
-#define BSPD_OK_READ        6   // SHDN_E_READ
-#define SOFTWARE_OK_READ    25  // SHDN_F_READ Watchdog Combined
-#define BOTS_OK_READ        3   // SHDN_B_READ
-#define BRAKE_LIGHT_CTRL    7
-#define INVERTER_EN         9
-#define INVERTER_24V_EN     8
+#define DEFAULT_BMS_OK_READ         5   // SHDN_D_READ
+#define DEFAULT_IMD_OK_READ         4   // SHDN_C_READ
+#define DEFAULT_BSPD_OK_READ        6   // SHDN_E_READ
+#define DEFAULT_SOFTWARE_OK_READ    25  // SHDN_F_READ Watchdog Combined
+#define DEFAULT_BOTS_OK_READ        3   // SHDN_B_READ
+#define DEFAULT_BRAKE_LIGHT_CTRL    7
+#define DEFAULT_INVERTER_EN         9
+#define DEFAULT_INVERTER_24V_EN     8
 
 template<typename message_queue>
 class MCUInterface
 {
 public:
-    MCUInterface(message_queue *msg_output_queue): 
-        msg_queue_(msg_output_queue) {};
+    MCUInterface(message_queue *msg_output_queue, int bms_pin, int imd_pin, int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin, int inv_pin, int inv_24V_pin): 
+        msg_queue_(msg_output_queue),
+        pin_bms_ok_read_(bms_pin),
+        pin_imd_ok_read_(imd_pin),
+        pin_bspd_ok_read_(bspd_pin),
+        pin_software_ok_read_(sw_ok_pin),
+        pin_bots_ok_read_(bots_ok_pin),
+        pin_brake_light_ctrl_(brake_light_pin),
+        pin_inv_en_(inv_pin),
+        pin_inv_24V_en_(inv_24V_pin) {};
+    MCUInterface(message_queue *msg_output_queue):
+        MCUInterface(msg_output_queue, DEFAULT_BMS_OK_READ, DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ, DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_EN, DEFAULT_INVERTER_24V_EN) {};
 
     /* Initialize shutdown circuit input readings */
     void init();
@@ -87,6 +97,16 @@ private:
     bool shutdown_c_above_threshold;
     bool shutdown_d_above_threshold;
     bool shutdown_e_above_threshold;
+
+    /* Hardware interface pins */
+    int pin_bms_ok_read_;
+    int pin_imd_ok_read_;
+    int pin_bspd_ok_read_;
+    int pin_software_ok_read_;
+    int pin_bots_ok_read_;
+    int pin_brake_light_ctrl_;
+    int pin_inv_en_;
+    int pin_inv_24V_en_;
 };
 
 #endif /* __MCU_INTERFACE_H__ */

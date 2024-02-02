@@ -5,6 +5,7 @@
 
 #include "FlexCAN_T4.h"
 // #include "HyTech_CAN.h"
+#include "MCU_rev15_defs.h"
 
 /* Interfaces */
 #include "HytechCANInterface.h"
@@ -36,7 +37,7 @@ using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_mes
 MCP3208 ADC1(ADC1_CS);
 MCP3208 ADC2(ADC2_CS);
 MCP3208 ADC3(ADC3_CS);
-OrbisBR10 steering1(Serial5);
+OrbisBR10 steering1(STEERING_SERIAL);
 
 /* Declare interfaces */
 DashboardInterface dashboard;
@@ -51,12 +52,12 @@ InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
 InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
 /* Declare systems */
 SysClock sys_clock;
-BuzzerController buzzer(2000);
+BuzzerController buzzer(BUZZER_ON_INTERVAL);
 SafetySystem safety_system(&ams_interface, &wd_interface);  // Tie ams and wd interface to safety system (by pointers)
 PedalsSystem pedals;
 SteeringSystem steering_system(steering1);  // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
-auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, 5000); // Tie inverter interfaces to drivetrain system (by pointers)
+auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
 // Hypothetical controllers, need more implementation details
 TorqueControllerSimple simple_mode;
 TorqueControllerSimple normal_force_mode;
@@ -101,7 +102,7 @@ void setup() {
     // Drivetrain set all inverters disabled, write inv_en and inv_24V_en hight, set inverter_has_error to false if using
 
     /* Present action for 5s */
-    delay(5000);
+    delay(SETUP_PRESENT_ACTION_INTERVAL);
 
     /* Set start up status */
     // fsm either initialize state to STARTUP/TRACTIVE_SYSTEM_NOT_ACTIVE or enable external set state
@@ -243,7 +244,7 @@ void update_and_enqueue_all_CAN() {
                          ADC1.get(),
                          ADC2.get(),
                          ADC3.get(),
-                         Steering1.convert());
+                         steering1.convert());
 }
 
 void sample_all_external_readings() {

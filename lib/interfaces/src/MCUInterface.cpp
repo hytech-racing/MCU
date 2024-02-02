@@ -72,9 +72,9 @@
 /* Initialize shutdown circuit input readings */
 void MCUInterface::init() {
     // Set pin mode
-    pinMode(BRAKE_LIGHT_CTRL, OUTPUT);
-    pinMode(INVERTER_EN, OUTPUT);
-    pinMode(INVERTER_24V_EN, OUTPUT);
+    pinMode(pin_brake_light_ctrl_, OUTPUT);
+    pinMode(pin_inv_en_, OUTPUT);
+    pinMode(pin_inv_24V_en_, OUTPUT);
 
     // Set initial shutdown circuit readings
     bms_ok_high = false;
@@ -82,8 +82,8 @@ void MCUInterface::init() {
 
     // Enable inverters (?)
     // Should be called from drivetrain
-    digitalWrite(INVERTER_EN, HIGH);
-    digitalWrite(INVERTER_24V_EN, HIGH);
+    digitalWrite(pin_inv_en_, HIGH);
+    digitalWrite(pin_inv_24V_en_, HIGH);
 }
 
 /* Read shutdown system values */
@@ -97,41 +97,41 @@ void MCUInterface::read_mcu_status() {
 /* Measure shutdown circuits' input */
 void MCUInterface::measure_shutdown_circuit_input() {
 
-    bms_ok_high = digitalRead(BMS_OK_READ);
-    imd_ok_high = digitalRead(IMD_OK_READ);
-    bspd_ok_high = digitalRead(BSPD_OK_READ);
-    software_ok_high = digitalRead(SOFTWARE_OK_READ); 
+    bms_ok_high = digitalRead(pin_bms_ok_read_);
+    imd_ok_high = digitalRead(pin_imd_ok_read_);
+    bspd_ok_high = digitalRead(pin_bspd_ok_read_);
+    software_ok_high = digitalRead(pin_software_ok_read_); 
     
 }
 
 /* Measure shutdown circuits' voltages */
 void MCUInterface::measure_shutdown_circuit_voltage() {
 
-    shutdown_b_above_threshold = digitalRead(BOTS_OK_READ);
-    shutdown_c_above_threshold = digitalRead(IMD_OK_READ);
-    shutdown_d_above_threshold = digitalRead(BMS_OK_READ);
-    shutdown_e_above_threshold = digitalRead(BSPD_OK_READ);
+    shutdown_b_above_threshold = digitalRead(pin_bots_ok_read_);
+    shutdown_c_above_threshold = digitalRead(pin_imd_ok_read_);
+    shutdown_d_above_threshold = digitalRead(pin_bms_ok_read_);
+    shutdown_e_above_threshold = digitalRead(pin_bspd_ok_read_);
     
 }
 
 /* Write inverter enable */
 void MCUInterface::set_inverter_enable(bool enable) {
 
-    digitalWrite(INVERTER_EN, enable);
+    digitalWrite(pin_inv_en_, enable);
 
 }
 
 /* Write inverter 24V enable */
 void MCUInterface::set_inverter_24V_enable(bool enable_24V) {
 
-    digitalWrite(INVERTER_24V_EN, enable_24V);
+    digitalWrite(pin_inv_24V_en_, enable_24V);
 
 }
 
 /* Write brake light */
 void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
 
-    digitalWrite(BRAKE_LIGHT_CTRL, brake_pedal_is_active);
+    digitalWrite(pin_brake_light_ctrl_, brake_pedal_is_active);
 
 }
 
