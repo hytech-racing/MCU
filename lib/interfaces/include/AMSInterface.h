@@ -51,7 +51,6 @@ public:
     float get_filtered_min_cell_voltage();
 
     /* Retrieve CAN */
-    void retrieve_coulomb_count_CAN(CAN_message_t &recvd_msg);
     void retrieve_status_CAN(CAN_message_t &recvd_msg, const SysTick_s &tick);
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);

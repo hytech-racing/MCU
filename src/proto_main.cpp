@@ -3,7 +3,7 @@
 // /* Include files */
 #include <Arduino.h>
 
-#include "FlexCAN_T4.h"
+// #include "FlexCAN_T4.h"
 // #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
 
@@ -217,9 +217,9 @@ void dispatch_telem_CAN() {
             ams_interface.retrieve_voltage_CAN(recvd_msg);
             break;
         // Dashboard status
-        // case ID_DASHBOARD_STATUS:
-            // dashboard.retrieve_CAN(recvd_msg);
-            // break;
+        case ID_DASHBOARD_STATUS:
+            dashboard.read(recvd_msg);
+            break;
         default:
             break;
         }

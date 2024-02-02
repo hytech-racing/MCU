@@ -2,6 +2,7 @@
 
 /* Send CAN messages */
 // Pedal readings
+// template<typename message_queue>
 void TelemetryInterface::enqueue_CAN_mcu_pedal_readings() {
     
     CAN_message_t msg;
@@ -12,6 +13,7 @@ void TelemetryInterface::enqueue_CAN_mcu_pedal_readings() {
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Loadcell readings
+// template<typename message_queue>
 void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
     
     CAN_message_t msg;
@@ -23,6 +25,7 @@ void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
 }
 // Suspension potentiometers
 // Front
+// template<typename message_queue>
 void TelemetryInterface::enqueue_CAN_mcu_front_potentiometers() {
     
     CAN_message_t msg;
@@ -33,6 +36,7 @@ void TelemetryInterface::enqueue_CAN_mcu_front_potentiometers() {
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Rear
+// template<typename message_queue>
 void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
     
     CAN_message_t msg;
@@ -43,6 +47,7 @@ void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
     msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Analog sensor readings
+// template<typename message_queue>
 void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
 
     CAN_message_t msg;
@@ -116,7 +121,7 @@ void TelemetryInterface::tick(const SysTick_s &tick,
         update_load_cells_CAN_msg(adc2.conversions[2], adc3.conversions[2]);
         enqueue_CAN_mcu_load_cells();
         // Pots
-        update_potentiometers_CAN_msg(adc2.conversions[3]. adc3.conversions[3]);
+        update_potentiometers_CAN_msg(adc2.conversions[3], adc3.conversions[3]);
         enqueue_CAN_mcu_front_potentiometers();
         // enqueue_CAN_mcu_rear_potentiometers();
     }
