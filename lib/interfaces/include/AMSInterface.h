@@ -9,22 +9,26 @@
 #define PACK_CHARGE_CRIT_TOTAL_THRESHOLD        420
 #define PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  35000
 
-#define SOFTWARE_OK     28
+#define DEFAULT_INIT_TEMP       40.0
+#define DEFAULT_INIT_VOLTAGE    3.5
+#define DEFAULT_TEMP_ALPHA      0.8
+#define DEFAULT_VOLTAGE_ALPHA   0.8
+
+#define SOFTWARE_OK 28
 
 class AMSInterface
 {
 public:
-    AMSInterface(float init_temp=40.0, float init_volt=3.5, float temp_alpha=0.8, float volt_alpha=0.8, const SysTick_s &tick):        
+    AMSInterface(float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
-        cell_voltage_alpha(volt_alpha) 
-    {
-        last_heartbeat_time = tick.millis;
-    }
+        cell_voltage_alpha(volt_alpha) {};
+    AMSInterface():
+        AMSInterface(DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
 
     /* Initialize interface pin mode */
-    void init();
+    void init(const SysTick_s &tick);
 
     /* Write to Main ECU */
     // Initialize output value

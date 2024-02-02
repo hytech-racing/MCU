@@ -93,7 +93,7 @@ void setup() {
     /* Initialize interface */
     main_ecu.init();    // pin mode, initial shutdown circuit readings, 
     wd_interface.init(curr_tick);   // pin mode, initialize wd kick time
-    ams_interface.init();           // pin mode
+    ams_interface.init(curr_tick);  // pin mode, initialize last heartbeat time
 
     /* Initialize system */
     safety_system.init();   // write software_ok high, write wd_input high, set software ok state true
