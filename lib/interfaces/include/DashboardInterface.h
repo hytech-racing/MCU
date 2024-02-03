@@ -76,8 +76,8 @@ private:
 public:
     Dashboard(){};
 
-    void read(DASHBOARD_STATE_t* msg);
-    DASHBOARD_MCU_STATE_t write();
+    void read(const CAN_message_t &can_msg);
+    CAN_message_t write();
 
     DialMode_s getDialMode();
     

@@ -1,7 +1,10 @@
 #include "DashboardInterface.h"
 
-void DashboardInterface::read(DASHBOARD_STATE_t* msg)
+void DashboardInterface::read(const CAN_message_t &can_msg)
 {
+
+    DASHBOARD_STATE_t msg;
+    Unpack_DASHBOARD_STATE_ht_can(&msg, can_msg.buf, NULL);
 
     _data.dial_mode = static_cast<DialMode_e>(msg.dial_state);
     
@@ -20,7 +23,7 @@ void DashboardInterface::read(DASHBOARD_STATE_t* msg)
 
 }
 
-DASHBOARD_MCU_STATE_t DashboardInterface::write()
+CAN_message_t DashboardInterface::write()
 {   
 
     DASHBOARD_MCU_STATE_t msg;
@@ -40,7 +43,10 @@ DASHBOARD_MCU_STATE_t DashboardInterface::write()
     msg.imd_led = _data.LED[DashLED_e::IMD_LED];
     msg.ams_led = _data.LED[DashLED_e::AMS_LED];
 
-    return msg;
+    CAN_message_t can_msg;
+    can_msg.id = Pack_DASHBOARD_MCU_STATE_ht_can(&msg, can_msg.buf, &can_msg.len, NULL);
+
+    return can_msg;
 
 }
 
