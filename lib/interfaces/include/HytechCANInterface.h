@@ -1,37 +1,44 @@
-#ifndef __HYTECH_CAN_INTERFACE_H__
-#define __HYTECH_CAN_INTERFACE_H__
+#ifndef HYTECHCANINTERFACE
+#define HYTECHCANINTERFACE
 
 #include <tuple>
 #include "FlexCAN_T4.h"
 
 #include "HyTech_CAN.h"
 
-#define INV_CAN_SPEED   500000
-#define TELEM_CAN_SPEED 1000000
+#include "InverterInterface.h"
+
+
+template <typename circular_buffer>
+struct CANInterfaces
+{
+    InverterInterface<circular_buffer> *front_left_inv;
+    InverterInterface<circular_buffer> *front_right_inv;
+    InverterInterface<circular_buffer> *rear_left_inv;
+    InverterInterface<circular_buffer> *rear_right_inv;
+};
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
 // the processing of the receive queue happens on every iteration of the loop
 // in the processing of the receive call, all of the messages received get de-serialized and passed to their interfaces
 
-// extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
-//     CAN1_rxBuffer;
-
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN1_rxBuffer;
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN2_rxBuffer;
 
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
-// extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
-//     CAN1_txBuffer;
-
+extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+    CAN1_txBuffer;
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN2_txBuffer;
 
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_txBuffer;
 
-// void on_can1_receive(const CAN_message_t &msg);
+void on_can1_receive(const CAN_message_t &msg);
 void on_can2_receive(const CAN_message_t &msg);
 void on_can3_receive(const CAN_message_t &msg);
 
@@ -53,7 +60,8 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
         memmove(&recvd_msg, buf, sizeof(recvd_msg));
         switch (recvd_msg.id)
         {
-        // MC status msgs
+
+            // MC status msgs
         case ID_MC1_STATUS:
             interfaces.front_left_inv->receive_status_msg(recvd_msg);
             break;
@@ -67,7 +75,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
             interfaces.rear_right_inv->receive_status_msg(recvd_msg);
             break;
 
-        // MC temp msgs
+            // MC temp msgs
         case ID_MC1_TEMPS:
             interfaces.front_left_inv->receive_temp_msg(recvd_msg);
             break;
@@ -81,7 +89,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
             interfaces.rear_right_inv->receive_temp_msg(recvd_msg);
             break;
 
-        // MC energy msgs
+            // MC energy msgs
         case ID_MC1_ENERGY:
             interfaces.front_left_inv->receive_energy_msg(recvd_msg);
             break;
@@ -112,4 +120,4 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
     }
 }
 
-#endif /* __HYTECH_CAN_INTERFACE_H__ */
+#endif /* HYTECHCANINTERFACE */
