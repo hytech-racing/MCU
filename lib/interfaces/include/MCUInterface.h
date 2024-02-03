@@ -7,14 +7,14 @@
 #include "SysClock.h"
 #include "MCUStateMachine.h"
 
-#define DEFAULT_BMS_OK_READ         5   // SHDN_D_READ
-#define DEFAULT_IMD_OK_READ         4   // SHDN_C_READ
-#define DEFAULT_BSPD_OK_READ        6   // SHDN_E_READ
-#define DEFAULT_SOFTWARE_OK_READ    25  // SHDN_F_READ Watchdog Combined
-#define DEFAULT_BOTS_OK_READ        3   // SHDN_B_READ
-#define DEFAULT_BRAKE_LIGHT_CTRL    7
-#define DEFAULT_INVERTER_EN         9
-#define DEFAULT_INVERTER_24V_EN     8
+const int DEFAULT_BMS_OK_READ       = 5;   // SHDN_D_READ
+const int DEFAULT_IMD_OK_READ       = 4;   // SHDN_C_READ
+const int DEFAULT_BSPD_OK_READ      = 6;   // SHDN_E_READ
+const int DEFAULT_SOFTWARE_OK_READ  = 25;  // SHDN_F_READ Watchdog Combined
+const int DEFAULT_BOTS_OK_READ      = 3;   // SHDN_B_READ
+const int DEFAULT_BRAKE_LIGHT_CTRL  = 7;
+const int DEFAULT_INVERTER_EN       = 9;
+const int DEFAULT_INVERTER_24V_EN   = 8;
 
 template<typename message_queue>
 class MCUInterface

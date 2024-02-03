@@ -5,16 +5,14 @@
 #include "HyTech_CAN.h"
 #include "SysClock.h"
 
-#define HEARTBEAT_INTERVAL                      20   // milliseconds
-#define PACK_CHARGE_CRIT_TOTAL_THRESHOLD        420
-#define PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  35000
+const unsigned long HEARTBEAT_INTERVAL                      = 20;   // milliseconds
+const unsigned long PACK_CHARGE_CRIT_TOTAL_THRESHOLD        = 420;
+const unsigned long PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  = 35000;
 
-#define DEFAULT_INIT_TEMP       40.0
-#define DEFAULT_INIT_VOLTAGE    3.5
-#define DEFAULT_TEMP_ALPHA      0.8
-#define DEFAULT_VOLTAGE_ALPHA   0.8
-
-#define DEFAULT_SOFTWARE_OK 28
+const float DEFAULT_INIT_TEMP       = 40.0;
+const float DEFAULT_INIT_VOLTAGE    = 3.5;
+const float DEFAULT_TEMP_ALPHA      = 0.8;
+const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 
 class AMSInterface
 {
@@ -27,8 +25,6 @@ public:
         cell_voltage_alpha(volt_alpha) {};
     AMSInterface(int sw_ok_pin):
         AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
-    AMSInterface():
-        AMSInterface(DEFAULT_SOFTWARE_OK) {};
 
     /* Initialize interface pin mode */
     void init(const SysTick_s &tick);

@@ -5,15 +5,12 @@
 #include "HyTech_CAN.h"
 #include "SysClock.h"
 
-#define DEFAULT_WATCHDOG_INPUT  32
-
-#define WATCHDOG_KICK_INTERVAL  7    // milliseconds
+const unsigned long WATCHDOG_KICK_INTERVAL = 7    // milliseconds
 
 class WatchdogInterface
 {
 public:
     WatchdogInterface(int wd_input_pin): pin_watchdog_input_(wd_input_pin) {};
-    WatchdogInterface(): WatchdogInterface(DEFAULT_WATCHDOG_INPUT) {};
 
     /* Initialize interface pin mode */
     void init(const SysTick_s &tick);
