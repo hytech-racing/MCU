@@ -1,7 +1,7 @@
 #ifndef __DASHBOARDINTERFACE_H__
 #define __DASHBOARDINTERFACE_H__
 
-#include "Dashboard_status.h"
+#include "ht_can.h"
 
 enum DialMode_e
 {
@@ -79,7 +79,7 @@ public:
     void read(const CAN_message_t &can_msg);
     CAN_message_t write();
 
-    DialMode_s getDialMode();
+    DialMode_e getDialMode();
     
     bool safetySystemOK();
 
