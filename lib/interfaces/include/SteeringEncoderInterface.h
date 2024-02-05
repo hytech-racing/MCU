@@ -1,7 +1,6 @@
 #ifndef __UPPERSTEERINGSENSOR_H__
 #define __UPPERSTEERINGSENSOR_H__
 
-#include "AnalogSensorsInterface.h"
 #include <tuple>
 
 enum SteeringEncoderStatus_e

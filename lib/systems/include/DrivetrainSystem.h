@@ -1,11 +1,9 @@
 #ifndef DRIVETRAINSYSTEM
 #define DRIVETRAINSYSTEM
 
-#include "InverterSystem.h"
-#include "InverterInterface.h"
 #include "Utility.h"
 #include <array>
-
+#include "stdint.h"
 struct DrivetrainCommand_s
 { 
     float speeds[NUM_MOTORS];
@@ -58,6 +56,7 @@ public:
     bool hv_over_threshold_on_drivetrain();
     void disable();
     bool drivetrain_error_occured();
+    void reset_drivetrain();
 
     void command_drivetrain(const DrivetrainCommand_s& data);
 private:

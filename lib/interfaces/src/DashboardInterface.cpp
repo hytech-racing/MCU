@@ -71,3 +71,4 @@ bool DashboardInterface::shutdownHAboveThreshold() {return _data.shutdown;}
 
 void DashboardInterface::soundBuzzer(bool state) {_data.buzzer_cmd = state;}
 bool DashboardInterface::checkBuzzer() {return _data.buzzer_state;}
+
