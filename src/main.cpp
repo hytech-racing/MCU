@@ -147,7 +147,7 @@ void loop() {
 void init_all_CAN() {
     // Inverter CAN line
     INV_CAN.begin();
-    INV_CAN.setBaudRate(INV_CAN_SPEED);
+    INV_CAN.setBaudRate(500000);
     INV_CAN.setMaxMB(16);
     INV_CAN.enableFIFO();
     INV_CAN.enableFIFOInterrupt();
@@ -156,7 +156,7 @@ void init_all_CAN() {
 
     // Telemetry CAN line
     TELEM_CAN.begin();
-    TELEM_CAN.setBaudRate(TELEM_CAN_SPEED);
+    TELEM_CAN.setBaudRate(500000);
     TELEM_CAN.setMaxMB(16);
     TELEM_CAN.enableFIFO();
     TELEM_CAN.enableFIFOInterrupt();
@@ -211,7 +211,7 @@ void dispatch_telem_CAN() {
         {
         // AMS CAN
         case ID_BMS_COULOMB_COUNTS:
-            ams_interface.retrieve_coulomb_count_CAN(recvd_msg);
+            // ams_interface.retrieve_coulomb_count_CAN(recvd_msg);
             break;
         case ID_BMS_STATUS:
             ams_interface.retrieve_status_CAN(recvd_msg, curr_tick);
@@ -236,35 +236,35 @@ void update_and_enqueue_all_CAN() {
     // Drivetrain system
         // probably here as well
     // MCU interface
-    main_ecu.tick(curr_tick,
-                  fsm.get_state(),
-                  drivetrain.drive_error_occured(),
-                  safety_system.get_software_is_ok(),
+    // main_ecu.tick(curr_tick,
+                //   fsm.get_state(),
+                //   drivetrain.drivetrain_error_occured(),
+                //   safety_system.get_software_is_ok(),
                   // TCMux return
-                  buzzer.buzzer_is_on(),
+                //   buzzer.buzzer_is_on(),
                   // Pedal system return
-                  ams_interface.pack_charge_is_critical(),
-                  dash.lauchControlButtonPressed());
+                //   ams_interface.pack_charge_is_critical(),
+                //   dash.lauchControlButtonPressed());
     // Telemetry
-    telem_interface.tick(curr_tick,
-                         ADC1.get(),
-                         ADC2.get(),
-                         ADC3.get(),
-                         steering1.convert());
+    // telem_interface.tick(curr_tick,
+                        //  ADC1.get(),
+                        //  ADC2.get(),
+                        //  ADC3.get(),
+                        //  steering1.convert());
 }
 
 void sample_all_external_readings() {
     // Tick all adcs
-    ADC1.tick();
-    ADC2.tick();
-    ADC3.tick();
+    // ADC1.tick();
+    // ADC2.tick();
+    // ADC3.tick();
     // Tick steering system
-    steering1.tick();
+    // steering1.tick();
     // Read shutdown circuits    
     main_ecu.read_mcu_status();
 }
 
 void process_all_value_readings() {
-    pedals.tick();
+    // pedals.tick();
 }
 

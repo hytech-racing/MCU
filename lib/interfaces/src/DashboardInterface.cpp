@@ -8,7 +8,7 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 
     _data.dial_mode = static_cast<DialMode_e>(msg.dial_state);
     
-    _data.ssok = msg.ssok_above_threshold
+    _data.ssok = msg.ssok_above_threshold;
     _data.shutdown = msg.shutdown_h_above_threshold;
 
     _data.button.start = msg.start_btn;
@@ -44,16 +44,18 @@ void DashboardInterface::write()
     msg.ams_led = _data.LED[DashLED_e::AMS_LED];
 
     CAN_message_t can_msg;
-    can_msg.id = Pack_DASHBOARD_MCU_STATE_ht_can(&msg, can_msg.buf, &can_msg.len, NULL);
-
-    msg_queue_->push_back(can_msg, sizeof(CAN_message_t));
+    can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, NULL);
+    
+    // TODO fix
+    // msg_queue_->push_back(can_msg, sizeof(CAN_message_t));
 
 }
 
 //figure out how to set enumed led colors or send (0,255 value)
 void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
 {
-    _data.LED[static_cast<int>(led)] = static_cast<int> color;
+    // TODO this no worky
+    // _data.LED[static_cast<int>(led)] = static_cast<int> color;
 }
 
 DialMode_e DashboardInterface::getDialMode() {return _data.dial_mode;}

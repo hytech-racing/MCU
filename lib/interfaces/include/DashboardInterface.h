@@ -37,7 +37,7 @@ enum DashLED_e
     MC_ERROR_LED,
     IMD_LED,
     AMS_LED,
-}
+};
 
 struct DashButtons_s
 {
@@ -78,7 +78,7 @@ private:
 
 public:
 
-    Dashboard(CANBufferType *msg_output_queue)
+    DashboardInterface(CANBufferType *msg_output_queue)
     {
         msg_queue_ = msg_output_queue;
     };
@@ -98,7 +98,7 @@ public:
     bool torqueLoadingButtonPressed();
     bool nightModeButtonPressed();
     bool torqueVectoringOffButtonPressed();
-
+    bool shutdownHAboveThreshold();
     void soundBuzzer(bool s);
     bool checkBuzzer();
 
