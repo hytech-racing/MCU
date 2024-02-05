@@ -22,17 +22,17 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::TRACTIVE_SYSTEM_ACTIVE:
     {
         // TODO migrate to new pedals system
-        PedalsDriverInterface data;
-        if (!drivetrain_->hv_over_threshold_on_drivetrain())
-        {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
-            break;
-        }
-        if (dashboard_->start_button_pressed() && pedals_->mech_brake_active(data))
-        {
-            set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
-            break;
-        }
+        PedalsSystemData_s data;
+        // if (!drivetrain_->hv_over_threshold_on_drivetrain())
+        // {
+        //     set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
+        //     break;
+        // }
+        // if (dashboard_->start_button_pressed() && pedals_->mech_brake_active(data))
+        // {
+        //     set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
+        //     break;
+        // }
         break;
     }
 
@@ -118,14 +118,14 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
         // TODO migrate the handling of the pedals / move to the new pedals system
-        PedalsDriverInterface data;
-        auto pedals_data = pedals_->evaluate_pedals(data, current_millis);
+        // PedalsDriverInterface data;
+        // auto pedals_data = pedals_->evaluate_pedals(data, current_millis);
         // auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
 
         // TODO: below in the scope of this function
         if (
-            bms_->ok_high() &&
-            imd_->ok_high() &&
+            // bms_->ok_high() &&
+            // imd_->ok_high() &&
             !pedals_->max_duration_of_implausibility_exceeded(current_millis))
         {
             // drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
@@ -134,11 +134,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         {
             drivetrain_->command_drivetrain_no_torque();
             hal_println("not calculating torque");
-            hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
-            hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
-            hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
-            hal_printf("get bms ok high: %d\n", bms_->ok_high());
-            hal_printf("get imd ok high: %d\n", imd_->ok_high());
+            // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
+            // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
+            // hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
+            // hal_printf("get bms ok high: %d\n", bms_->ok_high());
+            // hal_printf("get imd ok high: %d\n", imd_->ok_high());
         }
 
         break;

@@ -4,20 +4,20 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 {
 
     DASHBOARD_STATE_t msg;
-    Unpack_DASHBOARD_STATE_ht_can(&msg, can_msg.buf, NULL);
+    Unpack_DASHBOARD_STATE_hytech(&msg, can_msg.buf, NULL);
 
     _data.dial_mode = static_cast<DialMode_e>(msg.dial_state);
     
     _data.ssok = msg.ssok_above_threshold;
     _data.shutdown = msg.shutdown_h_above_threshold;
 
-    _data.button.start = msg.start_btn;
-    _data.button.mark = msg.mark_btn;
-    _data.button.mode = msg.mode_btn;
-    _data.button.mc_cycle = msg.mc_cycle_btn;
-    _data.button.launch_ctrl = msg.launch_ctrl_btn;
-    _data.button.torque_mode = msg.torque_mode_btn;
-    _data.button.led_dimmer = msg.led_dimmer_btn;
+    // _data.button.start = msg.start_btn;
+    // _data.button.mark = msg.mark_btn;
+    // _data.button.mode = msg.mode_btn;
+    // _data.button.mc_cycle = msg.mc_cycle_btn;
+    // _data.button.launch_ctrl = msg.launch_ctrl_btn;
+    // _data.button.torque_mode = msg.torque_mode_btn;
+    // _data.button.led_dimmer = msg.led_dimmer_btn;
 
     _data.buzzer_state = msg.drive_buzzer;
 
@@ -30,18 +30,18 @@ void DashboardInterface::write()
     msg.drive_buzzer = _data.buzzer_cmd;
 
     // TODO: use logic as to not write data for LEDs that have not changed
-    msg.bots_led = _data.LED[DashLED_e::BOTS_LED];
-    msg.launch_control_led = _data.LED[DashLED_e::LAUNCH_CONTROL_LED];
-    msg.mode_led = _data.LED[DashLED_e::MODE_LED];
-    msg.mech_brake_led = _data.LED[DashLED_e::MECH_BRAKE_LED];
-    msg.cockpit_brb_led = _data.LED[DashLED_e::COCKPIT_BRB_LED];
-    msg.inertia_led = _data.LED[DashLED_e::INERTIA_LED];
-    msg.glv_led = _data.LED[DashLED_e::GLV_LED];
-    msg.crit_charge_led = _data.LED[DashLED_e::CRIT_CHARGE_LED];
-    msg.start_led = _data.LED[DashLED_e::START_LED];
-    msg.mc_error_led = _data.LED[DashLED_e::MC_ERROR_LED];
-    msg.imd_led = _data.LED[DashLED_e::IMD_LED];
-    msg.ams_led = _data.LED[DashLED_e::AMS_LED];
+    // msg.bots_led = _data.LED[DashLED_e::BOTS_LED];
+    // msg.launch_control_led = _data.LED[DashLED_e::LAUNCH_CONTROL_LED];
+    // msg.mode_led = _data.LED[DashLED_e::MODE_LED];
+    // msg.mech_brake_led = _data.LED[DashLED_e::MECH_BRAKE_LED];
+    // msg.cockpit_brb_led = _data.LED[DashLED_e::COCKPIT_BRB_LED];
+    // msg.inertia_led = _data.LED[DashLED_e::INERTIA_LED];
+    // msg.glv_led = _data.LED[DashLED_e::GLV_LED];
+    // msg.crit_charge_led = _data.LED[DashLED_e::CRIT_CHARGE_LED];
+    // msg.start_led = _data.LED[DashLED_e::START_LED];
+    // msg.mc_error_led = _data.LED[DashLED_e::MC_ERROR_LED];
+    // msg.imd_led = _data.LED[DashLED_e::IMD_LED];
+    // msg.ams_led = _data.LED[DashLED_e::AMS_LED];
 
     CAN_message_t can_msg;
     can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, NULL);

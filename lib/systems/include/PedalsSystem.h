@@ -78,6 +78,8 @@ public:
     }
 
 // Functions
+    
+    bool max_duration_of_implausibility_exceeded(unsigned long t);
     void tick(
         const SysTick_s &sysClock, 
         const AnalogConversion_s &accel1, 
