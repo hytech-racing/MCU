@@ -1,5 +1,5 @@
-#include <TorqueControllerMux.h>
-#include <Utility.h>
+#include "TorqueControllerMux.h"
+#include "Utility.h"
 
 void TorqueControllerMux::tick(
         const SysTick_s& tick,
@@ -45,7 +45,10 @@ void TorqueControllerMux::tick(
         {
             bool speedPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
-                speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND >= maxSpeedForModeChange;
+                // float GEARBOX_RATIO =             11.86;
+                // float WHEEL_DIAMETER =            0.4064;
+                // float RPM_TO_METERS_PER_SECOND =  WHEEL_DIAMETER * 3.1415 / GEARBOX_RATIO / 60.0;
+                speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * 1.0 >= maxSpeedForModeChange;
 
             bool torqueDeltaPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)

@@ -85,3 +85,27 @@ void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1,
         data_.persistentImplausibilityDetected = false;
     }
 }
+
+// 
+// bool PedalsSystem::mech_brake_active()
+// {
+//     return pedal_is_active_();
+// }
+
+bool PedalsSystem::evaluate_brake_and_accel_pressed_()
+{
+
+    // bool accel_pressed = pedal_is_active_(data.accelPedalPosition1, data.accelPedalPosition2, accelParams_, 0.1);
+    // bool brake_pressed = pedal_is_active_(data.brakePedalPosition1, data.brakePedalPosition2, brakeParams_, 0.05);
+    
+    // return (accel_pressed && brake_pressed);
+
+}
+
+bool PedalsSystem::pedal_is_active_(int sense_1, int sense_2, const PedalsSystemParameters_s &pedalParams, float percent_threshold)
+{
+    // bool pedal_1_is_active = (sense_1 > (((pedalParams.end_sense_1 - pedalParams.start_sense_1) * percent_threshold) + pedalParams.start_sense_1));
+    // bool pedal_2_is_active = (sense_2 > (((pedalParams.end_sense_2 - pedalParams.start_sense_2) * percent_threshold) + pedalParams.start_sense_2));
+
+    // return (pedal_1_is_active || pedal_2_is_active);
+}

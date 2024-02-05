@@ -4,6 +4,6 @@
 #include "FlexCAN_T4.h"
 
 constexpr std::size_t CANBufferSize = 16;
-using CANBufferType = CircularBuffer<uint8_t, CANBufferSize>;
+using CANBufferType = Circular_Buffer<uint8_t, CANBufferSize>;
 
 #endif

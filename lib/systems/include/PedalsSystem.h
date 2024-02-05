@@ -54,8 +54,13 @@ class PedalsSystem
 private:
 // Data
     PedalsSystemParameters_s parameters_;
-    long implausibilityDetectedTime_;
+    int implausibilityDetectedTime_;
     PedalsSystemData_s data_;
+
+    bool evaluate_brake_and_accel_pressed_();
+
+    bool pedal_is_active_(int sense_1, int sense_2, const PedalsSystemParameters_s &pedalParams, float percent_threshold);
+
 public:
 // Constructors
     PedalsSystem(PedalsSystemParameters_s* parametersExt)
@@ -73,6 +78,8 @@ public:
     }
 
 // Functions
+    
+    bool max_duration_of_implausibility_exceeded(unsigned long t);
     void tick(
         const SysTick_s &sysClock, 
         const AnalogConversion_s &accel1, 

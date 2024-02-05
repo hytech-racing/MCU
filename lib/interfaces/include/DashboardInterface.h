@@ -3,7 +3,7 @@
 
 #include "MessageQueueDefine.h"
 #include "FlexCAN_T4.h"
-#include "ht_can.h"
+#include "hytech.h"
 
 enum DialMode_e
 {
@@ -37,7 +37,7 @@ enum DashLED_e
     MC_ERROR_LED,
     IMD_LED,
     AMS_LED,
-}
+};
 
 struct DashButtons_s
 {
@@ -78,7 +78,7 @@ private:
 
 public:
 
-    Dashboard(CANBufferType *msg_output_queue)
+    DashboardInterface(CANBufferType *msg_output_queue)
     {
         msg_queue_ = msg_output_queue;
     };
@@ -98,8 +98,9 @@ public:
     bool torqueLoadingButtonPressed();
     bool nightModeButtonPressed();
     bool torqueVectoringOffButtonPressed();
-
-    void soundBuzzer();
+    bool shutdownHAboveThreshold();
+    void soundBuzzer(bool s);
+    bool checkBuzzer();
 
     // LEDs in same order as dash rev. 7 placement
 

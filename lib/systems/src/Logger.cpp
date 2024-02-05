@@ -1,7 +1,7 @@
 #include "Logger.h"
 
 #ifdef ARDUINO
-#include <stdio.h>
+
 
 void hal_print(const char s[]) { Serial.print(s); }
 

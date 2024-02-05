@@ -5,7 +5,7 @@
 #include "TorqueControllers.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
-#include "SteeringSystem.h'
+#include "SteeringSystem.h"
 #include "DashboardInterface.h"
 #include "AnalogSensorsInterface.h"
 
