@@ -5,8 +5,8 @@
 
 enum DialMode_e
 {
+    MODE_1,
     MODE_2,
-    MODE_3,
     ACCEL_LAUNCH_CONTROL,
     SKIDPAD,
     AUTOCROSS,
@@ -63,7 +63,7 @@ struct DashComponentInterface_s
     bool buzzer_cmd;
     //making it an array of ints to support enumerated LEDs as well as
     //gradient/value based LEDs
-    LEDColors_e LED[13];
+    LEDColors_e LED[12];
 };
 
 
@@ -94,7 +94,7 @@ public:
 
     void soundBuzzer();
 
-    // LEDs in same order as dash rev. 8 placement
+    // LEDs in same order as dash rev. 7 placement
 
     void setLED(DashLED_e led, LEDColors_e color);
 };
