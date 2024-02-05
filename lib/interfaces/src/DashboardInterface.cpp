@@ -23,7 +23,7 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 
 }
 
-CAN_message_t DashboardInterface::write()
+void DashboardInterface::write()
 {   
 
     DASHBOARD_MCU_STATE_t msg;
@@ -46,7 +46,7 @@ CAN_message_t DashboardInterface::write()
     CAN_message_t can_msg;
     can_msg.id = Pack_DASHBOARD_MCU_STATE_ht_can(&msg, can_msg.buf, &can_msg.len, NULL);
 
-    return can_msg;
+    msg_queue_->push_back(can_msg, sizeof(CAN_message_t));
 
 }
 
