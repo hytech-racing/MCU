@@ -1,9 +1,9 @@
-#ifndef DASHBOARDINTERFACE
-#define DASHBOARDINTERFACE
+#ifndef __DASHBOARDINTERFACE_H__
+#define __DASHBOARDINTERFACE_H__
 
-#include "Dashboard_status.h"
+#include "ht_can.h"
 
-enum DialMode_s
+enum DialMode_e
 {
     MODE_1,
     MODE_2,
@@ -13,13 +13,29 @@ enum DialMode_s
     ENDURANCE,
 };
 
-enum LEDColors_s
+enum LEDColors_e
 {
     OFF,
     ON,
     YELLOW,
     RED,
 };
+
+enum DashLED_e
+{
+    BOTS_LED,
+    LAUNCH_CONTROL_LED,
+    MODE_LED,
+    MECH_BRAKE_LED,
+    COCKPIT_BRB_LED,
+    INERTIA_LED,
+    GLV_LED,
+    CRIT_CHARGE_LED,
+    START_LED,
+    MC_ERROR_LED,
+    IMD_LED,
+    AMS_LED,
+}
 
 struct DashButtons_s
 {
@@ -32,36 +48,22 @@ struct DashButtons_s
     bool led_dimmer;
 };
 
-struct DashLEDs_s
-{
-    uint8_t ams;
-    uint8_t imd;
-    uint8_t mode;
-    uint8_t mc_error;
-    uint8_t start;
-    uint8_t inertia;
-    uint8_t mech_brake;
-    uint8_t gen_purp;
-    uint8_t bots;
-    uint8_t cockpit_brb;
-    uint8_t crit_charge;
-    uint8_t glv;
-    uint8_t launch_control;
-};
-
-struct DashComponentInterface
+struct DashComponentInterface_s
 {
     /* READ DATA */
     // enum for dial position read by controller mux
-    DialMode_s dial_mode;
+    DialMode_e dial_mode;
     // Buttons struct for better naming
     DashButtons_s button;
     bool ssok; // safety system OK (IMD?) RENAME
     bool shutdown;
+    bool buzzer_state;
 
     /* WRITTEN DATA */
-    bool buzzer;
-    DashLEDs_s LED;
+    bool buzzer_cmd;
+    //making it an array of ints to support enumerated LEDs as well as
+    //gradient/value based LEDs
+    LEDColors_e LED[12];
 };
 
 
@@ -69,18 +71,19 @@ class DashboardInterface
 {
 private:
 
-    
+    DashComponentInterface_s _data;
 
 public:
-    DashboardInterface(){}
+    Dashboard(){};
 
-    void read(const Dashboard_status &msg);
+    void read(const CAN_message_t &can_msg);
+    CAN_message_t write();
 
-    DialMode_s getDialMode();
+    DialMode_e getDialMode();
     
     bool safetySystemOK();
 
-    bool start_button_pressed();
+    bool startButtonPressed();
     bool specialButtonPressed();
     bool torqueButtonPressed();
     bool inverterResetButtonPressed();
@@ -92,18 +95,8 @@ public:
     void soundBuzzer();
 
     // LEDs in same order as dash rev. 7 placement
-    void botsLED(LEDColors_s color);
-    void launchControlLED(LEDColors_s color);
-    void modeLED(LEDColors_s color);
-    void mechanicalBrakeLED(LEDColors_s color);
-    void cockpitBrbLED(LEDColors_s color);
-    void InertiaSwitchLED(LEDColors_s color);
-    void glvLED(LEDColors_s color);
-    void critChargeLED(LEDColors_s color);
-    void startLED(LEDColors_s color);
-    void mcErrorLED(LEDColors_s color);
-    void imdLED(LEDColors_s color);
-    void amsLED(LEDColors_s color);
+
+    void setLED(DashLED_e led, LEDColors_e color);
 };
 
-#endif /* DASHBOARDINTERFACE */
+#endif /* __DASHBOARDINTERFACE_H__ */
