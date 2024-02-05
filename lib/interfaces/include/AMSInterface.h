@@ -22,7 +22,11 @@ public:
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
-        cell_voltage_alpha(volt_alpha) {};
+        cell_voltage_alpha(volt_alpha)
+    {
+        // Set pin mode
+        pinMode(pin_software_ok_, OUTPUT);
+    };
     AMSInterface(int sw_ok_pin):
         AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
 
