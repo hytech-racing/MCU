@@ -5,7 +5,7 @@
 #include "HyTech_CAN.h"
 #include "SysClock.h"
 
-const unsigned long WATCHDOG_KICK_INTERVAL = 7    // milliseconds
+const unsigned long WATCHDOG_KICK_INTERVAL = 7;    // milliseconds
 
 class WatchdogInterface
 {

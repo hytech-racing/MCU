@@ -16,7 +16,7 @@ template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_hv()
 {
 
-    MC_setpoints_command mc_setpoints_command;
+    MC_setpoints_command mc_setpoints_command{};
     mc_setpoints_command.set_hv_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
@@ -24,20 +24,19 @@ void InverterInterface<message_queue>::request_enable_hv()
 template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_inverter()
 {
-    MC_setpoints_command mc_setpoints_command;
+    MC_setpoints_command mc_setpoints_command{};
     mc_setpoints_command.set_speed_setpoint(0);
     mc_setpoints_command.set_pos_torque_limit(0);
     mc_setpoints_command.set_neg_torque_limit(0);
     mc_setpoints_command.set_driver_enable(true);
     mc_setpoints_command.set_inverter_enable(true);
-
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
 
 template <typename message_queue>
 void InverterInterface<message_queue>::command_no_torque()
 {
-    MC_setpoints_command mc_setpoints_command;
+    MC_setpoints_command mc_setpoints_command{};
     mc_setpoints_command.set_speed_setpoint(0);
     mc_setpoints_command.set_pos_torque_limit(0);
     mc_setpoints_command.set_neg_torque_limit(0);
@@ -48,7 +47,7 @@ void InverterInterface<message_queue>::command_no_torque()
 template <typename message_queue>
 void InverterInterface<message_queue>::handle_command(const InverterCommand &command)
 {
-    MC_setpoints_command mc_setpoints_command;
+    MC_setpoints_command mc_setpoints_command{};
     // TODO handle the correct conversion to the over the wire data from real-world data type
     mc_setpoints_command.set_speed_setpoint(command.speed_setpoint_rpm);
 
@@ -65,11 +64,19 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
 
+
+template <typename message_queue>
+void InverterInterface<message_queue>::command_reset()
+{
+    MC_setpoints_command mc_setpoints_command{};
+    mc_setpoints_command.set_remove_error(true);
+    write_cmd_msg_to_queue_(mc_setpoints_command);
+}
+
 template <typename message_queue>
 void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
 {
     MC_status mc_status(&msg.buf[0]);
-
     system_ready_ = mc_status.get_system_ready();
     quit_dc_on_ = mc_status.get_quit_dc_on();
     quit_inverter_on_ = mc_status.get_quit_inverter_on();

@@ -37,6 +37,7 @@ public:
     void request_enable_inverter();
     void command_no_torque();
     void handle_command(const InverterCommand &command);
+    void command_reset();
 
     
     bool inverter_system_ready()

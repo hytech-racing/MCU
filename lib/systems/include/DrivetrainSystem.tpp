@@ -37,13 +37,35 @@ void DrivetrainSystem<InverterType>::command_drivetrain_no_torque()
 }
 
 template <typename InverterType>
-void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand& data)
+bool DrivetrainSystem<InverterType>::drivetrain_error_occured()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        if(inv_pointer->error())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+template <typename InverterType>
+void DrivetrainSystem<InverterType>::reset_drivetrain()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->command_reset();
+    }
+}
+
+template <typename InverterType>
+void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_s& data)
 {
 
-    inverters_[0]->handle_command(data.left_front_inverter_cmd);
-    inverters_[1]->handle_command(data.right_front_inverter_cmd);
-    inverters_[2]->handle_command(data.left_rear_inverter_cmd);
-    inverters_[3]->handle_command(data.right_rear_inverter_cmd);
+    // inverters_[0]->handle_command(data.left_front_inverter_cmd);
+    // inverters_[1]->handle_command(data.right_front_inverter_cmd);
+    // inverters_[2]->handle_command(data.left_rear_inverter_cmd);
+    // inverters_[3]->handle_command(data.right_rear_inverter_cmd);
     
 }
 
@@ -96,17 +118,4 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled()
         }
     }
     return true;
-}
-
-template<typename InverterType> 
-bool DrivetrainSystem<InverterType>::drivetrain_error_occured()
-{
-    for (auto inv_pointer : inverters_)
-    {
-        if (inv_pointer->error())
-        {
-            return true;
-        }
-    }
-    return false;
 }
