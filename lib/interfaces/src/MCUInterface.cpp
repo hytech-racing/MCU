@@ -76,15 +76,15 @@ bool MCUInterface::imd_ok_is_high() {
 
 /* Send CAN message */
 // MCU status
-void MCUInterface::enqueue_CAN_mcu_status() {
+// void MCUInterface::enqueue_CAN_mcu_status() {
 
-    CAN_message_t msg;
-    mcu_status_.write(msg.buf);
-    msg.id = ID_MCU_STATUS;
-    msg.len = sizeof(mcu_status_);
+//     CAN_message_t msg;
+//     mcu_status_.write(msg.buf);
+//     msg.id = ID_MCU_STATUS;
+//     msg.len = sizeof(mcu_status_);
 
-    msg_queue_->push_back(msg, sizeof(CAN_message_t));
-}
+//     msg_queue_->push_back(msg, sizeof(CAN_message_t));
+// }
 
 /* Update MCU_status CAN */
 // MCUInterface
@@ -107,7 +107,7 @@ void MCUInterface::update_mcu_status_CAN_fsm(CAR_STATE fsm_state) {
     // State machine returns struct in main loop
     // fsm.get_state()
     // might not be compatible anymore, using new states
-    mcu_status_.set_state(fsm_state);
+    // mcu_status_.set_state(fsm_state);
 }
 //DriveTrain
 void MCUInterface::update_mcu_status_CAN_drivetrain(bool has_error) {
@@ -138,7 +138,7 @@ void MCUInterface::update_mcu_status_CAN_TCMux() {
 void MCUInterface::update_mcu_status_CAN_dashboard(bool is_pressed) {
     // DashboardInterface (?) returns struct in main loop
     // dash.lauchControlButtonPressed()
-    mcu_status_.toggle_launch_ctrl_active(is_pressed);
+    // mcu_status_.toggle_launch_ctrl_active(is_pressed);
 }
 // BuzzerSystem
 void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on) {
@@ -158,33 +158,33 @@ void MCUInterface::update_mcu_status_CAN_pedals() {
 }
 
 /* Tick SysClock */
-void MCUInterface::tick(const SysTick_s &tick,
-                        // CAR_STATE fsm_state,
-                        bool inv_has_error,
-                        bool software_is_ok,
-                        // TCMux return
-                        bool buzzer_is_on,
-                        // Pedal system return
-                        bool pack_charge_is_critical,
-                        bool button_is_pressed) {
+// void MCUInterface::tick(const SysTick_s &tick,
+//                         // CAR_STATE fsm_state,
+//                         bool inv_has_error,
+//                         bool software_is_ok,
+//                         // TCMux return
+//                         bool buzzer_is_on,
+//                         // Pedal system return
+//                         bool pack_charge_is_critical,
+//                         bool button_is_pressed) {
 
-    if (tick.triggers.trigger10) {
-        // State machine
-        // update_mcu_status_CAN_fsm(fsm_state);
-        // Systems
-        update_mcu_status_CAN_drivetrain(inv_has_error);
-        update_mcu_status_CAN_safety(software_is_ok);
-        update_mcu_status_CAN_TCMux();
-        update_mcu_status_CAN_buzzer(buzzer_is_on);
-        update_mcu_status_CAN_pedals();
-        // External Interfaces
-        update_mcu_status_CAN_ams(pack_charge_is_critical);    
-        update_mcu_status_CAN_dashboard(button_is_pressed);
-        // Internal values
-        update_mcu_status_CAN();
-        // Push into buffer
-        enqueue_CAN_mcu_status();
-    }
-}
+//     if (tick.triggers.trigger10) {
+//         // State machine
+//         // update_mcu_status_CAN_fsm(fsm_state);
+//         // Systems
+//         update_mcu_status_CAN_drivetrain(inv_has_error);
+//         update_mcu_status_CAN_safety(software_is_ok);
+//         update_mcu_status_CAN_TCMux();
+//         update_mcu_status_CAN_buzzer(buzzer_is_on);
+//         update_mcu_status_CAN_pedals();
+//         // External Interfaces
+//         update_mcu_status_CAN_ams(pack_charge_is_critical);    
+//         update_mcu_status_CAN_dashboard(button_is_pressed);
+//         // Internal values
+//         update_mcu_status_CAN();
+//         // Push into buffer
+//         enqueue_CAN_mcu_status();
+//     }
+// }
 
 

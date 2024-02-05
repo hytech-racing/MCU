@@ -9,7 +9,7 @@ void TelemetryInterface::enqueue_CAN_mcu_pedal_readings() {
     msg.id = ID_MCU_PEDAL_READINGS;
     msg.len = sizeof(mcu_pedal_readings_);
 
-    msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Loadcell readings
 void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
@@ -19,7 +19,7 @@ void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
     msg.id = ID_MCU_LOAD_CELLS;
     msg.len = sizeof(mcu_load_cells_);
 
-    msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Suspension potentiometers
 // Front
@@ -30,7 +30,7 @@ void TelemetryInterface::enqueue_CAN_mcu_front_potentiometers() {
     msg.id = ID_MCU_FRONT_POTS;
     msg.len = sizeof(mcu_front_potentiometers_);
 
-    msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Rear
 void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
@@ -40,7 +40,7 @@ void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
     msg.id = ID_MCU_REAR_POTS;
     msg.len = sizeof(mcu_rear_potentiometers_);
 
-    msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 // Analog sensor readings
 void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
@@ -50,7 +50,7 @@ void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
     msg.id = ID_MCU_ANALOG_READINGS;
     msg.len = sizeof(mcu_analog_readings_);
 
-    msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
 }
 
 /* Update CAN messages */
