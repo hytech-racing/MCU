@@ -2,13 +2,14 @@
 
 /* Pin mode output to watchdog reset */
 void AMSInterface::init(const SysTick_s &tick) {
-    pinMode(pin_software_ok_, OUTPUT);
 
     set_heartbeat(tick);
+
 }
 
 /* Initial ouput to watchdog reset */
 void AMSInterface::set_start_state() {
+    
     digitalWrite(pin_software_ok_, HIGH);
     
 }

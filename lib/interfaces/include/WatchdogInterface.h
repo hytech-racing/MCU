@@ -9,8 +9,22 @@ const unsigned long WATCHDOG_KICK_INTERVAL = 7;    // milliseconds
 
 class WatchdogInterface
 {
+private:
+    /* Watchdog last kicked time */
+    unsigned long watchdog_time;
+
+    /* Watchdog output state */
+    bool watchdog_state;
+
+    /* Hardware interface pins */
+    int pin_watchdog_input_;
+    
 public:
-    WatchdogInterface(int wd_input_pin): pin_watchdog_input_(wd_input_pin) {};
+    WatchdogInterface(int wd_input_pin): pin_watchdog_input_(wd_input_pin)
+    {
+        // Set pin mode        
+        pinMode(pin_watchdog_input_, OUTPUT);
+    };
 
     /* Initialize interface pin mode */
     void init(const SysTick_s &tick);
@@ -21,17 +35,6 @@ public:
 
     /* Kick watchdog */
     void kick_watchdog(const SysTick_s &tick);
-
-
-private:
-    /* Watchdog last kicked time */
-    unsigned long watchdog_time;
-
-    /* Watchdog output state */
-    bool watchdog_state;
-
-    /* Hardware interface pins */
-    int pin_watchdog_input_;
 
 };
 

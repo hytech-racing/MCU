@@ -3,13 +3,23 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "ht_can.h"
 #include "SysClock.h"
 #include "AnalogSensorsInterface.h"
 #include "SteeringEncoderInterface.h"
 
-template<typename message_queue>
 class TelemetryInterface
 {
+private:
+    /* Outbound telemetry CAN messages */
+    MCU_pedal_readings          mcu_pedal_readings_;
+    MCU_load_cells              mcu_load_cells_;
+    MCU_front_potentiometers    mcu_front_potentiometers_;
+    MCU_rear_potentiometers     mcu_rear_potentiometers_;
+    MCU_analog_readings         mcu_analog_readings_;
+    /* CAN Tx buffer */
+    CANBufferType *msg_queue_;
+
 public:
     TelemetryInterface(message_queue *msg_output_queue):
         msg_queue_(msg_output_queue) {};
@@ -54,15 +64,6 @@ public:
         const SteeringEncoderConversion_s &encoder
     );
 
-private:
-    /* Outbound telemetry CAN messages */
-    MCU_pedal_readings          mcu_pedal_readings_;
-    MCU_load_cells              mcu_load_cells_;
-    MCU_front_potentiometers    mcu_front_potentiometers_;
-    MCU_rear_potentiometers     mcu_rear_potentiometers_;
-    MCU_analog_readings         mcu_analog_readings_;
-    /* CAN Tx buffer */
-    message_queue *msg_queue_;
 };
 
 #endif /* __TELEMETRY_INTERFACE_H__ */
