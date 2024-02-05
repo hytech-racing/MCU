@@ -1,5 +1,0 @@
-#ifndef __ANALOG_SENSOR_INTERFACE__
-#define __ANALOG_SENSOR_INTERFACE__
-
-
-#endif /* __ANALOG_SENSOR_INTERFACE__ */

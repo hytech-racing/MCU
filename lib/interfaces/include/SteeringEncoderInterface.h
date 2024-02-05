@@ -1,5 +1,33 @@
-#ifndef __STEERING_ENCODER_INTERFACE__
-#define __STEERING_ENCODER_INTERFACE__
+#ifndef __UPPERSTEERINGSENSOR_H__
+#define __UPPERSTEERINGSENSOR_H__
 
+#include <tuple>
 
-#endif /* __STEERING_ENCODER_INTERFACE__ */
+enum SteeringEncoderStatus_e
+{
+    STEERING_ENCODER_NOMINAL = 0,
+    STEERING_ENCODER_MARGINAL = 1,
+    STEERING_ENCODER_ERROR = 2,
+};
+
+struct SteeringEncoderConversion_s
+{
+    float angle;
+    SteeringEncoderStatus_e status;
+};
+
+class SteeringEncoderInterface
+{
+public:
+// Functions
+    /// @brief Commands the underlying steering sensor to sample and hold the result
+    void sample();
+    /// @brief Calculate steering angle and whether result is in sensor's defined bounds. DOES NOT SAMPLE.
+    /// @return Calculated steering angle in degrees, upperSteeringStatus_s
+    SteeringEncoderConversion_s convert();
+    /// @brief Set the upper steering sensor's offset. 0 degrees should be centered.
+    /// @param newOffset 
+    void setOffset(float newOffset);
+};
+
+#endif /* __UPPERSTEERINGSENSOR_H__ */

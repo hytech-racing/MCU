@@ -1,19 +1,23 @@
 #ifndef DRIVETRAINSYSTEM
 #define DRIVETRAINSYSTEM
 
-#include "InverterInterface.h"
+#include "Utility.h"
 #include <array>
-
-
-// TODO will need an interface update to handle the speed feedback from inverters
-// TODO update to using better method for keeping track of which inverter is which (named map I think would be good)
-
-struct DrivetrainCommand
+#include "stdint.h"
+struct DrivetrainCommand_s
 { 
-    InverterCommand left_front_inverter_cmd;
-    InverterCommand right_front_inverter_cmd;
-    InverterCommand left_rear_inverter_cmd;
-    InverterCommand right_rear_inverter_cmd;
+    float speeds[NUM_MOTORS];
+    float posTorqueLimits[NUM_MOTORS];
+    float negTorqueLimits[NUM_MOTORS];
+};
+
+struct DrivetrainDynamicReport_s
+{
+    float measuredPackVoltage;
+    float measuredSpeeds[NUM_MOTORS];
+    float measuredTorques[NUM_MOTORS];
+    float measuredTorqueCurrents[NUM_MOTORS];
+    float measuredMagnetizingCurrents[NUM_MOTORS];
 };
 
 template<typename InverterType>
@@ -52,8 +56,9 @@ public:
     bool hv_over_threshold_on_drivetrain();
     void disable();
     bool drivetrain_error_occured();
+    void reset_drivetrain();
 
-    void command_drivetrain(const DrivetrainCommand& data);
+    void command_drivetrain(const DrivetrainCommand_s& data);
 private:
 
     uint16_t min_hv_voltage_;
