@@ -1,6 +1,8 @@
 #ifndef __DASHBOARDINTERFACE_H__
 #define __DASHBOARDINTERFACE_H__
 
+#include "MessageQueueDefine.h"
+#include "FlexCAN_T4.h"
 #include "ht_can.h"
 
 enum DialMode_e
@@ -72,12 +74,17 @@ class DashboardInterface
 private:
 
     DashComponentInterface_s _data;
+    CANBufferType *msg_queue_;
 
 public:
-    Dashboard(){};
+
+    Dashboard(CANBufferType *msg_output_queue)
+    {
+        msg_queue_ = msg_output_queue;
+    };
 
     void read(const CAN_message_t &can_msg);
-    CAN_message_t write();
+    void write();
 
     DialMode_e getDialMode();
     
