@@ -9,7 +9,7 @@
 
 /* Interfaces */
 #include "HytechCANInterface.h"
-#include "MCP3208.h"
+#include "MCP_ADC.h"
 #include "ORBIS_BR10.h"
 #include "MCUInterface.h"
 #include "AMSInterface.h"
@@ -40,9 +40,9 @@ using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_mes
 
 
 /* Sensors */
-MCP3208 ADC1(ADC1_CS);
-MCP3208 ADC2(ADC2_CS);
-MCP3208 ADC3(ADC3_CS);
+MCP_ADC<8> ADC1(ADC1_CS);
+MCP_ADC<4> ADC2(ADC2_CS);
+MCP_ADC<4> ADC3(ADC3_CS);
 OrbisBR10 steering1(STEERING_SERIAL);
 
 
@@ -193,16 +193,16 @@ void sample_all_external_readings() {
     ADC2.tick(curr_tick);
     ADC3.tick(curr_tick);
     // Tick steering system
-    steering_system.tick(curr_tick, ADC1.channels[MCU15_STEERING_CHANNEL].convert());
+    steering_system.tick(curr_tick, ADC1.get().conversions[MCU15_STEERING_CHANNEL]);
     // Read shutdown circuits    
     main_ecu.read_mcu_status();
 }
 
 void process_all_value_readings() {
     pedals.tick(curr_tick,
-                ADC1.channels[MCU15_ACCEL1_CHANNEL].convert(),
-                ADC1.channels[MCU15_ACCEL2_CHANNEL].convert(),
-                ADC1.channels[MCU15_BRAKE1_CHANNEL].convert(),
-                ADC1.channels[MCU15_BRAKE2_CHANNEL].convert());
+                ADC1.get().conversions[MCU15_ACCEL1_CHANNEL],
+                ADC1.get().conversions[MCU15_ACCEL2_CHANNEL],
+                ADC1.get().conversions[MCU15_BRAKE1_CHANNEL],
+                ADC1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 }
 

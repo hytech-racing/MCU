@@ -112,8 +112,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
 /* Tick SysClock */
 void TelemetryInterface::tick(const SysTick_s &tick,
                               const AnalogConversionPacket_s<8> &adc1,
-                              const AnalogConversionPacket_s<8> &adc2,
-                              const AnalogConversionPacket_s<8> &adc3,
+                              const AnalogConversionPacket_s<4> &adc2,
+                              const AnalogConversionPacket_s<4> &adc3,
                               const SteeringEncoderConversion_s &encoder) {
 
     if (tick.triggers.trigger50) {

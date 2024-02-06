@@ -69,9 +69,9 @@ template <int N>
 class AnalogMultiSensor
 {
 private:
+protected:
+    AnalogChannel channels_[N];
 public:
-// Data
-    AnalogChannel channels[N];
     AnalogConversionPacket_s<N> data;
 // Functions
     /// @brief Called by the main loop. Allows AnalogMultiSensor devices not owned by a single system to self-actualize sampling & conversion.
@@ -90,7 +90,7 @@ public:
     {
         for (int i = 0; i < N; i++)
         {
-            data.conversions[i] = channels[i].convert();
+            data.conversions[i] = channels_[i].convert();
         }
     }
 

@@ -5,7 +5,7 @@
 const int ADC1_CS = 34;
 const int ADC2_CS = 33;
 const int ADC3_CS = 29;
-const HardwareSerial* STEERING_SERIAL = &Serial5;
+HardwareSerial* STEERING_SERIAL = &Serial5;
 const int SOFTWARE_OK       = 28;
 const int WATCHDOG_INPUT    = 32;
 
