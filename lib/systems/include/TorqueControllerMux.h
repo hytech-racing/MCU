@@ -7,7 +7,7 @@
 #include "PedalsSystem.h"
 #include "SteeringSystem.h"
 #include "DashboardInterface.h"
-#include "AnalogSensorsInterface.h"
+// #include "AnalogSensorsInterface.h"
 
 const float maxSpeedForModeChange = 5.0; // m/s
 const float maxTorqueDeltaForModeChange = 0.5; // Nm

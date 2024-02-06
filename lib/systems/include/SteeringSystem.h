@@ -3,7 +3,7 @@
 
 #include "SteeringEncoderInterface.h"
 #include "AnalogSensorsInterface.h"
-
+#include "SysClock.h"
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
 
@@ -13,7 +13,7 @@
 #define STEERING_DIVERGENCE_WARN_THRESHOLD (2.5) // Warning condition will be raised when steering sensors diverge 2.5 degrees
 
 // Enums
-enum SteeringSystemStatus_e
+enum class SteeringSystemStatus_e
 {
     STEERING_SYSTEM_NOMINAL = 0,
     STEERING_SYSTEM_MARGINAL = 1,

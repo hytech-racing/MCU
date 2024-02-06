@@ -14,30 +14,30 @@ void SteeringSystem::tick(const SysTick_s &tick, const AnalogConversion_s &secon
         // Compute internal state
 
         // Both sensors are nominal
-        if ((primaryConversion_.status == STEERING_ENCODER_NOMINAL) && (secondaryConversion.status == ANALOG_SENSOR_GOOD))
+        if ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL) && (secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_GOOD))
         {
             data_ = {
                 .angle = primaryConversion_.angle,
-                .status = STEERING_SYSTEM_NOMINAL
+                .status = SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL
             };
         }
         // One or both sensors are marginal
         // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
-        else if ((primaryConversion_.status == STEERING_ENCODER_MARGINAL)
-            || (secondaryConversion.status == ANALOG_SENSOR_CLAMPED)
+        else if ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_MARGINAL)
+            || (secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED)
             || ((std::abs(primaryConversion_.angle - secondaryConversion.conversion) > STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryConversion_.angle - secondaryConversion.conversion) < STEERING_DIVERGENCE_ERROR_THRESHOLD)))
         {
             data_ = {
                 .angle = primaryConversion_.angle,
-                .status = STEERING_SYSTEM_MARGINAL
+                .status = SteeringSystemStatus_e::STEERING_SYSTEM_MARGINAL
             };
         }
         // Upper steering sensor reports error, lower sensor is nominal
-        else if ((primaryConversion_.status == STEERING_ENCODER_ERROR) && (secondaryConversion.status == ANALOG_SENSOR_GOOD))
+        else if ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_ERROR) && (secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_GOOD))
         {
             data_ = {
                 .angle = secondaryConversion.conversion,
-                .status = STEERING_SYSTEM_DEGRADED
+                .status = SteeringSystemStatus_e::STEERING_SYSTEM_DEGRADED
             };
         }
         // Fall through case
@@ -46,7 +46,7 @@ void SteeringSystem::tick(const SysTick_s &tick, const AnalogConversion_s &secon
         {
             data_ = {
                 .angle = 0.0,
-                .status = STEERING_SYSTEM_ERROR
+                .status = SteeringSystemStatus_e::STEERING_SYSTEM_ERROR
             };
         }
     }

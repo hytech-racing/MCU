@@ -1,5 +1,5 @@
 
-// #include "MCUStateMachine.h"
+#include "MCUStateMachine.h"
 template <typename DrivetrainSysType>
 void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long current_millis)
 {
@@ -22,17 +22,17 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::TRACTIVE_SYSTEM_ACTIVE:
     {
         // TODO migrate to new pedals system
-        PedalsSystemData_s data;
-        // if (!drivetrain_->hv_over_threshold_on_drivetrain())
-        // {
-        //     set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
-        //     break;
-        // }
-        // if (dashboard_->start_button_pressed() && pedals_->mech_brake_active(data))
-        // {
-        //     set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
-        //     break;
-        // }
+        auto data = pedals_->getPedalsSystemData();
+        if (!drivetrain_->hv_over_threshold_on_drivetrain())
+        {
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
+            break;
+        }
+        if (dashboard_->startButtonPressed() && (data.pedalsCommand == PedalsCommanded_e::PEDALS_BRAKE_PRESSED))
+        {
+            set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
+            break;
+        }
         break;
     }
 
@@ -105,7 +105,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::READY_TO_DRIVE:
     {
-        
+        auto data = pedals_->getPedalsSystemData();
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
@@ -126,7 +126,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         if (
             // bms_->ok_high() &&
             // imd_->ok_high() &&
-            !pedals_->max_duration_of_implausibility_exceeded(current_millis))
+            !data.implausibilityExceededMaxDuration)
         {
             // drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
         }

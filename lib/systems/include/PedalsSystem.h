@@ -14,14 +14,14 @@ const float PEDALS_RAW_TOO_LOW          = 0.5 / 5 * 4096;       // FSAE T.4.2.10
 const float PEDALS_RAW_TOO_HIGH         = 4.5 / 5 * 4096;       // FSAE T.4.2.10 Pedals are implausible above 4.5V raw reading
 
 // Enums
-enum PedalsStatus_e
+enum class PedalsStatus_e
 {
     PEDALS_NOMINAL = 0,
     PEDALS_MARGINAL = 1,
     PEDALS_IMPLAUSIBLE = 2,
 };
 
-enum PedalsCommanded_e
+enum class PedalsCommanded_e
 {
     PEDALS_NONE_PRESSED = 0,
     PEDALS_ACCEL_PRESSED = 1,
@@ -34,6 +34,7 @@ struct PedalsSystemData_s
     PedalsCommanded_e pedalsCommand;
     PedalsStatus_e accelStatus;
     PedalsStatus_e brakeStatus;
+    bool implausibilityExceededMaxDuration;
     bool persistentImplausibilityDetected;
     float accelPercent;
     float brakePercent;
@@ -69,17 +70,18 @@ public:
     }
     PedalsSystem()
     {
-        parameters_ = {
-            .pedalsImplausiblePercent = PEDALS_IMPLAUSIBLE_PERCENT,
-            .pedalsMarginalPercent = PEDALS_MARGINAL_PERCENT,
-            .pedalsRawTooLow = PEDALS_RAW_TOO_LOW,
-            .pedalsRawTooHigh = PEDALS_RAW_TOO_HIGH,
-        };
+        parameters_.pedalsImplausiblePercent = PEDALS_IMPLAUSIBLE_PERCENT;
+        parameters_.pedalsMarginalPercent = PEDALS_MARGINAL_PERCENT;
+        parameters_.pedalsRawTooLow = PEDALS_RAW_TOO_LOW;
+        parameters_.pedalsRawTooHigh = PEDALS_RAW_TOO_HIGH;
+        parameters_.accelPressedThreshold = 0.1;
+        parameters_.brakePressedThreshold = 0.05;
+        
     }
 
 // Functions
     
-    bool max_duration_of_implausibility_exceeded(unsigned long t);
+    // bool max_duration_of_implausibility_exceeded(unsigned long t);
     void tick(
         const SysTick_s &sysClock, 
         const AnalogConversion_s &accel1, 

@@ -45,15 +45,15 @@ SteeringEncoderConversion_s OrbisBR10::convert()
 
     if (status_ & (ORBIS_BR10_BITMASK_GENERAL_ERROR | ORBIS_BR10_BITMASK_DETAILED_COUNTER_ERROR))
     {
-        returnConversion.status = STEERING_ENCODER_ERROR;
+        returnConversion.status = SteeringEncoderStatus_e::STEERING_ENCODER_ERROR;
     }
     else if (status_ == 0)
     {
-        returnConversion.status = STEERING_ENCODER_NOMINAL;
+        returnConversion.status = SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL;
     }
     else
     {
-        returnConversion.status = STEERING_ENCODER_MARGINAL;
+        returnConversion.status = SteeringEncoderStatus_e::STEERING_ENCODER_MARGINAL;
     }
     return returnConversion;
 }

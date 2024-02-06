@@ -33,17 +33,14 @@ public:
     void disable(){};
     bool drivetrain_error_occured(){};
 
-    void command_drivetrain(const DrivetrainCommand &data){};
+    void command_drivetrain(const DrivetrainCommand_s &data){};
 };
 
 BuzzerController buzzer(500);
 
 DrivetrainMock drivetrain;
 
-
-PedalsParams params_for_test = {1, 1, 10, 10, 1, 1, 9, 9};
-PedalsSystem pedals(params_for_test, params_for_test);
-
+PedalsSystem pedals;
 DashboardInterface dash_interface;
 
 MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals);
@@ -105,10 +102,21 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
 
     sys_time +=1;
     dash_interface.start_button_status_ = true;
-    auto pedals_brake_active_res = pedals.evaluate_pedals({0,0,3,3}, sys_time);
+
+    AnalogConversion_s pedals1_data;
+    pedals1_data.raw = 0;
+    pedals1_data.conversion = 0;
+    pedals1_data.status = AnalogSensorStatus_e::ANALOG_SENSOR_GOOD;
+    auto pedals2_data = pedals1_data;
+
+    AnalogConversion_s pedals3_data;
+    pedals3_data.raw = 3000;
+    pedals3_data.conversion= 1.0;
+    pedals3_data.status = pedals1_data.status;
+    auto pedals4_data = pedals3_data;
+    pedals.tick(SysTick_s{}, pedals1_data, pedals2_data, pedals3_data, pedals4_data);
     state_machine.tick_state_machine(sys_time);
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::ENABLING_INVERTERS);
-
     
 }
 

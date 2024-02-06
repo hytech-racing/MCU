@@ -37,14 +37,11 @@ FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically
 
 /* Set up CAN circular buffer */
 using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
-
-
 /* Sensors */
 MCP_ADC<8> ADC1(ADC1_CS);
 MCP_ADC<4> ADC2(ADC2_CS);
 MCP_ADC<4> ADC3(ADC3_CS);
 OrbisBR10 steering1(STEERING_SERIAL);
-
 
 /* Declare interfaces */
 DashboardInterface dashboard(&CAN2_txBuffer);

@@ -1,4 +1,4 @@
-#include <PedalsSystem.h>
+#include "PedalsSystem.h"
 
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
 {
@@ -34,45 +34,45 @@ void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1,
     float accelDeviation = abs(accel1.conversion - accel2.conversion) / accelAverage;
     if ((accelDeviation >= parameters_.pedalsImplausiblePercent) || !accelInRange1 || !accelInRange2)
     {
-        data_.accelStatus = PEDALS_IMPLAUSIBLE;
+        data_.accelStatus = PedalsStatus_e::PEDALS_IMPLAUSIBLE;
     }
     else if (accelDeviation >= parameters_.pedalsMarginalPercent && accelDeviation < parameters_.pedalsImplausiblePercent)
     {
-        data_.accelStatus = PEDALS_MARGINAL;
+        data_.accelStatus = PedalsStatus_e::PEDALS_MARGINAL;
     }
     else
     {
-        data_.accelStatus = PEDALS_NOMINAL;
+        data_.accelStatus = PedalsStatus_e::PEDALS_NOMINAL;
     }
 
     float brakeDeviation = abs(brake1.conversion - brake2.conversion) / brakeAverage;
     if ((brakeDeviation >= parameters_.pedalsImplausiblePercent) || !brakeInRange1 || !brakeInRange2)
     {
-        data_.brakeStatus = PEDALS_IMPLAUSIBLE;
+        data_.brakeStatus = PedalsStatus_e::PEDALS_IMPLAUSIBLE;
     }
     else if (brakeDeviation >= parameters_.pedalsMarginalPercent && brakeDeviation < parameters_.pedalsImplausiblePercent)
     {
-        data_.brakeStatus = PEDALS_MARGINAL;
+        data_.brakeStatus = PedalsStatus_e::PEDALS_MARGINAL;
     }
     else
     {
-        data_.brakeStatus = PEDALS_NOMINAL;
+        data_.brakeStatus = PedalsStatus_e::PEDALS_NOMINAL;
     }
 
     // Check if both pedals are pressed
     bool accelPressed = data_.accelPercent > parameters_.accelPressedThreshold;
     bool brakePressed = data_.brakePercent > parameters_.brakePressedThreshold;
     if (accelPressed && brakePressed)
-        data_.pedalsCommand = PEDALS_BOTH_PRESSED;
+        data_.pedalsCommand = PedalsCommanded_e::PEDALS_BOTH_PRESSED;
     else if (accelPressed)
-        data_.pedalsCommand = PEDALS_ACCEL_PRESSED;
+        data_.pedalsCommand =  PedalsCommanded_e::PEDALS_ACCEL_PRESSED;
     else if (brakePressed)
-        data_.pedalsCommand = PEDALS_BRAKE_PRESSED;
+        data_.pedalsCommand =   PedalsCommanded_e::PEDALS_BRAKE_PRESSED;
     else
-        data_.pedalsCommand = PEDALS_NONE_PRESSED;
+        data_.pedalsCommand =   PedalsCommanded_e::PEDALS_NONE_PRESSED;
 
     // Check for persistent implausibility
-    if ((data_.accelStatus == PEDALS_IMPLAUSIBLE) || (data_.brakeStatus == PEDALS_IMPLAUSIBLE))
+    if ((data_.accelStatus == PedalsStatus_e::PEDALS_IMPLAUSIBLE) || (data_.brakeStatus == PedalsStatus_e::PEDALS_IMPLAUSIBLE))
     {
         if (implausibilityDetectedTime_ == 0)
             implausibilityDetectedTime_ = tick.millis;

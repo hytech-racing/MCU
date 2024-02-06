@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <SysClock.h>
 
-enum AnalogSensorStatus_e
+enum class AnalogSensorStatus_e
 {
     ANALOG_SENSOR_GOOD = 0,
     ANALOG_SENSOR_CLAMPED = 1,
@@ -54,9 +54,9 @@ public:
     {
         float conversion = lastSample * scale + offset;
         float clampedConversion = std::min(std::max(conversion, clampLow), clampHigh);
-        AnalogSensorStatus_e returnStatus = ANALOG_SENSOR_GOOD;
+        AnalogSensorStatus_e returnStatus = AnalogSensorStatus_e::ANALOG_SENSOR_GOOD;
         if (clamp && (conversion > clampHigh || conversion < clampLow))
-            returnStatus = ANALOG_SENSOR_CLAMPED;
+            returnStatus = AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED;
         return {
             lastSample,
             clamp ? clampedConversion : conversion,
