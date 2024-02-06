@@ -65,7 +65,7 @@ struct DashComponentInterface_s
     bool buzzer_cmd;
     //making it an array of ints to support enumerated LEDs as well as
     //gradient/value based LEDs
-    LEDColors_e LED[12];
+    uint8_t LED[12];
 };
 
 
