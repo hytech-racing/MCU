@@ -21,13 +21,13 @@ class SteeringEncoderInterface
 public:
 // Functions
     /// @brief Commands the underlying steering sensor to sample and hold the result
-    void sample();
+    virtual void sample();
     /// @brief Calculate steering angle and whether result is in sensor's defined bounds. DOES NOT SAMPLE.
     /// @return Calculated steering angle in degrees, upperSteeringStatus_s
-    SteeringEncoderConversion_s convert();
+    virtual SteeringEncoderConversion_s convert();
     /// @brief Set the upper steering sensor's offset. 0 degrees should be centered.
     /// @param newOffset 
-    void setOffset(float newOffset);
+    virtual void setOffset(float newOffset);
 };
 
 #endif /* __UPPERSTEERINGSENSOR_H__ */

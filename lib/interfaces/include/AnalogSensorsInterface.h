@@ -80,7 +80,10 @@ public:
 
     /// @brief Used by systems to get data out of this device when it's self-actualizing sampling & conversion.
     /// @return Const ref to last data conversion.
-    const AnalogConversionPacket_s<N>& get();
+    const AnalogConversionPacket_s<N>& get()
+    {
+        return data;
+    }
 
     /// @brief Performs unit conversions on all channels
     void convert()

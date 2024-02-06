@@ -76,15 +76,17 @@ bool MCUInterface::imd_ok_is_high() {
 
 /* Send CAN message */
 // MCU status
-// void MCUInterface::enqueue_CAN_mcu_status() {
+void MCUInterface::enqueue_CAN_mcu_status() {
 
-//     CAN_message_t msg;
-//     mcu_status_.write(msg.buf);
-//     msg.id = ID_MCU_STATUS;
-//     msg.len = sizeof(mcu_status_);
+    CAN_message_t msg;
+    mcu_status_.write(msg.buf);
+    msg.id = ID_MCU_STATUS;
+    msg.len = sizeof(mcu_status_);
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
 
-//     msg_queue_->push_back(msg, sizeof(CAN_message_t));
-// }
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
+}
 
 /* Update MCU_status CAN */
 // MCUInterface
@@ -103,12 +105,12 @@ void MCUInterface::update_mcu_status_CAN() {
 
 // Main loop
 // State machine
-void MCUInterface::update_mcu_status_CAN_fsm(CAR_STATE fsm_state) {
-    // State machine returns struct in main loop
-    // fsm.get_state()
-    // might not be compatible anymore, using new states
-    // mcu_status_.set_state(fsm_state);
-}
+// void MCUInterface::update_mcu_status_CAN_fsm(CAR_STATE fsm_state) {
+//     // State machine returns struct in main loop
+//     // fsm.get_state()
+//     // might not be compatible anymore, using new states
+//     // mcu_status_.set_state(fsm_state);
+// }
 //DriveTrain
 void MCUInterface::update_mcu_status_CAN_drivetrain(bool has_error) {
     // Drivetrain returns struct in main loop
@@ -138,7 +140,8 @@ void MCUInterface::update_mcu_status_CAN_TCMux() {
 void MCUInterface::update_mcu_status_CAN_dashboard(bool is_pressed) {
     // DashboardInterface (?) returns struct in main loop
     // dash.lauchControlButtonPressed()
-    // mcu_status_.toggle_launch_ctrl_active(is_pressed);
+    if (is_pressed)
+        mcu_status_.toggle_launch_ctrl_active();
 }
 // BuzzerSystem
 void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on) {

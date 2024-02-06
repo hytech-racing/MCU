@@ -31,11 +31,11 @@ struct SteeringSystemData_s
 class SteeringSystem
 {
 private:
-    SteeringEncoderInterface& primarySensor_;
+    SteeringEncoderInterface *primarySensor_;
     SteeringEncoderConversion_s primaryConversion_;
     SteeringSystemData_s data_;
 public:
-    SteeringSystem(SteeringEncoderInterface &primarySensor) : primarySensor_(primarySensor) {}
+    SteeringSystem(SteeringEncoderInterface *primarySensor) : primarySensor_(primarySensor) {}
 
     /// @brief Computes steering angle and status of the steering system.
     /// @param secondaryAngle The computed steering angle as reported by the secondary steering sensor.

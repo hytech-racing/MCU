@@ -4,9 +4,10 @@
 #include <stdint.h>
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
-#include "hytech.h"
+// #include "hytech.h"
+#include "MessageQueueDefine.h"
 #include "SysClock.h"
-#include "MCUStateMachine.h"
+// #include "MCUStateMachine.h"
 
 const int DEFAULT_BMS_OK_READ       = 5;   // SHDN_D_READ
 const int DEFAULT_IMD_OK_READ       = 4;   // SHDN_C_READ
@@ -52,25 +53,24 @@ private:
     int pin_inv_24V_en_;
 
 public:
-    MCUInterface(){};
-    // MCUInterface(message_queue *msg_output_queue, int bms_pin, int imd_pin, int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin, int inv_pin, int inv_24V_pin): 
-    //     msg_queue_(msg_output_queue),
-    //     pin_bms_ok_read_(bms_pin),
-    //     pin_imd_ok_read_(imd_pin),
-    //     pin_bspd_ok_read_(bspd_pin),
-    //     pin_software_ok_read_(sw_ok_pin),
-    //     pin_bots_ok_read_(bots_ok_pin),
-    //     pin_brake_light_ctrl_(brake_light_pin),
-    //     pin_inv_en_(inv_pin),
-    //     pin_inv_24V_en_(inv_24V_pin)
-    // {
-    //     // Set pin mode
-    //     pinMode(pin_brake_light_ctrl_, OUTPUT);
-    //     pinMode(pin_inv_en_, OUTPUT);
-    //     pinMode(pin_inv_24V_en_, OUTPUT);
-    // };
-    // MCUInterface(message_queue *msg_output_queue):
-    //     MCUInterface(msg_output_queue, DEFAULT_BMS_OK_READ, DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ, DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_EN, DEFAULT_INVERTER_24V_EN) {};
+    MCUInterface(CANBufferType *msg_output_queue, int bms_pin, int imd_pin, int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin, int inv_pin, int inv_24V_pin): 
+        msg_queue_(msg_output_queue),
+        pin_bms_ok_read_(bms_pin),
+        pin_imd_ok_read_(imd_pin),
+        pin_bspd_ok_read_(bspd_pin),
+        pin_software_ok_read_(sw_ok_pin),
+        pin_bots_ok_read_(bots_ok_pin),
+        pin_brake_light_ctrl_(brake_light_pin),
+        pin_inv_en_(inv_pin),
+        pin_inv_24V_en_(inv_24V_pin)
+    {
+        // Set pin mode
+        pinMode(pin_brake_light_ctrl_, OUTPUT);
+        pinMode(pin_inv_en_, OUTPUT);
+        pinMode(pin_inv_24V_en_, OUTPUT);
+    };
+    MCUInterface(CANBufferType *msg_output_queue):
+        MCUInterface(msg_output_queue, DEFAULT_BMS_OK_READ, DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ, DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_EN, DEFAULT_INVERTER_24V_EN) {};
 
     /* Initialize shutdown circuit input readings */
     void init();
@@ -88,7 +88,7 @@ public:
 
     /* Update MCU_status CAN (main loop) */
     // State machine
-    void update_mcu_status_CAN_fsm(CAR_STATE fsm_state);
+    // void update_mcu_status_CAN_fsm(CAR_STATE fsm_state);
     // Systems
     void update_mcu_status_CAN_drivetrain(bool has_error);
     void update_mcu_status_CAN_safety(bool is_ok);
@@ -100,20 +100,20 @@ public:
     void update_mcu_status_CAN_dashboard(bool is_pressed);
 
     /* Enqueue MCU_status CAN  */
-    void enqueue_CAN_mcu_status(CAN_message_t &msg);
+    void enqueue_CAN_mcu_status();
 
     /* Tick SysClock to send CAN at 10Hz */
-    void tick(
-        const SysTick_s &tick,
-        CAR_STATE fsm_state,
-        bool inv_has_error,
-        bool software_is_ok,
-        // TCMux return
-        bool buzzer_is_on,
-        // Pedal system return
-        bool pack_charge_is_critical,
-        bool button_is_pressed
-    );
+    // void tick(
+    //     const SysTick_s &tick,
+    //     CAR_STATE fsm_state,
+    //     bool inv_has_error,
+    //     bool software_is_ok,
+    //     // TCMux return
+    //     bool buzzer_is_on,
+    //     // Pedal system return
+    //     bool pack_charge_is_critical,
+    //     bool button_is_pressed
+    // );
 
 };
 

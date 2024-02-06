@@ -24,4 +24,8 @@ const unsigned long SETUP_PRESENT_ACTION_INTERVAL       = 5000;
 const unsigned long BUZZER_ON_INTERVAL                  = 2000;
 const unsigned long INVERTER_ENABLING_TIMEOUT_INTERVAL  = 5000;
 
+// Communication speeds
+const unsigned long INV_CAN_BAUDRATE    = 500000;
+const unsigned long TELEM_CAN_BAUDRATE  = 500000;
+
 #endif /* __MCU15_H__ */

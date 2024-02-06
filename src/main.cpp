@@ -50,8 +50,8 @@ OrbisBR10 steering1(STEERING_SERIAL);
 DashboardInterface dashboard(&CAN2_txBuffer);
 AMSInterface ams_interface(SOFTWARE_OK);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
-// MCUInterface main_ecu(&CAN3_txBuffer);
-// TelemetryInterface<CircularBufferType> telem_interface(&CAN3_txBuffer);
+MCUInterface main_ecu(&CAN3_txBuffer);
+TelemetryInterface telem_interface(&CAN3_txBuffer);
 
 using InverterInterfaceType = InverterInterface<CircularBufferType>;
 InverterInterfaceType fl_inv(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
@@ -65,7 +65,7 @@ SysClock sys_clock;
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 SafetySystem safety_system(&ams_interface, &wd_interface);  // Tie ams and wd interface to safety system (by pointers)
 PedalsSystem pedals;
-// SteeringSystem steering_system(steering1);  // Unify member reference and pointers? tied by reference in this case
+SteeringSystem steering_system(&steering1);  // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
 /*
@@ -89,6 +89,7 @@ SysTick_s curr_tick;
 
 /* Function declarations */
 /* CAN functions */
+void update_and_enqueue_all_CAN();
 /* External value readings */
 void sample_all_external_readings();
 /* Process all readings */
@@ -100,9 +101,9 @@ void setup() {
     curr_tick = sys_clock.tick(micros());
 
     /* Initialize interface */
-    // main_ecu.init();    // pin mode, initial shutdown circuit readings, 
-    wd_interface.init(curr_tick);   // pin mode, initialize wd kick time
-    ams_interface.init(curr_tick);  // pin mode, initialize last heartbeat time
+    main_ecu.init();    // initial shutdown circuit readings, 
+    wd_interface.init(curr_tick);   // initialize wd kick time
+    ams_interface.init(curr_tick);  // initialize last heartbeat time
 
     /* Initialize system */
     safety_system.init();   // write software_ok high, write wd_input high, set software ok state true
@@ -130,7 +131,7 @@ void loop() {
     process_all_value_readings();
 
     /* Update and enqueue CAN messages */
-    // update_and_enqueue_all_CAN();
+    update_and_enqueue_all_CAN();
 
     /* Inverter procedure before entering state machine */
     // Drivetrain check if inverters have error
@@ -146,7 +147,7 @@ void loop() {
 void init_all_CAN() {
     // Inverter CAN line
     INV_CAN.begin();
-    INV_CAN.setBaudRate(500000);
+    INV_CAN.setBaudRate(INV_CAN_BAUDRATE);
     INV_CAN.setMaxMB(16);
     INV_CAN.enableFIFO();
     INV_CAN.enableFIFOInterrupt();
@@ -155,7 +156,7 @@ void init_all_CAN() {
 
     // Telemetry CAN line
     TELEM_CAN.begin();
-    TELEM_CAN.setBaudRate(500000);
+    TELEM_CAN.setBaudRate(TELEM_CAN_BAUDRATE);
     TELEM_CAN.setMaxMB(16);
     TELEM_CAN.enableFIFO();
     TELEM_CAN.enableFIFOInterrupt();
@@ -179,25 +180,29 @@ void update_and_enqueue_all_CAN() {
                 //   ams_interface.pack_charge_is_critical(),
                 //   dash.lauchControlButtonPressed());
     // Telemetry
-    // telem_interface.tick(curr_tick,
-                        //  ADC1.get(),
-                        //  ADC2.get(),
-                        //  ADC3.get(),
-                        //  steering1.convert());
+    telem_interface.tick(curr_tick,
+                         ADC1.get(),
+                         ADC2.get(),    // Add MCP3204 functionality for corner board
+                         ADC3.get(),    // Add implementation to get()
+                         steering1.convert());
 }
 
 void sample_all_external_readings() {
     // Tick all adcs
-    // ADC1.tick();
-    // ADC2.tick();
-    // ADC3.tick();
+    ADC1.tick(curr_tick);
+    ADC2.tick(curr_tick);
+    ADC3.tick(curr_tick);
     // Tick steering system
-    // steering1.tick();
+    steering_system.tick(curr_tick, ADC1.channels[MCU15_STEERING_CHANNEL].convert());
     // Read shutdown circuits    
-    // main_ecu.read_mcu_status();
+    main_ecu.read_mcu_status();
 }
 
 void process_all_value_readings() {
-    // pedals.tick();
+    pedals.tick(curr_tick,
+                ADC1.channels[MCU15_ACCEL1_CHANNEL].convert(),
+                ADC1.channels[MCU15_ACCEL2_CHANNEL].convert(),
+                ADC1.channels[MCU15_BRAKE1_CHANNEL].convert(),
+                ADC1.channels[MCU15_BRAKE2_CHANNEL].convert());
 }
 

@@ -1,9 +1,11 @@
 #ifndef __TELEMETRY_INTERFACE_H__
 #define __TELEMETRY_INTERFACE_H__
 
+#include "stdint.h"
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
-#include "hytech.h"
+// #include "hytech.h"
+#include "MessageQueueDefine.h"
 #include "SysClock.h"
 #include "AnalogSensorsInterface.h"
 #include "SteeringEncoderInterface.h"
@@ -18,12 +20,11 @@ private:
     MCU_rear_potentiometers     mcu_rear_potentiometers_;
     MCU_analog_readings         mcu_analog_readings_;
     /* CAN Tx buffer */
-    // CANBufferType *msg_queue_;
+    CANBufferType *msg_queue_;
 
 public:
-    TelemetryInterface(){};
-    // TelemetryInterface(message_queue *msg_output_queue):
-    //     msg_queue_(msg_output_queue) {};
+    TelemetryInterface(CANBufferType *msg_output_queue):
+        msg_queue_(msg_output_queue) {};
 
     /* Update CAN messages (main loop) */
     // Interfaces
@@ -60,8 +61,8 @@ public:
     void tick(
         const SysTick_s &tick,
         const AnalogConversionPacket_s<8> &adc1,
-        const AnalogConversionPacket_s<4> &adc2,
-        const AnalogConversionPacket_s<4> &adc3,
+        const AnalogConversionPacket_s<8> &adc2,
+        const AnalogConversionPacket_s<8> &adc3,
         const SteeringEncoderConversion_s &encoder
     );
 

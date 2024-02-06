@@ -8,8 +8,10 @@ void TelemetryInterface::enqueue_CAN_mcu_pedal_readings() {
     mcu_pedal_readings_.write(msg.buf);
     msg.id = ID_MCU_PEDAL_READINGS;
     msg.len = sizeof(mcu_pedal_readings_);
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
 
-    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 // Loadcell readings
 void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
@@ -18,8 +20,10 @@ void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
     mcu_load_cells_.write(msg.buf);
     msg.id = ID_MCU_LOAD_CELLS;
     msg.len = sizeof(mcu_load_cells_);
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
 
-    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 // Suspension potentiometers
 // Front
@@ -29,8 +33,10 @@ void TelemetryInterface::enqueue_CAN_mcu_front_potentiometers() {
     mcu_front_potentiometers_.write(msg.buf);
     msg.id = ID_MCU_FRONT_POTS;
     msg.len = sizeof(mcu_front_potentiometers_);
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
 
-    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 // Rear
 void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
@@ -39,8 +45,10 @@ void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
     mcu_rear_potentiometers_.write(msg.buf);
     msg.id = ID_MCU_REAR_POTS;
     msg.len = sizeof(mcu_rear_potentiometers_);
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
 
-    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 // Analog sensor readings
 void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
@@ -49,8 +57,10 @@ void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
     mcu_analog_readings_.write(msg.buf);
     msg.id = ID_MCU_ANALOG_READINGS;
     msg.len = sizeof(mcu_analog_readings_);
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
 
-    // msg_queue_->push_back(msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 
 /* Update CAN messages */
@@ -102,8 +112,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
 /* Tick SysClock */
 void TelemetryInterface::tick(const SysTick_s &tick,
                               const AnalogConversionPacket_s<8> &adc1,
-                              const AnalogConversionPacket_s<4> &adc2,
-                              const AnalogConversionPacket_s<4> &adc3,
+                              const AnalogConversionPacket_s<8> &adc2,
+                              const AnalogConversionPacket_s<8> &adc3,
                               const SteeringEncoderConversion_s &encoder) {
 
     if (tick.triggers.trigger50) {

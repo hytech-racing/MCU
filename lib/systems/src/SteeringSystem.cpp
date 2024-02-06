@@ -8,8 +8,8 @@ void SteeringSystem::tick(const SysTick_s &tick, const AnalogConversion_s &secon
     if (tick.triggers.trigger100)
     {
         // Poll upper steering sensor
-        primarySensor_.sample();
-        primaryConversion_ = primarySensor_.convert();
+        primarySensor_->sample();
+        primaryConversion_ = primarySensor_->convert();
 
         // Compute internal state
 
