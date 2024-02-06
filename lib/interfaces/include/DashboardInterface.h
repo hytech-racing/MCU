@@ -5,6 +5,7 @@
 #include "FlexCAN_T4.h"
 #include "hytech.h"
 
+/* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum DialMode_e
 {
     MODE_1,
@@ -15,6 +16,7 @@ enum DialMode_e
     ENDURANCE,
 };
 
+/* Enum for defined LED colors. ON will be LED's default color on dashboard*/
 enum LEDColors_e
 {
     OFF,
@@ -23,6 +25,7 @@ enum LEDColors_e
     RED,
 };
 
+/* Enum to index the LED array. Each LED in the CAN message is represented in no particular order. */
 enum DashLED_e
 {
     BOTS_LED,
@@ -39,6 +42,7 @@ enum DashLED_e
     AMS_LED,
 };
 
+/* Struct holding the state of Dashboard buttons */
 struct DashButtons_s
 {
     bool start;
@@ -50,6 +54,7 @@ struct DashButtons_s
     bool led_dimmer;
 };
 
+/* Struct holding all data for the DashboardInterface (inputs and outputs) */
 struct DashComponentInterface_s
 {
     /* READ DATA */
@@ -68,42 +73,79 @@ struct DashComponentInterface_s
     uint8_t LED[12];
 };
 
-
+/*
+    The DashboardInterface is an interface that handles all data to and from the dashboard.
+    Through a set of setters and getters (not explicitly named set/get) the state machine,
+    other interfaces, and systems can update the information on the dashboard.
+    Currently this is written to be a 1 to 1 representation of the current state of the dashboard,
+    almost no display logic for the below basic components is handled by the dash.
+*/
 class DashboardInterface
 {
 private:
-
+    /* The instantiated data struct used to access data by member functions */
     DashComponentInterface_s _data;
+    /* Pointer to the circular buffer to write new messages */
     CANBufferType *msg_queue_;
 
 public:
+    /*!
+        Constructor for new DashboardInterface, All that it is inited with
+        is the pointer to the telem circular buffer that is used to write new messages
 
+        @param msg_output_queue Pointer to the telem CAN circular buffer
+    */
     DashboardInterface(CANBufferType *msg_output_queue)
     {
         msg_queue_ = msg_output_queue;
     };
 
+    /*!
+        read function will take in a reference to a new CAN message, unpack it,
+        and will store all of the information into the DashComponentInterface for later access
+        @param can_msg is the reference to a new CAN message CAN_message_t
+    */
     void read(const CAN_message_t &can_msg);
+    /* write function will Pack a message based on the current data in the interface and push it to the tx buffer */
     void write();
 
+    /*!
+        getter for the dashboard's current dial position (drive profile)
+        @return returns a DialMode_e enum with the current dial position
+    */
     DialMode_e getDialMode();
     
+    /* gets whether the safety system is ok (wtf is a safety system - rename this)*/
     bool safetySystemOK();
 
+    /* getter for the start button */
     bool startButtonPressed();
+    /* getter for the mark button */
     bool specialButtonPressed();
+    /* getter for the torque button (does not currently exist on dash ) */
     bool torqueButtonPressed();
+    /* getter for the inverter reset button (clears error codes ) */
     bool inverterResetButtonPressed();
+    /* getter for the launch control button */
     bool launchControlButtonPressed();
+    /* getter for the torque mode/level button */
     bool torqueLoadingButtonPressed();
+    /* getter for the dimmer button (this logic handled on dash ) */
     bool nightModeButtonPressed();
-    bool torqueVectoringOffButtonPressed();
+    /* getter for the current shutdown threshold on the dashboard*/
     bool shutdownHAboveThreshold();
+    /* setter for the buzzer */
     void soundBuzzer(bool s);
+    /* getter for the buzzer */
     bool checkBuzzer();
 
     // LEDs in same order as dash rev. 7 placement
 
+    /*!
+        setter for the dash LEDs 
+        @param led DashLED_e enum that corresponds to the LED's value in the LED array
+        @param color LEDColors_e enum that corresponds to the color/state of the set LED
+    */
     void setLED(DashLED_e led, LEDColors_e color);
 };
 
