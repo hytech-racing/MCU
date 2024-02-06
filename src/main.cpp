@@ -1,8 +1,8 @@
-// /* Prototype main function for logic soothing */
-
-// /* Include files */
+/* Include files */
+/* System Includes*/
 #include <Arduino.h>
 
+/* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
@@ -17,6 +17,7 @@
 #include "DashboardInterface.h"
 #include "InverterInterface.h"
 #include "TelemetryInterface.h"
+
 /* Systems */
 #include "SysClock.h"
 #include "Buzzer.h"
@@ -24,32 +25,41 @@
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
 #include "TorqueControllerMux.h"
+
 /* State machine */
 #include "MCUStateMachine.h"
 
+
 /* External info sources */
 /* Two CAN lines on Main ECU rev15 */
-FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;
-FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN;
+FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN; // Inverter CAN (now both are on same line)
+FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
+
 /* Set up CAN circular buffer */
 using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
+
+
 /* Sensors */
 MCP3208 ADC1(ADC1_CS);
 MCP3208 ADC2(ADC2_CS);
 MCP3208 ADC3(ADC3_CS);
 OrbisBR10 steering1(STEERING_SERIAL);
 
+
 /* Declare interfaces */
-// DashboardInterface dashboard;
+DashboardInterface dashboard(&CAN2_txBuffer);
 AMSInterface ams_interface(SOFTWARE_OK);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
 // MCUInterface main_ecu(&CAN3_txBuffer);
 // TelemetryInterface<CircularBufferType> telem_interface(&CAN3_txBuffer);
+
 using InverterInterfaceType = InverterInterface<CircularBufferType>;
 InverterInterfaceType fl_inv(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
 InverterInterfaceType fr_inv(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND);
 InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
 InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
+
+
 /* Declare systems */
 SysClock sys_clock;
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
@@ -58,18 +68,24 @@ PedalsSystem pedals;
 // SteeringSystem steering_system(steering1);  // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
-// Hypothetical controllers, need more implementation details
-// TorqueControllerSimple simple_mode;
-// TorqueControllerSimple normal_force_mode;
-// TorqueControllerSimple endurance_derating_mode;
-// TorqueControllerSimple launch_control_mode;
-// TorqueControllerSimple torque_vectoring_mode;
+/*
+    Hypothetical controllers, need more implementation details
+        TorqueControllerSimple simple_mode;
+        TorqueControllerSimple normal_force_mode;
+        TorqueControllerSimple endurance_derating_mode;
+        TorqueControllerSimple launch_control_mode;
+        TorqueControllerSimple torque_vectoring_mode;
+*/
 TorqueControllerMux torque_controller_mux;  // would prob need to tie controllers to mux as well?
+
+
 /* Declare state machine */
 // MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard);    // need more implemetation details. associated interfaces and systems tied by pointers
 
+
 /* Global instantiations */
 SysTick_s curr_tick;
+
 
 /* Function declarations */
 /* CAN functions */
