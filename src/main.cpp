@@ -2,12 +2,6 @@
 
 // /* Include files */
 #include <Arduino.h>
-#include "MCUStateMachine.h"
-#include "InverterInterface.h"
-#include "ADC_SPI.h"
-// #include "MessageHandler.h"
-#include "DrivetrainSystem.h"
-#include "PedalsSystem.h"
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -49,7 +43,7 @@ OrbisBR10 steering1(STEERING_SERIAL);
 // DashboardInterface dashboard;
 AMSInterface ams_interface(SOFTWARE_OK);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
-// MCUInterface<CircularBufferType> main_ecu(&CAN3_txBuffer);
+// MCUInterface main_ecu(&CAN3_txBuffer);
 // TelemetryInterface<CircularBufferType> telem_interface(&CAN3_txBuffer);
 using InverterInterfaceType = InverterInterface<CircularBufferType>;
 InverterInterfaceType fl_inv(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
