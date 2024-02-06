@@ -4,6 +4,7 @@
 #include "FlexCAN_T4.h"
 
 constexpr std::size_t CANBufferSize = 16;
+// does this need to be 3 params like our original definitions of the buffers?
 using CANBufferType = Circular_Buffer<uint8_t, CANBufferSize>;
 
 #endif

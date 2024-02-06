@@ -48,7 +48,9 @@ void DashboardInterface::write()
     can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, NULL);
     
     // TODO fix
-    // msg_queue_->push_back(can_msg, sizeof(CAN_message_t));
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(msg));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
 
 }
 
@@ -56,7 +58,7 @@ void DashboardInterface::write()
 void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
 {
     // TODO this no worky
-    // _data.LED[static_cast<int>(led)] = static_cast<int> color;
+    _data.LED[static_cast<int>(led)] = static_cast<int>(color);
 }
 
 DialMode_e DashboardInterface::getDialMode() {return _data.dial_mode;}
