@@ -25,7 +25,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     {
         implausibilityStartTime_ = 0;
     }
-    
+
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
@@ -84,8 +84,7 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
 bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &accelPedalData1,
                                                      const AnalogConversion_s &accelPedalData2,
                                                      const AnalogConversion_s &brakePedalData1,
-                                                     const AnalogConversion_s &brakePedalData2
-                                                     )
+                                                     const AnalogConversion_s &brakePedalData2)
 {
 
     bool accel_pressed = pedal_is_active_(accelPedalData1.conversion, accelPedalData2.conversion, accelParams_.activation_percentage); // .1

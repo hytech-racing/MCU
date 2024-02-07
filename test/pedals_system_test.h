@@ -15,31 +15,40 @@ author: Lucas Plant
 #include <array>
 
 
-// struct PedalIsActiveTestCase
-// {
-//     // defines input and output params
+struct PedalIsActiveTestCase
+{
+    // defines input and output params
 
-//     // input params
-//     PedalsDriverInterface pedalsinput;
+    // input params
+    PedalsDriverInterface pedalsinput;
 
-//     // expected output
-//     bool expect_active;
-// };
+    // expected output
+    bool expect_active;
+};
 
 
+// TODO accel and brake implausibility for greater than max or less than min
 
-// TEST(PedalsSystemTesting, test_pedal_is_active)
-// {
-//     PedalsParams params_for_test = {1, 1, 10, 10, 1, 1, 9, 9};
-//     PedalsSystem pedals_system(params_for_test, params_for_test);
-//     std::array<PedalIsActiveTestCase, 1> test_cases{{{{0, 0, 3, 3}, true}}};
+// TODO accel and brake implausibility for values not within acceptable percentage differences
 
-//     for (const auto &test_case : test_cases)
-//     {
-//         auto out = pedals_system.mech_brake_active(test_case.pedalsinput);
-//         EXPECT_EQ(test_case.expect_active, out);
-//     }
-// }
+// TODO test accel and brake implausibility for both pressed at same time
+
+// TODO test accel and brake activation
+
+// TODO test implausibility duration alert
+
+TEST(PedalsSystemTesting, test_pedal_is_active)
+{
+    PedalsParams params_for_test = {1, 1, 10, 10, 1, 1, 9, 9};
+    PedalsSystem pedals_system(params_for_test, params_for_test);
+    std::array<PedalIsActiveTestCase, 1> test_cases{{{{0, 0, 3, 3}, true}}};
+
+    for (const auto &test_case : test_cases)
+    {
+        auto out = pedals_system.mech_brake_active(test_case.pedalsinput);
+        EXPECT_EQ(test_case.expect_active, out);
+    }
+}
 
 
 
