@@ -6,7 +6,7 @@
 #include "hytech.h"
 
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
-enum DialMode_e
+enum class DialMode_e
 {
     MODE_1,
     MODE_2,
@@ -17,7 +17,7 @@ enum DialMode_e
 };
 
 /* Enum for defined LED colors. ON will be LED's default color on dashboard*/
-enum LEDColors_e
+enum class LEDColors_e
 {
     OFF,
     ON,
@@ -26,7 +26,7 @@ enum LEDColors_e
 };
 
 /* Enum to index the LED array. Each LED in the CAN message is represented in no particular order. */
-enum DashLED_e
+enum class DashLED_e
 {
     BOTS_LED,
     LAUNCH_CONTROL_LED,

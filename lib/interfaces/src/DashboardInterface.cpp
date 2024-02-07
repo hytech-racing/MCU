@@ -30,19 +30,19 @@ void DashboardInterface::write()
     msg.drive_buzzer = _data.buzzer_cmd;
 
     // TODO: use logic as to not write data for LEDs that have not changed
-    msg.bots_led = _data.LED[DashLED_e::BOTS_LED];
-    msg.launch_control_led = _data.LED[DashLED_e::LAUNCH_CONTROL_LED];
-    msg.mode_led = _data.LED[DashLED_e::MODE_LED];
-    msg.mechanical_brake_led = _data.LED[DashLED_e::MECH_BRAKE_LED];
-    msg.cockpit_brb_led = _data.LED[DashLED_e::COCKPIT_BRB_LED];
-    msg.inertia_status_led = _data.LED[DashLED_e::INERTIA_LED];
-    msg.start_status_led = _data.LED[DashLED_e::START_LED];
-    msg.motor_controller_error_led = _data.LED[DashLED_e::MC_ERROR_LED];
-    msg.imd_led = _data.LED[DashLED_e::IMD_LED];
-    msg.ams_led = _data.LED[DashLED_e::AMS_LED];
+    msg.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
+    msg.launch_control_led = _data.LED[static_cast<int>(DashLED_e::LAUNCH_CONTROL_LED)];
+    msg.mode_led = _data.LED[static_cast<int>(DashLED_e::MODE_LED)];
+    msg.mechanical_brake_led = _data.LED[static_cast<int>(DashLED_e::MECH_BRAKE_LED)];
+    msg.cockpit_brb_led = _data.LED[static_cast<int>(DashLED_e::COCKPIT_BRB_LED)];
+    msg.inertia_status_led = _data.LED[static_cast<int>(DashLED_e::INERTIA_LED)];
+    msg.start_status_led = _data.LED[static_cast<int>(DashLED_e::START_LED)];
+    msg.motor_controller_error_led = _data.LED[static_cast<int>(DashLED_e::MC_ERROR_LED)];
+    msg.imd_led = _data.LED[static_cast<int>(DashLED_e::IMD_LED)];
+    msg.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
 
-    msg.glv_led = _data.LED[DashLED_e::GLV_LED];
-    msg.pack_charge_led = _data.LED[DashLED_e::CRIT_CHARGE_LED];
+    msg.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
+    msg.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
     
     CAN_message_t can_msg;
     can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, NULL);
