@@ -1,5 +1,5 @@
 #include "PedalsSystem.h"
-
+#include <iostream>
 // TODO parameterize percentages in constructor
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
 {
@@ -69,6 +69,7 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
         pedal_1_greater_than_max ||
         pedal_2_greater_than_max)
     {
+
         return true;
     }
     else if (sens_not_within_req_percent || pedalsClamped)

@@ -4,13 +4,7 @@
 #include <tuple>
 #include "AnalogSensorsInterface.h"
 
-enum class PedalsStatus_e
-{
-    PEDALS_NOMINAL = 0,
-    PEDALS_MARGINAL = 1,
-    PEDALS_IMPLAUSIBLE = 2,
-};
-
+#include "SysClock.h"
 struct PedalsSystemData_s
 {
 
@@ -41,11 +35,14 @@ public:
     {
         return data_;
     }
-    PedalsSystem()
+    PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams)
     {
-        implausibilityStartTime_ = 0;
+        accelParams_ = accelParams;
+        brakeParams_ = brakeParams;
+        implausibilityStartTime_ = 0; // ms
         // Setting of min and maxes for pedals via config file
     };
+    
     void tick(const SysTick_s &tick,
               const AnalogConversion_s &accel1,
               const AnalogConversion_s &accel2,
