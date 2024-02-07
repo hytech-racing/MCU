@@ -14,8 +14,8 @@ struct TriggerBits_s
 
 struct SysTick_s
 {
-    long millis;
-    long micros;
+    unsigned long millis;
+    unsigned long micros;
     TriggerBits_s triggers;
 };
 

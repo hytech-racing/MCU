@@ -61,7 +61,7 @@ InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND, 9, 8);
 SysClock sys_clock;
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 SafetySystem safety_system(&ams_interface, &wd_interface);  // Tie ams and wd interface to safety system (by pointers)
-PedalsSystem pedals;
+PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
 SteeringSystem steering_system(&steering1);  // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
