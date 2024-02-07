@@ -57,6 +57,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         //      the drivetrain state machine handling
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
+            hal_println("drivetrain not over thresh in WRTD?");
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
@@ -72,8 +73,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::READY_TO_DRIVE:
     {
         auto data = pedals_->getPedalsSystemData();
+
+        hal_println("RTD");
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
+            hal_println("drivetrain not over thresh?");
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
@@ -116,6 +120,8 @@ template <typename DrivetrainSysType>
 void MCUStateMachine<DrivetrainSysType>::set_state_(CAR_STATE new_state, unsigned long curr_time)
 {
     hal_println("running exit logic");
+
+    hal_printf("\n to state: %i\n", new_state);
     handle_exit_logic_(current_state_, curr_time);
 
     current_state_ = new_state;
@@ -163,12 +169,17 @@ void MCUStateMachine<DrivetrainSysType>::handle_entry_logic_(CAR_STATE new_state
         break;
     }
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
+    {
         // make dashboard sound buzzer
         buzzer_->activate_buzzer(curr_time);
         hal_println("RTDS enabled");
         break;
+    }
     case CAR_STATE::READY_TO_DRIVE:
+    {
+        hal_printf("%i\n", curr_time);
         hal_println("Ready to drive");
         break;
+    }
     }
 }
