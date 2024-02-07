@@ -74,7 +74,6 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     {
         auto data = pedals_->getPedalsSystemData();
 
-        hal_println("RTD");
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             hal_println("drivetrain not over thresh?");
@@ -87,18 +86,14 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
-        // TODO migrate the handling of the pedals / move to the new pedals system
-        // PedalsDriverInterface data;
-        // auto pedals_data = pedals_->evaluate_pedals(data, current_millis);
-        // auto dashboard_data = dashboard_->evaluate_dashboard(dash_data);
 
-        // TODO: below in the scope of this function
+        // TODO:integrate the ams and the IMD
         if (
             // bms_->ok_high() &&
             // imd_->ok_high() &&
             !data.implausibilityExceededMaxDuration)
         {
-            // drivetrain_->command_drivetrain(controller_mux_->get_drivetrain_input(pedals_data, dashboard_data));
+            drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         }
         else
         {

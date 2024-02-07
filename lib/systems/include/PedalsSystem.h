@@ -61,12 +61,17 @@ private:
     bool evaluate_brake_and_accel_pressed_();
 
     bool pedal_is_active_(int sense_1, int sense_2, const PedalsSystemParameters_s &pedalParams, float percent_threshold);
-
+    
 public:
 // Constructors
-    PedalsSystem(PedalsSystemParameters_s* parametersExt)
+    PedalsSystem(PedalsSystemParameters_s parametersExt)
     {
-        parameters_ = *parametersExt;
+        parameters_ = parametersExt;
+    }
+
+    void update_parameters(const PedalsSystemParameters_s &new_params)
+    {
+        parameters_ = new_params;
     }
     PedalsSystem()
     {
@@ -89,6 +94,8 @@ public:
         const AnalogConversion_s &brake1, 
         const AnalogConversion_s &brake2
     );
+
+    
     const PedalsSystemData_s& getPedalsSystemData()
     {
         return data_;

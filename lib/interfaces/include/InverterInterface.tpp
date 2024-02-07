@@ -25,7 +25,6 @@ void InverterInterface<message_queue>::request_enable_hv()
 template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_inverter()
 {
-
     MC_setpoints_command mc_setpoints_command{};
     mc_setpoints_command.set_speed_setpoint(0);
     mc_setpoints_command.set_pos_torque_limit(0);

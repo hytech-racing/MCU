@@ -27,13 +27,18 @@ template <typename DrivetrainSysType>
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerController *buzzer, DrivetrainSysType *drivetrain, DashboardInterface *dashboard, PedalsSystem *pedals)
+    MCUStateMachine(BuzzerController *buzzer,
+                    DrivetrainSysType *drivetrain,
+                    DashboardInterface *dashboard,
+                    PedalsSystem *pedals,
+                    TorqueControllerMux *mux)
     {
         current_state_ = CAR_STATE::STARTUP;
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
         dashboard_ = dashboard;
         pedals_ = pedals;
+        controller_mux_ = mux;
     }
 
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
@@ -43,7 +48,6 @@ public:
     CAR_STATE get_state() { return current_state_; }
 
 private:
-
     void set_state_(CAR_STATE new_state, unsigned long curr_time);
 
     /// @brief the function run upon the entry of the car into a new state
@@ -65,8 +69,7 @@ private:
     AMSInterface *bms_;
     // IMDInterface *imd_;
 
-    TorqueControllerMux* controller_mux_;
-
+    TorqueControllerMux *controller_mux_;
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */
