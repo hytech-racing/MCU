@@ -11,8 +11,6 @@ void MCUInterface::init() {
 
     // Enable inverters (?)
     // Should be called from drivetrain
-    digitalWrite(pin_inv_en_, HIGH);
-    digitalWrite(pin_inv_24V_en_, HIGH);
 }
 
 /* Read shutdown system values */
@@ -41,20 +39,6 @@ void MCUInterface::measure_shutdown_circuit_voltage() {
     shutdown_d_above_threshold = digitalRead(pin_bms_ok_read_);
     shutdown_e_above_threshold = digitalRead(pin_bspd_ok_read_);
     
-}
-
-/* Write inverter enable */
-void MCUInterface::set_inverter_enable(bool enable) {
-
-    digitalWrite(pin_inv_en_, enable);
-
-}
-
-/* Write inverter 24V enable */
-void MCUInterface::set_inverter_24V_enable(bool enable_24V) {
-
-    digitalWrite(pin_inv_24V_en_, enable_24V);
-
 }
 
 /* Write brake light */
