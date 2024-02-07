@@ -1,7 +1,10 @@
 #include "PedalsSystem.h"
 
 // TODO parameterize percentages in constructor
-PedalsSystemInterface PedalsSystem::evaluate_pedals(const PedalsDriverInterface &data, unsigned long curr_time)
+void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
+{
+}
+PedalsSystemInterface PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2, unsigned long curr_time)
 {
     PedalsSystemInterface out;
     out.accelImplausible = evaluate_pedal_implausibilities_(data.accelPedalPosition1, data.accelPedalPosition2, accelParams_, 0.1);

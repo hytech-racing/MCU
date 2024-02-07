@@ -2,6 +2,7 @@
 #define PEDALSSYSTEM
 #include <math.h>
 #include <tuple>
+#include "AnalogSensorsInterface.h"
 
 enum class PedalsStatus_e
 {
@@ -10,22 +11,22 @@ enum class PedalsStatus_e
     PEDALS_IMPLAUSIBLE = 2,
 };
 
-struct PedalsDriverInterface
-{
-    int accelPedalPosition1;
-    int accelPedalPosition2;
-    int brakePedalPosition1;
-    int brakePedalPosition2;
-};
+// struct PedalsDriverInterface
+// {
+//     int accelPedalPosition1;
+//     int accelPedalPosition2;
+//     int brakePedalPosition1;
+//     int brakePedalPosition2;
+// };
 
-struct PedalsSystemInterface
-{
-    bool accelImplausible;
-    bool brakeImplausible;
-    bool brakeAndAccelPressedImplausibility;
-    bool isBraking;
-    int requestedTorque;
-};
+// struct PedalsSystemInterface
+// {
+//     bool accelImplausible;
+//     bool brakeImplausible;
+//     bool brakeAndAccelPressedImplausibility;
+//     bool isBraking;
+//     int requestedTorque;
+// };
 
 struct PedalsSystemData_s
 {
@@ -71,12 +72,14 @@ public:
         implausibilityStartTime_ = 0;
         // Setting of min and maxes for pedals via config file
     };
-    PedalsSystemInterface evaluate_pedals(
-        const PedalsDriverInterface &pedal_data, unsigned long curr_time);
+    void tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2);
+
+    PedalsSystemInterface evaluate_pedals(const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2, unsigned long curr_time);
     bool max_duration_of_implausibility_exceeded(unsigned long curr_time);
     bool mech_brake_active();
 
 private:
+    PedalsSystemData_s data_;
     std::tuple<int, int> linearize_accel_pedal_values_(int accel1, int accel2);
 
     bool evaluate_pedal_implausibilities_(int sense_1, int sense_2, const PedalsParams &params, float max_percent_differnce);
