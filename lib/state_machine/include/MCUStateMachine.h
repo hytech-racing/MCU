@@ -19,8 +19,6 @@ enum class CAR_STATE
     TRACTIVE_SYSTEM_NOT_ACTIVE = 1,
     TRACTIVE_SYSTEM_ACTIVE = 2,
     ENABLING_INVERTERS = 3,
-    WAITING_DRIVETRAIN_QUIT_DC_ON = 4,
-    WAITING_DRIVETRAIN_ENABLED = 5,
     WAITING_READY_TO_DRIVE_SOUND = 6,
     READY_TO_DRIVE = 7
 };
@@ -44,6 +42,7 @@ public:
     CAR_STATE get_state() { return current_state_; }
 
 private:
+
     void set_state_(CAR_STATE new_state, unsigned long curr_time);
 
     /// @brief the function run upon the entry of the car into a new state

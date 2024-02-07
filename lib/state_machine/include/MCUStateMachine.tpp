@@ -38,52 +38,18 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::ENABLING_INVERTERS:
     {
-        // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
-        //      the drivetrain state machine handling
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
-
-        if (drivetrain_->drivetrain_ready())
-        {
-            // entry logic: drivetrain_->enable_drivetrain_hv(current_millis);
-            set_state_(CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON, current_millis);
-            break;
-        }
-        break;
-    }
-
-    case CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON:
-    {
-        if (drivetrain_->check_drivetrain_quit_dc_on() && !drivetrain_->inverter_init_timeout(current_millis))
-        {
-            set_state_(CAR_STATE::WAITING_DRIVETRAIN_ENABLED, current_millis);
-            break;
-        }
-        else if(drivetrain_->inverter_init_timeout(current_millis))
-        {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
-            break;
-        } else {
-            break;
-        }
-        break;
-    }
-    case CAR_STATE::WAITING_DRIVETRAIN_ENABLED:
-    {
-        if (drivetrain_->drivetrain_enabled() && !drivetrain_->inverter_init_timeout(current_millis))
+        // TODO handle drivetrain init timeout
+        if (drivetrain_->handle_inverter_startup())
         {
             set_state_(CAR_STATE::WAITING_READY_TO_DRIVE_SOUND, current_millis);
-        }
-        else if (drivetrain_->inverter_init_timeout(current_millis))
-        {
-            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
-            break;
-        } else {
             break;
         }
+        break;
     }
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
     {
@@ -171,10 +137,6 @@ void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state
         break;
     case CAR_STATE::ENABLING_INVERTERS:
         break;
-    case CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON:
-        break;
-    case CAR_STATE::WAITING_DRIVETRAIN_ENABLED:
-        break;
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
         break;
     case CAR_STATE::READY_TO_DRIVE:
@@ -200,20 +162,9 @@ void MCUStateMachine<DrivetrainSysType>::handle_entry_logic_(CAR_STATE new_state
     {
         break;
     }
-    case CAR_STATE::WAITING_DRIVETRAIN_QUIT_DC_ON:
-    {
-        drivetrain_->enable_drivetrain_hv(curr_time);
-        break;
-    }
-    case CAR_STATE::WAITING_DRIVETRAIN_ENABLED:
-    {
-        drivetrain_->request_enable();
-        break;
-    }
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
         // make dashboard sound buzzer
         buzzer_->activate_buzzer(curr_time);
-
         hal_println("RTDS enabled");
         break;
     case CAR_STATE::READY_TO_DRIVE:
