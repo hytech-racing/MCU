@@ -27,7 +27,7 @@ void TorqueControllerSimple::tick(const SysTick_s& tick, const PedalsSystemData_
     // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
     {
-        if ((pedalsData.pedalsCommand != PedalsCommanded_e::PEDALS_BOTH_PRESSED) && (pedalsData.persistentImplausibilityDetected == false))
+        if ((!pedalsData.brakeAndAccelPressedImplausibility) && (pedalsData.implausibilityExceededMaxDuration== false))
         {
             // Both pedals are not pressed and no implausibility has been detected
             // accelRequest goes between 1.0 and -1.0

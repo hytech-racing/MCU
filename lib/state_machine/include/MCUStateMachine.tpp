@@ -28,7 +28,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
-        if (dashboard_->startButtonPressed() && (data.pedalsCommand == PedalsCommanded_e::PEDALS_BRAKE_PRESSED))
+        if (dashboard_->startButtonPressed() && (data.brakePressed))
         {
             set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
             break;
