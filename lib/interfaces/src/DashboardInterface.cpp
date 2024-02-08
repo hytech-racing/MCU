@@ -28,31 +28,31 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 CAN_message_t DashboardInterface::write()
 {   
 
-    DASHBOARD_MCU_STATE_t msg;
-    msg.drive_buzzer = _data.buzzer_cmd;
+    DASHBOARD_MCU_STATE_t dash_mcu_state;
+    dash_mcu_state.drive_buzzer = _data.buzzer_cmd;
 
     // TODO: use logic as to not write data for LEDs that have not changed
-    msg.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
-    msg.launch_control_led = _data.LED[static_cast<int>(DashLED_e::LAUNCH_CONTROL_LED)];
-    msg.mode_led = _data.LED[static_cast<int>(DashLED_e::MODE_LED)];
-    msg.mechanical_brake_led = _data.LED[static_cast<int>(DashLED_e::MECH_BRAKE_LED)];
-    msg.cockpit_brb_led = _data.LED[static_cast<int>(DashLED_e::COCKPIT_BRB_LED)];
-    msg.inertia_status_led = _data.LED[static_cast<int>(DashLED_e::INERTIA_LED)];
-    msg.start_status_led = _data.LED[static_cast<int>(DashLED_e::START_LED)];
-    msg.motor_controller_error_led = _data.LED[static_cast<int>(DashLED_e::MC_ERROR_LED)];
-    msg.imd_led = _data.LED[static_cast<int>(DashLED_e::IMD_LED)];
-    msg.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
+    dash_mcu_state.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
+    dash_mcu_state.launch_control_led = _data.LED[static_cast<int>(DashLED_e::LAUNCH_CONTROL_LED)];
+    dash_mcu_state.mode_led = _data.LED[static_cast<int>(DashLED_e::MODE_LED)];
+    dash_mcu_state.mechanical_brake_led = _data.LED[static_cast<int>(DashLED_e::MECH_BRAKE_LED)];
+    dash_mcu_state.cockpit_brb_led = _data.LED[static_cast<int>(DashLED_e::COCKPIT_BRB_LED)];
+    dash_mcu_state.inertia_status_led = _data.LED[static_cast<int>(DashLED_e::INERTIA_LED)];
+    dash_mcu_state.start_status_led = _data.LED[static_cast<int>(DashLED_e::START_LED)];
+    dash_mcu_state.motor_controller_error_led = _data.LED[static_cast<int>(DashLED_e::MC_ERROR_LED)];
+    dash_mcu_state.imd_led = _data.LED[static_cast<int>(DashLED_e::IMD_LED)];
+    dash_mcu_state.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
 
-    msg.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
-    msg.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
+    dash_mcu_state.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
+    dash_mcu_state.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
     
     CAN_message_t can_msg;
-    can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, (uint8_t*) &can_msg.flags.extended);
+    can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&dash_mcu_state, can_msg.buf, &can_msg.len, (uint8_t*) &can_msg.flags.extended);
     
     // this circular buffer implementation requires that you push your data in a array buffer
     // all this does is put the msg into a uint8_t buffer and pushes it onto the queue
-    uint8_t buf[sizeof(CAN_message_t)];
-    memmove(buf, &msg, sizeof(CAN_message_t));
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &can_msg, sizeof(CAN_message_t));
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 
     return can_msg;

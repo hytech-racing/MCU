@@ -78,7 +78,7 @@ void test_passing_message_through_circular_buffer(void)
     dash_interface.setLED(DashLED_e::BOTS_LED, LEDColors_e::RED);
     dash_interface.setLED(DashLED_e::LAUNCH_CONTROL_LED, LEDColors_e::YELLOW);
 
-    //need to make _data in dash interface public:
+    // need to make _data in dash interface public:
     // TODO: investigate using friend class
     TEST_ASSERT_EQUAL_UINT8_ARRAY(LED, dash_interface._data.LED, sizeof(LED));
     
@@ -106,8 +106,8 @@ void test_passing_message_through_circular_buffer(void)
 
     Unpack_DASHBOARD_MCU_STATE_hytech(&mcu_state, msg.buf, NULL);
 
-    // TEST_ASSERT_EQUAL(LEDColors_e::RED, mcu_state.bots_led);
-    // TEST_ASSERT_EQUAL(LEDColors_e::YELLOW, mcu_state.launch_control_led);
+    TEST_ASSERT_EQUAL(LEDColors_e::RED, mcu_state.bots_led);
+    TEST_ASSERT_EQUAL(LEDColors_e::YELLOW, mcu_state.launch_control_led);
 
 }
 
