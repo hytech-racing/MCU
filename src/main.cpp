@@ -204,7 +204,7 @@ void tick_all_systems(const SysTick_s& current_system_tick) {
     drivetrain.tick(current_system_tick);
     torque_controller_mux.tick(
         current_system_tick,
-        (const DrivetrainDynamicReport_s) {},       // TODO: get drivetrain dynamic data
+        drivetrain.get_current_data(),       // TODO: get drivetrain dynamic data
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
         ADC2.get().conversions[0],                  // FL load cell reading. TODO: fix index
