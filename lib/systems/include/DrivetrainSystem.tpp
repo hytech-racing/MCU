@@ -78,11 +78,12 @@ void DrivetrainSystem<InverterType>::reset_drivetrain()
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_s &data)
 {
-
-    // inverters_[0]->handle_command(data.left_front_inverter_cmd);
-    // inverters_[1]->handle_command(data.right_front_inverter_cmd);
-    // inverters_[2]->handle_command(data.left_rear_inverter_cmd);
-    // inverters_[3]->handle_command(data.right_rear_inverter_cmd);
+    int index = 0;
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
+        index++;
+    }
 }
 
 // feedback functions
