@@ -4,6 +4,8 @@
 #include "Utility.h"
 #include <array>
 #include "stdint.h"
+#include "SysClock.h"
+
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
@@ -25,18 +27,24 @@ class DrivetrainSystem
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms)
-        : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms)
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 25)
+        : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms), min_hv_voltage_(min_hv_voltage), min_cmd_period_(min_cmd_period_ms)
     {
         // values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf
         motor_pole_pairs_ = 5;
-        lambda_magnetic_flux_wb_ = 
+        lambda_magnetic_flux_wb_ = 1.0;
         hv_en_requested_ = false;
         enable_requested_ = false;
-        // TODO set min_hv_voltage_
+        curr_system_millis_ = 0;
+        last_no_torque_cmd_time_ = 0;
+        last_reset_cmd_time_ = 0;
+        last_disable_cmd_time_ = 0;
+        last_general_cmd_time_ = 0; // ms
     }
+    void tick(const SysTick_s &tick);
 
-    void setup_retry() {
+    void setup_retry()
+    {
         reset_drivetrain();
         hv_en_requested_ = false;
         enable_requested_ = false;
@@ -57,6 +65,9 @@ public:
     DrivetrainDynamicReport_s get_current_data();
 
 private:
+    std::array<InverterType *, 4> inverters_;
+    int init_time_limit_ms_;
+    uint16_t min_hv_voltage_;
     int motor_pole_pairs_;
     float lambda_magnetic_flux_wb_, L_d_inductance_H_;
     // startup statuses:
@@ -73,11 +84,12 @@ private:
     // final check for drivetrain initialization to check if quit inverter on
     bool drivetrain_enabled_();
 
+    unsigned long curr_system_millis_;
+    int min_cmd_period_;
+    unsigned long last_no_torque_cmd_time_, last_reset_cmd_time_, last_disable_cmd_time_, last_general_cmd_time_;
 
-    uint16_t min_hv_voltage_;
-    std::array<InverterType *, 4> inverters_;
-    int init_time_limit_ms_;
     unsigned long drivetrain_initialization_phase_start_time_;
+    DrivetrainCommand_s current_drivetrain_command_;
 };
 
 #include "DrivetrainSystem.tpp"
