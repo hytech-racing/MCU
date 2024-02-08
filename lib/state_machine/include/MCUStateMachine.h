@@ -31,13 +31,15 @@ public:
                     DrivetrainSysType *drivetrain,
                     DashboardInterface *dashboard,
                     PedalsSystem *pedals,
-                    TorqueControllerMux *mux)
+                    TorqueControllerMux *mux, 
+                    AMSInterface *bms)
     {
         current_state_ = CAR_STATE::STARTUP;
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
         dashboard_ = dashboard;
         pedals_ = pedals;
+        bms_ = bms;
         controller_mux_ = mux;
     }
 

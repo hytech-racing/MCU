@@ -33,7 +33,19 @@ void InverterInterface<message_queue>::request_enable_inverter()
     mc_setpoints_command.set_inverter_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
-
+template <typename message_queue>
+void InverterInterface<message_queue>::disable()
+{
+    MC_setpoints_command mc_setpoints_command{};
+    mc_setpoints_command.set_inverter_enable(false);
+    mc_setpoints_command.set_hv_enable(false);
+    mc_setpoints_command.set_driver_enable(false);
+    mc_setpoints_command.set_remove_error(false);
+    mc_setpoints_command.set_speed_setpoint(0);
+    mc_setpoints_command.set_pos_torque_limit(0);
+    mc_setpoints_command.set_neg_torque_limit(0);
+    write_cmd_msg_to_queue_(mc_setpoints_command);
+}
 template <typename message_queue>
 void InverterInterface<message_queue>::command_no_torque()
 {

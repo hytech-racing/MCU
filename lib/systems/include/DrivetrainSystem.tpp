@@ -5,6 +5,14 @@ bool DrivetrainSystem<InverterType>::inverter_init_timeout(unsigned long curr_ti
 {
     return ((int)(curr_time - drivetrain_initialization_phase_start_time_) > init_time_limit_ms_);
 }
+template <typename InverterType>
+void DrivetrainSystem<InverterType>::disable()
+{
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->disable();
+    }
+}
 
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_time)
@@ -160,4 +168,5 @@ DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_current_data()
         // data.measuredTorques[inverter_ind] = inv_pointer->get_actual_torque();
         inverter_ind++;
     }
+    return data;
 }

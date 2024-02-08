@@ -41,6 +41,7 @@ public:
     void receive_temp_msg(CAN_message_t &msg);
 
     // send msg functions
+    void disable();
     void request_enable_hv();
     void request_enable_inverter();
     void command_no_torque();

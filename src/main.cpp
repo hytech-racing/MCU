@@ -77,7 +77,7 @@ TorqueControllerMux torque_controller_mux;
 
 
 /* Declare state machine */
-// MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard);    // need more implemetation details. associated interfaces and systems tied by pointers
+MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &ams_interface);    // need more implemetation details. associated interfaces and systems tied by pointers
 
 
 /* Global instantiations */
@@ -126,7 +126,7 @@ void loop() {
     
     /* System process readings prior to ticking state machine */
     tick_all_systems();
-
+    fsm.tick_state_machine(curr_tick.millis);
     /* Update and enqueue CAN messages */
     update_and_enqueue_all_CAN();
 

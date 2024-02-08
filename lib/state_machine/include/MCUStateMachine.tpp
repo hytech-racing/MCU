@@ -44,7 +44,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
         // TODO handle drivetrain init timeout
-        if (drivetrain_->handle_inverter_startup())
+        if (drivetrain_->handle_inverter_startup(current_millis))
         {
             set_state_(CAR_STATE::WAITING_READY_TO_DRIVE_SOUND, current_millis);
             break;
