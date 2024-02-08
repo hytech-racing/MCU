@@ -13,11 +13,13 @@ bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_
     {
         enable_drivetrain_hv_(curr_time);
         hv_en_requested_ = true;
+        return false;
     }
-    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !enable_requested_)
+    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !enable_requested_ && hv_en_requested_)
     {
         request_enable_();
         enable_requested_ = true;
+        return false;
     }
     bool all_ready = ( drivetrain_ready_() && check_drivetrain_quit_dc_on_() && drivetrain_enabled_() );
     return all_ready;
