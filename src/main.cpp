@@ -61,7 +61,7 @@ InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND, 9, 8);
 SysClock sys_clock;
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 SafetySystem safety_system(&ams_interface, &wd_interface);  // Tie ams and wd interface to safety system (by pointers)
-PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
+PedalsSystem pedals_system({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
 SteeringSystem steering_system(&steering1);  // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
@@ -73,7 +73,7 @@ auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INV
         TorqueControllerSimple launch_control_mode;
         TorqueControllerSimple torque_vectoring_mode;
 */
-TorqueControllerMux torque_controller_mux;  // would prob need to tie controllers to mux as well?
+TorqueControllerMux torque_controller_mux;
 
 
 /* Declare state machine */
@@ -89,8 +89,8 @@ SysTick_s curr_tick;
 void update_and_enqueue_all_CAN();
 /* External value readings */
 void sample_all_external_readings();
-/* Process all readings */
-void process_all_value_readings();
+/* Tick all systems */
+void tick_all_systems();
 
 void setup() {
 
@@ -125,7 +125,7 @@ void loop() {
     sample_all_external_readings();
     
     /* System process readings prior to ticking state machine */
-    process_all_value_readings();
+    tick_all_systems();
 
     /* Update and enqueue CAN messages */
     update_and_enqueue_all_CAN();
@@ -195,11 +195,29 @@ void sample_all_external_readings() {
     main_ecu.read_mcu_status();
 }
 
-void process_all_value_readings() {
-    pedals.tick(curr_tick,
-                ADC1.get().conversions[MCU15_ACCEL1_CHANNEL],
-                ADC1.get().conversions[MCU15_ACCEL2_CHANNEL],
-                ADC1.get().conversions[MCU15_BRAKE1_CHANNEL],
-                ADC1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+void tick_all_systems() {
+    pedals_system.tick(
+        curr_tick,
+        ADC1.get().conversions[MCU15_ACCEL1_CHANNEL],
+        ADC1.get().conversions[MCU15_ACCEL2_CHANNEL],
+        ADC1.get().conversions[MCU15_BRAKE1_CHANNEL],
+        ADC1.get().conversions[MCU15_BRAKE2_CHANNEL]
+    );
+    steering_system.tick(
+        curr_tick,
+        ADC1.get().conversions[MCU15_STEERING_CHANNEL]
+    );
+    torque_controller_mux.tick(
+        curr_tick,
+        (const DrivetrainDynamicReport_s) {},       // TODO: get drivetrain dynamic data
+        pedals_system.getPedalsSystemData(),
+        steering_system.getSteeringSystemData(),
+        ADC2.get().conversions[0],                  // FL load cell reading. TODO: fix index
+        ADC3.get().conversions[0],                  // FR load cell reading. TODO: fix index
+        (const AnalogConversion_s) {},              // RL load cell reading. TODO: get data from rear load cells
+        (const AnalogConversion_s) {},              // RR load cell reading. TODO: get data from rear load cells
+        dashboard.getDialMode(),
+        dashboard.torqueButtonPressed()
+    );
 }
 
