@@ -12,7 +12,7 @@
 const float maxSpeedForModeChange = 5.0; // m/s
 const float maxTorqueDeltaForModeChange = 0.5; // Nm
 
-enum TorqueLimit_e
+enum class TorqueLimit_e
 {
     TCMUX_LOW_TORQUE = 0,
     TCMUX_MID_TORQUE = 1,
@@ -33,9 +33,9 @@ private:
         {DialMode_e::ENDURANCE, TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
-        {TCMUX_LOW_TORQUE, 10.0},
-        {TCMUX_MID_TORQUE, 15.0},
-        {TCMUX_FULL_TORQUE, 20.0}
+        {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
+        {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
+        {TorqueLimit_e::TCMUX_FULL_TORQUE, 20.0}
     };
     DrivetrainCommand_s controllerCommands_[static_cast<int>(TC_NUM_CONTROLLERS)];
     TorqueControllerNone torqueControllerNone_;
@@ -52,7 +52,7 @@ public:
     , torqueControllerSimple_(controllerCommands_[static_cast<int>(TC_SAFE_MODE)])
     {
         muxMode_ = TC_NO_CONTROLLER;
-        torqueLimit_ = TCMUX_LOW_TORQUE;
+        torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
     }
 // Functions
     void tick(
@@ -70,6 +70,10 @@ public:
     const DrivetrainCommand_s& getDrivetrainCommand()
     {
         return drivetrainCommand_;
+    };
+    const TorqueLimit_e& getTorqueLimit()
+    {
+        return torqueLimit_;
     };
 };
 
