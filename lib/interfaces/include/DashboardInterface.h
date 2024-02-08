@@ -52,6 +52,8 @@ struct DashButtons_s
     bool launch_ctrl;
     bool torque_mode; // torque loading
     bool led_dimmer;
+    bool left_shifter;
+    bool right_shifter;
 };
 
 /* Struct holding all data for the DashboardInterface (inputs and outputs) */
@@ -70,7 +72,7 @@ struct DashComponentInterface_s
     bool buzzer_cmd;
     //making it an array of ints to support enumerated LEDs as well as
     //gradient/value based LEDs
-    uint8_t LED[12];
+    uint8_t LED[12] = {};
 };
 
 /*
@@ -83,12 +85,12 @@ struct DashComponentInterface_s
 class DashboardInterface
 {
 private:
-    /* The instantiated data struct used to access data by member functions */
-    DashComponentInterface_s _data;
     /* Pointer to the circular buffer to write new messages */
     CANBufferType *msg_queue_;
 
 public:
+    /* The instantiated data struct used to access data by member functions */
+    DashComponentInterface_s _data;
     /*!
         Constructor for new DashboardInterface, All that it is inited with
         is the pointer to the telem circular buffer that is used to write new messages
@@ -107,7 +109,7 @@ public:
     */
     void read(const CAN_message_t &can_msg);
     /* write function will Pack a message based on the current data in the interface and push it to the tx buffer */
-    void write();
+    CAN_message_t write();
 
     /*!
         getter for the dashboard's current dial position (drive profile)
@@ -132,6 +134,8 @@ public:
     bool torqueLoadingButtonPressed();
     /* getter for the dimmer button (this logic handled on dash ) */
     bool nightModeButtonPressed();
+    bool leftShifterButtonPressed();
+    bool rightShifterButtonPressed();
     /* getter for the current shutdown threshold on the dashboard*/
     bool shutdownHAboveThreshold();
     /* setter for the buzzer */

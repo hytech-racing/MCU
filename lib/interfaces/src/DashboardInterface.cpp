@@ -18,12 +18,14 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
     _data.button.launch_ctrl = msg.launch_ctrl_button;
     _data.button.torque_mode = msg.torque_mode_button;
     _data.button.led_dimmer = msg.led_dimmer_button;
+    _data.button.left_shifter = msg.left_shifter_button;
+    _data.button.right_shifter = msg.right_shifter_button;
 
     _data.buzzer_state = msg.drive_buzzer;
 
 }
 
-void DashboardInterface::write()
+CAN_message_t DashboardInterface::write()
 {   
 
     DASHBOARD_MCU_STATE_t msg;
@@ -45,13 +47,15 @@ void DashboardInterface::write()
     msg.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
     
     CAN_message_t can_msg;
-    can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, NULL);
+    can_msg.id = Pack_DASHBOARD_MCU_STATE_hytech(&msg, can_msg.buf, &can_msg.len, (uint8_t*) &can_msg.flags.extended);
     
     // this circular buffer implementation requires that you push your data in a array buffer
     // all this does is put the msg into a uint8_t buffer and pushes it onto the queue
     uint8_t buf[sizeof(CAN_message_t)];
-    memmove(buf, &msg, sizeof(msg));
+    memmove(buf, &msg, sizeof(CAN_message_t));
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
+
+    return can_msg;
 
 }
 
@@ -59,7 +63,7 @@ void DashboardInterface::write()
 void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
 {
 
-    _data.LED[static_cast<int>(led)] = static_cast<int>(color);
+    _data.LED[static_cast<uint8_t>(led)] = static_cast<uint8_t>(color);
 }
 
 DialMode_e DashboardInterface::getDialMode() {return _data.dial_mode;}
@@ -71,6 +75,8 @@ bool DashboardInterface::inverterResetButtonPressed() {return _data.button.mc_cy
 bool DashboardInterface::launchControlButtonPressed() {return _data.button.launch_ctrl;}
 bool DashboardInterface::torqueLoadingButtonPressed() {return _data.button.torque_mode;}
 bool DashboardInterface::nightModeButtonPressed() {return _data.button.led_dimmer;}
+bool DashboardInterface::leftShifterButtonPressed() {return _data.button.left_shifter;}
+bool DashboardInterface::rightShifterButtonPressed() {return _data.button.right_shifter;}
 
 bool DashboardInterface::safetySystemOK() {return _data.ssok;}
 bool DashboardInterface::shutdownHAboveThreshold() {return _data.shutdown;}
