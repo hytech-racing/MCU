@@ -79,23 +79,18 @@ TorqueControllerMux torque_controller_mux;
 /* Declare state machine */
 MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &ams_interface);    // need more implemetation details. associated interfaces and systems tied by pointers
 
-
-/* Global instantiations */
-SysTick_s curr_tick;
-
-
 /* Function declarations */
 /* CAN functions */
-void update_and_enqueue_all_CAN();
+void update_and_enqueue_all_CAN(const SysTick_s& current_system_tick);
 /* External value readings */
-void sample_all_external_readings();
+void sample_all_external_readings(const SysTick_s& current_system_tick);
 /* Tick all systems */
-void tick_all_systems();
+void tick_all_systems(const SysTick_s& current_system_tick);
 
 void setup() {
 
     /* Tick system clock */
-    curr_tick = sys_clock.tick(micros());
+    auto curr_tick = sys_clock.tick(micros());
 
     /* Initialize interface */
     main_ecu.init();    // initial shutdown circuit readings, 
@@ -118,17 +113,16 @@ void setup() {
 
 void loop() {
 
-    /* Tick system clock */
-    curr_tick = sys_clock.tick(micros());
-
+    auto cur_tick = sys_clock.tick(micros());
     // Sensors sample and cache
-    sample_all_external_readings();
+    sample_all_external_readings(cur_tick);
     
     /* System process readings prior to ticking state machine */
-    tick_all_systems();
-    fsm.tick_state_machine(curr_tick.millis);
+    
+    tick_all_systems(cur_tick);
+    fsm.tick_state_machine(cur_tick.millis);
     /* Update and enqueue CAN messages */
-    update_and_enqueue_all_CAN();
+    update_and_enqueue_all_CAN(cur_tick);
 
     /* Inverter procedure before entering state machine */
     // Drivetrain check if inverters have error
@@ -138,7 +132,7 @@ void loop() {
     // fsm.tick_state_machine(curr_tick);
 
     /* Tick safety system */
-    safety_system.software_shutdown(curr_tick);
+    safety_system.software_shutdown(cur_tick);
 }
 
 void init_all_CAN() {
@@ -163,7 +157,7 @@ void init_all_CAN() {
     delay(500);
 }
 
-void update_and_enqueue_all_CAN() {
+void update_and_enqueue_all_CAN(const SysTick_s& current_system_tick) {
     // Drivetrain system
         // probably here as well
     // MCU interface
@@ -177,38 +171,39 @@ void update_and_enqueue_all_CAN() {
                 //   ams_interface.pack_charge_is_critical(),
                 //   dash.lauchControlButtonPressed());
     // Telemetry
-    telem_interface.tick(curr_tick,
+    telem_interface.tick(current_system_tick,
                          ADC1.get(),
                          ADC2.get(),    // Add MCP3204 functionality for corner board
                          ADC3.get(),    // Add implementation to get()
                          steering1.convert());
 }
 
-void sample_all_external_readings() {
+void sample_all_external_readings(const SysTick_s& current_system_tick) {
     // Tick all adcs
-    ADC1.tick(curr_tick);
-    ADC2.tick(curr_tick);
-    ADC3.tick(curr_tick);
+    ADC1.tick(current_system_tick);
+    ADC2.tick(current_system_tick);
+    ADC3.tick(current_system_tick);
     // Tick steering system
-    steering_system.tick(curr_tick, ADC1.get().conversions[MCU15_STEERING_CHANNEL]);
+    steering_system.tick(current_system_tick, ADC1.get().conversions[MCU15_STEERING_CHANNEL]);
     // Read shutdown circuits    
     main_ecu.read_mcu_status();
 }
 
-void tick_all_systems() {
+void tick_all_systems(const SysTick_s& current_system_tick) {
     pedals_system.tick(
-        curr_tick,
+        current_system_tick,
         ADC1.get().conversions[MCU15_ACCEL1_CHANNEL],
         ADC1.get().conversions[MCU15_ACCEL2_CHANNEL],
         ADC1.get().conversions[MCU15_BRAKE1_CHANNEL],
         ADC1.get().conversions[MCU15_BRAKE2_CHANNEL]
     );
     steering_system.tick(
-        curr_tick,
+        current_system_tick,
         ADC1.get().conversions[MCU15_STEERING_CHANNEL]
     );
+    drivetrain.tick(current_system_tick);
     torque_controller_mux.tick(
-        curr_tick,
+        current_system_tick,
         (const DrivetrainDynamicReport_s) {},       // TODO: get drivetrain dynamic data
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
@@ -219,5 +214,6 @@ void tick_all_systems() {
         dashboard.getDialMode(),
         dashboard.torqueButtonPressed()
     );
+    
 }
 
