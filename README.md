@@ -147,8 +147,6 @@ stateDiagram-v2
     trac_sys_na : TRACTIVE_SYSTEM_NOT_ACTIVE
     trac_sys_a : TRACTIVE_SYSTEM_ACTIVE
     inv_en : ENABLING_INVERTERS
-    dt_q_dc_on : WAITING_DRIVETRAIN_QUIT_DC_ON
-    dt_en : WAITING_DRIVETRAIN_ENABLED
     rtd_s : WAITING_READY_TO_DRIVE_SOUND
     rtd : READY_TO_DRIVE
 
@@ -157,11 +155,7 @@ stateDiagram-v2
     trac_sys_a --> trac_sys_na: drivetrain voltage _not_ over threshold
     trac_sys_a --> inv_en: brake and start button pressed
     inv_en --> trac_sys_na: drivetrain voltage _not_ over threshold
-    inv_en --> dt_q_dc_on: drivetrain ready
-    dt_q_dc_on --> trac_sys_a: drivetrain init timeout
-    dt_q_dc_on --> dt_en: drivetrain quit dc statuses on
-    dt_en --> trac_sys_a: drivetrain initialization timeout
-    dt_en --> rtd_s: drivetrain enabled
+    inv_en  --> rtd_s: drivetrain enabled
     rtd_s --> trac_sys_na: drivetrain voltage _not_ over threshold
     rtd_s --> rtd: buzzer done buzzing
     rtd --> trac_sys_na: drivetrain voltage _not_ over threshold

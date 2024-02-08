@@ -19,22 +19,26 @@ enum class CAR_STATE
     TRACTIVE_SYSTEM_NOT_ACTIVE = 1,
     TRACTIVE_SYSTEM_ACTIVE = 2,
     ENABLING_INVERTERS = 3,
-    WAITING_DRIVETRAIN_QUIT_DC_ON = 4,
-    WAITING_DRIVETRAIN_ENABLED = 5,
-    WAITING_READY_TO_DRIVE_SOUND = 6,
-    READY_TO_DRIVE = 7
+    WAITING_READY_TO_DRIVE_SOUND = 4,
+    READY_TO_DRIVE = 5
 };
 
 template <typename DrivetrainSysType>
 class MCUStateMachine
 {
 public:
-    MCUStateMachine(BuzzerController *buzzer, DrivetrainSysType *drivetrain, DashboardInterface *dashboard, PedalsSystem *pedals)
+    MCUStateMachine(BuzzerController *buzzer,
+                    DrivetrainSysType *drivetrain,
+                    DashboardInterface *dashboard,
+                    PedalsSystem *pedals,
+                    TorqueControllerMux *mux)
     {
+        current_state_ = CAR_STATE::STARTUP;
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
         dashboard_ = dashboard;
         pedals_ = pedals;
+        controller_mux_ = mux;
     }
 
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
@@ -65,8 +69,7 @@ private:
     AMSInterface *bms_;
     // IMDInterface *imd_;
 
-    TorqueControllerMux* controller_mux_;
-
+    TorqueControllerMux *controller_mux_;
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */

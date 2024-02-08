@@ -6,9 +6,28 @@ bool DrivetrainSystem<InverterType>::inverter_init_timeout(unsigned long curr_ti
     return ((int)(curr_time - drivetrain_initialization_phase_start_time_) > init_time_limit_ms_);
 }
 
+template <typename InverterType>
+bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_time)
+{
+    if (drivetrain_ready_() && !hv_en_requested_)
+    {
+        enable_drivetrain_hv_(curr_time);
+        hv_en_requested_ = true;
+        return false;
+    }
+    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !enable_requested_ && hv_en_requested_)
+    {
+        request_enable_();
+        enable_requested_ = true;
+        return false;
+    }
+    bool all_ready = ( drivetrain_ready_() && check_drivetrain_quit_dc_on_() && drivetrain_enabled_() );
+    return all_ready;
+}
+
 // command functions
 template <typename InverterType>
-void DrivetrainSystem<InverterType>::enable_drivetrain_hv(unsigned long curr_time)
+void DrivetrainSystem<InverterType>::enable_drivetrain_hv_(unsigned long curr_time)
 {
 
     for (auto inv_pointer : inverters_)
@@ -19,7 +38,7 @@ void DrivetrainSystem<InverterType>::enable_drivetrain_hv(unsigned long curr_tim
 }
 
 template <typename InverterType>
-void DrivetrainSystem<InverterType>::request_enable()
+void DrivetrainSystem<InverterType>::request_enable_()
 {
     for (auto inv_pointer : inverters_)
     {
@@ -41,7 +60,7 @@ bool DrivetrainSystem<InverterType>::drivetrain_error_occured()
 {
     for (auto inv_pointer : inverters_)
     {
-        if(inv_pointer->error())
+        if (inv_pointer->error())
         {
             return true;
         }
@@ -59,30 +78,31 @@ void DrivetrainSystem<InverterType>::reset_drivetrain()
 }
 
 template <typename InverterType>
-void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_s& data)
+void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_s &data)
 {
-
-    // inverters_[0]->handle_command(data.left_front_inverter_cmd);
-    // inverters_[1]->handle_command(data.right_front_inverter_cmd);
-    // inverters_[2]->handle_command(data.left_rear_inverter_cmd);
-    // inverters_[3]->handle_command(data.right_rear_inverter_cmd);
-    
+    int index = 0;
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
+        index++;
+    }
 }
 
 // feedback functions
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::hv_over_threshold_on_drivetrain()
 {
-    for(auto inv_pointer : inverters_)
+    for (auto inv_pointer : inverters_)
     {
-        if(!(inv_pointer->dc_bus_voltage() > min_hv_voltage_)){
+        if (!(inv_pointer->dc_bus_voltage() > min_hv_voltage_))
+        {
             return false;
         }
     }
     return true;
 }
-template<typename InverterType> 
-bool DrivetrainSystem<InverterType>::drivetrain_ready()
+template <typename InverterType>
+bool DrivetrainSystem<InverterType>::drivetrain_ready_()
 {
     for (auto inv_pointer : inverters_)
     {
@@ -94,8 +114,8 @@ bool DrivetrainSystem<InverterType>::drivetrain_ready()
     return true;
 }
 
-template<typename InverterType> 
-bool DrivetrainSystem<InverterType>::check_drivetrain_quit_dc_on()
+template <typename InverterType>
+bool DrivetrainSystem<InverterType>::check_drivetrain_quit_dc_on_()
 {
     for (auto inv_pointer : inverters_)
     {
@@ -107,8 +127,8 @@ bool DrivetrainSystem<InverterType>::check_drivetrain_quit_dc_on()
     return true;
 }
 
-template<typename InverterType> 
-bool DrivetrainSystem<InverterType>::drivetrain_enabled()
+template <typename InverterType>
+bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
 {
     for (auto inv_pointer : inverters_)
     {

@@ -15,7 +15,7 @@ void TorqueControllerMux::tick(
     )
 {
     // Tick all torque controllers
-    torqueControllerSimple_.tick(tick, pedalsData, torqueLimit_);
+    torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
 
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
@@ -23,12 +23,12 @@ void TorqueControllerMux::tick(
         // detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms
         if (
             torqueLimitButtonPressed_ 
-            && dashboardTorqueModeButtonPressed
+            && !dashboardTorqueModeButtonPressed
             && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS
         )
         {
             // WOW C++ is ass
-            torqueLimit_ = static_cast<TorqueLimit_e>((static_cast<int>(torqueLimit_) + 1) % static_cast<int>(TCMUX_NUM_TORQUE_LIMITS));
+            torqueLimit_ = static_cast<TorqueLimit_e>((static_cast<int>(torqueLimit_) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
             torqueLimitButtonPressedTime_ = tick.millis;
         }
         torqueLimitButtonPressed_ = dashboardTorqueModeButtonPressed;
@@ -53,15 +53,12 @@ void TorqueControllerMux::tick(
             bool torqueDeltaPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
             {
-                float posTorqueDelta = abs(
-                    controllerCommands_[static_cast<int>(muxMode_)].posTorqueLimits[i]
-                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].posTorqueLimits[i]
+                float torqueDelta = abs(
+                    controllerCommands_[static_cast<int>(muxMode_)].torqueSetpoints[i]
+                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].torqueSetpoints[i]
                 );
-                float negTorqueDelta = abs(
-                    controllerCommands_[static_cast<int>(muxMode_)].negTorqueLimits[i]
-                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].negTorqueLimits[i]
-                );
-                if (posTorqueDelta > maxTorqueDeltaForModeChange || negTorqueDelta > maxTorqueDeltaForModeChange)
+                
+                if (torqueDelta > maxTorqueDeltaForModeChange)
                 {
                     torqueDeltaPreventsModeChange = true;
                     break;

@@ -14,15 +14,15 @@ struct TriggerBits_s
 
 struct SysTick_s
 {
-    long millis;
-    long micros;
+    unsigned long millis;
+    unsigned long micros;
     TriggerBits_s triggers;
 };
 
 class SysClock
 {
 private:
-    enum TriggerIndices_s
+    enum TriggerIndices_e
     {
         TRIG_1000 = 0,
         TRIG_500 = 1,
