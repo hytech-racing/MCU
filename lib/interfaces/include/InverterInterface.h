@@ -23,7 +23,8 @@ class InverterInterface
 public:
     InverterInterface(message_queue *msg_output_queue, uint32_t can_id, int inverter_enable_pin, int inverter_24v_enable_pin)
     {
-
+        // TODO fix me with correct value from config of inverter
+        id110_val_= 1.0;
         msg_queue_ = msg_output_queue;
         can_id_ = can_id;
         pin_inv_en_ = inverter_enable_pin;
