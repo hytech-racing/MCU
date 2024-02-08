@@ -5,6 +5,7 @@ bool DrivetrainSystem<InverterType>::inverter_init_timeout(unsigned long curr_ti
 {
     return ((int)(curr_time - drivetrain_initialization_phase_start_time_) > init_time_limit_ms_);
 }
+
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::disable()
 {
@@ -37,7 +38,6 @@ bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::enable_drivetrain_hv_(unsigned long curr_time)
 {
-
     for (auto inv_pointer : inverters_)
     {
         inv_pointer->request_enable_hv();
