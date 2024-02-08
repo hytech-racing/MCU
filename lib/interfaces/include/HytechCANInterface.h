@@ -4,10 +4,11 @@
 #include <tuple>
 #include "FlexCAN_T4.h"
 
+#include "hytech.h"
 #include "HyTech_CAN.h"
 
 #include "InverterInterface.h"
-
+#include "DashboardInterface.h"
 
 template <typename circular_buffer>
 struct CANInterfaces
@@ -16,6 +17,7 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *front_right_inv;
     InverterInterface<circular_buffer> *rear_left_inv;
     InverterInterface<circular_buffer> *rear_right_inv;
+    DashboardInterface *dash_interface;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
@@ -51,6 +53,7 @@ void on_can3_receive(const CAN_message_t &msg);
 template <typename BufferType, typename InterfaceType>
 void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
 {
+    // TODO switch to using the global CAN receive function from the generated CAN library
 
     while (rx_buffer.available())
     {
@@ -61,6 +64,12 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
         switch (recvd_msg.id)
         {
 
+        case DASHBOARD_STATE_CANID:
+            interfaces.dash_interface->read(recvd_msg);
+            break;
+            
+            
+            
             // MC status msgs
         case ID_MC1_STATUS:
             interfaces.front_left_inv->receive_status_msg(recvd_msg);
