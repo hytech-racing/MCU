@@ -1,5 +1,5 @@
-#ifndef __TELEMETRY_INTERFACE_H__
-#define __TELEMETRY_INTERFACE_H__
+#ifndef TELEMETRYINTERFACE
+#define TELEMETRYINTERFACE
 
 #include "stdint.h"
 #include "FlexCAN_T4.h"
@@ -68,4 +68,4 @@ public:
 
 };
 
-#endif /* __TELEMETRY_INTERFACE_H__ */
+#endif /* TELEMETRYINTERFACE */

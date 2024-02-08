@@ -1,3 +1,47 @@
+## building testing and running
+This project uses [Platformio](https://docs.platformio.org/en/latest/) for building, testing, checking and packaging. 
+
+There are two main options for using Platformio:
+1. [as a VSCode extension](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation)
+2. [the platformio core CLI](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html)
+
+Quick start guide on how to use VSCode's extension through the [platformio toolbar](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar)
+
+![ide upload and build](image.png)
+
+The main thing to understand is that there exists two "environments" that this project gets built in (`test_env`). One of them is for native running of tests and the other is for building for the teensy and deploying to the teensy (`teensy41`). 
+
+### Building
+To build the project for an environment, simply use platformio build check mark after switching to the specified `env`
+
+To build using platformio core CLI simply run `pio run -e teensy41`
+
+### Testing
+![testing through vscode](image-2.png)
+
+Before your feature / code addition / branch can get put into the `master` branch you must ensure the unit tests run with your code and that your code compiles. The remote CI will check your work and ensure that your code compiles and that it passes the unit tests however to check locally simply switch to the `test_env` and run the unit tests. This can be done through the VSCode IDE extension through the [project tasks menu](https://docs.platformio.org/en/latest/integration/ide/vscode.html#project-tasks) and selecting under `test_env` > `Advanced` > `Test`.
+
+
+To test using platformio core CLI simply run `pio test -e test_env`.
+
+### Uploading
+
+To upload to the teensy simply use the platformio upload arrow shown [here at number 3](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar).
+
+#### On Implementing and Importance of tests
+Unit tests are a great way to ensure that new features and new code in general can integrate and work well with other code. It provides a framework to verify that your stuff works the way it should and lets you know when and how it doesnt. 
+
+This project uses unit tests in the `test` folder to for both local testing and testing in the CI on github.
+
+The remote github CI testing currently only encompases system level testing and not the hardware dependent testing that is available locally for running.
+
+You can see results of previous test runs on commits here: https://github.com/hytech-racing/MCU/actions
+
+These MUST be maintained for functionality of the car. 
+
+
+
+## Design Lore of the Code
 ### outline
 
 Levels represent the layer of abstraction they are on. The reason for keeping track of this is to minimize the layers of abstraction for ease of understanding while also creating logical structure and getting maximum benefit per abstraction.
@@ -12,7 +56,7 @@ Levels represent the layer of abstraction they are on. The reason for keeping tr
 - __Reason for abstraction__: allows for easy swapping and adding of different portable systems and better [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) from [business logic](https://www.techtarget.com/whatis/definition/business-logic) of the car to the business logic of the system.
 
 
-Any firmware project that needs to have different states needs each system that creates outputs and / or controls real systems of the car needs can be thought of as each system being controlled by the state machine. What I am thinking is that in a similar fashion to the shared bus, each system can contain a shared pointer to the state machine. The system can know what state the car is in and based on the state it can determine how to behave. Obviously the state machine also needs to know about what the system is doing as well to determine the state, so the system also needs to be able to pass back data to the state machine. 
+Any firmware project that needs to have different states needs each system that creates outputs and / or controls real systems of the car needs can be thought of as each system being controlled by the state machine. What I am thinking is that in a similar fashion to the shared bus, each system can contain a pointer to the state machine. The system can know what state the car is in and based on the state it can determine how to behave. Obviously the state machine also needs to know about what the system is doing as well to determine the state, so the system also needs to be able to pass back data to the state machine. 
 
 For example, our state machine needs to handle understand the state of the pedals system. The pedals dont know about the state of the car, but it does know whether or not the pedals are outputting valid data. Each system can manage their own state and the abstract system base class could contain the set of system-agnostic states through which the statemachine evaluates.
 
@@ -41,8 +85,8 @@ classDiagram
         
         
         VectornavSystem* vectornav
-        PedalsSystem* pedals
-        DashSystem* dashboard
+        PedalsSystel* pedals
+        DashInterface* dashboard
 
 
         DrivetrainSystem* drivetrain

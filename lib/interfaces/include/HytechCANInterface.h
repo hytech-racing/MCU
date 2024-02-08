@@ -9,6 +9,7 @@
 
 #include "InverterInterface.h"
 #include "DashboardInterface.h"
+#include "AMSInterface.h"
 
 template <typename circular_buffer>
 struct CANInterfaces
@@ -18,6 +19,7 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *rear_left_inv;
     InverterInterface<circular_buffer> *rear_right_inv;
     DashboardInterface *dash_interface;
+    AMSInterface *ams_interface;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
@@ -51,7 +53,7 @@ void on_can3_receive(const CAN_message_t &msg);
 // RL = MC3
 // RR = MC4
 template <typename BufferType, typename InterfaceType>
-void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
+void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces, unsigned long curr_millis)
 {
     // TODO switch to using the global CAN receive function from the generated CAN library
 
@@ -67,9 +69,18 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces)
         case DASHBOARD_STATE_CANID:
             interfaces.dash_interface->read(recvd_msg);
             break;
-            
-            
-            
+        
+        // AMS msg receives
+        case ID_BMS_STATUS:
+            interfaces.ams_interface->retrieve_status_CAN(recvd_msg, curr_millis);
+            break;
+        case ID_BMS_TEMPERATURES:
+            interfaces.ams_interface->retrieve_temp_CAN(recvd_msg);
+            break;
+        case ID_BMS_VOLTAGES:
+            interfaces.ams_interface->retrieve_voltage_CAN(recvd_msg);
+            break;
+        
             // MC status msgs
         case ID_MC1_STATUS:
             interfaces.front_left_inv->receive_status_msg(recvd_msg);

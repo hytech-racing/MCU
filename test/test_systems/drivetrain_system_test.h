@@ -12,9 +12,16 @@ struct InverterCommand
 class InverterMock
 {
 public:
-    int request_enable_hv_count_, request_enable_inverter_count_;
-    float torque_setpoint_nm_;
-    float speed_setpoint_rpm_;
+    int request_enable_hv_count_ = 0;
+    int request_enable_inverter_count_ = 0;
+    float torque_setpoint_nm_ = 0;
+    float speed_setpoint_rpm_ = 0;
+
+    int cmd_no_t_count_ = 0;
+    int cmd_reset_count_ = 0;
+    int cmd_general_count_ = 0;
+    int cmd_disable_count_ = 0;
+
     InverterMock()
     {
 
@@ -44,18 +51,27 @@ public:
         quit_inverter_on_ = true;
     };
 
-    void command_no_torque(){};
-    bool error() { return error_; };
-    bool inverter_system_ready() { return system_ready_; };
-    void command_reset() { error_ = false; };
-    uint16_t dc_bus_voltage() { return voltage_; };
-    bool dc_quit_on() { return dc_quit_on_; }
-    bool quit_inverter_on() { return quit_inverter_on_; }
+    // periodic commands
+    void command_no_torque(){cmd_no_t_count_++;};
+    void command_reset() { 
+        cmd_reset_count_++;
+        error_ = false; };
     void handle_command(const InverterCommand &cmd)
     {
+        cmd_general_count_++;
         torque_setpoint_nm_ = cmd.torque_setpoint_nm;
         speed_setpoint_rpm_ = cmd.speed_setpoint_rpm;
     };
+    void disable() {
+        cmd_disable_count_++;
+    }
+
+    bool error() { return error_; };
+    bool inverter_system_ready() { return system_ready_; };
+
+    uint16_t dc_bus_voltage() { return voltage_; };
+    bool dc_quit_on() { return dc_quit_on_; }
+    bool quit_inverter_on() { return quit_inverter_on_; }
 };
 
 TEST(DrivetrainSystemTesting, test_drivetrain_startup)
@@ -142,7 +158,22 @@ TEST(DrivetrainSystemTesting, test_drivetrain_inverter_comms)
 
     //  torque_setpoint_nm_
     //  speed_setpoint_rpm_
+    // ensure that without ticking the inverters dont get the data
+    EXPECT_EQ(inv_fl.speed_setpoint_rpm_, 0.0);
+    EXPECT_EQ(inv_fl.torque_setpoint_nm_, 0);
 
+    EXPECT_EQ(inv_fr.torque_setpoint_nm_, 0);
+    EXPECT_EQ(inv_fr.speed_setpoint_rpm_, 0);
+
+    EXPECT_EQ(inv_rl.torque_setpoint_nm_, 0);
+    EXPECT_EQ(inv_rl.speed_setpoint_rpm_, 0);
+
+    EXPECT_EQ(inv_rr.torque_setpoint_nm_, 0);
+    EXPECT_EQ(inv_rr.speed_setpoint_rpm_, 0);
+    SysClock clock;
+    auto micros = 1000000;
+    dt.tick(clock.tick(micros));
+    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
     EXPECT_EQ(inv_fl.speed_setpoint_rpm_, 1000.0);
     EXPECT_EQ(inv_fl.torque_setpoint_nm_, 2000.0);
 
@@ -154,6 +185,18 @@ TEST(DrivetrainSystemTesting, test_drivetrain_inverter_comms)
 
     EXPECT_EQ(inv_rr.torque_setpoint_nm_, 2003.0);
     EXPECT_EQ(inv_rr.speed_setpoint_rpm_, 1003.0);
+
+    // testing to ensure that these extra general commands dont get through the period filter
+    micros += (20 * 1000);
+    dt.tick(clock.tick(micros));
+    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    EXPECT_EQ(inv_rl.cmd_general_count_, 1);
+    micros += (20 * 1000);
+    dt.tick(clock.tick(micros));
+    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    EXPECT_EQ(inv_rl.cmd_general_count_, 2);
 }
 // TODO test commanding of drivetrain to ensure that the data is getting accross correctly
 #endif /* DRIVETRAIN_SYSTEM_TEST */

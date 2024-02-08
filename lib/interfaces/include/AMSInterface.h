@@ -1,5 +1,5 @@
-#ifndef __AMS_INTERFACE_H__
-#define __AMS_INTERFACE_H__
+#ifndef AMSINTERFACE
+#define AMSINTERFACE
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -40,7 +40,7 @@ public:
     void set_state_ok_high(bool ok_high);
     
     /* Monitor AMS state */
-    void set_heartbeat(const SysTick_s &tick);
+    void set_heartbeat(unsigned long millis);
     bool heartbeat_received(const SysTick_s &tick);
     bool is_below_pack_charge_critical_low_thresh();
     bool is_below_pack_charge_critical_total_thresh();
@@ -51,7 +51,7 @@ public:
     float get_filtered_min_cell_voltage();
 
     /* Retrieve CAN */
-    void retrieve_status_CAN(CAN_message_t &recvd_msg, const SysTick_s &tick);
+    void retrieve_status_CAN(CAN_message_t &recvd_msg, unsigned long cur_millis);
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
 
@@ -77,4 +77,4 @@ private:
     int pin_software_ok_;
 };
 
-#endif /* __AMS_INTERFACE_H__ */
+#endif /* AMSINTERFACE */
