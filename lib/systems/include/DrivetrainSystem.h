@@ -12,7 +12,7 @@ struct DrivetrainCommand_s
 
 struct DrivetrainDynamicReport_s
 {
-    float measuredPackVoltage;
+    uint16_t measuredInverterFLPackVoltage;
     float measuredSpeeds[NUM_MOTORS];
     float measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
@@ -28,6 +28,9 @@ public:
     DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms)
         : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms)
     {
+        // values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf
+        motor_pole_pairs_ = 5;
+        lambda_magnetic_flux_wb_ = 
         hv_en_requested_ = false;
         enable_requested_ = false;
         // TODO set min_hv_voltage_
@@ -51,7 +54,11 @@ public:
     void reset_drivetrain();
     void command_drivetrain(const DrivetrainCommand_s &data);
 
+    DrivetrainDynamicReport_s get_current_data();
+
 private:
+    int motor_pole_pairs_;
+    float lambda_magnetic_flux_wb_, L_d_inductance_H_;
     // startup statuses:
     bool hv_en_requested_, enable_requested_;
     /// @param curr_time current system tick time (millis()) that sets the init phase start time

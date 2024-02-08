@@ -46,7 +46,6 @@ public:
     void handle_command(const InverterCommand &command);
     void command_reset();
 
-    
     bool inverter_system_ready()
     {
         return system_ready_;
@@ -64,13 +63,20 @@ public:
         return quit_inverter_on_;
     }
 
-    // TODO set this from can msg
     uint16_t dc_bus_voltage()
     {
         return dc_bus_voltage_;
     }
 
+    int16_t get_speed() { return speed_; }
+    float get_torque_current() {return torque_current_;}
+    float get_mag_current() {return magnetizing_current_;}
+    float get_actual_torque() {return actual_torque_nm_; }
+
 private:
+    float id110_val_;                            // for scaling to proper iq and id vals
+    float torque_current_, magnetizing_current_; // iq and id in A respectively
+    float actual_torque_nm_;
     int pin_inv_en_, pin_inv_24V_en_;
     void write_cmd_msg_to_queue_(const MC_setpoints_command &msg);
     int16_t speed_;

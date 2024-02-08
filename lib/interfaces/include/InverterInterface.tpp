@@ -52,19 +52,19 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
     // TODO handle the correct conversion to the over the wire data from real-world data type
     mc_setpoints_command.set_speed_setpoint(command.speed_setpoint_rpm);
 
-    if(command.torque_setpoint_nm < 0)
+    if (command.torque_setpoint_nm < 0)
     {
         mc_setpoints_command.set_neg_torque_limit(abs(command.torque_setpoint_nm));
         mc_setpoints_command.set_pos_torque_limit(0);
-    } else {
+    }
+    else
+    {
         mc_setpoints_command.set_neg_torque_limit(0);
         mc_setpoints_command.set_pos_torque_limit(command.torque_setpoint_nm);
     }
-    
 
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
-
 
 template <typename message_queue>
 void InverterInterface<message_queue>::command_reset()
@@ -82,6 +82,19 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     quit_dc_on_ = mc_status.get_quit_dc_on();
     quit_inverter_on_ = mc_status.get_quit_inverter_on();
     speed_ = mc_status.get_speed();
+
+    // TODO FIXME see 8.2.3 Units on page 83 of
+    // https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/pdk_205481_kw26-s5-fse-4q_en_.pdf#page=83&zoom=100,76,82
+    // for the actual conversion. requires looking at the current params of the inverter
+    // to get scalar for this.
+    torque_current_ = ((float)mc_status.get_torque_current() * id110_val_) / 16384.0;           // iq
+    magnetizing_current_ = ((float)mc_status.get_magnetizing_current() * id110_val_) / 16384.0; // id
+
+    // TODO enable this on the inverters
+    // actual torque in Nm is from the signal we can add in from here:
+    // https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/pdk_205481_kw26-s5-fse-4q_en_.pdf#page=75
+    // it is given in units of 0.1% Mn or 0.1% of the max torque 9.8 Nm
+    // actual_torque_nm_ = ((float)mc_status.get_actual_torque_value()) / (.001 * 9.8); 
     error_ = mc_status.get_error();
 }
 

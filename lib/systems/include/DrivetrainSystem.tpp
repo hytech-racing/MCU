@@ -21,7 +21,7 @@ bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_
         enable_requested_ = true;
         return false;
     }
-    bool all_ready = ( drivetrain_ready_() && check_drivetrain_quit_dc_on_() && drivetrain_enabled_() );
+    bool all_ready = (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && drivetrain_enabled_());
     return all_ready;
 }
 
@@ -130,6 +130,7 @@ bool DrivetrainSystem<InverterType>::check_drivetrain_quit_dc_on_()
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
 {
+
     for (auto inv_pointer : inverters_)
     {
         if (!inv_pointer->quit_inverter_on())
@@ -138,4 +139,25 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
         }
     }
     return true;
+}
+
+template <typename InverterType>
+DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_current_data()
+{
+    DrivetrainDynamicReport_s data;
+    // TODO idk
+    data.measuredInverterFLPackVoltage = inverters_[0]->dc_bus_voltage();
+    int inverter_ind = 0;
+    for (auto inv_pointer : inverters_)
+    {
+        auto iq = inv_pointer->get_torque_current(); // iq in A
+        auto id = inv_pointer->get_mag_current();    // id in A
+        data.measuredSpeeds[inverter_ind] = (float)inv_pointer->get_speed();
+        data.measuredTorqueCurrents[inverter_ind] = iq;
+        data.measuredMagnetizingCurrents[inverter_ind] = id;
+        
+        // TODO
+        // data.measuredTorques[inverter_ind] = inv_pointer->get_actual_torque();
+        inverter_ind++;
+    }
 }
