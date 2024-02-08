@@ -52,9 +52,8 @@ class TorqueControllerNone : public TorqueController<TC_NO_CONTROLLER>
 {
 private:
     DrivetrainCommand_s data_ = {
-        .speeds = {0.0, 0.0, 0.0, 0.0},
-        .posTorqueLimits = {0.0, 0.0, 0.0, 0.0},
-        .negTorqueLimits = {0.0, 0.0, 0.0, 0.0}
+        .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
+        .torqueSetpoints= {0.0, 0.0, 0.0, 0.0}
     };
 public:
     TorqueControllerNone(DrivetrainCommand_s& writeout)

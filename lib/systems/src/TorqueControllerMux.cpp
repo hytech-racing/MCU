@@ -53,15 +53,12 @@ void TorqueControllerMux::tick(
             bool torqueDeltaPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
             {
-                float posTorqueDelta = abs(
-                    controllerCommands_[static_cast<int>(muxMode_)].posTorqueLimits[i]
-                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].posTorqueLimits[i]
+                float torqueDelta = abs(
+                    controllerCommands_[static_cast<int>(muxMode_)].torqueSetpoints[i]
+                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].torqueSetpoints[i]
                 );
-                float negTorqueDelta = abs(
-                    controllerCommands_[static_cast<int>(muxMode_)].negTorqueLimits[i]
-                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].negTorqueLimits[i]
-                );
-                if (posTorqueDelta > maxTorqueDeltaForModeChange || negTorqueDelta > maxTorqueDeltaForModeChange)
+                
+                if (torqueDelta > maxTorqueDeltaForModeChange)
                 {
                     torqueDeltaPreventsModeChange = true;
                     break;

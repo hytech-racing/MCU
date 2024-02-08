@@ -5,7 +5,6 @@ rough draft
 author: Lucas Plant
 */
 
-// TODO @ben
 
 #ifndef PEDALS_SYSTEM_TEST
 #define PEDALS_SYSTEM_TEST
@@ -106,6 +105,5 @@ TEST(PedalsSystemTesting, test_implausibility_duration)
 
     EXPECT_TRUE(data.implausibilityExceededMaxDuration);
 }
-// TODO test implausibility duration alert
 
 #endif /* PEDALS_SYSTEM_TEST */

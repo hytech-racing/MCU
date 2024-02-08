@@ -6,9 +6,8 @@
 #include "stdint.h"
 struct DrivetrainCommand_s
 {
-    float speeds[NUM_MOTORS];
-    float posTorqueLimits[NUM_MOTORS];
-    float negTorqueLimits[NUM_MOTORS];
+    float speeds_rpm[NUM_MOTORS];
+    float torqueSetpoints[NUM_MOTORS];
 };
 
 struct DrivetrainDynamicReport_s

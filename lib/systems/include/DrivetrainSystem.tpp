@@ -13,11 +13,13 @@ bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_
     {
         enable_drivetrain_hv_(curr_time);
         hv_en_requested_ = true;
+        return false;
     }
-    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !enable_requested_)
+    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !enable_requested_ && hv_en_requested_)
     {
         request_enable_();
         enable_requested_ = true;
+        return false;
     }
     bool all_ready = ( drivetrain_ready_() && check_drivetrain_quit_dc_on_() && drivetrain_enabled_() );
     return all_ready;
@@ -78,11 +80,12 @@ void DrivetrainSystem<InverterType>::reset_drivetrain()
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_s &data)
 {
-
-    // inverters_[0]->handle_command(data.left_front_inverter_cmd);
-    // inverters_[1]->handle_command(data.right_front_inverter_cmd);
-    // inverters_[2]->handle_command(data.left_rear_inverter_cmd);
-    // inverters_[3]->handle_command(data.right_rear_inverter_cmd);
+    int index = 0;
+    for (auto inv_pointer : inverters_)
+    {
+        inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
+        index++;
+    }
 }
 
 // feedback functions
