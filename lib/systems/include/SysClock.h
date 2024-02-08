@@ -22,7 +22,7 @@ struct SysTick_s
 class SysClock
 {
 private:
-    enum TriggerIndices_s
+    enum TriggerIndices_e
     {
         TRIG_1000 = 0,
         TRIG_500 = 1,
