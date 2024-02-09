@@ -23,13 +23,13 @@ void AMSInterface::set_state_ok_high(bool ok_high) {
 }
 
 /* Set AMS last heartbeat receive time */
-void AMSInterface::set_heartbeat() {
-    last_heartbeat_time = millis();
+void AMSInterface::set_heartbeat(unsigned long curr_millis) {
+    last_heartbeat_time = curr_millis;
 }
 
 /* Check if AMS heartbeat is received */
-bool AMSInterface::heartbeat_received() {
-    return ((millis() - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+bool AMSInterface::heartbeat_received(unsigned long curr_millis) {
+    return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
 }
 
 /* Check if lowest cell temperature is below threshold */
@@ -68,9 +68,9 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 }
 
 /* Retrieve CAN messages */
-void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg, unsigned long cur_millis) {
+void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg, unsigned long curr_millis) {
     bms_status_.load(recvd_msg.buf);
-    set_heartbeat();
+    set_heartbeat(curr_millis);
 }
 
 void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {

@@ -3,7 +3,6 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
-#include "SysClock.h"
 
 /* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
 const unsigned long HEARTBEAT_INTERVAL                      = 20;   // milliseconds
