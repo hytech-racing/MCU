@@ -114,7 +114,7 @@ void setup() {
     /* Initialize interface */
     main_ecu.init();    // initial shutdown circuit readings, 
     wd_interface.init(curr_tick);   // initialize wd kick time
-    ams_interface.init();  // initialize last heartbeat time
+    ams_interface.init(curr_tick.millis);  // initialize last heartbeat time
 
     /* Initialize system */
     safety_system.init();   // write software_ok high, write wd_input high, set software ok state true
@@ -179,7 +179,7 @@ void tick_all_interfaces(const SysTick_s& current_system_tick) {
 }
 
 void tick_all_systems(const SysTick_s& current_system_tick) {
-    
+
     // tick pedals system
     pedals_system.tick(
         current_system_tick,

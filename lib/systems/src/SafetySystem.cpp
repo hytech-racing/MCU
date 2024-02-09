@@ -15,7 +15,8 @@ void SafetySystem::software_shutdown(const SysTick_s &tick) {
 
     // If AMS heartbeat is not received within reasonable interval
     // Set software is not ok
-    if (!ams_->heartbeat_received()) {
+    unsigned long millis = (unsigned long) tick.millis;
+    if (!ams_->heartbeat_received(millis)) {
         software_is_ok = false;
     }
     if (software_is_ok)

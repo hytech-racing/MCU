@@ -40,7 +40,7 @@ public:
         AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
 
     /* Initialize the heartbeat timer */
-    void init();
+    void init(unsigned long curr_millis);
 
     /* Write to Main ECU */
 
@@ -51,8 +51,8 @@ public:
     void set_state_ok_high(bool ok_high);
     
     /* Monitor AMS state */
-    void set_heartbeat();
-    bool heartbeat_received();
+    void set_heartbeat(unsigned long curr_millis);
+    bool heartbeat_received(unsigned long curr_millis);
     bool is_below_pack_charge_critical_low_thresh();
     bool is_below_pack_charge_critical_total_thresh();
     bool pack_charge_is_critical();    
@@ -62,7 +62,7 @@ public:
     float get_filtered_min_cell_voltage();
 
     /* Retrieve CAN */
-    void retrieve_status_CAN(CAN_message_t &recvd_msg, unsigned long cur_millis);
+    void retrieve_status_CAN(unsigned long millis, CAN_message_t &recvd_msg);
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
 

@@ -1,9 +1,9 @@
 #include "AMSInterface.h"
 
 /* Pin mode output to watchdog reset */
-void AMSInterface::init() {
+void AMSInterface::init(unsigned long curr_millis) {
 
-    set_heartbeat();
+    set_heartbeat(curr_millis);
 
 }
 
@@ -68,7 +68,7 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 }
 
 /* Retrieve CAN messages */
-void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg, unsigned long curr_millis) {
+void AMSInterface::retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg) {
     bms_status_.load(recvd_msg.buf);
     set_heartbeat(curr_millis);
 }
