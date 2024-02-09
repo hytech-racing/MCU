@@ -3,7 +3,6 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
-#include "SysClock.h"
 
 const unsigned long WATCHDOG_KICK_INTERVAL = 7;    // milliseconds
 
@@ -27,14 +26,14 @@ public:
     };
 
     /* Initialize interface pin mode */
-    void init(const SysTick_s &tick);
+    void init(unsigned long curr_millis);
 
     /* Write to Main ECU */
     // Initialize output value
     void set_start_state();
 
     /* Kick watchdog */
-    void kick_watchdog(const SysTick_s &tick);
+    void kick_watchdog(unsigned long curr_millis);
 
 };
 

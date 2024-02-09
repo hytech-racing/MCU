@@ -113,7 +113,7 @@ void setup() {
 
     /* Initialize interface */
     main_ecu.init();    // initial shutdown circuit readings, 
-    wd_interface.init(curr_tick);   // initialize wd kick time
+    wd_interface.init(curr_tick.millis);   // initialize wd kick time
     ams_interface.init(curr_tick.millis);  // initialize last heartbeat time
 
     /* Initialize system */
@@ -159,8 +159,7 @@ void tick_all_interfaces(const SysTick_s& current_system_tick) {
 
      } else if (t.trigger50) {
 
-        telem_interface.tick(current_system_tick,
-                            ADC1.get(),
+        telem_interface.tick(ADC1.get(),
                             ADC2.get(),    // Add MCP3204 functionality for corner board
                             ADC3.get(),    // Add implementation to get()
                             steering1.convert());
