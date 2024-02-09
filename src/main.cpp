@@ -29,10 +29,9 @@
 /* State machine */
 #include "MCUStateMachine.h"
 
-
 /* External info sources */
 /* Two CAN lines on Main ECU rev15 */
-FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN; // Inverter CAN (now both are on same line)
+FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
 
 /* Set up CAN circular buffer */
@@ -56,13 +55,12 @@ InverterInterfaceType fr_inv(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND, 9, 8);
 InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND, 9, 8);
 InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND, 9, 8);
 
-
 /* Declare systems */
 SysClock sys_clock;
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
-SafetySystem safety_system(&ams_interface, &wd_interface);  // Tie ams and wd interface to safety system (by pointers)
+SafetySystem safety_system(&ams_interface, &wd_interface); // Tie ams and wd interface to safety system (by pointers)
 PedalsSystem pedals_system({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
-SteeringSystem steering_system(&steering1);  // Unify member reference and pointers? tied by reference in this case
+SteeringSystem steering_system(&steering1); // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
 /*
@@ -75,18 +73,18 @@ auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INV
 */
 TorqueControllerMux torque_controller_mux;
 
-
 /* Declare state machine */
-MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &ams_interface);    // need more implemetation details. associated interfaces and systems tied by pointers
+MCUStateMachine<DrivetrainSystemType> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &ams_interface); // need more implemetation details. associated interfaces and systems tied by pointers
 
 CANInterfaces<CircularBufferType> CAN_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv, &dashboard, &ams_interface};
 
 /* tick interfaces */
-void tick_all_interfaces(const SysTick_s& current_system_tick);
+void tick_all_interfaces(const SysTick_s &current_system_tick);
 /* Tick all systems */
-void tick_all_systems(const SysTick_s& current_system_tick);
+void tick_all_systems(const SysTick_s &current_system_tick);
 
-void init_all_CAN_devices() {
+void init_all_CAN_devices()
+{
     // Inverter CAN line
     INV_CAN.begin();
     INV_CAN.setBaudRate(INV_CAN_BAUDRATE);
@@ -106,28 +104,29 @@ void init_all_CAN_devices() {
     TELEM_CAN.mailboxStatus();
 }
 
-void setup() {
+void setup()
+{
     init_all_CAN_devices();
     /* Tick system clock */
     auto curr_tick = sys_clock.tick(micros());
 
     /* Initialize interface */
-    main_ecu.init();    // initial shutdown circuit readings, 
-    wd_interface.init(curr_tick.millis);   // initialize wd kick time
-    ams_interface.init(curr_tick.millis);  // initialize last heartbeat time
+    main_ecu.init();                      // initial shutdown circuit readings,
+    wd_interface.init(curr_tick.millis);  // initialize wd kick time
+    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
 
     /* Initialize system */
-    safety_system.init();   // write software_ok high, write wd_input high, set software ok state true
+    safety_system.init(); // write software_ok high, write wd_input high, set software ok state true
     // ControllerMux set initial max torque to 10 NM, torque mode to 0 (could be done at construction or have an init function)
     // Drivetrain set all inverters disabled, write inv_en and inv_24V_en hight, set inverter_has_error to false if using
 
     // delay for 1 second
     delay(1000);
     // ControllerMux set max torque to 21 NM, torque mode to whatever makes most sense
-
 }
 
-void loop() {
+void loop()
+{
 
     auto cur_tick = sys_clock.tick(micros());
     process_ring_buffer(CAN2_rxBuffer, CAN_interfaces, cur_tick.millis);
@@ -151,33 +150,41 @@ void loop() {
     To remove dependencies, Interfaces cannot be passed the system_tick.
     Instead, the main code will just call the interfaces
 */
-void tick_all_interfaces(const SysTick_s& current_system_tick) {
+void tick_all_interfaces(const SysTick_s &current_system_tick)
+{
 
     TriggerBits_s t = current_system_tick.triggers;
 
-     if (t.trigger10) {
-
-     } else if (t.trigger50) {
+    if (t.trigger10)
+    {
+    }
+    else if (t.trigger50)
+    {
 
         telem_interface.tick(ADC1.get(),
-                            ADC2.get(),    // Add MCP3204 functionality for corner board
-                            ADC3.get(),    // Add implementation to get()
-                            steering1.convert());
+                             ADC2.get(), // Add MCP3204 functionality for corner board
+                             ADC3.get(), // Add implementation to get()
+                             steering1.convert());
+    }
+    else if (t.trigger100)
+    {
 
-     } else if (t.trigger100) {
-    
         // Tick all adcs
         ADC1.tick();
         ADC2.tick();
         ADC3.tick();
+    }
 
-     }
-
-    // Read shutdown circuits    
-    main_ecu.read_mcu_status();
+    main_ecu.tick(static_cast<int>(fsm.get_state()),
+                  drivetrain.drivetrain_error_occured(),
+                  safety_system.get_software_is_ok(),
+                  buzzer.buzzer_is_on(),
+                  ams_interface.pack_charge_is_critical(),
+                  dashboard.launchControlButtonPressed());
 }
 
-void tick_all_systems(const SysTick_s& current_system_tick) {
+void tick_all_systems(const SysTick_s &current_system_tick)
+{
 
     // tick pedals system
     pedals_system.tick(
@@ -201,12 +208,10 @@ void tick_all_systems(const SysTick_s& current_system_tick) {
         drivetrain.get_current_data(),
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
-        ADC2.get().conversions[0],                  // FL load cell reading. TODO: fix index
-        ADC3.get().conversions[0],                  // FR load cell reading. TODO: fix index
-        (const AnalogConversion_s) {},              // RL load cell reading. TODO: get data from rear load cells
-        (const AnalogConversion_s) {},              // RR load cell reading. TODO: get data from rear load cells
+        ADC2.get().conversions[0],    // FL load cell reading. TODO: fix index
+        ADC3.get().conversions[0],    // FR load cell reading. TODO: fix index
+        (const AnalogConversion_s){}, // RL load cell reading. TODO: get data from rear load cells
+        (const AnalogConversion_s){}, // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueButtonPressed());
-    
 }
-

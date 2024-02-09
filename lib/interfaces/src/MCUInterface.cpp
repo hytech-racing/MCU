@@ -89,12 +89,9 @@ void MCUInterface::update_mcu_status_CAN() {
 
 // Main loop
 // State machine
-// void MCUInterface::update_mcu_status_CAN_fsm(CAR_STATE fsm_state) {
-//     // State machine returns struct in main loop
-//     // fsm.get_state()
-//     // might not be compatible anymore, using new states
-//     // mcu_status_.set_state(fsm_state);
-// }
+void MCUInterface::update_mcu_status_CAN_fsm(int fsm_state_enum_val) {
+    mcu_status_.set_state(static_cast<MCU_STATE>(fsm_state_enum_val));
+}
 //DriveTrain
 void MCUInterface::update_mcu_status_CAN_drivetrain(bool has_error) {
     // Drivetrain returns struct in main loop
@@ -144,7 +141,7 @@ void MCUInterface::update_mcu_status_CAN_pedals() {
         // mcu_status_.set_no_accel_brake_implausability();
 }
 
-void MCUInterface::tick(// CAR_STATE fsm_state,
+void MCUInterface::tick(int fsm_state,
                         bool inv_has_error,
                         bool software_is_ok,
                         // TCMux return
@@ -153,7 +150,8 @@ void MCUInterface::tick(// CAR_STATE fsm_state,
                         bool pack_charge_is_critical,
                         bool button_is_pressed) {
         // State machine
-        // update_mcu_status_CAN_fsm(fsm_state);
+        read_mcu_status();
+        update_mcu_status_CAN_fsm(fsm_state);
         // Systems
         update_mcu_status_CAN_drivetrain(inv_has_error);
         update_mcu_status_CAN_safety(software_is_ok);
@@ -167,6 +165,7 @@ void MCUInterface::tick(// CAR_STATE fsm_state,
         update_mcu_status_CAN();
         // Push into buffer
         enqueue_CAN_mcu_status();
+        
     }
 
 

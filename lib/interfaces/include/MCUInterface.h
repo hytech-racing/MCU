@@ -81,7 +81,7 @@ public:
 
     /* Update MCU_status CAN (main loop) */
     // State machine
-    // void update_mcu_status_CAN_fsm(CAR_STATE fsm_state);
+    void update_mcu_status_CAN_fsm(int fsm_state);
     // Systems
     void update_mcu_status_CAN_drivetrain(bool has_error);
     void update_mcu_status_CAN_safety(bool is_ok);
@@ -97,12 +97,10 @@ public:
 
     /* Tick MCUInterface at 10HZ */
     void tick(
-        // CAR_STATE fsm_state,
+        int fsm_state,
         bool inv_has_error,
         bool software_is_ok,
-        // TCMux return
         bool buzzer_is_on,
-        // Pedal system return
         bool pack_charge_is_critical,
         bool button_is_pressed
     );
