@@ -27,14 +27,10 @@ MCP_ADC<MCP_ADC_NUM_CHANNELS>::MCP_ADC(const int spiPinCS__)
 : MCP_ADC<MCP_ADC_NUM_CHANNELS>(spiPinCS__, MCP_ADC_DEFAULT_SPI_SDI, MCP_ADC_DEFAULT_SPI_SDO, MCP_ADC_DEFAULT_SPI_CLK, MCP_ADC_DEFAULT_SPI_SPEED) {}
 
 template <int MCP_ADC_NUM_CHANNELS>
-void MCP_ADC<MCP_ADC_NUM_CHANNELS>::tick(const SysTick_s &tick)
+void MCP_ADC<MCP_ADC_NUM_CHANNELS>::tick()
 {
-    // Sample at 100hz
-    if (tick.triggers.trigger100)
-    {
-        MCP_ADC<MCP_ADC_NUM_CHANNELS>::sample();
-        MCP_ADC<MCP_ADC_NUM_CHANNELS>::convert();
-    }
+    MCP_ADC<MCP_ADC_NUM_CHANNELS>::sample();
+    MCP_ADC<MCP_ADC_NUM_CHANNELS>::convert();
 }
 
 template <int MCP_ADC_NUM_CHANNELS>

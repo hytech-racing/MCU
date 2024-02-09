@@ -167,6 +167,6 @@ void MCUInterface::tick(// CAR_STATE fsm_state,
         update_mcu_status_CAN();
         // Push into buffer
         enqueue_CAN_mcu_status();
-}
+    }
 
 

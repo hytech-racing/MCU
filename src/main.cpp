@@ -152,34 +152,51 @@ void loop() {
     Instead, the main code will just call the interfaces
 */
 void tick_all_interfaces(const SysTick_s& current_system_tick) {
-    // Tick all adcs
-    ADC1.tick(current_system_tick);
-    ADC2.tick(current_system_tick);
-    ADC3.tick(current_system_tick);
-    // Tick steering system
-    steering_system.tick(current_system_tick, ADC1.get().conversions[MCU15_STEERING_CHANNEL]);
+
+    TriggerBits_s t = current_system_tick.triggers;
+
+     if (t.trigger10) {
+
+     } else if (t.trigger50) {
+
+        telem_interface.tick(current_system_tick,
+                            ADC1.get(),
+                            ADC2.get(),    // Add MCP3204 functionality for corner board
+                            ADC3.get(),    // Add implementation to get()
+                            steering1.convert());
+
+     } else if (t.trigger100) {
+    
+        // Tick all adcs
+        ADC1.tick();
+        ADC2.tick();
+        ADC3.tick();
+
+     }
+
     // Read shutdown circuits    
     main_ecu.read_mcu_status();
-    telem_interface.tick(current_system_tick,
-                         ADC1.get(),
-                         ADC2.get(),    // Add MCP3204 functionality for corner board
-                         ADC3.get(),    // Add implementation to get()
-                         steering1.convert());
 }
 
 void tick_all_systems(const SysTick_s& current_system_tick) {
+    
+    // tick pedals system
     pedals_system.tick(
         current_system_tick,
         ADC1.get().conversions[MCU15_ACCEL1_CHANNEL],
         ADC1.get().conversions[MCU15_ACCEL2_CHANNEL],
         ADC1.get().conversions[MCU15_BRAKE1_CHANNEL],
-        ADC1.get().conversions[MCU15_BRAKE2_CHANNEL]
-    );
+        ADC1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+
+    // tick steering system
     steering_system.tick(
         current_system_tick,
-        ADC1.get().conversions[MCU15_STEERING_CHANNEL]
-    );
+        ADC1.get().conversions[MCU15_STEERING_CHANNEL]);
+
+    // tick drivetrain system
     drivetrain.tick(current_system_tick);
+
+    // tick torque controller mux
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_current_data(),
@@ -190,8 +207,7 @@ void tick_all_systems(const SysTick_s& current_system_tick) {
         (const AnalogConversion_s) {},              // RL load cell reading. TODO: get data from rear load cells
         (const AnalogConversion_s) {},              // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
-        dashboard.torqueButtonPressed()
-    );
+        dashboard.torqueButtonPressed());
     
 }
 
