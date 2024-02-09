@@ -6,7 +6,6 @@
 #include "HyTech_CAN.h"
 // #include "hytech.h"
 #include "MessageQueueDefine.h"
-#include "SysClock.h"
 #include "AnalogSensorsInterface.h"
 #include "SteeringEncoderInterface.h"
 
@@ -57,9 +56,8 @@ public:
     void enqueue_CAN_mcu_rear_potentiometers();
     void enqueue_CAN_mcu_analog_readings();
 
-    /* Tick SysClock to send CAN */
+    /* Tick at 50Hz to send CAN */
     void tick(
-        const SysTick_s &tick,
         const AnalogConversionPacket_s<8> &adc1,
         const AnalogConversionPacket_s<4> &adc2,
         const AnalogConversionPacket_s<4> &adc3,

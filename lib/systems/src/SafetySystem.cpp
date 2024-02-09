@@ -24,7 +24,7 @@ void SafetySystem::software_shutdown(const SysTick_s &tick) {
         ams_->set_state_ok_high(false);
 
     // Kick watchdog every software cycle
-    wd_->kick_watchdog(tick);
+    wd_->kick_watchdog(tick.millis);
 }
 
 /* Return software ok */

@@ -38,9 +38,9 @@ void test_AMS_heartbeat()
 {   
     //setting arbitrary pin 20
     AMSInterface ams_interface(20);
-    ams_interface.init();
+    ams_interface.init(millis());
     ams_interface.set_start_state();
-    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received());
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(millis()));
     delay(20);
-    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received());
+    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(millis()));
 }

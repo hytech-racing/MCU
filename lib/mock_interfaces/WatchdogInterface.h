@@ -27,7 +27,7 @@ public:
     void set_start_state();
 
     /* Kick watchdog */
-    void kick_watchdog(const SysTick_s &tick);
+    void kick_watchdog(unsigned long curr_millis);
 
 };
 

@@ -3,7 +3,6 @@
 
 #include <tuple>
 #include <algorithm>
-#include <SysClock.h>
 
 enum class AnalogSensorStatus_e
 {
@@ -76,7 +75,7 @@ public:
 // Functions
     /// @brief Called by the main loop. Allows AnalogMultiSensor devices not owned by a single system to self-actualize sampling & conversion.
     /// @param tick 
-    void tick(const SysTick_s &tick);
+    void tick(unsigned long curr_millis);
 
     /// @brief Used by systems to get data out of this device when it's self-actualizing sampling & conversion.
     /// @return Const ref to last data conversion.
