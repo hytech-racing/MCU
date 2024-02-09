@@ -1,9 +1,10 @@
 #include "WatchdogInterface.h"
 
 /* Pin mode output to watchdog WD */
-void WatchdogInterface::init(const SysTick_s &tick) {
+void WatchdogInterface::init(unsigned long curr_millis) {
 
-    watchdog_time = tick.millis;
+    watchdog_time = curr_millis;
+    set_watchdog_state(HIGH);
 
 }
 
@@ -15,12 +16,21 @@ void WatchdogInterface::set_start_state() {
 }
 
 /* Toggle watchdog WD to kick dog */
-void WatchdogInterface::kick_watchdog(const SysTick_s &tick) {
-    if ((tick.millis - watchdog_time) > WATCHDOG_KICK_INTERVAL) {
+void WatchdogInterface::kick_watchdog(unsigned long curr_millis) {
+    if ((curr_millis - watchdog_time) > WATCHDOG_KICK_INTERVAL) {
         watchdog_state = !watchdog_state;
         digitalWrite(pin_watchdog_input_, watchdog_state);
-        watchdog_time = tick.millis;
+        watchdog_time = curr_millis;
     }
 }
 
+/* Get interface status */
+bool WatchdogInterface::get_watchdog_state() {
+    return watchdog_state;
+}
+
+/* Set interface status */
+void WatchdogInterface::set_watchdog_state(bool state) {
+    watchdog_state = state;
+}
 

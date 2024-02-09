@@ -1,9 +1,7 @@
 #ifndef __WATCHDOG_INTERFACE_H__
 #define __WATCHDOG_INTERFACE_H__
 
-#include "FlexCAN_T4.h"
-#include "HyTech_CAN.h"
-#include "SysClock.h"
+#include <Arduino.h>
 
 const unsigned long WATCHDOG_KICK_INTERVAL = 7;    // milliseconds
 
@@ -24,17 +22,22 @@ public:
     {
         // Set pin mode        
         pinMode(pin_watchdog_input_, OUTPUT);
-    };
+    }
 
     /* Initialize interface pin mode */
-    void init(const SysTick_s &tick);
+    void init(unsigned long curr_millis);
 
     /* Write to Main ECU */
     // Initialize output value
     void set_start_state();
 
     /* Kick watchdog */
-    void kick_watchdog(const SysTick_s &tick);
+    void kick_watchdog(unsigned long curr_millis);
+
+    /* Getters */
+    bool get_watchdog_state();
+    /* Setters */
+    void set_watchdog_state(bool state);
 
 };
 

@@ -3,6 +3,7 @@
 
 #include "AMS_interface_test.h"
 #include "dashboard_interface_test.h"
+#include "Watchdog_interface_test.h"
 
 void setUp(void)
 {
@@ -22,7 +23,8 @@ int runUnityTests(void)
     RUN_TEST(test_dashboard_circular_buffer);
     /* TEST AMS */
     RUN_TEST(test_AMS_heartbeat);
-    
+    /* TEST WATCHDOG */
+    RUN_TEST(test_watchdog_kick);
 
     return UNITY_END();
 }
