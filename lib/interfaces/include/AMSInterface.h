@@ -62,7 +62,7 @@ public:
     float get_filtered_min_cell_voltage();
 
     /* Retrieve CAN */
-    void retrieve_status_CAN(unsigned long millis, CAN_message_t &recvd_msg);
+    void retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg);
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
 

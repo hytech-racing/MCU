@@ -19,7 +19,7 @@ public:
         // Set pin mode
     };
         /* Initialize interface pin mode */
-    void init();
+    void init(unsigned long curr_millis);
 
     /* Write to Main ECU */
     // Initialize output value
@@ -28,8 +28,8 @@ public:
     void set_state_ok_high(bool ok_high);
     
     /* Monitor AMS state */
-    void set_heartbeat();
-    bool heartbeat_received();
+    void set_heartbeat(unsigned long curr_millis);
+    bool heartbeat_received(unsigned long curr_millis);
     bool is_below_pack_charge_critical_low_thresh();
     bool is_below_pack_charge_critical_total_thresh();
     bool pack_charge_is_critical();    
