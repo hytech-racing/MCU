@@ -13,7 +13,7 @@ void MCUInterface::init() {
     // Should be called from drivetrain
 }
 
-/* Read shutdown system values */
+/* Read shutdown system values (Not ticked, just in main loop)*/
 void MCUInterface::read_mcu_status() {
 
     measure_shutdown_circuit_input();

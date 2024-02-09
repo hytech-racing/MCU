@@ -29,20 +29,27 @@
 /* State machine */
 #include "MCUStateMachine.h"
 
-/* External info sources */
+/*
+    DATA SOURCES
+*/
+
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
 
 /* Set up CAN circular buffer */
 using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
+
 /* Sensors */
 MCP_ADC<8> ADC1(ADC1_CS);
 MCP_ADC<4> ADC2(ADC2_CS);
 MCP_ADC<4> ADC3(ADC3_CS);
 OrbisBR10 steering1(STEERING_SERIAL);
 
-/* Declare interfaces */
+/*
+    INTERFACES
+*/
+
 DashboardInterface dashboard(&CAN2_txBuffer);
 AMSInterface ams_interface(SOFTWARE_OK);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
@@ -55,12 +62,15 @@ InverterInterfaceType fr_inv(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND, 9, 8);
 InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND, 9, 8);
 InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND, 9, 8);
 
-/* Declare systems */
+/*
+    SYSTEMS
+*/
+
 SysClock sys_clock;
+SteeringSystem steering_system(&steering1); // Unify member reference and pointers? tied by reference in this case
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 SafetySystem safety_system(&ams_interface, &wd_interface); // Tie ams and wd interface to safety system (by pointers)
 PedalsSystem pedals_system({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
-SteeringSystem steering_system(&steering1); // Unify member reference and pointers? tied by reference in this case
 using DrivetrainSystemType = DrivetrainSystem<InverterInterfaceType>;
 auto drivetrain = DrivetrainSystemType({&fl_inv, &fr_inv, &rl_inv, &rr_inv}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
 /*

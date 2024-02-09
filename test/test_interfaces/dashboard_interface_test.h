@@ -4,7 +4,7 @@
 #include "hytech.h"
 #include "DashboardInterface.h"
 
-Circular_Buffer <uint8_t, (uint32_t)16, sizeof(CAN_message_t)> CAN_buffer;
+Circular_Buffer <uint8_t, (uint32_t)16, sizeof(CAN_message_t)> dash_CAN_buffer;
 
 /* CHAT GPT FUNCTIONS */
 void printMemoryHex(void* ptr, size_t length) {
@@ -22,7 +22,7 @@ void printMemoryHex(void* ptr, size_t length) {
 
 void test_dashboard_unpacking_can_message(void)
 {
-  DashboardInterface dash_interface(&CAN_buffer);
+  DashboardInterface dash_interface(&dash_CAN_buffer);
 
   // Chat GPT code that iterates through a truth table
   for (int i = 0; i < (1 << 10); ++i) { // 2^10 possible combinations
@@ -63,8 +63,8 @@ void test_dashboard_unpacking_can_message(void)
 void test_dashboard_circular_buffer(void)
 {
 
-    Circular_Buffer <uint8_t, (uint32_t)16, sizeof(CAN_message_t)> CAN_buffer_2;
-    DashboardInterface dash_interface(&CAN_buffer_2);
+    Circular_Buffer <uint8_t, (uint32_t)16, sizeof(CAN_message_t)> dash_CAN_buffer_2;
+    DashboardInterface dash_interface(&dash_CAN_buffer_2);
 
     uint8_t LED[12] = {};
 
@@ -110,7 +110,7 @@ void test_dashboard_circular_buffer(void)
     CAN_message_t packed_message = dash_interface.write();
 
     uint8_t buffer[sizeof(CAN_message_t)];
-    CAN_buffer_2.pop_front(buffer, sizeof(CAN_message_t));
+    dash_CAN_buffer_2.pop_front(buffer, sizeof(CAN_message_t));
 
     delay(1000);
 
