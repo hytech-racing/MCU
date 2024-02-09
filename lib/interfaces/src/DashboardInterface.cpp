@@ -3,25 +3,25 @@
 void DashboardInterface::read(const CAN_message_t &can_msg)
 {
 
-    DASHBOARD_STATE_t msg;
-    Unpack_DASHBOARD_STATE_hytech(&msg, can_msg.buf, NULL);
+    DASHBOARD_STATE_t dash_state;
+    Unpack_DASHBOARD_STATE_hytech(&dash_state, can_msg.buf, NULL);
 
-    _data.dial_mode = static_cast<DialMode_e>(msg.dial_state);
+    _data.dial_mode = static_cast<DialMode_e>(dash_state.dial_state);
     
-    _data.ssok = msg.ssok_above_threshold;
-    _data.shutdown = msg.shutdown_h_above_threshold;
+    _data.ssok = dash_state.ssok_above_threshold;
+    _data.shutdown = dash_state.shutdown_h_above_threshold;
 
-    _data.button.start = msg.start_button;
-    _data.button.mark = msg.mark_button;
-    _data.button.mode = msg.mode_button;
-    _data.button.mc_cycle = msg.motor_controller_cycle_button;
-    _data.button.launch_ctrl = msg.launch_ctrl_button;
-    _data.button.torque_mode = msg.torque_mode_button;
-    _data.button.led_dimmer = msg.led_dimmer_button;
-    _data.button.left_shifter = msg.left_shifter_button;
-    _data.button.right_shifter = msg.right_shifter_button;
+    _data.button.start = dash_state.start_button;
+    _data.button.mark = dash_state.mark_button;
+    _data.button.mode = dash_state.mode_button;
+    _data.button.mc_cycle = dash_state.motor_controller_cycle_button;
+    _data.button.launch_ctrl = dash_state.launch_ctrl_button;
+    _data.button.torque_mode = dash_state.torque_mode_button;
+    _data.button.led_dimmer = dash_state.led_dimmer_button;
+    _data.button.left_shifter = dash_state.left_shifter_button;
+    _data.button.right_shifter = dash_state.right_shifter_button;
 
-    _data.buzzer_state = msg.drive_buzzer;
+    _data.buzzer_state = dash_state.drive_buzzer;
 
 }
 

@@ -1,9 +1,9 @@
 #include "AMSInterface.h"
 
 /* Pin mode output to watchdog reset */
-void AMSInterface::init(const SysTick_s &tick) {
+void AMSInterface::init() {
 
-    set_heartbeat(tick.millis);
+    set_heartbeat();
 
 }
 
@@ -23,13 +23,13 @@ void AMSInterface::set_state_ok_high(bool ok_high) {
 }
 
 /* Set AMS last heartbeat receive time */
-void AMSInterface::set_heartbeat(unsigned long millis) {
-    last_heartbeat_time = millis;
+void AMSInterface::set_heartbeat() {
+    last_heartbeat_time = millis();
 }
 
 /* Check if AMS heartbeat is received */
-bool AMSInterface::heartbeat_received(const SysTick_s &tick) {
-    return ((tick.millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+bool AMSInterface::heartbeat_received() {
+    return ((millis() - last_heartbeat_time) < HEARTBEAT_INTERVAL);
 }
 
 /* Check if lowest cell temperature is below threshold */
@@ -70,7 +70,7 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 /* Retrieve CAN messages */
 void AMSInterface::retrieve_status_CAN(CAN_message_t &recvd_msg, unsigned long cur_millis) {
     bms_status_.load(recvd_msg.buf);
-    set_heartbeat(cur_millis);
+    set_heartbeat();
 }
 
 void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {

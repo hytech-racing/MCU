@@ -51,13 +51,16 @@ private:
 
 
 public:
-    MCUInterface(CANBufferType *msg_output_queue, int bms_pin, int imd_pin, int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin): msg_queue_(msg_output_queue),
-                                                                                                                                                 pin_bms_ok_read_(bms_pin),
-                                                                                                                                                 pin_imd_ok_read_(imd_pin),
-                                                                                                                                                 pin_bspd_ok_read_(bspd_pin),
-                                                                                                                                                 pin_software_ok_read_(sw_ok_pin),
-                                                                                                                                                 pin_bots_ok_read_(bots_ok_pin),
-                                                                                                                                                 pin_brake_light_ctrl_(brake_light_pin)
+    MCUInterface(CANBufferType *msg_output_queue, int bms_pin, int imd_pin, int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin): 
+    
+    
+    msg_queue_(msg_output_queue),
+    pin_bms_ok_read_(bms_pin),
+    pin_imd_ok_read_(imd_pin),
+    pin_bspd_ok_read_(bspd_pin),
+    pin_software_ok_read_(sw_ok_pin),
+    pin_bots_ok_read_(bots_ok_pin),
+    pin_brake_light_ctrl_(brake_light_pin)
     {
         // Set pin mode
         pinMode(pin_brake_light_ctrl_, OUTPUT);
@@ -69,6 +72,7 @@ public:
 
     /* Read from Main ECU */
     void read_mcu_status();
+
     /* Write to Main ECU */
     void set_brake_light(bool brake_pedal_is_active); // Called from PedalInterface/System
 

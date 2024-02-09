@@ -87,10 +87,10 @@ class DashboardInterface
 private:
     /* Pointer to the circular buffer to write new messages */
     CANBufferType *msg_queue_;
-
-public:
     /* The instantiated data struct used to access data by member functions */
     DashComponentInterface_s _data;
+
+public:
     /*!
         Constructor for new DashboardInterface, All that it is inited with
         is the pointer to the telem circular buffer that is used to write new messages
