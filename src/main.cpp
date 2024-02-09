@@ -147,6 +147,10 @@ void loop() {
     safety_system.software_shutdown(cur_tick);
 }
 
+/*
+    To remove dependencies, Interfaces cannot be passed the system_tick.
+    Instead, the main code will just call the interfaces
+*/
 void tick_all_interfaces(const SysTick_s& current_system_tick) {
     // Tick all adcs
     ADC1.tick(current_system_tick);

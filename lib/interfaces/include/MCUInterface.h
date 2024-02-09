@@ -6,7 +6,6 @@
 #include "HyTech_CAN.h"
 // #include "hytech.h"
 #include "MessageQueueDefine.h"
-#include "SysClock.h"
 // #include "MCUStateMachine.h"
 
 const int DEFAULT_BMS_OK_READ = 5;       // SHDN_D_READ
@@ -96,18 +95,17 @@ public:
     /* Enqueue MCU_status CAN  */
     void enqueue_CAN_mcu_status();
 
-    /* Tick SysClock to send CAN at 10Hz */
-    // void tick(
-    //     const SysTick_s &tick,
-    //     CAR_STATE fsm_state,
-    //     bool inv_has_error,
-    //     bool software_is_ok,
-    //     // TCMux return
-    //     bool buzzer_is_on,
-    //     // Pedal system return
-    //     bool pack_charge_is_critical,
-    //     bool button_is_pressed
-    // );
+    /* Tick MCUInterface at 10HZ */
+    void tick(
+        // CAR_STATE fsm_state,
+        bool inv_has_error,
+        bool software_is_ok,
+        // TCMux return
+        bool buzzer_is_on,
+        // Pedal system return
+        bool pack_charge_is_critical,
+        bool button_is_pressed
+    );
 };
 
 #endif /* __MCU_INTERFACE_H__ */
