@@ -62,10 +62,10 @@ TelemetryInterface telem_interface(&CAN3_txBuffer);
 /* Inverter Interface Type */
 using InvInt_t = InverterInterface<CircularBufferType>;
 struct inverters {
-    InvInt_t fl = InvInt_t(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND, 9, 8);
-    InvInt_t fr = InvInt_t(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND, 9, 8);
-    InvInt_t rl = InvInt_t(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND, 9, 8);
-    InvInt_t rr = InvInt_t(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND, 9, 8);
+    InvInt_t fl = InvInt_t(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
+    InvInt_t fr = InvInt_t(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND);
+    InvInt_t rl = InvInt_t(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
+    InvInt_t rr = InvInt_t(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
 } inv;
 
 /*
@@ -78,7 +78,7 @@ BuzzerController buzzer(BUZZER_ON_INTERVAL);
 SafetySystem safety_system(&ams_interface, &wd_interface); // Tie ams and wd interface to safety system (by pointers)
 PedalsSystem pedals_system({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
-DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
+DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
 /*
     Hypothetical controllers, need more implementation details
         TorqueControllerSimple simple_mode;
@@ -160,9 +160,6 @@ void setup()
     // ControllerMux set max torque to 21 NM, torque mode to whatever makes most sense
 }
 
-/*
-    LOOP
-*/
 
 void loop()
 {
