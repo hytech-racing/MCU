@@ -20,14 +20,14 @@ public:
     WatchdogInterface(int wd_input_pin){};
 
     /* Initialize interface pin mode */
-    void init(const SysTick_s &tick);
+    void init(const SysTick_s &tick) {return;};
 
     /* Write to Main ECU */
     // Initialize output value
-    void set_start_state();
+    void set_start_state() {return;};
 
     /* Kick watchdog */
-    void kick_watchdog(unsigned long curr_millis);
+    void kick_watchdog(unsigned long curr_millis) {};
 
 };
 

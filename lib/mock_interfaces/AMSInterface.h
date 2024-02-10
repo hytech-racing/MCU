@@ -23,16 +23,16 @@ public:
 
     /* Write to Main ECU */
     // Initialize output value
-    void set_start_state();
+    void set_start_state() {};
     // Set output value
-    void set_state_ok_high(bool ok_high);
+    void set_state_ok_high(bool ok_high) {};
     
     /* Monitor AMS state */
-    void set_heartbeat(unsigned long curr_millis);
-    bool heartbeat_received(unsigned long curr_millis);
-    bool is_below_pack_charge_critical_low_thresh();
+    void set_heartbeat(unsigned long curr_millis) {};
+    bool heartbeat_received(unsigned long curr_millis) {};
+    bool is_below_pack_charge_critical_low_thresh() {};
     bool is_below_pack_charge_critical_total_thresh();
-    bool pack_charge_is_critical();    
+    bool pack_charge_is_critical() {};    
 
     /* IIR filtered AMS readings */
     float get_filtered_max_cell_temp();

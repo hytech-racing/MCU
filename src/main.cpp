@@ -90,7 +90,7 @@ DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_e
 TorqueControllerMux torque_controller_mux;
 
 /* Declare state machine */
-MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &ams_interface); // need more implemetation details. associated interfaces and systems tied by pointers
+MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system); // need more implemetation details. associated interfaces and systems tied by pointers
 
 /*
     GROUPING STRUCTS (To limit parameter count in utilizing functions)
