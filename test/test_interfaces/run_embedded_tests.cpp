@@ -4,7 +4,7 @@
 #include "AMS_interface_test.h"
 #include "dashboard_interface_test.h"
 #include "Watchdog_interface_test.h"
-#include "can_interface_test.h"
+
 #include "Telemetry_interface_test.h"
 
 void setUp(void)
