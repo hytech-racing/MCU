@@ -41,6 +41,7 @@ void OrbisBR10::sample()
 SteeringEncoderConversion_s OrbisBR10::convert()
 {
     SteeringEncoderConversion_s returnConversion;
+    returnConversion.raw = data_;
     returnConversion.angle = (data_ * ORBIS_BR10_SCALE) + offset_;
 
     if (status_ & (ORBIS_BR10_BITMASK_GENERAL_ERROR | ORBIS_BR10_BITMASK_DETAILED_COUNTER_ERROR))
