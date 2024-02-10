@@ -92,6 +92,10 @@ TorqueControllerMux torque_controller_mux;
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &ams_interface); // need more implemetation details. associated interfaces and systems tied by pointers
 
+/*
+    GROUPING STRUCTS (To limit parameter count in utilizing functions)
+*/
+
 CANInterfaces<CircularBufferType> CAN_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface};
 
 /*
