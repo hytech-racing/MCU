@@ -41,7 +41,8 @@ FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically
 using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
 
 /* Sensors */
-struct ADCs {
+struct ADCs
+{
     MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
     MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS);
     MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
@@ -61,7 +62,8 @@ TelemetryInterface telem_interface(&CAN3_txBuffer);
 
 /* Inverter Interface Type */
 using InvInt_t = InverterInterface<CircularBufferType>;
-struct inverters {
+struct inverters
+{
     InvInt_t fl = InvInt_t(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
     InvInt_t fr = InvInt_t(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND);
     InvInt_t rl = InvInt_t(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
@@ -133,7 +135,7 @@ void init_all_CAN_devices()
 */
 
 void setup()
-{   
+{
     init_all_CAN_devices();
 
     SysTick_s curr_tick = sys_clock.tick(micros()); // get latest tick from sys clock
@@ -149,7 +151,7 @@ void setup()
     /*
         Init Systems
     */
-   
+
     safety_system.init();
 
     // delay for 1 second
@@ -159,7 +161,6 @@ void setup()
     // Drivetrain set all inverters disabled, write inv_en and inv_24V_en hight, set inverter_has_error to false if using
     // ControllerMux set max torque to 21 NM, torque mode to whatever makes most sense
 }
-
 
 void loop()
 {
@@ -176,9 +177,9 @@ void loop()
     // tick systems
     tick_all_systems(curr_tick);
 
-    //tick state machine
+    // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
-    
+
     // tick safety system
     safety_system.software_shutdown(curr_tick);
 
@@ -199,17 +200,16 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
     if (t.trigger10) // 10Hz
     {
-
-
-
+        dashboard.soundBuzzer(buzzer.buzzer_is_on());
+        dashboard.write();
     }
-    else if (t.trigger50) // 50Hz
+    if (t.trigger50) // 50Hz
     {
 
         telem_interface.tick(ADC.a1.get(), ADC.a2.get(), ADC.a3.get(), steering1.convert());
-
     }
-    else if (t.trigger100) // 100Hz
+
+    if (t.trigger100) // 100Hz
     {
         ADC.a1.tick();
         ADC.a2.tick();
@@ -255,8 +255,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         drivetrain.get_current_data(),
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
-        ADC.a2.get().conversions[0],    // FL load cell reading. TODO: fix index
-        ADC.a3.get().conversions[0],    // FR load cell reading. TODO: fix index
+        ADC.a2.get().conversions[0],  // FL load cell reading. TODO: fix index
+        ADC.a3.get().conversions[0],  // FR load cell reading. TODO: fix index
         (const AnalogConversion_s){}, // RL load cell reading. TODO: get data from rear load cells
         (const AnalogConversion_s){}, // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
