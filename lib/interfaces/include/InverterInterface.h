@@ -21,16 +21,13 @@ template <typename message_queue>
 class InverterInterface
 {
 public:
-    InverterInterface(message_queue *msg_output_queue, uint32_t can_id, int inverter_enable_pin, int inverter_24v_enable_pin)
+    InverterInterface(message_queue *msg_output_queue, uint32_t can_id)
     {
         // TODO fix me with correct value from config of inverter
         id110_val_= 1.0;
         msg_queue_ = msg_output_queue;
         can_id_ = can_id;
-        pin_inv_en_ = inverter_enable_pin;
-        pin_inv_24V_en_ = inverter_24v_enable_pin;
-        pinMode(pin_inv_en_, OUTPUT);
-        pinMode(pin_inv_24V_en_, OUTPUT);
+        
     }
 
     uint32_t get_id() { return can_id_; };
@@ -79,8 +76,7 @@ private:
     float id110_val_;                            // for scaling to proper iq and id vals
     float torque_current_, magnetizing_current_; // iq and id in A respectively
     float actual_torque_nm_;
-    int pin_inv_en_, pin_inv_24V_en_;
-    void write_cmd_msg_to_queue_(const MC_setpoints_command &msg);
+    void write_cmd_msg_to_queue_(MC_setpoints_command &msg);
     int16_t speed_;
     uint16_t dc_bus_voltage_;
     bool error_;

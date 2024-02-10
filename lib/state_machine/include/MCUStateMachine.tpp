@@ -87,11 +87,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        // TODO:integrate the ams and the IMD
-        if (
-            // bms_->ok_high() &&
-            // imd_->ok_high() &&
-            !data.implausibilityExceededMaxDuration)
+        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         }

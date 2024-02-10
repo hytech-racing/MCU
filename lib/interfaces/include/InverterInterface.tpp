@@ -1,22 +1,21 @@
 #include "InverterInterface.h"
 
 template <typename message_queue>
-void InverterInterface<message_queue>::write_cmd_msg_to_queue_(const MC_setpoints_command &msg_in)
+void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_command &msg_in)
 {
     CAN_message_t msg;
     msg.id = can_id_;
     msg.len = sizeof(msg_in);
-    uint8_t buf[sizeof(CAN_message_t)];
     msg_in.write(msg.buf);
-    memmove(buf, &msg, sizeof(msg_in));
+    uint8_t buf[sizeof(CAN_message_t)];
+    memmove(buf, &msg, sizeof(CAN_message_t));
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 
 template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_hv()
 {
-    digitalWrite(pin_inv_en_, HIGH);
-    digitalWrite(pin_inv_24V_en_, HIGH);
+    
     MC_setpoints_command mc_setpoints_command{};
     mc_setpoints_command.set_hv_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);

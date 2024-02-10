@@ -1,6 +1,9 @@
 #include "SafetySystem.h"
 
-/* Initialize SafetySystem */
+/* 
+    Initialize SafetySystem
+    write software_ok high, write wd_input high, set software ok state true
+*/
 void SafetySystem::init() {
     // Initialize interface output
     ams_->set_start_state();    

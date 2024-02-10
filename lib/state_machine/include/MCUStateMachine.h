@@ -8,7 +8,7 @@
 #include "DrivetrainSystem.h"
 #include "Buzzer.h"
 #include "TorqueControllerMux.h"
-
+#include "SafetySystem.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 // #include "IMDInterface.h"
@@ -31,16 +31,16 @@ public:
                     DrivetrainSysType *drivetrain,
                     DashboardInterface *dashboard,
                     PedalsSystem *pedals,
-                    TorqueControllerMux *mux, 
-                    AMSInterface *bms)
+                    TorqueControllerMux *mux,
+                    SafetySystem *safety_system)
     {
         current_state_ = CAR_STATE::STARTUP;
         buzzer_ = buzzer;
         drivetrain_ = drivetrain;
         dashboard_ = dashboard;
         pedals_ = pedals;
-        bms_ = bms;
         controller_mux_ = mux;
+        safety_system_ = safety_system;
     }
 
     /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
@@ -68,9 +68,8 @@ private:
 
     /// @brief drivers within state machine
     DashboardInterface *dashboard_;
-    AMSInterface *bms_;
     // IMDInterface *imd_;
-
+    SafetySystem *safety_system_;
     TorqueControllerMux *controller_mux_;
 };
 #include "MCUStateMachine.tpp"

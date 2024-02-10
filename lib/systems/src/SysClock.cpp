@@ -9,6 +9,9 @@ SysClock::SysClock()
     }
 }
 
+/*
+    Get latest tick from sys clock
+*/
 SysTick_s SysClock::tick(unsigned long sysMicros)
 {
     SysTick_s tickReturn = {
