@@ -43,4 +43,11 @@ void test_AMS_heartbeat()
     TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(millis()));
     delay(20);
     TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(millis()));
+
+    ams_interface.set_heartbeat(millis());
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(millis()));
+    delay(19);
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(millis()));
+    delay(1);
+    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(millis()));
 }

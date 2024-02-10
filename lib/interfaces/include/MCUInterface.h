@@ -33,7 +33,6 @@ private:
 
     /* Outbound CAN message */
     MCU_status mcu_status_;
-    /* CAN Tx buffer */
 
     /* Shutdown circuit input */
     bool bms_ok_high;
@@ -50,21 +49,24 @@ private:
 
 
 public:
-    MCUInterface(CANBufferType *msg_output_queue, int bms_pin, int imd_pin, int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin): 
-    
-    
-    msg_queue_(msg_output_queue),
-    pin_bms_ok_read_(bms_pin),
-    pin_imd_ok_read_(imd_pin),
-    pin_bspd_ok_read_(bspd_pin),
-    pin_software_ok_read_(sw_ok_pin),
-    pin_bots_ok_read_(bots_ok_pin),
+    // PLEASE replace these long lists of parameters with structs
+    // and put initialization in constructor body instead of initializer list
+    // my retinas are in pain
+    MCUInterface(CANBufferType *msg_output_queue, int bms_pin, int imd_pin,
+                int bspd_pin, int sw_ok_pin, int bots_ok_pin,int brake_light_pin)
+    // Member initialization list            
+    : msg_queue_(msg_output_queue), pin_bms_ok_read_(bms_pin), pin_imd_ok_read_(imd_pin),
+    pin_bspd_ok_read_(bspd_pin), pin_software_ok_read_(sw_ok_pin), pin_bots_ok_read_(bots_ok_pin),
     pin_brake_light_ctrl_(brake_light_pin)
     {
         // Set pin mode
         pinMode(pin_brake_light_ctrl_, OUTPUT);
     };
-    MCUInterface(CANBufferType *msg_output_queue) : MCUInterface(msg_output_queue, DEFAULT_BMS_OK_READ, DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ, DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL){};
+
+    MCUInterface(CANBufferType *msg_output_queue)
+    // Overloading constructor
+    : MCUInterface(msg_output_queue, DEFAULT_BMS_OK_READ, DEFAULT_IMD_OK_READ,
+    DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ, DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL){};
 
     /* Initialize shutdown circuit input readings */
     void init();
@@ -102,8 +104,7 @@ public:
         bool software_is_ok,
         bool buzzer_is_on,
         bool pack_charge_is_critical,
-        bool button_is_pressed
-    );
+        bool button_is_pressed);
 };
 
 #endif /* __MCU_INTERFACE_H__ */
