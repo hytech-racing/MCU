@@ -184,9 +184,8 @@ void loop()
 
     /* Update and enqueue CAN messages */
     /* Inverter procedure before entering state machine */
-    // Drivetrain check if inverters have error
-    // Drivetrain reset inverters
-
+    send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
+    send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 }
 
 /*
