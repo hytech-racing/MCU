@@ -9,8 +9,8 @@
 #include "DashboardInterface.h"
 // #include "AnalogSensorsInterface.h"
 
-const float maxSpeedForModeChange = 5.0; // m/s
-const float maxTorqueDeltaForModeChange = 0.5; // Nm
+const float MAX_SPEED_FOR_MODE_CHANGE = 5.0; // m/s
+const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
 
 enum class TorqueLimit_e
 {
@@ -25,35 +25,31 @@ class TorqueControllerMux
 private:
     // Use this to map the dial to TCMUX modes
     std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
-        {DialMode_e::MODE_1, TC_SAFE_MODE},
-        {DialMode_e::MODE_2, TC_SAFE_MODE},
-        {DialMode_e::ACCEL_LAUNCH_CONTROL, TC_NO_CONTROLLER},
-        {DialMode_e::SKIDPAD, TC_NO_CONTROLLER},
-        {DialMode_e::AUTOCROSS, TC_NO_CONTROLLER},
-        {DialMode_e::ENDURANCE, TC_NO_CONTROLLER},
+        {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_MODE},
+        {DialMode_e::MODE_2, TorqueController_e::TC_SAFE_MODE},
+        {DialMode_e::ACCEL_LAUNCH_CONTROL, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::SKIDPAD, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::AUTOCROSS, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::ENDURANCE, TorqueController_e::TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
         {TorqueLimit_e::TCMUX_FULL_TORQUE, 20.0}
     };
-    DrivetrainCommand_s controllerCommands_[static_cast<int>(TC_NUM_CONTROLLERS)];
+    DrivetrainCommand_s controllerCommands_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
-    TorqueController_e muxMode_;
+    TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
     DrivetrainCommand_s drivetrainCommand_;
-    TorqueLimit_e torqueLimit_;
-    bool torqueLimitButtonPressed_;
-    unsigned long torqueLimitButtonPressedTime_;
+    TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
+    bool torqueLimitButtonPressed_ = false;
+    unsigned long torqueLimitButtonPressedTime_ = 0;
 public:
 // Constructors
     TorqueControllerMux()
-    : torqueControllerNone_(controllerCommands_[static_cast<int>(TC_NO_CONTROLLER)])
-    , torqueControllerSimple_(controllerCommands_[static_cast<int>(TC_SAFE_MODE)])
-    {
-        muxMode_ = TC_NO_CONTROLLER;
-        torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
-    }
+    : torqueControllerNone_(controllerCommands_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
+    , torqueControllerSimple_(controllerCommands_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)]) {}
 // Functions
     void tick(
         const SysTick_s& tick,

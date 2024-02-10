@@ -1,5 +1,6 @@
 #include "TorqueControllerMux.h"
 #include "Utility.h"
+#include "PhysicalParameters.h"
 
 void TorqueControllerMux::tick(
         const SysTick_s& tick,
@@ -22,8 +23,8 @@ void TorqueControllerMux::tick(
     {
         // detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms
         if (
-            torqueLimitButtonPressed_ 
-            && !dashboardTorqueModeButtonPressed
+            torqueLimitButtonPressed_ == true
+            && dashboardTorqueModeButtonPressed == false
             && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS
         )
         {
@@ -45,10 +46,7 @@ void TorqueControllerMux::tick(
         {
             bool speedPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
-                // float GEARBOX_RATIO =             11.86;
-                // float WHEEL_DIAMETER =            0.4064;
-                // float RPM_TO_METERS_PER_SECOND =  WHEEL_DIAMETER * 3.1415 / GEARBOX_RATIO / 60.0;
-                speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * 1.0 >= maxSpeedForModeChange;
+                speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND >= MAX_SPEED_FOR_MODE_CHANGE;
 
             bool torqueDeltaPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
@@ -58,7 +56,7 @@ void TorqueControllerMux::tick(
                     - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].torqueSetpoints[i]
                 );
                 
-                if (torqueDelta > maxTorqueDeltaForModeChange)
+                if (torqueDelta > MAX_TORQUE_DELTA_FOR_MODE_CHANGE)
                 {
                     torqueDeltaPreventsModeChange = true;
                     break;

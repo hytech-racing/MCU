@@ -34,9 +34,11 @@ void TorqueControllerSimple::tick(const SysTick_s& tick, const PedalsSystemData_
             float accelRequest = pedalsData.accelPercent - pedalsData.brakePercent;
             float torqueRequest;
 
-            if (accelRequest > 0.0)
+            if (accelRequest >= 0.0)
             {
                 // Positive torque request
+                torqueRequest = accelRequest * AMK_MAX_TORQUE;
+
                 data_.speeds_rpm[FL] = AMK_MAX_RPM;
                 data_.speeds_rpm[FR] = AMK_MAX_RPM;
                 data_.speeds_rpm[RL] = AMK_MAX_RPM;
@@ -46,12 +48,11 @@ void TorqueControllerSimple::tick(const SysTick_s& tick, const PedalsSystemData_
                 data_.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
                 data_.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
                 data_.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
-
             }
             else
             {
                 // Negative torque request
-                torqueRequest = MAX_REGEN_TORQUE * torqueRequest * -1.0; 
+                torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0; 
                 
                 data_.speeds_rpm[FL] = 0.0;
                 data_.speeds_rpm[FR] = 0.0;

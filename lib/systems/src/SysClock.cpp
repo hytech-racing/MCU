@@ -18,13 +18,13 @@ SysTick_s SysClock::tick(unsigned long sysMicros)
         .millis = sysMicros / 1000,
         .micros = sysMicros,
         .triggers = {
-            .trigger1000    = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_1000)],
-            .trigger500     = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_500)],
-            .trigger100     = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_100)],
-            .trigger50      = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_50)],
-            .trigger10      = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_10)],
-            .trigger5       = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_5)],
-            .trigger1       = sysMicros > triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_1)]
+            .trigger1000    = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_1000)],
+            .trigger500     = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_500)],
+            .trigger100     = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_100)],
+            .trigger50      = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_50)],
+            .trigger10      = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_10)],
+            .trigger5       = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_5)],
+            .trigger1       = sysMicros >= triggerTimes[static_cast<int>(TriggerIndices_e::TRIG_1)]
         }
     };
 
