@@ -15,8 +15,7 @@ void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_comm
 template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_hv()
 {
-    digitalWrite(pin_inv_en_, HIGH);
-    digitalWrite(pin_inv_24V_en_, HIGH);
+    
     MC_setpoints_command mc_setpoints_command{};
     mc_setpoints_command.set_hv_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);

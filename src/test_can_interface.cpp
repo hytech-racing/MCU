@@ -3,7 +3,7 @@
 #include "HytechCANInterface.h"
 #include "InverterInterface.h"
 
-FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> TEST_CAN1;
+FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TEST_CAN1;
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> TEST_CAN2; // Inverter CAN (now both are on same line)
 
 CAN_message_t msg;

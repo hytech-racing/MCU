@@ -5,6 +5,7 @@
 #include <array>
 #include "stdint.h"
 #include "SysClock.h"
+#include "MCUInterface.h"
 
 struct DrivetrainCommand_s
 {
@@ -27,7 +28,7 @@ class DrivetrainSystem
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 25)
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, MCUInterface *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 25)
         : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms), min_hv_voltage_(min_hv_voltage), min_cmd_period_(min_cmd_period_ms)
     {
         // values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf
@@ -40,6 +41,7 @@ public:
         last_reset_cmd_time_ = 0;
         last_disable_cmd_time_ = 0;
         last_general_cmd_time_ = 0; // ms
+        mcu_interface_ = mcu_interface;
     }
     void tick(const SysTick_s &tick);
 
@@ -66,6 +68,7 @@ public:
 
 private:
     std::array<InverterType *, 4> inverters_;
+    MCUInterface *mcu_interface_;
     int init_time_limit_ms_;
     uint16_t min_hv_voltage_;
     int motor_pole_pairs_;

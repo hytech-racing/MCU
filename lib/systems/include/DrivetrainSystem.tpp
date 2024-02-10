@@ -47,6 +47,7 @@ void DrivetrainSystem<InverterType>::enable_drivetrain_hv_(unsigned long curr_ti
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::request_enable_()
 {
+    mcu_interface_->enable_inverters_pin();
     for (auto inv_pointer : inverters_)
     {
         inv_pointer->request_enable_inverter();
@@ -84,6 +85,7 @@ void DrivetrainSystem<InverterType>::reset_drivetrain()
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::disable()
 {
+
     if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
     {
         for (auto inv_pointer : inverters_)
@@ -92,6 +94,8 @@ void DrivetrainSystem<InverterType>::disable()
         }
         last_disable_cmd_time_ = curr_system_millis_;
     }
+
+    mcu_interface_->disable_inverters_pin();
 }
 
 template <typename InverterType>

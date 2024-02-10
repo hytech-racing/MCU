@@ -76,8 +76,10 @@ public:
 
 TEST(DrivetrainSystemTesting, test_drivetrain_startup)
 {
+    
     InverterMock inv_fl, inv_fr, inv_rl, inv_rr;
-    DrivetrainSystem<InverterMock> dt({&inv_fl, &inv_fr, &inv_rl, &inv_rr}, 1000);
+    MCUInterface mcu;
+    DrivetrainSystem<InverterMock> dt({&inv_fl, &inv_fr, &inv_rl, &inv_rr}, &mcu, 1000);
     unsigned long sys_time = 1000;
     // inverters are not ready so an inverter startup call shouldnt send any requests to the inverter
     // to start the initialization process
@@ -114,7 +116,8 @@ TEST(DrivetrainSystemTesting, test_drivetrain_startup)
 TEST(DrivetrainSystemTesting, test_drivetrain_init_timeout)
 {
     InverterMock inv_fl, inv_fr, inv_rl, inv_rr;
-    DrivetrainSystem<InverterMock> dt({&inv_fl, &inv_fr, &inv_rl, &inv_rr}, 1000);
+    MCUInterface mcu;
+    DrivetrainSystem<InverterMock> dt({&inv_fl, &inv_fr, &inv_rl, &inv_rr}, &mcu, 1000);
     unsigned long sys_time = 1000;
     // test and make sure that normally the drivetrain doesnt timeout when changing the time
     EXPECT_FALSE(dt.handle_inverter_startup(sys_time));
@@ -137,7 +140,7 @@ TEST(DrivetrainSystemTesting, test_drivetrain_init_timeout)
 
     // test timeout
     InverterMock inv_fl2, inv_fr2, inv_rl2, inv_rr2;
-    DrivetrainSystem<InverterMock> dt2({&inv_fl2, &inv_fr2, &inv_rl2, &inv_rr2}, 1000);
+    DrivetrainSystem<InverterMock> dt2({&inv_fl2, &inv_fr2, &inv_rl2, &inv_rr2}, &mcu,1000);
     unsigned long sys_time2 = 1000;
 
     EXPECT_FALSE(dt2.handle_inverter_startup(sys_time2));
@@ -153,7 +156,8 @@ TEST(DrivetrainSystemTesting, test_drivetrain_inverter_comms)
 {
 
     InverterMock inv_fl, inv_fr, inv_rl, inv_rr;
-    DrivetrainSystem<InverterMock> dt({&inv_fl, &inv_fr, &inv_rl, &inv_rr}, 1000);
+    MCUInterface mcu;
+    DrivetrainSystem<InverterMock> dt({&inv_fl, &inv_fr, &inv_rl, &inv_rr}, &mcu, 1000);
     dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
 
     //  torque_setpoint_nm_

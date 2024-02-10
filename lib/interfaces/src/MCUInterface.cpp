@@ -3,7 +3,8 @@
 /* Member functions */
 
 /* Initialize shutdown circuit input readings */
-void MCUInterface::init() {
+void MCUInterface::init()
+{
 
     // Set initial shutdown circuit readings
     bms_ok_high = false;
@@ -14,53 +15,66 @@ void MCUInterface::init() {
 }
 
 /* Read shutdown system values (Not ticked, just in main loop)*/
-void MCUInterface::read_mcu_status() {
+void MCUInterface::read_mcu_status()
+{
 
     measure_shutdown_circuit_input();
-    measure_shutdown_circuit_voltage();  
-    
+    measure_shutdown_circuit_voltage();
 }
 
 /* Measure shutdown circuits' input */
-void MCUInterface::measure_shutdown_circuit_input() {
+void MCUInterface::measure_shutdown_circuit_input()
+{
 
     bms_ok_high = digitalRead(pin_bms_ok_read_);
     imd_ok_high = digitalRead(pin_imd_ok_read_);
     bspd_ok_high = digitalRead(pin_bspd_ok_read_);
-    software_ok_high = digitalRead(pin_software_ok_read_); 
-    
+    software_ok_high = digitalRead(pin_software_ok_read_);
 }
 
 /* Measure shutdown circuits' voltages */
-void MCUInterface::measure_shutdown_circuit_voltage() {
+void MCUInterface::measure_shutdown_circuit_voltage()
+{
 
     shutdown_b_above_threshold = digitalRead(pin_bots_ok_read_);
     shutdown_c_above_threshold = digitalRead(pin_imd_ok_read_);
     shutdown_d_above_threshold = digitalRead(pin_bms_ok_read_);
     shutdown_e_above_threshold = digitalRead(pin_bspd_ok_read_);
-    
 }
 
 /* Write brake light */
-void MCUInterface::set_brake_light(bool brake_pedal_is_active) {
+void MCUInterface::set_brake_light(bool brake_pedal_is_active)
+{
 
     digitalWrite(pin_brake_light_ctrl_, brake_pedal_is_active);
-
 }
 
+void MCUInterface::enable_inverters_pin()
+{
+    digitalWrite(pin_inv_en_, HIGH);
+    digitalWrite(pin_inv_24V_en_, HIGH);
+}
+void MCUInterface::disable_inverters_pin()
+{
+    digitalWrite(pin_inv_en_, LOW);
+    digitalWrite(pin_inv_24V_en_, LOW);
+}
 /* Shutdown circuit input state */
 // BMS
-bool MCUInterface::bms_ok_is_high() {
+bool MCUInterface::bms_ok_is_high()
+{
     return bms_ok_high;
 }
 // OKHS (IMD)
-bool MCUInterface::imd_ok_is_high() {
+bool MCUInterface::imd_ok_is_high()
+{
     return imd_ok_high;
 }
 
 /* Send CAN message */
 // MCU status
-void MCUInterface::enqueue_CAN_mcu_status() {
+void MCUInterface::enqueue_CAN_mcu_status()
+{
 
     CAN_message_t msg;
     mcu_status_.write(msg.buf);
@@ -74,7 +88,8 @@ void MCUInterface::enqueue_CAN_mcu_status() {
 
 /* Update MCU_status CAN */
 // MCUInterface
-void MCUInterface::update_mcu_status_CAN() {
+void MCUInterface::update_mcu_status_CAN()
+{
     // Shutdown circuit input
     mcu_status_.set_bms_ok_high(bms_ok_high);
     mcu_status_.set_imd_ok_high(imd_ok_high);
@@ -89,56 +104,64 @@ void MCUInterface::update_mcu_status_CAN() {
 
 // Main loop
 // State machine
-void MCUInterface::update_mcu_status_CAN_fsm(int fsm_state_enum_val) {
+void MCUInterface::update_mcu_status_CAN_fsm(int fsm_state_enum_val)
+{
     mcu_status_.set_state(static_cast<MCU_STATE>(fsm_state_enum_val));
 }
-//DriveTrain
-void MCUInterface::update_mcu_status_CAN_drivetrain(bool has_error) {
+// DriveTrain
+void MCUInterface::update_mcu_status_CAN_drivetrain(bool has_error)
+{
     // Drivetrain returns struct in main loop
     // drivetrain.drive_error_occured()
-    mcu_status_.set_inverters_error(has_error);     // could also be called has_error
+    mcu_status_.set_inverters_error(has_error); // could also be called has_error
 }
 // SafetySystem
-void MCUInterface::update_mcu_status_CAN_safety(bool is_ok) {
+void MCUInterface::update_mcu_status_CAN_safety(bool is_ok)
+{
     // SafetySystem returns struct in main loop
     // safety_system.get_software_is_ok()
     mcu_status_.set_software_is_ok(is_ok);
 }
 // AMSInterface
-void MCUInterface::update_mcu_status_CAN_ams(bool is_critical) {
+void MCUInterface::update_mcu_status_CAN_ams(bool is_critical)
+{
     // AMSInterface returns struct in main loop
     // ams_interface.pack_charge_is_critical()
     mcu_status_.set_pack_charge_critical(is_critical);
 }
 // TorqueControllerMux
 // Would need an agreement on
-void MCUInterface::update_mcu_status_CAN_TCMux() {
+void MCUInterface::update_mcu_status_CAN_TCMux()
+{
     // TorqueControllerMux returns struct in main loop
     // mcu_status_.set_torque_mode(dash_->get_torque_mode());
     // mcu_status_.set_max_torque(dash_->get_max_torque())
 }
 // DashboardInterface
-void MCUInterface::update_mcu_status_CAN_dashboard(bool is_pressed) {
+void MCUInterface::update_mcu_status_CAN_dashboard(bool is_pressed)
+{
     // DashboardInterface (?) returns struct in main loop
     // dash.lauchControlButtonPressed()
     if (is_pressed)
         mcu_status_.toggle_launch_ctrl_active();
 }
 // BuzzerSystem
-void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on) {
+void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on)
+{
     // Buzzer returns struct in main loop
     // buzzer.buzzer_is_on()
     mcu_status_.set_activate_buzzer(is_on);
 }
 // PedalSystem
 // Would need to agree on
-void MCUInterface::update_mcu_status_CAN_pedals() {
+void MCUInterface::update_mcu_status_CAN_pedals()
+{
     // PedalSystem returns struct in main loop
-        // mcu_status_.set_brake_pedal_active();
-        // mcu_status_.set_mech_brake_active();
-        // mcu_status_.set_no_accel_implausability();
-        // mcu_status_.set_no_brake_implausability();
-        // mcu_status_.set_no_accel_brake_implausability();
+    // mcu_status_.set_brake_pedal_active();
+    // mcu_status_.set_mech_brake_active();
+    // mcu_status_.set_no_accel_implausability();
+    // mcu_status_.set_no_brake_implausability();
+    // mcu_status_.set_no_accel_brake_implausability();
 }
 
 void MCUInterface::tick(int fsm_state,
@@ -148,24 +171,22 @@ void MCUInterface::tick(int fsm_state,
                         bool buzzer_is_on,
                         // Pedal system return
                         bool pack_charge_is_critical,
-                        bool button_is_pressed) {
-        // State machine
-        read_mcu_status();
-        update_mcu_status_CAN_fsm(fsm_state);
-        // Systems
-        update_mcu_status_CAN_drivetrain(inv_has_error);
-        update_mcu_status_CAN_safety(software_is_ok);
-        update_mcu_status_CAN_TCMux();
-        update_mcu_status_CAN_buzzer(buzzer_is_on);
-        update_mcu_status_CAN_pedals();
-        // External Interfaces
-        update_mcu_status_CAN_ams(pack_charge_is_critical);    
-        update_mcu_status_CAN_dashboard(button_is_pressed);
-        // Internal values
-        update_mcu_status_CAN();
-        // Push into buffer
-        enqueue_CAN_mcu_status();
-        
-    }
-
-
+                        bool button_is_pressed)
+{
+    // State machine
+    read_mcu_status();
+    update_mcu_status_CAN_fsm(fsm_state);
+    // Systems
+    update_mcu_status_CAN_drivetrain(inv_has_error);
+    update_mcu_status_CAN_safety(software_is_ok);
+    update_mcu_status_CAN_TCMux();
+    update_mcu_status_CAN_buzzer(buzzer_is_on);
+    update_mcu_status_CAN_pedals();
+    // External Interfaces
+    update_mcu_status_CAN_ams(pack_charge_is_critical);
+    update_mcu_status_CAN_dashboard(button_is_pressed);
+    // Internal values
+    update_mcu_status_CAN();
+    // Push into buffer
+    enqueue_CAN_mcu_status();
+}
