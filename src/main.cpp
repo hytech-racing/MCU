@@ -7,7 +7,7 @@
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
 
-/* Interfaces */
+// /* Interfaces */
 #include "HytechCANInterface.h"
 #include "MCP_ADC.h"
 #include "ORBIS_BR10.h"

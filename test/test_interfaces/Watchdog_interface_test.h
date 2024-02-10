@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <unity.h>
 
-#include "WatchdpgInterface.h"
+#include "WatchdogInterface.h"
 
 void test_watchdog_kick()
 {
