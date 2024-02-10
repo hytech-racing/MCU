@@ -6,14 +6,13 @@ void AMSInterface::init(unsigned long curr_millis) {
 
 }
 
-//SETTERS//
-
 void AMSInterface::set_start_state() {
     
     digitalWrite(pin_software_ok_, HIGH);
     
 }
 
+//SETTERS//
 void AMSInterface::set_state_ok_high(bool ok_high) {
     if (ok_high)
         digitalWrite(pin_software_ok_, HIGH);
@@ -24,8 +23,6 @@ void AMSInterface::set_state_ok_high(bool ok_high) {
 void AMSInterface::set_heartbeat(unsigned long curr_millis) {
     last_heartbeat_time = curr_millis;
 }
-
-//GETTERS//
 
 bool AMSInterface::heartbeat_received(unsigned long curr_millis) {
     return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
@@ -43,6 +40,7 @@ bool AMSInterface::pack_charge_is_critical() {
     return (is_below_pack_charge_critical_low_thresh() || is_below_pack_charge_critical_total_thresh());
 }
 
+//GETTERS//
 float AMSInterface::get_filtered_max_cell_temp() {
     bms_high_temp = bms_temperatures_.get_high_temperature() / 100.0;
     filtered_max_cell_temp = filtered_max_cell_temp * cell_temp_alpha + (1.0 - cell_temp_alpha) * bms_high_temp;
@@ -56,7 +54,6 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 }
 
 //RETRIEVE CAN MESSAGES//
-
 void AMSInterface::retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg) {
     bms_status_.load(recvd_msg.buf);
     set_heartbeat(curr_millis);

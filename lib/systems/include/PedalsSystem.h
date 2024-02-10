@@ -30,18 +30,19 @@ struct PedalsParams
 
 class PedalsSystem
 {
-public:
-    const PedalsSystemData_s &getPedalsSystemData()
-    {
-        return data_;
-    }
+public:    
     PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams)
     {
         accelParams_ = accelParams;
         brakeParams_ = brakeParams;
-        implausibilityStartTime_=0;
+        implausibilityStartTime_ = 0;
         // Setting of min and maxes for pedals via config file
     };
+
+    const PedalsSystemData_s &getPedalsSystemData()
+    {
+        return data_;
+    }
     
     void tick(const SysTick_s &tick,
               const AnalogConversion_s &accel1,

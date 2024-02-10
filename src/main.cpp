@@ -75,24 +75,17 @@ struct inverters
 */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1); // Unify member reference and pointers? tied by reference in this case
+SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
-SafetySystem safety_system(&ams_interface, &wd_interface); // Tie ams and wd interface to safety system (by pointers)
-PedalsSystem pedals_system({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.05});
+SafetySystem safety_system(&ams_interface, &wd_interface);
+PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MIN_THRESH, ACCEL1_MAX_THRESH, ACCEL2_MAX_THRESH, APPS_ACTIVATION_PERCENTAGE},
+                           {BRAKE1_MIN_THRESH, BRAKE2_MIN_THRESH, BRAKE1_MAX_THRESH, BRAKE2_MAX_THRESH, BRKAE_ACTIVATION_PERCENTAGE});
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
-DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL); // Tie inverter interfaces to drivetrain system (by pointers)
-/*
-    Hypothetical controllers, need more implementation details
-        TorqueControllerSimple simple_mode;
-        TorqueControllerSimple normal_force_mode;
-        TorqueControllerSimple endurance_derating_mode;
-        TorqueControllerSimple launch_control_mode;
-        TorqueControllerSimple torque_vectoring_mode;
-*/
+DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux;
 
 /* Declare state machine */
-MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system); // need more implemetation details. associated interfaces and systems tied by pointers
+MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
 /*
     GROUPING STRUCTS (To limit parameter count in utilizing functions)
@@ -104,10 +97,86 @@ CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &i
     FUNCTION DEFINITIONS
 */
 
-/* tick interfaces */
+/* Initialize CAN communication */
+void init_all_CAN_devices();
+/* Tick interfaces */
 void tick_all_interfaces(const SysTick_s &current_system_tick);
 /* Tick all systems */
 void tick_all_systems(const SysTick_s &current_system_tick);
+/* Reset inverters */
+void drivetrain_reset();
+
+/*
+    SETUP
+*/
+
+void setup()
+{
+    // initialize CAN communication
+    init_all_CAN_devices();
+    
+    // get latest tick from sys clock
+    SysTick_s curr_tick = sys_clock.tick(micros());
+
+    /*
+        Init Interfaces
+    */
+
+    main_ecu.init();                      // initial shutdown circuit readings,
+    wd_interface.init(curr_tick.millis);  // initialize wd kick time
+    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+
+    /*
+        Init Systems
+    */
+
+    safety_system.init();
+
+    // present action for 1 second
+    delay(SETUP_PRESENT_ACTION_INTERVAL);
+
+    // Drivetrain set all inverters disabled
+    drivetrain.disable();   // write inv_en and inv_24V_en low: writing high in previous code though, should double check 
+                            // would an error list be good for debugging? i.e. which inverter has error
+
+    // ControllerMux set max torque to 20 NM, torque mode to whatever makes most sense
+        // Preventing drivers from forgetting to toggle torque mode and end up self-derating at comp
+        // Not strictly necessary at the moment, just don't forget
+}
+
+void loop()
+{
+    // get latest tick from sys clock
+    SysTick_s curr_tick = sys_clock.tick(micros());
+
+    // process received CAN messages
+    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+
+    // tick interfaces
+    tick_all_interfaces(curr_tick);
+
+    // tick systems
+    tick_all_systems(curr_tick);
+
+    // inverter procedure before entering state machine
+    // reset inverters
+    drivetrain_reset();
+
+    // tick state machine
+    fsm.tick_state_machine(curr_tick.millis);
+
+    // tick safety system
+    safety_system.software_shutdown(curr_tick);
+
+    // send CAN   
+    send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
+    send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+}
+
+/*
+    Initialize CAN comm.
+*/
 
 void init_all_CAN_devices()
 {
@@ -131,65 +200,6 @@ void init_all_CAN_devices()
 }
 
 /*
-    SETUP
-*/
-
-void setup()
-{
-    init_all_CAN_devices();
-
-    SysTick_s curr_tick = sys_clock.tick(micros()); // get latest tick from sys clock
-
-    /*
-        Init Interfaces
-    */
-
-    main_ecu.init();                      // initial shutdown circuit readings,
-    wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
-
-    /*
-        Init Systems
-    */
-
-    safety_system.init();
-
-    // delay for 1 second
-    delay(1000);
-
-    // ControllerMux set initial max torque to 10 NM, torque mode to 0 (could be done at construction or have an init function)
-    // Drivetrain set all inverters disabled, write inv_en and inv_24V_en hight, set inverter_has_error to false if using
-    // ControllerMux set max torque to 21 NM, torque mode to whatever makes most sense
-}
-
-void loop()
-{
-
-    SysTick_s curr_tick = sys_clock.tick(micros()); // get latest tick from sys clock
-
-    // process received can messages
-    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
-    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
-
-    // tick interfaces
-    tick_all_interfaces(curr_tick);
-
-    // tick systems
-    tick_all_systems(curr_tick);
-
-    // tick state machine
-    fsm.tick_state_machine(curr_tick.millis);
-
-    // tick safety system
-    safety_system.software_shutdown(curr_tick);
-
-    /* Update and enqueue CAN messages */
-    /* Inverter procedure before entering state machine */
-    send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
-    send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
-}
-
-/*
     TICK INTERFACES
 */
 
@@ -202,10 +212,19 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     {
         dashboard.soundBuzzer(buzzer.buzzer_is_on());
         dashboard.write();
+
+        main_ecu.tick(static_cast<int>(fsm.get_state()),
+                  drivetrain.drivetrain_error_occured(),
+                  safety_system.get_software_is_ok(),
+                  static_cast<int>(torque_controller_mux.getTorqueLimit()),
+                  torque_controller_mux.getMaxTorque(),
+                  buzzer.buzzer_is_on(),
+                  pedals_system.getPedalsSystemData(),
+                  ams_interface.pack_charge_is_critical(),
+                  dashboard.launchControlButtonPressed());
     }
     if (t.trigger50) // 50Hz
     {
-
         telem_interface.tick(ADC.a1.get(), ADC.a2.get(), ADC.a3.get(), steering1.convert());
     }
 
@@ -217,13 +236,8 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     }
 
     // Untriggered
-
-    main_ecu.tick(static_cast<int>(fsm.get_state()),
-                  drivetrain.drivetrain_error_occured(),
-                  safety_system.get_software_is_ok(),
-                  buzzer.buzzer_is_on(),
-                  ams_interface.pack_charge_is_critical(),
-                  dashboard.launchControlButtonPressed());
+    main_ecu.read_mcu_status();
+    
 }
 
 /*
@@ -232,7 +246,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
 void tick_all_systems(const SysTick_s &current_system_tick)
 {
-
     // tick pedals system
     pedals_system.tick(
         current_system_tick,
@@ -261,4 +274,17 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         (const AnalogConversion_s){}, // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueButtonPressed());
+}
+
+/*
+    Finish restarting when timer expires
+*/
+void drivetrain_reset()
+{
+    if (dashboard.inverterResetButtonPressed())
+    {
+        drivetrain.enable_drivetrain_reset();
+    }
+    drivetrain.check_reset_condition();
+    drivetrain.reset_drivetrain();
 }

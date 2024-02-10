@@ -1,5 +1,5 @@
-#ifndef AMSINTERFACE
-#define AMSINTERFACE
+#ifndef __AMSINTERFACE_H__
+#define __AMSINTERFACE_H__
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -34,7 +34,6 @@ public:
         // Set pin mode
         pinMode(pin_software_ok_, OUTPUT);
     }
-
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
     AMSInterface(int sw_ok_pin):
         AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
@@ -42,51 +41,43 @@ public:
     /* Initialize the heartbeat timer */
     void init(unsigned long curr_millis);
 
-    //SETTERS//
-
     /* Init software OK pin by setting high*/
     void set_start_state();
-
-    /* set software OK pin */
-    void set_state_ok_high(bool ok_high);
-    
-    /* set the last heartbeat to the current millis time */
-    void set_heartbeat(unsigned long curr_millis);
-
-    //GETTERS//
 
     /* Check if the last heartbeat arrived within allowable interval */
     bool heartbeat_received(unsigned long curr_millis);
 
-    /* Check if lowest cell temperature is below threshold */
-    bool is_below_pack_charge_critical_low_thresh();
-
-    /* Check if total pack charge is above threshold */
-    bool is_below_pack_charge_critical_total_thresh();
-
     /* Check if either lowest cell or total pack is below threshold*/
-    bool pack_charge_is_critical();    
+    bool pack_charge_is_critical(); 
 
+    //SETTERS//    
+    /* set software OK pin */
+    void set_state_ok_high(bool ok_high);    
+    /* set the last heartbeat to the current millis time */
+    void set_heartbeat(unsigned long curr_millis);
+
+    //GETTERS//
     /* IIR filter and return filtered max cell temperature */
     float get_filtered_max_cell_temp();
-
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
 
     //RETRIEVE CAN MESSAGES//
-
     /* read BMS status messages */
     void retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg);
-
     /* read BMS temperature messages */
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
-
     /* read BMS voltage messages */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
 
 private:
-    /* AMS CAN messages */
+    /* Private functions */
+    // Check if lowest cell temperature is below threshold
+    bool is_below_pack_charge_critical_low_thresh();
+    // Check if total pack charge is above threshold
+    bool is_below_pack_charge_critical_total_thresh();
 
+    /* AMS CAN messages */
     BMS_status          bms_status_;
     BMS_temperatures    bms_temperatures_;
     BMS_voltages        bms_voltages_;
@@ -95,7 +86,6 @@ private:
     unsigned long last_heartbeat_time;
 
     /* IIR filter parameters */
-
     float bms_high_temp;
     float bms_low_voltage;
     float filtered_max_cell_temp;
@@ -107,4 +97,4 @@ private:
     int pin_software_ok_;
 };
 
-#endif /* AMSINTERFACE */
+#endif /* __AMSINTERFACE_H__ */

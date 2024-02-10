@@ -22,12 +22,26 @@ const int MCU15_CUR_POS_SENSE_CHANNEL   = 6;
 const int MCU15_CUR_NEG_SENSE_CHANNEL   = 0;
 
 // Time intervals
-const unsigned long SETUP_PRESENT_ACTION_INTERVAL       = 5000;
+const unsigned long SETUP_PRESENT_ACTION_INTERVAL       = 1000;
 const unsigned long BUZZER_ON_INTERVAL                  = 2000;
 const unsigned long INVERTER_ENABLING_TIMEOUT_INTERVAL  = 5000;
 
 // Communication speeds
 const unsigned long INV_CAN_BAUDRATE    = 500000;
 const unsigned long TELEM_CAN_BAUDRATE  = 500000;
+
+// APPS/Brake pedal parameters
+const int ACCEL1_MIN_THRESH = 100;
+const int ACCEL2_MIN_THRESH = 100;
+const int ACCEL1_MAX_THRESH = 3000;
+const int ACCEL2_MAX_THRESH = 3000;
+const float APPS_ACTIVATION_PERCENTAGE = 0.1;
+
+const int BRAKE1_MIN_THRESH = 100;
+const int BRAKE2_MIN_THRESH = 100;
+const int BRAKE1_MAX_THRESH = 3000;
+const int BRAKE2_MAX_THRESH = 3000;
+const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
+
 
 #endif /* __MCU15_H__ */

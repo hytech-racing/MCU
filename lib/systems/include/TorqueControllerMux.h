@@ -75,6 +75,10 @@ public:
     {
         return torqueLimit_;
     };
+    const float getMaxTorque()
+    {
+        return torqueLimitMap_[torqueLimit_];
+    }
 };
 
 #endif /* __TORQUECTRLMUX_H__ */

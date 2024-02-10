@@ -131,11 +131,11 @@ void MCUInterface::update_mcu_status_CAN_ams(bool is_critical)
 }
 // TorqueControllerMux
 // Would need an agreement on
-void MCUInterface::update_mcu_status_CAN_TCMux()
+void MCUInterface::update_mcu_status_CAN_TCMux(int torque_mode, float max_torque)
 {
     // TorqueControllerMux returns struct in main loop
-    // mcu_status_.set_torque_mode(dash_->get_torque_mode());
-    // mcu_status_.set_max_torque(dash_->get_max_torque())
+    mcu_status_.set_torque_mode(torque_mode);
+    mcu_status_.set_max_torque(static_cast<uint8_t>(max_torque));
 }
 // DashboardInterface
 void MCUInterface::update_mcu_status_CAN_dashboard(bool is_pressed)
@@ -154,34 +154,34 @@ void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on)
 }
 // PedalSystem
 // Would need to agree on
-void MCUInterface::update_mcu_status_CAN_pedals()
+void MCUInterface::update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals)
 {
     // PedalSystem returns struct in main loop
-    // mcu_status_.set_brake_pedal_active();
+    mcu_status_.set_brake_pedal_active(pedals.brakePressed);
     // mcu_status_.set_mech_brake_active();
-    // mcu_status_.set_no_accel_implausability();
-    // mcu_status_.set_no_brake_implausability();
-    // mcu_status_.set_no_accel_brake_implausability();
+    mcu_status_.set_no_accel_implausability(!pedals.accelImplausible);
+    mcu_status_.set_no_brake_implausability(!pedals.brakeImplausible);
+    mcu_status_.set_no_accel_brake_implausability(!(pedals.brakeAndAccelPressedImplausibility));
 }
 
 void MCUInterface::tick(int fsm_state,
                         bool inv_has_error,
                         bool software_is_ok,
-                        // TCMux return
+                        int torque_mode,
+                        float max_torque,
                         bool buzzer_is_on,
-                        // Pedal system return
+                        const PedalsSystemData_s &pedals_data,
                         bool pack_charge_is_critical,
                         bool button_is_pressed)
 {
     // State machine
-    read_mcu_status();
     update_mcu_status_CAN_fsm(fsm_state);
     // Systems
     update_mcu_status_CAN_drivetrain(inv_has_error);
     update_mcu_status_CAN_safety(software_is_ok);
-    update_mcu_status_CAN_TCMux();
+    update_mcu_status_CAN_TCMux(torque_mode, max_torque);
     update_mcu_status_CAN_buzzer(buzzer_is_on);
-    update_mcu_status_CAN_pedals();
+    update_mcu_status_CAN_pedals(pedals_data);
     // External Interfaces
     update_mcu_status_CAN_ams(pack_charge_is_critical);
     update_mcu_status_CAN_dashboard(button_is_pressed);

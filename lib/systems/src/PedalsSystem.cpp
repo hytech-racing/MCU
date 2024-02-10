@@ -1,10 +1,12 @@
 #include "PedalsSystem.h"
 #include <iostream>
+
 // TODO parameterize percentages in constructor
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
 {
     data_ = evaluate_pedals(accel1, accel2, brake1, brake2, tick.millis);
 }
+
 PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel1,
                                                  const AnalogConversion_s &accel2,
                                                  const AnalogConversion_s &brake1,

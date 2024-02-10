@@ -36,6 +36,9 @@ public:
         lambda_magnetic_flux_wb_ = 1.0;
         hv_en_requested_ = false;
         enable_requested_ = false;
+        reset_requested_ = false;
+        last_reset_pressed_time_ = 0;
+        reset_interval_ = 5000;     // ms
         curr_system_millis_ = 0;
         last_no_torque_cmd_time_ = 0;
         last_reset_cmd_time_ = 0;
@@ -64,6 +67,9 @@ public:
     void reset_drivetrain();
     void command_drivetrain(const DrivetrainCommand_s &data);
 
+    void enable_drivetrain_reset();
+    void check_reset_condition();
+
     DrivetrainDynamicReport_s get_current_data();
 
 private:
@@ -75,6 +81,10 @@ private:
     float lambda_magnetic_flux_wb_, L_d_inductance_H_;
     // startup statuses:
     bool hv_en_requested_, enable_requested_;
+    // reset inverters
+    bool reset_requested_;
+    unsigned long last_reset_pressed_time_;
+    unsigned long reset_interval_;
     /// @param curr_time current system tick time (millis()) that sets the init phase start time
     void enable_drivetrain_hv_(unsigned long curr_time);
     void request_enable_();

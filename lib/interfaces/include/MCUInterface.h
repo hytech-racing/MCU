@@ -4,9 +4,8 @@
 #include <stdint.h>
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
-// #include "hytech.h"
 #include "MessageQueueDefine.h"
-// #include "MCUStateMachine.h"
+#include "PedalsSystem.h"
 
 const int DEFAULT_BMS_OK_READ = 5;       // SHDN_D_READ
 const int DEFAULT_IMD_OK_READ = 4;       // SHDN_C_READ
@@ -99,9 +98,9 @@ public:
     // Systems
     void update_mcu_status_CAN_drivetrain(bool has_error);
     void update_mcu_status_CAN_safety(bool is_ok);
-    void update_mcu_status_CAN_TCMux();
+    void update_mcu_status_CAN_TCMux(int torque_mode, float max_torque);
     void update_mcu_status_CAN_buzzer(bool is_on);
-    void update_mcu_status_CAN_pedals();
+    void update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals);
     // Interfaces
     void update_mcu_status_CAN_ams(bool is_critical);
     void update_mcu_status_CAN_dashboard(bool is_pressed);
@@ -114,7 +113,10 @@ public:
         int fsm_state,
         bool inv_has_error,
         bool software_is_ok,
+        int torque_mode,
+        float max_torque,
         bool buzzer_is_on,
+        const PedalsSystemData_s &pedals_data,
         bool pack_charge_is_critical,
         bool button_is_pressed);
 };
