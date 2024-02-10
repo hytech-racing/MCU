@@ -13,6 +13,7 @@ enum class SteeringEncoderStatus_e
 struct SteeringEncoderConversion_s
 {
     float angle;
+    int raw;
     SteeringEncoderStatus_e status;
 };
 
