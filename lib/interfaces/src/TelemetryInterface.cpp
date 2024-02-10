@@ -80,10 +80,10 @@ void TelemetryInterface::update_pedal_readings_CAN_msg(const AnalogConversion_s 
 void TelemetryInterface::update_load_cells_CAN_msg(const AnalogConversion_s &lc_fl,
                                                    const AnalogConversion_s &lc_fr) {
     // do sth with mcu_load_cells_
-    mcu_load_cells_.set_RL_load_cell(lc_fl.raw);
-    mcu_load_cells_.set_RR_load_cell(lc_fr.raw);
-    // mcu_load_cells_.set_FL_load_cell(lc_rl.raw);
-    // mcu_load_cells_.set_FR_load_cell(lc_rr.raw);
+    mcu_load_cells_.set_FL_load_cell(lc_fl.raw);
+    mcu_load_cells_.set_FR_load_cell(lc_fr.raw);
+    // mcu_load_cells_.set_RL_load_cell(lc_fl.raw);
+    // mcu_load_cells_.set_RR_load_cell(lc_fr.raw);    
 }
 // MCP3204 returns structure
 void TelemetryInterface::update_potentiometers_CAN_msg(const AnalogConversion_s &pots_fl,
@@ -103,7 +103,7 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
                                                         const AnalogConversion_s &reference,
                                                         const AnalogConversion_s &glv) {
     // do sth with mcu_analog_readings_
-    mcu_analog_readings_.set_steering_1(steer1.angle);
+    mcu_analog_readings_.set_steering_1(static_cast<int16_t>(steer1.angle * FIXED_POINT_PRECISION));
     mcu_analog_readings_.set_steering_2(steer2.raw);
     mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);
     mcu_analog_readings_.set_glv_battery_voltage(glv.raw);

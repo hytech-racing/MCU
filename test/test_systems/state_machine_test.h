@@ -66,7 +66,8 @@ TEST(MCUStateMachineTesting, test_state_machine_init_tick)
     PedalsSystem pedals({},{});
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
     unsigned long sys_time = 1000;
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::STARTUP);
     state_machine.tick_state_machine(sys_time);
@@ -81,7 +82,8 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_activation)
     PedalsSystem pedals({},{});
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
     unsigned long sys_time = 1000;
 
     // ticking without hv over threshold testing and ensuring the tractive system not active still
@@ -115,7 +117,9 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
     PedalsSystem pedals({},{});
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     // ticking without hv over threshold testing and ensuring the tractive system not active still
     state_machine.tick_state_machine(sys_time);
@@ -159,7 +163,9 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert)
     PedalsSystem pedals({},{});
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     unsigned long sys_time = 1000;
     handle_startup(state_machine, sys_time, drivetrain, pedals, dash_interface);
@@ -189,7 +195,9 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert_leaving)
     PedalsSystem pedals({},{});
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     unsigned long sys_time = 1000;
 
@@ -221,7 +229,9 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_acti
     PedalsSystem pedals({},{});
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
 
 
@@ -264,7 +274,9 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_not_
     DashboardInterface dash_interface;
 
     TorqueControllerMux tc_mux;
-    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ams);
+
+    SafetySystem ss(&ams, 0);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
    
    
    

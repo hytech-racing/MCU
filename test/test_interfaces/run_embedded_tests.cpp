@@ -4,8 +4,8 @@
 #include "AMS_interface_test.h"
 #include "dashboard_interface_test.h"
 #include "Watchdog_interface_test.h"
-#include "MCU_interface_test.h"
-// #include "can_interface_test.h"
+
+#include "Telemetry_interface_test.h"
 
 void setUp(void)
 {
@@ -27,11 +27,11 @@ int runUnityTests(void)
     RUN_TEST(test_AMS_heartbeat);
     /* TEST WATCHDOG */
     RUN_TEST(test_watchdog_kick);
-    /* TEST CAN INTERFACE */
+    // testing can interface
     // RUN_TEST(test_can_interface_send)
     // RUN_TEST(test_can_interface_send_and_receive_raw)
-    /* TEST MCU */
-    RUN_TEST(test_set_brake_light);
+    /* TEST TELEMETRY */
+    RUN_TEST(test_telemetry_update_CAN);
 
     return UNITY_END();
 }
@@ -43,6 +43,4 @@ void setup()
     runUnityTests();
 }
 
-void loop() {
-
-}
+void loop() {}
