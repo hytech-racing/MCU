@@ -20,13 +20,22 @@ class MCUInterface
 private:
 
     CANBufferType *msg_queue_;
+
+    /* Shutdown Read Pin definitions*/
+    
     int pin_bms_ok_read_;
     int pin_imd_ok_read_;
     int pin_bspd_ok_read_;
     int pin_software_ok_read_;
     int pin_bots_ok_read_;
+
+    /* Brake Light Pin definition*/
+
     int pin_brake_light_ctrl_;
+
     /* Private utility functions */
+
+    /* Read all shutdown signals on ECU */
     void measure_shutdown_circuit_input();
     void measure_shutdown_circuit_voltage();
     void update_mcu_status_CAN();
