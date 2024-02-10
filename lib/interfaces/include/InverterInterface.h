@@ -12,11 +12,14 @@
 #include "MCUInterface.h"
 
 #include <Arduino.h>
+
+/* Struct holding torque and speed setpoint */
 struct InverterCommand
 {
     float torque_setpoint_nm;
     float speed_setpoint_rpm;
 };
+
 template <typename message_queue>
 class InverterInterface
 {
@@ -30,6 +33,7 @@ public:
         
     }
 
+    // getter for MC id
     uint32_t get_id() { return can_id_; };
 
     // receive functions

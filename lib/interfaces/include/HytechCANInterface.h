@@ -11,6 +11,13 @@
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 
+/* 
+    struct holding interfaces processed by process_ring_buffer() 
+    FL = MC1
+    FR = MC2
+    RL = MC3
+    RR = MC4
+*/
 template <typename circular_buffer>
 struct CANInterfaces
 {
@@ -24,34 +31,41 @@ struct CANInterfaces
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
 // the processing of the receive queue happens on every iteration of the loop
-// in the processing of the receive call, all of the messages received get de-serialized and passed to their interfaces
+// in the processing of the receive call, all of the messages received get passed to their interfaces to be unpacked
 
+/* RX buffer for CAN1 */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN1_rxBuffer;
+/* RX buffer for CAN2 */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN2_rxBuffer;
-
+/* RX buffer for CAN3 */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
+/* TX buffer for CAN1 */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN1_txBuffer;
+/* TX buffer for CAN2 */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN2_txBuffer;
-
+/* TX buffer for CAN3 */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_txBuffer;
 
+/* Receive callback function for CAN1 that pushes to circ. buffer */
 void on_can1_receive(const CAN_message_t &msg);
+/* Receive callback function for CAN2 that pushes to circ. buffer */
 void on_can2_receive(const CAN_message_t &msg);
+/* Receive callback function for CAN3 that pushes to circ. buffer */
 void on_can3_receive(const CAN_message_t &msg);
 
 // reads from receive buffer updating the current message frame from a specific receive buffer
 // TODO ensure that all of the repeated interfaces are at the correct IDs
-// FL = MC1
-// FR = MC2
-// RL = MC3
-// RR = MC4
+/*
+ Reads from the specified receive buffer and passes through messages to
+ the callback associated with the CAN message ID.
+*/
 template <typename BufferType, typename InterfaceType>
 void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces, unsigned long curr_millis)
 {
@@ -126,6 +140,10 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
     }
 }
 
+
+/*
+    Sends out all CAN messages on the specified buffer
+*/
 template <typename bufferType>
 void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
 {
