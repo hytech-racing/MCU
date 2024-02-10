@@ -96,7 +96,7 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 */
 
-CANInterfaces<CircularBufferType> CAN_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface};
+CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface};
 
 /*
     FUNCTION DEFINITIONS
@@ -164,23 +164,23 @@ void setup()
 void loop()
 {
 
-    auto cur_tick = sys_clock.tick(micros()); // get latest tick from sys clock
+    SysTick_s curr_tick = sys_clock.tick(micros()); // get latest tick from sys clock
 
     // process received can messages
-    process_ring_buffer(CAN2_rxBuffer, CAN_interfaces, cur_tick.millis);
-    process_ring_buffer(CAN3_rxBuffer, CAN_interfaces, cur_tick.millis);
+    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
 
     // tick interfaces
-    tick_all_interfaces(cur_tick);
+    tick_all_interfaces(curr_tick);
 
     // tick systems
-    tick_all_systems(cur_tick);
+    tick_all_systems(curr_tick);
 
     //tick state machine
-    fsm.tick_state_machine(cur_tick.millis);
+    fsm.tick_state_machine(curr_tick.millis);
     
     // tick safety system
-    safety_system.software_shutdown(cur_tick);
+    safety_system.software_shutdown(curr_tick);
 
     /* Update and enqueue CAN messages */
     /* Inverter procedure before entering state machine */
