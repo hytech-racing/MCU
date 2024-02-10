@@ -9,6 +9,8 @@
 #include "AnalogSensorsInterface.h"
 #include "SteeringEncoderInterface.h"
 
+const int FIXED_POINT_PRECISION = 10000;
+
 class TelemetryInterface
 {
 private:
