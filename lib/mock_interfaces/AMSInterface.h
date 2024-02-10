@@ -19,7 +19,7 @@ public:
         // Set pin mode
     };
         /* Initialize interface pin mode */
-    void init(unsigned long curr_millis);
+    void init(unsigned long curr_millis) {set_heartbeat(curr_millis);}
 
     /* Write to Main ECU */
     // Initialize output value
@@ -28,8 +28,11 @@ public:
     void set_state_ok_high(bool ok_high) {};
     
     /* Monitor AMS state */
-    void set_heartbeat(unsigned long curr_millis) {};
-    bool heartbeat_received(unsigned long curr_millis) {};
+    void set_heartbeat(unsigned long curr_millis) {last_heartbeat_time = curr_millis;}
+    bool heartbeat_received(unsigned long curr_millis)
+    {
+        return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+    }
     bool is_below_pack_charge_critical_low_thresh() {};
     bool is_below_pack_charge_critical_total_thresh();
     bool pack_charge_is_critical() {};    
@@ -42,6 +45,8 @@ public:
 private:
     /* AMS CAN messages */
     // Outbound
+    /* AMS last heartbeat time */
+    unsigned long last_heartbeat_time;
 };
 
 #endif /* __AMS_INTERFACE_H__ */
