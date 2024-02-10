@@ -68,13 +68,14 @@ class TorqueControllerSimple : public TorqueController<TC_SAFE_MODE>
 private:
     DrivetrainCommand_s& writeout_;
     DrivetrainCommand_s data_;
-    float frontTorqueScale_;
-    float rearTorqueScale_;
+    float frontTorqueScale_ = 1.0;
+    float rearTorqueScale_ = 1.0;
 public:
     TorqueControllerSimple(DrivetrainCommand_s& writeout, float rearTorqueScale)
     : writeout_(writeout),
+    frontTorqueScale_(2.0 - rearTorqueScale),
     rearTorqueScale_(rearTorqueScale) {}
-    TorqueControllerSimple(DrivetrainCommand_s& writeout) : TorqueControllerSimple(writeout, 0.5) {}
+    TorqueControllerSimple(DrivetrainCommand_s& writeout) : TorqueControllerSimple(writeout, 1.0) {}
 
     void tick(const SysTick_s& tick, const PedalsSystemData_s& pedalsData, float torqueLimit);
 };
