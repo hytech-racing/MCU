@@ -71,11 +71,14 @@ public:
     );
 
     /* Enqueue outbound telemetry CAN messages */    
-    void enqueue_CAN_mcu_pedal_readings();
-    void enqueue_CAN_mcu_load_cells();
-    void enqueue_CAN_mcu_front_potentiometers();
-    void enqueue_CAN_mcu_rear_potentiometers();
-    void enqueue_CAN_mcu_analog_readings();
+    // void enqueue_CAN_mcu_pedal_readings();
+    // void enqueue_CAN_mcu_load_cells();
+    // void enqueue_CAN_mcu_front_potentiometers();
+    // void enqueue_CAN_mcu_rear_potentiometers();
+    // void enqueue_CAN_mcu_analog_readings();
+
+    template<typename T>
+    void enqueue_CAN(T& can_msg, uint32_t  id);
 
     /* Tick at 50Hz to send CAN */
     void tick(
