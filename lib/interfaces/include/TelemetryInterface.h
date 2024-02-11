@@ -78,7 +78,7 @@ public:
     // void enqueue_CAN_mcu_analog_readings();
 
     template<typename T>
-    void enqueue_CAN(T& can_msg, uint32_t  id);
+    void enqueue_CAN(T can_msg, uint32_t  id);
 
     /* Tick at 50Hz to send CAN */
     void tick(

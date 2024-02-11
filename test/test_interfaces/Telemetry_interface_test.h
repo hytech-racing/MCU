@@ -14,8 +14,10 @@
 CANBufferType CAN_tx_test;
 
 void test_telemetry_update_CAN() {
+
+    TelemetryInterfaceReadChannels channels{};
     
-    TelemetryInterface telem_interface(&CAN_tx_test);
+    TelemetryInterface telem_interface(&CAN_tx_test, channels);
 
     // Pedal readings
     AnalogConversion_s accel1;
@@ -29,7 +31,6 @@ void test_telemetry_update_CAN() {
     telem_interface.update_pedal_readings_CAN_msg(accel1, accel2, brake1, brake2);
     CAN_message_t msg;
     MCU_pedal_readings pedal_can_msg;
-    telem_interface.enqueue_CAN_mcu_pedal_readings();
     uint8_t buf[sizeof(CAN_message_t)];
     CAN_tx_test.pop_front(buf, sizeof(CAN_message_t));
     memmove(&msg, buf, sizeof(msg));
@@ -53,7 +54,6 @@ void test_telemetry_update_CAN() {
     glv.raw = 178;
     telem_interface.update_analog_readings_CAN_msg(steer1, steer2, current, reference, glv);
     MCU_analog_readings analog_can_msg;
-    telem_interface.enqueue_CAN_mcu_analog_readings();
     CAN_tx_test.pop_front(buf, sizeof(CAN_message_t));
     memmove(&msg, buf, sizeof(msg));
     TEST_ASSERT_EQUAL(ID_MCU_ANALOG_READINGS, msg.id);
@@ -70,7 +70,6 @@ void test_telemetry_update_CAN() {
     lc_fr.raw = 93;
     telem_interface.update_load_cells_CAN_msg(lc_fl, lc_fr);
     MCU_load_cells load_cells_can_msg;
-    telem_interface.enqueue_CAN_mcu_load_cells();
     CAN_tx_test.pop_front(buf, sizeof(CAN_message_t));
     memmove(&msg, buf, sizeof(msg));
     TEST_ASSERT_EQUAL(ID_MCU_LOAD_CELLS, msg.id);
@@ -85,7 +84,6 @@ void test_telemetry_update_CAN() {
     pots_fr.raw = 90;
     telem_interface.update_potentiometers_CAN_msg(pots_fl, pots_fr);
     MCU_front_potentiometers front_pots_can_msg;
-    telem_interface.enqueue_CAN_mcu_front_potentiometers();
     CAN_tx_test.pop_front(buf, sizeof(CAN_message_t));
     memmove(&msg, buf, sizeof(msg));
     TEST_ASSERT_EQUAL(ID_MCU_FRONT_POTS, msg.id);

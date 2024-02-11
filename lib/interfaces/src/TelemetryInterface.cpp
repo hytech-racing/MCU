@@ -56,72 +56,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
 }
 
 /* Send CAN messages */
-// Pedal readings
-// void TelemetryInterface::enqueue_CAN_mcu_pedal_readings() {
-    
-//     CAN_message_t msg;
-//     mcu_pedal_readings_.write(msg.buf);
-//     msg.id = ID_MCU_PEDAL_READINGS;
-//     msg.len = sizeof(mcu_pedal_readings_);
-//     uint8_t buf[sizeof(CAN_message_t)];
-//     memmove(buf, &msg, sizeof(msg));
-
-//     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-// }
-// // Loadcell readings
-// void TelemetryInterface::enqueue_CAN_mcu_load_cells() {
-    
-//     CAN_message_t msg;
-//     mcu_load_cells_.write(msg.buf);
-//     msg.id = ID_MCU_LOAD_CELLS;
-//     msg.len = sizeof(mcu_load_cells_);
-//     uint8_t buf[sizeof(CAN_message_t)];
-//     memmove(buf, &msg, sizeof(msg));
-
-//     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-// }
-// Suspension potentiometers
-// Front
-// void TelemetryInterface::enqueue_CAN_mcu_front_potentiometers() {
-    
-//     CAN_message_t msg;
-//     mcu_front_potentiometers_.write(msg.buf);
-//     msg.id = ID_MCU_FRONT_POTS;
-//     msg.len = sizeof(mcu_front_potentiometers_);
-//     uint8_t buf[sizeof(CAN_message_t)];
-//     memmove(buf, &msg, sizeof(msg));
-
-//     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-// }
-// // Rear
-// void TelemetryInterface::enqueue_CAN_mcu_rear_potentiometers() {
-    
-//     CAN_message_t msg;
-//     mcu_rear_potentiometers_.write(msg.buf);
-//     msg.id = ID_MCU_REAR_POTS;
-//     msg.len = sizeof(mcu_rear_potentiometers_);
-//     uint8_t buf[sizeof(CAN_message_t)];
-//     memmove(buf, &msg, sizeof(msg));
-
-//     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-// }
-// // Analog sensor readings
-// void TelemetryInterface::enqueue_CAN_mcu_analog_readings() {
-
-    
-
-//     CAN_message_t msg;
-//     mcu_analog_readings_.write(msg.buf);
-//     msg.id = ID_MCU_ANALOG_READINGS;
-//     msg.len = sizeof(mcu_analog_readings_);
-//     uint8_t buf[sizeof(CAN_message_t)];
-//     memmove(buf, &msg, sizeof(msg));
-
-//     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-// }
-
 template<typename T>
-void TelemetryInterface::enqueue_CAN(T& msg_class, uint32_t  id) {
+void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
     
     CAN_message_t msg;
     msg_class.write(msg.buf);
