@@ -58,7 +58,9 @@ DashboardInterface dashboard(&CAN2_txBuffer);
 AMSInterface ams_interface(SOFTWARE_OK);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
-TelemetryInterface telem_interface(&CAN3_txBuffer);
+TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_ACCEL2_CHANNEL, MCU15_BRAKE1_CHANNEL, MCU15_BRAKE2_CHANNEL,
+                                                    MCU15_FL_POTS_CHANNEL, MCU15_FR_POTS_CHANNEL, MCU15_FL_LOADCELL_CHANNEL, MCU15_FR_LOADCELL_CHANNEL,
+                                                    MCU15_STEERING_CHANNEL, MCU15_CUR_POS_SENSE_CHANNEL, MCU15_CUR_NEG_SENSE_CHANNEL, MCU15_GLV_SENSE_CHANNEL});
 
 /* Inverter Interface Type */
 using InvInt_t = InverterInterface<CircularBufferType>;
@@ -236,7 +238,8 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     }
 
     // Untriggered
-    main_ecu.read_mcu_status();
+    main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
+                                // DO NOT call in main_ecu.tick()
     
 }
 
@@ -268,10 +271,10 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         drivetrain.get_current_data(),
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
-        ADC.a2.get().conversions[0],  // FL load cell reading. TODO: fix index
-        ADC.a3.get().conversions[0],  // FR load cell reading. TODO: fix index
-        (const AnalogConversion_s){}, // RL load cell reading. TODO: get data from rear load cells
-        (const AnalogConversion_s){}, // RR load cell reading. TODO: get data from rear load cells
+        ADC.a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],  // FL load cell reading. TODO: fix index
+        ADC.a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],  // FR load cell reading. TODO: fix index
+        (const AnalogConversion_s){},                         // RL load cell reading. TODO: get data from rear load cells
+        (const AnalogConversion_s){},                         // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueButtonPressed());
 }

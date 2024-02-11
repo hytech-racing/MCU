@@ -7,38 +7,40 @@
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
 
-const int DEFAULT_BMS_OK_READ = 5;       // SHDN_D_READ
-const int DEFAULT_IMD_OK_READ = 4;       // SHDN_C_READ
-const int DEFAULT_BSPD_OK_READ = 6;      // SHDN_E_READ
-const int DEFAULT_SOFTWARE_OK_READ = 25; // SHDN_F_READ Watchdog Combined
-const int DEFAULT_BOTS_OK_READ = 3;      // SHDN_B_READ
-const int DEFAULT_BRAKE_LIGHT_CTRL = 7;
+const int DEFAULT_BMS_OK_READ         = 5;      // SHDN_D_READ
+const int DEFAULT_IMD_OK_READ         = 4;      // SHDN_C_READ
+const int DEFAULT_BSPD_OK_READ        = 6;      // SHDN_E_READ
+const int DEFAULT_SOFTWARE_OK_READ    = 25;     // SHDN_F_READ Watchdog Combined
+const int DEFAULT_BOTS_OK_READ        = 3;      // SHDN_B_READ
+const int DEFAULT_BRAKE_LIGHT_CTRL    = 7;
+const int DEFAULT_INVERTER_ENABLE     = 9;
+const int DEFAULT_INVERTER_24V_ENABLE = 8;
+
+/// @brief specifically designed so that Walker would be happy
+struct MainECUHardwareReadPins
+{
+    // shutdown read pins
+    int pin_bms_ok_read;
+    int pin_imd_ok_read;
+    int pin_bspd_ok_read;
+    int pin_software_ok_read;
+    int pin_bots_ok_read;
+    // brake light pin
+    int pin_brake_light_ctrl;
+    // inverter enable pins
+    int pin_inv_en;
+    int pin_inv_24V_en;
+};
+
+static const MainECUHardwareReadPins DEFAULT_PINS = {DEFAULT_BMS_OK_READ,DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ,
+                                                     DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_ENABLE, DEFAULT_INVERTER_24V_ENABLE};
 
 class MCUInterface
 {
 private:
     CANBufferType *msg_queue_;
 
-    /* Shutdown Read Pin definitions*/
-    
-    int pin_bms_ok_read_;
-    int pin_imd_ok_read_;
-    int pin_bspd_ok_read_;
-    int pin_software_ok_read_;
-    int pin_bots_ok_read_;
-
-    /* Brake Light Pin definition*/
-
-    int pin_brake_light_ctrl_;
-
-    int pin_inv_en_;
-    int pin_inv_24V_en_;
-    /* Private utility functions */
-
-    /* Read all shutdown signals on ECU */
-    void measure_shutdown_circuit_input();
-    void measure_shutdown_circuit_voltage();
-    void update_mcu_status_CAN();
+    MainECUHardwareReadPins pins_;
 
     /* Outbound CAN message */
     MCU_status mcu_status_;
@@ -54,29 +56,31 @@ private:
     bool shutdown_d_above_threshold;
     bool shutdown_e_above_threshold;
 
-    /* Hardware interface pins */
+    /* Private utility functions */
+    // Read all shutdown signals on ECU
+    void measure_shutdown_circuit_input();
+    void measure_shutdown_circuit_voltage();
+    // Update CAN message content
+    void update_mcu_status_CAN();
 
 public:
     // PLEASE replace these long lists of parameters with structs
-    // and put initialization in constructor body instead of initializer list
+    // and put initialization in constructor body instead of initializer list     -- happy?
     // my retinas are in pain
-    MCUInterface(CANBufferType *msg_output_queue, int bms_pin, int imd_pin,
-                 int bspd_pin, int sw_ok_pin, int bots_ok_pin, int brake_light_pin, int inverter_enable_pin, int inverter_24v_enable_pin)
+    MCUInterface(CANBufferType *msg_output_queue, const MainECUHardwareReadPins &pins):
         // Member initialization list
-        : msg_queue_(msg_output_queue), pin_bms_ok_read_(bms_pin), pin_imd_ok_read_(imd_pin),
-          pin_bspd_ok_read_(bspd_pin), pin_software_ok_read_(sw_ok_pin), pin_bots_ok_read_(bots_ok_pin),
-          pin_brake_light_ctrl_(brake_light_pin), pin_inv_en_(inverter_enable_pin), pin_inv_24V_en_(inverter_24v_enable_pin)
+        msg_queue_(msg_output_queue),
+        pins_(pins)
     {
         // Set pin mode
-        pinMode(pin_inv_en_, OUTPUT);
-        pinMode(pin_inv_24V_en_, OUTPUT);
-        pinMode(pin_brake_light_ctrl_, OUTPUT);
+        pinMode(pins_.pin_inv_en, OUTPUT);
+        pinMode(pins_.pin_inv_24V_en, OUTPUT);
+        pinMode(pins_.pin_brake_light_ctrl, OUTPUT);
     };
-
-    MCUInterface(CANBufferType *msg_output_queue)
-        // Overloading constructor
-        : MCUInterface(msg_output_queue, DEFAULT_BMS_OK_READ, DEFAULT_IMD_OK_READ,
-                       DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ, DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, 9, 8){};
+    // Overloading constructor
+    MCUInterface(CANBufferType *msg_output_queue):        
+        MCUInterface(msg_output_queue, DEFAULT_PINS)
+    {};
 
     /* Initialize shutdown circuit input readings */
     void init();
@@ -88,6 +92,7 @@ public:
     void set_brake_light(bool brake_pedal_is_active); // Called from PedalInterface/System
     void enable_inverters_pin();
     void disable_inverters_pin();
+
     /* Feed to state machine */
     bool bms_ok_is_high();
     bool imd_ok_is_high();

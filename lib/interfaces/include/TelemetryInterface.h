@@ -11,6 +11,22 @@
 
 const int FIXED_POINT_PRECISION = 10000;
 
+struct TelemetryInterfaceReadChannels
+{
+    int accel1_channel;
+    int accel2_channel;
+    int brake1_channel;
+    int brake2_channel;
+    int pots_fl_channel;
+    int pots_fr_channel;
+    int loadcell_fl_channel;
+    int loadcell_fr_channel;
+    int analog_steering_channel;
+    int current_channel;
+    int current_ref_channel;
+    int glv_sense_channel;
+};
+
 class TelemetryInterface
 {
 private:
@@ -22,10 +38,13 @@ private:
     MCU_analog_readings         mcu_analog_readings_;
     /* CAN Tx buffer */
     CANBufferType *msg_queue_;
+    /* ADC read channels */
+    TelemetryInterfaceReadChannels channels_;
 
 public:
-    TelemetryInterface(CANBufferType *msg_output_queue):
-        msg_queue_(msg_output_queue) {};
+    TelemetryInterface(CANBufferType *msg_output_queue, const TelemetryInterfaceReadChannels &channels):
+        msg_queue_(msg_output_queue),
+        channels_(channels) {};
 
     /* Update CAN messages (main loop) */
     // Interfaces

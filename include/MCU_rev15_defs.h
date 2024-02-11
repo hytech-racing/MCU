@@ -20,6 +20,11 @@ const int MCU15_GLV_SENSE_CHANNEL       = 4;
 const int MCU15_STEERING_CHANNEL        = 7;
 const int MCU15_CUR_POS_SENSE_CHANNEL   = 6;
 const int MCU15_CUR_NEG_SENSE_CHANNEL   = 0;
+// ADC2 channel defs
+const int MCU15_FL_POTS_CHANNEL         = 1;
+const int MCU15_FR_POTS_CHANNEL         = 1;
+const int MCU15_FL_LOADCELL_CHANNEL     = 2;
+const int MCU15_FR_LOADCELL_CHANNEL     = 2;
 
 // Time intervals
 const unsigned long SETUP_PRESENT_ACTION_INTERVAL       = 1000;

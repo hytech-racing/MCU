@@ -116,16 +116,25 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const SteeringEncoderConversion_s &encoder) {
 
     // Pedals
-    update_pedal_readings_CAN_msg(adc1.conversions[2], adc1.conversions[1], adc1.conversions[5], adc1.conversions[3]);
+    update_pedal_readings_CAN_msg(adc1.conversions[channels_.accel1_channel],
+                                  adc1.conversions[channels_.accel2_channel],
+                                  adc1.conversions[channels_.brake1_channel],
+                                  adc1.conversions[channels_.brake2_channel]);
     enqueue_CAN_mcu_pedal_readings();
     // Analog readings
-    update_analog_readings_CAN_msg(encoder, adc1.conversions[7], adc1.conversions[6], adc1.conversions[0], adc1.conversions[4]);
+    update_analog_readings_CAN_msg(encoder,
+                                   adc1.conversions[channels_.analog_steering_channel],
+                                   adc1.conversions[channels_.current_channel],
+                                   adc1.conversions[channels_.current_ref_channel],
+                                   adc1.conversions[channels_.glv_sense_channel]);
     enqueue_CAN_mcu_analog_readings();
     // Load cells
-    update_load_cells_CAN_msg(adc2.conversions[2], adc3.conversions[2]);
+    update_load_cells_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
+                              adc3.conversions[channels_.loadcell_fr_channel]);
     enqueue_CAN_mcu_load_cells();
     // Pots
-    update_potentiometers_CAN_msg(adc2.conversions[3], adc3.conversions[3]);
+    update_potentiometers_CAN_msg(adc2.conversions[channels_.pots_fl_channel],
+                                  adc3.conversions[channels_.pots_fr_channel]);
     enqueue_CAN_mcu_front_potentiometers();
     // enqueue_CAN_mcu_rear_potentiometers();
 

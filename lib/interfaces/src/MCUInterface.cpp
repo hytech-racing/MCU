@@ -26,38 +26,38 @@ void MCUInterface::read_mcu_status()
 void MCUInterface::measure_shutdown_circuit_input()
 {
 
-    bms_ok_high = digitalRead(pin_bms_ok_read_);
-    imd_ok_high = digitalRead(pin_imd_ok_read_);
-    bspd_ok_high = digitalRead(pin_bspd_ok_read_);
-    software_ok_high = digitalRead(pin_software_ok_read_);
+    bms_ok_high = digitalRead(pins_.pin_bms_ok_read);
+    imd_ok_high = digitalRead(pins_.pin_imd_ok_read);
+    bspd_ok_high = digitalRead(pins_.pin_bspd_ok_read);
+    software_ok_high = digitalRead(pins_.pin_software_ok_read);
 }
 
 /* Measure shutdown circuits' voltages */
 void MCUInterface::measure_shutdown_circuit_voltage()
 {
 
-    shutdown_b_above_threshold = digitalRead(pin_bots_ok_read_);
-    shutdown_c_above_threshold = digitalRead(pin_imd_ok_read_);
-    shutdown_d_above_threshold = digitalRead(pin_bms_ok_read_);
-    shutdown_e_above_threshold = digitalRead(pin_bspd_ok_read_);
+    shutdown_b_above_threshold = digitalRead(pins_.pin_bots_ok_read);
+    shutdown_c_above_threshold = digitalRead(pins_.pin_imd_ok_read);
+    shutdown_d_above_threshold = digitalRead(pins_.pin_bms_ok_read);
+    shutdown_e_above_threshold = digitalRead(pins_.pin_bspd_ok_read);
 }
 
 /* Write brake light */
 void MCUInterface::set_brake_light(bool brake_pedal_is_active)
 {
 
-    digitalWrite(pin_brake_light_ctrl_, brake_pedal_is_active);
+    digitalWrite(pins_.pin_brake_light_ctrl, brake_pedal_is_active);
 }
 
 void MCUInterface::enable_inverters_pin()
 {
-    digitalWrite(pin_inv_en_, HIGH);
-    digitalWrite(pin_inv_24V_en_, HIGH);
+    digitalWrite(pins_.pin_inv_en, HIGH);
+    digitalWrite(pins_.pin_inv_24V_en, HIGH);
 }
 void MCUInterface::disable_inverters_pin()
 {
-    digitalWrite(pin_inv_en_, LOW);
-    digitalWrite(pin_inv_24V_en_, LOW);
+    digitalWrite(pins_.pin_inv_en, LOW);
+    digitalWrite(pins_.pin_inv_24V_en, LOW);
 }
 /* Shutdown circuit input state */
 // BMS
