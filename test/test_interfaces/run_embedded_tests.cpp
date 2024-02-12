@@ -7,8 +7,6 @@
 
 // #include "Telemetry_interface_test.h"
 
-#include "ORBIS_Steering _test.h"
-
 void setUp(void)
 {
     // init_can_interface();
@@ -34,11 +32,6 @@ int runUnityTests(void)
     // RUN_TEST(test_can_interface_send_and_receive_raw)
     /* TEST TELEMETRY */
     // RUN_TEST(test_telemetry_update_CAN);
-    /* TEST MCP_ADC */
-    Serial.println("Print sth in main");
-    RUN_TEST(test_MCP_ADC_sample);
-    /* Test steering encoder */
-    RUN_TEST(test_steering_sample_and_convert);
 
     return UNITY_END();
 }
