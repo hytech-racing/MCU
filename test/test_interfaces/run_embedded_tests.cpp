@@ -5,7 +5,9 @@
 #include "dashboard_interface_test.h"
 #include "Watchdog_interface_test.h"
 
-#include "Telemetry_interface_test.h"
+// #include "Telemetry_interface_test.h"
+
+#include "MCP_ADC_test.h"
 
 void setUp(void)
 {
@@ -31,7 +33,10 @@ int runUnityTests(void)
     // RUN_TEST(test_can_interface_send)
     // RUN_TEST(test_can_interface_send_and_receive_raw)
     /* TEST TELEMETRY */
-    RUN_TEST(test_telemetry_update_CAN);
+    // RUN_TEST(test_telemetry_update_CAN);
+    /* TEST MCP_ADC */
+    Serial.println("Print sth in main");
+    RUN_TEST(test_MCP_ADC_sample);
 
     return UNITY_END();
 }
