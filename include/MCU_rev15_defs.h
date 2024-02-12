@@ -47,6 +47,6 @@ const int BRAKE2_MIN_THRESH = 100;
 const int BRAKE1_MAX_THRESH = 3000;
 const int BRAKE2_MAX_THRESH = 3000;
 const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
-
+const float BRAKE_MECH_THRESH = 0.05; // TODO: Determine actual mech threshold
 
 #endif /* __MCU15_H__ */

@@ -8,11 +8,12 @@
 struct PedalsSystemData_s
 {
 
-    bool accelImplausible;
-    bool brakeImplausible;
-    bool brakePressed;
-    bool brakeAndAccelPressedImplausibility;
-    bool implausibilityExceededMaxDuration;
+    bool accelImplausible:1;
+    bool brakeImplausible:1;
+    bool brakePressed:1;
+    bool mechBrakeActive:1;
+    bool brakeAndAccelPressedImplausibility:1;
+    bool implausibilityExceededMaxDuration:1;
     float accelPercent;
     float brakePercent;
 };
@@ -31,11 +32,12 @@ struct PedalsParams
 class PedalsSystem
 {
 public:    
-    PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams)
+    PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams, float mechBrakeActiveThreshold)
     {
         accelParams_ = accelParams;
         brakeParams_ = brakeParams;
         implausibilityStartTime_ = 0;
+        mechBrakeActiveThreshold_ = mechBrakeActiveThreshold;
         // Setting of min and maxes for pedals via config file
     };
 
@@ -72,6 +74,7 @@ private:
     bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, float percent_threshold);
     PedalsParams accelParams_;
     PedalsParams brakeParams_;
+    float mechBrakeActiveThreshold_;
     unsigned long implausibilityStartTime_;
 };
 
