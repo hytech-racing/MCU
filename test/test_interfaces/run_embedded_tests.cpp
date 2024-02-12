@@ -7,7 +7,6 @@
 
 // #include "Telemetry_interface_test.h"
 
-#include "MCP_ADC_test.h"
 #include "ORBIS_Steering _test.h"
 
 void setUp(void)
