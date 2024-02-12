@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "license": "MIT",
     "dependencies": {
-      "interfaces-lib": "*"
+      "interfaces-lib": "*",
+      "shared-interfaces-lib": "*",
+      "shared-systems-lib": "*"
     },
     "frameworks": "*",
     "platforms": "*"
