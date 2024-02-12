@@ -63,7 +63,7 @@ TEST(MCUStateMachineTesting, test_state_machine_init_tick)
     AMSInterface ams(0,0,0,0,0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
     SafetySystem ss(&ams, 0);
@@ -79,7 +79,7 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_activation)
     AMSInterface ams(0,0,0,0,0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
     SafetySystem ss(&ams, 0);
@@ -114,7 +114,7 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
     AMSInterface ams(0,0,0,0,0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
 
@@ -160,7 +160,7 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert)
     AMSInterface ams(0,0,0,0,0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
 
@@ -192,7 +192,7 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert_leaving)
     AMSInterface ams(0,0,0,0,0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
 
@@ -226,7 +226,7 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_acti
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     drivetrain.drivetrain_error_ = false;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
     TorqueControllerMux tc_mux;
 
@@ -270,7 +270,7 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_not_
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     drivetrain.drivetrain_error_ = false;
-    PedalsSystem pedals({},{});
+    PedalsSystem pedals({},{},0.0f);
     DashboardInterface dash_interface;
 
     TorqueControllerMux tc_mux;

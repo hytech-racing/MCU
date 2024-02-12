@@ -19,7 +19,7 @@ TEST(PedalsSystemTesting, test_accel_and_brake_limits_plausibility)
     AnalogConversion_s test_accel1_val = {0, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_accel2_val = {200, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {200, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1});
+    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.accelImplausible);
     data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
@@ -51,7 +51,7 @@ TEST(PedalsSystemTesting, test_accel_and_brake_percentages_implausibility)
     AnalogConversion_s test_accel1_val = {200, 0.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_accel2_val = {200, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {200, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1});
+    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
 
     EXPECT_FALSE(data.brakeImplausible);
@@ -76,7 +76,7 @@ TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activati
     AnalogConversion_s test_accel1_val = {1000, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {1000, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1});
+    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);
@@ -94,7 +94,7 @@ TEST(PedalsSystemTesting, test_implausibility_duration)
     AnalogConversion_s test_accel1_val = {1000, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {1000, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1});
+    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);
