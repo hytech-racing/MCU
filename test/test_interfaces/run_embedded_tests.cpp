@@ -8,6 +8,7 @@
 // #include "Telemetry_interface_test.h"
 
 #include "MCP_ADC_test.h"
+#include "ORBIS_Steering _test.h"
 
 void setUp(void)
 {
@@ -37,6 +38,8 @@ int runUnityTests(void)
     /* TEST MCP_ADC */
     Serial.println("Print sth in main");
     RUN_TEST(test_MCP_ADC_sample);
+    /* Test steering encoder */
+    RUN_TEST(test_steering_sample_and_convert);
 
     return UNITY_END();
 }
