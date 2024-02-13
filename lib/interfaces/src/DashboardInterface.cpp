@@ -4,7 +4,7 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 {
 
     DASHBOARD_STATE_t dash_state;
-    Unpack_DASHBOARD_STATE_hytech(&dash_state, can_msg.buf, NULL);
+    Unpack_DASHBOARD_STATE_hytech(&dash_state, can_msg.buf, can_msg.len);
 
     _data.dial_mode = static_cast<DialMode_e>(dash_state.dial_state);
     

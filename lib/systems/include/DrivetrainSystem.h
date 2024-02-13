@@ -98,7 +98,7 @@ private:
     bool drivetrain_enabled_();
 
     unsigned long curr_system_millis_;
-    int min_cmd_period_;
+    unsigned int min_cmd_period_;
     unsigned long last_no_torque_cmd_time_, last_reset_cmd_time_, last_disable_cmd_time_, last_general_cmd_time_;
 
     unsigned long drivetrain_initialization_phase_start_time_;

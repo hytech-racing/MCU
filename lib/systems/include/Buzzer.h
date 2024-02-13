@@ -15,7 +15,7 @@ public:
     bool buzzer_is_on() { return buzzer_on_; }
 
 private:
-    int buzzer_period_;
+    unsigned int buzzer_period_;
     unsigned long last_activation_time_;
     bool buzzer_on_;
 };

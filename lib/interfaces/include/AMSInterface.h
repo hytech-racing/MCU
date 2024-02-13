@@ -85,6 +85,9 @@ private:
     /* AMS last heartbeat time */
     unsigned long last_heartbeat_time;
 
+    /* software OK pin */
+    int pin_software_ok_;
+
     /* IIR filter parameters */
     float bms_high_temp;
     float bms_low_voltage;
@@ -92,9 +95,6 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
-
-    /* software OK pin */
-    int pin_software_ok_;
 };
 
 #endif /* __AMSINTERFACE_H__ */
