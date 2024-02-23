@@ -105,7 +105,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
-        DialMode_e::MODE_1,
+        DialMode_e::MODE_0,
         false
     );
 
@@ -127,7 +127,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
-        DialMode_e::MODE_1,
+        DialMode_e::MODE_0,
         false
     );
 
@@ -141,7 +141,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
-        DialMode_e::MODE_1,
+        DialMode_e::MODE_0,
         false
     );
 
@@ -219,7 +219,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
-        DialMode_e::MODE_1,
+        DialMode_e::MODE_0,
         false
     );
 
@@ -241,7 +241,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
-        DialMode_e::MODE_1,
+        DialMode_e::MODE_0,
         false
     );
 
@@ -255,7 +255,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
-        DialMode_e::MODE_1,
+        DialMode_e::MODE_0,
         false
     );
 

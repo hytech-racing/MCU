@@ -7,13 +7,17 @@
 
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum class DialMode_e
-{
+{   
+    /* No torque vectoring */
+    MODE_0,
+    /* Normal force torque vectoring */
     MODE_1,
+    /* PID torque vectoring */
     MODE_2,
-    ACCEL_LAUNCH_CONTROL,
-    SKIDPAD,
-    AUTOCROSS,
-    ENDURANCE,
+    /* Launch Ctrl */
+    MODE_3,
+    MODE_4,
+    MODE_5,
 };
 
 /* Enum for defined LED colors. ON will be LED's default color on dashboard*/

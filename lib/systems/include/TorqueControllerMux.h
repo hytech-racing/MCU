@@ -25,12 +25,12 @@ class TorqueControllerMux
 private:
     // Use this to map the dial to TCMUX modes
     std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
+        {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
         {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_2, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::ACCEL_LAUNCH_CONTROL, TorqueController_e::TC_NO_CONTROLLER},
-        {DialMode_e::SKIDPAD, TorqueController_e::TC_NO_CONTROLLER},
-        {DialMode_e::AUTOCROSS, TorqueController_e::TC_NO_CONTROLLER},
-        {DialMode_e::ENDURANCE, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_2, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_3, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
