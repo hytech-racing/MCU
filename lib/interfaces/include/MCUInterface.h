@@ -9,12 +9,12 @@
 
 const int DEFAULT_BMS_OK_READ         = 5;      // SHDN_D_READ
 const int DEFAULT_IMD_OK_READ         = 4;      // SHDN_C_READ
-const int DEFAULT_BSPD_OK_READ        = 6;      // SHDN_E_READ
+const int DEFAULT_BSPD_OK_READ        = 39;      // SHDN_E_READ
 const int DEFAULT_SOFTWARE_OK_READ    = 25;     // SHDN_F_READ Watchdog Combined
 const int DEFAULT_BOTS_OK_READ        = 3;      // SHDN_B_READ
-const int DEFAULT_BRAKE_LIGHT_CTRL    = 7;
+const int DEFAULT_BRAKE_LIGHT_CTRL    = 6;
 const int DEFAULT_INVERTER_ENABLE     = 9;
-const int DEFAULT_INVERTER_24V_ENABLE = 8;
+const int DEFAULT_INVERTER_24V_ENABLE = 7;
 
 /// @brief specifically designed so that Walker would be happy
 struct MainECUHardwareReadPins

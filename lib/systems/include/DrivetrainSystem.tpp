@@ -117,6 +117,7 @@ void DrivetrainSystem<InverterType>::disable()
     }
 
     mcu_interface_->disable_inverters_pin();
+    mcu_interface_->enable_inverters_pin();
 }
 
 template <typename InverterType>
