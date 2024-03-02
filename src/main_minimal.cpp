@@ -129,7 +129,7 @@ void setup()
     a2.init();
     a3.init();
     Serial.begin(9600);
-    pinMode(LED_BUILTIN, OUTPUT);
+    // pinMode(LED_BUILTIN, OUTPUT);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -161,7 +161,7 @@ void setup()
 
 void loop()
 {
-    digitalWrite(LED_BUILTIN, HIGH);
+    // digitalWrite(LED_BUILTIN, HIGH);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -188,7 +188,7 @@ void loop()
     // // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
-    // Serial.println("yo");
+    Serial.println("yo");
     // hal_println("finished loop");
 }
 
