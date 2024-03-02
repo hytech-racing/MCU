@@ -3,17 +3,21 @@
 
 #include "AMSInterface.h"
 #include "WatchdogInterface.h"
-#include "DashboardInterface.h"
+// #include "DashboardInterface.h"
 #include "SysClock.h"
 
 class SafetySystem
 {
 public:
-    SafetySystem(AMSInterface *ams, WatchdogInterface *wd, DashboardInterface *dash): 
+    // SafetySystem(AMSInterface *ams, WatchdogInterface *wd, DashboardInterface *dash): 
+    //     ams_(ams), 
+    //     wd_(wd),
+    //     dash_(dash) {};
+    SafetySystem(AMSInterface *ams, WatchdogInterface *wd): 
         ams_(ams), 
-        wd_(wd),
-        dash_(dash) {};
+        wd_(wd){};
 
+ 
     /* Initialization */
     void init();
 
@@ -28,7 +32,7 @@ private:
     /* Associated interfaces */
     AMSInterface        *ams_;
     WatchdogInterface   *wd_;
-    DashboardInterface  *dash_;
+    // DashboardInterface  *dash_;
 
     /* Software ok status */
     bool software_is_ok;

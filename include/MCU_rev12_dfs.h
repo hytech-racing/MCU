@@ -47,7 +47,7 @@
 #define IMD_OK_READ 4 // SHDN_C_READ
 #define BMS_OK_READ 5 // SHDN_D_READ
 #define BSPD_OK_READ 6 // SHDN_E_READ
-#define SOFTWARE_OK 28
+#define SOFTWARE_OK 8
 // digital outputs
 #define WATCHDOG_INPUT 32
 

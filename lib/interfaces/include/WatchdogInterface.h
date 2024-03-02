@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-const unsigned long WATCHDOG_KICK_INTERVAL = 7;    // milliseconds
+const unsigned long WATCHDOG_KICK_INTERVAL = 10;    // milliseconds
 
 class WatchdogInterface
 {

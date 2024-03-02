@@ -60,7 +60,7 @@ OrbisBR10 steering1(STEERING_SERIAL);
 
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
-WatchdogInterface wd_interface(WATCHDOG_INPUT);
+WatchdogInterface wd_interface(32);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_ACCEL2_CHANNEL, MCU15_BRAKE1_CHANNEL, MCU15_BRAKE2_CHANNEL,
                                                     MCU15_FL_POTS_CHANNEL, MCU15_FR_POTS_CHANNEL, MCU15_FL_LOADCELL_CHANNEL, MCU15_FR_LOADCELL_CHANNEL,
@@ -83,7 +83,9 @@ struct inverters
 SysClock sys_clock;
 // SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
-SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
+
+SafetySystem safety_system(&ams_interface, &wd_interface);
+// SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
 PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MIN_THRESH, ACCEL1_MAX_THRESH, ACCEL2_MAX_THRESH, APPS_ACTIVATION_PERCENTAGE},
                            {BRAKE1_MIN_THRESH, BRAKE2_MIN_THRESH, BRAKE1_MAX_THRESH, BRAKE2_MAX_THRESH, BRKAE_ACTIVATION_PERCENTAGE},
                            BRAKE_MECH_THRESH);
