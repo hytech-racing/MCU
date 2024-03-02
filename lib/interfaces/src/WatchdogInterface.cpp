@@ -19,11 +19,13 @@ void WatchdogInterface::set_start_state() {
 
 /* Toggle watchdog WD to kick dog */
 void WatchdogInterface::kick_watchdog(unsigned long curr_millis) {
+
+    // Serial.println("attempting kick watchdog");
     if ((curr_millis - watchdog_time) > WATCHDOG_KICK_INTERVAL) {
         watchdog_state = !watchdog_state;
         digitalWrite(pin_watchdog_input_, watchdog_state);
         watchdog_time = curr_millis;
-        Serial.println("kicking watchdog");
+        // Serial.println("kicking watchdog");
     }
 }
 

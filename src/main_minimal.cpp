@@ -58,8 +58,8 @@ OrbisBR10 steering1(STEERING_SERIAL);
 //     INTERFACES
 // */
 
-DashboardInterface dashboard(&CAN2_txBuffer);
-AMSInterface ams_interface(SOFTWARE_OK);
+DashboardInterface dashboard(&CAN3_txBuffer);
+AMSInterface ams_interface(8);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_ACCEL2_CHANNEL, MCU15_BRAKE1_CHANNEL, MCU15_BRAKE2_CHANNEL,
@@ -120,7 +120,7 @@ void drivetrain_reset();
 void setup()
 {
     // initialize CAN communication
-    // init_all_CAN_devices();
+    init_all_CAN_devices();
     
     SPI.begin();
     a1.init();
@@ -171,7 +171,7 @@ void loop()
     tick_all_interfaces(curr_tick);
 
     // // tick systems
-    // tick_all_systems(curr_tick);
+    tick_all_systems(curr_tick);
 
     // // inverter procedure before entering state machine
     // // reset inverters
@@ -224,25 +224,26 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
     TriggerBits_s t = current_system_tick.triggers;
 
-    // if (t.trigger10) // 10Hz
-    // {
-    //     dashboard.soundBuzzer(buzzer.buzzer_is_on());
-    //     dashboard.write();
+    if (t.trigger10) // 10Hz
+    {
+        hal_println("triggering supposedly");
+        dashboard.soundBuzzer(buzzer.buzzer_is_on());
+        auto memes = dashboard.write();
 
-    //     main_ecu.tick(static_cast<int>(fsm.get_state()),
-    //               drivetrain.drivetrain_error_occured(),
-    //               safety_system.get_software_is_ok(),
-    //               static_cast<int>(torque_controller_mux.getTorqueLimit()),
-    //               torque_controller_mux.getMaxTorque(),
-    //               buzzer.buzzer_is_on(),
-    //               pedals_system.getPedalsSystemData(),
-    //               ams_interface.pack_charge_is_critical(),
-    //               dashboard.launchControlButtonPressed());
-    // }
-    // if (t.trigger50) // 50Hz
-    // {
-    //     telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
-    // }
+        main_ecu.tick(static_cast<int>(fsm.get_state()),
+                  drivetrain.drivetrain_error_occured(),
+                  safety_system.get_software_is_ok(),
+                  static_cast<int>(torque_controller_mux.getTorqueLimit()),
+                  torque_controller_mux.getMaxTorque(),
+                  buzzer.buzzer_is_on(),
+                  pedals_system.getPedalsSystemData(),
+                  ams_interface.pack_charge_is_critical(),
+                  dashboard.launchControlButtonPressed());
+    }
+    if (t.trigger50) // 50Hz
+    {
+        telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
+    }
 
     if (t.trigger100) // 100Hz
     {
@@ -264,19 +265,19 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 void tick_all_systems(const SysTick_s &current_system_tick)
 {
     // tick pedals system
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+    pedals_system.tick(
+        current_system_tick,
+        a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+        a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+        a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+        a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
     // // tick steering system
     // steering_system.tick(
     //     current_system_tick,
     //     a1.get().conversions[MCU15_STEERING_CHANNEL]);
 
     // // tick drivetrain system
-    // drivetrain.tick(current_system_tick);
+    drivetrain.tick(current_system_tick);
     // // tick torque controller mux
     // torque_controller_mux.tick(
     //     current_system_tick,

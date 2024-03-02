@@ -70,7 +70,10 @@ template <typename BufferType, typename InterfaceType>
 void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces, unsigned long curr_millis)
 {
     // TODO switch to using the global CAN receive function from the generated CAN library
+    // if(rx_buffer.size() > 0){
 
+    // Serial.println(rx_buffer.size());
+    // }
     while (rx_buffer.available())
     {
         CAN_message_t recvd_msg;
@@ -86,7 +89,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         
         // AMS msg receives
         case ID_BMS_STATUS:
-            interfaces.ams_interface->retrieve_status_CAN(curr_millis, recvd_msg);
+            interfaces.ams_interface->retrieve_status_CAN(millis(), recvd_msg);
             break;
         case ID_BMS_TEMPERATURES:
             interfaces.ams_interface->retrieve_temp_CAN(recvd_msg);
