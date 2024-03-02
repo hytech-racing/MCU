@@ -83,7 +83,7 @@ struct inverters
 SysClock sys_clock;
 // SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
-SafetySystem safety_system(&ams_interface, &wd_interface);
+SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
 PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MIN_THRESH, ACCEL1_MAX_THRESH, ACCEL2_MAX_THRESH, APPS_ACTIVATION_PERCENTAGE},
                            {BRAKE1_MIN_THRESH, BRAKE2_MIN_THRESH, BRAKE1_MAX_THRESH, BRAKE2_MAX_THRESH, BRKAE_ACTIVATION_PERCENTAGE},
                            BRAKE_MECH_THRESH);
