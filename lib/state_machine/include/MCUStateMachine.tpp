@@ -6,6 +6,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     switch (get_state())
     {
     case CAR_STATE::STARTUP:
+
+        hal_println("in startup state");
         set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
         break;
 
@@ -21,6 +23,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::TRACTIVE_SYSTEM_ACTIVE:
     {
+
+        hal_println("in tractive system active state");
         // TODO migrate to new pedals system
         auto data = pedals_->getPedalsSystemData();
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
@@ -38,6 +42,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::ENABLING_INVERTERS:
     {
+
+        hal_println("in enabling inverters state");
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);

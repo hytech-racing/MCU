@@ -21,6 +21,7 @@ void WatchdogInterface::kick_watchdog(unsigned long curr_millis) {
         watchdog_state = !watchdog_state;
         digitalWrite(pin_watchdog_input_, watchdog_state);
         watchdog_time = curr_millis;
+        Serial.println("kicking watchdog");
     }
 }
 
