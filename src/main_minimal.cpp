@@ -41,13 +41,6 @@ FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically
 using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
 
 /* Sensors */
-// struct ADCs
-// {
-//     // MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
-//     // MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS);
-//     // MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
-// } ADC;
-
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
 MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS);
 MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
@@ -81,7 +74,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-// SteeringSystem steering_system(&steering1);
+SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -167,8 +160,8 @@ void loop()
     SysTick_s curr_tick = sys_clock.tick(micros());
 
     // // process received CAN messages
-    // process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
-    // process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
 
     // // tick interfaces
     tick_all_interfaces(curr_tick);
@@ -181,16 +174,15 @@ void loop()
     drivetrain_reset();
 
     // // tick state machine
-    // fsm.tick_state_machine(curr_tick.millis);
+    fsm.tick_state_machine(curr_tick.millis);
 
     // // tick safety system
     safety_system.software_shutdown(curr_tick);
 
     // // send CAN
-    // send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
-    // send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
-    Serial.println("yo");
-    // hal_println("finished loop");
+    send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
+    send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+    hal_println("finished loop");
 }
 
 /*
@@ -226,12 +218,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 {
 
     TriggerBits_s t = current_system_tick.triggers;
-    Serial.println("Ticking interfaces");
     if (t.trigger10) // 10Hz
     {
         // Serial.println("before buzzer");
-        // dashboard.soundBuzzer(buzzer.buzzer_is_on());
-        // auto memes = dashboard.write();
+        dashboard.soundBuzzer(buzzer.buzzer_is_on());
+        auto memes = dashboard.write();
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                   drivetrain.drivetrain_error_occured(),
@@ -245,12 +236,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     }
     if (t.trigger50) // 50Hz
     {
-        // telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
+        telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
     }
 
     if (t.trigger100) // 100Hz
     {
-        Serial.println("Trigger100");
 
         a1.tick();
         a2.tick();
