@@ -125,10 +125,12 @@ void setup()
     init_all_CAN_devices();
     
     SPI.begin();
+    delay(10);
     a1.init();
     a2.init();
     a3.init();
     Serial.begin(9600);
+    while(!Serial){}
     pinMode(LED_BUILTIN, OUTPUT);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
@@ -225,10 +227,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 {
 
     TriggerBits_s t = current_system_tick.triggers;
-
+    Serial.println("Ticking interfaces");
     if (t.trigger10) // 10Hz
     {
-        hal_println("triggering supposedly");
+        Serial.println("before buzzer");
         dashboard.soundBuzzer(buzzer.buzzer_is_on());
         auto memes = dashboard.write();
 
@@ -249,6 +251,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
     if (t.trigger100) // 100Hz
     {
+        Serial.println("Trigger100");
 
         a1.tick();
         a2.tick();
