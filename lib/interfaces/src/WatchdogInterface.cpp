@@ -2,6 +2,8 @@
 
 /* Pin mode output to watchdog WD */
 void WatchdogInterface::init(unsigned long curr_millis) {
+    // Set pin mode        
+    pinMode(pin_watchdog_input_, OUTPUT);
 
     watchdog_time = curr_millis;
     set_watchdog_state(HIGH);

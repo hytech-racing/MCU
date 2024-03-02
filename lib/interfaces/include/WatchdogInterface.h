@@ -18,11 +18,7 @@ private:
     int pin_watchdog_input_;
     
 public:
-    WatchdogInterface(int wd_input_pin): pin_watchdog_input_(wd_input_pin)
-    {
-        // Set pin mode        
-        pinMode(pin_watchdog_input_, OUTPUT);
-    }
+    WatchdogInterface(int wd_input_pin): pin_watchdog_input_(wd_input_pin){};
 
     /* Initialize interface pin mode */
     void init(unsigned long curr_millis);

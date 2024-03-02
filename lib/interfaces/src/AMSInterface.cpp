@@ -1,6 +1,9 @@
 #include "AMSInterface.h"
 
 void AMSInterface::init(unsigned long curr_millis) {
+    
+    // Set pin mode
+    pinMode(pin_software_ok_, OUTPUT);
 
     set_heartbeat(curr_millis);
 

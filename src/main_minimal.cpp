@@ -48,7 +48,7 @@ struct ADCs
     // MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
 } ADC;
 
-// OrbisBR10 steering1(STEERING_SERIAL);
+OrbisBR10 steering1(STEERING_SERIAL);
 
 // /*
 //     INTERFACES

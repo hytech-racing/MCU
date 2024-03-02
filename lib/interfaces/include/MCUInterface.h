@@ -70,13 +70,8 @@ public:
     MCUInterface(CANBufferType *msg_output_queue, const MainECUHardwareReadPins &pins):
         // Member initialization list
         msg_queue_(msg_output_queue),
-        pins_(pins)
-    {
-        // Set pin mode
-        pinMode(pins_.pin_inv_en, OUTPUT);
-        pinMode(pins_.pin_inv_24V_en, OUTPUT);
-        pinMode(pins_.pin_brake_light_ctrl, OUTPUT);
-    };
+        pins_(pins){};
+
     // Overloading constructor
     MCUInterface(CANBufferType *msg_output_queue):        
         MCUInterface(msg_output_queue, DEFAULT_PINS)

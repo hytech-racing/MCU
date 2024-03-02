@@ -5,6 +5,10 @@
 /* Initialize shutdown circuit input readings */
 void MCUInterface::init()
 {
+    // Set pin mode
+    pinMode(pins_.pin_inv_en, OUTPUT);
+    pinMode(pins_.pin_inv_24V_en, OUTPUT);
+    pinMode(pins_.pin_brake_light_ctrl, OUTPUT);
 
     // Set initial shutdown circuit readings
     bms_ok_high = false;
