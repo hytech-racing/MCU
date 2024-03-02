@@ -13,6 +13,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE:
     {
+        hal_println("tractive system not active state");
         // if TS is above HV threshold, move to Tractive System Active
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {

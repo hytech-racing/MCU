@@ -164,7 +164,7 @@ void loop()
 
     // inverter procedure before entering state machine
     // reset inverters
-    drivetrain_reset();
+    // drivetrain_reset();
 
     // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
