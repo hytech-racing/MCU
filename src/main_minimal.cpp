@@ -125,7 +125,7 @@ void setup()
     init_all_CAN_devices();
     
     SPI.begin();
-    delay(10);
+    // delay(10);
     a1.init();
     a2.init();
     a3.init();
@@ -167,8 +167,8 @@ void loop()
     SysTick_s curr_tick = sys_clock.tick(micros());
 
     // // process received CAN messages
-    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
-    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    // process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    // process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
 
     // // tick interfaces
     tick_all_interfaces(curr_tick);
@@ -181,14 +181,14 @@ void loop()
     drivetrain_reset();
 
     // // tick state machine
-    fsm.tick_state_machine(curr_tick.millis);
+    // fsm.tick_state_machine(curr_tick.millis);
 
     // // tick safety system
     safety_system.software_shutdown(curr_tick);
 
     // // send CAN
-    send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
-    send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+    // send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
+    // send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
     Serial.println("yo");
     // hal_println("finished loop");
 }
@@ -229,9 +229,9 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     Serial.println("Ticking interfaces");
     if (t.trigger10) // 10Hz
     {
-        Serial.println("before buzzer");
-        dashboard.soundBuzzer(buzzer.buzzer_is_on());
-        auto memes = dashboard.write();
+        // Serial.println("before buzzer");
+        // dashboard.soundBuzzer(buzzer.buzzer_is_on());
+        // auto memes = dashboard.write();
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                   drivetrain.drivetrain_error_occured(),
@@ -245,7 +245,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     }
     if (t.trigger50) // 50Hz
     {
-        telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
+        // telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
     }
 
     if (t.trigger100) // 100Hz
