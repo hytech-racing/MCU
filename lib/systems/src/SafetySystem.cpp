@@ -21,10 +21,14 @@ void SafetySystem::software_shutdown(const SysTick_s &tick) {
     if (!ams_->heartbeat_received(tick.millis)) {
         software_is_ok = false;
     }
-    if (software_is_ok)
+    if (software_is_ok) {
+        dash_->setLED(DashLED_e::AMS_LED, LEDColors_e::ON);
         ams_->set_state_ok_high(true);
-    else
+    }
+    else {
+        dash_->setLED(DashLED_e::AMS_LED, LEDColors_e::RED);
         ams_->set_state_ok_high(false);
+    }
 
     // Kick watchdog every software cycle
     wd_->kick_watchdog(tick.millis);
