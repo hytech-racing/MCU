@@ -68,6 +68,7 @@ void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
 
 void DashboardInterface::tick10(bool buzzer, bool ams_ok, bool imd_ok, bool bots)
 {
+    
     soundBuzzer(buzzer);
 
     if (ams_ok) setLED(DashLED_e::AMS_LED, LEDColors_e::ON);

@@ -8,7 +8,7 @@ public:
     BuzzerController(int duration_of_activation_ms) {
         buzzer_period_ = duration_of_activation_ms;
     }
-
+    void deactivate();
     void activate_buzzer(unsigned long act_time);
 
     bool done(unsigned long curr_time);

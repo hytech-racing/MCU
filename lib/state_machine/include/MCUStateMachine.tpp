@@ -37,11 +37,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.print(data.brakeAndAccelPressedImplausibility);
         // Serial.print(" ");
         // Serial.print(data.implausibilityExceededMaxDuration);
-        
+
         // Serial.println();
-        
-        
+
         // if TS is above HV threshold, move to Tractive System Active
+        // drivetrain_->disable_no_pins();
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
@@ -51,8 +51,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::TRACTIVE_SYSTEM_ACTIVE:
     {
-
-        hal_println("in tractive system active state");
+        if (buzzer_->buzzer_is_on())
+        {
+            buzzer_->deactivate();
+        }
+        // hal_println("in tractive system active state");
         // TODO migrate to new pedals system
         auto data = pedals_->getPedalsSystemData();
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
@@ -71,7 +74,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::ENABLING_INVERTERS:
     {
 
-        hal_println("in enabling inverters state");
+        // hal_println("in enabling inverters state");
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
@@ -89,12 +92,15 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     {
         // TODO handle the drivetrain state change back to startup phase 1 and/or move this into
         //      the drivetrain state machine handling
+        
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             hal_println("drivetrain not over thresh in WRTD?");
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
+        
+        drivetrain_->command_drivetrain_no_torque();
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
         if (buzzer_->done(current_millis))
@@ -117,24 +123,30 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         if (drivetrain_->drivetrain_error_occured())
         {
+            hal_println("drivetrain error");
+
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
         }
 
-        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
-        {
-            drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
-        }
-        else
-        {
-            drivetrain_->command_drivetrain_no_torque();
-            hal_println("not calculating torque");
-            // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
-            // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
-            // hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
-            // hal_printf("get bms ok high: %d\n", bms_->ok_high());
-            // hal_printf("get imd ok high: %d\n", imd_->ok_high());
-        }
+        // if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
+        // {
+        // drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
+        // }
+        // else
+        // {
+
+        drivetrain_->command_drivetrain_no_torque();
+        // }
+
+        // drivetrain_->command_drivetrain_no_torque();
+        hal_println("not calculating torque");
+        // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
+        // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
+        // hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
+        // hal_printf("get bms ok high: %d\n", bms_->ok_high());
+        // hal_printf("get imd ok high: %d\n", imd_->ok_high());
+        // }
 
         break;
     }
@@ -172,7 +184,7 @@ void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state
         break;
     case CAR_STATE::READY_TO_DRIVE:
     {
-        drivetrain_->disable();
+        // drivetrain_->disable();
         break;
     }
     }

@@ -18,16 +18,23 @@ bool DrivetrainSystem<InverterType>::inverter_init_timeout(unsigned long curr_ti
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_time)
 {
-    if (drivetrain_ready_() && !hv_en_requested_)
+    // 1. if system ready 
+    // Serial.println("handling inverter startup");
+    // request_enable_();
+    if (drivetrain_ready_() && !check_drivetrain_quit_dc_on_() && !drivetrain_enabled_())
     {
+
+        // Serial.println("drivetrain ready and enabling drivetrain hv");
         enable_drivetrain_hv_(curr_time);
-        hv_en_requested_ = true;
+
+        // hv_en_requested_ = true;
         return false;
     }
-    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !enable_requested_ && hv_en_requested_)
+    else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !drivetrain_enabled_())
     {
+        // Serial.println("requesting enable");
         request_enable_();
-        enable_requested_ = true;
+    //     enable_requested_ = true;
         return false;
     }
     bool all_ready = (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && drivetrain_enabled_());
@@ -47,7 +54,7 @@ void DrivetrainSystem<InverterType>::enable_drivetrain_hv_(unsigned long curr_ti
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::request_enable_()
 {
-    mcu_interface_->enable_inverters_pin();
+    // mcu_interface_->enable_inverters_pin();
     for (auto inv_pointer : inverters_)
     {
         inv_pointer->request_enable_inverter();
@@ -100,6 +107,20 @@ void DrivetrainSystem<InverterType>::reset_drivetrain()
             }
             last_reset_cmd_time_ = curr_system_millis_;
         }   
+    }
+
+}
+
+template <typename InverterType>
+void DrivetrainSystem<InverterType>::disable_no_pins()
+{    
+    if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
+    {
+        for (auto inv_pointer : inverters_)
+        {
+            inv_pointer->disable();
+        }
+        last_disable_cmd_time_ = curr_system_millis_;
     }
 
 }
@@ -178,6 +199,7 @@ bool DrivetrainSystem<InverterType>::drivetrain_ready_()
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::check_drivetrain_quit_dc_on_()
 {
+    // return (inverters_[3]->dc_quit_on());
     for (auto inv_pointer : inverters_)
     {
         if (!inv_pointer->dc_quit_on())
@@ -192,6 +214,7 @@ template <typename InverterType>
 bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
 {
 
+    // return (inverters_[3]->quit_inverter_on());
     for (auto inv_pointer : inverters_)
     {
         if (!inv_pointer->quit_inverter_on())

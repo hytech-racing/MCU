@@ -84,6 +84,7 @@ PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MAX_THRESH, ACCEL1_MAX_THR
                            BRAKE_MECH_THRESH);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
+// DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux;
 
 /* Declare state machine */

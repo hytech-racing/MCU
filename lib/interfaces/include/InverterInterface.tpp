@@ -1,22 +1,32 @@
 #include "InverterInterface.h"
 
 template <typename message_queue>
-void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_command &msg_in)
-{
-    CAN_message_t msg;
-    msg.id = can_id_;
-    msg.len = sizeof(msg_in);
-    msg_in.write(msg.buf);
-    uint8_t buf[sizeof(CAN_message_t)];
-    memmove(buf, &msg, sizeof(CAN_message_t));
-    msg_queue_->push_back(buf, sizeof(CAN_message_t));
+void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_command msg_in)
+{   
+    auto test = msg_in;
+    if(timer_can_.check()){
+        // Serial.println(can_id_);
+        CAN_message_t msg;
+        msg.id = can_id_;
+        msg.len = sizeof(msg_in);
+        test.write(msg.buf);
+        uint8_t buf[sizeof(CAN_message_t)];
+        memmove(buf, &msg, sizeof(CAN_message_t));
+        msg_queue_->push_back(buf, sizeof(CAN_message_t));
+    }
 }
 
 template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_hv()
 {
     
-    MC_setpoints_command mc_setpoints_command{};
+    MC_setpoints_command mc_setpoints_command;
+    mc_setpoints_command.set_speed_setpoint(0);
+    mc_setpoints_command.set_pos_torque_limit(0);
+    mc_setpoints_command.set_neg_torque_limit(0);
+    mc_setpoints_command.set_remove_error(false);
+    mc_setpoints_command.set_driver_enable(false);
+    mc_setpoints_command.set_inverter_enable(false);
     mc_setpoints_command.set_hv_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
@@ -24,18 +34,21 @@ void InverterInterface<message_queue>::request_enable_hv()
 template <typename message_queue>
 void InverterInterface<message_queue>::request_enable_inverter()
 {
-    MC_setpoints_command mc_setpoints_command{};
+    MC_setpoints_command mc_setpoints_command;
     mc_setpoints_command.set_speed_setpoint(0);
     mc_setpoints_command.set_pos_torque_limit(0);
     mc_setpoints_command.set_neg_torque_limit(0);
+    mc_setpoints_command.set_remove_error(false);
     mc_setpoints_command.set_driver_enable(true);
+    mc_setpoints_command.set_hv_enable(true);
     mc_setpoints_command.set_inverter_enable(true);
+    // Serial.println("requesting enabling inverter");
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
 template <typename message_queue>
 void InverterInterface<message_queue>::disable()
 {
-    MC_setpoints_command mc_setpoints_command{};
+    MC_setpoints_command mc_setpoints_command;
     mc_setpoints_command.set_inverter_enable(false);
     mc_setpoints_command.set_hv_enable(false);
     mc_setpoints_command.set_driver_enable(false);
@@ -48,18 +61,24 @@ void InverterInterface<message_queue>::disable()
 template <typename message_queue>
 void InverterInterface<message_queue>::command_no_torque()
 {
-    MC_setpoints_command mc_setpoints_command{};
-    mc_setpoints_command.set_speed_setpoint(0);
-    mc_setpoints_command.set_pos_torque_limit(0);
+    MC_setpoints_command mc_setpoints_command;
+    mc_setpoints_command.set_speed_setpoint(120);
+    mc_setpoints_command.set_pos_torque_limit(1000);
     mc_setpoints_command.set_neg_torque_limit(0);
-
+    mc_setpoints_command.set_driver_enable(true);
+    mc_setpoints_command.set_hv_enable(true);
+    
+    mc_setpoints_command.set_inverter_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
 
 template <typename message_queue>
 void InverterInterface<message_queue>::handle_command(const InverterCommand &command)
 {
-    MC_setpoints_command mc_setpoints_command{};
+    MC_setpoints_command mc_setpoints_command;
+    mc_setpoints_command.set_driver_enable(true);
+    mc_setpoints_command.set_hv_enable(true);
+    mc_setpoints_command.set_inverter_enable(true);
     // TODO handle the correct conversion to the over the wire data from real-world data type
     mc_setpoints_command.set_speed_setpoint(command.speed_setpoint_rpm);
 
@@ -80,7 +99,7 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
 template <typename message_queue>
 void InverterInterface<message_queue>::command_reset()
 {
-    MC_setpoints_command mc_setpoints_command{};
+    MC_setpoints_command mc_setpoints_command;
     mc_setpoints_command.set_remove_error(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }

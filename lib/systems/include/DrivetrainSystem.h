@@ -63,6 +63,7 @@ public:
 
     bool hv_over_threshold_on_drivetrain();
     void disable();
+    void disable_no_pins();
     bool drivetrain_error_occured();
     void reset_drivetrain();
     void command_drivetrain(const DrivetrainCommand_s &data);

@@ -12,7 +12,7 @@
 #include "MCUInterface.h"
 
 #include <Arduino.h>
-
+#include <Metro.h>
 /* Struct holding torque and speed setpoint */
 struct InverterCommand
 {
@@ -96,7 +96,7 @@ private:
     float torque_current_, magnetizing_current_; // iq and id in A respectively
     float actual_torque_nm_;
     /* write setpoints message to the CAN buffer */
-    void write_cmd_msg_to_queue_(MC_setpoints_command &msg);
+    void write_cmd_msg_to_queue_(MC_setpoints_command msg);
     int16_t speed_;
     uint16_t dc_bus_voltage_;
     bool error_;
@@ -105,6 +105,7 @@ private:
     bool system_ready_;
     message_queue *msg_queue_;
     uint32_t can_id_;
+    Metro timer_can_ = Metro(20);
 };
 
 #include "InverterInterface.tpp"

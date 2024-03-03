@@ -89,7 +89,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         
         // AMS msg receives
         case ID_BMS_STATUS:
-            interfaces.ams_interface->retrieve_status_CAN(millis(), recvd_msg);
+            interfaces.ams_interface->retrieve_status_CAN(curr_millis, recvd_msg);
             break;
         case ID_BMS_TEMPERATURES:
             interfaces.ams_interface->retrieve_temp_CAN(recvd_msg);
