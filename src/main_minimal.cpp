@@ -122,6 +122,28 @@ void setup()
     a1.init();
     a2.init();
     a3.init();
+
+
+
+
+
+    a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_MAX_THRESH - ACCEL1_MIN_THRESH)));
+    a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_MAX_THRESH - ACCEL2_MIN_THRESH)));
+    a1.setChannelScale(MCU15_BRAKE1_CHANNEL, (1.0 / (float)(BRAKE1_MAX_THRESH - BRAKE1_MIN_THRESH)));
+    a1.setChannelScale(MCU15_BRAKE2_CHANNEL, (1.0 / (float)(BRAKE2_MAX_THRESH - BRAKE2_MIN_THRESH)));
+
+
+    // a1.setChannelScale(MCU15_ACCEL1_CHANNEL, 1.0); 
+    // a1.setChannelScale(MCU15_ACCEL2_CHANNEL, 1.0); 
+    // a1.setChannelScale(MCU15_BRAKE1_CHANNEL, 1.0); 
+    // a1.setChannelScale(MCU15_BRAKE2_CHANNEL, 1.0); 
+    a1.setChannelOffset(MCU15_ACCEL1_CHANNEL, -ACCEL1_MIN_THRESH);
+    a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_MIN_THRESH);
+    a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
+    a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_MIN_THRESH);
+
+    // setting scaling of pedals stuffs
+
     Serial.begin(9600);
     // pinMode(LED_BUILTIN, OUTPUT);
     // get latest tick from sys clock
@@ -282,17 +304,17 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // // tick drivetrain system
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
-    // torque_controller_mux.tick(
-    //     current_system_tick,
-    //     drivetrain.get_current_data(),
-    //     pedals_system.getPedalsSystemData(),
-    //     steering_system.getSteeringSystemData(),
-    //     a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
-    //     a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
-    //     (const AnalogConversion_s){},                        // RL load cell reading. TODO: get data from rear load cells
-    //     (const AnalogConversion_s){},                        // RR load cell reading. TODO: get data from rear load cells
-    //     dashboard.getDialMode(),
-    //     dashboard.torqueButtonPressed());
+    torque_controller_mux.tick(
+        current_system_tick,
+        drivetrain.get_current_data(),
+        pedals_system.getPedalsSystemData(),
+        steering_system.getSteeringSystemData(),
+        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
+        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
+        (const AnalogConversion_s){},                        // RL load cell reading. TODO: get data from rear load cells
+        (const AnalogConversion_s){},                        // RR load cell reading. TODO: get data from rear load cells
+        dashboard.getDialMode(),
+        dashboard.torqueButtonPressed());
 }
 
 // /*

@@ -13,18 +13,24 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE:
     {
-        hal_println("tractive system not active state");
+        // hal_println("tractive system not active state");
 
         auto data = pedals_->getPedalsSystemData();
-        hal_println("accel and brake: ");
-        Serial.println(data.accelPercent);
-        Serial.println(data.brakePercent);
-        Serial.println(data.accelImplausible);
-        Serial.println(data.brakeImplausible);
-        Serial.println(data.brakePressed);
-        Serial.println(data.mechBrakeActive);
-        Serial.println(data.brakeAndAccelPressedImplausibility);
-        Serial.println(data.implausibilityExceededMaxDuration);
+        auto mux_test = controller_mux_->getDrivetrainCommand();
+        // hal_println("speeds 1 through 4");
+        // Serial.println(mux_test.speeds_rpm[0]);
+        // Serial.println(mux_test.speeds_rpm[1]);
+        // Serial.println(mux_test.speeds_rpm[2]);
+        // Serial.println(mux_test.speeds_rpm[3]);
+
+        // hal_println("torqeus");
+        // Serial.println(mux_test.torqueSetpoints[0]);
+        // Serial.println(mux_test.torqueSetpoints[1]);
+        // Serial.println(mux_test.torqueSetpoints[2]);
+        // Serial.println(mux_test.torqueSetpoints[3]);
+        // Serial.println(data.mechBrakeActive);
+        // Serial.println(data.brakeAndAccelPressedImplausibility);
+        // Serial.println(data.implausibilityExceededMaxDuration);
         
         
         

@@ -3,30 +3,25 @@
 #include "PhysicalParameters.h"
 
 void TorqueControllerMux::tick(
-        const SysTick_s& tick,
-        const DrivetrainDynamicReport_s& drivetrainData,
-        const PedalsSystemData_s& pedalsData,
-        const SteeringSystemData_s& steeringData,
-        const AnalogConversion_s& loadFLData,
-        const AnalogConversion_s& loadFRData,
-        const AnalogConversion_s& loadRLData,
-        const AnalogConversion_s& loadRRData,
-        DialMode_e dashboardDialMode,
-        bool dashboardTorqueModeButtonPressed
-    )
+    const SysTick_s &tick,
+    const DrivetrainDynamicReport_s &drivetrainData,
+    const PedalsSystemData_s &pedalsData,
+    const SteeringSystemData_s &steeringData,
+    const AnalogConversion_s &loadFLData,
+    const AnalogConversion_s &loadFRData,
+    const AnalogConversion_s &loadRLData,
+    const AnalogConversion_s &loadRRData,
+    DialMode_e dashboardDialMode,
+    bool dashboardTorqueModeButtonPressed)
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
-
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
     {
         // detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms
         if (
-            torqueLimitButtonPressed_ == true
-            && dashboardTorqueModeButtonPressed == false
-            && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS
-        )
+            torqueLimitButtonPressed_ == true && dashboardTorqueModeButtonPressed == false && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS)
         {
             // WOW C++ is ass
             torqueLimit_ = static_cast<TorqueLimit_e>((static_cast<int>(torqueLimit_) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
@@ -52,10 +47,8 @@ void TorqueControllerMux::tick(
             for (int i = 0; i < NUM_MOTORS; i++)
             {
                 float torqueDelta = abs(
-                    controllerCommands_[static_cast<int>(muxMode_)].torqueSetpoints[i]
-                    - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].torqueSetpoints[i]
-                );
-                
+                    controllerCommands_[static_cast<int>(muxMode_)].torqueSetpoints[i] - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].torqueSetpoints[i]);
+
                 if (torqueDelta > MAX_TORQUE_DELTA_FOR_MODE_CHANGE)
                 {
                     torqueDeltaPreventsModeChange = true;

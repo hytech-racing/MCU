@@ -5,8 +5,7 @@
 static inline void TCPowerLimitScaleDown(
     DrivetrainCommand_s &command,
     const DrivetrainDynamicReport_s &drivetrainData,
-    float powerLimit
-)
+    float powerLimit)
 {
     // TODO
     // probably requires AMS interface
@@ -22,12 +21,23 @@ static inline void TCPosTorqueLimit(DrivetrainCommand_s &command, float torqueLi
 
 // TorqueControllerSimple
 
-void TorqueControllerSimple::tick(const SysTick_s& tick, const PedalsSystemData_s& pedalsData, float torqueLimit)
+void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
 {
+
+    Serial.println("pedals data");
+    Serial.println(pedalsData.implausibilityExceededMaxDuration);
+    Serial.println(pedalsData.brakeAndAccelPressedImplausibility);
+    Serial.println(pedalsData.mechBrakeActive);
+    Serial.println(pedalsData.brakePressed);
+    Serial.println(pedalsData.brakeImplausible);
+    Serial.println(pedalsData.accelImplausible);
+    Serial.println(pedalsData.brakePercent);
+    Serial.println(pedalsData.accelPercent);
+
     // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
     {
-        if ((!pedalsData.brakeAndAccelPressedImplausibility) && (pedalsData.implausibilityExceededMaxDuration== false))
+        if ((!pedalsData.brakeAndAccelPressedImplausibility) && (pedalsData.implausibilityExceededMaxDuration == false))
         {
             // Both pedals are not pressed and no implausibility has been detected
             // accelRequest goes between 1.0 and -1.0
@@ -52,8 +62,8 @@ void TorqueControllerSimple::tick(const SysTick_s& tick, const PedalsSystemData_
             else
             {
                 // Negative torque request
-                torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0; 
-                
+                torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+
                 data_.speeds_rpm[FL] = 0.0;
                 data_.speeds_rpm[FR] = 0.0;
                 data_.speeds_rpm[RL] = 0.0;
@@ -81,9 +91,14 @@ void TorqueControllerSimple::tick(const SysTick_s& tick, const PedalsSystemData_
             data_.torqueSetpoints[FR] = 0.0;
             data_.torqueSetpoints[RL] = 0.0;
             data_.torqueSetpoints[RR] = 0.0;
-
         }
 
         writeout_ = data_;
+
+        Serial.println("simple torques");
+        Serial.println(data_.torqueSetpoints[3]);
+        Serial.println(data_.torqueSetpoints[2]);
+        Serial.println(data_.torqueSetpoints[1]);
+        Serial.println(data_.torqueSetpoints[0]);
     }
 }

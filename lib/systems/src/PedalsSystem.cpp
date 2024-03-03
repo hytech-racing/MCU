@@ -63,6 +63,9 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
 
     // check that the pedals are reading within 10% of each other
     // T.4.2.4
+    // Serial.println("pedal 1 and 2 conversion");
+    
+    
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
 
     bool pedalsClamped = (pedalData1.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED || pedalData2.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED);
