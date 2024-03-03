@@ -243,8 +243,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger10) // 10Hz
     {
         // Serial.println("before buzzer");
-        dashboard.soundBuzzer(buzzer.buzzer_is_on());
-        auto memes = dashboard.write();
+        dashboard.tick10(buzzer.buzzer_is_on(),
+                        safety_system.get_software_is_ok(),
+                        main_ecu.bms_ok_is_high(),
+                        main_ecu.get_bots_ok());
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),

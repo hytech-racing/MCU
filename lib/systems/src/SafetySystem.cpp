@@ -22,11 +22,9 @@ void SafetySystem::software_shutdown(const SysTick_s &tick) {
         software_is_ok = false;
     }
     if (software_is_ok) {
-        // dash_->setLED(DashLED_e::AMS_LED, LEDColors_e::ON);
         ams_->set_state_ok_high(true);
     }
     else {
-        // dash_->setLED(DashLED_e::AMS_LED, LEDColors_e::RED);
         ams_->set_state_ok_high(false);
     }
 
