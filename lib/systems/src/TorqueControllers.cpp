@@ -24,74 +24,58 @@ static inline void TCPosTorqueLimit(DrivetrainCommand_s &command, float torqueLi
 void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
 {
 
-    Serial.println("pedals data");
-    Serial.println(pedalsData.implausibilityExceededMaxDuration);
-    Serial.println(pedalsData.brakeAndAccelPressedImplausibility);
-    Serial.println(pedalsData.mechBrakeActive);
-    Serial.println(pedalsData.brakePressed);
-    Serial.println(pedalsData.brakeImplausible);
-    Serial.println(pedalsData.accelImplausible);
-    Serial.println(pedalsData.brakePercent);
-    Serial.println(pedalsData.accelPercent);
+    // Serial.println(pedalsData.implausibilityExceededMaxDuration);
+    // Serial.println(pedalsData.brakeAndAccelPressedImplausibility);
+    // Serial.println(pedalsData.mechBrakeActive);
+    // Serial.println(pedalsData.brakePressed);
+    // Serial.println(pedalsData.brakeImplausible);
+    // Serial.println(pedalsData.accelImplausible);
 
     // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
     {
-        if ((!pedalsData.brakeAndAccelPressedImplausibility) && (pedalsData.implausibilityExceededMaxDuration == false))
+        Serial.println("pedals data");
+        Serial.println(pedalsData.accelPercent);
+        Serial.println(pedalsData.brakePercent);
+
+        // Both pedals are not pressed and no implausibility has been detected
+        // accelRequest goes between 1.0 and -1.0
+        float accelRequest = pedalsData.accelPercent - pedalsData.brakePercent;
+        float torqueRequest;
+
+        if (accelRequest >= 0.0)
         {
-            // Both pedals are not pressed and no implausibility has been detected
-            // accelRequest goes between 1.0 and -1.0
-            float accelRequest = pedalsData.accelPercent - pedalsData.brakePercent;
-            float torqueRequest;
+            // Positive torque request
+            torqueRequest = accelRequest * AMK_MAX_TORQUE;
 
-            if (accelRequest >= 0.0)
-            {
-                // Positive torque request
-                torqueRequest = accelRequest * AMK_MAX_TORQUE;
+            data_.speeds_rpm[FL] = AMK_MAX_RPM;
+            data_.speeds_rpm[FR] = AMK_MAX_RPM;
+            data_.speeds_rpm[RL] = AMK_MAX_RPM;
+            data_.speeds_rpm[RR] = AMK_MAX_RPM;
 
-                data_.speeds_rpm[FL] = AMK_MAX_RPM;
-                data_.speeds_rpm[FR] = AMK_MAX_RPM;
-                data_.speeds_rpm[RL] = AMK_MAX_RPM;
-                data_.speeds_rpm[RR] = AMK_MAX_RPM;
-
-                data_.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
-                data_.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
-                data_.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
-                data_.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
-            }
-            else
-            {
-                // Negative torque request
-                torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
-
-                data_.speeds_rpm[FL] = 0.0;
-                data_.speeds_rpm[FR] = 0.0;
-                data_.speeds_rpm[RL] = 0.0;
-                data_.speeds_rpm[RR] = 0.0;
-
-                data_.torqueSetpoints[FL] = torqueRequest;
-                data_.torqueSetpoints[FR] = torqueRequest;
-                data_.torqueSetpoints[RL] = torqueRequest;
-                data_.torqueSetpoints[RR] = torqueRequest;
-            }
-
-            // Apply the torque limit
-            TCPosTorqueLimit(data_, torqueLimit);
+            data_.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
+            data_.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
+            data_.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
+            data_.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
         }
         else
         {
-            // Both pedals are pressed or an implausibility has been detected
-            // Zero out torque
+            // Negative torque request
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest;
+
             data_.speeds_rpm[FL] = 0.0;
             data_.speeds_rpm[FR] = 0.0;
             data_.speeds_rpm[RL] = 0.0;
             data_.speeds_rpm[RR] = 0.0;
 
-            data_.torqueSetpoints[FL] = 0.0;
-            data_.torqueSetpoints[FR] = 0.0;
-            data_.torqueSetpoints[RL] = 0.0;
-            data_.torqueSetpoints[RR] = 0.0;
+            data_.torqueSetpoints[FL] = torqueRequest;
+            data_.torqueSetpoints[FR] = torqueRequest;
+            data_.torqueSetpoints[RL] = torqueRequest;
+            data_.torqueSetpoints[RR] = torqueRequest;
         }
+
+        // Apply the torque limit
+        TCPosTorqueLimit(data_, torqueLimit);
 
         writeout_ = data_;
 
