@@ -5,7 +5,7 @@
 #include "HyTech_CAN.h"
 
 /* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
-const unsigned long HEARTBEAT_INTERVAL                      = 500;   // milliseconds
+const unsigned long HEARTBEAT_INTERVAL                      = 2000;   // milliseconds
 /* The total pcc threshold is the lowest allowable voltage of the entire pack (in Volts)*/
 const unsigned long PACK_CHARGE_CRIT_TOTAL_THRESHOLD        = 420;
 /* The lowest pcc threshold is the lowest allowable single cell voltage (in 100 microvolts)*/

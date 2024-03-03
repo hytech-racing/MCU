@@ -13,9 +13,12 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
     case CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE:
     {
+        Serial.println("eror in ts not active:");
+        Serial.println(safety_system_->get_software_is_ok());
+        // Serial.println();
         // hal_println("tractive system not active state");
 
-        // auto data = pedals_->getPedalsSystemData();
+        auto data = pedals_->getPedalsSystemData();
         // auto mux_test = controller_mux_->getDrivetrainCommand();
         // hal_println("speeds 1 through 4");
         // Serial.println(mux_test.speeds_rpm[0]);
@@ -30,15 +33,15 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.println(mux_test.torqueSetpoints[3]);
         // Serial.println();
 
-        // Serial.print(data.brakeImplausible);
-        // Serial.print(" ");
-        // Serial.print(data.accelImplausible);
-        // Serial.print(" ");
-        // Serial.print(data.brakeAndAccelPressedImplausibility);
-        // Serial.print(" ");
-        // Serial.print(data.implausibilityExceededMaxDuration);
+        Serial.print(data.brakeImplausible);
+        Serial.print(" ");
+        Serial.print(data.accelImplausible);
+        Serial.print(" ");
+        Serial.print(data.brakeAndAccelPressedImplausibility);
+        Serial.print(" ");
+        Serial.print(data.implausibilityExceededMaxDuration);
 
-        // Serial.println();
+        Serial.println();
 
         // if TS is above HV threshold, move to Tractive System Active
         // drivetrain_->disable_no_pins();
@@ -129,17 +132,20 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
-        {
-            drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
-        }
+        // if (safety_system_->get_software_is_ok())
+        // {
+
+            // drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
+        // }
         // else
         // {
 
-        // drivetrain_->command_drivetrain_debug();
+        //     Serial.println("eror:");
+        //     Serial.println(safety_system_->get_software_is_ok());
+        //     Serial.println(data.implausibilityExceededMaxDuration);
         // }
 
-        // drivetrain_->command_drivetrain_no_torque();
+        drivetrain_->command_drivetrain_debug();
         // hal_println("not calculating torque");
         // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
         // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);

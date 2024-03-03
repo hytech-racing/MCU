@@ -95,7 +95,6 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
     mc_setpoints_command.set_inverter_enable(true);
     // TODO handle the correct conversion to the over the wire data from real-world data type
     mc_setpoints_command.set_speed_setpoint(command.speed_setpoint_rpm);
-
     if (command.torque_setpoint_nm < 0)
     {
         mc_setpoints_command.set_neg_torque_limit(abs(command.torque_setpoint_nm));
