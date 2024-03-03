@@ -75,6 +75,11 @@ bool MCUInterface::imd_ok_is_high()
     return imd_ok_high;
 }
 
+bool MCUInterface::get_bots_ok()
+{
+    return shutdown_b_above_threshold;
+}
+
 /* Send CAN message */
 // MCU status
 void MCUInterface::enqueue_CAN_mcu_status()

@@ -92,6 +92,8 @@ public:
     bool bms_ok_is_high();
     bool imd_ok_is_high();
 
+    bool get_bots_ok();
+
     /* Update MCU_status CAN (main loop) */
     // State machine
     void update_mcu_status_CAN_fsm(int fsm_state);

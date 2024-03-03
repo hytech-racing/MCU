@@ -112,8 +112,14 @@ public:
         @param can_msg is the reference to a new CAN message CAN_message_t
     */
     void read(const CAN_message_t &can_msg);
+
     /* write function will Pack a message based on the current data in the interface and push it to the tx buffer */
     CAN_message_t write();
+
+    /*
+        Tick DashboardInterface at 10hz to gather data and send CAN message
+    */
+    void tick10(bool buzzer, bool ams_ok, bool imd_ok, bool bots);
 
     /*!
         getter for the dashboard's current dial position (drive profile)
