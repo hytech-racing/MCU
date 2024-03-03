@@ -36,8 +36,8 @@ const unsigned long INV_CAN_BAUDRATE    = 500000;
 const unsigned long TELEM_CAN_BAUDRATE  = 500000;
 
 // APPS/Brake pedal parameters
-const int ACCEL1_MIN_THRESH = 2191;
-const int ACCEL2_MIN_THRESH = 1492;
+const int ACCEL1_MIN_THRESH = 2170;
+const int ACCEL2_MIN_THRESH = 1550;
 const int ACCEL1_MAX_THRESH = 3308;
 const int ACCEL2_MAX_THRESH = 399;
 const float APPS_ACTIVATION_PERCENTAGE = 0.1;

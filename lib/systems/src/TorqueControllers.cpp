@@ -24,20 +24,9 @@ static inline void TCPosTorqueLimit(DrivetrainCommand_s &command, float torqueLi
 void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
 {
 
-    // Serial.println(pedalsData.implausibilityExceededMaxDuration);
-    // Serial.println(pedalsData.brakeAndAccelPressedImplausibility);
-    // Serial.println(pedalsData.mechBrakeActive);
-    // Serial.println(pedalsData.brakePressed);
-    // Serial.println(pedalsData.brakeImplausible);
-    // Serial.println(pedalsData.accelImplausible);
-
     // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
     {
-        Serial.println("pedals data");
-        Serial.println(pedalsData.accelPercent);
-        Serial.println(pedalsData.brakePercent);
-
         // Both pedals are not pressed and no implausibility has been detected
         // accelRequest goes between 1.0 and -1.0
         float accelRequest = pedalsData.accelPercent - pedalsData.brakePercent;
@@ -79,10 +68,5 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
 
         writeout_ = data_;
 
-        Serial.println("simple torques");
-        Serial.println(data_.torqueSetpoints[3]);
-        Serial.println(data_.torqueSetpoints[2]);
-        Serial.println(data_.torqueSetpoints[1]);
-        Serial.println(data_.torqueSetpoints[0]);
     }
 }

@@ -60,7 +60,37 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     bool pedal_2_less_than_min = (pedalData2.raw < params.min_sense_2);
     bool pedal_1_greater_than_max = (pedalData1.raw > params.max_sense_1);
     bool pedal_2_greater_than_max = (pedalData2.raw > params.max_sense_2);
+    
+    // Serial.println();
 
+    // Serial.print("pedal1 ");
+    // Serial.print(pedalData1.raw);
+    // Serial.print(" pedal2 ");
+    // Serial.print(pedalData2.raw);
+
+    // Serial.println();
+
+    // if(pedal_1_less_than_min ){
+    //     Serial.print("pedal_1_less_than_min ");
+    //     Serial.print(pedal_1_less_than_min);
+    // }
+    // if(pedal_2_less_than_min ){
+    //     Serial.print(" pedal_2_less_than_min ");
+
+    //     Serial.print(pedal_2_less_than_min);
+    // }
+    // if(pedal_1_greater_than_max ){
+    //     Serial.print(" pedal_1_greater_than_max ");
+
+    //     Serial.print(pedal_1_greater_than_max);
+    // }
+    // if(pedal_2_greater_than_max ){
+    //     Serial.print(" pedal_2_greater_than_max ");
+
+    //     Serial.print(pedal_2_greater_than_max);
+    // }
+
+    // Serial.println();
     // check that the pedals are reading within 10% of each other
     // T.4.2.4
     // Serial.println("pedal 1 and 2 conversion");
@@ -80,6 +110,11 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     }
     else if (sens_not_within_req_percent || pedalsClamped)
     {
+        Serial.println("pedals clamped or sens not within perc");
+        Serial.println(pedalsClamped);
+        Serial.println(sens_not_within_req_percent);
+        Serial.println(pedalData1.conversion);
+        Serial.println(pedalData2.conversion);
         return true;
     }
     else

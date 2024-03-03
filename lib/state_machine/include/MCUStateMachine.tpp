@@ -15,8 +15,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     {
         // hal_println("tractive system not active state");
 
-        auto data = pedals_->getPedalsSystemData();
-        auto mux_test = controller_mux_->getDrivetrainCommand();
+        // auto data = pedals_->getPedalsSystemData();
+        // auto mux_test = controller_mux_->getDrivetrainCommand();
         // hal_println("speeds 1 through 4");
         // Serial.println(mux_test.speeds_rpm[0]);
         // Serial.println(mux_test.speeds_rpm[1]);
@@ -28,10 +28,17 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.println(mux_test.torqueSetpoints[1]);
         // Serial.println(mux_test.torqueSetpoints[2]);
         // Serial.println(mux_test.torqueSetpoints[3]);
-        // Serial.println(data.mechBrakeActive);
-        // Serial.println(data.brakeAndAccelPressedImplausibility);
-        // Serial.println(data.implausibilityExceededMaxDuration);
+        // Serial.println();
+
+        // Serial.print(data.brakeImplausible);
+        // Serial.print(" ");
+        // Serial.print(data.accelImplausible);
+        // Serial.print(" ");
+        // Serial.print(data.brakeAndAccelPressedImplausibility);
+        // Serial.print(" ");
+        // Serial.print(data.implausibilityExceededMaxDuration);
         
+        // Serial.println();
         
         
         // if TS is above HV threshold, move to Tractive System Active

@@ -50,6 +50,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
     mcu_analog_readings_.set_steering_1(static_cast<int16_t>(steer1.angle * FIXED_POINT_PRECISION));
     mcu_analog_readings_.set_steering_2(steer2.raw);
     mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);
+    Serial.println("hall effect current: ");
+    Serial.println(mcu_analog_readings_.get_hall_effect_current());
     mcu_analog_readings_.set_glv_battery_voltage(glv.raw);
 
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
