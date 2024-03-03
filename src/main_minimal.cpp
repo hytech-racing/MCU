@@ -116,7 +116,7 @@ void setup()
 {
     // initialize CAN communication
     init_all_CAN_devices();
-    
+
     SPI.begin();
     // delay(10);
     a1.init();
@@ -182,7 +182,7 @@ void loop()
     // // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
-    hal_println("finished loop");
+    // hal_println("finished loop");
 }
 
 /*
@@ -225,14 +225,14 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         auto memes = dashboard.write();
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
-                  drivetrain.drivetrain_error_occured(),
-                  safety_system.get_software_is_ok(),
-                  static_cast<int>(torque_controller_mux.getTorqueLimit()),
-                  torque_controller_mux.getMaxTorque(),
-                  buzzer.buzzer_is_on(),
-                  pedals_system.getPedalsSystemData(),
-                  ams_interface.pack_charge_is_critical(),
-                  dashboard.launchControlButtonPressed());
+                      drivetrain.drivetrain_error_occured(),
+                      safety_system.get_software_is_ok(),
+                      static_cast<int>(torque_controller_mux.getTorqueLimit()),
+                      torque_controller_mux.getMaxTorque(),
+                      buzzer.buzzer_is_on(),
+                      pedals_system.getPedalsSystemData(),
+                      ams_interface.pack_charge_is_critical(),
+                      dashboard.launchControlButtonPressed());
     }
     if (t.trigger50) // 50Hz
     {
@@ -249,7 +249,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     // // Untriggered
     main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
                                 // DO NOT call in main_ecu.tick()
-
 }
 
 // /*
@@ -259,6 +258,16 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 void tick_all_systems(const SysTick_s &current_system_tick)
 {
     // tick pedals system
+
+    // Serial.println("accel1");
+    // Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+    // Serial.println("accel2");
+    // Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+    // Serial.println("brake1");
+    // Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+    // Serial.println("brake2");
+    // Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+
     pedals_system.tick(
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],

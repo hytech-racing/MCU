@@ -36,16 +36,16 @@ const unsigned long INV_CAN_BAUDRATE    = 500000;
 const unsigned long TELEM_CAN_BAUDRATE  = 500000;
 
 // APPS/Brake pedal parameters
-const int ACCEL1_MIN_THRESH = 100;
-const int ACCEL2_MIN_THRESH = 100;
-const int ACCEL1_MAX_THRESH = 3000;
-const int ACCEL2_MAX_THRESH = 3000;
+const int ACCEL1_MIN_THRESH = 2191;
+const int ACCEL2_MIN_THRESH = 1492;
+const int ACCEL1_MAX_THRESH = 3308;
+const int ACCEL2_MAX_THRESH = 399;
 const float APPS_ACTIVATION_PERCENTAGE = 0.1;
 
-const int BRAKE1_MIN_THRESH = 100;
-const int BRAKE2_MIN_THRESH = 100;
-const int BRAKE1_MAX_THRESH = 3000;
-const int BRAKE2_MAX_THRESH = 3000;
+const int BRAKE1_MIN_THRESH = 2786;
+const int BRAKE2_MIN_THRESH = 921;
+const int BRAKE1_MAX_THRESH = 1223;
+const int BRAKE2_MAX_THRESH = 2488;
 const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
 const float BRAKE_MECH_THRESH = 0.05; // TODO: Determine actual mech threshold
 
