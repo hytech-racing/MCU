@@ -129,18 +129,18 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        // if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
-        // {
-        // drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
-        // }
+        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
+        {
+            drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
+        }
         // else
         // {
 
-        drivetrain_->command_drivetrain_no_torque();
+        // drivetrain_->command_drivetrain_debug();
         // }
 
         // drivetrain_->command_drivetrain_no_torque();
-        hal_println("not calculating torque");
+        // hal_println("not calculating torque");
         // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
         // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
         // hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));

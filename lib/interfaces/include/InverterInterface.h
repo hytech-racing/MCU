@@ -51,6 +51,7 @@ public:
     void request_enable_inverter();
     /* send MC command no torque message*/
     void command_no_torque();
+    void command_debug();
     /* sends torque and rpm setpoints to MC */
     void handle_command(const InverterCommand &command);
     /* send MC command reset message*/

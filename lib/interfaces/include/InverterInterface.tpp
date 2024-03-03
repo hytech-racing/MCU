@@ -10,8 +10,8 @@ void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_comm
         msg.id = can_id_;
         msg.len = sizeof(msg_in);
         test.write(msg.buf);
-        uint8_t buf[sizeof(CAN_message_t)];
-        memmove(buf, &msg, sizeof(CAN_message_t));
+        uint8_t buf[sizeof(msg)];
+        memmove(buf, &msg, sizeof(msg));
         msg_queue_->push_back(buf, sizeof(CAN_message_t));
     }
 }
@@ -59,15 +59,29 @@ void InverterInterface<message_queue>::disable()
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
 template <typename message_queue>
-void InverterInterface<message_queue>::command_no_torque()
+void InverterInterface<message_queue>::command_debug()
 {
     MC_setpoints_command mc_setpoints_command;
+    
     mc_setpoints_command.set_speed_setpoint(120);
     mc_setpoints_command.set_pos_torque_limit(1000);
     mc_setpoints_command.set_neg_torque_limit(0);
     mc_setpoints_command.set_driver_enable(true);
     mc_setpoints_command.set_hv_enable(true);
+    mc_setpoints_command.set_inverter_enable(true);
+    write_cmd_msg_to_queue_(mc_setpoints_command);
+}
+
+template <typename message_queue>
+void InverterInterface<message_queue>::command_no_torque()
+{
+    MC_setpoints_command mc_setpoints_command;
     
+    mc_setpoints_command.set_speed_setpoint(0);
+    mc_setpoints_command.set_pos_torque_limit(0);
+    mc_setpoints_command.set_neg_torque_limit(0);
+    mc_setpoints_command.set_driver_enable(true);
+    mc_setpoints_command.set_hv_enable(true);
     mc_setpoints_command.set_inverter_enable(true);
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }

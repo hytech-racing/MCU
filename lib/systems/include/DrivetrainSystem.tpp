@@ -64,16 +64,29 @@ void DrivetrainSystem<InverterType>::request_enable_()
 // rate limited commands. we will only be commanding one of these at a time.
 /*----------------------------------------------------------------------------------------*/
 template <typename InverterType>
+void DrivetrainSystem<InverterType>::command_drivetrain_debug()
+{
+    // if ((curr_system_millis_ - last_no_torque_cmd_time_) > min_cmd_period_)
+    // {
+        for (auto inv_pointer : inverters_)
+        {
+            inv_pointer->command_debug();
+        }
+        last_no_torque_cmd_time_ = curr_system_millis_;
+    // }
+}
+
+template <typename InverterType>
 void DrivetrainSystem<InverterType>::command_drivetrain_no_torque()
 {
-    if ((curr_system_millis_ - last_no_torque_cmd_time_) > min_cmd_period_)
-    {
+    // if ((curr_system_millis_ - last_no_torque_cmd_time_) > min_cmd_period_)
+    // {
         for (auto inv_pointer : inverters_)
         {
             inv_pointer->command_no_torque();
         }
         last_no_torque_cmd_time_ = curr_system_millis_;
-    }
+    // }
 }
 
 template <typename InverterType>
@@ -114,28 +127,28 @@ void DrivetrainSystem<InverterType>::reset_drivetrain()
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::disable_no_pins()
 {    
-    if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
-    {
+    // if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
+    // {
         for (auto inv_pointer : inverters_)
         {
             inv_pointer->disable();
         }
         last_disable_cmd_time_ = curr_system_millis_;
-    }
+    // }
 
 }
 
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::disable()
 {    
-    if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
-    {
+    // if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
+    // {
         for (auto inv_pointer : inverters_)
         {
             inv_pointer->disable();
         }
         last_disable_cmd_time_ = curr_system_millis_;
-    }
+    // }
 
     mcu_interface_->disable_inverters_pin();
     mcu_interface_->enable_inverters_pin();
@@ -144,8 +157,8 @@ void DrivetrainSystem<InverterType>::disable()
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_s &data)
 {
-    if ((curr_system_millis_ - last_general_cmd_time_) > min_cmd_period_)
-    {
+    // if ((curr_system_millis_ - last_general_cmd_time_) > min_cmd_period_)
+    // {
         int index = 0;
         for (auto inv_pointer : inverters_)
         {
@@ -153,7 +166,7 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
             index++;
         }
         last_general_cmd_time_ = curr_system_millis_;
-    }
+    // }
 }
 /*----------------------------------------------------------------------------------------*/
 // feedback functions
