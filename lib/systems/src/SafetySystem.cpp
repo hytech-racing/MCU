@@ -29,7 +29,6 @@ void SafetySystem::software_shutdown(const SysTick_s &tick) {
     }
 
     // Kick watchdog every software cycle
-    Serial.println("watchdock kicked");
     wd_->kick_watchdog(tick.millis);
 }
 
