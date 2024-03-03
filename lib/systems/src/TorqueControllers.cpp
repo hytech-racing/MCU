@@ -61,7 +61,7 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
         else
         {
             // Negative torque request
-            torqueRequest = MAX_REGEN_TORQUE * accelRequest;
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
 
             data_.speeds_rpm[FL] = 0.0;
             data_.speeds_rpm[FR] = 0.0;
