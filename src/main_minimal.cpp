@@ -145,7 +145,7 @@ void setup()
 
     // setting scaling of pedals stuffs
 
-    Serial.begin(9600);
+    Serial.begin(115200);
     // pinMode(LED_BUILTIN, OUTPUT);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
