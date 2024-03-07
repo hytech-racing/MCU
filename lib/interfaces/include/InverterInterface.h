@@ -106,7 +106,7 @@ private:
     bool system_ready_;
     message_queue *msg_queue_;
     uint32_t can_id_;
-    Metro timer_can_ = Metro(25);
+    Metro timer_can_ = Metro(35);
 };
 
 #include "InverterInterface.tpp"

@@ -140,19 +140,20 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        if (safety_system_->get_software_is_ok())
+        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
         //     // drivetrain_->command_drivetrain_no_torque();
             
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         } else {
-            hal_println("not calculating torque (software ok then pedals implaus)");
-            Serial.println(safety_system_->get_software_is_ok());
-            Serial.println(data.implausibilityExceededMaxDuration);
+            drivetrain_->command_drivetrain_no_torque();
+            // hal_println("not calculating torque (software ok then pedals implaus)");
+            // Serial.println(safety_system_->get_software_is_ok());
+            // Serial.println(data.implausibilityExceededMaxDuration);
 
         }
         // drivetrain_->command_drivetrain_debug();
-
+// 
         // hal_println("not calculating torque");
         // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
         // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);

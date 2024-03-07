@@ -165,7 +165,7 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
             inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
             index++;
         }
-        last_general_cmd_time_ = curr_system_millis_;
+        // last_general_cmd_time_ = curr_system_millis_;
     // }
 }
 /*----------------------------------------------------------------------------------------*/
