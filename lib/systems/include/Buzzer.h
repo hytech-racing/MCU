@@ -15,7 +15,7 @@ public:
     bool done(unsigned long curr_time);
     bool buzzer_is_on() { 
         if(buzzer_on_){
-            Serial.println("buzzer should be on now");
+            // Serial.println("buzzer should be on now");
         }    
         return buzzer_on_; 
     }

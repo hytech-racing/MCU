@@ -18,8 +18,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.println();
         // hal_println("tractive system not active state");
 
-        // auto data = pedals_->getPedalsSystemData();
-        // auto mux_test = controller_mux_->getDrivetrainCommand();
+        auto data = pedals_->getPedalsSystemData();
+        auto mux_test = controller_mux_->getDrivetrainCommand();
         // hal_println("speeds 1 through 4");
         // Serial.println(mux_test.speeds_rpm[0]);
         // Serial.println(mux_test.speeds_rpm[1]);
@@ -32,6 +32,13 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.println(mux_test.torqueSetpoints[2]);
         // Serial.println(mux_test.torqueSetpoints[3]);
         // Serial.println();
+        // Serial.print(data.brakeImplausible);
+        // Serial.print(" ");
+        // Serial.print(data.accelImplausible);
+        // Serial.print(" ");
+        // Serial.print(data.brakeAndAccelPressedImplausibility);
+        // Serial.print(" ");
+        // Serial.print(data.implausibilityExceededMaxDuration);
 
         // Serial.print(data.brakeImplausible);
         // Serial.print(" ");
@@ -77,7 +84,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::ENABLING_INVERTERS:
     {
 
-        hal_println("in enabling inverters state");
+        // hal_println("in enabling inverters state");
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
@@ -108,7 +115,6 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
         if (buzzer_->done(current_millis))
         {
-
             set_state_(CAR_STATE::READY_TO_DRIVE, current_millis);
         }
         break;
@@ -134,7 +140,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
+        if (safety_system_->get_software_is_ok())
         {
         //     // drivetrain_->command_drivetrain_no_torque();
             
@@ -145,6 +151,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             Serial.println(data.implausibilityExceededMaxDuration);
 
         }
+        // drivetrain_->command_drivetrain_debug();
 
         // hal_println("not calculating torque");
         // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
@@ -215,7 +222,7 @@ void MCUStateMachine<DrivetrainSysType>::handle_entry_logic_(CAR_STATE new_state
     {
         // make dashboard sound buzzer
         buzzer_->activate_buzzer(curr_time);
-        hal_println("RTDS enabled");
+        // hal_println("RTDS enabled");
         break;
     }
     case CAR_STATE::READY_TO_DRIVE:

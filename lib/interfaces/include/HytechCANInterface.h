@@ -158,6 +158,7 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
         buffer.pop_front(buf, sizeof(CAN_message_t));
         memmove(&msg, buf, sizeof(msg));
         can_interface->write(msg);
+        // delayMicroseconds(2500);
     }
 }
 

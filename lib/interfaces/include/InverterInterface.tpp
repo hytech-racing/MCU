@@ -94,11 +94,11 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
     mc_setpoints_command.set_hv_enable(true);
     mc_setpoints_command.set_inverter_enable(true);
     // TODO handle the correct conversion to the over the wire data from real-world data type
-    Serial.println("command");
-    Serial.println((int16_t)command.speed_setpoint_rpm);
+    // Serial.println("command");
+    // Serial.println((int16_t)command.speed_setpoint_rpm);
     int16_t torque_cmd = (command.torque_setpoint_nm/21.42)*1000;
     
-    Serial.println(torque_cmd);
+    // Serial.println(torque_cmd);
     mc_setpoints_command.set_speed_setpoint((int16_t)command.speed_setpoint_rpm);
     mc_setpoints_command.set_neg_torque_limit(-abs(torque_cmd));
     mc_setpoints_command.set_pos_torque_limit(abs(torque_cmd));

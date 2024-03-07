@@ -1,5 +1,6 @@
 #include "PedalsSystem.h"
 #include <iostream>
+#include <Arduino.h>
 
 // TODO parameterize percentages in constructor
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
@@ -13,8 +14,18 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
                                                  const AnalogConversion_s &brake2,
                                                  unsigned long curr_time)
 {
+    // Serial.println("accel data");
+    // Serial.println(accel1.raw);
+    // Serial.println(accel2.raw);
+    // Serial.println("brake data");
+    // Serial.println(brake1.raw);
+    // Serial.println(brake2.raw);
     PedalsSystemData_s out;
+    // Serial.println();
+    // Serial.println("checking accel");
+    
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
+    // Serial.println("checking b");
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);
     bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
@@ -56,38 +67,49 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
 {
     // FSAE EV.5.5
     // FSAE T.4.2.10
-    bool pedal_1_less_than_min = (pedalData1.raw < params.min_sense_1);
-    bool pedal_2_less_than_min = (pedalData2.raw < params.min_sense_2);
-    bool pedal_1_greater_than_max = (pedalData1.raw > params.max_sense_1);
-    bool pedal_2_greater_than_max = (pedalData2.raw > params.max_sense_2);
+    bool pedal1_swapped = false;
+    bool pedal2_swapped = false;
+    if(params.min_sense_1 > params.max_sense_1)
+    {
+
+        pedal1_swapped = true;
+        // swap the logic: need to check and see if it is greater than min and less than max
+    }
+    if(params.min_sense_2 > params.max_sense_2)
+    {
+        pedal2_swapped = true;
+        // swap the logic
+    }
+    bool pedal_1_less_than_min = pedal1_swapped ? (pedalData1.raw > params.min_sense_1) : (pedalData1.raw < params.min_sense_1);
+
+    bool pedal_2_less_than_min = pedal2_swapped ? (pedalData2.raw > params.min_sense_2) : (pedalData2.raw < params.min_sense_2);
     
-    // Serial.println();
-
-    // Serial.print("pedal1 ");
-    // Serial.print(pedalData1.raw);
-    // Serial.print(" pedal2 ");
-    // Serial.print(pedalData2.raw);
-
-    // Serial.println();
-
+    bool pedal_1_greater_than_max = pedal1_swapped ? (pedalData1.raw < params.max_sense_1) : (pedalData1.raw > params.max_sense_1);
+    
+    bool pedal_2_greater_than_max = pedal2_swapped ? (pedalData2.raw < params.max_sense_2) : (pedalData2.raw > params.max_sense_2);
+    
     // if(pedal_1_less_than_min ){
     //     Serial.print("pedal_1_less_than_min ");
-    //     Serial.print(pedal_1_less_than_min);
+    //     Serial.println(pedal_1_less_than_min);
+    //     Serial.println(pedalData1.raw);
     // }
     // if(pedal_2_less_than_min ){
     //     Serial.print(" pedal_2_less_than_min ");
 
-    //     Serial.print(pedal_2_less_than_min);
+    //     Serial.println(pedal_2_less_than_min);
+    //     Serial.println(pedalData2.raw);
     // }
     // if(pedal_1_greater_than_max ){
     //     Serial.print(" pedal_1_greater_than_max ");
 
-    //     Serial.print(pedal_1_greater_than_max);
+    //     Serial.println(pedal_1_greater_than_max);
+    //     Serial.println(pedalData1.raw);
     // }
     // if(pedal_2_greater_than_max ){
     //     Serial.print(" pedal_2_greater_than_max ");
 
-    //     Serial.print(pedal_2_greater_than_max);
+    //     Serial.println(pedal_2_greater_than_max);
+    //     Serial.println(pedalData2.raw);
     // }
 
     // Serial.println();
@@ -96,6 +118,10 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     // Serial.println("pedal 1 and 2 conversion");
     
     
+        // Serial.println(pedalsClamped);
+        // Serial.println(sens_not_within_req_percent);
+    // Serial.println(pedalData1.raw);
+    // Serial.println(pedalData2.raw);
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
 
     bool pedalsClamped = (pedalData1.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED || pedalData2.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED);
@@ -110,11 +136,13 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     }
     else if (sens_not_within_req_percent || pedalsClamped)
     {
-        Serial.println("pedals clamped or sens not within perc");
-        Serial.println(pedalsClamped);
-        Serial.println(sens_not_within_req_percent);
-        Serial.println(pedalData1.conversion);
-        Serial.println(pedalData2.conversion);
+        // Serial.println("pedals clamped or sens not within perc");
+        //
+        // Serial.println("pedals data");
+        // // Serial.println(pedalsClamped);
+        // // Serial.println(sens_not_within_req_percent);
+        // Serial.println(pedalData1.raw);
+        // Serial.println(pedalData2.raw);
         return true;
     }
     else
@@ -131,7 +159,9 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
 
     bool accel_pressed = pedal_is_active_(accelPedalData1.conversion, accelPedalData2.conversion, accelParams_.activation_percentage); // .1
     bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, brakeParams_.activation_percentage); // 0.05
-
+    // Serial.println("brake percents:");
+    // Serial.println(brakePedalData1.conversion);
+    // Serial.println(brakePedalData2.conversion);
     return (accel_pressed && brake_pressed);
 }
 
