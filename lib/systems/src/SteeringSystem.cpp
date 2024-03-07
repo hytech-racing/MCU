@@ -1,4 +1,6 @@
 #include "SteeringSystem.h"
+#include <cmath>
+
 
 void SteeringSystem::tick(const SysTick_s &tick, const AnalogConversion_s &secondaryConversion)
 {
