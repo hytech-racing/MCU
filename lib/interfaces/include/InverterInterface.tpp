@@ -5,7 +5,6 @@ void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_comm
 {   
     auto test = msg_in;
     if(timer_can_.check()){
-        // Serial.println(can_id_);
         CAN_message_t msg;
         msg.id = can_id_;
         msg.len = sizeof(msg_in);
@@ -93,9 +92,6 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
     mc_setpoints_command.set_driver_enable(true);
     mc_setpoints_command.set_hv_enable(true);
     mc_setpoints_command.set_inverter_enable(true);
-    // TODO handle the correct conversion to the over the wire data from real-world data type
-    // Serial.println("command");
-    // Serial.println((int16_t)command.speed_setpoint_rpm);
     int16_t torque_cmd = (command.torque_setpoint_nm/21.42)*1000;
     
     // Serial.println(torque_cmd);
@@ -116,7 +112,8 @@ void InverterInterface<message_queue>::command_reset()
 template <typename message_queue>
 void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
 {
-    MC_status mc_status(&msg.buf[0]);
+    MC_status mc_status;
+    mc_status.load(msg.buf);
     system_ready_ = mc_status.get_system_ready();
     quit_dc_on_ = mc_status.get_quit_dc_on();
     quit_inverter_on_ = mc_status.get_quit_inverter_on();
@@ -135,6 +132,11 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     // it is given in units of 0.1% Mn or 0.1% of the max torque 9.8 Nm
     // actual_torque_nm_ = ((float)mc_status.get_actual_torque_value()) / (.001 * 9.8); 
     error_ = mc_status.get_error();
+    if(error_)
+    {
+        Serial.println("got error in dt");
+        Serial.println(can_id_);
+    }
 }
 
 // TODO fill this in with the correct receiving

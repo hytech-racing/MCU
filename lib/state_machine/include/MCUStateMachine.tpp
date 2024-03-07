@@ -51,7 +51,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.println();
 
         // if TS is above HV threshold, move to Tractive System Active
-        // drivetrain_->disable_no_pins();
+        drivetrain_->disable_no_pins();
         if (drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
@@ -68,6 +68,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // hal_println("in tractive system active state");
         // TODO migrate to new pedals system
         auto data = pedals_->getPedalsSystemData();
+        drivetrain_->disable_no_pins();
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
@@ -134,7 +135,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         if (drivetrain_->drivetrain_error_occured())
         {
-            hal_println("drivetrain error");
+            // hal_println("drivetrain error");
 
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
@@ -143,24 +144,13 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
         //     // drivetrain_->command_drivetrain_no_torque();
+
             
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         } else {
             drivetrain_->command_drivetrain_no_torque();
-            // hal_println("not calculating torque (software ok then pedals implaus)");
-            // Serial.println(safety_system_->get_software_is_ok());
-            // Serial.println(data.implausibilityExceededMaxDuration);
-
+            // Serial.println("software not ok?");
         }
-        // drivetrain_->command_drivetrain_debug();
-// 
-        // hal_println("not calculating torque");
-        // hal_printf("no brake implausibility: %d\n", pedals_data.brakeImplausible);
-        // hal_printf("no accel implausibility: %d\n", pedals_data.accelImplausible);
-        // hal_printf("bms heartbeat: %d\n", bms_->heartbeat_check(current_millis));
-        // hal_printf("get bms ok high: %d\n", bms_->ok_high());
-        // hal_printf("get imd ok high: %d\n", imd_->ok_high());
-        // }
 
         break;
     }

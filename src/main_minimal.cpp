@@ -131,13 +131,7 @@ void setup()
     a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_MAX_THRESH - ACCEL1_MIN_THRESH)));
     a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_MAX_THRESH - ACCEL2_MIN_THRESH)));
     a1.setChannelScale(MCU15_BRAKE1_CHANNEL, (1.0 / (float)(BRAKE1_MAX_THRESH - BRAKE1_MIN_THRESH)));
-    a1.setChannelScale(MCU15_BRAKE2_CHANNEL, (1.0 / (float)(BRAKE2_MAX_THRESH - BRAKE2_MIN_THRESH)));
-
-
-    // a1.setChannelScale(MCU15_ACCEL1_CHANNEL, 1.0); 
-    // a1.setChannelScale(MCU15_ACCEL2_CHANNEL, 1.0); 
-    // a1.setChannelScale(MCU15_BRAKE1_CHANNEL, 1.0); 
-    // a1.setChannelScale(MCU15_BRAKE2_CHANNEL, 1.0); 
+    a1.setChannelScale(MCU15_BRAKE2_CHANNEL, (1.0 / (float)(BRAKE2_MAX_THRESH - BRAKE2_MIN_THRESH))); 
     a1.setChannelOffset(MCU15_ACCEL1_CHANNEL, -ACCEL1_MIN_THRESH);
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_MIN_THRESH);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
