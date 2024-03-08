@@ -132,11 +132,11 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     // it is given in units of 0.1% Mn or 0.1% of the max torque 9.8 Nm
     // actual_torque_nm_ = ((float)mc_status.get_actual_torque_value()) / (.001 * 9.8); 
     error_ = mc_status.get_error();
-    if(error_)
-    {
-        Serial.println("got error in dt");
-        Serial.println(can_id_);
-    }
+    // if(error_)
+    // {
+    //     Serial.println("got error in dt");
+    //     Serial.println(can_id_);
+    // }
 }
 
 // TODO fill this in with the correct receiving

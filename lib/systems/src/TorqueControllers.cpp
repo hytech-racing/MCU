@@ -1,6 +1,7 @@
 #include "TorqueControllers.h"
 #include "Utility.h"
 #include <algorithm>
+#include "PhysicalParameters.h"
 
 static inline void TCPowerLimitScaleDown(
     DrivetrainCommand_s &command,
@@ -37,10 +38,14 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
             // Positive torque request
             torqueRequest = accelRequest * AMK_MAX_TORQUE;
 
-            data_.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
-            data_.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;
-            data_.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
-            data_.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
+            // data_.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
+            // data_.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;
+            // data_.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
+            // data_.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
+            data_.speeds_rpm[FL] = AMK_MAX_RPM;
+            data_.speeds_rpm[FR] = AMK_MAX_RPM;
+            data_.speeds_rpm[RL] = AMK_MAX_RPM;
+            data_.speeds_rpm[RR] = AMK_MAX_RPM;
 
             data_.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
             data_.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;

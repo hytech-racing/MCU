@@ -7,8 +7,13 @@
 #include <SteeringSystem.h>
 #include "AnalogSensorsInterface.h"
 #include "DashboardInterface.h"
+#include "PhysicalParameters.h"
 
-const float AMK_MAX_RPM = 20000.0;
+
+// const float AMK_MAX_RPM = 20000;
+// 10MPH LIMIT for lot testing lmao
+const float AMK_MAX_RPM = (4.47 * METERS_PER_SECOND_TO_RPM);
+// const float 
 const float AMK_MAX_TORQUE = 20.0; // TODO: update this with the true value
 const float MAX_REGEN_TORQUE = 10.0;
 

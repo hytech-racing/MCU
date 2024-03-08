@@ -124,14 +124,10 @@ void setup()
     a2.init();
     a3.init();
 
-
-
-
-
     a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_MAX_THRESH - ACCEL1_MIN_THRESH)));
     a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_MAX_THRESH - ACCEL2_MIN_THRESH)));
     a1.setChannelScale(MCU15_BRAKE1_CHANNEL, (1.0 / (float)(BRAKE1_MAX_THRESH - BRAKE1_MIN_THRESH)));
-    a1.setChannelScale(MCU15_BRAKE2_CHANNEL, (1.0 / (float)(BRAKE2_MAX_THRESH - BRAKE2_MIN_THRESH))); 
+    a1.setChannelScale(MCU15_BRAKE2_CHANNEL, (1.0 / (float)(BRAKE2_MAX_THRESH - BRAKE2_MIN_THRESH)));
     a1.setChannelOffset(MCU15_ACCEL1_CHANNEL, -ACCEL1_MIN_THRESH);
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_MIN_THRESH);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
@@ -188,8 +184,11 @@ void loop()
 
     // // inverter procedure before entering state machine
     // // reset inverters
-    drivetrain_reset();
-
+    if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
+    {
+        hal_println("resetting errored drivetrain");
+        drivetrain.reset_drivetrain();
+    }
     // // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
 
@@ -239,9 +238,9 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     {
         // Serial.println("before buzzer");
         dashboard.tick10(buzzer.buzzer_is_on(),
-                        safety_system.get_software_is_ok(),
-                        main_ecu.bms_ok_is_high(),
-                        main_ecu.get_bots_ok());
+                         safety_system.get_software_is_ok(),
+                         main_ecu.bms_ok_is_high(),
+                         main_ecu.get_bots_ok());
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),
@@ -308,21 +307,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
         a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
-        (const AnalogConversion_s){},                        // RL load cell reading. TODO: get data from rear load cells
-        (const AnalogConversion_s){},                        // RR load cell reading. TODO: get data from rear load cells
+        (const AnalogConversion_s){},                    // RL load cell reading. TODO: get data from rear load cells
+        (const AnalogConversion_s){},                    // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueButtonPressed());
-}
-
-// /*
-//     Finish restarting when timer expires
-// */
-void drivetrain_reset()
-{
-    if (dashboard.inverterResetButtonPressed())
-    {
-        drivetrain.enable_drivetrain_reset();
-    }
-    drivetrain.check_reset_condition();
-    drivetrain.reset_drivetrain();
 }

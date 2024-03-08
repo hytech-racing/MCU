@@ -20,6 +20,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         auto data = pedals_->getPedalsSystemData();
         auto mux_test = controller_mux_->getDrivetrainCommand();
+
         // hal_println("speeds 1 through 4");
         // Serial.println(mux_test.speeds_rpm[0]);
         // Serial.println(mux_test.speeds_rpm[1]);
@@ -39,16 +40,12 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.print(data.brakeAndAccelPressedImplausibility);
         // Serial.print(" ");
         // Serial.print(data.implausibilityExceededMaxDuration);
-
-        // Serial.print(data.brakeImplausible);
-        // Serial.print(" ");
-        // Serial.print(data.accelImplausible);
-        // Serial.print(" ");
-        // Serial.print(data.brakeAndAccelPressedImplausibility);
-        // Serial.print(" ");
-        // Serial.print(data.implausibilityExceededMaxDuration);
-
         // Serial.println();
+        // Serial.print(data.accelPercent);
+        // Serial.print(" ");
+        // Serial.print(data.brakePercent);
+        // Serial.print(" ");
+
 
         // if TS is above HV threshold, move to Tractive System Active
         drivetrain_->disable_no_pins();
@@ -135,7 +132,6 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         if (drivetrain_->drivetrain_error_occured())
         {
-            // hal_println("drivetrain error");
 
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
             break;
@@ -143,11 +139,12 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
-        //     // drivetrain_->command_drivetrain_no_torque();
+            //     // drivetrain_->command_drivetrain_no_torque();
 
-            
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
-        } else {
+        }
+        else
+        {
             drivetrain_->command_drivetrain_no_torque();
             // Serial.println("software not ok?");
         }

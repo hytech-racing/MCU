@@ -89,38 +89,25 @@ void DrivetrainSystem<InverterType>::command_drivetrain_no_torque()
     // }
 }
 
-template <typename InverterType>
-void DrivetrainSystem<InverterType>::enable_drivetrain_reset()
-{
-    reset_requested_ = true;
-    last_reset_pressed_time_ = curr_system_millis_;
-}
+
 
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::check_reset_condition()
 {
-    if ((curr_system_millis_ - last_reset_pressed_time_) > reset_interval_)
-    {   
-        reset_requested_ = false;
-    }
+    // if ((curr_system_millis_ - last_reset_pressed_time_) > reset_interval_)
+    // {   
+    reset_requested_ = false;
+    // }
 }
 
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::reset_drivetrain()
 {
-    // Handle reset condition
-    if (reset_requested_)
-    {
-        // Handle CAN send rate
-        if ((curr_system_millis_ - last_reset_cmd_time_) > min_cmd_period_)
+    
+        for (auto inv_pointer : inverters_)
         {
-            for (auto inv_pointer : inverters_)
-            {
-                inv_pointer->command_reset();
-            }
-            last_reset_cmd_time_ = curr_system_millis_;
-        }   
-    }
+            inv_pointer->command_reset();
+        }  
 
 }
 
