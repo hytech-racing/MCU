@@ -48,7 +48,7 @@ struct ADCs
     MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
 } ADC;
 
-OrbisBR10 steering1(STEERING_SERIAL);
+OrbisBR10 steering1(&Serial5);
 
 /*
     INTERFACES
@@ -79,7 +79,7 @@ struct inverters
 SysClock sys_clock;
 SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
-SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
+SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MIN_THRESH, ACCEL1_MAX_THRESH, ACCEL2_MAX_THRESH, APPS_ACTIVATION_PERCENTAGE},
                            {BRAKE1_MIN_THRESH, BRAKE2_MIN_THRESH, BRAKE1_MAX_THRESH, BRAKE2_MAX_THRESH, BRKAE_ACTIVATION_PERCENTAGE},
                            BRAKE_MECH_THRESH);
@@ -117,6 +117,22 @@ void setup()
 {
     // initialize CAN communication
     init_all_CAN_devices();
+
+    SPI.begin();
+    a1.init();
+    a2.init();
+    a3.init();
+
+    a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_MAX_THRESH - ACCEL1_MIN_THRESH)));
+    a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_MAX_THRESH - ACCEL2_MIN_THRESH)));
+    a1.setChannelScale(MCU15_BRAKE1_CHANNEL, (1.0 / (float)(BRAKE1_MAX_THRESH - BRAKE1_MIN_THRESH)));
+    a1.setChannelScale(MCU15_BRAKE2_CHANNEL, (1.0 / (float)(BRAKE2_MAX_THRESH - BRAKE2_MIN_THRESH)));
+    a1.setChannelOffset(MCU15_ACCEL1_CHANNEL, -ACCEL1_MIN_THRESH);
+    a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_MIN_THRESH);
+    a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
+    a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_MIN_THRESH);
+
+    Serial.begin(115200);
     
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
@@ -134,9 +150,6 @@ void setup()
     */
 
     safety_system.init();
-
-    // present action for 1 second
-    delay(SETUP_PRESENT_ACTION_INTERVAL);
 
     // Drivetrain set all inverters disabled
     drivetrain.disable();   // write inv_en and inv_24V_en low: writing high in previous code though, should double check 
@@ -162,9 +175,13 @@ void loop()
     // tick systems
     tick_all_systems(curr_tick);
 
-    // inverter procedure before entering state machine
-    // reset inverters
-    // drivetrain_reset();
+    // // inverter procedure before entering state machine
+    // // reset inverters
+    if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
+    {
+        hal_println("resetting errored drivetrain");
+        drivetrain.reset_drivetrain();
+    }
 
     // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
@@ -280,15 +297,4 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueButtonPressed());
 }
 
-/*
-    Finish restarting when timer expires
-*/
-void drivetrain_reset()
-{
-    if (dashboard.inverterResetButtonPressed())
-    {
-        drivetrain.enable_drivetrain_reset();
-    }
-    drivetrain.check_reset_condition();
-    drivetrain.reset_drivetrain();
-}
+

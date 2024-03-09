@@ -45,7 +45,7 @@ MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
 MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS);
 MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
 
-OrbisBR10 steering1(STEERING_SERIAL);
+OrbisBR10 steering1(&Serial5);
 
 // /*
 //     INTERFACES
@@ -84,7 +84,6 @@ PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MIN_THRESH, ACCEL1_MAX_THR
                            BRAKE_MECH_THRESH);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-// DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux;
 
 /* Declare state machine */
@@ -96,22 +95,22 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 
 CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface};
 
-// /*
-//     FUNCTION DEFINITIONS
-// */
+/*
+    FUNCTION DEFINITIONS
+*/
 
-// /* Initialize CAN communication */
+/* Initialize CAN communication */
 void init_all_CAN_devices();
-// /* Tick interfaces */
+/* Tick interfaces */
 void tick_all_interfaces(const SysTick_s &current_system_tick);
-// /* Tick all systems */
+/* Tick all systems */
 void tick_all_systems(const SysTick_s &current_system_tick);
-// /* Reset inverters */
+/* Reset inverters */
 void drivetrain_reset();
 
-// /*
-//     SETUP
-// */
+/*
+    SETUP
+*/
 
 void setup()
 {
@@ -119,7 +118,6 @@ void setup()
     init_all_CAN_devices();
 
     SPI.begin();
-    // delay(10);
     a1.init();
     a2.init();
     a3.init();
@@ -133,10 +131,8 @@ void setup()
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_MIN_THRESH);
 
-    // setting scaling of pedals stuffs
-
     Serial.begin(115200);
-    // pinMode(LED_BUILTIN, OUTPUT);
+
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -154,9 +150,6 @@ void setup()
 
     safety_system.init();
 
-    // present action for 1 second
-    // delay(SETUP_PRESENT_ACTION_INTERVAL);
-
     // Drivetrain set all inverters disabled
     drivetrain.disable(); // write inv_en and inv_24V_en low: writing high in previous code though, should double check
     // would an error list be good for debugging? i.e. which inverter has error
@@ -168,18 +161,17 @@ void setup()
 
 void loop()
 {
-    // digitalWrite(LED_BUILTIN, HIGH);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    // // process received CAN messages
+    // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
     process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
 
-    // // tick interfaces
+    // tick interfaces
     tick_all_interfaces(curr_tick);
 
-    // // tick systems
+    // tick systems
     tick_all_systems(curr_tick);
 
     // // inverter procedure before entering state machine
@@ -189,16 +181,15 @@ void loop()
         hal_println("resetting errored drivetrain");
         drivetrain.reset_drivetrain();
     }
-    // // tick state machine
+    // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
 
-    // // tick safety system
+    // tick safety system
     safety_system.software_shutdown(curr_tick);
 
-    // // send CAN
+    // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
-    // hal_println("finished loop");
 }
 
 /*
@@ -226,9 +217,9 @@ void init_all_CAN_devices()
     TELEM_CAN.mailboxStatus();
 }
 
-// /*
-//     TICK INTERFACES
-// */
+/*
+    TICK INTERFACES
+*/
 
 void tick_all_interfaces(const SysTick_s &current_system_tick)
 {

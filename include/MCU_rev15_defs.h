@@ -5,11 +5,9 @@
 const int ADC1_CS = 34;
 const int ADC2_CS = 33;
 const int ADC3_CS = 29;
-const int SOFTWARE_OK       = 28;
+const int SOFTWARE_OK       = 8;
 const int WATCHDOG_INPUT    = 32;
 
-// serial def
-HardwareSerial* STEERING_SERIAL = &Serial5;
 
 // ADC1 channel defs
 const int MCU15_ACCEL1_CHANNEL          = 2;
