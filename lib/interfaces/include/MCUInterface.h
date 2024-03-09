@@ -7,11 +7,12 @@
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
 
-const int DEFAULT_BMS_OK_READ         = 5;      // SHDN_D_READ
-const int DEFAULT_IMD_OK_READ         = 4;      // SHDN_C_READ
+const int DEFAULT_BMS_OK_READ         = 17;      // SHDN_D_READ
+const int DEFAULT_IMD_OK_READ         = 10;      // SHDN_C_READ
 const int DEFAULT_BSPD_OK_READ        = 39;      // SHDN_E_READ
-const int DEFAULT_SOFTWARE_OK_READ    = 25;     // SHDN_F_READ Watchdog Combined
-const int DEFAULT_BOTS_OK_READ        = 3;      // SHDN_B_READ
+const int DEFAULT_SOFTWARE_OK_READ    = 25;      // SHDN_F_READ Watchdog Combined
+const int DEFAULT_BOTS_OK_READ        = 24;      // SHDN_B_READ
+const int DEFAULT_BRB_OK_READ         = 26;      // SHDN_G_READ
 const int DEFAULT_BRAKE_LIGHT_CTRL    = 6;
 const int DEFAULT_INVERTER_ENABLE     = 9;
 const int DEFAULT_INVERTER_24V_ENABLE = 7;
@@ -25,6 +26,7 @@ struct MainECUHardwareReadPins
     int pin_bspd_ok_read;
     int pin_software_ok_read;
     int pin_bots_ok_read;
+    int pin_brb_ok_read;
     // brake light pin
     int pin_brake_light_ctrl;
     // inverter enable pins
@@ -33,7 +35,7 @@ struct MainECUHardwareReadPins
 };
 
 static const MainECUHardwareReadPins DEFAULT_PINS = {DEFAULT_BMS_OK_READ,DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ,
-                                                     DEFAULT_BOTS_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_ENABLE, DEFAULT_INVERTER_24V_ENABLE};
+                                                     DEFAULT_BOTS_OK_READ, DEFAULT_BRB_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_ENABLE, DEFAULT_INVERTER_24V_ENABLE};
 
 class MCUInterface
 {
@@ -50,11 +52,13 @@ private:
     bool imd_ok_high;
     bool bspd_ok_high;
     bool software_ok_high;
-    /* Shutdown circuit voltage */
-    bool shutdown_b_above_threshold;
-    bool shutdown_c_above_threshold;
-    bool shutdown_d_above_threshold;
-    bool shutdown_e_above_threshold;
+    bool brb_ok_high;
+    /* Shutdown circuit voltage */ 
+    bool shutdown_b_above_threshold; // BOTS
+    bool shutdown_c_above_threshold; // IMD
+    bool shutdown_d_above_threshold; // AMS
+    bool shutdown_e_above_threshold; // BSPD
+    bool shutdown_g_above_threshold; // BRB
 
     /* Private utility functions */
     // Read all shutdown signals on ECU
@@ -91,6 +95,7 @@ public:
     /* Feed to state machine */
     bool bms_ok_is_high();
     bool imd_ok_is_high();
+    bool brb_ok_is_high();
 
     bool get_bots_ok();
 

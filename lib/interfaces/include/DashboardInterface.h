@@ -4,6 +4,8 @@
 #include "MessageQueueDefine.h"
 #include "FlexCAN_T4.h"
 #include "hytech.h"
+#include "MCUInterface.h"
+#include "MCU_status.h"
 
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum class DialMode_e
@@ -40,8 +42,8 @@ enum class DashLED_e
     INERTIA_LED,
     GLV_LED,
     CRIT_CHARGE_LED,
-    START_LED,
-    MC_ERROR_LED,
+    START_LED, /// from state machine. When READY_TO_DRIVE, set START_LED to true. See what else uses READY_TO_DRIVE so that you can update START_LED.
+    MC_ERROR_LED, /// from DrivetrainSystem.cpp, get drivetrain_error_occurred()
     IMD_LED,
     AMS_LED,
 };
@@ -119,7 +121,7 @@ public:
     /*
         Tick DashboardInterface at 10hz to gather data and send CAN message
     */
-    void tick10(bool buzzer, bool ams_ok, bool imd_ok, bool bots);
+    void tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error);
 
     /*!
         getter for the dashboard's current dial position (drive profile)

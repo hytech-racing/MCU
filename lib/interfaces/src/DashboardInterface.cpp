@@ -66,19 +66,24 @@ void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
     _data.LED[static_cast<uint8_t>(led)] = static_cast<uint8_t>(color);
 }
 
-void DashboardInterface::tick10(bool buzzer, bool ams_ok, bool imd_ok, bool bots)
+void DashboardInterface::tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error)
 {
     
     soundBuzzer(buzzer);
 
-    if (ams_ok) setLED(DashLED_e::AMS_LED, LEDColors_e::ON);
-    else setLED(DashLED_e::AMS_LED, LEDColors_e::RED);
+    // Serial.printf("mcu->bms_ok_is_high() is %d\n", mcu->bms_ok_is_high());
+    // Serial.printf("mcu->imd_ok_is_high() is %d\n", mcu->imd_ok_is_high());
+    // Serial.printf("mcu->get_bots_ok() is %d\n", mcu->get_bots_ok());
+    // Serial.printf("car_state == int(MCU_STATE::READY_TO_DRIVE) is %d\n", car_state == int(MCU_STATE::READY_TO_DRIVE));
+    // Serial.printf("!drivetrain_error is %d\n\n", !drivetrain_error);
+    // Serial.printf("!drivetrain_error is %d\n\n", !drivetrain_error);
 
-    if (imd_ok) setLED(DashLED_e::IMD_LED, LEDColors_e::ON);
-    else setLED(DashLED_e::IMD_LED, LEDColors_e::RED);
-
-    if (bots) setLED(DashLED_e::BOTS_LED, LEDColors_e::ON);
-    else setLED(DashLED_e::BOTS_LED, LEDColors_e::RED);
+    setLED(DashLED_e::AMS_LED, mcu->bms_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
+    setLED(DashLED_e::IMD_LED, mcu->imd_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
+    setLED(DashLED_e::BOTS_LED, mcu->get_bots_ok() ? LEDColors_e::ON : LEDColors_e::RED);
+    setLED(DashLED_e::START_LED, car_state == int(MCU_STATE::READY_TO_DRIVE) ? LEDColors_e::ON : LEDColors_e::RED);
+    setLED(DashLED_e::MC_ERROR_LED, !drivetrain_error ? LEDColors_e::ON : LEDColors_e::RED);
+    setLED(DashLED_e::COCKPIT_BRB_LED, mcu->brb_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
 
     write();
 }

@@ -13,6 +13,7 @@ void MCUInterface::init()
     // Set initial shutdown circuit readings
     bms_ok_high = false;
     imd_ok_high = false;
+    brb_ok_high = false;
 
     // Enable inverters (?)
     // Should be called from drivetrain
@@ -34,6 +35,8 @@ void MCUInterface::measure_shutdown_circuit_input()
     imd_ok_high = digitalRead(pins_.pin_imd_ok_read);
     bspd_ok_high = digitalRead(pins_.pin_bspd_ok_read);
     software_ok_high = digitalRead(pins_.pin_software_ok_read);
+    brb_ok_high = digitalRead(pins_.pin_brb_ok_read);
+
 }
 
 /* Measure shutdown circuits' voltages */
@@ -44,6 +47,7 @@ void MCUInterface::measure_shutdown_circuit_voltage()
     shutdown_c_above_threshold = digitalRead(pins_.pin_imd_ok_read);
     shutdown_d_above_threshold = digitalRead(pins_.pin_bms_ok_read);
     shutdown_e_above_threshold = digitalRead(pins_.pin_bspd_ok_read);
+    shutdown_g_above_threshold = digitalRead(pins_.pin_brb_ok_read);
 }
 
 /* Write brake light */
@@ -73,6 +77,12 @@ bool MCUInterface::bms_ok_is_high()
 bool MCUInterface::imd_ok_is_high()
 {
     return imd_ok_high;
+}
+
+// BRB
+bool MCUInterface::brb_ok_is_high()
+{
+    return brb_ok_high;
 }
 
 bool MCUInterface::get_bots_ok()
@@ -109,6 +119,7 @@ void MCUInterface::update_mcu_status_CAN()
     mcu_status_.set_shutdown_c_above_threshold(shutdown_c_above_threshold);
     mcu_status_.set_shutdown_d_above_threshold(shutdown_d_above_threshold);
     mcu_status_.set_shutdown_e_above_threshold(shutdown_e_above_threshold);
+    
 }
 
 // Main loop
