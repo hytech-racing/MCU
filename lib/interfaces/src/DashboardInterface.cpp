@@ -32,7 +32,6 @@ CAN_message_t DashboardInterface::write()
     dash_mcu_state.drive_buzzer = _data.buzzer_cmd;
 
     // TODO: use logic as to not write data for LEDs that have not changed
-    dash_mcu_state.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
     dash_mcu_state.launch_control_led = _data.LED[static_cast<int>(DashLED_e::LAUNCH_CONTROL_LED)];
     dash_mcu_state.mode_led = _data.LED[static_cast<int>(DashLED_e::MODE_LED)];
     dash_mcu_state.mechanical_brake_led = _data.LED[static_cast<int>(DashLED_e::MECH_BRAKE_LED)];
@@ -40,9 +39,17 @@ CAN_message_t DashboardInterface::write()
     dash_mcu_state.inertia_status_led = _data.LED[static_cast<int>(DashLED_e::INERTIA_LED)];
     dash_mcu_state.start_status_led = _data.LED[static_cast<int>(DashLED_e::START_LED)];
     dash_mcu_state.motor_controller_error_led = _data.LED[static_cast<int>(DashLED_e::MC_ERROR_LED)];
+
+    dash_mcu_state.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
     dash_mcu_state.imd_led = _data.LED[static_cast<int>(DashLED_e::IMD_LED)];
     dash_mcu_state.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
 
+    // Make sure IMD and AMS stay green if it is only BOTS that is tripped
+    if (dash_mcu_state.bots_led == int(LEDColors_e::RED)) {
+        dash_mcu_state.imd_led = int(LEDColors_e::ON);
+        dash_mcu_state.ams_led = int(LEDColors_e::ON);
+    }
+    
     dash_mcu_state.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
     dash_mcu_state.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
     
