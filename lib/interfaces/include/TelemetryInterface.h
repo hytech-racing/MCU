@@ -74,10 +74,10 @@ public:
         const AnalogConversion_s &glv
     );
     void update_drivetrain_rpms_CAN_msg(
-        InvInt_t fl, 
-        InvInt_t fr, 
-        InvInt_t rl, 
-        InvInt_t rr
+        InvInt_t* fl, 
+        InvInt_t* fr, 
+        InvInt_t* rl, 
+        InvInt_t* rr
     );
 
     /* Enqueue outbound telemetry CAN messages */    
@@ -91,14 +91,18 @@ public:
     void enqueue_CAN(T can_msg, uint32_t  id);
 
     template<typename U>
-    void enqueue_CAN(U* structure, uint32_t (* pack_function)(U*, uint8_t*, uint8_t*, uint8_t*));
+    void enqueue_new_CAN(U* structure, uint32_t (* pack_function)(U*, uint8_t*, uint8_t*, uint8_t*));
 
     /* Tick at 50Hz to send CAN */
     void tick(
         const AnalogConversionPacket_s<8> &adc1,
         const AnalogConversionPacket_s<4> &adc2,
         const AnalogConversionPacket_s<4> &adc3,
-        const SteeringEncoderConversion_s &encoder
+        const SteeringEncoderConversion_s &encoder,
+        const InvInt_t* fl,
+        const InvInt_t* fr,
+        const InvInt_t* rl,
+        const InvInt_t* rr
     );
 
 };

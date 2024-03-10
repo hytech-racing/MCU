@@ -247,7 +247,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     }
     if (t.trigger50) // 50Hz
     {
-        telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert());
+        telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert(), &inv.fl, &inv.fr, &inv.rl, &inv.rr);
     }
 
     if (t.trigger100) // 100Hz
