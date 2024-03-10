@@ -8,6 +8,10 @@
 #include "MessageQueueDefine.h"
 #include "AnalogSensorsInterface.h"
 #include "SteeringEncoderInterface.h"
+#include "hytech.h"
+#include "InverterInterface.h"
+
+using InvInt_t = InverterInterface<CANBufferType>;
 
 const int FIXED_POINT_PRECISION = 10000;
 
@@ -69,6 +73,12 @@ public:
         const AnalogConversion_s &reference,
         const AnalogConversion_s &glv
     );
+    void update_drivetrain_rpms_CAN_msg(
+        InvInt_t fl, 
+        InvInt_t fr, 
+        InvInt_t rl, 
+        InvInt_t rr
+    );
 
     /* Enqueue outbound telemetry CAN messages */    
     // void enqueue_CAN_mcu_pedal_readings();
@@ -79,6 +89,9 @@ public:
 
     template<typename T>
     void enqueue_CAN(T can_msg, uint32_t  id);
+
+    template<typename U>
+    void enqueue_CAN(U* structure, uint32_t (* pack_function)(U*, uint8_t*, uint8_t*, uint8_t*));
 
     /* Tick at 50Hz to send CAN */
     void tick(

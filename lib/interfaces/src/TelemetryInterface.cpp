@@ -57,6 +57,16 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
 
+void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t fl, InvInt_t fr, InvInt_t rl, InvInt_t rr) {
+    DRIVETRAIN_RPMS_TELEM_t rpms;
+    rpms.fr_motor_rpm = fr.get_speed();
+    rpms.fl_motor_rpm = fl.get_speed();
+    rpms.rl_motor_rpm = rl.get_speed();
+    rpms.rr_motor_rpm = rr.get_speed();
+    
+    enqueue_CAN<DRIVETRAIN_RPMS_TELEM_t>(&rpms, &Pack_DRIVETRAIN_RPMS_TELEM_hytech);
+}
+
 /* Send CAN messages */
 template<typename T>
 void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
@@ -71,6 +81,17 @@ void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 
 }
+
+/* Send inverter CAN messages with new CAN library */
+template<typename U>
+void TelemetryInterface::enqueue_CAN(U* structure, uint32_t (* pack_function)(U*, uint8_t*, uint8_t*, uint8_t*)) {
+    CAN_message_t can_msg;
+    can_msg.id = pack_function(structure, can_msg.buf, &can_msg.len, (uint8_t*) can_msg.flags.extended);
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &can_msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
+}
+
 
 /* Tick SysClock */
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
