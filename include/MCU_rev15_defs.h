@@ -26,7 +26,7 @@ const int MCU15_FR_LOADCELL_CHANNEL     = 2;
 
 // Time intervals
 const unsigned long SETUP_PRESENT_ACTION_INTERVAL       = 1000;
-const unsigned long BUZZER_ON_INTERVAL                  = 1000;
+const unsigned long BUZZER_ON_INTERVAL                  = 2000;
 const unsigned long INVERTER_ENABLING_TIMEOUT_INTERVAL  = 5000;
 
 // Communication speeds
