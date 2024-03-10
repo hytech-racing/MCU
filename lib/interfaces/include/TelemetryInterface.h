@@ -79,6 +79,12 @@ public:
         InvInt_t* rl, 
         InvInt_t* rr
     );
+    void update_drivetrain_err_status_CAN_msg(
+        InvInt_t* fl, 
+        InvInt_t* fr, 
+        InvInt_t* rl, 
+        InvInt_t* rr
+    );
 
     /* Enqueue outbound telemetry CAN messages */    
     // void enqueue_CAN_mcu_pedal_readings();

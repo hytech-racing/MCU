@@ -152,4 +152,11 @@ void InverterInterface<message_queue>::receive_temp_msg(CAN_message_t &msg)
 {
     MC_temps mc_temps(&msg.buf[0]);
     // TODO use this (not currently being used in old main)
+    diagnostic_number_ = mc_temps.get_diagnostic_number();
+}
+
+template <typename message_queue>
+uint16_t InverterInterface<message_queue>::get_error_status()
+{
+    return diagnostic_number_;
 }

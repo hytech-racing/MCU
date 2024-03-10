@@ -91,6 +91,7 @@ public:
     float get_torque_current() {return torque_current_;}
     float get_mag_current() {return magnetizing_current_;}
     float get_actual_torque() {return actual_torque_nm_; }
+    uint16_t get_error_status();
 
 private:
     float id110_val_;                            // for scaling to proper iq and id vals
@@ -107,6 +108,7 @@ private:
     message_queue *msg_queue_;
     uint32_t can_id_;
     Metro timer_can_ = Metro(20);
+    uint16_t diagnostic_number_;
 };
 
 #include "InverterInterface.tpp"

@@ -59,12 +59,25 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
 
 void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr) {
     DRIVETRAIN_RPMS_TELEM_t rpms;
-    rpms.fr_motor_rpm = fr->get_speed();
     rpms.fl_motor_rpm = fl->get_speed();
+    rpms.fr_motor_rpm = fr->get_speed();
     rpms.rl_motor_rpm = rl->get_speed();
     rpms.rr_motor_rpm = rr->get_speed();
     
     enqueue_new_CAN<DRIVETRAIN_RPMS_TELEM_t>(&rpms, &Pack_DRIVETRAIN_RPMS_TELEM_hytech);
+}
+
+void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr) {
+
+    if (1) {
+        DRIVETRAIN_ERR_STATUS_TELEM_t errors;
+        errors.mc1_diagnostic_number = fl->get_error_status();
+        errors.mc2_diagnostic_number = fr->get_error_status();
+        errors.mc3_diagnostic_number = rl->get_error_status();
+        errors.mc4_diagnostic_number = rr->get_error_status();
+        enqueue_new_CAN<DRIVETRAIN_ERR_STATUS_TELEM_t>(&errors, &Pack_DRIVETRAIN_ERR_STATUS_TELEM_hytech);
+    }
+    
 }
 
 /* Send CAN messages */
@@ -125,6 +138,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                                   adc3.conversions[channels_.pots_fr_channel]);
 
     update_drivetrain_rpms_CAN_msg(fl, fr, rl, rr);
+    update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
     // enqueue_CAN_mcu_front_potentiometers();
     // enqueue_CAN_mcu_rear_potentiometers();
 
