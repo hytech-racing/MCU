@@ -111,7 +111,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         drivetrain_->command_drivetrain_no_torque();
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
-        if (buzzer_->done(current_millis))
+        if (buzzer_->done(current_millis) && !dashboard_->checkBuzzer())
         {
             set_state_(CAR_STATE::READY_TO_DRIVE, current_millis);
         }
