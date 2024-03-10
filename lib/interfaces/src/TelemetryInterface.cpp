@@ -57,7 +57,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
 
-void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr) {
+void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
+{
     DRIVETRAIN_RPMS_TELEM_t rpms;
     rpms.fl_motor_rpm = fl->get_speed();
     rpms.fr_motor_rpm = fr->get_speed();
@@ -67,9 +68,10 @@ void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t* fl, InvInt_t* 
     enqueue_new_CAN<DRIVETRAIN_RPMS_TELEM_t>(&rpms, &Pack_DRIVETRAIN_RPMS_TELEM_hytech);
 }
 
-void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr) {
+void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
+{
 
-    if (1) {
+    if (1) { // We should only write error status if some error has occurred, but for now, this is just an if(1)
         DRIVETRAIN_ERR_STATUS_TELEM_t errors;
         errors.mc1_diagnostic_number = fl->get_error_status();
         errors.mc2_diagnostic_number = fr->get_error_status();
@@ -78,6 +80,49 @@ void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvI
         enqueue_new_CAN<DRIVETRAIN_ERR_STATUS_TELEM_t>(&errors, &Pack_DRIVETRAIN_ERR_STATUS_TELEM_hytech);
     }
     
+}
+//Pack_DRIVETRAIN_STATUS_TELEM_hytech
+void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
+{
+    DRIVETRAIN_STATUS_TELEM_t status;
+
+    status.mc1_dc_on = fl->get_dc_on();
+    status.mc1_derating_on = fl->get_derating_on();
+    status.mc1_error = fl->get_error();
+    status.mc1_inverter_on = fl->get_inverter_on();
+    status.mc1_quit_dc = fl->get_quit_dc_on();
+    status.mc1_quit_inverter_on = fl->get_quit_inverter_on();
+    status.mc1_system_ready = fl->inverter_system_ready();
+    status.mc1_warning = fl->get_warning();
+
+    status.mc2_dc_on = fr->get_dc_on();
+    status.mc2_derating_on = fr->get_derating_on();
+    status.mc2_error = fr->get_error();
+    status.mc2_inverter_on = fr->get_inverter_on();
+    status.mc2_quit_dc = fr->get_quit_dc_on();
+    status.mc2_quit_inverter_on = fr->get_quit_inverter_on();
+    status.mc2_system_ready = fr->inverter_system_ready();
+    status.mc2_warning = fr->get_warning();
+
+    status.mc3_dc_on = rl->get_dc_on();
+    status.mc3_derating_on = rl->get_derating_on();
+    status.mc3_error = rl->get_error();
+    status.mc3_inverter_on = rl->get_inverter_on();
+    status.mc3_quit_dc = rl->get_quit_dc_on();
+    status.mc3_quit_inverter_on = rl->get_quit_inverter_on();
+    status.mc3_system_ready = rl->inverter_system_ready();
+    status.mc3_warning = rl->get_warning();
+
+    status.mc4_dc_on = rr->get_dc_on();
+    status.mc4_derating_on = rr->get_derating_on();
+    status.mc4_error = rr->get_error();
+    status.mc4_inverter_on = rr->get_inverter_on();
+    status.mc4_quit_dc = rr->get_quit_dc_on();
+    status.mc4_quit_inverter_on = rr->get_quit_inverter_on();
+    status.mc4_system_ready = rr->inverter_system_ready();
+    status.mc4_warning = rr->get_warning();
+    
+    enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }
 
 /* Send CAN messages */
@@ -139,6 +184,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
 
     update_drivetrain_rpms_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
+    update_drivetrain_status_telem_CAN_msg(fl, fr, rl, rr);
     // enqueue_CAN_mcu_front_potentiometers();
     // enqueue_CAN_mcu_rear_potentiometers();
 

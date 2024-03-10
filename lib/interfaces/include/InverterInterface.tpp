@@ -114,9 +114,16 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
 {
     MC_status mc_status;
     mc_status.load(msg.buf);
+
     system_ready_ = mc_status.get_system_ready();
+    error_ = mc_status.get_error();
+    warning_ = mc_status.get_warning();
     quit_dc_on_ = mc_status.get_quit_dc_on();
+    dc_on_ = mc_status.get_dc_on();
     quit_inverter_on_ = mc_status.get_quit_inverter_on();
+    inverter_on_ = mc_status.get_inverter_on();
+    derating_on_ = mc_status.get_derating_on();
+
     speed_ = mc_status.get_speed();
 
     // TODO FIXME see 8.2.3 Units on page 83 of
@@ -131,7 +138,7 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     // https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/pdk_205481_kw26-s5-fse-4q_en_.pdf#page=75
     // it is given in units of 0.1% Mn or 0.1% of the max torque 9.8 Nm
     // actual_torque_nm_ = ((float)mc_status.get_actual_torque_value()) / (.001 * 9.8); 
-    error_ = mc_status.get_error();
+    
     // if(error_)
     // {
     //     Serial.println("got error in dt");

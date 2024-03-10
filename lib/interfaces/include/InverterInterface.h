@@ -57,28 +57,59 @@ public:
     /* send MC command reset message*/
     void command_reset();
 
-    /* check if MC is ready */
+    /* Returns the value stored in system_ready_, which is
+       read from the MC in receive_status_msg() */
     bool inverter_system_ready()
     {
         return system_ready_;
     }
 
-    /* check for errors */
-    bool error()
+    /* Returns the value stored in error_, which is
+       read from the MC in receive_status_msg() */
+    bool get_error()
     {
         return error_;
     }
 
-    /*check for dc quit on */
-    bool dc_quit_on()
+    /* Returns the value stored in error_, which is
+       read from the MC in receive_status_msg() */
+    bool get_warning() {
+        return warning_;
+    }
+
+
+    /* Returns the value stored in quit_dc_on_, which is
+       read from the MC in receive_status_msg() */
+    bool get_quit_dc_on()
     {
         return quit_dc_on_;
     }
 
-    /* check for quit inverter on*/
-    bool quit_inverter_on()
+    /* Returns the value stored in dc_on_, which is
+       read from the MC in receive_status_msg() */
+    bool get_dc_on()
+    {
+        return dc_on_;
+    }
+
+    /* Returns the value stored in quit_inverter_on_, which is
+       read from the MC in receive_status_msg() */
+    bool get_quit_inverter_on()
     {
         return quit_inverter_on_;
+    }
+
+    /* Returns the value stored in inverter_on_, which is
+       read from the MC in receive_status_msg() */
+    bool get_inverter_on()
+    {
+        return inverter_on_;
+    }
+
+    /* Returns the value stored in derating_on_, which is
+       read from the MC in receive_status_msg() */
+    bool get_derating_on() {
+        return derating_on_;
     }
 
     /* check for dc bus voltage */
@@ -101,10 +132,17 @@ private:
     void write_cmd_msg_to_queue_(MC_setpoints_command msg);
     int16_t speed_;
     uint16_t dc_bus_voltage_;
-    bool error_;
-    bool quit_dc_on_;
-    bool quit_inverter_on_;
+    
+    /* Booleans to store data from the MC. Updated in receive_status_msg() */
     bool system_ready_;
+    bool error_;
+    bool warning_;
+    bool quit_dc_on_;
+    bool dc_on_;
+    bool quit_inverter_on_;
+    bool inverter_on_;
+    bool derating_on_;
+
     message_queue *msg_queue_;
     uint32_t can_id_;
     Metro timer_can_ = Metro(20);

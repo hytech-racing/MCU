@@ -163,7 +163,7 @@ bool DrivetrainSystem<InverterType>::drivetrain_error_occured()
 {
     for (auto inv_pointer : inverters_)
     {
-        if (inv_pointer->error())
+        if (inv_pointer->get_error())
         {
             return true;
         }
@@ -202,7 +202,7 @@ bool DrivetrainSystem<InverterType>::check_drivetrain_quit_dc_on_()
     // return (inverters_[3]->dc_quit_on());
     for (auto inv_pointer : inverters_)
     {
-        if (!inv_pointer->dc_quit_on())
+        if (!inv_pointer->get_quit_dc_on())
         {
             return false;
         }
@@ -217,7 +217,7 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
     // return (inverters_[3]->quit_inverter_on());
     for (auto inv_pointer : inverters_)
     {
-        if (!inv_pointer->quit_inverter_on())
+        if (!inv_pointer->get_quit_dc_on())
         {
             return false;
         }
