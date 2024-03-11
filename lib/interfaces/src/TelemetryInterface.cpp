@@ -82,7 +82,15 @@ void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvI
     
 }
 //Pack_DRIVETRAIN_STATUS_TELEM_hytech
-void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
+void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
+                                                                InvInt_t* fl,
+                                                                InvInt_t* fr,
+                                                                InvInt_t* rl,
+                                                                InvInt_t* rr,
+                                                                bool accel_implaus,
+                                                                bool brake_implaus,
+                                                                float accel_per,
+                                                                float brake_per)
 {
     DRIVETRAIN_STATUS_TELEM_t status;
 
@@ -121,6 +129,11 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(InvInt_t* fl, In
     status.mc4_quit_inverter_on = rr->get_quit_inverter_on();
     status.mc4_system_ready = rr->inverter_system_ready();
     status.mc4_warning = rr->get_warning();
+
+    status.accel_implausible = accel_implaus;
+    status.brake_implausible = brake_implaus;
+    status.brake_percent = (uint8_t)(abs(brake_per) * 100);
+    status.accel_percent = (uint8_t)(abs(accel_per) * 100);
     
     enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }
@@ -159,7 +172,11 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const InvInt_t* fl,
                               const InvInt_t* fr,
                               const InvInt_t* rl,
-                              const InvInt_t* rr) {
+                              const InvInt_t* rr,
+                              bool accel_implaus,
+                              bool brake_implaus,
+                              float accel_per,
+                              float brake_per) {
 
     // Pedals
     update_pedal_readings_CAN_msg(adc1.conversions[channels_.accel1_channel],
@@ -184,7 +201,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
 
     update_drivetrain_rpms_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
-    update_drivetrain_status_telem_CAN_msg(fl, fr, rl, rr);
+    update_drivetrain_status_telem_CAN_msg(fl, fr, rl, rr, accel_implaus, brake_implaus, accel_per, brake_per);
     // enqueue_CAN_mcu_front_potentiometers();
     // enqueue_CAN_mcu_rear_potentiometers();
 

@@ -89,7 +89,11 @@ public:
         InvInt_t* fl,
         InvInt_t* fr,
         InvInt_t* rl,
-        InvInt_t* rr
+        InvInt_t* rr,
+        bool accel_implaus,
+        bool brake_implaus,
+        float accel_per,
+        float brake_per
     );
 
     /* Enqueue outbound telemetry CAN messages */    
@@ -114,7 +118,11 @@ public:
         const InvInt_t* fl,
         const InvInt_t* fr,
         const InvInt_t* rl,
-        const InvInt_t* rr
+        const InvInt_t* rr,
+        bool accel_implaus,
+        bool brake_implaus,
+        float accel_per,
+        float brake_per
     );
 
 };

@@ -45,6 +45,11 @@ public:
     {
         return data_;
     }
+
+    PedalsSystemData_s getPedalsSystemDataCopy()
+    {
+        return data_;
+    }
     
     void tick(const SysTick_s &tick,
               const AnalogConversion_s &accel1,
