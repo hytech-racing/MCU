@@ -8,7 +8,9 @@
 #include "PedalsSystem.h"
 
 const int DEFAULT_BMS_OK_READ         = 17;      // SHDN_D_READ
+const int DEFAULT_BMS_SENSE_PIN       = 16;      // BMS_OK_SENSE
 const int DEFAULT_IMD_OK_READ         = 10;      // SHDN_C_READ
+const int DEFAULT_IMD_SENSE_PIN       = 18;      // OKHS_SENSE
 const int DEFAULT_BSPD_OK_READ        = 39;      // SHDN_E_READ
 const int DEFAULT_SOFTWARE_OK_READ    = 25;      // SHDN_F_READ Watchdog Combined
 const int DEFAULT_BOTS_OK_READ        = 24;      // SHDN_B_READ

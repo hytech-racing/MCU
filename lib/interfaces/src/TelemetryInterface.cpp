@@ -20,7 +20,9 @@ void TelemetryInterface::update_load_cells_CAN_msg(const AnalogConversion_s &lc_
                                                    const AnalogConversion_s &lc_fr) {
     // do sth with mcu_load_cells_
     mcu_load_cells_.set_FL_load_cell(lc_fl.raw);
+    // Serial.printf("FL LC: %d\n", lc_fl.raw);
     mcu_load_cells_.set_FR_load_cell(lc_fr.raw);
+    // Serial.printf("FR LC: %d\n", lc_fr.raw);
     // mcu_load_cells_.set_RL_load_cell(lc_fl.raw);
     // mcu_load_cells_.set_RR_load_cell(lc_fr.raw);    
 
@@ -31,7 +33,9 @@ void TelemetryInterface::update_potentiometers_CAN_msg(const AnalogConversion_s 
                                                        const AnalogConversion_s &pots_fr) {
     // do sth with mcu_front_potentiometers_
     mcu_front_potentiometers_.set_pot1(pots_fl.raw);
+    // Serial.printf("Fl pot: %d\n", pots_fl.raw);
     mcu_front_potentiometers_.set_pot3(pots_fr.raw);
+    // Serial.printf("Fr pot: %d\n", pots_fr.raw);
 
     // do sth with mcu_rear_potentiometers_
     // mcu_rear_potentiometers_.set_pot4(pots_rl.raw);

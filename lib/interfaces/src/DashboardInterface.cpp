@@ -45,10 +45,10 @@ CAN_message_t DashboardInterface::write()
     dash_mcu_state.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
 
     // Make sure IMD and AMS stay green if it is only BOTS that is tripped
-    if (dash_mcu_state.bots_led == int(LEDColors_e::RED)) {
-        dash_mcu_state.imd_led = int(LEDColors_e::ON);
-        dash_mcu_state.ams_led = int(LEDColors_e::ON);
-    }
+    // if (dash_mcu_state.bots_led == int(LEDColors_e::RED)) {
+    //     dash_mcu_state.imd_led = int(LEDColors_e::ON);
+    //     dash_mcu_state.ams_led = int(LEDColors_e::ON);
+    // }
     
     dash_mcu_state.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
     dash_mcu_state.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];

@@ -42,8 +42,8 @@ using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_mes
 
 /* Sensors */
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
-MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS);
-MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS);
+MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS, 1000000); // 1M baud needed for 04s
+MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS, 1000000);
 
 OrbisBR10 steering1(&Serial5);
 

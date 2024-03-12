@@ -30,9 +30,10 @@ void MCUInterface::read_mcu_status()
 /* Measure shutdown circuits' input */
 void MCUInterface::measure_shutdown_circuit_input()
 {
-
-    bms_ok_high = digitalRead(pins_.pin_bms_ok_read);
-    imd_ok_high = digitalRead(pins_.pin_imd_ok_read);
+    // TODO: change these back to pins from constructor
+    bms_ok_high = digitalRead(DEFAULT_BMS_SENSE_PIN);
+    imd_ok_high = digitalRead(DEFAULT_IMD_SENSE_PIN);
+    
     bspd_ok_high = digitalRead(pins_.pin_bspd_ok_read);
     software_ok_high = digitalRead(pins_.pin_software_ok_read);
     brb_ok_high = digitalRead(pins_.pin_brb_ok_read);
