@@ -16,6 +16,8 @@ private:
 
     /* Hardware interface pins */
     int pin_watchdog_input_;
+
+    bool watchdog_chillin = true;
     
 public:
     WatchdogInterface(int wd_input_pin): pin_watchdog_input_(wd_input_pin){};

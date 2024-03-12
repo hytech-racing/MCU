@@ -20,6 +20,16 @@ void WatchdogInterface::set_start_state() {
 /* Toggle watchdog WD to kick dog */
 void WatchdogInterface::kick_watchdog(unsigned long curr_millis) {
 
+    unsigned long before_print = millis();
+    if (watchdog_chillin) Serial.printf("wd ms %d\n", curr_millis - watchdog_time);
+    unsigned long after_print = millis();
+    if ((after_print - before_print) > 50) Serial.println(after_print - before_print);
+    
+    // if ((curr_millis - watchdog_time) > 15) {
+    //     Serial.printf("wd ms %d\n", curr_millis - watchdog_time);
+    //     watchdog_chillin = false;
+    // }
+
     if ((curr_millis - watchdog_time) > WATCHDOG_KICK_INTERVAL) {
         watchdog_state = !watchdog_state;
         digitalWrite(pin_watchdog_input_, watchdog_state);

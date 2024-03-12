@@ -29,6 +29,8 @@
 // /* State machine */
 #include "MCUStateMachine.h"
 
+
+#include "LatencyTest.cpp"
 /*
     DATA SOURCES
 */
@@ -112,6 +114,8 @@ void drivetrain_reset();
     SETUP
 */
 
+LatencyTest latency_test;
+
 void setup()
 {
     // initialize CAN communication
@@ -132,6 +136,8 @@ void setup()
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_MIN_THRESH);
 
     Serial.begin(115200);
+    while(!Serial);
+    Serial.println("Starting");
 
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
@@ -160,7 +166,9 @@ void setup()
 }
 
 void loop()
-{
+{   
+    latency_test.check_results();
+    // if (main_ecu.get_bots_ok()) Serial.printf("dasflhksdfiausefhlskhdahfosaehiulfhasldkjfhlasuefhlaiuehlfauhisfwuhasudhflaiuwefhsaufhlsuhff%d\n\n\n", main_ecu.get_bots_ok());
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -183,13 +191,15 @@ void loop()
     }
     // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
-
+    latency_test.state_machine = millis();
     // tick safety system
     safety_system.software_shutdown(curr_tick);
-
+    latency_test.safety_system = millis();
     // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+
+    latency_test.bottom_of_loop = millis();
 }
 
 /*

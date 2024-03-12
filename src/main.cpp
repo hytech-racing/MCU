@@ -185,7 +185,7 @@ void loop()
 
     // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
-
+    
     // tick safety system
     safety_system.software_shutdown(curr_tick);
 
