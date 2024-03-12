@@ -95,6 +95,10 @@ public:
         float accel_per,
         float brake_per
     );
+    void TelemetryInterface::update_penthouse_accum_CAN_msg(
+        const AnalogConversion_s &current,
+        const AnalogConversion_s &reference
+    );
 
     /* Enqueue outbound telemetry CAN messages */    
     // void enqueue_CAN_mcu_pedal_readings();

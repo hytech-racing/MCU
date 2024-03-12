@@ -138,6 +138,16 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
     enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }
 
+// Pack_PENTHOUSE_ACCUM_MSG_hytech
+void TelemetryInterface::update_penthouse_accum_CAN_msg(const AnalogConversion_s &current, const AnalogConversion_s &reference)
+{
+    PENTHOUSE_ACCUM_MSG_t message;
+    message.hall_curr_ref = reference.raw;
+    message.hall_curr_signal = current.raw;
+
+    enqueue_new_CAN<PENTHOUSE_ACCUM_MSG_t>(&message, &Pack_PENTHOUSE_ACCUM_MSG_hytech);
+}
+
 /* Send CAN messages */
 template<typename T>
 void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
@@ -202,6 +212,8 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
     update_drivetrain_rpms_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_status_telem_CAN_msg(fl, fr, rl, rr, accel_implaus, brake_implaus, accel_per, brake_per);
+    update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
+                                   adc1.conversions[channels_.current_ref_channel]);
     // enqueue_CAN_mcu_front_potentiometers();
     // enqueue_CAN_mcu_rear_potentiometers();
 
