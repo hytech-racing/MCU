@@ -18,8 +18,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.println();
         // hal_println("tractive system not active state");
 
-        auto data = pedals_->getPedalsSystemData();
-        auto mux_test = controller_mux_->getDrivetrainCommand();
+        // auto data = pedals_->getPedalsSystemData();
+        // auto mux_test = controller_mux_->getDrivetrainCommand();
 
         // hal_println("speeds 1 through 4");
         // Serial.println(mux_test.speeds_rpm[0]);
@@ -121,7 +121,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::READY_TO_DRIVE:
     {
         auto data = pedals_->getPedalsSystemData();
-        auto test = controller_mux_->getDrivetrainCommand();
+        // auto test = controller_mux_->getDrivetrainCommand();
 
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {

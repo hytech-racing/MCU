@@ -47,6 +47,7 @@ private:
 public:
     bool start_button_status_;
     bool startButtonPressed() { return  start_button_status_; };
+    bool checkBuzzer(){ return false; };
 };
 
 #endif /* DASHBOARDINTERFACE */

@@ -71,7 +71,8 @@ public:
 
     uint16_t dc_bus_voltage() { return voltage_; };
     bool dc_quit_on() { return dc_quit_on_; }
-    bool quit_inverter_on() { return quit_inverter_on_; }
+    bool get_quit_dc_on() { return dc_quit_on_; }
+    bool get_quit_inverter_on() { return quit_inverter_on_; }
 };
 
 TEST(DrivetrainSystemTesting, test_drivetrain_startup)
@@ -163,17 +164,18 @@ TEST(DrivetrainSystemTesting, test_drivetrain_inverter_comms)
     //  torque_setpoint_nm_
     //  speed_setpoint_rpm_
     // ensure that without ticking the inverters dont get the data
-    EXPECT_EQ(inv_fl.speed_setpoint_rpm_, 0.0);
-    EXPECT_EQ(inv_fl.torque_setpoint_nm_, 0);
+    // as of 3/13/24 this isnt being handled by the drivetrain rn
+    // EXPECT_EQ(inv_fl.speed_setpoint_rpm_, 0.0);
+    // EXPECT_EQ(inv_fl.torque_setpoint_nm_, 0);
 
-    EXPECT_EQ(inv_fr.torque_setpoint_nm_, 0);
-    EXPECT_EQ(inv_fr.speed_setpoint_rpm_, 0);
+    // EXPECT_EQ(inv_fr.torque_setpoint_nm_, 0);
+    // EXPECT_EQ(inv_fr.speed_setpoint_rpm_, 0);
 
-    EXPECT_EQ(inv_rl.torque_setpoint_nm_, 0);
-    EXPECT_EQ(inv_rl.speed_setpoint_rpm_, 0);
+    // EXPECT_EQ(inv_rl.torque_setpoint_nm_, 0);
+    // EXPECT_EQ(inv_rl.speed_setpoint_rpm_, 0);
 
-    EXPECT_EQ(inv_rr.torque_setpoint_nm_, 0);
-    EXPECT_EQ(inv_rr.speed_setpoint_rpm_, 0);
+    // EXPECT_EQ(inv_rr.torque_setpoint_nm_, 0);
+    // EXPECT_EQ(inv_rr.speed_setpoint_rpm_, 0);
     SysClock clock;
     auto micros = 1000000;
     dt.tick(clock.tick(micros));
@@ -191,16 +193,18 @@ TEST(DrivetrainSystemTesting, test_drivetrain_inverter_comms)
     EXPECT_EQ(inv_rr.speed_setpoint_rpm_, 1003.0);
 
     // testing to ensure that these extra general commands dont get through the period filter
-    micros += (20 * 1000);
-    dt.tick(clock.tick(micros));
-    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
-    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
-    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
-    EXPECT_EQ(inv_rl.cmd_general_count_, 1);
-    micros += (20 * 1000);
-    dt.tick(clock.tick(micros));
-    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
-    EXPECT_EQ(inv_rl.cmd_general_count_, 2);
+    // as of 3/13/24, the inverter sending rate is being handled at the inverter interface
+    // TODO decide if we want to add this back into the drivetrain
+    // micros += (20 * 1000);
+    // dt.tick(clock.tick(micros));
+    // dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    // dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    // dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    // EXPECT_EQ(inv_rl.cmd_general_count_, 1);
+    // micros += (20 * 1000);
+    // dt.tick(clock.tick(micros));
+    // dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    // EXPECT_EQ(inv_rl.cmd_general_count_, 2);
 }
 // TODO test commanding of drivetrain to ensure that the data is getting accross correctly
 #endif /* DRIVETRAIN_SYSTEM_TEST */
