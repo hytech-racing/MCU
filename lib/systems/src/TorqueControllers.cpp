@@ -30,7 +30,7 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
     {
         // Both pedals are not pressed and no implausibility has been detected
         // accelRequest goes between 1.0 and -1.0
-        float accelRequest = pedalsData.accelPercent - pedalsData.brakePercent;
+        float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
         float torqueRequest;
 
         if (accelRequest >= 0.0)

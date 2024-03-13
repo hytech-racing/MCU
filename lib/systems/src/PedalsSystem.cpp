@@ -41,9 +41,11 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
+    out.regenPercent = max(min(out.brakePercent / mechBrakeActiveThreshold_, 1.0), 0.0);
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
     out.mechBrakeActive = out.brakePercent > mechBrakeActiveThreshold_;
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
+
     return out;
 }
 

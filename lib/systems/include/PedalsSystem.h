@@ -16,6 +16,7 @@ struct PedalsSystemData_s
     bool implausibilityExceededMaxDuration:1;
     float accelPercent;
     float brakePercent;
+    float regenPercent;
 };
 
 /// @brief Pedals params struct that will hold min / max that will be used for evaluateion.
