@@ -143,6 +143,7 @@ void setup()
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
     ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    steering1.init();
 
     /*
         Init Systems
@@ -228,11 +229,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger10) // 10Hz
     {
         // Serial.println("before buzzer");
-        // dashboard.tick10(buzzer.buzzer_is_on(),
-        //                  main_ecu.bms_ok_is_high(),
-        //                  safety_system.get_software_is_ok(),
-        //                  main_ecu.get_bots_ok(),
-        //                  safety_system.get_software_is_ok());
         dashboard.tick10(&main_ecu, int(fsm.get_state()), buzzer.buzzer_is_on(), drivetrain.drivetrain_error_occured());
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
@@ -247,6 +243,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     }
     if (t.trigger50) // 50Hz
     {
+        steering1.sample();
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
         telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert(), &inv.fl, &inv.fr, &inv.rl, &inv.rr, data2.accelImplausible, data2.brakeImplausible, data2.accelPercent, data2.brakePercent);
     }
