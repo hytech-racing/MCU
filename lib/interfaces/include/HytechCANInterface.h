@@ -10,6 +10,7 @@
 #include "InverterInterface.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
+#include "SABInterface.h"
 
 /* 
     struct holding interfaces processed by process_ring_buffer() 
@@ -27,6 +28,7 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *rear_right_inv;
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
+    SABInterface *sab_interface;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
@@ -138,6 +140,11 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             break;
         case ID_MC4_ENERGY:
             interfaces.rear_right_inv->receive_energy_msg(recvd_msg);
+            break;
+
+            // SAB msgs
+        case SAB_CB_CANID:
+            interfaces.sab_interface->retrieve_pots_and_load_cells_CAN(recvd_msg);
             break;
         }
     }

@@ -17,6 +17,7 @@
 #include "DashboardInterface.h"
 #include "InverterInterface.h"
 #include "TelemetryInterface.h"
+#include "SABInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -61,6 +62,7 @@ MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_ACCEL2_CHANNEL, MCU15_BRAKE1_CHANNEL, MCU15_BRAKE2_CHANNEL,
                                                     MCU15_FL_POTS_CHANNEL, MCU15_FR_POTS_CHANNEL, MCU15_FL_LOADCELL_CHANNEL, MCU15_FR_LOADCELL_CHANNEL,
                                                     MCU15_STEERING_CHANNEL, MCU15_CUR_POS_SENSE_CHANNEL, MCU15_CUR_NEG_SENSE_CHANNEL, MCU15_GLV_SENSE_CHANNEL});
+SABInterface sab_interface();
 
 /* Inverter Interface Type */
 using InvInt_t = InverterInterface<CircularBufferType>;
@@ -94,7 +96,7 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 */
 
-CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface};
+CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface, &sab_interface};
 
 /*
     FUNCTION DEFINITIONS
