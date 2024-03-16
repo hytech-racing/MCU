@@ -35,7 +35,7 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
                                                         const AnalogConversion_s &reference,
                                                         const AnalogConversion_s &glv) {
     // do sth with mcu_analog_readings_
-    mcu_analog_readings_.set_steering_1(static_cast<int16_t>(steer1.angle * FIXED_POINT_PRECISION));
+    mcu_analog_readings_.set_steering_1(steer1.angle);
     mcu_analog_readings_.set_steering_2(steer2.raw);
     mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);
     // Serial.println("hall effect current: ");
