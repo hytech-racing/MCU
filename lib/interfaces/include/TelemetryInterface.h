@@ -36,9 +36,6 @@ class TelemetryInterface
 private:
     /* Outbound telemetry CAN messages */
     MCU_pedal_readings          mcu_pedal_readings_;
-    MCU_load_cells              mcu_load_cells_;
-    MCU_front_potentiometers    mcu_front_potentiometers_;
-    MCU_rear_potentiometers     mcu_rear_potentiometers_;
     MCU_analog_readings         mcu_analog_readings_;
     /* CAN Tx buffer */
     CANBufferType *msg_queue_;
@@ -58,11 +55,9 @@ public:
         const AnalogConversion_s &brake1,
         const AnalogConversion_s &brake2
     );
-    void update_load_cells_CAN_msg(
+    void update_suspension_CAN_msg(
         const AnalogConversion_s &lc_fl,
-        const AnalogConversion_s &lc_fr
-    );
-    void update_potentiometers_CAN_msg(
+        const AnalogConversion_s &lc_fr,
         const AnalogConversion_s &pots_fl,
         const AnalogConversion_s &pots_fr
     );
