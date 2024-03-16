@@ -142,6 +142,29 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
     enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }
 
+void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
+                                                                InvInt_t* fl,
+                                                                InvInt_t* fr,
+                                                                InvInt_t* rl,
+                                                                InvInt_t* rr)
+{
+    // TODO: change this to use actual torque values from inverter
+    // Torque current just temporary for gearbox seal validation
+    DRIVETRAIN_TORQUE_TELEM_t torque;
+    torque.fl_motor_torque = fl->get_torque_current();
+    torque.fr_motor_torque = fr->get_torque_current();
+    torque.rl_motor_torque = rl->get_torque_current();
+    torque.rr_motor_torque = rr->get_torque_current();
+
+    // Serial.printf("TORQUE:\nFL: %d\nFR: %d\nRL: %d\nRR: %d\n",
+    //                 torque.fl_motor_torque,
+    //                 torque.fr_motor_torque,
+    //                 torque.rl_motor_torque,
+    //                 torque.rr_motor_torque);
+
+    enqueue_new_CAN<DRIVETRAIN_TORQUE_TELEM_t>(&torque, &Pack_DRIVETRAIN_TORQUE_TELEM_hytech);
+}
+
 // Pack_PENTHOUSE_ACCUM_MSG_hytech
 void TelemetryInterface::update_penthouse_accum_CAN_msg(const AnalogConversion_s &current, const AnalogConversion_s &reference)
 {
@@ -216,6 +239,8 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
     update_drivetrain_rpms_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_status_telem_CAN_msg(fl, fr, rl, rr, accel_implaus, brake_implaus, accel_per, brake_per);
+    update_drivetrain_torque_telem_CAN_msg(fl, fr, rl, rr);
+
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);
     // enqueue_CAN_mcu_front_potentiometers();

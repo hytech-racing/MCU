@@ -130,7 +130,8 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     // https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/pdk_205481_kw26-s5-fse-4q_en_.pdf#page=83&zoom=100,76,82
     // for the actual conversion. requires looking at the current params of the inverter
     // to get scalar for this.
-    torque_current_ = ((float)mc_status.get_torque_current() * id110_val_) / 16384.0;           // iq
+    // torque_current_ = ((float)mc_status.get_torque_current() * id110_val_) / 16384.0;           // iq
+    torque_current_ = mc_status.get_torque_current();
     magnetizing_current_ = ((float)mc_status.get_magnetizing_current() * id110_val_) / 16384.0; // id
 
     // TODO enable this on the inverters
