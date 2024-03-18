@@ -37,17 +37,20 @@ void TorqueControllerMux::tick(
         // Only transisiton to the next state if:
         // Vehicle speed is below 5 m/s
         // AND torque delta between old and new controllers is < 0.5nm on every wheel
+        // AND the selected torque controller is in the ready state
         if (muxMode_ != dialModeMap_[dashboardDialMode])
         {
+            // Check if speed permits mode change
             bool speedPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
                 speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND >= MAX_SPEED_FOR_MODE_CHANGE;
 
+            // Check if torque delta permits mode change
             bool torqueDeltaPreventsModeChange = false;
             for (int i = 0; i < NUM_MOTORS; i++)
             {
                 float torqueDelta = abs(
-                    controllerCommands_[static_cast<int>(muxMode_)].torqueSetpoints[i] - controllerCommands_[static_cast<int>(dialModeMap_[dashboardDialMode])].torqueSetpoints[i]);
+                    controllerOutputs_[static_cast<int>(muxMode_)].command.torqueSetpoints[i] - controllerOutputs_[static_cast<int>(dialModeMap_[dashboardDialMode])].command.torqueSetpoints[i]);
 
                 if (torqueDelta > MAX_TORQUE_DELTA_FOR_MODE_CHANGE)
                 {
@@ -56,12 +59,23 @@ void TorqueControllerMux::tick(
                 }
             }
 
-            if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange))
+            // Check if targeted controller is ready to be selected
+            bool controllerNotReadyPreventsModeChange = (controllerOutputs_[static_cast<int>(dialModeMap_[dashboardDialMode])].ready == false);
+
+            if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
             {
                 muxMode_ = dialModeMap_[dashboardDialMode];
             }
         }
 
-        drivetrainCommand_ = controllerCommands_[static_cast<int>(muxMode_)];
+        // Check if the current controller is ready. If it has faulted, revert to safe mode
+        // When the car goes below 5m/s, it will attempt to re-engage the faulted controller
+        // It will stay in safe mode if the controller is still faulted
+        if (controllerOutputs_[static_cast<int>(muxMode_)].ready == false)
+        {
+            muxMode_ = TorqueController_e::TC_SAFE_MODE;
+        }
+
+        drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
     }
 }

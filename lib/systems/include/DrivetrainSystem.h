@@ -10,7 +10,7 @@
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
-    float torqueSetpoints[NUM_MOTORS];
+    float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
 };
 
 struct DrivetrainDynamicReport_s
