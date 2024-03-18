@@ -143,7 +143,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             break;
 
             // SAB msgs
-        case SAB_CB_CANID:
+        case SAB_SUSPENSION_CANID:
             interfaces.sab_interface->retrieve_pots_and_load_cells_CAN(recvd_msg);
             break;
         }

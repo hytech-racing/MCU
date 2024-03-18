@@ -14,6 +14,8 @@
 // 10MPH LIMIT for lot testing lmao
 const float AMK_MAX_RPM = (13.4 * METERS_PER_SECOND_TO_RPM); // 30mph
 // const float AMK_MAX_RPM = (4.47 * METERS_PER_SECOND_TO_RPM); // 10mph
+// const float AMK_MAX_RPM = (2.235 * METERS_PER_SECOND_TO_RPM); // 5mph
+// const float AMK_MAX_RPM = (.89 * METERS_PER_SECOND_TO_RPM); // 1mph
 // const float 
 const float AMK_MAX_TORQUE = 20.0; // TODO: update this with the true value
 const float MAX_REGEN_TORQUE = 10.0;

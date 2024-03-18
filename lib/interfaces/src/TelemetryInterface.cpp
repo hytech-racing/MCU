@@ -16,33 +16,17 @@ void TelemetryInterface::update_pedal_readings_CAN_msg(const AnalogConversion_s 
     enqueue_CAN<MCU_pedal_readings>(mcu_pedal_readings_, ID_MCU_PEDAL_READINGS);
 }
 // MCP3204 returns structure
-void TelemetryInterface::update_load_cells_CAN_msg(const AnalogConversion_s &lc_fl,
-                                                   const AnalogConversion_s &lc_fr) {
-    // do sth with mcu_load_cells_
-    mcu_load_cells_.set_FL_load_cell(lc_fl.raw);
-    // Serial.printf("FL LC: %d\n", lc_fl.raw);
-    mcu_load_cells_.set_FR_load_cell(lc_fr.raw);
-    // Serial.printf("FR LC: %d\n", lc_fr.raw);
-    // mcu_load_cells_.set_RL_load_cell(lc_fl.raw);
-    // mcu_load_cells_.set_RR_load_cell(lc_fr.raw);    
+void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_fl,
+                                                   const AnalogConversion_s &lc_fr,
+                                                   const AnalogConversion_s &pots_fl,
+                                                   const AnalogConversion_s &pots_fr) {
+    MCU_SUSPENSION_t sus;
+    sus.load_cell_fl = lc_fl.raw;
+    sus.load_cell_fr = lc_fr.raw;
+    sus.potentiometer_fl = pots_fr.raw;
+    sus.potentiometer_fr = pots_fl.raw;
 
-    enqueue_CAN<MCU_load_cells>(mcu_load_cells_, ID_MCU_LOAD_CELLS);
-}
-// MCP3204 returns structure
-void TelemetryInterface::update_potentiometers_CAN_msg(const AnalogConversion_s &pots_fl,
-                                                       const AnalogConversion_s &pots_fr) {
-    // do sth with mcu_front_potentiometers_
-    mcu_front_potentiometers_.set_pot1(pots_fl.raw);
-    // Serial.printf("Fl pot: %d\n", pots_fl.raw);
-    mcu_front_potentiometers_.set_pot3(pots_fr.raw);
-    // Serial.printf("Fr pot: %d\n", pots_fr.raw);
-
-    // do sth with mcu_rear_potentiometers_
-    // mcu_rear_potentiometers_.set_pot4(pots_rl.raw);
-    // mcu_rear_potentiometers_.set_pot6(pots_rr.raw);
-
-    enqueue_CAN<MCU_front_potentiometers>(mcu_front_potentiometers_, ID_MCU_FRONT_POTS);
-    // enqueue_CAN<MCU_rear_potentiometers>(mcu_rear_potentiometers_, ID_MCU_REAR_POTS);
+    enqueue_new_CAN<MCU_SUSPENSION_t>(&sus, &Pack_MCU_SUSPENSION_hytech);
 }
 // SteeringDual and MCP3208 return structures
 void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderConversion_s &steer1,
@@ -51,7 +35,7 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
                                                         const AnalogConversion_s &reference,
                                                         const AnalogConversion_s &glv) {
     // do sth with mcu_analog_readings_
-    mcu_analog_readings_.set_steering_1(static_cast<int16_t>(steer1.angle * FIXED_POINT_PRECISION));
+    mcu_analog_readings_.set_steering_1(steer1.angle);
     mcu_analog_readings_.set_steering_2(steer2.raw);
     mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);
     // Serial.println("hall effect current: ");
@@ -229,12 +213,10 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                                    adc1.conversions[channels_.glv_sense_channel]);
     // enqueue_CAN_mcu_analog_readings();
     // Load cells
-    update_load_cells_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
-                              adc3.conversions[channels_.loadcell_fr_channel]);
-    // enqueue_CAN_mcu_load_cells();
-    // Pots
-    update_potentiometers_CAN_msg(adc2.conversions[channels_.pots_fl_channel],
-                                  adc3.conversions[channels_.pots_fr_channel]);
+    update_suspension_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
+                              adc3.conversions[channels_.loadcell_fr_channel],
+                              adc2.conversions[channels_.pots_fl_channel],
+                              adc3.conversions[channels_.pots_fr_channel]);
 
     update_drivetrain_rpms_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
