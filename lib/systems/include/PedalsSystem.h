@@ -8,12 +8,12 @@
 struct PedalsSystemData_s
 {
 
-    bool accelImplausible:1;
-    bool brakeImplausible:1;
-    bool brakePressed:1;
-    bool mechBrakeActive:1;
-    bool brakeAndAccelPressedImplausibility:1;
-    bool implausibilityExceededMaxDuration:1;
+    bool accelImplausible : 1;
+    bool brakeImplausible : 1;
+    bool brakePressed : 1;
+    bool mechBrakeActive : 1;
+    bool brakeAndAccelPressedImplausibility : 1;
+    bool implausibilityExceededMaxDuration : 1;
     float accelPercent;
     float brakePercent;
     float regenPercent;
@@ -32,7 +32,7 @@ struct PedalsParams
 
 class PedalsSystem
 {
-public:    
+public:
     PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams, float mechBrakeActiveThreshold)
     {
         accelParams_ = accelParams;
@@ -51,7 +51,7 @@ public:
     {
         return data_;
     }
-    
+
     void tick(const SysTick_s &tick,
               const AnalogConversion_s &accel1,
               const AnalogConversion_s &accel2,
@@ -66,7 +66,7 @@ public:
 
 private:
     PedalsSystemData_s data_;
-
+    float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
     bool evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData1,
                                           const AnalogConversion_s &pedalData2,

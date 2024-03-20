@@ -139,14 +139,12 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
-            //     // drivetrain_->command_drivetrain_no_torque();
-
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         }
-        else
+        else    
         {
             drivetrain_->command_drivetrain_no_torque();
-            // Serial.println("software not ok?");
+
         }
 
         break;
