@@ -136,9 +136,9 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
                                                      const AnalogConversion_s &brakePedalData2)
 {
 
-    // float accel_pedal1_real = remove_deadzone_(accelPedalData1.conversion, 0.05);
-    // float accel_pedal2_real = remove_deadzone_(accelPedalData2.conversion, 0.05);
-    bool accel_pressed = pedal_is_active_(accelPedalData1.conversion, accelPedalData2.conversion, accelParams_.activation_percentage); // .1
+    float accel_pedal1_real = remove_deadzone_(accelPedalData1.conversion, 0.05);
+    float accel_pedal2_real = remove_deadzone_(accelPedalData2.conversion, 0.05);
+    bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
     bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, 0.80);                               // 0.05
     // Serial.println("brake percents:");
     // Serial.println(brakePedalData1.conversion);
