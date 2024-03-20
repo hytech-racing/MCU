@@ -4,3 +4,4 @@
 .vscode/launch.json
 .vscode/ipch
 .vscode/
+compile_commands.json

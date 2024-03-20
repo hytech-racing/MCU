@@ -19,8 +19,7 @@ template <typename InverterType>
 bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_time)
 {
     // 1. if system ready 
-    // Serial.println("handling inverter startup");
-    // request_enable_();
+    
     if (drivetrain_ready_() && !check_drivetrain_quit_dc_on_() && !drivetrain_enabled_())
     {
 
@@ -32,7 +31,7 @@ bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_
     }
     else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !drivetrain_enabled_())
     {
-        // Serial.println("requesting enable");
+        
         request_enable_();
     //     enable_requested_ = true;
         return false;
@@ -217,7 +216,7 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
     // return (inverters_[3]->quit_inverter_on());
     for (auto inv_pointer : inverters_)
     {
-        if (!inv_pointer->get_quit_dc_on())
+        if (!inv_pointer->get_quit_inverter_on())
         {
             return false;
         }

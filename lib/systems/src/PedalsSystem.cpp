@@ -1,8 +1,9 @@
 #include "PedalsSystem.h"
 #include <iostream>
-#include <Arduino.h>
+
 #include <algorithm>
-#include <iomanip>
+
+// #include <Arduino.h>
 
 // TODO parameterize percentages in constructor
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
@@ -16,18 +17,11 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
                                                  const AnalogConversion_s &brake2,
                                                  unsigned long curr_time)
 {
-    // Serial.println("accel data");
-    // Serial.println(accel1.raw);
-    // Serial.println(accel2.raw);
-    // Serial.println("brake data");
-    // Serial.println(brake1.conversion);
-    // Serial.println(brake2.conversion);
-    PedalsSystemData_s out;
-    // Serial.println();
-    // Serial.println("checking accel");
 
+    PedalsSystemData_s out;
+    
+    
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
-    // Serial.println("checking b");
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);
     bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
@@ -43,7 +37,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
-    out.regenPercent = max(min(out.brakePercent / mechBrakeActiveThreshold_, 1.0), 0.0);
+    out.regenPercent = std::max(std::min(out.brakePercent / mechBrakeActiveThreshold_, 1.0f), 0.0f);
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
     out.mechBrakeActive = out.brakePercent > mechBrakeActiveThreshold_;
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
