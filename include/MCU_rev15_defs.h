@@ -47,4 +47,18 @@ const int BRAKE2_MAX_THRESH = 2150;
 const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
 const float BRAKE_MECH_THRESH = 0.55;
 
+// Load Cell Defs to convert raw to lbs
+// lbs = (scale)*raw + offset
+
+const float LOADCELL_FL_SCALE = 0.0553;
+const float LOADCELL_FL_OFFSET = 15.892;
+
+const float LOADCELL_FR_SCALE = 0.0512;
+const float LOADCELL_FR_OFFSET = 17.196;
+
+const float LOADCELL_RL_SCALE = 0.1147;
+const float LOADCELL_RL_OFFSET = 21.842;
+
+const float LOADCELL_RR_SCALE = 0.0588;
+const float LOADCELL_RR_OFFSET = 19.576;
 #endif /* __MCU15_H__ */
