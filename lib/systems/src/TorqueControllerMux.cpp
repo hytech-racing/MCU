@@ -16,6 +16,7 @@ void TorqueControllerMux::tick(
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
+    torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
     {
