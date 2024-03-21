@@ -45,7 +45,7 @@ void test_dashboard_unpacking_can_message(void)
 
       TEST_ASSERT_EQUAL(current_state.start_button, dash_interface.startButtonPressed() );
       TEST_ASSERT_EQUAL(current_state.mark_button, dash_interface.specialButtonPressed() );
-      TEST_ASSERT_EQUAL(current_state.mode_button , dash_interface.torqueButtonPressed() );
+      TEST_ASSERT_EQUAL(current_state.mode_button , dash_interface.torqueModeButtonPressed() );
       TEST_ASSERT_EQUAL(current_state.motor_controller_cycle_button, dash_interface.inverterResetButtonPressed() );
       TEST_ASSERT_EQUAL(current_state.launch_ctrl_button , dash_interface.launchControlButtonPressed() );
       TEST_ASSERT_EQUAL(current_state.torque_mode_button , dash_interface.torqueLoadingButtonPressed() );

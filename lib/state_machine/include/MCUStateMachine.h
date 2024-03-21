@@ -11,6 +11,7 @@
 #include "SafetySystem.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
+
 // #include "IMDInterface.h"
 
 enum class CAR_STATE
@@ -48,6 +49,7 @@ public:
     // void tick_state_machine(const SysTick_s &tick);
     void tick_state_machine(unsigned long cm);
     CAR_STATE get_state() { return current_state_; }
+    bool car_in_ready_to_drive() { return current_state_ == CAR_STATE::READY_TO_DRIVE; };
 
 private:
     void set_state_(CAR_STATE new_state, unsigned long curr_time);
@@ -71,6 +73,8 @@ private:
     // IMDInterface *imd_;
     SafetySystem *safety_system_;
     TorqueControllerMux *controller_mux_;
+    
+
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */

@@ -4,10 +4,9 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 
-
-/// @brief Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
-const unsigned long HEARTBEAT_INTERVAL                      = 20;   // milliseconds
-/// @brief The total pcc threshold is the lowest allowable voltage of the entire pack (in Volts)*/
+/* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
+const unsigned long HEARTBEAT_INTERVAL                      = 2000;   // milliseconds
+/* The total pcc threshold is the lowest allowable voltage of the entire pack (in Volts)*/
 const unsigned long PACK_CHARGE_CRIT_TOTAL_THRESHOLD        = 420;
 /* The lowest pcc threshold is the lowest allowable single cell voltage (in 100 microvolts)*/
 const unsigned long PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  = 35000; //equivalent to 3.5V
@@ -32,11 +31,8 @@ public:
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
-        cell_voltage_alpha(volt_alpha)
-    {
-        // Set pin mode
-        pinMode(pin_software_ok_, OUTPUT);
-    }
+        cell_voltage_alpha(volt_alpha) {};
+
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
     AMSInterface(int sw_ok_pin):
         AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};

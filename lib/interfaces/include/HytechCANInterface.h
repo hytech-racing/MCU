@@ -10,6 +10,7 @@
 #include "InverterInterface.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
+#include "SABInterface.h"
 
 /* 
     struct holding interfaces processed by process_ring_buffer() 
@@ -27,6 +28,7 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *rear_right_inv;
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
+    SABInterface *sab_interface;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
@@ -70,7 +72,10 @@ template <typename BufferType, typename InterfaceType>
 void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces, unsigned long curr_millis)
 {
     // TODO switch to using the global CAN receive function from the generated CAN library
+    // if(rx_buffer.size() > 0){
 
+    // Serial.println(rx_buffer.size());
+    // }
     while (rx_buffer.available())
     {
         CAN_message_t recvd_msg;
@@ -136,6 +141,11 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case ID_MC4_ENERGY:
             interfaces.rear_right_inv->receive_energy_msg(recvd_msg);
             break;
+
+            // SAB msgs
+        case SAB_SUSPENSION_CANID:
+            interfaces.sab_interface->retrieve_pots_and_load_cells_CAN(recvd_msg);
+            break;
         }
     }
 }
@@ -155,6 +165,7 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
         buffer.pop_front(buf, sizeof(CAN_message_t));
         memmove(&msg, buf, sizeof(msg));
         can_interface->write(msg);
+        // delayMicroseconds(2500);
     }
 }
 

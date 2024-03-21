@@ -4,7 +4,6 @@
 #include <gmock/gmock.h>
 #include "MCUStateMachine.h"
 
-// TODO @ben
 
 class DrivetrainMock
 {
@@ -25,6 +24,7 @@ public:
     bool drivetrain_error_occured() { return drivetrain_error_; };
 
     void command_drivetrain(const DrivetrainCommand_s &data){};
+    void disable_no_pins() {};
 };
 
 void handle_startup(MCUStateMachine<DrivetrainMock> &state_machine, unsigned long sys_time, DrivetrainMock &drivetrain, PedalsSystem &pedals, DashboardInterface &dash_interface)

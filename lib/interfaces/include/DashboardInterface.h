@@ -4,6 +4,21 @@
 #include "MessageQueueDefine.h"
 #include "FlexCAN_T4.h"
 #include "hytech.h"
+#include "MCUInterface.h"
+#include "MCU_status.h"
+
+/*
+    Enum for the car's torque limits
+    MOVE ME! - ideally into a TorqueControllerDefs.h file
+    to prevent circular dependencies
+*/
+enum class TorqueLimit_e
+{
+    TCMUX_LOW_TORQUE = 0,
+    TCMUX_MID_TORQUE = 1,
+    TCMUX_FULL_TORQUE = 2,
+    TCMUX_NUM_TORQUE_LIMITS = 3,
+};
 
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum class DialMode_e
@@ -40,8 +55,8 @@ enum class DashLED_e
     INERTIA_LED,
     GLV_LED,
     CRIT_CHARGE_LED,
-    START_LED,
-    MC_ERROR_LED,
+    START_LED, /// from state machine. When READY_TO_DRIVE, set START_LED to true. See what else uses READY_TO_DRIVE so that you can update START_LED.
+    MC_ERROR_LED, /// from DrivetrainSystem.cpp, get drivetrain_error_occurred()
     IMD_LED,
     AMS_LED,
 };
@@ -112,8 +127,14 @@ public:
         @param can_msg is the reference to a new CAN message CAN_message_t
     */
     void read(const CAN_message_t &can_msg);
+
     /* write function will Pack a message based on the current data in the interface and push it to the tx buffer */
     CAN_message_t write();
+
+    /*
+        Tick DashboardInterface at 10hz to gather data and send CAN message
+    */
+    void tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error, TorqueLimit_e torque);
 
     /*!
         getter for the dashboard's current dial position (drive profile)
@@ -129,7 +150,7 @@ public:
     /* getter for the mark button */
     bool specialButtonPressed();
     /* getter for the torque button (does not currently exist on dash ) */
-    bool torqueButtonPressed();
+    bool torqueModeButtonPressed();
     /* getter for the inverter reset button (clears error codes ) */
     bool inverterResetButtonPressed();
     /* getter for the launch control button */

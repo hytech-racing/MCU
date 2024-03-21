@@ -1,6 +1,10 @@
 name: generate doxygen docs and deploy to github pages
 
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - master
 jobs:
 
   gen_docs:

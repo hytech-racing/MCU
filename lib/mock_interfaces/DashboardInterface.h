@@ -1,5 +1,19 @@
 #ifndef DASHBOARDINTERFACE
 #define DASHBOARDINTERFACE
+
+/*
+    Enum for the car's torque limits
+    MOVE ME! - ideally into a TorqueControllerDefs.h file
+    to prevent circular dependencies
+*/
+enum class TorqueLimit_e
+{
+    TCMUX_LOW_TORQUE = 0,
+    TCMUX_MID_TORQUE = 1,
+    TCMUX_FULL_TORQUE = 2,
+    TCMUX_NUM_TORQUE_LIMITS = 3,
+};
+
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum class DialMode_e
 {   
@@ -47,6 +61,7 @@ private:
 public:
     bool start_button_status_;
     bool startButtonPressed() { return  start_button_status_; };
+    bool checkBuzzer(){ return false; };
 };
 
 #endif /* DASHBOARDINTERFACE */

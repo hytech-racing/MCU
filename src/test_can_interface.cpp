@@ -15,7 +15,7 @@ InverterInterfaceType fr_inv(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND);
 InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
 InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
 
-CANInterfaces<CircularBufferType> CAN_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv, 0, 0};
+CANInterfaces<CircularBufferType> CAN_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv, 0, 0, 0};
 
 void init_can_interface()
 {

@@ -1,5 +1,9 @@
 #include "Buzzer.h"
 #include "Logger.h"
+void BuzzerController::deactivate()
+{
+    buzzer_on_ = false;
+}
 void BuzzerController::activate_buzzer(unsigned long act_time)
 {
     last_activation_time_ = act_time;
@@ -8,7 +12,7 @@ void BuzzerController::activate_buzzer(unsigned long act_time)
 
 bool BuzzerController::done(unsigned long curr_time){
 
-    buzzer_on_ = ((curr_time - last_activation_time_) > buzzer_period_);
-    return buzzer_on_;
+    buzzer_on_ = ((curr_time - last_activation_time_) < buzzer_period_);
+    return (!buzzer_on_);
     
 }

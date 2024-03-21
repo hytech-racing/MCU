@@ -10,8 +10,9 @@ class SafetySystem
 public:
     SafetySystem(AMSInterface *ams, WatchdogInterface *wd): 
         ams_(ams), 
-        wd_(wd) {};
+        wd_(wd){};
 
+ 
     /* Initialization */
     void init();
 

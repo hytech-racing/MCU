@@ -10,7 +10,7 @@
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
-    float torqueSetpoints[NUM_MOTORS];
+    float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
 };
 
 struct DrivetrainDynamicReport_s
@@ -28,7 +28,7 @@ class DrivetrainSystem
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, MCUInterface *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 25)
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, MCUInterface *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 1)
         : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms), min_hv_voltage_(min_hv_voltage), min_cmd_period_(min_cmd_period_ms)
     {
         // values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf
@@ -58,11 +58,13 @@ public:
     bool handle_inverter_startup(unsigned long curr_time);
     // on entry logic
     void command_drivetrain_no_torque();
+    void command_drivetrain_debug();
     // check to see if init time limit has passed
     bool inverter_init_timeout(unsigned long curr_time);
 
     bool hv_over_threshold_on_drivetrain();
     void disable();
+    void disable_no_pins();
     bool drivetrain_error_occured();
     void reset_drivetrain();
     void command_drivetrain(const DrivetrainCommand_s &data);

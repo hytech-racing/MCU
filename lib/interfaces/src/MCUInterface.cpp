@@ -5,10 +5,15 @@
 /* Initialize shutdown circuit input readings */
 void MCUInterface::init()
 {
+    // Set pin mode
+    pinMode(pins_.pin_inv_en, OUTPUT);
+    pinMode(pins_.pin_inv_24V_en, OUTPUT);
+    pinMode(pins_.pin_brake_light_ctrl, OUTPUT);
 
     // Set initial shutdown circuit readings
     bms_ok_high = false;
     imd_ok_high = false;
+    brb_ok_high = false;
 
     // Enable inverters (?)
     // Should be called from drivetrain
@@ -25,11 +30,14 @@ void MCUInterface::read_mcu_status()
 /* Measure shutdown circuits' input */
 void MCUInterface::measure_shutdown_circuit_input()
 {
-
-    bms_ok_high = digitalRead(pins_.pin_bms_ok_read);
-    imd_ok_high = digitalRead(pins_.pin_imd_ok_read);
+    // TODO: change these back to pins from constructor
+    bms_ok_high = digitalRead(DEFAULT_BMS_SENSE_PIN);
+    imd_ok_high = digitalRead(DEFAULT_IMD_SENSE_PIN);
+    
     bspd_ok_high = digitalRead(pins_.pin_bspd_ok_read);
     software_ok_high = digitalRead(pins_.pin_software_ok_read);
+    brb_ok_high = digitalRead(pins_.pin_brb_ok_read);
+
 }
 
 /* Measure shutdown circuits' voltages */
@@ -40,6 +48,7 @@ void MCUInterface::measure_shutdown_circuit_voltage()
     shutdown_c_above_threshold = digitalRead(pins_.pin_imd_ok_read);
     shutdown_d_above_threshold = digitalRead(pins_.pin_bms_ok_read);
     shutdown_e_above_threshold = digitalRead(pins_.pin_bspd_ok_read);
+    shutdown_g_above_threshold = digitalRead(pins_.pin_brb_ok_read);
 }
 
 /* Write brake light */
@@ -71,6 +80,17 @@ bool MCUInterface::imd_ok_is_high()
     return imd_ok_high;
 }
 
+// BRB
+bool MCUInterface::brb_ok_is_high()
+{
+    return brb_ok_high;
+}
+
+bool MCUInterface::get_bots_ok()
+{
+    return shutdown_b_above_threshold;
+}
+
 /* Send CAN message */
 // MCU status
 void MCUInterface::enqueue_CAN_mcu_status()
@@ -100,6 +120,7 @@ void MCUInterface::update_mcu_status_CAN()
     mcu_status_.set_shutdown_c_above_threshold(shutdown_c_above_threshold);
     mcu_status_.set_shutdown_d_above_threshold(shutdown_d_above_threshold);
     mcu_status_.set_shutdown_e_above_threshold(shutdown_e_above_threshold);
+    
 }
 
 // Main loop

@@ -1,6 +1,9 @@
 #include "AMSInterface.h"
 
 void AMSInterface::init(unsigned long curr_millis) {
+    
+    // Set pin mode
+    pinMode(pin_software_ok_, OUTPUT);
 
     set_heartbeat(curr_millis);
 
@@ -25,6 +28,13 @@ void AMSInterface::set_heartbeat(unsigned long curr_millis) {
 }
 
 bool AMSInterface::heartbeat_received(unsigned long curr_millis) {
+    // if((curr_millis - last_heartbeat_time) >= HEARTBEAT_INTERVAL){
+    //     Serial.println("ERROR");
+    //     Serial.println(curr_millis);
+    //     Serial.println(last_heartbeat_time);
+    //     Serial.println(curr_millis - last_heartbeat_time);
+    // }
+    
     return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
 }
 

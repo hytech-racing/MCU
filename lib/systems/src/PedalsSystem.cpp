@@ -1,6 +1,10 @@
 #include "PedalsSystem.h"
 #include <iostream>
 
+#include <algorithm>
+
+// #include <Arduino.h>
+
 // TODO parameterize percentages in constructor
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
 {
@@ -13,7 +17,10 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
                                                  const AnalogConversion_s &brake2,
                                                  unsigned long curr_time)
 {
+
     PedalsSystemData_s out;
+    
+    
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);
@@ -30,9 +37,11 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
+    out.regenPercent = std::max(std::min(out.brakePercent / mechBrakeActiveThreshold_, 1.0f), 0.0f);
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
     out.mechBrakeActive = out.brakePercent > mechBrakeActiveThreshold_;
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
+
     return out;
 }
 
@@ -56,26 +65,46 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
 {
     // FSAE EV.5.5
     // FSAE T.4.2.10
-    bool pedal_1_less_than_min = (pedalData1.raw < params.min_sense_1);
-    bool pedal_2_less_than_min = (pedalData2.raw < params.min_sense_2);
-    bool pedal_1_greater_than_max = (pedalData1.raw > params.max_sense_1);
-    bool pedal_2_greater_than_max = (pedalData2.raw > params.max_sense_2);
+    bool pedal1_swapped = false;
+    bool pedal2_swapped = false;
+    float margin_of_error = 0.10;
+    if (params.min_sense_1 > params.max_sense_1)
+    {
 
-    // check that the pedals are reading within 10% of each other
-    // T.4.2.4
+        pedal1_swapped = true;
+        // swap the logic: need to check and see if it is greater than min and less than max
+    }
+    if (params.min_sense_2 > params.max_sense_2)
+    {
+        pedal2_swapped = true;
+        // swap the logic
+    }
+
+    bool pedal_1_less_than_min = pedal1_swapped ? (pedalData1.raw > ((1.0 + margin_of_error) * params.min_sense_1))
+                                                : (pedalData1.raw < ((1.0 - margin_of_error) * params.min_sense_1));
+
+    bool pedal_2_less_than_min = pedal2_swapped ? (pedalData2.raw > ((1.0 + margin_of_error) * params.min_sense_2))
+                                                : (pedalData2.raw < ((1.0 - margin_of_error) * params.min_sense_2));
+
+    bool pedal_1_greater_than_max = pedal1_swapped ? (pedalData1.raw < ((1.0 - margin_of_error) * params.max_sense_1))
+                                                   : (pedalData1.raw > ((1.0 + margin_of_error) * params.max_sense_1));
+
+    bool pedal_2_greater_than_max = pedal2_swapped ? (pedalData2.raw < ((1.0 - margin_of_error) * params.max_sense_2))
+                                                   : (pedalData2.raw > ((1.0 + margin_of_error) * params.max_sense_2));
+    
+    
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
 
-    bool pedalsClamped = (pedalData1.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED || pedalData2.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED);
+    // bool pedalsClamped = (pedalData1.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED || pedalData2.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED);
     if (
         pedal_1_less_than_min ||
         pedal_2_less_than_min ||
         pedal_1_greater_than_max ||
         pedal_2_greater_than_max)
     {
-
         return true;
     }
-    else if (sens_not_within_req_percent || pedalsClamped)
+    else if (sens_not_within_req_percent)
     {
         return true;
     }
@@ -85,15 +114,29 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     }
 }
 
+float PedalsSystem::remove_deadzone_(float conversion_input, float deadzone)
+{
+    // first, subtract the start zone and ensure that the pedal is clamped at zero
+    float out = std::max(conversion_input - deadzone, 0.0f);
+
+    // second, scale output from 0 to 1 with 1 being 100 percent at say 95 percent actually
+    out = std::min((out / (1 - deadzone)), 1.0f);
+    return out;
+}
+
 bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &accelPedalData1,
                                                      const AnalogConversion_s &accelPedalData2,
                                                      const AnalogConversion_s &brakePedalData1,
                                                      const AnalogConversion_s &brakePedalData2)
 {
 
-    bool accel_pressed = pedal_is_active_(accelPedalData1.conversion, accelPedalData2.conversion, accelParams_.activation_percentage); // .1
-    bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, brakeParams_.activation_percentage); // 0.05
-
+    float accel_pedal1_real = remove_deadzone_(accelPedalData1.conversion, 0.05);
+    float accel_pedal2_real = remove_deadzone_(accelPedalData2.conversion, 0.05);
+    bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
+    bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, 0.80);                               // 0.05
+    // Serial.println("brake percents:");
+    // Serial.println(brakePedalData1.conversion);
+    // Serial.println(brakePedalData2.conversion);
     return (accel_pressed && brake_pressed);
 }
 

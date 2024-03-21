@@ -19,12 +19,15 @@ void SafetySystem::software_shutdown(const SysTick_s &tick) {
     // If AMS heartbeat is not received within reasonable interval
     // Set software is not ok
     if (!ams_->heartbeat_received(tick.millis)) {
+        // Serial.println("heartbeat not received");
         software_is_ok = false;
     }
-    if (software_is_ok)
+    if (software_is_ok) {
         ams_->set_state_ok_high(true);
-    else
+    }
+    else {
         ams_->set_state_ok_high(false);
+    }
 
     // Kick watchdog every software cycle
     wd_->kick_watchdog(tick.millis);

@@ -5,11 +5,9 @@
 const int ADC1_CS = 34;
 const int ADC2_CS = 33;
 const int ADC3_CS = 29;
-const int SOFTWARE_OK       = 28;
+const int SOFTWARE_OK       = 8;
 const int WATCHDOG_INPUT    = 32;
 
-// serial def
-HardwareSerial* STEERING_SERIAL = &Serial5;
 
 // ADC1 channel defs
 const int MCU15_ACCEL1_CHANNEL          = 2;
@@ -36,17 +34,31 @@ const unsigned long INV_CAN_BAUDRATE    = 500000;
 const unsigned long TELEM_CAN_BAUDRATE  = 500000;
 
 // APPS/Brake pedal parameters
-const int ACCEL1_MIN_THRESH = 100;
-const int ACCEL2_MIN_THRESH = 100;
-const int ACCEL1_MAX_THRESH = 3000;
-const int ACCEL2_MAX_THRESH = 3000;
+const int ACCEL1_MIN_THRESH = 2087;
+const int ACCEL2_MIN_THRESH = 1472;
+const int ACCEL1_MAX_THRESH = 3283;
+const int ACCEL2_MAX_THRESH = 323;
 const float APPS_ACTIVATION_PERCENTAGE = 0.1;
 
-const int BRAKE1_MIN_THRESH = 100;
-const int BRAKE2_MIN_THRESH = 100;
-const int BRAKE1_MAX_THRESH = 3000;
-const int BRAKE2_MAX_THRESH = 3000;
-const float BRAKE_ACTIVATION_PERCENTAGE = 0.05;
-const float BRAKE_MECH_THRESH = 0.05; // TODO: Determine actual mech threshold
+const int BRAKE1_MIN_THRESH = 2757;
+const int BRAKE2_MIN_THRESH = 867;
+const int BRAKE1_MAX_THRESH = 1421;
+const int BRAKE2_MAX_THRESH = 2198;
+const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
+const float BRAKE_MECH_THRESH = 0.55;
 
+// Load Cell Defs to convert raw to lbs
+// lbs = (scale)*raw + offset
+
+const float LOADCELL_FL_SCALE = 0.0553;
+const float LOADCELL_FL_OFFSET = 15.892;
+
+const float LOADCELL_FR_SCALE = 0.0512;
+const float LOADCELL_FR_OFFSET = 17.196;
+
+const float LOADCELL_RL_SCALE = 0.1147;
+const float LOADCELL_RL_OFFSET = 21.842;
+
+const float LOADCELL_RR_SCALE = 0.0588;
+const float LOADCELL_RR_OFFSET = 19.576;
 #endif /* __MCU15_H__ */

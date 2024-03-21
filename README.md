@@ -28,7 +28,7 @@ To test using platformio core CLI simply run `pio test -e test_env`.
 
 To upload to the teensy simply use the platformio upload arrow shown [here at number 3](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar).
 
-#### On Implementing and Importance of tests
+##### On Implementing and Importance of tests
 Unit tests are a great way to ensure that new features and new code in general can integrate and work well with other code. It provides a framework to verify that your stuff works the way it should and lets you know when and how it doesnt. 
 
 This project uses unit tests in the `test` folder to for both local testing and testing in the CI on github.
@@ -39,6 +39,44 @@ You can see results of previous test runs on commits here: https://github.com/hy
 
 These MUST be maintained for functionality of the car. 
 
+### setup vscode 
+##### with auto-completition and advanced navigation using compile commands
+
+
+the `compile_commands.json` file is a file that gets generated in the build folder upon excution of the [compiledb platformio task](https://docs.platformio.org/en/latest/integration/compile_commands.html) that sets up the include paths for vscode. [more about compile_commands.json here](https://clangd.llvm.org/design/compile-commands).
+
+If you enter the platformio terminal, you can generate compile commands with 
+1. ![alt text](image-1.png)
+
+then 
+2. ```pio run -t compiledb -e teensy41```
+
+
+this will generate the compile commands for the `teensy41` environment which is the environment we use to build and flash to the car. in a similar fashion, other environments (eg: `test_env`) can have their compile commands generated.
+
+3. then you need to setup vscode to recognize where this file is, which gets put into the `.pio` folder in your workspace. To do this, simply create a `.vscode` folder in the workspace and add a file called `c_cpp_properties.json` and it should look like this:
+
+```json
+{
+    "configurations": [
+        {
+            "name": "teensy41",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/.pio/build/teensy41/compile_commands.json"
+        }
+    ],
+    "version": 4
+}
+```
+then you can select this configuration to be used with [this c/c++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) in vscode for auto-completition and code navigation. 
+
+to select the configuration, use the hotkey `ctrl+shift+p` to open the command prompt in vscode, and then type \`C/C++: Select a Configuration\` and then select your configuration for which you named above.
 
 
 ## Design Lore of the Code
