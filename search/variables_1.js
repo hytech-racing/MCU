@@ -13,7 +13,7 @@ var searchData=
   ['brakepressed_10',['brakePressed',['../structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e',1,'PedalsSystemData_s']]],
   ['brkae_5factivation_5fpercentage_11',['BRKAE_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#a8162f3de879491ebacaf6258d707769c',1,'MCU_rev15_defs.h']]],
   ['button_12',['button',['../structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4',1,'DashComponentInterface_s']]],
-  ['buzzer_13',['buzzer',['../src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d',1,'buzzer():&#160;main.cpp'],['../main__minimal_8cpp.html#a9b42ad39449aba736bffe26005657f8c',1,'buzzer():&#160;main_minimal.cpp']]],
+  ['buzzer_13',['buzzer',['../src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d',1,'main.cpp']]],
   ['buzzer_5fcmd_14',['buzzer_cmd',['../structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237',1,'DashComponentInterface_s']]],
   ['buzzer_5fon_5finterval_15',['BUZZER_ON_INTERVAL',['../MCU__rev15__defs_8h.html#ad2f45d4290bd68044421a162246e5b88',1,'MCU_rev15_defs.h']]],
   ['buzzer_5fstate_16',['buzzer_state',['../structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f',1,'DashComponentInterface_s']]]

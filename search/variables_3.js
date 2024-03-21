@@ -21,7 +21,7 @@ var searchData=
   ['default_5ftemp_5falpha_18',['DEFAULT_TEMP_ALPHA',['../interfaces_2include_2AMSInterface_8h.html#aad9c93b43a51e92cd51c641838407dbd',1,'DEFAULT_TEMP_ALPHA():&#160;AMSInterface.h'],['../mock__interfaces_2AMSInterface_8h.html#aad9c93b43a51e92cd51c641838407dbd',1,'DEFAULT_TEMP_ALPHA():&#160;AMSInterface.h']]],
   ['default_5fvoltage_5falpha_19',['DEFAULT_VOLTAGE_ALPHA',['../interfaces_2include_2AMSInterface_8h.html#a1c778e9b4f30ea85c7e9d9ef1a0e657b',1,'DEFAULT_VOLTAGE_ALPHA():&#160;AMSInterface.h'],['../mock__interfaces_2AMSInterface_8h.html#a1c778e9b4f30ea85c7e9d9ef1a0e657b',1,'DEFAULT_VOLTAGE_ALPHA():&#160;AMSInterface.h']]],
   ['dial_5fmode_20',['dial_mode',['../structDashComponentInterface__s.html#a88d6ffb7bec4ed250450b7d0f07a2ed0',1,'DashComponentInterface_s']]],
-  ['drivetrain_21',['drivetrain',['../main__minimal_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f',1,'drivetrain():&#160;main_minimal.cpp'],['../src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f',1,'drivetrain():&#160;main.cpp']]],
+  ['drivetrain_21',['drivetrain',['../src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f',1,'main.cpp']]],
   ['drivetrain_5ferror_5f_22',['drivetrain_error_',['../classDrivetrainMock.html#a05f11d150b3a3db607d4867f3bc60d1c',1,'DrivetrainMock']]],
   ['drivetrain_5finited_5f_23',['drivetrain_inited_',['../classDrivetrainMock.html#a11eaf5c9275727dca38f7a01e0f71b83',1,'DrivetrainMock']]]
 ];

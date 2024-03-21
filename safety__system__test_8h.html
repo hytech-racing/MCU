@@ -124,19 +124,19 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   13</span> </div>
 <div class="line"><span class="lineno">   14</span>    SysTick_s curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(0);</div>
 <div class="line"><span class="lineno">   15</span> </div>
-<div class="line"><span class="lineno">   16</span>    <a class="code hl_class" href="classAMSInterface.html">AMSInterface</a> <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>(0, 0, 0, 0, 0);</div>
-<div class="line"><span class="lineno">   17</span>    <a class="code hl_class" href="classWatchdogInterface.html">WatchdogInterface</a> <a class="code hl_variable" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a>(0);</div>
-<div class="line"><span class="lineno">   18</span>    <a class="code hl_class" href="classSafetySystem.html">SafetySystem</a> safety_system(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a>);</div>
+<div class="line"><span class="lineno">   16</span>    <a class="code hl_class" href="classAMSInterface.html">AMSInterface</a> <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>(0, 0, 0, 0, 0);</div>
+<div class="line"><span class="lineno">   17</span>    <a class="code hl_class" href="classWatchdogInterface.html">WatchdogInterface</a> <a class="code hl_variable" href="src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb">wd_interface</a>(0);</div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_class" href="classSafetySystem.html">SafetySystem</a> safety_system(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb">wd_interface</a>);</div>
 <div class="line"><span class="lineno">   19</span> </div>
-<div class="line"><span class="lineno">   20</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">init</a>(curr_tick.millis);</div>
-<div class="line"><span class="lineno">   21</span>    <a class="code hl_variable" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a>.<a class="code hl_function" href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">init</a>(curr_tick.millis);</div>
+<div class="line"><span class="lineno">   20</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">init</a>(curr_tick.millis);</div>
+<div class="line"><span class="lineno">   21</span>    <a class="code hl_variable" href="src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb">wd_interface</a>.<a class="code hl_function" href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">init</a>(curr_tick.millis);</div>
 <div class="line"><span class="lineno">   22</span>    safety_system.init();</div>
 <div class="line"><span class="lineno">   23</span> </div>
 <div class="line"><span class="lineno">   24</span>    ASSERT_EQ(safety_system.get_software_is_ok(), <span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>    <span class="comment">// 10 milliseconds later</span></div>
 <div class="line"><span class="lineno">   27</span>    curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(10 * 1000);</div>
-<div class="line"><span class="lineno">   28</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">set_heartbeat</a>(curr_tick.millis);</div>
+<div class="line"><span class="lineno">   28</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">set_heartbeat</a>(curr_tick.millis);</div>
 <div class="line"><span class="lineno">   29</span>    </div>
 <div class="line"><span class="lineno">   30</span>    safety_system.software_shutdown(curr_tick);</div>
 <div class="line"><span class="lineno">   31</span> </div>
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   35</span>    curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(45 * 1000);</div>
 <div class="line"><span class="lineno">   36</span>    safety_system.software_shutdown(curr_tick);</div>
 <div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">heartbeat_received</a>(curr_tick.millis), <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">   38</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">heartbeat_received</a>(curr_tick.millis), <span class="keyword">false</span>);</div>
 <div class="line"><span class="lineno">   39</span> </div>
 <div class="line"><span class="lineno">   40</span>    ASSERT_EQ(safety_system.get_software_is_ok(), <span class="keyword">false</span>);</div>
 <div class="line"><span class="lineno">   41</span> </div>
@@ -158,9 +158,9 @@ Functions</h2></td></tr>
 <div class="ttc" id="aclassSafetySystem_html"><div class="ttname"><a href="classSafetySystem.html">SafetySystem</a></div><div class="ttdef"><b>Definition:</b> <a href="SafetySystem_8h_source.html#l00008">SafetySystem.h:9</a></div></div>
 <div class="ttc" id="aclassWatchdogInterface_html"><div class="ttname"><a href="classWatchdogInterface.html">WatchdogInterface</a></div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2WatchdogInterface_8h_source.html#l00008">WatchdogInterface.h:9</a></div></div>
 <div class="ttc" id="aclassWatchdogInterface_html_a17741120f4067cd237a2c88f95bd3476"><div class="ttname"><a href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">WatchdogInterface::init</a></div><div class="ttdeci">void init(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00004">WatchdogInterface.cpp:4</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a9e79e8e3656e1b303f2b26036ea815b1"><div class="ttname"><a href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(SOFTWARE_OK)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00084">main.cpp:84</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_ab38aceb67800dab467af6c2aa001d7df"><div class="ttname"><a href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a></div><div class="ttdeci">WatchdogInterface wd_interface(WATCHDOG_INPUT)</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_ae7fc4cf3627b4a43f5a397270a5c351c"><div class="ttname"><a href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a></div><div class="ttdeci">SysClock sys_clock</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00081">main.cpp:81</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a85a5439b2aa488ed20a8c97afafc2760"><div class="ttname"><a href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(8)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00087">main.cpp:87</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_ad301bd17a182b8613b3b265111e098cb"><div class="ttname"><a href="src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb">wd_interface</a></div><div class="ttdeci">WatchdogInterface wd_interface(32)</div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_ae7fc4cf3627b4a43f5a397270a5c351c"><div class="ttname"><a href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a></div><div class="ttdeci">SysClock sys_clock</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00083">main.cpp:83</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

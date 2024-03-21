@@ -17,7 +17,7 @@ var searchData=
   ['brkae_5factivation_5fpercentage_14',['BRKAE_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#a8162f3de879491ebacaf6258d707769c',1,'MCU_rev15_defs.h']]],
   ['building_20testing_20and_20running_15',['building testing and running',['../md_README.html',1,'']]],
   ['button_16',['button',['../structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4',1,'DashComponentInterface_s']]],
-  ['buzzer_17',['buzzer',['../src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d',1,'buzzer():&#160;main.cpp'],['../main__minimal_8cpp.html#a9b42ad39449aba736bffe26005657f8c',1,'buzzer():&#160;main_minimal.cpp']]],
+  ['buzzer_17',['buzzer',['../src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d',1,'main.cpp']]],
   ['buzzer_2ecpp_18',['Buzzer.cpp',['../Buzzer_8cpp.html',1,'']]],
   ['buzzer_2eh_19',['Buzzer.h',['../Buzzer_8h.html',1,'']]],
   ['buzzer_5fcmd_20',['buzzer_cmd',['../structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237',1,'DashComponentInterface_s']]],

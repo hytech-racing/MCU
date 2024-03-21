@@ -129,7 +129,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  159</span>    SysClock clock = SysClock();</div>
 <div class="line"><span class="lineno">  160</span>    SysTick_s cur_tick;</div>
 <div class="line"><span class="lineno">  161</span>    cur_tick = clock.tick(0);</div>
-<div class="line"><span class="lineno">  162</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
+<div class="line"><span class="lineno">  162</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
 <div class="line"><span class="lineno">  163</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> resulting_torque_command;</div>
 <div class="line"><span class="lineno">  164</span> </div>
 <div class="line"><span class="lineno">  165</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_slow_drivetrain_dynamics = {</div>
@@ -180,7 +180,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  210</span> </div>
 <div class="line"><span class="lineno">  211</span>    <span class="comment">// Pretend the drivetrain is moving above MAX_SPEED_FOR_MODE_CHANGE and attempt mode shift (TC_NO_CONTROLLER to TC_SAFE_MODE) via tick</span></div>
 <div class="line"><span class="lineno">  212</span>    <span class="comment">// Torque mode should not change since the car is moving</span></div>
-<div class="line"><span class="lineno">  213</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">  213</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
 <div class="line"><span class="lineno">  214</span>        cur_tick,</div>
 <div class="line"><span class="lineno">  215</span>        simulated_fast_drivetrain_dynamics,</div>
 <div class="line"><span class="lineno">  216</span>        simulated_no_accel_press,</div>
@@ -193,7 +193,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  223</span>        false</div>
 <div class="line"><span class="lineno">  224</span>    );</div>
 <div class="line"><span class="lineno">  225</span> </div>
-<div class="line"><span class="lineno">  226</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  226</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
 <div class="line"><span class="lineno">  227</span> </div>
 <div class="line"><span class="lineno">  228</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
 <div class="line"><span class="lineno">  229</span>    {</div>
@@ -202,7 +202,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  232</span>    }</div>
 <div class="line"><span class="lineno">  233</span> </div>
 <div class="line"><span class="lineno">  234</span>    <span class="comment">// Tell TCMUX vehicle is stationary. Mode should change</span></div>
-<div class="line"><span class="lineno">  235</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">  235</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
 <div class="line"><span class="lineno">  236</span>        cur_tick,</div>
 <div class="line"><span class="lineno">  237</span>        simulated_slow_drivetrain_dynamics,</div>
 <div class="line"><span class="lineno">  238</span>        simulated_no_accel_press,</div>
@@ -216,7 +216,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  246</span>    );</div>
 <div class="line"><span class="lineno">  247</span> </div>
 <div class="line"><span class="lineno">  248</span>    <span class="comment">// Now press the pedal. Torque should be requested</span></div>
-<div class="line"><span class="lineno">  249</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">  249</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
 <div class="line"><span class="lineno">  250</span>        cur_tick,</div>
 <div class="line"><span class="lineno">  251</span>        simulated_slow_drivetrain_dynamics,</div>
 <div class="line"><span class="lineno">  252</span>        simulated_full_accel_press,</div>
@@ -229,7 +229,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  259</span>        false</div>
 <div class="line"><span class="lineno">  260</span>    );</div>
 <div class="line"><span class="lineno">  261</span> </div>
-<div class="line"><span class="lineno">  262</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  262</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
 <div class="line"><span class="lineno">  263</span> </div>
 <div class="line"><span class="lineno">  264</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
 <div class="line"><span class="lineno">  265</span>    {</div>
@@ -244,7 +244,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="aclassTorqueControllerMux_html_a71217aa07bca005b9131252473c4463d"><div class="ttname"><a href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">TorqueControllerMux::getDrivetrainCommand</a></div><div class="ttdeci">const DrivetrainCommand_s &amp; getDrivetrainCommand()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00070">TorqueControllerMux.h:70</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a90a48e36c38a01af7a9552466613ae99"><div class="ttname"><a href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">TorqueControllerMux::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const DrivetrainDynamicReport_s &amp;drivetrainData, const PedalsSystemData_s &amp;pedalsData, const SteeringSystemData_s &amp;steeringData, const AnalogConversion_s &amp;loadFLData, const AnalogConversion_s &amp;loadFRData, const AnalogConversion_s &amp;loadRLData, const AnalogConversion_s &amp;loadRRData, DialMode_e dashboardDialMode, bool dashboardTorqueModeButtonPressed)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00005">TorqueControllerMux.cpp:5</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_af9af553c886080310b9cd6364449c0e1"><div class="ttname"><a href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a></div><div class="ttdeci">TorqueControllerMux torque_controller_mux</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00090">main.cpp:90</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_af8f6043c059e465412c7d1b34bc39a2c"><div class="ttname"><a href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a></div><div class="ttdeci">TorqueControllerMux torque_controller_mux(1.0, 0.4)</div></div>
 <div class="ttc" id="astructAnalogConversion__s_html"><div class="ttname"><a href="structAnalogConversion__s.html">AnalogConversion_s</a></div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00013">AnalogSensorsInterface.h:14</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html"><div class="ttname"><a href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a></div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00010">DrivetrainSystem.h:11</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00012">DrivetrainSystem.h:12</a></div></div>
@@ -288,7 +288,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   63</span>    SysClock clock = SysClock();</div>
 <div class="line"><span class="lineno">   64</span>    SysTick_s cur_tick;</div>
 <div class="line"><span class="lineno">   65</span>    cur_tick = clock.tick(0);</div>
-<div class="line"><span class="lineno">   66</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
+<div class="line"><span class="lineno">   66</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
 <div class="line"><span class="lineno">   67</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> resulting_torque_command;</div>
 <div class="line"><span class="lineno">   68</span> </div>
 <div class="line"><span class="lineno">   69</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_drivetrain_dynamics = {</div>
@@ -321,7 +321,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>    <span class="comment">// Press the pedal and observe whether torque mode changes</span></div>
 <div class="line"><span class="lineno">   98</span>    <span class="comment">// Torque mode should not change since the requested torque is vastly different from the currently requested torque (0)</span></div>
-<div class="line"><span class="lineno">   99</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">   99</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
 <div class="line"><span class="lineno">  100</span>        cur_tick,</div>
 <div class="line"><span class="lineno">  101</span>        simulated_drivetrain_dynamics,</div>
 <div class="line"><span class="lineno">  102</span>        simulated_full_accel_press,</div>
@@ -334,7 +334,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  109</span>        false</div>
 <div class="line"><span class="lineno">  110</span>    );</div>
 <div class="line"><span class="lineno">  111</span> </div>
-<div class="line"><span class="lineno">  112</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  112</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
 <div class="line"><span class="lineno">  113</span> </div>
 <div class="line"><span class="lineno">  114</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
 <div class="line"><span class="lineno">  115</span>    {</div>
@@ -343,7 +343,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  118</span>    }</div>
 <div class="line"><span class="lineno">  119</span> </div>
 <div class="line"><span class="lineno">  120</span>    <span class="comment">// Release the pedal. The mode should change now</span></div>
-<div class="line"><span class="lineno">  121</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">  121</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
 <div class="line"><span class="lineno">  122</span>        cur_tick,</div>
 <div class="line"><span class="lineno">  123</span>        simulated_drivetrain_dynamics,</div>
 <div class="line"><span class="lineno">  124</span>        simulated_no_accel_press,</div>
@@ -357,7 +357,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  132</span>    );</div>
 <div class="line"><span class="lineno">  133</span> </div>
 <div class="line"><span class="lineno">  134</span>    <span class="comment">// Now press the pedal again. Torque should be requested</span></div>
-<div class="line"><span class="lineno">  135</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">  135</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
 <div class="line"><span class="lineno">  136</span>        cur_tick,</div>
 <div class="line"><span class="lineno">  137</span>        simulated_drivetrain_dynamics,</div>
 <div class="line"><span class="lineno">  138</span>        simulated_full_accel_press,</div>
@@ -370,7 +370,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  145</span>        false</div>
 <div class="line"><span class="lineno">  146</span>    );</div>
 <div class="line"><span class="lineno">  147</span> </div>
-<div class="line"><span class="lineno">  148</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  148</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
 <div class="line"><span class="lineno">  149</span> </div>
 <div class="line"><span class="lineno">  150</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
 <div class="line"><span class="lineno">  151</span>    {</div>
