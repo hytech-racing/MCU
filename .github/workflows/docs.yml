@@ -19,4 +19,4 @@ jobs:
     - name: build and deploy docs
       uses: mattnotmitt/doxygen-action@v1.9.5
       with:
-        doxyfile-path: 'Doxygen' 
+        doxyfile-path: 'Doxyfile' 
