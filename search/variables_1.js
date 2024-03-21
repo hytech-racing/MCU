@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['bms_5fcoulomb_5fcounts_0',['bms_coulomb_counts',['../old__main_8cpp.html#ac2c110b5d25baee01b11a042eaeef2d1',1,'old_main.cpp']]],
+  ['bms_5fstatus_1',['bms_status',['../old__main_8cpp.html#ac87defea67b1901f45c90aa3d0f7f10f',1,'old_main.cpp']]],
+  ['bms_5ftemperatures_2',['bms_temperatures',['../old__main_8cpp.html#aa8206fff21b9f05bd80923733eb38ed1',1,'old_main.cpp']]],
+  ['bms_5fvoltages_3',['bms_voltages',['../old__main_8cpp.html#ab9cd2522e403a7c937a9a08cd0b5471b',1,'old_main.cpp']]],
+  ['brake1_5fchannel_4',['brake1_channel',['../structTelemetryInterfaceReadChannels.html#ad66c7ad29bd48c3b0bfcd92503385399',1,'TelemetryInterfaceReadChannels']]],
+  ['brake1_5fmax_5fthresh_5',['BRAKE1_MAX_THRESH',['../MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8',1,'MCU_rev15_defs.h']]],
+  ['brake1_5fmin_5fthresh_6',['BRAKE1_MIN_THRESH',['../MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429',1,'MCU_rev15_defs.h']]],
+  ['brake2_5fchannel_7',['brake2_channel',['../structTelemetryInterfaceReadChannels.html#aa115bab2c803921b25ac1e8519a59d03',1,'TelemetryInterfaceReadChannels']]],
+  ['brake2_5fmax_5fthresh_8',['BRAKE2_MAX_THRESH',['../MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709',1,'MCU_rev15_defs.h']]],
+  ['brake2_5fmin_5fthresh_9',['BRAKE2_MIN_THRESH',['../MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978',1,'MCU_rev15_defs.h']]],
+  ['brake_5factivation_5fpercentage_10',['BRAKE_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#a5c7f10ffdceb24ed1a6b1b861bc284d4',1,'MCU_rev15_defs.h']]],
+  ['brake_5fmech_5fthresh_11',['BRAKE_MECH_THRESH',['../MCU__rev15__defs_8h.html#adbefeea2e527d6fe954857f24e1fa7e4',1,'MCU_rev15_defs.h']]],
+  ['brakeandaccelpressedimplausibility_12',['brakeAndAccelPressedImplausibility',['../structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b',1,'PedalsSystemData_s']]],
+  ['brakeimplausible_13',['brakeImplausible',['../structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122',1,'PedalsSystemData_s']]],
+  ['brakepercent_14',['brakePercent',['../structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8',1,'PedalsSystemData_s']]],
+  ['brakepressed_15',['brakePressed',['../structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e',1,'PedalsSystemData_s']]],
+  ['button_16',['button',['../structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4',1,'DashComponentInterface_s']]],
+  ['buzzer_17',['buzzer',['../src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d',1,'main.cpp']]],
+  ['buzzer_5fcmd_18',['buzzer_cmd',['../structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237',1,'DashComponentInterface_s']]],
+  ['buzzer_5fon_5finterval_19',['BUZZER_ON_INTERVAL',['../MCU__rev15__defs_8h.html#ad2f45d4290bd68044421a162246e5b88',1,'MCU_rev15_defs.h']]],
+  ['buzzer_5fstate_20',['buzzer_state',['../structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f',1,'DashComponentInterface_s']]]
+];
