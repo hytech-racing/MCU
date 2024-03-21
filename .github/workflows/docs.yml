@@ -9,11 +9,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    
-    - name: Copy source code
-      run: |
-        cp -r ./src ./html/src  # Adjust './src' to match the actual path to your source code
-    
     - name: gen docs
       uses: mattnotmitt/doxygen-action@v1.9.5
       with:
