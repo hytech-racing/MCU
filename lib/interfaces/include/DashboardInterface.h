@@ -137,7 +137,7 @@ public:
     /* getter for the mark button */
     bool specialButtonPressed();
     /* getter for the torque button (does not currently exist on dash ) */
-    bool torqueButtonPressed();
+    bool torqueModeButtonPressed();
     /* getter for the inverter reset button (clears error codes ) */
     bool inverterResetButtonPressed();
     /* getter for the launch control button */

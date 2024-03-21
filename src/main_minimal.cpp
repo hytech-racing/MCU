@@ -314,5 +314,5 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         sab_interface.rlLoadCell.convert(),  // RL load cell reading. TODO: get data from rear load cells
         sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
-        dashboard.torqueButtonPressed());
+        dashboard.torqueModeButtonPressed());
 }

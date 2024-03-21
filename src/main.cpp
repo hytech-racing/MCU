@@ -296,7 +296,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         (const AnalogConversion_s){},                         // RL load cell reading. TODO: get data from rear load cells
         (const AnalogConversion_s){},                         // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
-        dashboard.torqueButtonPressed());
+        dashboard.torqueModeButtonPressed());
 }
 
 
