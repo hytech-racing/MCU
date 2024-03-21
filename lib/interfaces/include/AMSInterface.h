@@ -4,9 +4,10 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 
-/* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
+
+/// @brief Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
 const unsigned long HEARTBEAT_INTERVAL                      = 20;   // milliseconds
-/* The total pcc threshold is the lowest allowable voltage of the entire pack (in Volts)*/
+/// @brief The total pcc threshold is the lowest allowable voltage of the entire pack (in Volts)*/
 const unsigned long PACK_CHARGE_CRIT_TOTAL_THRESHOLD        = 420;
 /* The lowest pcc threshold is the lowest allowable single cell voltage (in 100 microvolts)*/
 const unsigned long PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  = 35000; //equivalent to 3.5V
@@ -16,6 +17,8 @@ const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 
+
+/// @brief this class is for interfacing with the AMS (accumulator management system) 
 class AMSInterface
 {
 public:
