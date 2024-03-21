@@ -7,6 +7,19 @@
 #include "MCUInterface.h"
 #include "MCU_status.h"
 
+/*
+    Enum for the car's torque limits
+    MOVE ME! - ideally into a TorqueControllerDefs.h file
+    to prevent circular dependencies
+*/
+enum class TorqueLimit_e
+{
+    TCMUX_LOW_TORQUE = 0,
+    TCMUX_MID_TORQUE = 1,
+    TCMUX_FULL_TORQUE = 2,
+    TCMUX_NUM_TORQUE_LIMITS = 3,
+};
+
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum class DialMode_e
 {   
@@ -121,7 +134,7 @@ public:
     /*
         Tick DashboardInterface at 10hz to gather data and send CAN message
     */
-    void tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error);
+    void tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error, TorqueLimit_e torque);
 
     /*!
         getter for the dashboard's current dial position (drive profile)
@@ -137,7 +150,7 @@ public:
     /* getter for the mark button */
     bool specialButtonPressed();
     /* getter for the torque button (does not currently exist on dash ) */
-    bool torqueButtonPressed();
+    bool torqueModeButtonPressed();
     /* getter for the inverter reset button (clears error codes ) */
     bool inverterResetButtonPressed();
     /* getter for the launch control button */

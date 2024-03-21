@@ -43,12 +43,6 @@ CAN_message_t DashboardInterface::write()
     dash_mcu_state.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
     dash_mcu_state.imd_led = _data.LED[static_cast<int>(DashLED_e::IMD_LED)];
     dash_mcu_state.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
-
-    // Make sure IMD and AMS stay green if it is only BOTS that is tripped
-    // if (dash_mcu_state.bots_led == int(LEDColors_e::RED)) {
-    //     dash_mcu_state.imd_led = int(LEDColors_e::ON);
-    //     dash_mcu_state.ams_led = int(LEDColors_e::ON);
-    // }
     
     dash_mcu_state.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
     dash_mcu_state.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
@@ -73,17 +67,10 @@ void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
     _data.LED[static_cast<uint8_t>(led)] = static_cast<uint8_t>(color);
 }
 
-void DashboardInterface::tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error)
+void DashboardInterface::tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error, TorqueLimit_e torque)
 {
     
     soundBuzzer(buzzer);
-
-    // Serial.printf("mcu->bms_ok_is_high() is %d\n", mcu->bms_ok_is_high());
-    // Serial.printf("mcu->imd_ok_is_high() is %d\n", mcu->imd_ok_is_high());
-    // Serial.printf("mcu->get_bots_ok() is %d\n", mcu->get_bots_ok());
-    // Serial.printf("car_state == int(MCU_STATE::READY_TO_DRIVE) is %d\n", car_state == int(MCU_STATE::READY_TO_DRIVE));
-    // Serial.printf("!drivetrain_error is %d\n\n", !drivetrain_error);
-    // Serial.printf("!drivetrain_error is %d\n\n", !drivetrain_error);
 
     setLED(DashLED_e::AMS_LED, mcu->bms_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
     setLED(DashLED_e::IMD_LED, mcu->imd_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
@@ -92,6 +79,21 @@ void DashboardInterface::tick10(MCUInterface* mcu, int car_state, bool buzzer, b
     setLED(DashLED_e::MC_ERROR_LED, !drivetrain_error ? LEDColors_e::ON : LEDColors_e::RED);
     setLED(DashLED_e::COCKPIT_BRB_LED, mcu->brb_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
 
+    switch(torque){
+    case TorqueLimit_e::TCMUX_LOW_TORQUE:
+        setLED(DashLED_e::MODE_LED, LEDColors_e::OFF);
+        break;
+    case TorqueLimit_e::TCMUX_MID_TORQUE:
+        setLED(DashLED_e::MODE_LED, LEDColors_e::YELLOW);
+        break;
+    case TorqueLimit_e::TCMUX_FULL_TORQUE:
+        setLED(DashLED_e::MODE_LED, LEDColors_e::ON);
+        break;
+    default:
+        setLED(DashLED_e::MODE_LED, LEDColors_e::RED);
+        break;
+    }
+
     write();
 }
 
@@ -99,10 +101,9 @@ DialMode_e DashboardInterface::getDialMode() {return _data.dial_mode;}
 
 bool DashboardInterface::startButtonPressed() {return _data.button.start;}
 bool DashboardInterface::specialButtonPressed() {return _data.button.mark;}
-bool DashboardInterface::torqueButtonPressed() {return _data.button.mode;}
+bool DashboardInterface::torqueModeButtonPressed() {return _data.button.torque_mode;}
 bool DashboardInterface::inverterResetButtonPressed() {return _data.button.mc_cycle;}
 bool DashboardInterface::launchControlButtonPressed() {return _data.button.launch_ctrl;}
-bool DashboardInterface::torqueLoadingButtonPressed() {return _data.button.torque_mode;}
 bool DashboardInterface::nightModeButtonPressed() {return _data.button.led_dimmer;}
 bool DashboardInterface::leftShifterButtonPressed() {return _data.button.left_shifter;}
 bool DashboardInterface::rightShifterButtonPressed() {return _data.button.right_shifter;}
