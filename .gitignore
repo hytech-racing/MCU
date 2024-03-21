@@ -5,3 +5,4 @@
 .vscode/ipch
 .vscode/
 compile_commands.json
+docs/html/

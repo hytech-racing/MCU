@@ -16,6 +16,8 @@ const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 
+
+/// @brief this class is for interfacing with the AMS (accumulator management system) 
 class AMSInterface
 {
 public:
