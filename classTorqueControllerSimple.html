@@ -92,20 +92,29 @@ Inheritance diagram for TorqueControllerSimple:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a886314bc9e4bfe4abb5a325cc33a53c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimple.html#a886314bc9e4bfe4abb5a325cc33a53c5">TorqueControllerSimple</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;writeout, float rearTorqueScale)</td></tr>
-<tr class="separator:a886314bc9e4bfe4abb5a325cc33a53c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99df319b8969aa4ec07c17fe9457add3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimple.html#a99df319b8969aa4ec07c17fe9457add3">TorqueControllerSimple</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;writeout)</td></tr>
-<tr class="separator:a99df319b8969aa4ec07c17fe9457add3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ff860a62589c84ce75b6b671012ce84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimple.html#a5ff860a62589c84ce75b6b671012ce84">TorqueControllerSimple</a> (<a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;writeout, float rearTorqueScale, float regenTorqueScale)</td></tr>
+<tr class="memdesc:a5ff860a62589c84ce75b6b671012ce84"><td class="mdescLeft">&#160;</td><td class="mdescRight">simple TC in which a scaling can be applied to both regen and accel torques for scaling accel request (accel percent - regen percent)  <a href="classTorqueControllerSimple.html#a5ff860a62589c84ce75b6b671012ce84">More...</a><br /></td></tr>
+<tr class="separator:a5ff860a62589c84ce75b6b671012ce84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d44c2b47b49a3f156cdc11c3f353f94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimple.html#a4d44c2b47b49a3f156cdc11c3f353f94">TorqueControllerSimple</a> (<a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;writeout)</td></tr>
+<tr class="separator:a4d44c2b47b49a3f156cdc11c3f353f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6517b0493098838c2f923e23feff718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">tick</a> (const SysTick_s &amp;tick, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;pedalsData, float torqueLimit)</td></tr>
 <tr class="separator:ac6517b0493098838c2f923e23feff718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classTorqueController"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classTorqueController')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classTorqueController.html">TorqueController&lt; TC_SAFE_MODE &gt;</a></td></tr>
+<tr class="memitem:ad1a1aba4ba5e0d038e7e23f7eb1fa81b inherit pro_methods_classTorqueController"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueController.html#ad1a1aba4ba5e0d038e7e23f7eb1fa81b">TCPowerLimitScaleDown</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrainData, float powerLimit)</td></tr>
+<tr class="separator:ad1a1aba4ba5e0d038e7e23f7eb1fa81b inherit pro_methods_classTorqueController"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ec4fb9528f417a873726d0c7ed4e7c inherit pro_methods_classTorqueController"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueController.html#a10ec4fb9528f417a873726d0c7ed4e7c">TCPosTorqueLimit</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, float torqueLimit)</td></tr>
+<tr class="separator:a10ec4fb9528f417a873726d0c7ed4e7c inherit pro_methods_classTorqueController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Simple torque controller that only considers pedal inputs and torque limit. </p>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00066">66</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00095">95</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a886314bc9e4bfe4abb5a325cc33a53c5" name="a886314bc9e4bfe4abb5a325cc33a53c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a886314bc9e4bfe4abb5a325cc33a53c5">&#9670;&#160;</a></span>TorqueControllerSimple() <span class="overload">[1/2]</span></h2>
+<a id="a5ff860a62589c84ce75b6b671012ce84" name="a5ff860a62589c84ce75b6b671012ce84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ff860a62589c84ce75b6b671012ce84">&#9670;&#160;</a></span>TorqueControllerSimple() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -116,14 +125,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">TorqueControllerSimple::TorqueControllerSimple </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;&#160;</td>
           <td class="paramname"><em>writeout</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>rearTorqueScale</em>&#160;</td>
+          <td class="paramname"><em>rearTorqueScale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>regenTorqueScale</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -138,15 +153,34 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00074">74</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>    : writeout_(writeout),</div>
-<div class="line"><span class="lineno">   76</span>    frontTorqueScale_(2.0 - rearTorqueScale),</div>
-<div class="line"><span class="lineno">   77</span>    rearTorqueScale_(rearTorqueScale) {}</div>
+<p>simple TC in which a scaling can be applied to both regen and accel torques for scaling accel request (accel percent - regen percent) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">writeout</td><td>the reference to the torque controller output being sent that contains the drivetrain command </td></tr>
+    <tr><td class="paramname">rearTorqueScale</td><td>the 0 to 2 scaling with which 0 represents 200 percent of the accel percent with which to request torque from front wheels, 2 being vice versa to the rear and 1 being balanced. </td></tr>
+    <tr><td class="paramname">regenTorqueScale</td><td>same as rearTorqueScale, accept applied to negative accel percents which correspond to regen </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00110">110</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>        : writeout_(writeout),</div>
+<div class="line"><span class="lineno">  112</span>          frontTorqueScale_(2.0 - rearTorqueScale),</div>
+<div class="line"><span class="lineno">  113</span>          rearTorqueScale_(rearTorqueScale),</div>
+<div class="line"><span class="lineno">  114</span>          frontRegenTorqueScale_(2.0 - regenTorqueScale),</div>
+<div class="line"><span class="lineno">  115</span>          rearRegenTorqueScale_(regenTorqueScale)</div>
+<div class="line"><span class="lineno">  116</span>    {</div>
+<div class="line"><span class="lineno">  117</span>        writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a> = <a class="code hl_variable" href="TorqueControllers_8h.html#a45e479ed7f57380fd87a3b9c9d1fbef8">TC_COMMAND_NO_TORQUE</a>;</div>
+<div class="line"><span class="lineno">  118</span>        writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  119</span>    }</div>
+<div class="ttc" id="aTorqueControllers_8h_html_a45e479ed7f57380fd87a3b9c9d1fbef8"><div class="ttname"><a href="TorqueControllers_8h.html#a45e479ed7f57380fd87a3b9c9d1fbef8">TC_COMMAND_NO_TORQUE</a></div><div class="ttdeci">const DrivetrainCommand_s TC_COMMAND_NO_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00022">TorqueControllers.h:22</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a85f1248f94789f10b46e7fbe9a8daf15"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">TorqueControllerOutput_s::ready</a></div><div class="ttdeci">bool ready</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00029">TorqueControllers.h:29</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00028">TorqueControllers.h:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a99df319b8969aa4ec07c17fe9457add3" name="a99df319b8969aa4ec07c17fe9457add3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99df319b8969aa4ec07c17fe9457add3">&#9670;&#160;</a></span>TorqueControllerSimple() <span class="overload">[2/2]</span></h2>
+<a id="a4d44c2b47b49a3f156cdc11c3f353f94" name="a4d44c2b47b49a3f156cdc11c3f353f94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d44c2b47b49a3f156cdc11c3f353f94">&#9670;&#160;</a></span>TorqueControllerSimple() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +191,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">TorqueControllerSimple::TorqueControllerSimple </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;&#160;</td>
           <td class="paramname"><em>writeout</em></td><td>)</td>
           <td></td>
         </tr>
@@ -169,9 +203,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00078">78</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>: <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a>(writeout, 1.0) {}</div>
-<div class="ttc" id="aclassTorqueControllerSimple_html"><div class="ttname"><a href="classTorqueControllerSimple.html">TorqueControllerSimple</a></div><div class="ttdoc">Simple torque controller that only considers pedal inputs and torque limit.</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00066">TorqueControllers.h:67</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00120">120</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  120</span>: <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a>(writeout, 1.0, 1.0) {}</div>
+<div class="ttc" id="aclassTorqueControllerSimple_html"><div class="ttname"><a href="classTorqueControllerSimple.html">TorqueControllerSimple</a></div><div class="ttdoc">Simple torque controller that only considers pedal inputs and torque limit.</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00095">TorqueControllers.h:96</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -208,85 +242,69 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8cpp_source.html#l00025">25</a> of file <a class="el" href="TorqueControllers_8cpp_source.html">TorqueControllers.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   26</span>{</div>
-<div class="line"><span class="lineno">   27</span>    <span class="comment">// Calculate torque commands at 100hz</span></div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">tick</a>.triggers.trigger100)</div>
-<div class="line"><span class="lineno">   29</span>    {</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">if</span> ((!pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">brakeAndAccelPressedImplausibility</a>) &amp;&amp; (pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#aa0abaf0a205603315888d746ce5a7e95">implausibilityExceededMaxDuration</a>== <span class="keyword">false</span>))</div>
-<div class="line"><span class="lineno">   31</span>        {</div>
-<div class="line"><span class="lineno">   32</span>            <span class="comment">// Both pedals are not pressed and no implausibility has been detected</span></div>
-<div class="line"><span class="lineno">   33</span>            <span class="comment">// accelRequest goes between 1.0 and -1.0</span></div>
-<div class="line"><span class="lineno">   34</span>            <span class="keywordtype">float</span> accelRequest = pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> - pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a>;</div>
-<div class="line"><span class="lineno">   35</span>            <span class="keywordtype">float</span> torqueRequest;</div>
-<div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>            <span class="keywordflow">if</span> (accelRequest &gt;= 0.0)</div>
-<div class="line"><span class="lineno">   38</span>            {</div>
-<div class="line"><span class="lineno">   39</span>                <span class="comment">// Positive torque request</span></div>
-<div class="line"><span class="lineno">   40</span>                torqueRequest = accelRequest * <a class="code hl_variable" href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a>;</div>
-<div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
-<div class="line"><span class="lineno">   43</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
-<div class="line"><span class="lineno">   44</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
-<div class="line"><span class="lineno">   45</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
-<div class="line"><span class="lineno">   46</span> </div>
-<div class="line"><span class="lineno">   47</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = torqueRequest * frontTorqueScale_;</div>
-<div class="line"><span class="lineno">   48</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = torqueRequest * frontTorqueScale_;</div>
-<div class="line"><span class="lineno">   49</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = torqueRequest * rearTorqueScale_;</div>
-<div class="line"><span class="lineno">   50</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = torqueRequest * rearTorqueScale_;</div>
-<div class="line"><span class="lineno">   51</span>            }</div>
-<div class="line"><span class="lineno">   52</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   53</span>            {</div>
-<div class="line"><span class="lineno">   54</span>                <span class="comment">// Negative torque request</span></div>
-<div class="line"><span class="lineno">   55</span>                torqueRequest = <a class="code hl_variable" href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a> * accelRequest * -1.0; </div>
-<div class="line"><span class="lineno">   56</span>                </div>
-<div class="line"><span class="lineno">   57</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   58</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   59</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   60</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = torqueRequest;</div>
-<div class="line"><span class="lineno">   63</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = torqueRequest;</div>
-<div class="line"><span class="lineno">   64</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = torqueRequest;</div>
-<div class="line"><span class="lineno">   65</span>                data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = torqueRequest;</div>
-<div class="line"><span class="lineno">   66</span>            }</div>
-<div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>            <span class="comment">// Apply the torque limit</span></div>
-<div class="line"><span class="lineno">   69</span>            TCPosTorqueLimit(data_, torqueLimit);</div>
-<div class="line"><span class="lineno">   70</span>        }</div>
-<div class="line"><span class="lineno">   71</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   72</span>        {</div>
-<div class="line"><span class="lineno">   73</span>            <span class="comment">// Both pedals are pressed or an implausibility has been detected</span></div>
-<div class="line"><span class="lineno">   74</span>            <span class="comment">// Zero out torque</span></div>
-<div class="line"><span class="lineno">   75</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   76</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   77</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   78</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   81</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   82</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   83</span>            data_.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">   84</span> </div>
-<div class="line"><span class="lineno">   85</span>        }</div>
-<div class="line"><span class="lineno">   86</span> </div>
-<div class="line"><span class="lineno">   87</span>        writeout_ = data_;</div>
-<div class="line"><span class="lineno">   88</span>    }</div>
-<div class="line"><span class="lineno">   89</span>}</div>
-<div class="ttc" id="aTorqueControllers_8h_html_a029c8f98807f0d9b74fc89ffd5a1099d"><div class="ttname"><a href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a></div><div class="ttdeci">const float MAX_REGEN_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00013">TorqueControllers.h:13</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a7ec80f409ae2327c088489fb3b0830b8"><div class="ttname"><a href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a></div><div class="ttdeci">const float AMK_MAX_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00012">TorqueControllers.h:12</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a82baa3a9bb5bff28d581a673391aa7a6"><div class="ttname"><a href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a></div><div class="ttdeci">const float AMK_MAX_RPM</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00011">TorqueControllers.h:11</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8cpp_source.html#l00008">8</a> of file <a class="el" href="TorqueControllers_8cpp_source.html">TorqueControllers.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    9</span>{</div>
+<div class="line"><span class="lineno">   10</span> </div>
+<div class="line"><span class="lineno">   11</span>    <span class="comment">// Calculate torque commands at 100hz</span></div>
+<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">tick</a>.triggers.trigger100)</div>
+<div class="line"><span class="lineno">   13</span>    {</div>
+<div class="line"><span class="lineno">   14</span>        <span class="comment">// Both pedals are not pressed and no implausibility has been detected</span></div>
+<div class="line"><span class="lineno">   15</span>        <span class="comment">// accelRequest goes between 1.0 and -1.0</span></div>
+<div class="line"><span class="lineno">   16</span>        <span class="keywordtype">float</span> accelRequest = pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> - pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">regenPercent</a>;</div>
+<div class="line"><span class="lineno">   17</span>        <span class="keywordtype">float</span> torqueRequest;</div>
+<div class="line"><span class="lineno">   18</span> </div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">if</span> (accelRequest &gt;= 0.0)</div>
+<div class="line"><span class="lineno">   20</span>        {</div>
+<div class="line"><span class="lineno">   21</span>            <span class="comment">// Positive torque request</span></div>
+<div class="line"><span class="lineno">   22</span>            torqueRequest = accelRequest * <a class="code hl_variable" href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a>;</div>
+<div class="line"><span class="lineno">   23</span> </div>
+<div class="line"><span class="lineno">   24</span>            <span class="comment">// writeout_.command.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;</span></div>
+<div class="line"><span class="lineno">   25</span>            <span class="comment">// writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;</span></div>
+<div class="line"><span class="lineno">   26</span>            <span class="comment">// writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;</span></div>
+<div class="line"><span class="lineno">   27</span>            <span class="comment">// writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;</span></div>
+<div class="line"><span class="lineno">   28</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
+<div class="line"><span class="lineno">   29</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
+<div class="line"><span class="lineno">   30</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
+<div class="line"><span class="lineno">   31</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a>;</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = torqueRequest * frontTorqueScale_;</div>
+<div class="line"><span class="lineno">   34</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = torqueRequest * frontTorqueScale_;</div>
+<div class="line"><span class="lineno">   35</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = torqueRequest * rearTorqueScale_;</div>
+<div class="line"><span class="lineno">   36</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = torqueRequest * rearTorqueScale_;</div>
+<div class="line"><span class="lineno">   37</span>        }</div>
+<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   39</span>        {</div>
+<div class="line"><span class="lineno">   40</span>            <span class="comment">// Negative torque request</span></div>
+<div class="line"><span class="lineno">   41</span>            torqueRequest = <a class="code hl_variable" href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a> * accelRequest * -1.0;</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   44</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   45</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   46</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   47</span> </div>
+<div class="line"><span class="lineno">   48</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = torqueRequest * frontRegenTorqueScale_;</div>
+<div class="line"><span class="lineno">   49</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = torqueRequest * frontRegenTorqueScale_;</div>
+<div class="line"><span class="lineno">   50</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = torqueRequest * rearRegenTorqueScale_;</div>
+<div class="line"><span class="lineno">   51</span>            writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = torqueRequest * rearRegenTorqueScale_;</div>
+<div class="line"><span class="lineno">   52</span>        }</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span>        <span class="comment">// Apply the torque limit</span></div>
+<div class="line"><span class="lineno">   55</span>        <a class="code hl_function" href="classTorqueController.html#a10ec4fb9528f417a873726d0c7ed4e7c">TCPosTorqueLimit</a>(writeout_.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>, torqueLimit);</div>
+<div class="line"><span class="lineno">   56</span>    }</div>
+<div class="line"><span class="lineno">   57</span>}</div>
+<div class="ttc" id="aTorqueControllers_8h_html_a029c8f98807f0d9b74fc89ffd5a1099d"><div class="ttname"><a href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a></div><div class="ttdeci">const float MAX_REGEN_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00020">TorqueControllers.h:20</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_a7ec80f409ae2327c088489fb3b0830b8"><div class="ttname"><a href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a></div><div class="ttdeci">const float AMK_MAX_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00019">TorqueControllers.h:19</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_a82baa3a9bb5bff28d581a673391aa7a6"><div class="ttname"><a href="TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6">AMK_MAX_RPM</a></div><div class="ttdeci">const float AMK_MAX_RPM</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00012">TorqueControllers.h:12</a></div></div>
 <div class="ttc" id="aUtility_8h_html_a070b34e47f13ddfdaa2502536eee14ce"><div class="ttname"><a href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a></div><div class="ttdeci">const int RR</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00008">Utility.h:8</a></div></div>
 <div class="ttc" id="aUtility_8h_html_a232e53b0b909b708971e1ff0886a269e"><div class="ttname"><a href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a></div><div class="ttdeci">const int FL</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00005">Utility.h:5</a></div></div>
 <div class="ttc" id="aUtility_8h_html_a47968b41e57a835656473a78eb95a36c"><div class="ttname"><a href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a></div><div class="ttdeci">const int FR</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00006">Utility.h:6</a></div></div>
 <div class="ttc" id="aUtility_8h_html_ae422df0ea387cc2ead9435c88d092c27"><div class="ttname"><a href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a></div><div class="ttdeci">const int RL</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00007">Utility.h:7</a></div></div>
-<div class="ttc" id="aclassTorqueControllerSimple_html_ac6517b0493098838c2f923e23feff718"><div class="ttname"><a href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">TorqueControllerSimple::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, float torqueLimit)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8cpp_source.html#l00025">TorqueControllers.cpp:25</a></div></div>
+<div class="ttc" id="aclassTorqueControllerSimple_html_ac6517b0493098838c2f923e23feff718"><div class="ttname"><a href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">TorqueControllerSimple::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, float torqueLimit)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8cpp_source.html#l00008">TorqueControllers.cpp:8</a></div></div>
+<div class="ttc" id="aclassTorqueController_html_a10ec4fb9528f417a873726d0c7ed4e7c"><div class="ttname"><a href="classTorqueController.html#a10ec4fb9528f417a873726d0c7ed4e7c">TorqueController&lt; TC_SAFE_MODE &gt;::TCPosTorqueLimit</a></div><div class="ttdeci">void TCPosTorqueLimit(DrivetrainCommand_s &amp;command, float torqueLimit)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00072">TorqueControllers.h:72</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00012">DrivetrainSystem.h:12</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a03435669a9f0c4fea7e268e6ce3eb4d8"><div class="ttname"><a href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">PedalsSystemData_s::brakePercent</a></div><div class="ttdeci">float brakePercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00018">PedalsSystem.h:18</a></div></div>
 <div class="ttc" id="astructPedalsSystemData__s_html_a6c4e6145913766af3968ad78d6789f3f"><div class="ttname"><a href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">PedalsSystemData_s::accelPercent</a></div><div class="ttdeci">float accelPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00017">PedalsSystem.h:17</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a6fbbc6f3e3c526a1b1c8f37f04764e4b"><div class="ttname"><a href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">PedalsSystemData_s::brakeAndAccelPressedImplausibility</a></div><div class="ttdeci">bool brakeAndAccelPressedImplausibility</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00015">PedalsSystem.h:15</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_aa0abaf0a205603315888d746ce5a7e95"><div class="ttname"><a href="structPedalsSystemData__s.html#aa0abaf0a205603315888d746ce5a7e95">PedalsSystemData_s::implausibilityExceededMaxDuration</a></div><div class="ttdeci">bool implausibilityExceededMaxDuration</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00016">PedalsSystem.h:16</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a71792b1ecf0e495d43f94169dd3248ca"><div class="ttname"><a href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">PedalsSystemData_s::regenPercent</a></div><div class="ttdeci">float regenPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00019">PedalsSystem.h:19</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

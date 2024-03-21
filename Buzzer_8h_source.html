@@ -79,31 +79,38 @@ $(function() {
 <a href="Buzzer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef BUZZER</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define BUZZER</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="classBuzzerController.html">    4</a></span><span class="keyword">class </span><a class="code hl_class" href="classBuzzerController.html">BuzzerController</a></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">    8</a></span>    <a class="code hl_function" href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">BuzzerController</a>(<span class="keywordtype">int</span> duration_of_activation_ms) {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        buzzer_period_ = duration_of_activation_ms;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    }</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBuzzerController.html#a622f82f861f140a939000f257ab3a215">activate_buzzer</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> act_time);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classBuzzerController.html#a101ee7aca347426e5f7bd6580741899f">done</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> curr_time);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">   15</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>() { <span class="keywordflow">return</span> buzzer_on_; }</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> buzzer_period_;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> last_activation_time_;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">bool</span> buzzer_on_;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classBuzzerController.html">    5</a></span><span class="keyword">class </span><a class="code hl_class" href="classBuzzerController.html">BuzzerController</a></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">    9</a></span>    <a class="code hl_function" href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">BuzzerController</a>(<span class="keywordtype">int</span> duration_of_activation_ms) {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        buzzer_period_ = duration_of_activation_ms;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    }</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBuzzerController.html#ae691d60472be787d7002232f5a6af595">deactivate</a>();</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBuzzerController.html#a622f82f861f140a939000f257ab3a215">activate_buzzer</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> act_time);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classBuzzerController.html#a101ee7aca347426e5f7bd6580741899f">done</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> curr_time);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">   16</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>() { </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">if</span>(buzzer_on_){</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <span class="comment">// Serial.println(&quot;buzzer should be on now&quot;);</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        }    </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span> buzzer_on_; </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif </span><span class="comment">/* BUZZER */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclassBuzzerController_html"><div class="ttname"><a href="classBuzzerController.html">BuzzerController</a></div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00004">Buzzer.h:6</a></div></div>
-<div class="ttc" id="aclassBuzzerController_html_a101ee7aca347426e5f7bd6580741899f"><div class="ttname"><a href="classBuzzerController.html#a101ee7aca347426e5f7bd6580741899f">BuzzerController::done</a></div><div class="ttdeci">bool done(unsigned long curr_time)</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8cpp_source.html#l00009">Buzzer.cpp:9</a></div></div>
-<div class="ttc" id="aclassBuzzerController_html_a11e345a5525348fb3af44e0f9ee2fc4f"><div class="ttname"><a href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">BuzzerController::BuzzerController</a></div><div class="ttdeci">BuzzerController(int duration_of_activation_ms)</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00008">Buzzer.h:8</a></div></div>
-<div class="ttc" id="aclassBuzzerController_html_a622f82f861f140a939000f257ab3a215"><div class="ttname"><a href="classBuzzerController.html#a622f82f861f140a939000f257ab3a215">BuzzerController::activate_buzzer</a></div><div class="ttdeci">void activate_buzzer(unsigned long act_time)</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8cpp_source.html#l00003">Buzzer.cpp:3</a></div></div>
-<div class="ttc" id="aclassBuzzerController_html_ada5466ab34c97e68568486f505d1b6e3"><div class="ttname"><a href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">BuzzerController::buzzer_is_on</a></div><div class="ttdeci">bool buzzer_is_on()</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00015">Buzzer.h:15</a></div></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> buzzer_period_;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> last_activation_time_;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">bool</span> buzzer_on_;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif </span><span class="comment">/* BUZZER */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclassBuzzerController_html"><div class="ttname"><a href="classBuzzerController.html">BuzzerController</a></div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00005">Buzzer.h:7</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_a101ee7aca347426e5f7bd6580741899f"><div class="ttname"><a href="classBuzzerController.html#a101ee7aca347426e5f7bd6580741899f">BuzzerController::done</a></div><div class="ttdeci">bool done(unsigned long curr_time)</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8cpp_source.html#l00013">Buzzer.cpp:13</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_a11e345a5525348fb3af44e0f9ee2fc4f"><div class="ttname"><a href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">BuzzerController::BuzzerController</a></div><div class="ttdeci">BuzzerController(int duration_of_activation_ms)</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00009">Buzzer.h:9</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_a622f82f861f140a939000f257ab3a215"><div class="ttname"><a href="classBuzzerController.html#a622f82f861f140a939000f257ab3a215">BuzzerController::activate_buzzer</a></div><div class="ttdeci">void activate_buzzer(unsigned long act_time)</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8cpp_source.html#l00007">Buzzer.cpp:7</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_ada5466ab34c97e68568486f505d1b6e3"><div class="ttname"><a href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">BuzzerController::buzzer_is_on</a></div><div class="ttdeci">bool buzzer_is_on()</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00016">Buzzer.h:16</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_ae691d60472be787d7002232f5a6af595"><div class="ttname"><a href="classBuzzerController.html#ae691d60472be787d7002232f5a6af595">BuzzerController::deactivate</a></div><div class="ttdeci">void deactivate()</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8cpp_source.html#l00003">Buzzer.cpp:3</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

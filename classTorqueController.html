@@ -69,16 +69,126 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="classTorqueController-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">TorqueController&lt; TorqueControllerType &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad1a1aba4ba5e0d038e7e23f7eb1fa81b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueController.html#ad1a1aba4ba5e0d038e7e23f7eb1fa81b">TCPowerLimitScaleDown</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrainData, float powerLimit)</td></tr>
+<tr class="separator:ad1a1aba4ba5e0d038e7e23f7eb1fa81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ec4fb9528f417a873726d0c7ed4e7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueController.html#a10ec4fb9528f417a873726d0c7ed4e7c">TCPosTorqueLimit</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, float torqueLimit)</td></tr>
+<tr class="separator:a10ec4fb9528f417a873726d0c7ed4e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27">TorqueController_e</a> TorqueControllerType&gt;<br />
 class TorqueController&lt; TorqueControllerType &gt;</div>
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00045">45</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00061">61</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a10ec4fb9528f417a873726d0c7ed4e7c" name="a10ec4fb9528f417a873726d0c7ed4e7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10ec4fb9528f417a873726d0c7ed4e7c">&#9670;&#160;</a></span>TCPosTorqueLimit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27">TorqueController_e</a> TorqueControllerType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTorqueController.html">TorqueController</a>&lt; TorqueControllerType &gt;::TCPosTorqueLimit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>torqueLimit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00072">72</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   73</span>    {</div>
+<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
+<div class="line"><span class="lineno">   75</span>        {</div>
+<div class="line"><span class="lineno">   76</span>            command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i] = std::min(command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i], torqueLimit);</div>
+<div class="line"><span class="lineno">   77</span>        }</div>
+<div class="line"><span class="lineno">   78</span>    }</div>
+<div class="ttc" id="aUtility_8h_html_ae84658f12c2f1b44f59af36678cf3dcc"><div class="ttname"><a href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a></div><div class="ttdeci">const int NUM_MOTORS</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00009">Utility.h:9</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad1a1aba4ba5e0d038e7e23f7eb1fa81b" name="ad1a1aba4ba5e0d038e7e23f7eb1fa81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1a1aba4ba5e0d038e7e23f7eb1fa81b">&#9670;&#160;</a></span>TCPowerLimitScaleDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27">TorqueController_e</a> TorqueControllerType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTorqueController.html">TorqueController</a>&lt; TorqueControllerType &gt;::TCPowerLimitScaleDown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>drivetrainData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>powerLimit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00064">64</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>    {</div>
+<div class="line"><span class="lineno">   69</span>        <span class="comment">// TODO</span></div>
+<div class="line"><span class="lineno">   70</span>        <span class="comment">// probably requires AMS interface</span></div>
+<div class="line"><span class="lineno">   71</span>    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>lib/systems/include/<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a></li>
 </ul>
 </div><!-- contents -->

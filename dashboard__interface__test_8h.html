@@ -217,29 +217,29 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  119</span>    Serial.println(<span class="stringliteral">&quot;Printing popped message&quot;</span>);</div>
 <div class="line"><span class="lineno">  120</span>    <a class="code hl_function" href="dashboard__interface__test_8h.html#ab60e7525528c7ef2721ba384c725fbaf">printMemoryHex</a>(&amp;buffer, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">  121</span> </div>
-<div class="line"><span class="lineno">  122</span>    CAN_message_t <a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><span class="lineno">  123</span>    memmove(&amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, buffer, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  122</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  123</span>    memmove(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, buffer, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">  124</span> </div>
 <div class="line"><span class="lineno">  125</span>    Serial.println(<span class="stringliteral">&quot;Printing moved message:&quot;</span>);</div>
-<div class="line"><span class="lineno">  126</span>    <a class="code hl_function" href="dashboard__interface__test_8h.html#ab60e7525528c7ef2721ba384c725fbaf">printMemoryHex</a>(&amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  126</span>    <a class="code hl_function" href="dashboard__interface__test_8h.html#ab60e7525528c7ef2721ba384c725fbaf">printMemoryHex</a>(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>    TEST_ASSERT_EQUAL_MEMORY(&amp;packed_message, &amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  128</span>    TEST_ASSERT_EQUAL_MEMORY(&amp;packed_message, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">  129</span> </div>
 <div class="line"><span class="lineno">  130</span>    DASHBOARD_MCU_STATE_t mcu_state;</div>
 <div class="line"><span class="lineno">  131</span> </div>
-<div class="line"><span class="lineno">  132</span>    Unpack_DASHBOARD_MCU_STATE_hytech(&amp;mcu_state, <a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.buf, NULL);</div>
+<div class="line"><span class="lineno">  132</span>    Unpack_DASHBOARD_MCU_STATE_hytech(&amp;mcu_state, <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.buf, NULL);</div>
 <div class="line"><span class="lineno">  133</span> </div>
 <div class="line"><span class="lineno">  134</span>    TEST_ASSERT_EQUAL(<a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a825fe008c126d33fd7d461eab39736d3aa2d9547b5d3dd9f05984475f7c926da0">LEDColors_e::RED</a>, mcu_state.bots_led);</div>
 <div class="line"><span class="lineno">  135</span>    TEST_ASSERT_EQUAL(<a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a825fe008c126d33fd7d461eab39736d3a8a568e5f41b7e4da88fe5c4a00aad34e">LEDColors_e::YELLOW</a>, mcu_state.launch_control_led);</div>
 <div class="line"><span class="lineno">  136</span> </div>
 <div class="line"><span class="lineno">  137</span>}</div>
-<div class="ttc" id="aclassDashboardInterface_html"><div class="ttname"><a href="classDashboardInterface.html">DashboardInterface</a></div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00089">DashboardInterface.h:90</a></div></div>
+<div class="ttc" id="aclassDashboardInterface_html"><div class="ttname"><a href="classDashboardInterface.html">DashboardInterface</a></div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00104">DashboardInterface.h:105</a></div></div>
 <div class="ttc" id="adashboard__interface__test_8h_html_ab60e7525528c7ef2721ba384c725fbaf"><div class="ttname"><a href="dashboard__interface__test_8h.html#ab60e7525528c7ef2721ba384c725fbaf">printMemoryHex</a></div><div class="ttdeci">void printMemoryHex(void *ptr, size_t length)</div><div class="ttdef"><b>Definition:</b> <a href="dashboard__interface__test_8h_source.html#l00010">dashboard_interface_test.h:10</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a825fe008c126d33fd7d461eab39736d3a8a568e5f41b7e4da88fe5c4a00aad34e"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a825fe008c126d33fd7d461eab39736d3a8a568e5f41b7e4da88fe5c4a00aad34e">LEDColors_e::YELLOW</a></div><div class="ttdeci">@ YELLOW</div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a825fe008c126d33fd7d461eab39736d3aa2d9547b5d3dd9f05984475f7c926da0"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a825fe008c126d33fd7d461eab39736d3aa2d9547b5d3dd9f05984475f7c926da0">LEDColors_e::RED</a></div><div class="ttdeci">@ RED</div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_affd48e86f9b88870e9e62b0f7a58d940a401f1ddf42b1ceaf64b3d566d8cd1fee"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a401f1ddf42b1ceaf64b3d566d8cd1fee">DashLED_e::LAUNCH_CONTROL_LED</a></div><div class="ttdeci">@ LAUNCH_CONTROL_LED</div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_affd48e86f9b88870e9e62b0f7a58d940ad168bed09ed59d17b2fa8750b280bd7f"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940ad168bed09ed59d17b2fa8750b280bd7f">DashLED_e::BOTS_LED</a></div><div class="ttdeci">@ BOTS_LED</div></div>
-<div class="ttc" id="aold__main_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="old__main_8cpp_source.html#l00121">old_main.cpp:121</a></div></div>
+<div class="ttc" id="atest__can__interface_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00009">test_can_interface.cpp:9</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -277,14 +277,14 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   38</span>      current_state.right_shifter_button = (uint8_t)((i &amp; (1 &lt;&lt; 1)) &gt;&gt; 1);</div>
 <div class="line"><span class="lineno">   39</span>      current_state.shutdown_h_above_threshold = (uint8_t)(i &amp; 1);</div>
 <div class="line"><span class="lineno">   40</span>      </div>
-<div class="line"><span class="lineno">   41</span>      CAN_message_t <a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><span class="lineno">   42</span>      <a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.id= Pack_DASHBOARD_STATE_hytech(&amp;current_state, <a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.buf, &amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.len, (uint8_t*) &amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.flags.extended);</div>
+<div class="line"><span class="lineno">   41</span>      CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">   42</span>      <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.id= Pack_DASHBOARD_STATE_hytech(&amp;current_state, <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.buf, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.len, (uint8_t*) &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.flags.extended);</div>
 <div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>      dash_interface.read(<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>);</div>
+<div class="line"><span class="lineno">   44</span>      dash_interface.read(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>);</div>
 <div class="line"><span class="lineno">   45</span> </div>
 <div class="line"><span class="lineno">   46</span>      TEST_ASSERT_EQUAL(current_state.start_button, dash_interface.startButtonPressed() );</div>
 <div class="line"><span class="lineno">   47</span>      TEST_ASSERT_EQUAL(current_state.mark_button, dash_interface.specialButtonPressed() );</div>
-<div class="line"><span class="lineno">   48</span>      TEST_ASSERT_EQUAL(current_state.mode_button , dash_interface.torqueButtonPressed() );</div>
+<div class="line"><span class="lineno">   48</span>      TEST_ASSERT_EQUAL(current_state.mode_button , dash_interface.torqueModeButtonPressed() );</div>
 <div class="line"><span class="lineno">   49</span>      TEST_ASSERT_EQUAL(current_state.motor_controller_cycle_button, dash_interface.inverterResetButtonPressed() );</div>
 <div class="line"><span class="lineno">   50</span>      TEST_ASSERT_EQUAL(current_state.launch_ctrl_button , dash_interface.launchControlButtonPressed() );</div>
 <div class="line"><span class="lineno">   51</span>      TEST_ASSERT_EQUAL(current_state.torque_mode_button , dash_interface.torqueLoadingButtonPressed() );</div>

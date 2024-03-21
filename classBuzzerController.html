@@ -82,6 +82,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a11e345a5525348fb3af44e0f9ee2fc4f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#a11e345a5525348fb3af44e0f9ee2fc4f">BuzzerController</a> (int duration_of_activation_ms)</td></tr>
 <tr class="separator:a11e345a5525348fb3af44e0f9ee2fc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae691d60472be787d7002232f5a6af595"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#ae691d60472be787d7002232f5a6af595">deactivate</a> ()</td></tr>
+<tr class="separator:ae691d60472be787d7002232f5a6af595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a622f82f861f140a939000f257ab3a215"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#a622f82f861f140a939000f257ab3a215">activate_buzzer</a> (unsigned long act_time)</td></tr>
 <tr class="separator:a622f82f861f140a939000f257ab3a215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a101ee7aca347426e5f7bd6580741899f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#a101ee7aca347426e5f7bd6580741899f">done</a> (unsigned long curr_time)</td></tr>
@@ -91,7 +93,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00004">4</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00005">5</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a11e345a5525348fb3af44e0f9ee2fc4f" name="a11e345a5525348fb3af44e0f9ee2fc4f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11e345a5525348fb3af44e0f9ee2fc4f">&#9670;&#160;</a></span>BuzzerController()</h2>
@@ -117,10 +119,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00008">8</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    8</span>                                                    {</div>
-<div class="line"><span class="lineno">    9</span>        buzzer_period_ = duration_of_activation_ms;</div>
-<div class="line"><span class="lineno">   10</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00009">9</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    9</span>                                                    {</div>
+<div class="line"><span class="lineno">   10</span>        buzzer_period_ = duration_of_activation_ms;</div>
+<div class="line"><span class="lineno">   11</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -141,11 +143,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00003">3</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    4</span>{</div>
-<div class="line"><span class="lineno">    5</span>    last_activation_time_ = act_time;</div>
-<div class="line"><span class="lineno">    6</span>    buzzer_on_ = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">    7</span>}</div>
+<p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00007">7</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    8</span>{</div>
+<div class="line"><span class="lineno">    9</span>    last_activation_time_ = act_time;</div>
+<div class="line"><span class="lineno">   10</span>    buzzer_on_ = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   11</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -172,8 +174,35 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00015">15</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   15</span>{ <span class="keywordflow">return</span> buzzer_on_; }</div>
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00016">16</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   16</span>                        { </div>
+<div class="line"><span class="lineno">   17</span>        <span class="keywordflow">if</span>(buzzer_on_){</div>
+<div class="line"><span class="lineno">   18</span>            <span class="comment">// Serial.println(&quot;buzzer should be on now&quot;);</span></div>
+<div class="line"><span class="lineno">   19</span>        }    </div>
+<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">return</span> buzzer_on_; </div>
+<div class="line"><span class="lineno">   21</span>    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae691d60472be787d7002232f5a6af595" name="ae691d60472be787d7002232f5a6af595"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae691d60472be787d7002232f5a6af595">&#9670;&#160;</a></span>deactivate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BuzzerController::deactivate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00003">3</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    4</span>{</div>
+<div class="line"><span class="lineno">    5</span>    buzzer_on_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">    6</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -193,13 +222,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00009">9</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    9</span>                                                  {</div>
-<div class="line"><span class="lineno">   10</span> </div>
-<div class="line"><span class="lineno">   11</span>    buzzer_on_ = ((curr_time - last_activation_time_) &gt; buzzer_period_);</div>
-<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">return</span> buzzer_on_;</div>
-<div class="line"><span class="lineno">   13</span>    </div>
-<div class="line"><span class="lineno">   14</span>}</div>
+<p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00013">13</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   13</span>                                                  {</div>
+<div class="line"><span class="lineno">   14</span> </div>
+<div class="line"><span class="lineno">   15</span>    buzzer_on_ = ((curr_time - last_activation_time_) &lt; buzzer_period_);</div>
+<div class="line"><span class="lineno">   16</span>    <span class="keywordflow">return</span> (!buzzer_on_);</div>
+<div class="line"><span class="lineno">   17</span>    </div>
+<div class="line"><span class="lineno">   18</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

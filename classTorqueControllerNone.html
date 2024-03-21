@@ -89,15 +89,23 @@ Inheritance diagram for TorqueControllerNone:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9850e8367b7fbbb0daa4c5275e9171c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerNone.html#a9850e8367b7fbbb0daa4c5275e9171c4">TorqueControllerNone</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;writeout)</td></tr>
-<tr class="separator:a9850e8367b7fbbb0daa4c5275e9171c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28a0aa283b1f3b00e43cbb58a60275e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerNone.html#a28a0aa283b1f3b00e43cbb58a60275e0">TorqueControllerNone</a> (<a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;writeout)</td></tr>
+<tr class="separator:a28a0aa283b1f3b00e43cbb58a60275e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classTorqueController"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classTorqueController')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classTorqueController.html">TorqueController&lt; TC_NO_CONTROLLER &gt;</a></td></tr>
+<tr class="memitem:ad1a1aba4ba5e0d038e7e23f7eb1fa81b inherit pro_methods_classTorqueController"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueController.html#ad1a1aba4ba5e0d038e7e23f7eb1fa81b">TCPowerLimitScaleDown</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrainData, float powerLimit)</td></tr>
+<tr class="separator:ad1a1aba4ba5e0d038e7e23f7eb1fa81b inherit pro_methods_classTorqueController"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ec4fb9528f417a873726d0c7ed4e7c inherit pro_methods_classTorqueController"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueController.html#a10ec4fb9528f417a873726d0c7ed4e7c">TCPosTorqueLimit</a> (<a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, float torqueLimit)</td></tr>
+<tr class="separator:a10ec4fb9528f417a873726d0c7ed4e7c inherit pro_methods_classTorqueController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00051">51</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00083">83</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9850e8367b7fbbb0daa4c5275e9171c4" name="a9850e8367b7fbbb0daa4c5275e9171c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9850e8367b7fbbb0daa4c5275e9171c4">&#9670;&#160;</a></span>TorqueControllerNone()</h2>
+<a id="a28a0aa283b1f3b00e43cbb58a60275e0" name="a28a0aa283b1f3b00e43cbb58a60275e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28a0aa283b1f3b00e43cbb58a60275e0">&#9670;&#160;</a></span>TorqueControllerNone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -108,7 +116,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">TorqueControllerNone::TorqueControllerNone </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;&#160;</td>
           <td class="paramname"><em>writeout</em></td><td>)</td>
           <td></td>
         </tr>
@@ -120,10 +128,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00059">59</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>    {</div>
-<div class="line"><span class="lineno">   61</span>        writeout = data_;</div>
-<div class="line"><span class="lineno">   62</span>    };</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00087">87</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   88</span>    {</div>
+<div class="line"><span class="lineno">   89</span>        writeout.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a> = <a class="code hl_variable" href="TorqueControllers_8h.html#a45e479ed7f57380fd87a3b9c9d1fbef8">TC_COMMAND_NO_TORQUE</a>;</div>
+<div class="line"><span class="lineno">   90</span>        writeout.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   91</span>    };</div>
+<div class="ttc" id="aTorqueControllers_8h_html_a45e479ed7f57380fd87a3b9c9d1fbef8"><div class="ttname"><a href="TorqueControllers_8h.html#a45e479ed7f57380fd87a3b9c9d1fbef8">TC_COMMAND_NO_TORQUE</a></div><div class="ttdeci">const DrivetrainCommand_s TC_COMMAND_NO_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00022">TorqueControllers.h:22</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a85f1248f94789f10b46e7fbe9a8daf15"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">TorqueControllerOutput_s::ready</a></div><div class="ttdeci">bool ready</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00029">TorqueControllers.h:29</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00028">TorqueControllers.h:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

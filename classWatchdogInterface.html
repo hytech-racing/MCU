@@ -130,11 +130,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="interfaces_2include_2WatchdogInterface_8h_source.html#l00021">21</a> of file <a class="el" href="interfaces_2include_2WatchdogInterface_8h_source.html">WatchdogInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span>                                       : pin_watchdog_input_(wd_input_pin)</div>
-<div class="line"><span class="lineno">   22</span>    {</div>
-<div class="line"><span class="lineno">   23</span>        <span class="comment">// Set pin mode        </span></div>
-<div class="line"><span class="lineno">   24</span>        pinMode(pin_watchdog_input_, OUTPUT);</div>
-<div class="line"><span class="lineno">   25</span>    }</div>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>: pin_watchdog_input_(wd_input_pin){};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -183,10 +179,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00028">28</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   28</span>                                           {</div>
-<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">return</span> watchdog_state;</div>
-<div class="line"><span class="lineno">   30</span>}</div>
+<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00032">32</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>                                           {</div>
+<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">return</span> watchdog_state;</div>
+<div class="line"><span class="lineno">   34</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -208,12 +204,14 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00004">4</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    4</span>                                                      {</div>
-<div class="line"><span class="lineno">    5</span> </div>
-<div class="line"><span class="lineno">    6</span>    watchdog_time = curr_millis;</div>
-<div class="line"><span class="lineno">    7</span>    <a class="code hl_function" href="classWatchdogInterface.html#adaca5cdf8ef4e8cf078a774cf617cd8f">set_watchdog_state</a>(HIGH);</div>
-<div class="line"><span class="lineno">    8</span> </div>
-<div class="line"><span class="lineno">    9</span>}</div>
-<div class="ttc" id="aclassWatchdogInterface_html_adaca5cdf8ef4e8cf078a774cf617cd8f"><div class="ttname"><a href="classWatchdogInterface.html#adaca5cdf8ef4e8cf078a774cf617cd8f">WatchdogInterface::set_watchdog_state</a></div><div class="ttdeci">void set_watchdog_state(bool state)</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00033">WatchdogInterface.cpp:33</a></div></div>
+<div class="line"><span class="lineno">    5</span>    <span class="comment">// Set pin mode        </span></div>
+<div class="line"><span class="lineno">    6</span>    pinMode(pin_watchdog_input_, OUTPUT);</div>
+<div class="line"><span class="lineno">    7</span> </div>
+<div class="line"><span class="lineno">    8</span>    watchdog_time = curr_millis;</div>
+<div class="line"><span class="lineno">    9</span>    <a class="code hl_function" href="classWatchdogInterface.html#adaca5cdf8ef4e8cf078a774cf617cd8f">set_watchdog_state</a>(HIGH);</div>
+<div class="line"><span class="lineno">   10</span> </div>
+<div class="line"><span class="lineno">   11</span>}</div>
+<div class="ttc" id="aclassWatchdogInterface_html_adaca5cdf8ef4e8cf078a774cf617cd8f"><div class="ttname"><a href="classWatchdogInterface.html#adaca5cdf8ef4e8cf078a774cf617cd8f">WatchdogInterface::set_watchdog_state</a></div><div class="ttdeci">void set_watchdog_state(bool state)</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00037">WatchdogInterface.cpp:37</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -262,14 +260,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00019">19</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   19</span>                                                               {</div>
-<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">if</span> ((curr_millis - watchdog_time) &gt; <a class="code hl_variable" href="mock__interfaces_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26">WATCHDOG_KICK_INTERVAL</a>) {</div>
-<div class="line"><span class="lineno">   21</span>        watchdog_state = !watchdog_state;</div>
-<div class="line"><span class="lineno">   22</span>        digitalWrite(pin_watchdog_input_, watchdog_state);</div>
-<div class="line"><span class="lineno">   23</span>        watchdog_time = curr_millis;</div>
-<div class="line"><span class="lineno">   24</span>    }</div>
-<div class="line"><span class="lineno">   25</span>}</div>
+<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00021">21</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>                                                               {</div>
+<div class="line"><span class="lineno">   22</span> </div>
+<div class="line"><span class="lineno">   23</span>    <span class="keywordflow">if</span> ((curr_millis - watchdog_time) &gt; <a class="code hl_variable" href="mock__interfaces_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26">WATCHDOG_KICK_INTERVAL</a>) {</div>
+<div class="line"><span class="lineno">   24</span>        watchdog_state = !watchdog_state;</div>
+<div class="line"><span class="lineno">   25</span>        digitalWrite(pin_watchdog_input_, watchdog_state);</div>
+<div class="line"><span class="lineno">   26</span>        watchdog_time = curr_millis;</div>
+<div class="line"><span class="lineno">   27</span>    }</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>}</div>
 <div class="ttc" id="amock__interfaces_2WatchdogInterface_8h_html_a646ea29789fa1318efa493bcd6656d26"><div class="ttname"><a href="mock__interfaces_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26">WATCHDOG_KICK_INTERVAL</a></div><div class="ttdeci">const unsigned long WATCHDOG_KICK_INTERVAL</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2WatchdogInterface_8h_source.html#l00005">WatchdogInterface.h:5</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -318,12 +318,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00012">12</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   12</span>                                        {</div>
-<div class="line"><span class="lineno">   13</span> </div>
-<div class="line"><span class="lineno">   14</span>    digitalWrite(pin_watchdog_input_, HIGH);</div>
-<div class="line"><span class="lineno">   15</span>    </div>
-<div class="line"><span class="lineno">   16</span>}</div>
+<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00014">14</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>                                        {</div>
+<div class="line"><span class="lineno">   15</span> </div>
+<div class="line"><span class="lineno">   16</span>    digitalWrite(pin_watchdog_input_, HIGH);</div>
+<div class="line"><span class="lineno">   17</span>    </div>
+<div class="line"><span class="lineno">   18</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -371,10 +371,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00033">33</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   33</span>                                                     {</div>
-<div class="line"><span class="lineno">   34</span>    watchdog_state = state;</div>
-<div class="line"><span class="lineno">   35</span>}</div>
+<p class="definition">Definition at line <a class="el" href="WatchdogInterface_8cpp_source.html#l00037">37</a> of file <a class="el" href="WatchdogInterface_8cpp_source.html">WatchdogInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                     {</div>
+<div class="line"><span class="lineno">   38</span>    watchdog_state = state;</div>
+<div class="line"><span class="lineno">   39</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -1,21 +1,5 @@
 var searchData=
 [
-  ['accl_5fdue_5fto_5fgravity_0',['ACCL_DUE_TO_GRAVITY',['../MCU__rev12__dfs_8h.html#a3e0aa763b43b699baff582891e078479',1,'MCU_rev12_dfs.h']]],
-  ['adc1_5fcs_1',['ADC1_CS',['../MCU__rev12__dfs_8h.html#afd1c6d032c32f9448f37a4585dec04c2',1,'MCU_rev12_dfs.h']]],
-  ['adc2_5fcs_2',['ADC2_CS',['../MCU__rev12__dfs_8h.html#ac09bce164b629fb944e368485be7306b',1,'MCU_rev12_dfs.h']]],
-  ['adc3_5fcs_3',['ADC3_CS',['../MCU__rev12__dfs_8h.html#a318f2ab2470990ef9ce73b9ccd485851',1,'MCU_rev12_dfs.h']]],
-  ['adc_5faccel_5f1_5fchannel_4',['ADC_ACCEL_1_CHANNEL',['../MCU__rev12__dfs_8h.html#ad343fd695294d18b25f6c65c9f57aaff',1,'MCU_rev12_dfs.h']]],
-  ['adc_5faccel_5f2_5fchannel_5',['ADC_ACCEL_2_CHANNEL',['../MCU__rev12__dfs_8h.html#a83147b5ba51010ca7d5dddd4cd3bc2aa',1,'MCU_rev12_dfs.h']]],
-  ['adc_5fbrake_5f1_5fchannel_6',['ADC_BRAKE_1_CHANNEL',['../MCU__rev12__dfs_8h.html#a9d3be91a70ff30c794b966cacd6bf365',1,'MCU_rev12_dfs.h']]],
-  ['adc_5fbrake_5f2_5fchannel_7',['ADC_BRAKE_2_CHANNEL',['../MCU__rev12__dfs_8h.html#a9cff07e33ce3f62301e7874ece6a879d',1,'MCU_rev12_dfs.h']]],
-  ['adc_5fcurrent_5fchannel_8',['ADC_CURRENT_CHANNEL',['../MCU__rev12__dfs_8h.html#a55997c3743778ae79afaa9f37b8b5acc',1,'MCU_rev12_dfs.h']]],
-  ['adc_5ffl_5fload_5fcell_5fchannel_9',['ADC_FL_LOAD_CELL_CHANNEL',['../MCU__rev12__dfs_8h.html#a593f65b73e440c4c5b66257a154d6ecb',1,'MCU_rev12_dfs.h']]],
-  ['adc_5ffr_5fload_5fcell_5fchannel_10',['ADC_FR_LOAD_CELL_CHANNEL',['../MCU__rev12__dfs_8h.html#aa8add32188669c3004b023f0674f9118',1,'MCU_rev12_dfs.h']]],
-  ['adc_5fglv_5fread_5fchannel_11',['ADC_GLV_READ_CHANNEL',['../MCU__rev12__dfs_8h.html#acfe1105334e8d86965389a866c0888a3',1,'MCU_rev12_dfs.h']]],
-  ['adc_5freference_5fchannel_12',['ADC_REFERENCE_CHANNEL',['../MCU__rev12__dfs_8h.html#a5d110bf1c805ded393e4c847bc1331b7',1,'MCU_rev12_dfs.h']]],
-  ['adc_5frl_5fload_5fcell_5fchannel_13',['ADC_RL_LOAD_CELL_CHANNEL',['../MCU__rev12__dfs_8h.html#a12bedba74612a05affc8ec0cd337a587',1,'MCU_rev12_dfs.h']]],
-  ['adc_5frr_5fload_5fcell_5fchannel_14',['ADC_RR_LOAD_CELL_CHANNEL',['../MCU__rev12__dfs_8h.html#a78e2ba0caf66a273bba11adfd08396f1',1,'MCU_rev12_dfs.h']]],
-  ['adc_5fspi_5fspeed_15',['ADC_SPI_SPEED',['../MCU__rev12__dfs_8h.html#a5ba1e6b8cd5726a13e7277900416628b',1,'MCU_rev12_dfs.h']]],
-  ['adc_5fsteering_5f2_5fchannel_16',['ADC_STEERING_2_CHANNEL',['../MCU__rev12__dfs_8h.html#afd5434a4d75449884ea05925ac4dc5a1',1,'MCU_rev12_dfs.h']]],
-  ['alpha_17',['ALPHA',['../MCU__rev12__dfs_8h.html#af5abd28c44c29b7397c84f1fec4b1d84',1,'MCU_rev12_dfs.h']]]
+  ['steering_5fdivergence_5ferror_5fthreshold_0',['STEERING_DIVERGENCE_ERROR_THRESHOLD',['../SteeringSystem_8h.html#ae66f0edcc3684c88b8437e19177e7102',1,'SteeringSystem.h']]],
+  ['steering_5fdivergence_5fwarn_5fthreshold_1',['STEERING_DIVERGENCE_WARN_THRESHOLD',['../SteeringSystem_8h.html#affd0760d25d0ad9f2e7f6279dec8bc6d',1,'SteeringSystem.h']]]
 ];

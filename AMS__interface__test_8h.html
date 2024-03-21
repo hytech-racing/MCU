@@ -176,12 +176,12 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   51</span>    delay(1);</div>
 <div class="line"><span class="lineno">   52</span>    TEST_ASSERT_EQUAL(<span class="keyword">false</span>, <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">heartbeat_received</a>(millis()));</div>
 <div class="line"><span class="lineno">   53</span>}</div>
-<div class="ttc" id="aclassAMSInterface_html"><div class="ttname"><a href="classAMSInterface.html">AMSInterface</a></div><div class="ttdoc">this class is for interfacing with the AMS (accumulator management system)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2AMSInterface_8h_source.html#l00022">AMSInterface.h:23</a></div></div>
-<div class="ttc" id="aclassAMSInterface_html_a1f9e1a41b18e8f3228cbcbf7fe99b661"><div class="ttname"><a href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">AMSInterface::set_heartbeat</a></div><div class="ttdeci">void set_heartbeat(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00023">AMSInterface.cpp:23</a></div></div>
-<div class="ttc" id="aclassAMSInterface_html_a688f8b01c45d8f0f77e2d1353ea618de"><div class="ttname"><a href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">AMSInterface::heartbeat_received</a></div><div class="ttdeci">bool heartbeat_received(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00027">AMSInterface.cpp:27</a></div></div>
+<div class="ttc" id="aclassAMSInterface_html"><div class="ttname"><a href="classAMSInterface.html">AMSInterface</a></div><div class="ttdoc">this class is for interfacing with the AMS (accumulator management system)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2AMSInterface_8h_source.html#l00021">AMSInterface.h:22</a></div></div>
+<div class="ttc" id="aclassAMSInterface_html_a1f9e1a41b18e8f3228cbcbf7fe99b661"><div class="ttname"><a href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">AMSInterface::set_heartbeat</a></div><div class="ttdeci">void set_heartbeat(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00026">AMSInterface.cpp:26</a></div></div>
+<div class="ttc" id="aclassAMSInterface_html_a688f8b01c45d8f0f77e2d1353ea618de"><div class="ttname"><a href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">AMSInterface::heartbeat_received</a></div><div class="ttdeci">bool heartbeat_received(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00030">AMSInterface.cpp:30</a></div></div>
 <div class="ttc" id="aclassAMSInterface_html_ac64811ee77a13091f106238641c454a1"><div class="ttname"><a href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">AMSInterface::init</a></div><div class="ttdeci">void init(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00003">AMSInterface.cpp:3</a></div></div>
-<div class="ttc" id="aclassAMSInterface_html_ad353d459d4ec31cab48d94481d0c622c"><div class="ttname"><a href="classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c">AMSInterface::set_start_state</a></div><div class="ttdeci">void set_start_state()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00009">AMSInterface.cpp:9</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a9e79e8e3656e1b303f2b26036ea815b1"><div class="ttname"><a href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(SOFTWARE_OK)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00082">main.cpp:82</a></div></div>
+<div class="ttc" id="aclassAMSInterface_html_ad353d459d4ec31cab48d94481d0c622c"><div class="ttname"><a href="classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c">AMSInterface::set_start_state</a></div><div class="ttdeci">void set_start_state()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00012">AMSInterface.cpp:12</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a9e79e8e3656e1b303f2b26036ea815b1"><div class="ttname"><a href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(SOFTWARE_OK)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00084">main.cpp:84</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -206,11 +206,10 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">    9</span><span class="comment">    Need clarification on what these states are.</span></div>
 <div class="line"><span class="lineno">   10</span><span class="comment">    Why is nothing else in the message read by AMSInterface</span></div>
 <div class="line"><span class="lineno">   11</span><span class="comment">    */</span></div>
-<div class="line"><span class="lineno">   12</span>    BMS_status <a class="code hl_variable" href="old__main_8cpp.html#ac87defea67b1901f45c90aa3d0f7f10f">bms_status</a>{};</div>
-<div class="line"><span class="lineno">   13</span>    <a class="code hl_variable" href="old__main_8cpp.html#ac87defea67b1901f45c90aa3d0f7f10f">bms_status</a>.set_state(5);</div>
+<div class="line"><span class="lineno">   12</span>    BMS_status bms_status{};</div>
+<div class="line"><span class="lineno">   13</span>    bms_status.set_state(5);</div>
 <div class="line"><span class="lineno">   14</span> </div>
 <div class="line"><span class="lineno">   15</span>}</div>
-<div class="ttc" id="aold__main_8cpp_html_ac87defea67b1901f45c90aa3d0f7f10f"><div class="ttname"><a href="old__main_8cpp.html#ac87defea67b1901f45c90aa3d0f7f10f">bms_status</a></div><div class="ttdeci">BMS_status bms_status</div><div class="ttdef"><b>Definition:</b> <a href="old__main_8cpp_source.html#l00069">old_main.cpp:69</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

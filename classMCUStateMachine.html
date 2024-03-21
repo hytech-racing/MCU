@@ -87,11 +87,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4776c4162d3311fb5ed9644e398ed55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b419b1b3ffa46e9126a32e566fd201d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a3b419b1b3ffa46e9126a32e566fd201d">get_state</a> ()</td></tr>
 <tr class="separator:a3b419b1b3ffa46e9126a32e566fd201d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5429e2fd34f7d3c5f38ab6fcf53b7a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#ad5429e2fd34f7d3c5f38ab6fcf53b7a8">car_in_ready_to_drive</a> ()</td></tr>
+<tr class="separator:ad5429e2fd34f7d3c5f38ab6fcf53b7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename DrivetrainSysType&gt;<br />
 class MCUStateMachine&lt; DrivetrainSysType &gt;</div>
-<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00027">27</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00028">28</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad34421e34b84d3526140fc95b263e680" name="ad34421e34b84d3526140fc95b263e680"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad34421e34b84d3526140fc95b263e680">&#9670;&#160;</a></span>MCUStateMachine()</h2>
@@ -153,22 +155,52 @@ template&lt;typename DrivetrainSysType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00030">30</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   36</span>    {</div>
-<div class="line"><span class="lineno">   37</span>        current_state_ = CAR_STATE::STARTUP;</div>
-<div class="line"><span class="lineno">   38</span>        buzzer_ = <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>;</div>
-<div class="line"><span class="lineno">   39</span>        drivetrain_ = <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>;</div>
-<div class="line"><span class="lineno">   40</span>        dashboard_ = dashboard;</div>
-<div class="line"><span class="lineno">   41</span>        pedals_ = pedals;</div>
-<div class="line"><span class="lineno">   42</span>        controller_mux_ = mux;</div>
-<div class="line"><span class="lineno">   43</span>        safety_system_ = safety_system;</div>
-<div class="line"><span class="lineno">   44</span>    }</div>
-<div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00087">main.cpp:87</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a9b1d074ed9dae4fd92f949d027378c2d"><div class="ttname"><a href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a></div><div class="ttdeci">BuzzerController buzzer(BUZZER_ON_INTERVAL)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00091">main.cpp:91</a></div></div>
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00031">31</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>    {</div>
+<div class="line"><span class="lineno">   38</span>        current_state_ = CAR_STATE::STARTUP;</div>
+<div class="line"><span class="lineno">   39</span>        buzzer_ = <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>;</div>
+<div class="line"><span class="lineno">   40</span>        drivetrain_ = <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>;</div>
+<div class="line"><span class="lineno">   41</span>        dashboard_ = dashboard;</div>
+<div class="line"><span class="lineno">   42</span>        pedals_ = pedals;</div>
+<div class="line"><span class="lineno">   43</span>        controller_mux_ = mux;</div>
+<div class="line"><span class="lineno">   44</span>        safety_system_ = safety_system;</div>
+<div class="line"><span class="lineno">   45</span>    }</div>
+<div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00089">main.cpp:89</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a9b1d074ed9dae4fd92f949d027378c2d"><div class="ttname"><a href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a></div><div class="ttdeci">BuzzerController buzzer(BUZZER_ON_INTERVAL)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00093">main.cpp:93</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad5429e2fd34f7d3c5f38ab6fcf53b7a8" name="ad5429e2fd34f7d3c5f38ab6fcf53b7a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5429e2fd34f7d3c5f38ab6fcf53b7a8">&#9670;&#160;</a></span>car_in_ready_to_drive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::car_in_ready_to_drive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00052">52</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{ <span class="keywordflow">return</span> current_state_ == CAR_STATE::READY_TO_DRIVE; };</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a3b419b1b3ffa46e9126a32e566fd201d" name="a3b419b1b3ffa46e9126a32e566fd201d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3b419b1b3ffa46e9126a32e566fd201d">&#9670;&#160;</a></span>get_state()</h2>
 
@@ -194,8 +226,8 @@ template&lt;typename DrivetrainSysType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00050">50</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   50</span>{ <span class="keywordflow">return</span> current_state_; }</div>
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00051">51</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>{ <span class="keywordflow">return</span> current_state_; }</div>
 </div><!-- fragment -->
 </div>
 </div>

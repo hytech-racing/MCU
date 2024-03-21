@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['a1_0',['a1',['../structADCs.html#a441ae840cae59e57f0d2de7602392533',1,'ADCs']]],
-  ['a2_1',['a2',['../structADCs.html#aa98921220697f4bfa4e580f139df7fd1',1,'ADCs']]],
-  ['a3_2',['a3',['../structADCs.html#a2324ec3ad328eeb09866fcab738f09e3',1,'ADCs']]],
+  ['a1_0',['a1',['../structADCs.html#a441ae840cae59e57f0d2de7602392533',1,'ADCs::a1()'],['../main__spi__test_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb',1,'a1():&#160;main_spi_test.cpp'],['../main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb',1,'a1():&#160;main_minimal.cpp']]],
+  ['a2_1',['a2',['../structADCs.html#aa98921220697f4bfa4e580f139df7fd1',1,'ADCs::a2()'],['../main__spi__test_8cpp.html#a825565ee53fc1270eb766de1eb009cf2',1,'a2():&#160;main_spi_test.cpp'],['../main__minimal_8cpp.html#a825565ee53fc1270eb766de1eb009cf2',1,'a2():&#160;main_minimal.cpp']]],
+  ['a3_2',['a3',['../structADCs.html#a2324ec3ad328eeb09866fcab738f09e3',1,'ADCs::a3()'],['../main__minimal_8cpp.html#aed4c8f760d0c9893dcc21da660136846',1,'a3():&#160;main_minimal.cpp'],['../main__spi__test_8cpp.html#aed4c8f760d0c9893dcc21da660136846',1,'a3():&#160;main_spi_test.cpp']]],
   ['accel1_5fchannel_3',['accel1_channel',['../structTelemetryInterfaceReadChannels.html#a5bf26010449c41d8ce762e7dd5c1fb13',1,'TelemetryInterfaceReadChannels']]],
   ['accel1_5fmax_5fthresh_4',['ACCEL1_MAX_THRESH',['../MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479',1,'MCU_rev15_defs.h']]],
   ['accel1_5fmin_5fthresh_5',['ACCEL1_MIN_THRESH',['../MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de',1,'MCU_rev15_defs.h']]],
@@ -18,7 +18,7 @@ var searchData=
   ['adc3_5fcs_15',['ADC3_CS',['../MCU__rev15__defs_8h.html#afef284a61dec31ceaf620f532c528f07',1,'MCU_rev15_defs.h']]],
   ['amk_5fmax_5frpm_16',['AMK_MAX_RPM',['../TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6',1,'TorqueControllers.h']]],
   ['amk_5fmax_5ftorque_17',['AMK_MAX_TORQUE',['../TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8',1,'TorqueControllers.h']]],
-  ['ams_5finterface_18',['ams_interface',['../structCANInterfaces.html#a07b2512ce4dd8b21566334315e9026fa',1,'CANInterfaces::ams_interface()'],['../src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1',1,'ams_interface():&#160;main.cpp']]],
+  ['ams_5finterface_18',['ams_interface',['../structCANInterfaces.html#a07b2512ce4dd8b21566334315e9026fa',1,'CANInterfaces::ams_interface()'],['../src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1',1,'ams_interface():&#160;main.cpp'],['../main__minimal_8cpp.html#a608770735b7fc8a33ff0e8d45abba5f1',1,'ams_interface():&#160;main_minimal.cpp']]],
   ['analog_5fsteering_5fchannel_19',['analog_steering_channel',['../structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89',1,'TelemetryInterfaceReadChannels']]],
   ['angle_20',['angle',['../structSteeringSystemData__s.html#a2935bd230dc29a1fbc7c462c425cca79',1,'SteeringSystemData_s::angle()'],['../structSteeringEncoderConversion__s.html#ada5152e3d6306f8a36c2e571bb0e1714',1,'SteeringEncoderConversion_s::angle()']]],
   ['apps_5factivation_5fpercentage_21',['APPS_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293',1,'MCU_rev15_defs.h']]]

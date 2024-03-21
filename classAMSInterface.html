@@ -135,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >this class is for interfacing with the AMS (accumulator management system) </p>
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00022">22</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00021">21</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa2a8cbda93452f64c5752506fe571080" name="aa2a8cbda93452f64c5752506fe571080"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2a8cbda93452f64c5752506fe571080">&#9670;&#160;</a></span>AMSInterface() <span class="overload">[1/3]</span></h2>
@@ -195,17 +195,13 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00030">30</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   30</span>                                                                                                     :        </div>
-<div class="line"><span class="lineno">   31</span>        pin_software_ok_(sw_ok_pin),</div>
-<div class="line"><span class="lineno">   32</span>        filtered_max_cell_temp(init_temp),</div>
-<div class="line"><span class="lineno">   33</span>        filtered_min_cell_voltage(init_volt),</div>
-<div class="line"><span class="lineno">   34</span>        cell_temp_alpha(temp_alpha),</div>
-<div class="line"><span class="lineno">   35</span>        cell_voltage_alpha(volt_alpha)</div>
-<div class="line"><span class="lineno">   36</span>    {</div>
-<div class="line"><span class="lineno">   37</span>        <span class="comment">// Set pin mode</span></div>
-<div class="line"><span class="lineno">   38</span>        pinMode(pin_software_ok_, OUTPUT);</div>
-<div class="line"><span class="lineno">   39</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00029">29</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   29</span>                                                                                                     :        </div>
+<div class="line"><span class="lineno">   30</span>        pin_software_ok_(sw_ok_pin),</div>
+<div class="line"><span class="lineno">   31</span>        filtered_max_cell_temp(init_temp),</div>
+<div class="line"><span class="lineno">   32</span>        filtered_min_cell_voltage(init_volt),</div>
+<div class="line"><span class="lineno">   33</span>        cell_temp_alpha(temp_alpha),</div>
+<div class="line"><span class="lineno">   34</span>        cell_voltage_alpha(volt_alpha) {};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -233,10 +229,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00041">41</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>                               :</div>
-<div class="line"><span class="lineno">   42</span>        <a class="code hl_class" href="classAMSInterface.html">AMSInterface</a>(sw_ok_pin, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e">DEFAULT_INIT_TEMP</a>, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235">DEFAULT_INIT_VOLTAGE</a>, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#aad9c93b43a51e92cd51c641838407dbd">DEFAULT_TEMP_ALPHA</a>, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#a1c778e9b4f30ea85c7e9d9ef1a0e657b">DEFAULT_VOLTAGE_ALPHA</a>) {};</div>
-<div class="ttc" id="aclassAMSInterface_html"><div class="ttname"><a href="classAMSInterface.html">AMSInterface</a></div><div class="ttdoc">this class is for interfacing with the AMS (accumulator management system)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2AMSInterface_8h_source.html#l00022">AMSInterface.h:23</a></div></div>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00037">37</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                               :</div>
+<div class="line"><span class="lineno">   38</span>        <a class="code hl_class" href="classAMSInterface.html">AMSInterface</a>(sw_ok_pin, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e">DEFAULT_INIT_TEMP</a>, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235">DEFAULT_INIT_VOLTAGE</a>, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#aad9c93b43a51e92cd51c641838407dbd">DEFAULT_TEMP_ALPHA</a>, <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#a1c778e9b4f30ea85c7e9d9ef1a0e657b">DEFAULT_VOLTAGE_ALPHA</a>) {};</div>
+<div class="ttc" id="aclassAMSInterface_html"><div class="ttname"><a href="classAMSInterface.html">AMSInterface</a></div><div class="ttdoc">this class is for interfacing with the AMS (accumulator management system)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2AMSInterface_8h_source.html#l00021">AMSInterface.h:22</a></div></div>
 <div class="ttc" id="amock__interfaces_2AMSInterface_8h_html_a1c778e9b4f30ea85c7e9d9ef1a0e657b"><div class="ttname"><a href="mock__interfaces_2AMSInterface_8h.html#a1c778e9b4f30ea85c7e9d9ef1a0e657b">DEFAULT_VOLTAGE_ALPHA</a></div><div class="ttdeci">const float DEFAULT_VOLTAGE_ALPHA</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2AMSInterface_8h_source.html#l00013">AMSInterface.h:13</a></div></div>
 <div class="ttc" id="amock__interfaces_2AMSInterface_8h_html_a3e84cff12cd053ea3224bcdc1e7e4235"><div class="ttname"><a href="mock__interfaces_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235">DEFAULT_INIT_VOLTAGE</a></div><div class="ttdeci">const float DEFAULT_INIT_VOLTAGE</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2AMSInterface_8h_source.html#l00011">AMSInterface.h:11</a></div></div>
 <div class="ttc" id="amock__interfaces_2AMSInterface_8h_html_a5d6e09b98e5878108b7cf4d1aea6022e"><div class="ttname"><a href="mock__interfaces_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e">DEFAULT_INIT_TEMP</a></div><div class="ttdeci">const float DEFAULT_INIT_TEMP</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2AMSInterface_8h_source.html#l00010">AMSInterface.h:10</a></div></div>
@@ -319,12 +315,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00044">44</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   44</span>                                               {</div>
-<div class="line"><span class="lineno">   45</span>    bms_high_temp = bms_temperatures_.get_high_temperature() / 100.0;</div>
-<div class="line"><span class="lineno">   46</span>    filtered_max_cell_temp = filtered_max_cell_temp * cell_temp_alpha + (1.0 - cell_temp_alpha) * bms_high_temp;</div>
-<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">return</span> filtered_max_cell_temp;</div>
-<div class="line"><span class="lineno">   48</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00054">54</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   54</span>                                               {</div>
+<div class="line"><span class="lineno">   55</span>    bms_high_temp = bms_temperatures_.get_high_temperature() / 100.0;</div>
+<div class="line"><span class="lineno">   56</span>    filtered_max_cell_temp = filtered_max_cell_temp * cell_temp_alpha + (1.0 - cell_temp_alpha) * bms_high_temp;</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">return</span> filtered_max_cell_temp;</div>
+<div class="line"><span class="lineno">   58</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -360,12 +356,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00050">50</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   50</span>                                                  {</div>
-<div class="line"><span class="lineno">   51</span>    bms_low_voltage = bms_voltages_.get_low() / 10000.0;</div>
-<div class="line"><span class="lineno">   52</span>    filtered_min_cell_voltage = filtered_min_cell_voltage * cell_temp_alpha + (1.0 - cell_voltage_alpha) * bms_low_voltage;</div>
-<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">return</span> filtered_min_cell_voltage;</div>
-<div class="line"><span class="lineno">   54</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00060">60</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   60</span>                                                  {</div>
+<div class="line"><span class="lineno">   61</span>    bms_low_voltage = bms_voltages_.get_low() / 10000.0;</div>
+<div class="line"><span class="lineno">   62</span>    filtered_min_cell_voltage = filtered_min_cell_voltage * cell_temp_alpha + (1.0 - cell_voltage_alpha) * bms_low_voltage;</div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">return</span> filtered_min_cell_voltage;</div>
+<div class="line"><span class="lineno">   64</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -402,10 +398,17 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00027">27</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   27</span>                                                               {</div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">return</span> ((curr_millis - last_heartbeat_time) &lt; <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#af38825f1c9ec604259fa932b301a3354">HEARTBEAT_INTERVAL</a>);</div>
-<div class="line"><span class="lineno">   29</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00030">30</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   30</span>                                                               {</div>
+<div class="line"><span class="lineno">   31</span>    <span class="comment">// if((curr_millis - last_heartbeat_time) &gt;= HEARTBEAT_INTERVAL){</span></div>
+<div class="line"><span class="lineno">   32</span>    <span class="comment">//     Serial.println(&quot;ERROR&quot;);</span></div>
+<div class="line"><span class="lineno">   33</span>    <span class="comment">//     Serial.println(curr_millis);</span></div>
+<div class="line"><span class="lineno">   34</span>    <span class="comment">//     Serial.println(last_heartbeat_time);</span></div>
+<div class="line"><span class="lineno">   35</span>    <span class="comment">//     Serial.println(curr_millis - last_heartbeat_time);</span></div>
+<div class="line"><span class="lineno">   36</span>    <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">   37</span>    </div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">return</span> ((curr_millis - last_heartbeat_time) &lt; <a class="code hl_variable" href="mock__interfaces_2AMSInterface_8h.html#af38825f1c9ec604259fa932b301a3354">HEARTBEAT_INTERVAL</a>);</div>
+<div class="line"><span class="lineno">   39</span>}</div>
 <div class="ttc" id="amock__interfaces_2AMSInterface_8h_html_af38825f1c9ec604259fa932b301a3354"><div class="ttname"><a href="mock__interfaces_2AMSInterface_8h.html#af38825f1c9ec604259fa932b301a3354">HEARTBEAT_INTERVAL</a></div><div class="ttdeci">const unsigned long HEARTBEAT_INTERVAL</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2AMSInterface_8h_source.html#l00006">AMSInterface.h:6</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -459,11 +462,14 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00003">3</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    3</span>                                                 {</div>
-<div class="line"><span class="lineno">    4</span> </div>
-<div class="line"><span class="lineno">    5</span>    <a class="code hl_function" href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">set_heartbeat</a>(curr_millis);</div>
-<div class="line"><span class="lineno">    6</span> </div>
-<div class="line"><span class="lineno">    7</span>}</div>
-<div class="ttc" id="aclassAMSInterface_html_a1f9e1a41b18e8f3228cbcbf7fe99b661"><div class="ttname"><a href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">AMSInterface::set_heartbeat</a></div><div class="ttdeci">void set_heartbeat(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00023">AMSInterface.cpp:23</a></div></div>
+<div class="line"><span class="lineno">    4</span>    </div>
+<div class="line"><span class="lineno">    5</span>    <span class="comment">// Set pin mode</span></div>
+<div class="line"><span class="lineno">    6</span>    pinMode(pin_software_ok_, OUTPUT);</div>
+<div class="line"><span class="lineno">    7</span> </div>
+<div class="line"><span class="lineno">    8</span>    <a class="code hl_function" href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">set_heartbeat</a>(curr_millis);</div>
+<div class="line"><span class="lineno">    9</span> </div>
+<div class="line"><span class="lineno">   10</span>}</div>
+<div class="ttc" id="aclassAMSInterface_html_a1f9e1a41b18e8f3228cbcbf7fe99b661"><div class="ttname"><a href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">AMSInterface::set_heartbeat</a></div><div class="ttdeci">void set_heartbeat(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00026">AMSInterface.cpp:26</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -556,10 +562,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00039">39</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   39</span>                                           {</div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">return</span> (is_below_pack_charge_critical_low_thresh() || is_below_pack_charge_critical_total_thresh());</div>
-<div class="line"><span class="lineno">   41</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00049">49</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>                                           {</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">return</span> (is_below_pack_charge_critical_low_thresh() || is_below_pack_charge_critical_total_thresh());</div>
+<div class="line"><span class="lineno">   51</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -617,11 +623,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00057">57</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   57</span>                                                                                          {</div>
-<div class="line"><span class="lineno">   58</span>    bms_status_.load(recvd_msg.buf);</div>
-<div class="line"><span class="lineno">   59</span>    <a class="code hl_function" href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">set_heartbeat</a>(curr_millis);</div>
-<div class="line"><span class="lineno">   60</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00067">67</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>                                                                                          {</div>
+<div class="line"><span class="lineno">   68</span>    bms_status_.load(recvd_msg.buf);</div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_function" href="classAMSInterface.html#a1f9e1a41b18e8f3228cbcbf7fe99b661">set_heartbeat</a>(curr_millis);</div>
+<div class="line"><span class="lineno">   70</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -641,10 +647,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00062">62</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>                                                             {</div>
-<div class="line"><span class="lineno">   63</span>    bms_temperatures_.load(recvd_msg.buf);</div>
-<div class="line"><span class="lineno">   64</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00072">72</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>                                                             {</div>
+<div class="line"><span class="lineno">   73</span>    bms_temperatures_.load(recvd_msg.buf);</div>
+<div class="line"><span class="lineno">   74</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -664,10 +670,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00066">66</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   66</span>                                                                {</div>
-<div class="line"><span class="lineno">   67</span>    bms_voltages_.load(recvd_msg.buf);</div>
-<div class="line"><span class="lineno">   68</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00076">76</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   76</span>                                                                {</div>
+<div class="line"><span class="lineno">   77</span>    bms_voltages_.load(recvd_msg.buf);</div>
+<div class="line"><span class="lineno">   78</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -687,10 +693,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00023">23</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>                                                          {</div>
-<div class="line"><span class="lineno">   24</span>    last_heartbeat_time = curr_millis;</div>
-<div class="line"><span class="lineno">   25</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00026">26</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>                                                          {</div>
+<div class="line"><span class="lineno">   27</span>    last_heartbeat_time = curr_millis;</div>
+<div class="line"><span class="lineno">   28</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -738,12 +744,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00009">9</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    9</span>                                   {</div>
-<div class="line"><span class="lineno">   10</span>    </div>
-<div class="line"><span class="lineno">   11</span>    digitalWrite(pin_software_ok_, HIGH);</div>
-<div class="line"><span class="lineno">   12</span>    </div>
-<div class="line"><span class="lineno">   13</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00012">12</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   12</span>                                   {</div>
+<div class="line"><span class="lineno">   13</span>    </div>
+<div class="line"><span class="lineno">   14</span>    digitalWrite(pin_software_ok_, HIGH);</div>
+<div class="line"><span class="lineno">   15</span>    </div>
+<div class="line"><span class="lineno">   16</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -791,13 +797,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00016">16</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   16</span>                                                 {</div>
-<div class="line"><span class="lineno">   17</span>    <span class="keywordflow">if</span> (ok_high)</div>
-<div class="line"><span class="lineno">   18</span>        digitalWrite(pin_software_ok_, HIGH);</div>
-<div class="line"><span class="lineno">   19</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   20</span>        digitalWrite(pin_software_ok_, LOW);</div>
-<div class="line"><span class="lineno">   21</span>}</div>
+<p class="definition">Definition at line <a class="el" href="AMSInterface_8cpp_source.html#l00019">19</a> of file <a class="el" href="AMSInterface_8cpp_source.html">AMSInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                                                 {</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">if</span> (ok_high)</div>
+<div class="line"><span class="lineno">   21</span>        digitalWrite(pin_software_ok_, HIGH);</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   23</span>        digitalWrite(pin_software_ok_, LOW);</div>
+<div class="line"><span class="lineno">   24</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

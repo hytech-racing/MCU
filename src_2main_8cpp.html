@@ -94,6 +94,7 @@ $(function() {
 <code>#include &quot;DashboardInterface.h&quot;</code><br />
 <code>#include &quot;InverterInterface.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SABInterface_8h_source.html">SABInterface.h</a>&quot;</code><br />
 <code>#include &quot;SysClock.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="SafetySystem_8h_source.html">SafetySystem.h</a>&quot;</code><br />
@@ -117,13 +118,13 @@ Typedefs</h2></td></tr>
 <tr class="separator:a44b11fbb973dc0855b34fc2b17d93e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21f5dbed5370a0561a7d878f18a4d6b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a21f5dbed5370a0561a7d878f18a4d6b0">InvInt_t</a> = <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; <a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> &gt;</td></tr>
 <tr class="separator:a21f5dbed5370a0561a7d878f18a4d6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2c187948cffd84c29d9c1103ad54801"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a> = <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; <a class="el" href="src_2main_8cpp.html#a21f5dbed5370a0561a7d878f18a4d6b0">InvInt_t</a> &gt;</td></tr>
+<tr class="memitem:af2c187948cffd84c29d9c1103ad54801"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a> = <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> &gt;</td></tr>
 <tr class="separator:af2c187948cffd84c29d9c1103ad54801"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a881eadf2dcd1b88eb652bc0bd0de5a42"><td class="memItemLeft" align="right" valign="top">OrbisBR10&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a881eadf2dcd1b88eb652bc0bd0de5a42">steering1</a> (<a class="el" href="MCU__rev15__defs_8h.html#a53db2ff9b614f8279833583c96621199">STEERING_SERIAL</a>)</td></tr>
-<tr class="separator:a881eadf2dcd1b88eb652bc0bd0de5a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1edb6fc0e413799762878f3313aea907"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSABInterface.html">SABInterface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a1edb6fc0e413799762878f3313aea907">sab_interface</a> ()</td></tr>
+<tr class="separator:a1edb6fc0e413799762878f3313aea907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeae3526f94cfea3b731d38786f35c277"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a> ()</td></tr>
 <tr class="separator:aeae3526f94cfea3b731d38786f35c277"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b7a1fda0811fe6090746162c97a38a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a> (const SysTick_s &amp;current_system_tick)</td></tr>
@@ -145,11 +146,13 @@ Variables</h2></td></tr>
 <tr class="separator:acc3edd98677708079eb82bba82410c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bf03c0480edc5cee328eeb4f30ad2da"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structADCs.html">ADCs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a></td></tr>
 <tr class="separator:a0bf03c0480edc5cee328eeb4f30ad2da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47ca5c627a2dc58833e4893310b0678c"><td class="memItemLeft" align="right" valign="top">OrbisBR10 <a class="el" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a47ca5c627a2dc58833e4893310b0678c">Serial5</a></td></tr>
+<tr class="separator:a47ca5c627a2dc58833e4893310b0678c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aede0cf4c1529d92370c9bfb1608b853b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDashboardInterface.html">DashboardInterface</a> dashboard &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#aede0cf4c1529d92370c9bfb1608b853b">CAN2_txBuffer</a></td></tr>
 <tr class="separator:aede0cf4c1529d92370c9bfb1608b853b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e79e8e3656e1b303f2b26036ea815b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAMSInterface.html">AMSInterface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a> (<a class="el" href="MCU__rev12__dfs_8h.html#ab725e7510caf9e7809af7526aa9561ef">SOFTWARE_OK</a>)</td></tr>
+<tr class="memitem:a9e79e8e3656e1b303f2b26036ea815b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAMSInterface.html">AMSInterface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a> (<a class="el" href="MCU__rev15__defs_8h.html#aa0b54c9c7888a302eaa235df30d7d9a4">SOFTWARE_OK</a>)</td></tr>
 <tr class="separator:a9e79e8e3656e1b303f2b26036ea815b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab38aceb67800dab467af6c2aa001d7df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classWatchdogInterface.html">WatchdogInterface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a> (<a class="el" href="MCU__rev12__dfs_8h.html#ae5fe8fbc54e3f30aac0fa4ab66e16508">WATCHDOG_INPUT</a>)</td></tr>
+<tr class="memitem:ab38aceb67800dab467af6c2aa001d7df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classWatchdogInterface.html">WatchdogInterface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a> (<a class="el" href="MCU__rev15__defs_8h.html#a2e4da32aa1ef69980b1ee0afb899862f">WATCHDOG_INPUT</a>)</td></tr>
 <tr class="separator:ab38aceb67800dab467af6c2aa001d7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03aea0f270016e8f260986478975f3a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMCUInterface.html">MCUInterface</a> main_ecu &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5">CAN3_txBuffer</a></td></tr>
 <tr class="separator:a03aea0f270016e8f260986478975f3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,13 +164,13 @@ Variables</h2></td></tr>
 <tr class="separator:a0f351bbfcf80590ece6101bf1cfa1006"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b1d074ed9dae4fd92f949d027378c2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBuzzerController.html">BuzzerController</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a> (<a class="el" href="MCU__rev15__defs_8h.html#ad2f45d4290bd68044421a162246e5b88">BUZZER_ON_INTERVAL</a>)</td></tr>
 <tr class="separator:a9b1d074ed9dae4fd92f949d027378c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a201a9dddc980a400a0a2140d3da55792"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPedalsSystem.html">PedalsSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a> ({<a class="el" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293">APPS_ACTIVATION_PERCENTAGE</a>}, {<a class="el" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a5c7f10ffdceb24ed1a6b1b861bc284d4">BRAKE_ACTIVATION_PERCENTAGE</a>}, <a class="el" href="MCU__rev15__defs_8h.html#adbefeea2e527d6fe954857f24e1fa7e4">BRAKE_MECH_THRESH</a>)</td></tr>
+<tr class="memitem:a201a9dddc980a400a0a2140d3da55792"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPedalsSystem.html">PedalsSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a> ({<a class="el" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293">APPS_ACTIVATION_PERCENTAGE</a>}, {<a class="el" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a>, BRAKE_ACTIVATION_PERCENTAGE}, <a class="el" href="MCU__rev15__defs_8h.html#adbefeea2e527d6fe954857f24e1fa7e4">BRAKE_MECH_THRESH</a>)</td></tr>
 <tr class="separator:a201a9dddc980a400a0a2140d3da55792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60b1f8a5e4ac159bc3ca1710391a185f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a> = <a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a>({&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr}, &amp;main_ecu, <a class="el" href="MCU__rev15__defs_8h.html#af703dfb934c8b49dcd5462a8fa0593b8">INVERTER_ENABLING_TIMEOUT_INTERVAL</a>)</td></tr>
 <tr class="separator:a60b1f8a5e4ac159bc3ca1710391a185f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9af553c886080310b9cd6364449c0e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a></td></tr>
 <tr class="separator:af9af553c886080310b9cd6364449c0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2105bee21456d7572113b1e5b69ce5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt; <a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a> = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>}</td></tr>
+<tr class="memitem:aa2105bee21456d7572113b1e5b69ce5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt; <a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a> = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>, &amp;<a class="el" href="main__minimal_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>}</td></tr>
 <tr class="separator:aa2105bee21456d7572113b1e5b69ce5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -183,7 +186,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00041">41</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00042">42</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -194,12 +197,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a> =  <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt;<a class="el" href="src_2main_8cpp.html#a21f5dbed5370a0561a7d878f18a4d6b0">InvInt_t</a>&gt;</td>
+          <td class="memname">using <a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a> =  <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt;<a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00086">86</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00088">88</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -210,12 +213,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="src_2main_8cpp.html#a21f5dbed5370a0561a7d878f18a4d6b0">InvInt_t</a> =  <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt;<a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a>&gt;</td>
+          <td class="memname">using <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> =  <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt;<a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00066">66</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00068">68</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -235,20 +238,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00286">286</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  287</span>{</div>
-<div class="line"><span class="lineno">  288</span>    <span class="keywordflow">if</span> (dashboard.inverterResetButtonPressed())</div>
-<div class="line"><span class="lineno">  289</span>    {</div>
-<div class="line"><span class="lineno">  290</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3af766df74ce9d0894f18ec2d281af29">enable_drivetrain_reset</a>();</div>
-<div class="line"><span class="lineno">  291</span>    }</div>
-<div class="line"><span class="lineno">  292</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#aa9ae1ca23e95f2088affd664c4f02837">check_reset_condition</a>();</div>
-<div class="line"><span class="lineno">  293</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">reset_drivetrain</a>();</div>
-<div class="line"><span class="lineno">  294</span>}</div>
-<div class="ttc" id="aclassDrivetrainSystem_html_a3af766df74ce9d0894f18ec2d281af29"><div class="ttname"><a href="classDrivetrainSystem.html#a3af766df74ce9d0894f18ec2d281af29">DrivetrainSystem::enable_drivetrain_reset</a></div><div class="ttdeci">void enable_drivetrain_reset()</div></div>
-<div class="ttc" id="aclassDrivetrainSystem_html_aa9ae1ca23e95f2088affd664c4f02837"><div class="ttname"><a href="classDrivetrainSystem.html#aa9ae1ca23e95f2088affd664c4f02837">DrivetrainSystem::check_reset_condition</a></div><div class="ttdeci">void check_reset_condition()</div></div>
-<div class="ttc" id="aclassDrivetrainSystem_html_ae4798f5013796504e5b6f3721a38e659"><div class="ttname"><a href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">DrivetrainSystem::reset_drivetrain</a></div><div class="ttdeci">void reset_drivetrain()</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00087">main.cpp:87</a></div></div>
-</div><!-- fragment -->
 </div>
 </div>
 <a id="aeae3526f94cfea3b731d38786f35c277" name="aeae3526f94cfea3b731d38786f35c277"></a>
@@ -266,32 +255,32 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00184">184</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  185</span>{</div>
-<div class="line"><span class="lineno">  186</span>    <span class="comment">// Inverter CAN line</span></div>
-<div class="line"><span class="lineno">  187</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.begin();</div>
-<div class="line"><span class="lineno">  188</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a>);</div>
-<div class="line"><span class="lineno">  189</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setMaxMB(16);</div>
-<div class="line"><span class="lineno">  190</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFO();</div>
-<div class="line"><span class="lineno">  191</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFOInterrupt();</div>
-<div class="line"><span class="lineno">  192</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.onReceive(<a class="code hl_function" href="HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a>);</div>
-<div class="line"><span class="lineno">  193</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.mailboxStatus();</div>
-<div class="line"><span class="lineno">  194</span> </div>
-<div class="line"><span class="lineno">  195</span>    <span class="comment">// Telemetry CAN line</span></div>
-<div class="line"><span class="lineno">  196</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.begin();</div>
-<div class="line"><span class="lineno">  197</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a>);</div>
-<div class="line"><span class="lineno">  198</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setMaxMB(16);</div>
-<div class="line"><span class="lineno">  199</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFO();</div>
-<div class="line"><span class="lineno">  200</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFOInterrupt();</div>
-<div class="line"><span class="lineno">  201</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.onReceive(<a class="code hl_function" href="HytechCANInterface_8h.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a>);</div>
-<div class="line"><span class="lineno">  202</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.mailboxStatus();</div>
-<div class="line"><span class="lineno">  203</span>}</div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00203">203</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  204</span>{</div>
+<div class="line"><span class="lineno">  205</span>    <span class="comment">// Inverter CAN line</span></div>
+<div class="line"><span class="lineno">  206</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.begin();</div>
+<div class="line"><span class="lineno">  207</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a>);</div>
+<div class="line"><span class="lineno">  208</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setMaxMB(16);</div>
+<div class="line"><span class="lineno">  209</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFO();</div>
+<div class="line"><span class="lineno">  210</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFOInterrupt();</div>
+<div class="line"><span class="lineno">  211</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.onReceive(<a class="code hl_function" href="HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a>);</div>
+<div class="line"><span class="lineno">  212</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.mailboxStatus();</div>
+<div class="line"><span class="lineno">  213</span> </div>
+<div class="line"><span class="lineno">  214</span>    <span class="comment">// Telemetry CAN line</span></div>
+<div class="line"><span class="lineno">  215</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.begin();</div>
+<div class="line"><span class="lineno">  216</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a>);</div>
+<div class="line"><span class="lineno">  217</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setMaxMB(16);</div>
+<div class="line"><span class="lineno">  218</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFO();</div>
+<div class="line"><span class="lineno">  219</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFOInterrupt();</div>
+<div class="line"><span class="lineno">  220</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.onReceive(<a class="code hl_function" href="HytechCANInterface_8h.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a>);</div>
+<div class="line"><span class="lineno">  221</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.mailboxStatus();</div>
+<div class="line"><span class="lineno">  222</span>}</div>
 <div class="ttc" id="aHytechCANInterface_8h_html_a0a0a6eb75d69645e467f0a54cc36e3b1"><div class="ttname"><a href="HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a></div><div class="ttdeci">void on_can2_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00019">HytechCANInterface.cpp:19</a></div></div>
 <div class="ttc" id="aHytechCANInterface_8h_html_a983dcec234a2ed40ef72c2b0347d83ce"><div class="ttname"><a href="HytechCANInterface_8h.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a></div><div class="ttdeci">void on_can3_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00026">HytechCANInterface.cpp:26</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_a5d43b28eff85e18d6b40d4c458f9c8d3"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a></div><div class="ttdeci">const unsigned long TELEM_CAN_BAUDRATE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00036">MCU_rev15_defs.h:36</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_acf780f904fac84a7a0897fbdbe970795"><div class="ttname"><a href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a></div><div class="ttdeci">const unsigned long INV_CAN_BAUDRATE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00035">MCU_rev15_defs.h:35</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a4af6316bd58f478b3b084beb56f0f0f3"><div class="ttname"><a href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a></div><div class="ttdeci">FlexCAN_T4&lt; CAN2, RX_SIZE_256, TX_SIZE_16 &gt; INV_CAN</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00037">main.cpp:37</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_acc3edd98677708079eb82bba82410c21"><div class="ttname"><a href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a></div><div class="ttdeci">FlexCAN_T4&lt; CAN3, RX_SIZE_256, TX_SIZE_16 &gt; TELEM_CAN</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00038">main.cpp:38</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a5d43b28eff85e18d6b40d4c458f9c8d3"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a></div><div class="ttdeci">const unsigned long TELEM_CAN_BAUDRATE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00034">MCU_rev15_defs.h:34</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_acf780f904fac84a7a0897fbdbe970795"><div class="ttname"><a href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a></div><div class="ttdeci">const unsigned long INV_CAN_BAUDRATE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00033">MCU_rev15_defs.h:33</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a4af6316bd58f478b3b084beb56f0f0f3"><div class="ttname"><a href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a></div><div class="ttdeci">FlexCAN_T4&lt; CAN2, RX_SIZE_256, TX_SIZE_16 &gt; INV_CAN</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00038">main.cpp:38</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_acc3edd98677708079eb82bba82410c21"><div class="ttname"><a href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a></div><div class="ttdeci">FlexCAN_T4&lt; CAN3, RX_SIZE_256, TX_SIZE_16 &gt; TELEM_CAN</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00039">main.cpp:39</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -310,47 +299,70 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00150">150</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  151</span>{</div>
-<div class="line"><span class="lineno">  152</span>    <span class="comment">// get latest tick from sys clock</span></div>
-<div class="line"><span class="lineno">  153</span>    SysTick_s curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(micros());</div>
-<div class="line"><span class="lineno">  154</span> </div>
-<div class="line"><span class="lineno">  155</span>    <span class="comment">// process received CAN messages</span></div>
-<div class="line"><span class="lineno">  156</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a>(<a class="code hl_variable" href="HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a>, <a class="code hl_variable" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a>, curr_tick.millis);</div>
-<div class="line"><span class="lineno">  157</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a>(<a class="code hl_variable" href="HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a>, <a class="code hl_variable" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a>, curr_tick.millis);</div>
-<div class="line"><span class="lineno">  158</span> </div>
-<div class="line"><span class="lineno">  159</span>    <span class="comment">// tick interfaces</span></div>
-<div class="line"><span class="lineno">  160</span>    <a class="code hl_function" href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a>(curr_tick);</div>
-<div class="line"><span class="lineno">  161</span> </div>
-<div class="line"><span class="lineno">  162</span>    <span class="comment">// tick systems</span></div>
-<div class="line"><span class="lineno">  163</span>    <a class="code hl_function" href="src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce">tick_all_systems</a>(curr_tick);</div>
-<div class="line"><span class="lineno">  164</span> </div>
-<div class="line"><span class="lineno">  165</span>    <span class="comment">// inverter procedure before entering state machine</span></div>
-<div class="line"><span class="lineno">  166</span>    <span class="comment">// reset inverters</span></div>
-<div class="line"><span class="lineno">  167</span>    <a class="code hl_function" href="src_2main_8cpp.html#a433468e39ea3e8251555e9f46cf24923">drivetrain_reset</a>();</div>
-<div class="line"><span class="lineno">  168</span> </div>
-<div class="line"><span class="lineno">  169</span>    <span class="comment">// tick state machine</span></div>
-<div class="line"><span class="lineno">  170</span>    fsm.tick_state_machine(curr_tick.millis);</div>
-<div class="line"><span class="lineno">  171</span> </div>
-<div class="line"><span class="lineno">  172</span>    <span class="comment">// tick safety system</span></div>
-<div class="line"><span class="lineno">  173</span>    safety_system.software_shutdown(curr_tick);</div>
-<div class="line"><span class="lineno">  174</span> </div>
-<div class="line"><span class="lineno">  175</span>    <span class="comment">// send CAN   </span></div>
-<div class="line"><span class="lineno">  176</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="src_2main_8cpp.html#aede0cf4c1529d92370c9bfb1608b853b">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>);</div>
-<div class="line"><span class="lineno">  177</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5">CAN3_txBuffer</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>);</div>
-<div class="line"><span class="lineno">  178</span>}</div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00165">165</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  166</span>{</div>
+<div class="line"><span class="lineno">  167</span>    <span class="comment">// get latest tick from sys clock</span></div>
+<div class="line"><span class="lineno">  168</span>    SysTick_s curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(micros());</div>
+<div class="line"><span class="lineno">  169</span> </div>
+<div class="line"><span class="lineno">  170</span>    <span class="comment">// process received CAN messages</span></div>
+<div class="line"><span class="lineno">  171</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a>(<a class="code hl_variable" href="HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a>, <a class="code hl_variable" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a>, curr_tick.millis);</div>
+<div class="line"><span class="lineno">  172</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a>(<a class="code hl_variable" href="HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a>, <a class="code hl_variable" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a>, curr_tick.millis);</div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>    <span class="comment">// tick interfaces</span></div>
+<div class="line"><span class="lineno">  175</span>    <a class="code hl_function" href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a>(curr_tick);</div>
+<div class="line"><span class="lineno">  176</span> </div>
+<div class="line"><span class="lineno">  177</span>    <span class="comment">// tick systems</span></div>
+<div class="line"><span class="lineno">  178</span>    <a class="code hl_function" href="src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce">tick_all_systems</a>(curr_tick);</div>
+<div class="line"><span class="lineno">  179</span> </div>
+<div class="line"><span class="lineno">  180</span>    <span class="comment">// // inverter procedure before entering state machine</span></div>
+<div class="line"><span class="lineno">  181</span>    <span class="comment">// // reset inverters</span></div>
+<div class="line"><span class="lineno">  182</span>    <span class="keywordflow">if</span> (dashboard.inverterResetButtonPressed() &amp;&amp; <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">drivetrain_error_occured</a>())</div>
+<div class="line"><span class="lineno">  183</span>    {</div>
+<div class="line"><span class="lineno">  184</span>        hal_println(<span class="stringliteral">&quot;resetting errored drivetrain&quot;</span>);</div>
+<div class="line"><span class="lineno">  185</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">reset_drivetrain</a>();</div>
+<div class="line"><span class="lineno">  186</span>    }</div>
+<div class="line"><span class="lineno">  187</span> </div>
+<div class="line"><span class="lineno">  188</span>    <span class="comment">// tick state machine</span></div>
+<div class="line"><span class="lineno">  189</span>    fsm.tick_state_machine(curr_tick.millis);</div>
+<div class="line"><span class="lineno">  190</span> </div>
+<div class="line"><span class="lineno">  191</span>    <span class="comment">// tick safety system</span></div>
+<div class="line"><span class="lineno">  192</span>    safety_system.software_shutdown(curr_tick);</div>
+<div class="line"><span class="lineno">  193</span> </div>
+<div class="line"><span class="lineno">  194</span>    <span class="comment">// send CAN   </span></div>
+<div class="line"><span class="lineno">  195</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="src_2main_8cpp.html#aede0cf4c1529d92370c9bfb1608b853b">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>);</div>
+<div class="line"><span class="lineno">  196</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5">CAN3_txBuffer</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>);</div>
+<div class="line"><span class="lineno">  197</span>}</div>
 <div class="ttc" id="aHytechCANInterface_8h_html_a29aa040358a501c30e482164867b44a7"><div class="ttname"><a href="HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN3_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00005">HytechCANInterface.cpp:5</a></div></div>
-<div class="ttc" id="aHytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00070">HytechCANInterface.h:70</a></div></div>
-<div class="ttc" id="aHytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00148">HytechCANInterface.h:148</a></div></div>
+<div class="ttc" id="aHytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00072">HytechCANInterface.h:72</a></div></div>
+<div class="ttc" id="aHytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00158">HytechCANInterface.h:158</a></div></div>
 <div class="ttc" id="aHytechCANInterface_8h_html_ad97681e0953a0b25effdbce5aef0ce72"><div class="ttname"><a href="HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN2_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00004">HytechCANInterface.cpp:4</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a03aea0f270016e8f260986478975f3a5"><div class="ttname"><a href="src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5">CAN3_txBuffer</a></div><div class="ttdeci">MCUInterface main_ecu &amp; CAN3_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00060">main.cpp:60</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a433468e39ea3e8251555e9f46cf24923"><div class="ttname"><a href="src_2main_8cpp.html#a433468e39ea3e8251555e9f46cf24923">drivetrain_reset</a></div><div class="ttdeci">void drivetrain_reset()</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00286">main.cpp:286</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a5b7a1fda0811fe6090746162c97a38a0"><div class="ttname"><a href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a></div><div class="ttdeci">void tick_all_interfaces(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00209">main.cpp:209</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_aa2105bee21456d7572113b1e5b69ce5f"><div class="ttname"><a href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a></div><div class="ttdeci">CANInterfaces&lt; CircularBufferType &gt; CAN_receive_interfaces</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00097">main.cpp:97</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_adb2a2450ba6cc5c27c30ad5f22eadbce"><div class="ttname"><a href="src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce">tick_all_systems</a></div><div class="ttdeci">void tick_all_systems(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00251">main.cpp:251</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_ae7fc4cf3627b4a43f5a397270a5c351c"><div class="ttname"><a href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a></div><div class="ttdeci">SysClock sys_clock</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00079">main.cpp:79</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_aede0cf4c1529d92370c9bfb1608b853b"><div class="ttname"><a href="src_2main_8cpp.html#aede0cf4c1529d92370c9bfb1608b853b">CAN2_txBuffer</a></div><div class="ttdeci">DashboardInterface dashboard &amp; CAN2_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00057">main.cpp:57</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a3eefd92d61b78ad1e3c314d455da6b5a"><div class="ttname"><a href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">DrivetrainSystem::drivetrain_error_occured</a></div><div class="ttdeci">bool drivetrain_error_occured()</div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_ae4798f5013796504e5b6f3721a38e659"><div class="ttname"><a href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">DrivetrainSystem::reset_drivetrain</a></div><div class="ttdeci">void reset_drivetrain()</div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a03aea0f270016e8f260986478975f3a5"><div class="ttname"><a href="src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5">CAN3_txBuffer</a></div><div class="ttdeci">MCUInterface main_ecu &amp; CAN3_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00061">main.cpp:61</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a5b7a1fda0811fe6090746162c97a38a0"><div class="ttname"><a href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a></div><div class="ttdeci">void tick_all_interfaces(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00228">main.cpp:228</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00089">main.cpp:89</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_aa2105bee21456d7572113b1e5b69ce5f"><div class="ttname"><a href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a></div><div class="ttdeci">CANInterfaces&lt; CircularBufferType &gt; CAN_receive_interfaces</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00099">main.cpp:99</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_adb2a2450ba6cc5c27c30ad5f22eadbce"><div class="ttname"><a href="src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce">tick_all_systems</a></div><div class="ttdeci">void tick_all_systems(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00270">main.cpp:270</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_ae7fc4cf3627b4a43f5a397270a5c351c"><div class="ttname"><a href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a></div><div class="ttdeci">SysClock sys_clock</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00081">main.cpp:81</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_aede0cf4c1529d92370c9bfb1608b853b"><div class="ttname"><a href="src_2main_8cpp.html#aede0cf4c1529d92370c9bfb1608b853b">CAN2_txBuffer</a></div><div class="ttdeci">DashboardInterface dashboard &amp; CAN2_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00058">main.cpp:58</a></div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="a1edb6fc0e413799762878f3313aea907" name="a1edb6fc0e413799762878f3313aea907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1edb6fc0e413799762878f3313aea907">&#9670;&#160;</a></span>sab_interface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSABInterface.html">SABInterface</a> sab_interface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a4fc01d736fe50cf5b977f755b675f11d" name="a4fc01d736fe50cf5b977f755b675f11d"></a>
@@ -369,65 +381,74 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00116">116</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  117</span>{</div>
-<div class="line"><span class="lineno">  118</span>    <span class="comment">// initialize CAN communication</span></div>
-<div class="line"><span class="lineno">  119</span>    <a class="code hl_function" href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a>();</div>
-<div class="line"><span class="lineno">  120</span>    </div>
-<div class="line"><span class="lineno">  121</span>    <span class="comment">// get latest tick from sys clock</span></div>
-<div class="line"><span class="lineno">  122</span>    SysTick_s curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(micros());</div>
-<div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">  125</span><span class="comment">        Init Interfaces</span></div>
-<div class="line"><span class="lineno">  126</span><span class="comment">    */</span></div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00118">118</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  119</span>{</div>
+<div class="line"><span class="lineno">  120</span>    <span class="comment">// initialize CAN communication</span></div>
+<div class="line"><span class="lineno">  121</span>    <a class="code hl_function" href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a>();</div>
+<div class="line"><span class="lineno">  122</span> </div>
+<div class="line"><span class="lineno">  123</span>    SPI.begin();</div>
+<div class="line"><span class="lineno">  124</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.init();</div>
+<div class="line"><span class="lineno">  125</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.init();</div>
+<div class="line"><span class="lineno">  126</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.init();</div>
 <div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>    main_ecu.init();                      <span class="comment">// initial shutdown circuit readings,</span></div>
-<div class="line"><span class="lineno">  129</span>    <a class="code hl_variable" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a>.<a class="code hl_function" href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">init</a>(curr_tick.millis);  <span class="comment">// initialize wd kick time</span></div>
-<div class="line"><span class="lineno">  130</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">init</a>(curr_tick.millis); <span class="comment">// initialize last heartbeat time</span></div>
-<div class="line"><span class="lineno">  131</span> </div>
-<div class="line"><span class="lineno">  132</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">  133</span><span class="comment">        Init Systems</span></div>
-<div class="line"><span class="lineno">  134</span><span class="comment">    */</span></div>
-<div class="line"><span class="lineno">  135</span> </div>
-<div class="line"><span class="lineno">  136</span>    safety_system.init();</div>
-<div class="line"><span class="lineno">  137</span> </div>
-<div class="line"><span class="lineno">  138</span>    <span class="comment">// present action for 1 second</span></div>
-<div class="line"><span class="lineno">  139</span>    delay(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac79fb442494faae60c51a92c0470a0d2">SETUP_PRESENT_ACTION_INTERVAL</a>);</div>
-<div class="line"><span class="lineno">  140</span> </div>
-<div class="line"><span class="lineno">  141</span>    <span class="comment">// Drivetrain set all inverters disabled</span></div>
-<div class="line"><span class="lineno">  142</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#ac0e7340c39f7b0561dbcfa9aebb4d27c">disable</a>();   <span class="comment">// write inv_en and inv_24V_en low: writing high in previous code though, should double check </span></div>
-<div class="line"><span class="lineno">  143</span>                            <span class="comment">// would an error list be good for debugging? i.e. which inverter has error</span></div>
-<div class="line"><span class="lineno">  144</span> </div>
-<div class="line"><span class="lineno">  145</span>    <span class="comment">// ControllerMux set max torque to 20 NM, torque mode to whatever makes most sense</span></div>
-<div class="line"><span class="lineno">  146</span>        <span class="comment">// Preventing drivers from forgetting to toggle torque mode and end up self-derating at comp</span></div>
-<div class="line"><span class="lineno">  147</span>        <span class="comment">// Not strictly necessary at the moment, just don&#39;t forget</span></div>
-<div class="line"><span class="lineno">  148</span>}</div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_ac79fb442494faae60c51a92c0470a0d2"><div class="ttname"><a href="MCU__rev15__defs_8h.html#ac79fb442494faae60c51a92c0470a0d2">SETUP_PRESENT_ACTION_INTERVAL</a></div><div class="ttdeci">const unsigned long SETUP_PRESENT_ACTION_INTERVAL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00030">MCU_rev15_defs.h:30</a></div></div>
+<div class="line"><span class="lineno">  128</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelScale(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>, (1.0 / (<span class="keywordtype">float</span>)(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a> - <a class="code hl_variable" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>)));</div>
+<div class="line"><span class="lineno">  129</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelScale(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>, (1.0 / (<span class="keywordtype">float</span>)(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a> - <a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>)));</div>
+<div class="line"><span class="lineno">  130</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelScale(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>, (1.0 / (<span class="keywordtype">float</span>)(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a> - <a class="code hl_variable" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>)));</div>
+<div class="line"><span class="lineno">  131</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelScale(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a>, (1.0 / (<span class="keywordtype">float</span>)(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a> - <a class="code hl_variable" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>)));</div>
+<div class="line"><span class="lineno">  132</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelOffset(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>, -<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>);</div>
+<div class="line"><span class="lineno">  133</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelOffset(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>, -<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>);</div>
+<div class="line"><span class="lineno">  134</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelOffset(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>, -<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>);</div>
+<div class="line"><span class="lineno">  135</span>    <a class="code hl_variable" href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.setChannelOffset(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a>, -<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>);</div>
+<div class="line"><span class="lineno">  136</span> </div>
+<div class="line"><span class="lineno">  137</span>    Serial.begin(115200);</div>
+<div class="line"><span class="lineno">  138</span>    </div>
+<div class="line"><span class="lineno">  139</span>    <span class="comment">// get latest tick from sys clock</span></div>
+<div class="line"><span class="lineno">  140</span>    SysTick_s curr_tick = <a class="code hl_variable" href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a>.tick(micros());</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>    <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  143</span><span class="comment">        Init Interfaces</span></div>
+<div class="line"><span class="lineno">  144</span><span class="comment">    */</span></div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>    main_ecu.init();                      <span class="comment">// initial shutdown circuit readings,</span></div>
+<div class="line"><span class="lineno">  147</span>    <a class="code hl_variable" href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a>.<a class="code hl_function" href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">init</a>(curr_tick.millis);  <span class="comment">// initialize wd kick time</span></div>
+<div class="line"><span class="lineno">  148</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">init</a>(curr_tick.millis); <span class="comment">// initialize last heartbeat time</span></div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>    <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  151</span><span class="comment">        Init Systems</span></div>
+<div class="line"><span class="lineno">  152</span><span class="comment">    */</span></div>
+<div class="line"><span class="lineno">  153</span> </div>
+<div class="line"><span class="lineno">  154</span>    safety_system.init();</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>    <span class="comment">// Drivetrain set all inverters disabled</span></div>
+<div class="line"><span class="lineno">  157</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#ac0e7340c39f7b0561dbcfa9aebb4d27c">disable</a>();   <span class="comment">// write inv_en and inv_24V_en low: writing high in previous code though, should double check </span></div>
+<div class="line"><span class="lineno">  158</span>                            <span class="comment">// would an error list be good for debugging? i.e. which inverter has error</span></div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>    <span class="comment">// ControllerMux set max torque to 20 NM, torque mode to whatever makes most sense</span></div>
+<div class="line"><span class="lineno">  161</span>        <span class="comment">// Preventing drivers from forgetting to toggle torque mode and end up self-derating at comp</span></div>
+<div class="line"><span class="lineno">  162</span>        <span class="comment">// Not strictly necessary at the moment, just don&#39;t forget</span></div>
+<div class="line"><span class="lineno">  163</span>}</div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a0b479ef0a6e7555ce142622121018c98"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a></div><div class="ttdeci">const int MCU15_BRAKE1_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00015">MCU_rev15_defs.h:15</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a0e81e8c639a877046bc4387f87e76e2e"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a></div><div class="ttdeci">const int ACCEL2_MIN_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00038">MCU_rev15_defs.h:38</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a21edcd6b774c32547e03dc679d09a3de"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a></div><div class="ttdeci">const int ACCEL1_MIN_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00037">MCU_rev15_defs.h:37</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a25349e2f4f24ad9572c183b7715eeb3c"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a></div><div class="ttdeci">const int MCU15_ACCEL2_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00014">MCU_rev15_defs.h:14</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a29ca12e2c0bd73395c43a488e2e20429"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a></div><div class="ttdeci">const int BRAKE1_MIN_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00043">MCU_rev15_defs.h:43</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a2ab097622267aa827442fdc13be48978"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a></div><div class="ttdeci">const int BRAKE2_MIN_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00044">MCU_rev15_defs.h:44</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a33bf29781bb7a11a62f74cfe0ad54479"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a></div><div class="ttdeci">const int ACCEL1_MAX_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00039">MCU_rev15_defs.h:39</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a59079f731d8208ca9451d29e5ed3c709"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a></div><div class="ttdeci">const int BRAKE2_MAX_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00046">MCU_rev15_defs.h:46</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a6e2fd9ccfca03462c00d8df7f5712555"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a></div><div class="ttdeci">const int ACCEL2_MAX_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00040">MCU_rev15_defs.h:40</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a834161a9eb74258a68dbe2c46bfdbbc8"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a></div><div class="ttdeci">const int BRAKE1_MAX_THRESH</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00045">MCU_rev15_defs.h:45</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_ab2d326124c667edba446393a437385ec"><div class="ttname"><a href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a></div><div class="ttdeci">const int MCU15_BRAKE2_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00016">MCU_rev15_defs.h:16</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_ac2b037ba0558b48d9413de6402fdacc5"><div class="ttname"><a href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a></div><div class="ttdeci">const int MCU15_ACCEL1_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00013">MCU_rev15_defs.h:13</a></div></div>
 <div class="ttc" id="aclassAMSInterface_html_ac64811ee77a13091f106238641c454a1"><div class="ttname"><a href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">AMSInterface::init</a></div><div class="ttdeci">void init(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00003">AMSInterface.cpp:3</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_ac0e7340c39f7b0561dbcfa9aebb4d27c"><div class="ttname"><a href="classDrivetrainSystem.html#ac0e7340c39f7b0561dbcfa9aebb4d27c">DrivetrainSystem::disable</a></div><div class="ttdeci">void disable()</div></div>
 <div class="ttc" id="aclassWatchdogInterface_html_a17741120f4067cd237a2c88f95bd3476"><div class="ttname"><a href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">WatchdogInterface::init</a></div><div class="ttdeci">void init(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00004">WatchdogInterface.cpp:4</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a9e79e8e3656e1b303f2b26036ea815b1"><div class="ttname"><a href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(SOFTWARE_OK)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00082">main.cpp:82</a></div></div>
+<div class="ttc" id="amain__minimal_8cpp_html_a825565ee53fc1270eb766de1eb009cf2"><div class="ttname"><a href="main__minimal_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a2</div><div class="ttdef"><b>Definition:</b> <a href="main__minimal_8cpp_source.html#l00046">main_minimal.cpp:46</a></div></div>
+<div class="ttc" id="amain__minimal_8cpp_html_ac04fcfdfca6ce3ee5f3034ef9017c6bb"><div class="ttname"><a href="main__minimal_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a></div><div class="ttdeci">MCP_ADC&lt; 8 &gt; a1</div><div class="ttdef"><b>Definition:</b> <a href="main__minimal_8cpp_source.html#l00045">main_minimal.cpp:45</a></div></div>
+<div class="ttc" id="amain__minimal_8cpp_html_aed4c8f760d0c9893dcc21da660136846"><div class="ttname"><a href="main__minimal_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a3</div><div class="ttdef"><b>Definition:</b> <a href="main__minimal_8cpp_source.html#l00047">main_minimal.cpp:47</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a9e79e8e3656e1b303f2b26036ea815b1"><div class="ttname"><a href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(SOFTWARE_OK)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00084">main.cpp:84</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_ab38aceb67800dab467af6c2aa001d7df"><div class="ttname"><a href="src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df">wd_interface</a></div><div class="ttdeci">WatchdogInterface wd_interface(WATCHDOG_INPUT)</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_aeae3526f94cfea3b731d38786f35c277"><div class="ttname"><a href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a></div><div class="ttdeci">void init_all_CAN_devices()</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00184">main.cpp:184</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_aeae3526f94cfea3b731d38786f35c277"><div class="ttname"><a href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a></div><div class="ttdeci">void init_all_CAN_devices()</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00203">main.cpp:203</a></div></div>
 </div><!-- fragment -->
-</div>
-</div>
-<a id="a881eadf2dcd1b88eb652bc0bd0de5a42" name="a881eadf2dcd1b88eb652bc0bd0de5a42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a881eadf2dcd1b88eb652bc0bd0de5a42">&#9670;&#160;</a></span>steering1()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OrbisBR10 steering1 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="MCU__rev15__defs_8h.html#a53db2ff9b614f8279833583c96621199">STEERING_SERIAL</a>&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 </div>
 </div>
 <a id="a5b7a1fda0811fe6090746162c97a38a0" name="a5b7a1fda0811fe6090746162c97a38a0"></a>
@@ -446,57 +467,56 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00209">209</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  210</span>{</div>
-<div class="line"><span class="lineno">  211</span> </div>
-<div class="line"><span class="lineno">  212</span>    TriggerBits_s t = current_system_tick.triggers;</div>
-<div class="line"><span class="lineno">  213</span> </div>
-<div class="line"><span class="lineno">  214</span>    <span class="keywordflow">if</span> (t.trigger10) <span class="comment">// 10Hz</span></div>
-<div class="line"><span class="lineno">  215</span>    {</div>
-<div class="line"><span class="lineno">  216</span>        dashboard.soundBuzzer(<a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>());</div>
-<div class="line"><span class="lineno">  217</span>        dashboard.write();</div>
-<div class="line"><span class="lineno">  218</span> </div>
-<div class="line"><span class="lineno">  219</span>        main_ecu.tick(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(fsm.get_state()),</div>
-<div class="line"><span class="lineno">  220</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">drivetrain_error_occured</a>(),</div>
-<div class="line"><span class="lineno">  221</span>                  safety_system.get_software_is_ok(),</div>
-<div class="line"><span class="lineno">  222</span>                  <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">getTorqueLimit</a>()),</div>
-<div class="line"><span class="lineno">  223</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">getMaxTorque</a>(),</div>
-<div class="line"><span class="lineno">  224</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>(),</div>
-<div class="line"><span class="lineno">  225</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
-<div class="line"><span class="lineno">  226</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">pack_charge_is_critical</a>(),</div>
-<div class="line"><span class="lineno">  227</span>                  dashboard.launchControlButtonPressed());</div>
-<div class="line"><span class="lineno">  228</span>    }</div>
-<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">if</span> (t.trigger50) <span class="comment">// 50Hz</span></div>
-<div class="line"><span class="lineno">  230</span>    {</div>
-<div class="line"><span class="lineno">  231</span>        telem_interface.tick(<a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get(), <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">a2</a>.get(), <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">a3</a>.get(), <a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.convert());</div>
-<div class="line"><span class="lineno">  232</span>    }</div>
-<div class="line"><span class="lineno">  233</span> </div>
-<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">if</span> (t.trigger100) <span class="comment">// 100Hz</span></div>
-<div class="line"><span class="lineno">  235</span>    {</div>
-<div class="line"><span class="lineno">  236</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.tick();</div>
-<div class="line"><span class="lineno">  237</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">a2</a>.tick();</div>
-<div class="line"><span class="lineno">  238</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">a3</a>.tick();</div>
-<div class="line"><span class="lineno">  239</span>    }</div>
-<div class="line"><span class="lineno">  240</span> </div>
-<div class="line"><span class="lineno">  241</span>    <span class="comment">// Untriggered</span></div>
-<div class="line"><span class="lineno">  242</span>    main_ecu.read_mcu_status(); <span class="comment">// should be executed at the same rate as state machine</span></div>
-<div class="line"><span class="lineno">  243</span>                                <span class="comment">// DO NOT call in main_ecu.tick()</span></div>
-<div class="line"><span class="lineno">  244</span>    </div>
-<div class="line"><span class="lineno">  245</span>}</div>
-<div class="ttc" id="aclassAMSInterface_html_aeb87faf300372a818af40cd81a738a2e"><div class="ttname"><a href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">AMSInterface::pack_charge_is_critical</a></div><div class="ttdeci">bool pack_charge_is_critical()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00039">AMSInterface.cpp:39</a></div></div>
-<div class="ttc" id="aclassBuzzerController_html_ada5466ab34c97e68568486f505d1b6e3"><div class="ttname"><a href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">BuzzerController::buzzer_is_on</a></div><div class="ttdeci">bool buzzer_is_on()</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00015">Buzzer.h:15</a></div></div>
-<div class="ttc" id="aclassDrivetrainSystem_html_a3eefd92d61b78ad1e3c314d455da6b5a"><div class="ttname"><a href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">DrivetrainSystem::drivetrain_error_occured</a></div><div class="ttdeci">bool drivetrain_error_occured()</div></div>
-<div class="ttc" id="aclassPedalsSystem_html_a8cdf6d36ae9dc05bfeae37e32521f9ed"><div class="ttname"><a href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">PedalsSystem::getPedalsSystemData</a></div><div class="ttdeci">const PedalsSystemData_s &amp; getPedalsSystemData()</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00044">PedalsSystem.h:44</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a160fa55363d010205f742fafab0e1b90"><div class="ttname"><a href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">TorqueControllerMux::getMaxTorque</a></div><div class="ttdeci">const float getMaxTorque()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a61d50d187c266fa65a1c3709d0207962"><div class="ttname"><a href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">TorqueControllerMux::getTorqueLimit</a></div><div class="ttdeci">const TorqueLimit_e &amp; getTorqueLimit()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00070">TorqueControllerMux.h:70</a></div></div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00228">228</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  229</span>{</div>
+<div class="line"><span class="lineno">  230</span> </div>
+<div class="line"><span class="lineno">  231</span>    TriggerBits_s t = current_system_tick.triggers;</div>
+<div class="line"><span class="lineno">  232</span> </div>
+<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">if</span> (t.trigger10) <span class="comment">// 10Hz</span></div>
+<div class="line"><span class="lineno">  234</span>    {</div>
+<div class="line"><span class="lineno">  235</span>        dashboard.soundBuzzer(<a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>());</div>
+<div class="line"><span class="lineno">  236</span>        dashboard.write();</div>
+<div class="line"><span class="lineno">  237</span> </div>
+<div class="line"><span class="lineno">  238</span>        main_ecu.tick(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(fsm.get_state()),</div>
+<div class="line"><span class="lineno">  239</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">drivetrain_error_occured</a>(),</div>
+<div class="line"><span class="lineno">  240</span>                  safety_system.get_software_is_ok(),</div>
+<div class="line"><span class="lineno">  241</span>                  <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">getTorqueLimit</a>()),</div>
+<div class="line"><span class="lineno">  242</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">getMaxTorque</a>(),</div>
+<div class="line"><span class="lineno">  243</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>(),</div>
+<div class="line"><span class="lineno">  244</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
+<div class="line"><span class="lineno">  245</span>                  <a class="code hl_variable" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">pack_charge_is_critical</a>(),</div>
+<div class="line"><span class="lineno">  246</span>                  dashboard.launchControlButtonPressed());</div>
+<div class="line"><span class="lineno">  247</span>    }</div>
+<div class="line"><span class="lineno">  248</span>    <span class="keywordflow">if</span> (t.trigger50) <span class="comment">// 50Hz</span></div>
+<div class="line"><span class="lineno">  249</span>    {</div>
+<div class="line"><span class="lineno">  250</span>        telem_interface.tick(<a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get(), <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">a2</a>.get(), <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">a3</a>.get(), <a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.convert());</div>
+<div class="line"><span class="lineno">  251</span>    }</div>
+<div class="line"><span class="lineno">  252</span> </div>
+<div class="line"><span class="lineno">  253</span>    <span class="keywordflow">if</span> (t.trigger100) <span class="comment">// 100Hz</span></div>
+<div class="line"><span class="lineno">  254</span>    {</div>
+<div class="line"><span class="lineno">  255</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.tick();</div>
+<div class="line"><span class="lineno">  256</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">a2</a>.tick();</div>
+<div class="line"><span class="lineno">  257</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">a3</a>.tick();</div>
+<div class="line"><span class="lineno">  258</span>    }</div>
+<div class="line"><span class="lineno">  259</span> </div>
+<div class="line"><span class="lineno">  260</span>    <span class="comment">// Untriggered</span></div>
+<div class="line"><span class="lineno">  261</span>    main_ecu.read_mcu_status(); <span class="comment">// should be executed at the same rate as state machine</span></div>
+<div class="line"><span class="lineno">  262</span>                                <span class="comment">// DO NOT call in main_ecu.tick()</span></div>
+<div class="line"><span class="lineno">  263</span>    </div>
+<div class="line"><span class="lineno">  264</span>}</div>
+<div class="ttc" id="aclassAMSInterface_html_aeb87faf300372a818af40cd81a738a2e"><div class="ttname"><a href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">AMSInterface::pack_charge_is_critical</a></div><div class="ttdeci">bool pack_charge_is_critical()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00049">AMSInterface.cpp:49</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_ada5466ab34c97e68568486f505d1b6e3"><div class="ttname"><a href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">BuzzerController::buzzer_is_on</a></div><div class="ttdeci">bool buzzer_is_on()</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00016">Buzzer.h:16</a></div></div>
+<div class="ttc" id="aclassPedalsSystem_html_a8cdf6d36ae9dc05bfeae37e32521f9ed"><div class="ttname"><a href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">PedalsSystem::getPedalsSystemData</a></div><div class="ttdeci">const PedalsSystemData_s &amp; getPedalsSystemData()</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00045">PedalsSystem.h:45</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a160fa55363d010205f742fafab0e1b90"><div class="ttname"><a href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">TorqueControllerMux::getMaxTorque</a></div><div class="ttdeci">const float getMaxTorque()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00078">TorqueControllerMux.h:78</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a61d50d187c266fa65a1c3709d0207962"><div class="ttname"><a href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">TorqueControllerMux::getTorqueLimit</a></div><div class="ttdeci">const TorqueLimit_e &amp; getTorqueLimit()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a0bf03c0480edc5cee328eeb4f30ad2da"><div class="ttname"><a href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a></div><div class="ttdeci">struct ADCs ADC</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a0f351bbfcf80590ece6101bf1cfa1006"><div class="ttname"><a href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a></div><div class="ttdeci">SteeringSystem steering_system &amp; steering1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00080">main.cpp:80</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a0f351bbfcf80590ece6101bf1cfa1006"><div class="ttname"><a href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a></div><div class="ttdeci">SteeringSystem steering_system &amp; steering1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00082">main.cpp:82</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a201a9dddc980a400a0a2140d3da55792"><div class="ttname"><a href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a></div><div class="ttdeci">PedalsSystem pedals_system({ACCEL1_MIN_THRESH, ACCEL2_MIN_THRESH, ACCEL1_MAX_THRESH, ACCEL2_MAX_THRESH, APPS_ACTIVATION_PERCENTAGE}, {BRAKE1_MIN_THRESH, BRAKE2_MIN_THRESH, BRAKE1_MAX_THRESH, BRAKE2_MAX_THRESH, BRAKE_ACTIVATION_PERCENTAGE}, BRAKE_MECH_THRESH)</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a9b1d074ed9dae4fd92f949d027378c2d"><div class="ttname"><a href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a></div><div class="ttdeci">BuzzerController buzzer(BUZZER_ON_INTERVAL)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00091">main.cpp:91</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_af9af553c886080310b9cd6364449c0e1"><div class="ttname"><a href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a></div><div class="ttdeci">TorqueControllerMux torque_controller_mux</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00088">main.cpp:88</a></div></div>
-<div class="ttc" id="astructADCs_html_a2324ec3ad328eeb09866fcab738f09e3"><div class="ttname"><a href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">ADCs::a3</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a3</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00048">main.cpp:48</a></div></div>
-<div class="ttc" id="astructADCs_html_a441ae840cae59e57f0d2de7602392533"><div class="ttname"><a href="structADCs.html#a441ae840cae59e57f0d2de7602392533">ADCs::a1</a></div><div class="ttdeci">MCP_ADC&lt; 8 &gt; a1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00046">main.cpp:46</a></div></div>
-<div class="ttc" id="astructADCs_html_aa98921220697f4bfa4e580f139df7fd1"><div class="ttname"><a href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">ADCs::a2</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a2</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00047">main.cpp:47</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a9b1d074ed9dae4fd92f949d027378c2d"><div class="ttname"><a href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a></div><div class="ttdeci">BuzzerController buzzer(BUZZER_ON_INTERVAL)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00093">main.cpp:93</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_af9af553c886080310b9cd6364449c0e1"><div class="ttname"><a href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a></div><div class="ttdeci">TorqueControllerMux torque_controller_mux</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00090">main.cpp:90</a></div></div>
+<div class="ttc" id="astructADCs_html_a2324ec3ad328eeb09866fcab738f09e3"><div class="ttname"><a href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">ADCs::a3</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a3</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00049">main.cpp:49</a></div></div>
+<div class="ttc" id="astructADCs_html_a441ae840cae59e57f0d2de7602392533"><div class="ttname"><a href="structADCs.html#a441ae840cae59e57f0d2de7602392533">ADCs::a1</a></div><div class="ttdeci">MCP_ADC&lt; 8 &gt; a1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00047">main.cpp:47</a></div></div>
+<div class="ttc" id="astructADCs_html_aa98921220697f4bfa4e580f139df7fd1"><div class="ttname"><a href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">ADCs::a2</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a2</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00048">main.cpp:48</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -516,47 +536,43 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00251">251</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  252</span>{</div>
-<div class="line"><span class="lineno">  253</span>    <span class="comment">// tick pedals system</span></div>
-<div class="line"><span class="lineno">  254</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">tick</a>(</div>
-<div class="line"><span class="lineno">  255</span>        current_system_tick,</div>
-<div class="line"><span class="lineno">  256</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  257</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  258</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  259</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a>]);</div>
-<div class="line"><span class="lineno">  260</span> </div>
-<div class="line"><span class="lineno">  261</span>    <span class="comment">// tick steering system</span></div>
-<div class="line"><span class="lineno">  262</span>    steering_system.tick(</div>
-<div class="line"><span class="lineno">  263</span>        current_system_tick,</div>
-<div class="line"><span class="lineno">  264</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>]);</div>
-<div class="line"><span class="lineno">  265</span> </div>
-<div class="line"><span class="lineno">  266</span>    <span class="comment">// tick drivetrain system</span></div>
-<div class="line"><span class="lineno">  267</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">tick</a>(current_system_tick);</div>
-<div class="line"><span class="lineno">  268</span> </div>
-<div class="line"><span class="lineno">  269</span>    <span class="comment">// tick torque controller mux</span></div>
-<div class="line"><span class="lineno">  270</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
-<div class="line"><span class="lineno">  271</span>        current_system_tick,</div>
-<div class="line"><span class="lineno">  272</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#afae36a9955eb94f69cee9f89a3296992">get_current_data</a>(),</div>
-<div class="line"><span class="lineno">  273</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
-<div class="line"><span class="lineno">  274</span>        steering_system.getSteeringSystemData(),</div>
-<div class="line"><span class="lineno">  275</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">a2</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#abc97188d24b0d85e2d17a367070674a3">MCU15_FL_LOADCELL_CHANNEL</a>],  <span class="comment">// FL load cell reading. TODO: fix index</span></div>
-<div class="line"><span class="lineno">  276</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">a3</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#aa335db56afb6b950b2f14cb29b1d5a28">MCU15_FR_LOADCELL_CHANNEL</a>],  <span class="comment">// FR load cell reading. TODO: fix index</span></div>
-<div class="line"><span class="lineno">  277</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>){},                         <span class="comment">// RL load cell reading. TODO: get data from rear load cells</span></div>
-<div class="line"><span class="lineno">  278</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>){},                         <span class="comment">// RR load cell reading. TODO: get data from rear load cells</span></div>
-<div class="line"><span class="lineno">  279</span>        dashboard.getDialMode(),</div>
-<div class="line"><span class="lineno">  280</span>        dashboard.torqueButtonPressed());</div>
-<div class="line"><span class="lineno">  281</span>}</div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_a0b479ef0a6e7555ce142622121018c98"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a></div><div class="ttdeci">const int MCU15_BRAKE1_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00017">MCU_rev15_defs.h:17</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_a1009f1898ab80c773745359d3262a879"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a></div><div class="ttdeci">const int MCU15_STEERING_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00020">MCU_rev15_defs.h:20</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_a25349e2f4f24ad9572c183b7715eeb3c"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a></div><div class="ttdeci">const int MCU15_ACCEL2_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00016">MCU_rev15_defs.h:16</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_aa335db56afb6b950b2f14cb29b1d5a28"><div class="ttname"><a href="MCU__rev15__defs_8h.html#aa335db56afb6b950b2f14cb29b1d5a28">MCU15_FR_LOADCELL_CHANNEL</a></div><div class="ttdeci">const int MCU15_FR_LOADCELL_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00027">MCU_rev15_defs.h:27</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_ab2d326124c667edba446393a437385ec"><div class="ttname"><a href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a></div><div class="ttdeci">const int MCU15_BRAKE2_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00018">MCU_rev15_defs.h:18</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_abc97188d24b0d85e2d17a367070674a3"><div class="ttname"><a href="MCU__rev15__defs_8h.html#abc97188d24b0d85e2d17a367070674a3">MCU15_FL_LOADCELL_CHANNEL</a></div><div class="ttdeci">const int MCU15_FL_LOADCELL_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00026">MCU_rev15_defs.h:26</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_ac2b037ba0558b48d9413de6402fdacc5"><div class="ttname"><a href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a></div><div class="ttdeci">const int MCU15_ACCEL1_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00015">MCU_rev15_defs.h:15</a></div></div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00270">270</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  271</span>{</div>
+<div class="line"><span class="lineno">  272</span>    <span class="comment">// tick pedals system</span></div>
+<div class="line"><span class="lineno">  273</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">tick</a>(</div>
+<div class="line"><span class="lineno">  274</span>        current_system_tick,</div>
+<div class="line"><span class="lineno">  275</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  276</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  277</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  278</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a>]);</div>
+<div class="line"><span class="lineno">  279</span> </div>
+<div class="line"><span class="lineno">  280</span>    <span class="comment">// tick steering system</span></div>
+<div class="line"><span class="lineno">  281</span>    steering_system.tick(</div>
+<div class="line"><span class="lineno">  282</span>        current_system_tick,</div>
+<div class="line"><span class="lineno">  283</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a441ae840cae59e57f0d2de7602392533">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>]);</div>
+<div class="line"><span class="lineno">  284</span> </div>
+<div class="line"><span class="lineno">  285</span>    <span class="comment">// tick drivetrain system</span></div>
+<div class="line"><span class="lineno">  286</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">tick</a>(current_system_tick);</div>
+<div class="line"><span class="lineno">  287</span> </div>
+<div class="line"><span class="lineno">  288</span>    <span class="comment">// tick torque controller mux</span></div>
+<div class="line"><span class="lineno">  289</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af9af553c886080310b9cd6364449c0e1">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>(</div>
+<div class="line"><span class="lineno">  290</span>        current_system_tick,</div>
+<div class="line"><span class="lineno">  291</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#afae36a9955eb94f69cee9f89a3296992">get_current_data</a>(),</div>
+<div class="line"><span class="lineno">  292</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a201a9dddc980a400a0a2140d3da55792">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
+<div class="line"><span class="lineno">  293</span>        steering_system.getSteeringSystemData(),</div>
+<div class="line"><span class="lineno">  294</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#aa98921220697f4bfa4e580f139df7fd1">a2</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#abc97188d24b0d85e2d17a367070674a3">MCU15_FL_LOADCELL_CHANNEL</a>],  <span class="comment">// FL load cell reading. TODO: fix index</span></div>
+<div class="line"><span class="lineno">  295</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0bf03c0480edc5cee328eeb4f30ad2da">ADC</a>.<a class="code hl_variable" href="structADCs.html#a2324ec3ad328eeb09866fcab738f09e3">a3</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#aa335db56afb6b950b2f14cb29b1d5a28">MCU15_FR_LOADCELL_CHANNEL</a>],  <span class="comment">// FR load cell reading. TODO: fix index</span></div>
+<div class="line"><span class="lineno">  296</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>){},                         <span class="comment">// RL load cell reading. TODO: get data from rear load cells</span></div>
+<div class="line"><span class="lineno">  297</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>){},                         <span class="comment">// RR load cell reading. TODO: get data from rear load cells</span></div>
+<div class="line"><span class="lineno">  298</span>        dashboard.getDialMode(),</div>
+<div class="line"><span class="lineno">  299</span>        dashboard.torqueModeButtonPressed());</div>
+<div class="line"><span class="lineno">  300</span>}</div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a1009f1898ab80c773745359d3262a879"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a></div><div class="ttdeci">const int MCU15_STEERING_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00018">MCU_rev15_defs.h:18</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_aa335db56afb6b950b2f14cb29b1d5a28"><div class="ttname"><a href="MCU__rev15__defs_8h.html#aa335db56afb6b950b2f14cb29b1d5a28">MCU15_FR_LOADCELL_CHANNEL</a></div><div class="ttdeci">const int MCU15_FR_LOADCELL_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00025">MCU_rev15_defs.h:25</a></div></div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_abc97188d24b0d85e2d17a367070674a3"><div class="ttname"><a href="MCU__rev15__defs_8h.html#abc97188d24b0d85e2d17a367070674a3">MCU15_FL_LOADCELL_CHANNEL</a></div><div class="ttdeci">const int MCU15_FL_LOADCELL_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00024">MCU_rev15_defs.h:24</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a5f70417c1da9a6f99e9b6ef42cffd075"><div class="ttname"><a href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">DrivetrainSystem::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick)</div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_afae36a9955eb94f69cee9f89a3296992"><div class="ttname"><a href="classDrivetrainSystem.html#afae36a9955eb94f69cee9f89a3296992">DrivetrainSystem::get_current_data</a></div><div class="ttdeci">DrivetrainDynamicReport_s get_current_data()</div></div>
-<div class="ttc" id="aclassPedalsSystem_html_af7c5e74cc4c5eb90c282b07b161f9b80"><div class="ttname"><a href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">PedalsSystem::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00005">PedalsSystem.cpp:5</a></div></div>
+<div class="ttc" id="aclassPedalsSystem_html_af7c5e74cc4c5eb90c282b07b161f9b80"><div class="ttname"><a href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">PedalsSystem::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00009">PedalsSystem.cpp:9</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a90a48e36c38a01af7a9552466613ae99"><div class="ttname"><a href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">TorqueControllerMux::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const DrivetrainDynamicReport_s &amp;drivetrainData, const PedalsSystemData_s &amp;pedalsData, const SteeringSystemData_s &amp;steeringData, const AnalogConversion_s &amp;loadFLData, const AnalogConversion_s &amp;loadFRData, const AnalogConversion_s &amp;loadRLData, const AnalogConversion_s &amp;loadRRData, DialMode_e dashboardDialMode, bool dashboardTorqueModeButtonPressed)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00005">TorqueControllerMux.cpp:5</a></div></div>
 <div class="ttc" id="astructAnalogConversion__s_html"><div class="ttname"><a href="structAnalogConversion__s.html">AnalogConversion_s</a></div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00013">AnalogSensorsInterface.h:14</a></div></div>
 </div><!-- fragment -->
@@ -586,14 +602,14 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classSafetySystem.html">SafetySystem</a> safety_system &amp; ams_interface </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="MCU__rev12__dfs_8h.html#ab725e7510caf9e7809af7526aa9561ef">SOFTWARE_OK</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="MCU__rev15__defs_8h.html#aa0b54c9c7888a302eaa235df30d7d9a4">SOFTWARE_OK</a>&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00082">82</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00084">84</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -613,7 +629,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00091">91</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00093">93</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +645,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00057">57</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00058">58</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -645,7 +661,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00060">60</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00061">61</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -656,12 +672,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt;<a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a>&gt; CAN_receive_interfaces = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>}</td>
+          <td class="memname"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt;<a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a>&gt; CAN_receive_interfaces = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a9e79e8e3656e1b303f2b26036ea815b1">ams_interface</a>, &amp;<a class="el" href="main__minimal_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>}</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00097">97</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00099">99</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -677,7 +693,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00087">87</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00089">89</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -707,7 +723,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00037">37</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00038">38</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -718,7 +734,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPedalsSystem.html">PedalsSystem</a> pedals_system({<a class="el" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293">APPS_ACTIVATION_PERCENTAGE</a>}, {<a class="el" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a5c7f10ffdceb24ed1a6b1b861bc284d4">BRAKE_ACTIVATION_PERCENTAGE</a>}, <a class="el" href="MCU__rev15__defs_8h.html#adbefeea2e527d6fe954857f24e1fa7e4">BRAKE_MECH_THRESH</a>) </td>
+          <td class="memname"><a class="el" href="classPedalsSystem.html">PedalsSystem</a> pedals_system({<a class="el" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293">APPS_ACTIVATION_PERCENTAGE</a>}, {<a class="el" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a>, BRAKE_ACTIVATION_PERCENTAGE}, <a class="el" href="MCU__rev15__defs_8h.html#adbefeea2e527d6fe954857f24e1fa7e4">BRAKE_MECH_THRESH</a>) </td>
           <td>(</td>
           <td class="paramtype">{<a class="el" href="MCU__rev15__defs_8h.html#a21edcd6b774c32547e03dc679d09a3de">ACCEL1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a0e81e8c639a877046bc4387f87e76e2e">ACCEL2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a33bf29781bb7a11a62f74cfe0ad54479">ACCEL1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a6e2fd9ccfca03462c00d8df7f5712555">ACCEL2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293">APPS_ACTIVATION_PERCENTAGE</a>}&#160;</td>
           <td class="paramname">, </td>
@@ -726,7 +742,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">{<a class="el" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a5c7f10ffdceb24ed1a6b1b861bc284d4">BRAKE_ACTIVATION_PERCENTAGE</a>}&#160;</td>
+          <td class="paramtype">{<a class="el" href="MCU__rev15__defs_8h.html#a29ca12e2c0bd73395c43a488e2e20429">BRAKE1_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a2ab097622267aa827442fdc13be48978">BRAKE2_MIN_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a834161a9eb74258a68dbe2c46bfdbbc8">BRAKE1_MAX_THRESH</a>, <a class="el" href="MCU__rev15__defs_8h.html#a59079f731d8208ca9451d29e5ed3c709">BRAKE2_MAX_THRESH</a>, BRAKE_ACTIVATION_PERCENTAGE}&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -745,6 +761,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a47ca5c627a2dc58833e4893310b0678c" name="a47ca5c627a2dc58833e4893310b0678c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ca5c627a2dc58833e4893310b0678c">&#9670;&#160;</a></span>Serial5</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">OrbisBR10 <a class="el" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>&amp; Serial5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00052">52</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a0f351bbfcf80590ece6101bf1cfa1006" name="a0f351bbfcf80590ece6101bf1cfa1006"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f351bbfcf80590ece6101bf1cfa1006">&#9670;&#160;</a></span>steering1</h2>
 
@@ -757,7 +789,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00080">80</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00082">82</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -773,7 +805,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00079">79</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00081">81</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -789,7 +821,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00038">38</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00039">39</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -805,7 +837,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00088">88</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00090">90</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -816,9 +848,9 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classWatchdogInterface.html">WatchdogInterface</a> wd_interface(<a class="el" href="MCU__rev12__dfs_8h.html#ae5fe8fbc54e3f30aac0fa4ab66e16508">WATCHDOG_INPUT</a>) </td>
+          <td class="memname"><a class="el" href="classWatchdogInterface.html">WatchdogInterface</a> wd_interface(<a class="el" href="MCU__rev15__defs_8h.html#a2e4da32aa1ef69980b1ee0afb899862f">WATCHDOG_INPUT</a>) </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="MCU__rev12__dfs_8h.html#ae5fe8fbc54e3f30aac0fa4ab66e16508">WATCHDOG_INPUT</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="MCU__rev15__defs_8h.html#a2e4da32aa1ef69980b1ee0afb899862f">WATCHDOG_INPUT</a>&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>

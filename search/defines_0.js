@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_5fuse_5fmath_5fdefines_0',['_USE_MATH_DEFINES',['../old__main_8cpp.html#a525335710b53cb064ca56b936120431e',1,'old_main.cpp']]]
+  ['half_5faccelerator_5fpedal_5f1_0',['HALF_ACCELERATOR_PEDAL_1',['../driver__constants_8h.html#a6c2ec75026298a435d5ec8abde0c4d9e',1,'driver_constants.h']]],
+  ['half_5faccelerator_5fpedal_5f2_1',['HALF_ACCELERATOR_PEDAL_2',['../driver__constants_8h.html#a6b3117f29b4e0cf6007af174fbe64467',1,'driver_constants.h']]]
 ];

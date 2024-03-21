@@ -92,22 +92,55 @@ Testing</h2>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Uploading</h2>
 <p >To upload to the teensy simply use the platformio upload arrow shown <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar">here at number 3</a>.</p>
-<h3><a class="anchor" id="autotoc_md4"></a>
-On Implementing and Importance of tests</h3>
+<h4><a class="anchor" id="autotoc_md4"></a>
+On Implementing and Importance of tests</h4>
 <p >Unit tests are a great way to ensure that new features and new code in general can integrate and work well with other code. It provides a framework to verify that your stuff works the way it should and lets you know when and how it doesnt.</p>
 <p >This project uses unit tests in the <code>test</code> folder to for both local testing and testing in the CI on github.</p>
 <p >The remote github CI testing currently only encompases system level testing and not the hardware dependent testing that is available locally for running.</p>
 <p >You can see results of previous test runs on commits here: <a href="https://github.com/hytech-racing/MCU/actions">https://github.com/hytech-racing/MCU/actions</a></p>
 <p >These MUST be maintained for functionality of the car.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
+setup vscode</h2>
+<h4><a class="anchor" id="autotoc_md6"></a>
+with auto-completition and advanced navigation using compile commands</h4>
+<p >the <code>compile_commands.json</code> file is a file that gets generated in the build folder upon excution of the <a href="https://docs.platformio.org/en/latest/integration/compile_commands.html">compiledb platformio task</a> that sets up the include paths for vscode. <a href="https://clangd.llvm.org/design/compile-commands">more about compile_commands.json here</a>.</p>
+<p >If you enter the platformio terminal, you can generate compile commands with</p><ol type="1">
+<li><img src="image-1.png" alt="alt text" class="inline"/></li>
+</ol>
+<p >then</p><ol type="1">
+<li><code>pio run -t compiledb -e teensy41</code></li>
+</ol>
+<p >this will generate the compile commands for the <code>teensy41</code> environment which is the environment we use to build and flash to the car. in a similar fashion, other environments (eg: <code>test_env</code>) can have their compile commands generated.</p>
+<ol type="1">
+<li>then you need to setup vscode to recognize where this file is, which gets put into the <code>.pio</code> folder in your workspace. To do this, simply create a <code>.vscode</code> folder in the workspace and add a file called <code>c_cpp_properties.json</code> and it should look like this:</li>
+</ol>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;configurations&quot;: [</div>
+<div class="line">        {</div>
+<div class="line">            &quot;name&quot;: &quot;teensy41&quot;,</div>
+<div class="line">            &quot;includePath&quot;: [</div>
+<div class="line">                &quot;${workspaceFolder}/**&quot;</div>
+<div class="line">            ],</div>
+<div class="line">            &quot;defines&quot;: [],</div>
+<div class="line">            &quot;cStandard&quot;: &quot;c17&quot;,</div>
+<div class="line">            &quot;cppStandard&quot;: &quot;gnu++17&quot;,</div>
+<div class="line">            &quot;intelliSenseMode&quot;: &quot;linux-gcc-x64&quot;,</div>
+<div class="line">            &quot;compileCommands&quot;: &quot;${workspaceFolder}/.pio/build/teensy41/compile_commands.json&quot;</div>
+<div class="line">        }</div>
+<div class="line">    ],</div>
+<div class="line">    &quot;version&quot;: 4</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> then you can select this configuration to be used with <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">this c/c++ extension</a> in vscode for auto-completition and code navigation.</p>
+<p >to select the configuration, use the hotkey <code>ctrl+shift+p</code> to open the command prompt in vscode, and then type `C/C++: Select a Configuration` and then select your configuration for which you named above.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Design Lore of the Code</h1>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 outline</h2>
 <p >Levels represent the layer of abstraction they are on. The reason for keeping track of this is to minimize the layers of abstraction for ease of understanding while also creating logical structure and getting maximum benefit per abstraction.</p>
-<h4><a class="anchor" id="autotoc_md7"></a>
+<h4><a class="anchor" id="autotoc_md9"></a>
 state diagram legend</h4>
 <p ><code>+</code> = Public <code>-</code> = Private</p>
-<h3><a class="anchor" id="autotoc_md8"></a>
+<h3><a class="anchor" id="autotoc_md10"></a>
 level 1: state machine goals for interface design and implementation</h3>
 <ul>
 <li><b>Reason for abstraction</b>: allows for easy swapping and adding of different portable systems and better <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> from <a href="https://www.techtarget.com/whatis/definition/business-logic">business logic</a> of the car to the business logic of the system.</li>
@@ -150,7 +183,7 @@ level 1: state machine goals for interface design and implementation</h3>
 <div class="line">    </div>
 <div class="line"> </div>
 <div class="line">    car_state &quot;1&quot; *-- StateMachine : contains</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
 level 2 portable Systems: interfaces, logic and structure</h3>
 <ul>
 <li><b>Reason for abstraction</b>: these Systems allow us to have board portable pieces so that when newer iterations of boards are made, the same systems that the previous iteration handled can be kept while only the hardware specific code changes.</li>
@@ -186,7 +219,7 @@ level 2 portable Systems: interfaces, logic and structure</h3>
 <div class="line">        +torque_cmds get_torque_cmds(float desired_throttle)</div>
 <div class="line">        -void pull_from_table(float current_speed)</div>
 <div class="line">    }</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md12"></a>
 level 2 SPI / i2c data bus abstraction from hardware specific implementations</h3>
 <ul>
 <li><b>Reason for abstraction</b>: this allows us to create a specific type of system that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other systems.</li>
@@ -215,7 +248,7 @@ level 2 SPI / i2c data bus abstraction from hardware specific implementations</h
 <div class="line">    Sensor &lt;|-- LoadSensor : implements</div>
 <div class="line">    Sensor &lt;|-- SteeringSensor : implements</div>
 <div class="line">    Sensor &lt;|-- CurrentSensor : implements</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
 state machine documentation</h2>
 <div class="fragment"><div class="line">stateDiagram-v2</div>
 <div class="line">    startup : STARTUP</div>
@@ -235,10 +268,10 @@ state machine documentation</h2>
 <div class="line">    rtd_s --&gt; rtd: buzzer done buzzing</div>
 <div class="line">    rtd --&gt; trac_sys_na: drivetrain voltage _not_ over threshold</div>
 <div class="line">    rtd --&gt; trac_sys_a: drivetrain error occured</div>
-</div><!-- fragment --> <h3><a class="anchor" id="autotoc_md12"></a>
+</div><!-- fragment --> <h3><a class="anchor" id="autotoc_md14"></a>
 running the tests</h3>
 <p >This repo uses platformio testing for CI unit testing. these tests can be run locally with <code>pio test -e test_env</code>. The CI checks to ensure that the code both compiles for the teensy and ensures that the tests are passing.</p>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md15"></a>
 notes</h3>
 <p >new MCU code:</p><ul>
 <li>system definition: an abstract sub-system of the physical car or the code that requires logic to be evaluated by the MCU to determine what input to give it or logic required to handle output from.</li>

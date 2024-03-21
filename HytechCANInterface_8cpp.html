@@ -85,11 +85,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac94cbbb38b834761938aa1a627ba27a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HytechCANInterface_8cpp.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a> (const CAN_message_t &amp;<a class="el" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
+<tr class="memitem:ac94cbbb38b834761938aa1a627ba27a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HytechCANInterface_8cpp.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a> (const CAN_message_t &amp;<a class="el" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
 <tr class="separator:ac94cbbb38b834761938aa1a627ba27a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a0a6eb75d69645e467f0a54cc36e3b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HytechCANInterface_8cpp.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a> (const CAN_message_t &amp;<a class="el" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
+<tr class="memitem:a0a0a6eb75d69645e467f0a54cc36e3b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HytechCANInterface_8cpp.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a> (const CAN_message_t &amp;<a class="el" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
 <tr class="separator:a0a0a6eb75d69645e467f0a54cc36e3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a983dcec234a2ed40ef72c2b0347d83ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HytechCANInterface_8cpp.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a> (const CAN_message_t &amp;<a class="el" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
+<tr class="memitem:a983dcec234a2ed40ef72c2b0347d83ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="HytechCANInterface_8cpp.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a> (const CAN_message_t &amp;<a class="el" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
 <tr class="separator:a983dcec234a2ed40ef72c2b0347d83ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -127,11 +127,11 @@ Variables</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="HytechCANInterface_8cpp_source.html#l00012">12</a> of file <a class="el" href="HytechCANInterface_8cpp_source.html">HytechCANInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
 <div class="line"><span class="lineno">   14</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">   15</span>    memmove(buf, &amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
+<div class="line"><span class="lineno">   15</span>    memmove(buf, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
 <div class="line"><span class="lineno">   16</span>    <a class="code hl_variable" href="HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">   17</span>}</div>
 <div class="ttc" id="aHytechCANInterface_8cpp_html_ac6e1127319d762b3edecd01ba64541a1"><div class="ttname"><a href="HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN1_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00003">HytechCANInterface.cpp:3</a></div></div>
-<div class="ttc" id="aold__main_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="old__main_8cpp_source.html#l00121">old_main.cpp:121</a></div></div>
+<div class="ttc" id="atest__can__interface_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00009">test_can_interface.cpp:9</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -154,7 +154,7 @@ Variables</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="HytechCANInterface_8cpp_source.html#l00019">19</a> of file <a class="el" href="HytechCANInterface_8cpp_source.html">HytechCANInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   20</span>{</div>
 <div class="line"><span class="lineno">   21</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">   22</span>    memmove(buf, &amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
+<div class="line"><span class="lineno">   22</span>    memmove(buf, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
 <div class="line"><span class="lineno">   23</span>    <a class="code hl_variable" href="HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a>.push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">   24</span>}</div>
 <div class="ttc" id="aHytechCANInterface_8cpp_html_ad97681e0953a0b25effdbce5aef0ce72"><div class="ttname"><a href="HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN2_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00004">HytechCANInterface.cpp:4</a></div></div>
@@ -180,7 +180,7 @@ Variables</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="HytechCANInterface_8cpp_source.html#l00026">26</a> of file <a class="el" href="HytechCANInterface_8cpp_source.html">HytechCANInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   27</span>{</div>
 <div class="line"><span class="lineno">   28</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">   29</span>    memmove(buf, &amp;<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="old__main_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
+<div class="line"><span class="lineno">   29</span>    memmove(buf, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
 <div class="line"><span class="lineno">   30</span>    <a class="code hl_variable" href="HytechCANInterface_8cpp.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a>.push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">   31</span>}</div>
 <div class="ttc" id="aHytechCANInterface_8cpp_html_a29aa040358a501c30e482164867b44a7"><div class="ttname"><a href="HytechCANInterface_8cpp.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN3_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00005">HytechCANInterface.cpp:5</a></div></div>

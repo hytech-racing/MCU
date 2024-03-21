@@ -103,8 +103,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a68f858aeef63e118fad6ca8bb14e3c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae144775e6a432a48e217866324d3385b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterMock.html#ae144775e6a432a48e217866324d3385b">dc_quit_on</a> ()</td></tr>
 <tr class="separator:ae144775e6a432a48e217866324d3385b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab25d559f98fb115e64d18f24f038cc8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterMock.html#ab25d559f98fb115e64d18f24f038cc8a">quit_inverter_on</a> ()</td></tr>
-<tr class="separator:ab25d559f98fb115e64d18f24f038cc8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189b4dfd4d653eedde02b1a9ed2ac182"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterMock.html#a189b4dfd4d653eedde02b1a9ed2ac182">get_quit_dc_on</a> ()</td></tr>
+<tr class="separator:a189b4dfd4d653eedde02b1a9ed2ac182"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c9dac90937f14a85f8d30252700295f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterMock.html#a4c9dac90937f14a85f8d30252700295f">get_quit_inverter_on</a> ()</td></tr>
+<tr class="separator:a4c9dac90937f14a85f8d30252700295f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -358,6 +360,62 @@ Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a189b4dfd4d653eedde02b1a9ed2ac182" name="a189b4dfd4d653eedde02b1a9ed2ac182"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a189b4dfd4d653eedde02b1a9ed2ac182">&#9670;&#160;</a></span>get_quit_dc_on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InverterMock::get_quit_dc_on </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="drivetrain__system__test_8h_source.html#l00074">74</a> of file <a class="el" href="drivetrain__system__test_8h_source.html">drivetrain_system_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterMock.html#a25c39975b0d0ad8b9734ca9a50a8b3b1">dc_quit_on_</a>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4c9dac90937f14a85f8d30252700295f" name="a4c9dac90937f14a85f8d30252700295f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c9dac90937f14a85f8d30252700295f">&#9670;&#160;</a></span>get_quit_inverter_on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InverterMock::get_quit_inverter_on </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="drivetrain__system__test_8h_source.html#l00075">75</a> of file <a class="el" href="drivetrain__system__test_8h_source.html">drivetrain_system_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterMock.html#a826550e021439f8b8057e83499f4e7c1">quit_inverter_on_</a>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a7dafd8c664118a22437da03de27407e8" name="a7dafd8c664118a22437da03de27407e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7dafd8c664118a22437da03de27407e8">&#9670;&#160;</a></span>handle_command()</h2>
 
@@ -421,34 +479,6 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="drivetrain__system__test_8h_source.html#l00070">70</a> of file <a class="el" href="drivetrain__system__test_8h_source.html">drivetrain_system_test.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   70</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterMock.html#a23eb50a5bc193ece93a5fac315eb8b11">system_ready_</a>; };</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ab25d559f98fb115e64d18f24f038cc8a" name="ab25d559f98fb115e64d18f24f038cc8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab25d559f98fb115e64d18f24f038cc8a">&#9670;&#160;</a></span>quit_inverter_on()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool InverterMock::quit_inverter_on </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="drivetrain__system__test_8h_source.html#l00074">74</a> of file <a class="el" href="drivetrain__system__test_8h_source.html">drivetrain_system_test.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterMock.html#a826550e021439f8b8057e83499f4e7c1">quit_inverter_on_</a>; }</div>
 </div><!-- fragment -->
 </div>
 </div>
