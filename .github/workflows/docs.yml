@@ -1,22 +1,14 @@
-name: generate doxygen docs and deploy to github pages
+name: Doxygen GitHub Pages Deploy Action
 
 on: [push, pull_request]
-jobs:
 
-  gen_docs:
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-
-    - name: gen docs
-      uses: mattnotmitt/doxygen-action@v1.9.5
-      with:
-        doxyfile-path: 'docs/Doxyfile'
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs  # Set this to the Doxygen output directory
-        keep_files: false  # Set to true to keep files that are not in the Doxygen output directory
+      - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: docs/html
+          config_file: docs/Doxyfile
