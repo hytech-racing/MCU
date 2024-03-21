@@ -60,10 +60,10 @@ TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_
                                                     MCU15_FL_POTS_CHANNEL, MCU15_FR_POTS_CHANNEL, MCU15_FL_LOADCELL_CHANNEL, MCU15_FR_LOADCELL_CHANNEL,
                                                     MCU15_STEERING_CHANNEL, MCU15_CUR_POS_SENSE_CHANNEL, MCU15_CUR_NEG_SENSE_CHANNEL, MCU15_GLV_SENSE_CHANNEL});
 SABInterface sab_interface(
-    1.0,
-    0.0,
-    1.0,
-    0.0 // TODO: add tuning values
+    LOADCELL_RL_SCALE, // RL Scale
+    LOADCELL_RL_OFFSET, // RL Offset (Migos)
+    LOADCELL_RR_SCALE, // RR Scale
+    LOADCELL_RR_OFFSET //  RR Offset
 );
 
 // /* Inverter Interface Type */
@@ -137,6 +137,12 @@ void setup()
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_MIN_THRESH);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_MIN_THRESH);
+
+    a3.setChannelScale(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_SCALE/*Todo*/);
+    a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_SCALE/*Todo*/);
+
+    a3.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_OFFSET/*Todo*/);
+    a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_OFFSET/*Todo*/);
 
     Serial.begin(115200);
 
@@ -308,8 +314,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
         a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
-        (const AnalogConversion_s){},                    // RL load cell reading. TODO: get data from rear load cells
-        (const AnalogConversion_s){},                    // RR load cell reading. TODO: get data from rear load cells
+        sab_interface.rlLoadCell.convert(),  // RL load cell reading. TODO: get data from rear load cells
+        sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
-        dashboard.torqueButtonPressed());
+        dashboard.torqueModeButtonPressed());
 }

@@ -19,7 +19,7 @@ private:
     std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
         {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
         {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_2, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_2, TorqueController_e::TC_LOAD_CELL_VECTORING},
         {DialMode_e::MODE_3, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
@@ -29,9 +29,10 @@ private:
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
         {TorqueLimit_e::TCMUX_FULL_TORQUE, 20.0}
     };
-    DrivetrainCommand_s controllerCommands_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
+    TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
+    TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
     DrivetrainCommand_s drivetrainCommand_;
     TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
@@ -40,8 +41,9 @@ private:
 public:
 // Constructors
     TorqueControllerMux()
-    : torqueControllerNone_(controllerCommands_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
-    , torqueControllerSimple_(controllerCommands_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)]) {}
+    : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
+    , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}
 // Functions
     void tick(
         const SysTick_s& tick,

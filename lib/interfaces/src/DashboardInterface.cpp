@@ -101,10 +101,9 @@ DialMode_e DashboardInterface::getDialMode() {return _data.dial_mode;}
 
 bool DashboardInterface::startButtonPressed() {return _data.button.start;}
 bool DashboardInterface::specialButtonPressed() {return _data.button.mark;}
-bool DashboardInterface::torqueButtonPressed() {return _data.button.mode;}
+bool DashboardInterface::torqueModeButtonPressed() {return _data.button.torque_mode;}
 bool DashboardInterface::inverterResetButtonPressed() {return _data.button.mc_cycle;}
 bool DashboardInterface::launchControlButtonPressed() {return _data.button.launch_ctrl;}
-bool DashboardInterface::torqueLoadingButtonPressed() {return _data.button.torque_mode;}
 bool DashboardInterface::nightModeButtonPressed() {return _data.button.led_dimmer;}
 bool DashboardInterface::leftShifterButtonPressed() {return _data.button.left_shifter;}
 bool DashboardInterface::rightShifterButtonPressed() {return _data.button.right_shifter;}
