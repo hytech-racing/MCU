@@ -9,14 +9,19 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
+    
+    - name: Copy source code
+      run: |
+        cp -r ./src ./html/src  # Adjust './src' to match the actual path to your source code
+    
     - name: gen docs
       uses: mattnotmitt/doxygen-action@v1.9.5
       with:
         doxyfile-path: 'Doxyfile'
-        
+    
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/html  # Set this to the Doxygen output directory
-        keep_files: true  # Set to true to keep files that are not in the Doxygen output directory
+        publish_dir: ./html  # Set this to the Doxygen output directory
+        keep_files: false  # Set to true to keep files that are not in the Doxygen output directory
