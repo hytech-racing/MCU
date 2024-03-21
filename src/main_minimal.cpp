@@ -236,7 +236,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger10) // 10Hz
     {
         // Serial.println("before buzzer");
-        dashboard.tick10(&main_ecu, int(fsm.get_state()), buzzer.buzzer_is_on(), drivetrain.drivetrain_error_occured());
+        dashboard.tick10(&main_ecu, int(fsm.get_state()), 
+                        buzzer.buzzer_is_on(), 
+                        drivetrain.drivetrain_error_occured(), 
+                        torque_controller_mux.getTorqueLimit());
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),

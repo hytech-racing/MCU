@@ -12,14 +12,6 @@
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0; // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
 
-enum class TorqueLimit_e
-{
-    TCMUX_LOW_TORQUE = 0,
-    TCMUX_MID_TORQUE = 1,
-    TCMUX_FULL_TORQUE = 2,
-    TCMUX_NUM_TORQUE_LIMITS = 3,
-};
-
 class TorqueControllerMux
 {
 private:
