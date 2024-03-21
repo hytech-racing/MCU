@@ -12,7 +12,7 @@ jobs:
     - name: gen docs
       uses: mattnotmitt/doxygen-action@v1.9.5
       with:
-        doxyfile-path: 'docs/Doxygen'
+        doxyfile-path: 'docs/Doxyfile'
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
