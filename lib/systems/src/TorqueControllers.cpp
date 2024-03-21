@@ -3,23 +3,6 @@
 #include <algorithm>
 #include "PhysicalParameters.h"
 
-static inline void TCPowerLimitScaleDown(
-    DrivetrainCommand_s &command,
-    const DrivetrainDynamicReport_s &drivetrainData,
-    float powerLimit)
-{
-    // TODO
-    // probably requires AMS interface
-}
-
-static inline void TCPosTorqueLimit(DrivetrainCommand_s &command, float torqueLimit)
-{
-    for (int i = 0; i < NUM_MOTORS; i++)
-    {
-        command.torqueSetpoints[i] = std::min(command.torqueSetpoints[i], torqueLimit);
-    }
-}
-
 // TorqueControllerSimple
 
 void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
@@ -62,29 +45,27 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
             writeout_.command.speeds_rpm[RL] = 0.0;
             writeout_.command.speeds_rpm[RR] = 0.0;
 
-            writeout_.command.torqueSetpoints[FL] = torqueRequest;
-            writeout_.command.torqueSetpoints[FR] = torqueRequest;
-            writeout_.command.torqueSetpoints[RL] = torqueRequest;
-            writeout_.command.torqueSetpoints[RR] = torqueRequest;
+            writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
+            writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
+            writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
+            writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
         }
 
         // Apply the torque limit
         TCPosTorqueLimit(writeout_.command, torqueLimit);
-
     }
 }
 
 // TorqueControllerLoadCellVectoring
 
 void TorqueControllerLoadCellVectoring::tick(
-    const SysTick_s& tick, 
-    const PedalsSystemData_s& pedalsData, 
+    const SysTick_s &tick,
+    const PedalsSystemData_s &pedalsData,
     float torqueLimit,
-    const AnalogConversion_s& flLoadCellData,
-    const AnalogConversion_s& frLoadCellData,
-    const AnalogConversion_s& rlLoadCellData,
-    const AnalogConversion_s& rrLoadCellData
-)
+    const AnalogConversion_s &flLoadCellData,
+    const AnalogConversion_s &frLoadCellData,
+    const AnalogConversion_s &rlLoadCellData,
+    const AnalogConversion_s &rrLoadCellData)
 {
     // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
@@ -113,11 +94,7 @@ void TorqueControllerLoadCellVectoring::tick(
         loadCellsErrorCounter_[1] = frLoadCellData.raw != 4095 && frLoadCellData.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[1] + 1;
         loadCellsErrorCounter_[2] = rlLoadCellData.raw != 4095 && rlLoadCellData.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[2] + 1;
         loadCellsErrorCounter_[3] = rrLoadCellData.raw != 4095 && rrLoadCellData.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[3] + 1;
-        ready_ = FIRSaturated_ 
-            && loadCellsErrorCounter_[0] < errorCountThreshold_ 
-            && loadCellsErrorCounter_[1] < errorCountThreshold_ 
-            && loadCellsErrorCounter_[2] < errorCountThreshold_ 
-            && loadCellsErrorCounter_[3] < errorCountThreshold_;
+        ready_ = FIRSaturated_ && loadCellsErrorCounter_[0] < errorCountThreshold_ && loadCellsErrorCounter_[1] < errorCountThreshold_ && loadCellsErrorCounter_[2] < errorCountThreshold_ && loadCellsErrorCounter_[3] < errorCountThreshold_;
 
         writeout_.ready = ready_;
 
