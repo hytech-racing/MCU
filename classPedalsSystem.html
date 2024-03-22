@@ -86,6 +86,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8cdf6d36ae9dc05bfeae37e32521f9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a713dbdab41328be38e74fb6a39977b21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21">getPedalsSystemDataCopy</a> ()</td></tr>
 <tr class="separator:a713dbdab41328be38e74fb6a39977b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addd0da418f7eeec586a9c9dde07f23a3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3">getMechBrakeActiveThreshold</a> ()</td></tr>
+<tr class="separator:addd0da418f7eeec586a9c9dde07f23a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7c5e74cc4c5eb90c282b07b161f9b80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">tick</a> (const SysTick_s &amp;tick, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel2, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake2)</td></tr>
 <tr class="separator:af7c5e74cc4c5eb90c282b07b161f9b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b9ac2da0743454dd4438941885ef496"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a> (const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel2, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake2, unsigned long curr_time)</td></tr>
@@ -232,6 +234,36 @@ Public Member Functions</h2></td></tr>
 <div class="ttc" id="astructPedalsSystemData__s_html_aea42e9eaad23539f4ebbac93b6a3cc5e"><div class="ttname"><a href="structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e">PedalsSystemData_s::brakePressed</a></div><div class="ttdeci">bool brakePressed</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00013">PedalsSystem.h:13</a></div></div>
 <div class="ttc" id="astructPedalsSystemData__s_html_af714ca909b990948479a9193d2d1f5c3"><div class="ttname"><a href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">PedalsSystemData_s::accelImplausible</a></div><div class="ttdeci">bool accelImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00011">PedalsSystem.h:11</a></div></div>
 <div class="ttc" id="astructPedalsSystemData__s_html_afaca612a833a6fed9f726222d976c122"><div class="ttname"><a href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">PedalsSystemData_s::brakeImplausible</a></div><div class="ttdeci">bool brakeImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00012">PedalsSystem.h:12</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="addd0da418f7eeec586a9c9dde07f23a3" name="addd0da418f7eeec586a9c9dde07f23a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addd0da418f7eeec586a9c9dde07f23a3">&#9670;&#160;</a></span>getMechBrakeActiveThreshold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PedalsSystem::getMechBrakeActiveThreshold </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00055">55</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>    {</div>
+<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">return</span> mechBrakeActiveThreshold_;</div>
+<div class="line"><span class="lineno">   58</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -24,8 +24,9 @@ var searchData=
   ['getdialmode_21',['getDialMode',['../classDashboardInterface.html#a111879c011f5cb5bddfc8ed09f736099',1,'DashboardInterface']]],
   ['getdrivetraincommand_22',['getDrivetrainCommand',['../classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d',1,'TorqueControllerMux']]],
   ['getmaxtorque_23',['getMaxTorque',['../classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90',1,'TorqueControllerMux']]],
-  ['getpedalssystemdata_24',['getPedalsSystemData',['../classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed',1,'PedalsSystem']]],
-  ['getpedalssystemdatacopy_25',['getPedalsSystemDataCopy',['../classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21',1,'PedalsSystem']]],
-  ['getsteeringsystemdata_26',['getSteeringSystemData',['../classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f',1,'SteeringSystem']]],
-  ['gettorquelimit_27',['getTorqueLimit',['../classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962',1,'TorqueControllerMux']]]
+  ['getmechbrakeactivethreshold_24',['getMechBrakeActiveThreshold',['../classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3',1,'PedalsSystem']]],
+  ['getpedalssystemdata_25',['getPedalsSystemData',['../classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed',1,'PedalsSystem']]],
+  ['getpedalssystemdatacopy_26',['getPedalsSystemDataCopy',['../classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21',1,'PedalsSystem']]],
+  ['getsteeringsystemdata_27',['getSteeringSystemData',['../classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f',1,'SteeringSystem']]],
+  ['gettorquelimit_28',['getTorqueLimit',['../classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962',1,'TorqueControllerMux']]]
 ];

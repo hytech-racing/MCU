@@ -25,10 +25,11 @@ var searchData=
   ['getdialmode_22',['getDialMode',['../classDashboardInterface.html#a111879c011f5cb5bddfc8ed09f736099',1,'DashboardInterface']]],
   ['getdrivetraincommand_23',['getDrivetrainCommand',['../classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d',1,'TorqueControllerMux']]],
   ['getmaxtorque_24',['getMaxTorque',['../classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90',1,'TorqueControllerMux']]],
-  ['getpedalssystemdata_25',['getPedalsSystemData',['../classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed',1,'PedalsSystem']]],
-  ['getpedalssystemdatacopy_26',['getPedalsSystemDataCopy',['../classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21',1,'PedalsSystem']]],
-  ['getsteeringsystemdata_27',['getSteeringSystemData',['../classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f',1,'SteeringSystem']]],
-  ['gettorquelimit_28',['getTorqueLimit',['../classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962',1,'TorqueControllerMux']]],
-  ['glv_5fled_29',['GLV_LED',['../interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h'],['../interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h']]],
-  ['glv_5fsense_5fchannel_30',['glv_sense_channel',['../structTelemetryInterfaceReadChannels.html#a6d256a278a06c2f13a045d27506fc7d7',1,'TelemetryInterfaceReadChannels']]]
+  ['getmechbrakeactivethreshold_25',['getMechBrakeActiveThreshold',['../classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3',1,'PedalsSystem']]],
+  ['getpedalssystemdata_26',['getPedalsSystemData',['../classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed',1,'PedalsSystem']]],
+  ['getpedalssystemdatacopy_27',['getPedalsSystemDataCopy',['../classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21',1,'PedalsSystem']]],
+  ['getsteeringsystemdata_28',['getSteeringSystemData',['../classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f',1,'SteeringSystem']]],
+  ['gettorquelimit_29',['getTorqueLimit',['../classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962',1,'TorqueControllerMux']]],
+  ['glv_5fled_30',['GLV_LED',['../interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h'],['../interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940a6cae76252570cffe432499ead5277126',1,'GLV_LED():&#160;DashboardInterface.h']]],
+  ['glv_5fsense_5fchannel_31',['glv_sense_channel',['../structTelemetryInterfaceReadChannels.html#a6d256a278a06c2f13a045d27506fc7d7',1,'TelemetryInterfaceReadChannels']]]
 ];
