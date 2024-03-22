@@ -46,13 +46,13 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
 /* TX buffer for CAN1 */
-extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
     CAN1_txBuffer;
 /* TX buffer for CAN2 */
-extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
     CAN2_txBuffer;
 /* TX buffer for CAN3 */
-extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
+extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
     CAN3_txBuffer;
 
 /* Receive callback function for CAN1 that pushes to circ. buffer */
