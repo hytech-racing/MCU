@@ -67,7 +67,11 @@ void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
     _data.LED[static_cast<uint8_t>(led)] = static_cast<uint8_t>(color);
 }
 
-void DashboardInterface::tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error, TorqueLimit_e torque)
+void DashboardInterface::tick10(MCUInterface* mcu, 
+                                int car_state, 
+                                bool buzzer, 
+                                bool drivetrain_error, 
+                                TorqueLimit_e torque)
 {
     
     soundBuzzer(buzzer);

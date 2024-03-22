@@ -134,7 +134,11 @@ public:
     /*
         Tick DashboardInterface at 10hz to gather data and send CAN message
     */
-    void tick10(MCUInterface* mcu, int car_state, bool buzzer, bool drivetrain_error, TorqueLimit_e torque);
+    void tick10(MCUInterface* mcu,
+                int car_state, 
+                bool buzzer, 
+                bool drivetrain_error, 
+                TorqueLimit_e torque);
 
     /*!
         getter for the dashboard's current dial position (drive profile)

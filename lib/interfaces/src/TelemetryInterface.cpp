@@ -3,17 +3,17 @@
 /* Update CAN messages */
 // Main loop
 // MCP3208 returns structure
-void TelemetryInterface::update_pedal_readings_CAN_msg(const AnalogConversion_s &accel1,
-                                                       const AnalogConversion_s &accel2,
-                                                       const AnalogConversion_s &brake1,
-                                                       const AnalogConversion_s &brake2) {
-    // do sth with mcu_pedal_readings_
-    mcu_pedal_readings_.set_accelerator_pedal_1(accel1.raw);
-    mcu_pedal_readings_.set_accelerator_pedal_2(accel2.raw);
-    mcu_pedal_readings_.set_brake_pedal_1(brake1.raw);
-    mcu_pedal_readings_.set_brake_pedal_2(brake2.raw);
+void TelemetryInterface::update_pedal_readings_CAN_msg(float accel_percent,
+                                                       float brake_percent,
+                                                       float mech_brake_percent) {
 
-    enqueue_CAN<MCU_pedal_readings>(mcu_pedal_readings_, ID_MCU_PEDAL_READINGS);
+    MCU_PEDAL_READINGS_t pedal_readings;
+
+    pedal_readings.accel_percent_float_ro = HYTECH_accel_percent_float_ro_toS(accel_percent*100);
+    pedal_readings.brake_percent_float_ro = HYTECH_brake_percent_float_ro_toS(brake_percent*100);
+    pedal_readings.mechanical_brake_percent_float_ro = HYTECH_mechanical_brake_percent_float_ro_toS(mech_brake_percent*100);
+
+    enqueue_new_CAN<MCU_PEDAL_READINGS_t>(&pedal_readings, &Pack_MCU_PEDAL_READINGS_hytech);
 }
 // MCP3204 returns structure
 void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_fl,
@@ -197,21 +197,19 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               bool accel_implaus,
                               bool brake_implaus,
                               float accel_per,
-                              float brake_per) {
+                              float brake_per,
+                              float mech_brake_active_percent) {
 
     // Pedals
-    update_pedal_readings_CAN_msg(adc1.conversions[channels_.accel1_channel],
-                                  adc1.conversions[channels_.accel2_channel],
-                                  adc1.conversions[channels_.brake1_channel],
-                                  adc1.conversions[channels_.brake2_channel]);
-    // enqueue_CAN_mcu_pedal_readings();
+    update_pedal_readings_CAN_msg(accel_per,
+                                  brake_per,
+                                  mech_brake_active_percent);
     // Analog readings
     update_analog_readings_CAN_msg(encoder,
                                    adc1.conversions[channels_.analog_steering_channel],
                                    adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel],
                                    adc1.conversions[channels_.glv_sense_channel]);
-    // enqueue_CAN_mcu_analog_readings();
     // Load cells
     update_suspension_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
                               adc3.conversions[channels_.loadcell_fr_channel],
@@ -225,7 +223,5 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
 
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);
-    // enqueue_CAN_mcu_front_potentiometers();
-    // enqueue_CAN_mcu_rear_potentiometers();
 
 }

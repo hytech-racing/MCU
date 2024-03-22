@@ -35,7 +35,6 @@ class TelemetryInterface
 {
 private:
     /* Outbound telemetry CAN messages */
-    MCU_pedal_readings          mcu_pedal_readings_;
     MCU_analog_readings         mcu_analog_readings_;
     /* CAN Tx buffer */
     CANBufferType *msg_queue_;
@@ -50,10 +49,9 @@ public:
     /* Update CAN messages (main loop) */
     // Interfaces
     void update_pedal_readings_CAN_msg(
-        const AnalogConversion_s &accel1,
-        const AnalogConversion_s &accel2,
-        const AnalogConversion_s &brake1,
-        const AnalogConversion_s &brake2
+        float accel_percent,
+        float brake_percent,
+        float mech_brake_percent
     );
     void update_suspension_CAN_msg(
         const AnalogConversion_s &lc_fl,
@@ -126,7 +124,8 @@ public:
         bool accel_implaus,
         bool brake_implaus,
         float accel_per,
-        float brake_per
+        float brake_per,
+        float mech_brake_active_percent
     );
 
 };

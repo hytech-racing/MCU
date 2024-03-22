@@ -261,7 +261,19 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     {
         steering1.sample();
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-        telem_interface.tick(a1.get(), a2.get(), a3.get(), steering1.convert(), &inv.fl, &inv.fr, &inv.rl, &inv.rr, data2.accelImplausible, data2.brakeImplausible, data2.accelPercent, data2.brakePercent);
+        telem_interface.tick(a1.get(), 
+                             a2.get(), 
+                             a3.get(), 
+                             steering1.convert(), 
+                             &inv.fl, 
+                             &inv.fr, 
+                             &inv.rl, 
+                             &inv.rr, 
+                             data2.accelImplausible, 
+                             data2.brakeImplausible, 
+                             data2.accelPercent, 
+                             data2.brakePercent,
+                             pedals_system.getMechBrakeActiveThreshold());
     }
 
     if (t.trigger100) // 100Hz

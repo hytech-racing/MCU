@@ -52,6 +52,11 @@ public:
         return data_;
     }
 
+    float getMechBrakeActiveThreshold()
+    {
+        return mechBrakeActiveThreshold_;
+    }
+
     void tick(const SysTick_s &tick,
               const AnalogConversion_s &accel1,
               const AnalogConversion_s &accel2,
