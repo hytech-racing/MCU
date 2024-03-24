@@ -245,7 +245,9 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         dashboard.tick10(&main_ecu, int(fsm.get_state()), 
                         buzzer.buzzer_is_on(), 
                         drivetrain.drivetrain_error_occured(), 
-                        torque_controller_mux.getTorqueLimit());
+                        torque_controller_mux.getTorqueLimit(),
+                        ams_interface.get_filtered_min_cell_voltage(),
+                        telem_interface.get_glv_voltage(a1.get()));
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),
