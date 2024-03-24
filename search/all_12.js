@@ -38,7 +38,7 @@ var searchData=
   ['testing_35',['TESTING',['../md_TESTING.html',1,'']]],
   ['testing_2emd_36',['TESTING.md',['../TESTING_8md.html',1,'']]],
   ['tick_37',['tick',['../classTelemetryInterface.html#a6216f959ebff052b6b872e5011951974',1,'TelemetryInterface::tick()'],['../classMCUInterface.html#a240670d1a4552fe974948da184edce9d',1,'MCUInterface::tick()'],['../classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075',1,'DrivetrainSystem::tick()'],['../classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80',1,'PedalsSystem::tick()'],['../classSteeringSystem.html#a9237807b8e5d76c2b9bd7c94770bc865',1,'SteeringSystem::tick()'],['../classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99',1,'TorqueControllerMux::tick()'],['../classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718',1,'TorqueControllerSimple::tick()'],['../classTorqueControllerLoadCellVectoring.html#acb8917f5c9fd34363e22357f62028a78',1,'TorqueControllerLoadCellVectoring::tick()']]],
-  ['tick10_38',['tick10',['../classDashboardInterface.html#a04cc4db03a6c58ff6aa8f9816d2bf0ca',1,'DashboardInterface']]],
+  ['tick10_38',['tick10',['../classDashboardInterface.html#a6a635d9188341f9587053ab81b4357b1',1,'DashboardInterface']]],
   ['tick_5fall_5finterfaces_39',['tick_all_interfaces',['../src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0',1,'main.cpp']]],
   ['tick_5fall_5fsystems_40',['tick_all_systems',['../src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce',1,'main.cpp']]],
   ['tick_5fstate_5fmachine_41',['tick_state_machine',['../classMCUStateMachine.html#a4776c4162d3311fb5ed9644e398ed55b',1,'MCUStateMachine']]],

@@ -87,8 +87,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a13849bd01a439ddd3588f27144c77608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f1a5c0cc0b5227a05041003afa8765"><td class="memItemLeft" align="right" valign="top">CAN_message_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765">write</a> ()</td></tr>
 <tr class="separator:a72f1a5c0cc0b5227a05041003afa8765"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04cc4db03a6c58ff6aa8f9816d2bf0ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a04cc4db03a6c58ff6aa8f9816d2bf0ca">tick10</a> (<a class="el" href="classMCUInterface.html">MCUInterface</a> *mcu, int car_state, bool <a class="el" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>, bool drivetrain_error, <a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> torque)</td></tr>
-<tr class="separator:a04cc4db03a6c58ff6aa8f9816d2bf0ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a635d9188341f9587053ab81b4357b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a6a635d9188341f9587053ab81b4357b1">tick10</a> (<a class="el" href="classMCUInterface.html">MCUInterface</a> *mcu, int car_state, bool <a class="el" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>, bool drivetrain_error, <a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> torque, float min_cell_voltage, <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> glv_voltage)</td></tr>
+<tr class="separator:a6a635d9188341f9587053ab81b4357b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a111879c011f5cb5bddfc8ed09f736099"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8">DialMode_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a111879c011f5cb5bddfc8ed09f736099">getDialMode</a> ()</td></tr>
 <tr class="separator:a111879c011f5cb5bddfc8ed09f736099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab55316fcfd5c13b51530a764f11c59b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#ab55316fcfd5c13b51530a764f11c59b0">safetySystemOK</a> ()</td></tr>
@@ -131,7 +131,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html#l00104">104</a> of file <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html#l00105">105</a> of file <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="add8574dd443920bfdfe23c3feb1c6576" name="add8574dd443920bfdfe23c3feb1c6576"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add8574dd443920bfdfe23c3feb1c6576">&#9670;&#160;</a></span>DashboardInterface()</h2>
@@ -164,10 +164,10 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html#l00119">119</a> of file <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  120</span>    {</div>
-<div class="line"><span class="lineno">  121</span>        msg_queue_ = msg_output_queue;</div>
-<div class="line"><span class="lineno">  122</span>    };</div>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html#l00120">120</a> of file <a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>    {</div>
+<div class="line"><span class="lineno">  122</span>        msg_queue_ = msg_output_queue;</div>
+<div class="line"><span class="lineno">  123</span>    };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -187,9 +187,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00119">119</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  119</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f">buzzer_state</a>;}</div>
-<div class="ttc" id="astructDashComponentInterface__s_html_ad7f6f8732c5a77926d853b9f2b47117f"><div class="ttname"><a href="structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f">DashComponentInterface_s::buzzer_state</a></div><div class="ttdeci">bool buzzer_state</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00088">DashboardInterface.h:88</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00125">125</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  125</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f">buzzer_state</a>;}</div>
+<div class="ttc" id="astructDashComponentInterface__s_html_ad7f6f8732c5a77926d853b9f2b47117f"><div class="ttname"><a href="structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f">DashComponentInterface_s::buzzer_state</a></div><div class="ttdeci">bool buzzer_state</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00089">DashboardInterface.h:89</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -237,9 +237,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >getter for the dashboard's current dial position (drive profile) </p><dl class="section return"><dt>Returns</dt><dd>returns a DialMode_e enum with the current dial position </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00104">104</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  104</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a88d6ffb7bec4ed250450b7d0f07a2ed0">dial_mode</a>;}</div>
-<div class="ttc" id="astructDashComponentInterface__s_html_a88d6ffb7bec4ed250450b7d0f07a2ed0"><div class="ttname"><a href="structDashComponentInterface__s.html#a88d6ffb7bec4ed250450b7d0f07a2ed0">DashComponentInterface_s::dial_mode</a></div><div class="ttdeci">DialMode_e dial_mode</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00083">DashboardInterface.h:83</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00110">110</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  110</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a88d6ffb7bec4ed250450b7d0f07a2ed0">dial_mode</a>;}</div>
+<div class="ttc" id="astructDashComponentInterface__s_html_a88d6ffb7bec4ed250450b7d0f07a2ed0"><div class="ttname"><a href="structDashComponentInterface__s.html#a88d6ffb7bec4ed250450b7d0f07a2ed0">DashComponentInterface_s::dial_mode</a></div><div class="ttdeci">DialMode_e dial_mode</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00084">DashboardInterface.h:84</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -258,10 +258,10 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00109">109</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  109</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#aeee2622d45851ba5294d3fc31b097f32">mc_cycle</a>;}</div>
-<div class="ttc" id="astructDashButtons__s_html_aeee2622d45851ba5294d3fc31b097f32"><div class="ttname"><a href="structDashButtons__s.html#aeee2622d45851ba5294d3fc31b097f32">DashButtons_s::mc_cycle</a></div><div class="ttdeci">bool mc_cycle</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00070">DashboardInterface.h:70</a></div></div>
-<div class="ttc" id="astructDashComponentInterface__s_html_ade081de3630645249fa68a7c372ecee4"><div class="ttname"><a href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">DashComponentInterface_s::button</a></div><div class="ttdeci">DashButtons_s button</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00085">DashboardInterface.h:85</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00115">115</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  115</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#aeee2622d45851ba5294d3fc31b097f32">mc_cycle</a>;}</div>
+<div class="ttc" id="astructDashButtons__s_html_aeee2622d45851ba5294d3fc31b097f32"><div class="ttname"><a href="structDashButtons__s.html#aeee2622d45851ba5294d3fc31b097f32">DashButtons_s::mc_cycle</a></div><div class="ttdeci">bool mc_cycle</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00071">DashboardInterface.h:71</a></div></div>
+<div class="ttc" id="astructDashComponentInterface__s_html_ade081de3630645249fa68a7c372ecee4"><div class="ttname"><a href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">DashComponentInterface_s::button</a></div><div class="ttdeci">DashButtons_s button</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00086">DashboardInterface.h:86</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -280,9 +280,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00110">110</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  110</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#a08431f8557d496885ae6ae6eb4509bd3">launch_ctrl</a>;}</div>
-<div class="ttc" id="astructDashButtons__s_html_a08431f8557d496885ae6ae6eb4509bd3"><div class="ttname"><a href="structDashButtons__s.html#a08431f8557d496885ae6ae6eb4509bd3">DashButtons_s::launch_ctrl</a></div><div class="ttdeci">bool launch_ctrl</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00071">DashboardInterface.h:71</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00116">116</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#a08431f8557d496885ae6ae6eb4509bd3">launch_ctrl</a>;}</div>
+<div class="ttc" id="astructDashButtons__s_html_a08431f8557d496885ae6ae6eb4509bd3"><div class="ttname"><a href="structDashButtons__s.html#a08431f8557d496885ae6ae6eb4509bd3">DashButtons_s::launch_ctrl</a></div><div class="ttdeci">bool launch_ctrl</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00072">DashboardInterface.h:72</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -301,9 +301,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00112">112</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  112</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#aa53089de7af930596fa00ab9d0135a60">left_shifter</a>;}</div>
-<div class="ttc" id="astructDashButtons__s_html_aa53089de7af930596fa00ab9d0135a60"><div class="ttname"><a href="structDashButtons__s.html#aa53089de7af930596fa00ab9d0135a60">DashButtons_s::left_shifter</a></div><div class="ttdeci">bool left_shifter</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00074">DashboardInterface.h:74</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00118">118</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  118</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#aa53089de7af930596fa00ab9d0135a60">left_shifter</a>;}</div>
+<div class="ttc" id="astructDashButtons__s_html_aa53089de7af930596fa00ab9d0135a60"><div class="ttname"><a href="structDashButtons__s.html#aa53089de7af930596fa00ab9d0135a60">DashButtons_s::left_shifter</a></div><div class="ttdeci">bool left_shifter</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00075">DashboardInterface.h:75</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -322,9 +322,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00111">111</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  111</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#a69f35daefb8716f0e4d6418a25d82e4a">led_dimmer</a>;}</div>
-<div class="ttc" id="astructDashButtons__s_html_a69f35daefb8716f0e4d6418a25d82e4a"><div class="ttname"><a href="structDashButtons__s.html#a69f35daefb8716f0e4d6418a25d82e4a">DashButtons_s::led_dimmer</a></div><div class="ttdeci">bool led_dimmer</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00073">DashboardInterface.h:73</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00117">117</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#a69f35daefb8716f0e4d6418a25d82e4a">led_dimmer</a>;}</div>
+<div class="ttc" id="astructDashButtons__s_html_a69f35daefb8716f0e4d6418a25d82e4a"><div class="ttname"><a href="structDashButtons__s.html#a69f35daefb8716f0e4d6418a25d82e4a">DashButtons_s::led_dimmer</a></div><div class="ttdeci">bool led_dimmer</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00074">DashboardInterface.h:74</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -374,14 +374,14 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   24</span>    _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ad7f6f8732c5a77926d853b9f2b47117f">buzzer_state</a> = dash_state.drive_buzzer;</div>
 <div class="line"><span class="lineno">   25</span> </div>
 <div class="line"><span class="lineno">   26</span>}</div>
-<div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8">DialMode_e</a></div><div class="ttdeci">DialMode_e</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00024">DashboardInterface.h:25</a></div></div>
-<div class="ttc" id="astructDashButtons__s_html_a173c7e71eb95cc11954ccf9cc0cef709"><div class="ttname"><a href="structDashButtons__s.html#a173c7e71eb95cc11954ccf9cc0cef709">DashButtons_s::mode</a></div><div class="ttdeci">bool mode</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00069">DashboardInterface.h:69</a></div></div>
-<div class="ttc" id="astructDashButtons__s_html_a5b37e5a5b3eb4ff8d30fbb96242c5e4b"><div class="ttname"><a href="structDashButtons__s.html#a5b37e5a5b3eb4ff8d30fbb96242c5e4b">DashButtons_s::right_shifter</a></div><div class="ttdeci">bool right_shifter</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00075">DashboardInterface.h:75</a></div></div>
-<div class="ttc" id="astructDashButtons__s_html_ab81dede1f9ea2601deb9c1163c056926"><div class="ttname"><a href="structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926">DashButtons_s::mark</a></div><div class="ttdeci">bool mark</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00068">DashboardInterface.h:68</a></div></div>
-<div class="ttc" id="astructDashButtons__s_html_ae2fa4297ffd2056e4a596bfa174df416"><div class="ttname"><a href="structDashButtons__s.html#ae2fa4297ffd2056e4a596bfa174df416">DashButtons_s::start</a></div><div class="ttdeci">bool start</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00067">DashboardInterface.h:67</a></div></div>
-<div class="ttc" id="astructDashButtons__s_html_af470e52adec4873b9943ac3ff5600cf7"><div class="ttname"><a href="structDashButtons__s.html#af470e52adec4873b9943ac3ff5600cf7">DashButtons_s::torque_mode</a></div><div class="ttdeci">bool torque_mode</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00072">DashboardInterface.h:72</a></div></div>
-<div class="ttc" id="astructDashComponentInterface__s_html_a218c3189f7ce07bf6da992018a96c52d"><div class="ttname"><a href="structDashComponentInterface__s.html#a218c3189f7ce07bf6da992018a96c52d">DashComponentInterface_s::shutdown</a></div><div class="ttdeci">bool shutdown</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00087">DashboardInterface.h:87</a></div></div>
-<div class="ttc" id="astructDashComponentInterface__s_html_a72893a2430439acef128e492913ff3b4"><div class="ttname"><a href="structDashComponentInterface__s.html#a72893a2430439acef128e492913ff3b4">DashComponentInterface_s::ssok</a></div><div class="ttdeci">bool ssok</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00086">DashboardInterface.h:86</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8">DialMode_e</a></div><div class="ttdeci">DialMode_e</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00025">DashboardInterface.h:26</a></div></div>
+<div class="ttc" id="astructDashButtons__s_html_a173c7e71eb95cc11954ccf9cc0cef709"><div class="ttname"><a href="structDashButtons__s.html#a173c7e71eb95cc11954ccf9cc0cef709">DashButtons_s::mode</a></div><div class="ttdeci">bool mode</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00070">DashboardInterface.h:70</a></div></div>
+<div class="ttc" id="astructDashButtons__s_html_a5b37e5a5b3eb4ff8d30fbb96242c5e4b"><div class="ttname"><a href="structDashButtons__s.html#a5b37e5a5b3eb4ff8d30fbb96242c5e4b">DashButtons_s::right_shifter</a></div><div class="ttdeci">bool right_shifter</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00076">DashboardInterface.h:76</a></div></div>
+<div class="ttc" id="astructDashButtons__s_html_ab81dede1f9ea2601deb9c1163c056926"><div class="ttname"><a href="structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926">DashButtons_s::mark</a></div><div class="ttdeci">bool mark</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00069">DashboardInterface.h:69</a></div></div>
+<div class="ttc" id="astructDashButtons__s_html_ae2fa4297ffd2056e4a596bfa174df416"><div class="ttname"><a href="structDashButtons__s.html#ae2fa4297ffd2056e4a596bfa174df416">DashButtons_s::start</a></div><div class="ttdeci">bool start</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00068">DashboardInterface.h:68</a></div></div>
+<div class="ttc" id="astructDashButtons__s_html_af470e52adec4873b9943ac3ff5600cf7"><div class="ttname"><a href="structDashButtons__s.html#af470e52adec4873b9943ac3ff5600cf7">DashButtons_s::torque_mode</a></div><div class="ttdeci">bool torque_mode</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00073">DashboardInterface.h:73</a></div></div>
+<div class="ttc" id="astructDashComponentInterface__s_html_a218c3189f7ce07bf6da992018a96c52d"><div class="ttname"><a href="structDashComponentInterface__s.html#a218c3189f7ce07bf6da992018a96c52d">DashComponentInterface_s::shutdown</a></div><div class="ttdeci">bool shutdown</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00088">DashboardInterface.h:88</a></div></div>
+<div class="ttc" id="astructDashComponentInterface__s_html_a72893a2430439acef128e492913ff3b4"><div class="ttname"><a href="structDashComponentInterface__s.html#a72893a2430439acef128e492913ff3b4">DashComponentInterface_s::ssok</a></div><div class="ttdeci">bool ssok</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00087">DashboardInterface.h:87</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -400,8 +400,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00113">113</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  113</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#a5b37e5a5b3eb4ff8d30fbb96242c5e4b">right_shifter</a>;}</div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00119">119</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  119</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#a5b37e5a5b3eb4ff8d30fbb96242c5e4b">right_shifter</a>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -420,8 +420,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00115">115</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  115</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a72893a2430439acef128e492913ff3b4">ssok</a>;}</div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00121">121</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a72893a2430439acef128e492913ff3b4">ssok</a>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -463,7 +463,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>    _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a2b1d67638edab048b268adc2e6d99ac1">LED</a>[<span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(led)] = <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(color);</div>
 <div class="line"><span class="lineno">   68</span>}</div>
-<div class="ttc" id="astructDashComponentInterface__s_html_a2b1d67638edab048b268adc2e6d99ac1"><div class="ttname"><a href="structDashComponentInterface__s.html#a2b1d67638edab048b268adc2e6d99ac1">DashComponentInterface_s::LED</a></div><div class="ttdeci">uint8_t LED[12]</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00094">DashboardInterface.h:94</a></div></div>
+<div class="ttc" id="astructDashComponentInterface__s_html_a2b1d67638edab048b268adc2e6d99ac1"><div class="ttname"><a href="structDashComponentInterface__s.html#a2b1d67638edab048b268adc2e6d99ac1">DashComponentInterface_s::LED</a></div><div class="ttdeci">uint8_t LED[12]</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00095">DashboardInterface.h:95</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -482,8 +482,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00116">116</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a218c3189f7ce07bf6da992018a96c52d">shutdown</a>;}</div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00122">122</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a218c3189f7ce07bf6da992018a96c52d">shutdown</a>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -503,9 +503,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00118">118</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  118</span>{_data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237">buzzer_cmd</a> = state;}</div>
-<div class="ttc" id="astructDashComponentInterface__s_html_a613cf61d0b56fcbba6e2069143829237"><div class="ttname"><a href="structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237">DashComponentInterface_s::buzzer_cmd</a></div><div class="ttdeci">bool buzzer_cmd</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00091">DashboardInterface.h:91</a></div></div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00124">124</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  124</span>{_data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237">buzzer_cmd</a> = state;}</div>
+<div class="ttc" id="astructDashComponentInterface__s_html_a613cf61d0b56fcbba6e2069143829237"><div class="ttname"><a href="structDashComponentInterface__s.html#a613cf61d0b56fcbba6e2069143829237">DashComponentInterface_s::buzzer_cmd</a></div><div class="ttdeci">bool buzzer_cmd</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00092">DashboardInterface.h:92</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -524,8 +524,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00107">107</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  107</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926">mark</a>;}</div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00113">113</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926">mark</a>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -544,8 +544,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00106">106</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  106</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#ae2fa4297ffd2056e4a596bfa174df416">start</a>;}</div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00112">112</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#ae2fa4297ffd2056e4a596bfa174df416">start</a>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -578,8 +578,8 @@ Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a04cc4db03a6c58ff6aa8f9816d2bf0ca" name="a04cc4db03a6c58ff6aa8f9816d2bf0ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04cc4db03a6c58ff6aa8f9816d2bf0ca">&#9670;&#160;</a></span>tick10()</h2>
+<a id="a6a635d9188341f9587053ab81b4357b1" name="a6a635d9188341f9587053ab81b4357b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a635d9188341f9587053ab81b4357b1">&#9670;&#160;</a></span>tick10()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -612,7 +612,19 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a>&#160;</td>
-          <td class="paramname"><em>torque</em>&#160;</td>
+          <td class="paramname"><em>torque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min_cell_voltage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a>&#160;</td>
+          <td class="paramname"><em>glv_voltage</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -623,37 +635,41 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00070">70</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>{</div>
-<div class="line"><span class="lineno">   76</span>    </div>
-<div class="line"><span class="lineno">   77</span>    <a class="code hl_function" href="classDashboardInterface.html#ac5f8d8515637b1b2a3d7d6067ba446e4">soundBuzzer</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>);</div>
-<div class="line"><span class="lineno">   78</span> </div>
-<div class="line"><span class="lineno">   79</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::AMS_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#afb2dff221a9f0c91319af9d9189077e2">bms_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::IMD_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a16f0bb4fe742e2042a93f610bccb5ae8">imd_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   81</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::BOTS_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a748730d4238924e66f60c8029b113467">get_bots_ok</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   82</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::START_LED, car_state == <span class="keywordtype">int</span>(MCU_STATE::READY_TO_DRIVE) ? LEDColors_e::ON : LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   83</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MC_ERROR_LED, !drivetrain_error ? LEDColors_e::ON : LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   84</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::COCKPIT_BRB_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a0a40a91ec3a9ca8235dc0f639f4b42dd">brb_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   85</span> </div>
-<div class="line"><span class="lineno">   86</span>    <span class="keywordflow">switch</span>(torque){</div>
-<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">case</span> TorqueLimit_e::TCMUX_LOW_TORQUE:</div>
-<div class="line"><span class="lineno">   88</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::OFF);</div>
-<div class="line"><span class="lineno">   89</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">case</span> TorqueLimit_e::TCMUX_MID_TORQUE:</div>
-<div class="line"><span class="lineno">   91</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::YELLOW);</div>
-<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">case</span> TorqueLimit_e::TCMUX_FULL_TORQUE:</div>
-<div class="line"><span class="lineno">   94</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::ON);</div>
-<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">   97</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::RED);</div>
-<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   99</span>    }</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>    <a class="code hl_function" href="classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765">write</a>();</div>
-<div class="line"><span class="lineno">  102</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">   77</span>{</div>
+<div class="line"><span class="lineno">   78</span>    </div>
+<div class="line"><span class="lineno">   79</span>    <a class="code hl_function" href="classDashboardInterface.html#ac5f8d8515637b1b2a3d7d6067ba446e4">soundBuzzer</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>);</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::AMS_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#afb2dff221a9f0c91319af9d9189077e2">bms_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">   82</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::IMD_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a16f0bb4fe742e2042a93f610bccb5ae8">imd_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">   83</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::BOTS_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a748730d4238924e66f60c8029b113467">get_bots_ok</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">   84</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::START_LED, car_state == <span class="keywordtype">int</span>(MCU_STATE::READY_TO_DRIVE) ? LEDColors_e::ON : LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">   85</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MC_ERROR_LED, !drivetrain_error ? LEDColors_e::ON : LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">   86</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::COCKPIT_BRB_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a0a40a91ec3a9ca8235dc0f639f4b42dd">brb_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">switch</span>(torque){</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">case</span> TorqueLimit_e::TCMUX_LOW_TORQUE:</div>
+<div class="line"><span class="lineno">   90</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::OFF);</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   92</span>    <span class="keywordflow">case</span> TorqueLimit_e::TCMUX_MID_TORQUE:</div>
+<div class="line"><span class="lineno">   93</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::YELLOW);</div>
+<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">case</span> TorqueLimit_e::TCMUX_FULL_TORQUE:</div>
+<div class="line"><span class="lineno">   96</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::ON);</div>
+<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">   99</span>        <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::MODE_LED, LEDColors_e::RED);</div>
+<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  101</span>    }</div>
+<div class="line"><span class="lineno">  102</span> </div>
+<div class="line"><span class="lineno">  103</span>    uint16_t scaled_cell_voltage = (uint16_t)map((uint32_t)(min_cell_voltage*1000), 3300, 4100, 0, 255);<span class="comment">// scale voltage</span></div>
+<div class="line"><span class="lineno">  104</span>    _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a2b1d67638edab048b268adc2e6d99ac1">LED</a>[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(DashLED_e::CRIT_CHARGE_LED)] = std::max(0, std::min((<span class="keywordtype">int</span>)scaled_cell_voltage, 255));<span class="comment">// clamp voltage</span></div>
+<div class="line"><span class="lineno">  105</span>    <span class="comment">// _data.LED[DashLED_e::GLV_LED] = (uint8_t)map(glv_voltage.raw)</span></div>
+<div class="line"><span class="lineno">  106</span> </div>
+<div class="line"><span class="lineno">  107</span>    <a class="code hl_function" href="classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765">write</a>();</div>
+<div class="line"><span class="lineno">  108</span>}</div>
 <div class="ttc" id="aclassDashboardInterface_html_a2b862f16ae263ade4c00bc9277a1f580"><div class="ttname"><a href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">DashboardInterface::setLED</a></div><div class="ttdeci">void setLED(DashLED_e led, LEDColors_e color)</div><div class="ttdef"><b>Definition:</b> <a href="DashboardInterface_8cpp_source.html#l00064">DashboardInterface.cpp:64</a></div></div>
 <div class="ttc" id="aclassDashboardInterface_html_a72f1a5c0cc0b5227a05041003afa8765"><div class="ttname"><a href="classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765">DashboardInterface::write</a></div><div class="ttdeci">CAN_message_t write()</div><div class="ttdef"><b>Definition:</b> <a href="DashboardInterface_8cpp_source.html#l00028">DashboardInterface.cpp:28</a></div></div>
-<div class="ttc" id="aclassDashboardInterface_html_ac5f8d8515637b1b2a3d7d6067ba446e4"><div class="ttname"><a href="classDashboardInterface.html#ac5f8d8515637b1b2a3d7d6067ba446e4">DashboardInterface::soundBuzzer</a></div><div class="ttdeci">void soundBuzzer(bool s)</div><div class="ttdef"><b>Definition:</b> <a href="DashboardInterface_8cpp_source.html#l00118">DashboardInterface.cpp:118</a></div></div>
+<div class="ttc" id="aclassDashboardInterface_html_ac5f8d8515637b1b2a3d7d6067ba446e4"><div class="ttname"><a href="classDashboardInterface.html#ac5f8d8515637b1b2a3d7d6067ba446e4">DashboardInterface::soundBuzzer</a></div><div class="ttdeci">void soundBuzzer(bool s)</div><div class="ttdef"><b>Definition:</b> <a href="DashboardInterface_8cpp_source.html#l00124">DashboardInterface.cpp:124</a></div></div>
 <div class="ttc" id="aclassMCUInterface_html_a0a40a91ec3a9ca8235dc0f639f4b42dd"><div class="ttname"><a href="classMCUInterface.html#a0a40a91ec3a9ca8235dc0f639f4b42dd">MCUInterface::brb_ok_is_high</a></div><div class="ttdeci">bool brb_ok_is_high()</div><div class="ttdef"><b>Definition:</b> <a href="MCUInterface_8cpp_source.html#l00084">MCUInterface.cpp:84</a></div></div>
 <div class="ttc" id="aclassMCUInterface_html_a16f0bb4fe742e2042a93f610bccb5ae8"><div class="ttname"><a href="classMCUInterface.html#a16f0bb4fe742e2042a93f610bccb5ae8">MCUInterface::imd_ok_is_high</a></div><div class="ttdeci">bool imd_ok_is_high()</div><div class="ttdef"><b>Definition:</b> <a href="MCUInterface_8cpp_source.html#l00078">MCUInterface.cpp:78</a></div></div>
 <div class="ttc" id="aclassMCUInterface_html_a748730d4238924e66f60c8029b113467"><div class="ttname"><a href="classMCUInterface.html#a748730d4238924e66f60c8029b113467">MCUInterface::get_bots_ok</a></div><div class="ttdeci">bool get_bots_ok()</div><div class="ttdef"><b>Definition:</b> <a href="MCUInterface_8cpp_source.html#l00089">MCUInterface.cpp:89</a></div></div>
@@ -694,8 +710,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00108">108</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  108</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#af470e52adec4873b9943ac3ff5600cf7">torque_mode</a>;}</div>
+<p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00114">114</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  114</span>{<span class="keywordflow">return</span> _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#ade081de3630645249fa68a7c372ecee4">button</a>.<a class="code hl_variable" href="structDashButtons__s.html#af470e52adec4873b9943ac3ff5600cf7">torque_mode</a>;}</div>
 </div><!-- fragment -->
 </div>
 </div>
