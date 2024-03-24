@@ -661,7 +661,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  100</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  101</span>    }</div>
 <div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>    uint16_t scaled_cell_voltage = (uint16_t)map((uint32_t)(min_cell_voltage*1000), 3300, 4100, 0, 255);<span class="comment">// scale voltage</span></div>
+<div class="line"><span class="lineno">  103</span>    uint16_t scaled_cell_voltage = (uint16_t)map((uint32_t)(min_cell_voltage*1000), 3300, 4200, 0, 255);<span class="comment">// scale voltage</span></div>
 <div class="line"><span class="lineno">  104</span>    _data.<a class="code hl_variable" href="structDashComponentInterface__s.html#a2b1d67638edab048b268adc2e6d99ac1">LED</a>[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(DashLED_e::CRIT_CHARGE_LED)] = std::max(0, std::min((<span class="keywordtype">int</span>)scaled_cell_voltage, 255));<span class="comment">// clamp voltage</span></div>
 <div class="line"><span class="lineno">  105</span>    <span class="comment">// _data.LED[DashLED_e::GLV_LED] = (uint8_t)map(glv_voltage.raw)</span></div>
 <div class="line"><span class="lineno">  106</span> </div>
