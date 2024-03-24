@@ -122,6 +122,17 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
     status.brake_implausible = brake_implaus;
     status.brake_percent = (uint8_t)(abs(brake_per) * 100);
     status.accel_percent = (uint8_t)(abs(accel_per) * 100);
+
+    MC_temps mc1_temps = fl->get_temps_msg();
+    MC_temps mc2_temps = fr->get_temps_msg();
+    MC_temps mc3_temps = rl->get_temps_msg();
+    MC_temps mc4_temps = rr->get_temps_msg();
+    
+    enqueue_CAN<MC_temps>(mc1_temps, ID_MC1_TEMPS);
+    enqueue_CAN<MC_temps>(mc2_temps, ID_MC2_TEMPS);
+    enqueue_CAN<MC_temps>(mc3_temps, ID_MC3_TEMPS);
+    enqueue_CAN<MC_temps>(mc4_temps, ID_MC4_TEMPS);
+
     
     enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }

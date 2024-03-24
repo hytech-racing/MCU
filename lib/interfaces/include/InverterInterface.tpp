@@ -160,6 +160,7 @@ void InverterInterface<message_queue>::receive_temp_msg(CAN_message_t &msg)
 {
     MC_temps mc_temps(&msg.buf[0]);
     // TODO use this (not currently being used in old main)
+    mc_temps_ = mc_temps;
     diagnostic_number_ = mc_temps.get_diagnostic_number();
 }
 
