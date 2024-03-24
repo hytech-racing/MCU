@@ -51,14 +51,14 @@ const float BRAKE_MECH_THRESH = 0.55;
 // lbs = (scale)*raw + offset
 
 const float LOADCELL_FL_SCALE = 0.0553;
-const float LOADCELL_FL_OFFSET = 15.892;
+const float LOADCELL_FL_OFFSET = 15.892 / LOADCELL_FL_SCALE;
 
 const float LOADCELL_FR_SCALE = 0.0512;
-const float LOADCELL_FR_OFFSET = 17.196;
+const float LOADCELL_FR_OFFSET = 17.196 / LOADCELL_FR_SCALE;
 
 const float LOADCELL_RL_SCALE = 0.1147;
-const float LOADCELL_RL_OFFSET = 21.842;
+const float LOADCELL_RL_OFFSET = 21.842 / LOADCELL_RL_SCALE;
 
 const float LOADCELL_RR_SCALE = 0.0588;
-const float LOADCELL_RR_OFFSET = 19.576;
+const float LOADCELL_RR_OFFSET = 19.576 / LOADCELL_RR_SCALE;
 #endif /* __MCU15_H__ */
