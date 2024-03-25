@@ -112,9 +112,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a44b11fbb973dc0855b34fc2b17d93e4e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> = Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt;</td></tr>
-<tr class="separator:a44b11fbb973dc0855b34fc2b17d93e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f5dbed5370a0561a7d878f18a4d6b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a21f5dbed5370a0561a7d878f18a4d6b0">InvInt_t</a> = <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; <a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> &gt;</td></tr>
+<tr class="memitem:a08862e40d3e8058f87294bbbd8945807"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> = Circular_Buffer&lt; uint8_t,(uint32_t) 32, sizeof(CAN_message_t)&gt;</td></tr>
+<tr class="separator:a08862e40d3e8058f87294bbbd8945807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f5dbed5370a0561a7d878f18a4d6b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#a21f5dbed5370a0561a7d878f18a4d6b0">InvInt_t</a> = <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; <a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> &gt;</td></tr>
 <tr class="separator:a21f5dbed5370a0561a7d878f18a4d6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2c187948cffd84c29d9c1103ad54801"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#af2c187948cffd84c29d9c1103ad54801">DriveSys_t</a> = <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> &gt;</td></tr>
 <tr class="separator:af2c187948cffd84c29d9c1103ad54801"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,18 +170,18 @@ Variables</h2></td></tr>
 <tr class="separator:a60b1f8a5e4ac159bc3ca1710391a185f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f6043c059e465412c7d1b34bc39a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> (1.0, 0.4)</td></tr>
 <tr class="separator:af8f6043c059e465412c7d1b34bc39a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2105bee21456d7572113b1e5b69ce5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt; <a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a> = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>, &amp;<a class="el" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>}</td></tr>
+<tr class="memitem:aa2105bee21456d7572113b1e5b69ce5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt; <a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a> = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>, &amp;<a class="el" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>}</td></tr>
 <tr class="separator:aa2105bee21456d7572113b1e5b69ce5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a44b11fbb973dc0855b34fc2b17d93e4e" name="a44b11fbb973dc0855b34fc2b17d93e4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44b11fbb973dc0855b34fc2b17d93e4e">&#9670;&#160;</a></span>CircularBufferType</h2>
+<a id="a08862e40d3e8058f87294bbbd8945807" name="a08862e40d3e8058f87294bbbd8945807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08862e40d3e8058f87294bbbd8945807">&#9670;&#160;</a></span>CircularBufferType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> =  Circular_Buffer&lt;uint8_t, (uint32_t)16, sizeof(CAN_message_t)&gt;</td>
+          <td class="memname">using <a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> =  Circular_Buffer&lt;uint8_t, (uint32_t)32, sizeof(CAN_message_t)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -213,7 +213,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> =  <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt;<a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a>&gt;</td>
+          <td class="memname">using <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> =  <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt;<a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -331,7 +331,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  205</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>);</div>
 <div class="line"><span class="lineno">  206</span>    <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5">CAN3_txBuffer</a>, &amp;<a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>);</div>
 <div class="line"><span class="lineno">  207</span>}</div>
-<div class="ttc" id="aHytechCANInterface_8h_html_a0563e26e6ba2018e944623e568c0af93"><div class="ttname"><a href="HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93">CAN2_txBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN2_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00014">test_can_interface.cpp:14</a></div></div>
+<div class="ttc" id="aHytechCANInterface_8h_html_a0563e26e6ba2018e944623e568c0af93"><div class="ttname"><a href="HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93">CAN2_txBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 32, sizeof(CAN_message_t)&gt; CAN2_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00014">test_can_interface.cpp:14</a></div></div>
 <div class="ttc" id="aHytechCANInterface_8h_html_a29aa040358a501c30e482164867b44a7"><div class="ttname"><a href="HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN3_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00005">HytechCANInterface.cpp:5</a></div></div>
 <div class="ttc" id="aHytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00072">HytechCANInterface.h:72</a></div></div>
 <div class="ttc" id="aHytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00158">HytechCANInterface.h:158</a></div></div>
@@ -719,7 +719,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt;<a class="el" href="src_2main_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a>&gt; CAN_receive_interfaces = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>, &amp;<a class="el" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>}</td>
+          <td class="memname"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt;<a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a>&gt; CAN_receive_interfaces = {&amp;inv.fl, &amp;inv.fr, &amp;inv.rl, &amp;inv.rr, &amp;dashboard, &amp;<a class="el" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>, &amp;<a class="el" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>}</td>
         </tr>
       </table>
 </div><div class="memdoc">
