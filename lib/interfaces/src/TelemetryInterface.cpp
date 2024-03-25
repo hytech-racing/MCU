@@ -220,7 +220,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                                    adc1.conversions[channels_.analog_steering_channel],
                                    adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel],
-                                   adc1.conversions[channels_.glv_sense_channel]);
+                                   get_glv_voltage(adc1));
     // Load cells
     update_suspension_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
                               adc3.conversions[channels_.loadcell_fr_channel],

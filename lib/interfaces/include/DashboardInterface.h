@@ -6,6 +6,7 @@
 #include "hytech.h"
 #include "MCUInterface.h"
 #include "MCU_status.h"
+#include "InverterInterface.h"
 
 /*
     Enum for the car's torque limits
@@ -138,7 +139,9 @@ public:
                 int car_state, 
                 bool buzzer, 
                 bool drivetrain_error, 
-                TorqueLimit_e torque);
+                TorqueLimit_e torque,
+                float min_cell_voltage,
+                AnalogConversion_s glv_voltage);
 
     /*!
         getter for the dashboard's current dial position (drive profile)

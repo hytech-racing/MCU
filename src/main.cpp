@@ -138,10 +138,10 @@ void setup()
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_MIN_THRESH);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_MIN_THRESH);
 
-    a3.setChannelScale(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_SCALE/*Todo*/);
+    a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_SCALE/*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_SCALE/*Todo*/);
 
-    a3.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_OFFSET/*Todo*/);
+    a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_OFFSET/*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_OFFSET/*Todo*/);
 
     Serial.begin(115200);
@@ -245,7 +245,9 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         dashboard.tick10(&main_ecu, int(fsm.get_state()), 
                         buzzer.buzzer_is_on(), 
                         drivetrain.drivetrain_error_occured(), 
-                        torque_controller_mux.getTorqueLimit());
+                        torque_controller_mux.getTorqueLimit(),
+                        ams_interface.get_filtered_min_cell_voltage(),
+                        telem_interface.get_glv_voltage(a1.get()));
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),

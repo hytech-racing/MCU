@@ -71,7 +71,9 @@ void DashboardInterface::tick10(MCUInterface* mcu,
                                 int car_state, 
                                 bool buzzer, 
                                 bool drivetrain_error, 
-                                TorqueLimit_e torque)
+                                TorqueLimit_e torque,
+                                float min_cell_voltage,
+                                AnalogConversion_s glv_voltage)
 {
     
     soundBuzzer(buzzer);
@@ -97,6 +99,10 @@ void DashboardInterface::tick10(MCUInterface* mcu,
         setLED(DashLED_e::MODE_LED, LEDColors_e::RED);
         break;
     }
+
+    uint16_t scaled_cell_voltage = (uint16_t)map((uint32_t)(min_cell_voltage*1000), 3300, 4200, 0, 255);// scale voltage
+    _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)] = std::max(0, std::min((int)scaled_cell_voltage, 255));// clamp voltage
+    // _data.LED[DashLED_e::GLV_LED] = (uint8_t)map(glv_voltage.raw)
 
     write();
 }

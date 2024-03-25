@@ -46,6 +46,12 @@ public:
         msg_queue_(msg_output_queue),
         channels_(channels) {};
 
+    /* GETTERS for basic conversions that don't have a home*/
+
+    AnalogConversion_s get_glv_voltage(const AnalogConversionPacket_s<8> &adc1) {
+        return adc1.conversions[channels_.glv_sense_channel];
+    }
+
     /* Update CAN messages (main loop) */
     // Interfaces
     void update_pedal_readings_CAN_msg(
