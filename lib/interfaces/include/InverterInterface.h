@@ -27,10 +27,9 @@ public:
     InverterInterface(message_queue *msg_output_queue, uint32_t can_id)
     {
         // TODO fix me with correct value from config of inverter
-        id110_val_= 1.0;
+        id110_val_ = 1.0;
         msg_queue_ = msg_output_queue;
         can_id_ = can_id;
-        
     }
 
     // getter for MC id
@@ -73,10 +72,10 @@ public:
 
     /* Returns the value stored in error_, which is
        read from the MC in receive_status_msg() */
-    bool get_warning() {
+    bool get_warning()
+    {
         return warning_;
     }
-
 
     /* Returns the value stored in quit_dc_on_, which is
        read from the MC in receive_status_msg() */
@@ -108,7 +107,8 @@ public:
 
     /* Returns the value stored in derating_on_, which is
        read from the MC in receive_status_msg() */
-    bool get_derating_on() {
+    bool get_derating_on()
+    {
         return derating_on_;
     }
 
@@ -119,10 +119,11 @@ public:
     }
 
     int16_t get_speed() { return speed_; }
-    float get_torque_current() {return torque_current_;}
-    float get_mag_current() {return magnetizing_current_;}
-    float get_actual_torque() {return actual_torque_nm_; }
+    float get_torque_current() { return torque_current_; }
+    float get_mag_current() { return magnetizing_current_; }
+    float get_actual_torque() { return actual_torque_nm_; }
     uint16_t get_error_status();
+    MC_temps get_temps_msg() { return mc_temps_; }
 
 private:
     float id110_val_;                            // for scaling to proper iq and id vals
@@ -132,7 +133,7 @@ private:
     void write_cmd_msg_to_queue_(MC_setpoints_command msg);
     int16_t speed_;
     uint16_t dc_bus_voltage_;
-    
+
     /* Booleans to store data from the MC. Updated in receive_status_msg() */
     bool system_ready_;
     bool error_;
@@ -142,7 +143,7 @@ private:
     bool quit_inverter_on_;
     bool inverter_on_;
     bool derating_on_;
-
+    MC_temps mc_temps_;
     message_queue *msg_queue_;
     uint32_t can_id_;
     Metro timer_can_ = Metro(20);
