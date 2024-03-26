@@ -9,6 +9,8 @@
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
 
+#include "PID_TV.h"
+
 const float AMK_MAX_RPM = 20000;
 // 10MPH LIMIT for lot testing lmao
 // const float AMK_MAX_RPM = (13.4 * METERS_PER_SECOND_TO_RPM); // 30mph
@@ -34,7 +36,8 @@ enum TorqueController_e
     TC_NO_CONTROLLER = 0,
     TC_SAFE_MODE = 1,
     TC_LOAD_CELL_VECTORING = 2,
-    TC_NUM_CONTROLLERS = 3,
+    TC_PID_VECTORING = 3,
+    TC_NUM_CONTROLLERS = 4,
 };
 
 /// @brief If a command fed through this function exceeds the specified power limit, all torques will be scaled down equally
@@ -61,6 +64,7 @@ template <TorqueController_e TorqueControllerType>
 class TorqueController
 {
 protected:
+
     void TCPowerLimitScaleDown(
         DrivetrainCommand_s &command,
         const DrivetrainDynamicReport_s &drivetrainData,
@@ -181,4 +185,23 @@ public:
         const AnalogConversion_s &rrLoadCellData);
 };
 
+class TorqueControllerPIDTV: public TorqueController<TC_PID_VECTORING>
+{
+public: 
+    void tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate);
+    TorqueControllerPIDTV(TorqueControllerOutput_s &writeout): writeout_(writeout)
+    {
+        tv_pid_.initialize();
+        tv_pid_.setExternalInputs(&pid_input_);
+        pid_input_.PID_P = 3.0;
+        pid_input_.PID_I = 1.0;
+        pid_input_.PID_D = 0.0;
+        pid_input_.PID_N = 100;
+    }
+private:
+    TorqueControllerOutput_s &writeout_;
+    
+    PID_TV::ExtU_PID_TV_T pid_input_;
+    PID_TV tv_pid_;
+};
 #endif /* __TORQUECONTROLLERS_H__ */
