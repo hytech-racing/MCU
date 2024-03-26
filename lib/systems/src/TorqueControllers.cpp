@@ -2,8 +2,9 @@
 #include "Utility.h"
 #include <algorithm>
 #include "PhysicalParameters.h"
-
+#include <cmath>
 // TorqueControllerSimple
+
 
 void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
 {
@@ -13,6 +14,7 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
     {
         // Both pedals are not pressed and no implausibility has been detected
         // accelRequest goes between 1.0 and -1.0
+        
         float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
         float torqueRequest;
 
@@ -37,9 +39,34 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
         }
         else
         {
+            
             // Negative torque request
-            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+            DrivetrainDynamicReport_s data;
+            // 5 mph = 2.2352 m/s  10mph = 4.4704 m/s
+            float rpmUpper = METERS_PER_SECOND_TO_RPM * 2.2352; // upper threshold
+            float rpmLower = METERS_PER_SECOND_TO_RPM * 4.4704; // lower threshold
+            const float mphConv = 2.23693629; // for converting m/s to mph
+            float scale;
+            // apply linear scale factor once speed is below 10 mph.
+            // y = 0.2x - 1 (5 <= x <= 10), y = 0 otherwise (y = scale and x = motor speed in mph)
+            if (data.measuredSpeeds[FL] <= rpmUpper) {
+                scale = 0.2 * (data.measuredSpeeds[FL] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+                frontRegenTorqueScale_ = data.measuredSpeeds[FL] < rpmLower ? 0 : scale;
+            }
+            if (data.measuredSpeeds[FR] <= rpmUpper) {
+                scale = 0.2 * (data.measuredSpeeds[FR] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+                frontRegenTorqueScale_ = data.measuredSpeeds[FR] < rpmLower ? 0 : scale;
+            }
+            if (data.measuredSpeeds[RL] <= rpmUpper) {
+                scale = 0.2 * (data.measuredSpeeds[RL] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+                rearRegenTorqueScale_ = data.measuredSpeeds[RL] < rpmLower ? 0 : scale;
+            }
+            if (data.measuredSpeeds[RR] <= rpmUpper) {
+                scale = 0.2 * (data.measuredSpeeds[RR] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+                rearRegenTorqueScale_ = data.measuredSpeeds[RR] < rpmLower ? 0 : scale;
+            }
 
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
             writeout_.command.speeds_rpm[FL] = 0.0;
             writeout_.command.speeds_rpm[FR] = 0.0;
             writeout_.command.speeds_rpm[RL] = 0.0;
@@ -57,7 +84,6 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
 }
 
 // TorqueControllerLoadCellVectoring
-
 void TorqueControllerLoadCellVectoring::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
