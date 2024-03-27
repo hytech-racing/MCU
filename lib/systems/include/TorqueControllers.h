@@ -85,8 +85,8 @@ protected:
      */
     std::array<float, 4> RegenThresholdAdjuster(const DrivetrainDynamicReport_s &data) {
         
-        float rpmUpper = METERS_PER_SECOND_TO_RPM * 2.2352; // upper threshold
-        float rpmLower = METERS_PER_SECOND_TO_RPM * 4.4704; // lower threshold
+        float rpmUpper = METERS_PER_SECOND_TO_RPM * 4.4704; // upper threshold 10mph
+        float rpmLower = METERS_PER_SECOND_TO_RPM * 2.2352; // lower threshold 5mph
         const float mphConv = 2.23693629; // for converting m/s to mph
         float scale;
         std::array<float, 4> result;
