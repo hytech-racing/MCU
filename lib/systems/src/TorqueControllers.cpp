@@ -40,7 +40,10 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
         else
         {
             // Negative torque request
-            RegenThresholdAdjuster(dynamicData); // adjusts regen torque scale for speeds below 10mph
+            std::array<float, 4> regenScales = RegenThresholdAdjuster(dynamicData); // adjusts regen torque scale for speeds below 10mph
+            frontRegenTorqueScale_ = 0.5 * (regenScales[0] + regenScales[1]); // takes average of both wheels
+            rearRegenTorqueScale_ = 0.5 * (regenScales[2] + regenScales[3]);
+
             torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
             writeout_.command.speeds_rpm[FL] = 0.0;
             writeout_.command.speeds_rpm[FR] = 0.0;
@@ -134,7 +137,10 @@ void TorqueControllerLoadCellVectoring::tick(
             {
                 // Negative torque request
                 // No load cell vectoring on regen
-                RegenThresholdAdjuster(dynamicData); // adjusts regen torque scale for speeds below 10mph
+                std::array<float, 4> regenScales = RegenThresholdAdjuster(dynamicData); // adjusts regen torque scale for speeds below 10mph
+                frontRegenTorqueScale_ = 0.5 * (regenScales[0] + regenScales[1]); // takes average of both wheels
+                rearRegenTorqueScale_ = 0.5 * (regenScales[2] + regenScales[3]);
+
                 torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
 
                 writeout_.command.speeds_rpm[FL] = 0.0;
@@ -142,10 +148,10 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torqueRequest;
-                writeout_.command.torqueSetpoints[FR] = torqueRequest;
-                writeout_.command.torqueSetpoints[RL] = torqueRequest;
-                writeout_.command.torqueSetpoints[RR] = torqueRequest;
+                writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
             }
 
             // Apply the torque limit
