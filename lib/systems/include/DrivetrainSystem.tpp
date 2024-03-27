@@ -100,16 +100,6 @@ void DrivetrainSystem<InverterType>::check_reset_condition()
 }
 
 template <typename InverterType>
-int16_t DrivetrainSystem<InverterType>::get_max_speed()
-{
-    int16_t max_speed = 0;
-    for (auto inv_pointer : inverters_)
-    {
-        max_speed = max(max_speed, abs(inv_pointer->get_speed()));
-    }
-}
-
-template <typename InverterType>
 void DrivetrainSystem<InverterType>::reset_drivetrain()
 {
     
@@ -241,12 +231,10 @@ DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_current_data()
     // TODO idk
     data.measuredInverterFLPackVoltage = inverters_[0]->dc_bus_voltage();
     int inverter_ind = 0;
-    uint16_t max_speed = 0;
     for (auto inv_pointer : inverters_)
     {
         auto iq = inv_pointer->get_torque_current(); // iq in A
         auto id = inv_pointer->get_mag_current();    // id in A
-        max_speed = max(max_speed, abs(inv_pointer->get_speed()));
         data.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
         data.measuredTorqueCurrents[inverter_ind] = iq;
         data.measuredMagnetizingCurrents[inverter_ind] = id;
@@ -255,6 +243,5 @@ DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_current_data()
         // data.measuredTorques[inverter_ind] = inv_pointer->get_actual_torque();
         inverter_ind++;
     }
-    data.max_speed = max_speed;
     return data;
 }
