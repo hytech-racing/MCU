@@ -163,6 +163,7 @@ void TorqueControllerSimpleLaunch::tick(
 {
 
     int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE * -1;
+
     float max_speed = 0;
     for(int i = 0; i < sizeof(wheel_rpms); i++){
         max_speed = std::max(max_speed, abs(wheel_rpms[i]));
@@ -213,7 +214,7 @@ void TorqueControllerSimpleLaunch::tick(
             time_of_launch = tick.millis;
 
             //check speed is 0 and brake not pressed
-            if (pedalsData.accelPercent >= launch_ready_accel_threshold
+            if (pedalsData.brakePercent >= launch_ready_brake_threshold
                 || max_speed >= launch_ready_speed_threshold)
             {
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
