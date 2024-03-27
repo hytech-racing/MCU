@@ -21,7 +21,7 @@ private:
         {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
         {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_MODE},
         {DialMode_e::MODE_2, TorqueController_e::TC_LOAD_CELL_VECTORING},
-        {DialMode_e::MODE_3, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
         {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
@@ -34,6 +34,7 @@ private:
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
+    TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
     DrivetrainCommand_s drivetrainCommand_;
     TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
@@ -44,7 +45,8 @@ public:
     TorqueControllerMux()
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
+    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}
 
 
     /// @brief torque controller mux constructor that leaves all other TCs with defaults accept for simple TC
@@ -53,7 +55,8 @@ public:
     TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
+    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}
 // Functions
     void tick(
         const SysTick_s& tick,
