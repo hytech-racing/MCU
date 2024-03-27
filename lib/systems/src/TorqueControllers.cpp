@@ -162,7 +162,7 @@ void TorqueControllerSimpleLaunch::tick(
     const float wheel_rpms[])
 {
 
-    int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE * -1;
+    int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
 
     float max_speed = 0;
     for(int i = 0; i < sizeof(wheel_rpms); i++){
@@ -226,25 +226,33 @@ void TorqueControllerSimpleLaunch::tick(
             break;
         case LaunchStates_e::LAUNCHING:
             //check accel below launch threshold and brake above
-            if(pedalsData.accelPercent <= launch_ready_accel_threshold
+            if(pedalsData.accelPercent <= launch_stop_accel_threshold
                || pedalsData.brakePercent >= launch_ready_brake_threshold)
             {
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
             }
 
-            launch_speed_target = (int16_t)((float) (tick.millis - time_of_launch) / 1000.0 * launch_rate_target_ * 60.0 / 1.2767432544 * 11.86);
+            /*
+            Stolen launch algo from HT07. This ramps up the speed target over time.
+            launch rate target is m/s^2 and is the target acceleration rate
+            secs_since_launch takes the milliseconds since launch started and converts to sec
+            This is then converted to RPM for a speed target
+            There is an initial speed target that is your iitial instant acceleration on the wheels
+            */
+            float secs_since_launch = (float)(tick.millis - time_of_launch) / 1000.0;
+            launch_speed_target = (int16_t)((float) secs_since_launch * launch_rate_target_ * METERS_PER_SECOND_TO_RPM);
             launch_speed_target += 1500;
-            launch_speed_target = std::min(20000, std::max(0, (int)launch_speed_target));
+            launch_speed_target = std::min(AMK_MAX_RPM, std::max(0, (int)launch_speed_target));
 
             writeout_.command.speeds_rpm[FL] = launch_speed_target;
             writeout_.command.speeds_rpm[FR] = launch_speed_target;
             writeout_.command.speeds_rpm[RL] = launch_speed_target;
             writeout_.command.speeds_rpm[RR] = launch_speed_target;
 
-            writeout_.command.torqueSetpoints[FL] = max_torque_target;
-            writeout_.command.torqueSetpoints[FR] = max_torque_target;
-            writeout_.command.torqueSetpoints[RL] = max_torque_target;
-            writeout_.command.torqueSetpoints[RR] = max_torque_target;
+            writeout_.command.torqueSetpoints[FL] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[FR] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[RL] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[RR] = AMK_MAX_TORQUE;
 
             break;
         default:
