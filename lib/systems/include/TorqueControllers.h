@@ -8,6 +8,7 @@
 #include "AnalogSensorsInterface.h"
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
+#include <cmath>
 
 const float AMK_MAX_RPM = 20000;
 // 10MPH LIMIT for lot testing lmao
@@ -74,6 +75,37 @@ protected:
         for (int i = 0; i < NUM_MOTORS; i++)
         {
             command.torqueSetpoints[i] = std::min(command.torqueSetpoints[i], torqueLimit);
+        }
+    }
+    DrivetrainDynamicReport_s dynamicData; // for use in different torque controllers
+    /**
+     * @brief Method adjusts regen by linearly scaling regen factor between 5mph-10mph
+     * 
+     * @param data 
+     */
+    void RegenThresholdAdjuster(const DrivetrainDynamicReport_s &data) {
+
+        float rpmUpper = METERS_PER_SECOND_TO_RPM * 2.2352; // upper threshold
+        float rpmLower = METERS_PER_SECOND_TO_RPM * 4.4704; // lower threshold
+        const float mphConv = 2.23693629; // for converting m/s to mph
+        float scale;
+
+        // apply linear scale factor once speed is below 10 mph
+        if (data.measuredSpeeds[FL] <= rpmUpper) {
+            scale = 0.2 * (data.measuredSpeeds[FL] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+            frontRegenTorqueScale_ = data.measuredSpeeds[FL] < rpmLower ? 0 : scale;
+        }
+        if (data.measuredSpeeds[FR] <= rpmUpper) {
+            scale = 0.2 * (data.measuredSpeeds[FR] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+            frontRegenTorqueScale_ = data.measuredSpeeds[FR] < rpmLower ? 0 : scale;
+        }
+        if (data.measuredSpeeds[RL] <= rpmUpper) {
+            scale = 0.2 * (data.measuredSpeeds[RL] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+            rearRegenTorqueScale_ = data.measuredSpeeds[RL] < rpmLower ? 0 : scale;
+        }
+        if (data.measuredSpeeds[RR] <= rpmUpper) {
+            scale = 0.2 * (data.measuredSpeeds[RR] * RPM_TO_METERS_PER_SECOND * mphConv) - 1;
+            rearRegenTorqueScale_ = data.measuredSpeeds[RR] < rpmLower ? 0 : scale;
         }
     }
 
