@@ -16,7 +16,8 @@ struct DrivetrainCommand_s
 struct DrivetrainDynamicReport_s
 {
     uint16_t measuredInverterFLPackVoltage;
-    float measuredSpeeds[NUM_MOTORS];
+    uint16_t max_speed;
+    int16_t measuredSpeeds[NUM_MOTORS];
     float measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
@@ -71,6 +72,8 @@ public:
 
     void enable_drivetrain_reset();
     void check_reset_condition();
+
+    int16_t get_max_speed();
 
     DrivetrainDynamicReport_s get_current_data();
 

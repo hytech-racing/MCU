@@ -17,6 +17,7 @@ void TorqueControllerMux::tick(
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
     torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);
+    torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.max_speed);
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
     {
@@ -42,9 +43,7 @@ void TorqueControllerMux::tick(
         if (muxMode_ != dialModeMap_[dashboardDialMode])
         {
             // Check if speed permits mode change
-            bool speedPreventsModeChange = false;
-            for (int i = 0; i < NUM_MOTORS; i++)
-                speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND >= MAX_SPEED_FOR_MODE_CHANGE;
+            bool speedPreventsModeChange = drivetrainData.max_speed * RPM_TO_METERS_PER_SECOND >= MAX_SPEED_FOR_MODE_CHANGE;
 
             // Check if torque delta permits mode change
             bool torqueDeltaPreventsModeChange = false;
