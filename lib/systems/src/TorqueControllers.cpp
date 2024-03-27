@@ -227,7 +227,7 @@ void TorqueControllerSimpleLaunch::tick(
         case LaunchStates_e::LAUNCHING:
             //check accel below launch threshold and brake above
             if(pedalsData.accelPercent <= launch_ready_accel_threshold
-               || pedalsData.brakePercent <= launch_stop_accel_threshold)
+               || pedalsData.brakePercent >= launch_stop_brake_threshold)
             {
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
             }
