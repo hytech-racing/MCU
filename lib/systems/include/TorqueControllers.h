@@ -193,7 +193,7 @@ public:
     {
         tv_pid_.initialize();
         tv_pid_.setExternalInputs(&pid_input_);
-        pid_input_.PID_P = 3.0;
+        pid_input_.PID_P = 2.0;
         pid_input_.PID_I = 1.0;
         pid_input_.PID_D = 0.0;
         pid_input_.PID_N = 100;

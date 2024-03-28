@@ -67,7 +67,7 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     // FSAE T.4.2.10
     bool pedal1_swapped = false;
     bool pedal2_swapped = false;
-    float margin_of_error = 0.10;
+    float margin_of_error = 0.30;
     if (params.min_sense_1 > params.max_sense_1)
     {
 
