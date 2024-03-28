@@ -14,7 +14,7 @@ var searchData=
   ['get_5fid_11',['get_id',['../classInverterInterface.html#a8b13e9519e6d739f430ca4eb79fdba01',1,'InverterInterface']]],
   ['get_5finverter_5fon_12',['get_inverter_on',['../classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b',1,'InverterInterface']]],
   ['get_5fmag_5fcurrent_13',['get_mag_current',['../classInverterInterface.html#af52ea25a52c152546083023f2c70cff0',1,'InverterInterface']]],
-  ['get_5fquit_5fdc_5fon_14',['get_quit_dc_on',['../classInverterMock.html#a189b4dfd4d653eedde02b1a9ed2ac182',1,'InverterMock::get_quit_dc_on()'],['../classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487',1,'InverterInterface::get_quit_dc_on()']]],
+  ['get_5fquit_5fdc_5fon_14',['get_quit_dc_on',['../classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487',1,'InverterInterface::get_quit_dc_on()'],['../classInverterMock.html#a189b4dfd4d653eedde02b1a9ed2ac182',1,'InverterMock::get_quit_dc_on()']]],
   ['get_5fquit_5finverter_5fon_15',['get_quit_inverter_on',['../classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb',1,'InverterInterface::get_quit_inverter_on()'],['../classInverterMock.html#a4c9dac90937f14a85f8d30252700295f',1,'InverterMock::get_quit_inverter_on()']]],
   ['get_5fsoftware_5fis_5fok_16',['get_software_is_ok',['../classSafetySystem.html#ade5ab559e1b2fbb93f5319136d75be38',1,'SafetySystem']]],
   ['get_5fspeed_17',['get_speed',['../classInverterInterface.html#a4f22168794371e6609332877857ce076',1,'InverterInterface']]],
@@ -25,10 +25,12 @@ var searchData=
   ['get_5fwatchdog_5fstate_22',['get_watchdog_state',['../classWatchdogInterface.html#a6947390399a4275d51c7b34ee3c96d16',1,'WatchdogInterface']]],
   ['getdialmode_23',['getDialMode',['../classDashboardInterface.html#a111879c011f5cb5bddfc8ed09f736099',1,'DashboardInterface']]],
   ['getdrivetraincommand_24',['getDrivetrainCommand',['../classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d',1,'TorqueControllerMux']]],
-  ['getmaxtorque_25',['getMaxTorque',['../classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90',1,'TorqueControllerMux']]],
-  ['getmechbrakeactivethreshold_26',['getMechBrakeActiveThreshold',['../classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3',1,'PedalsSystem']]],
-  ['getpedalssystemdata_27',['getPedalsSystemData',['../classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed',1,'PedalsSystem']]],
-  ['getpedalssystemdatacopy_28',['getPedalsSystemDataCopy',['../classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21',1,'PedalsSystem']]],
-  ['getsteeringsystemdata_29',['getSteeringSystemData',['../classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f',1,'SteeringSystem']]],
-  ['gettorquelimit_30',['getTorqueLimit',['../classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962',1,'TorqueControllerMux']]]
+  ['getexternaloutputs_25',['getExternalOutputs',['../classPID__TV.html#a4f60caa3ff8d17316693857cee825d52',1,'PID_TV']]],
+  ['getmaxtorque_26',['getMaxTorque',['../classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90',1,'TorqueControllerMux']]],
+  ['getmechbrakeactivethreshold_27',['getMechBrakeActiveThreshold',['../classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3',1,'PedalsSystem']]],
+  ['getpedalssystemdata_28',['getPedalsSystemData',['../classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed',1,'PedalsSystem']]],
+  ['getpedalssystemdatacopy_29',['getPedalsSystemDataCopy',['../classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21',1,'PedalsSystem']]],
+  ['getrtm_30',['getRTM',['../classPID__TV.html#afb996967888eba3d831943f341a5684c',1,'PID_TV']]],
+  ['getsteeringsystemdata_31',['getSteeringSystemData',['../classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f',1,'SteeringSystem']]],
+  ['gettorquelimit_32',['getTorqueLimit',['../classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962',1,'TorqueControllerMux']]]
 ];

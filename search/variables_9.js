@@ -13,5 +13,7 @@ var searchData=
   ['loadcell_5frl_5foffset_10',['LOADCELL_RL_OFFSET',['../MCU__rev15__defs_8h.html#abcca8239ac9ed0e61260e46f537faeb1',1,'MCU_rev15_defs.h']]],
   ['loadcell_5frl_5fscale_11',['LOADCELL_RL_SCALE',['../MCU__rev15__defs_8h.html#a721546450a31033b1df87c56e3ac8944',1,'MCU_rev15_defs.h']]],
   ['loadcell_5frr_5foffset_12',['LOADCELL_RR_OFFSET',['../MCU__rev15__defs_8h.html#ae6f3d3048254385730468b125d2377bf',1,'MCU_rev15_defs.h']]],
-  ['loadcell_5frr_5fscale_13',['LOADCELL_RR_SCALE',['../MCU__rev15__defs_8h.html#aea7cdd2695fcb2f466dca1b9228251a2',1,'MCU_rev15_defs.h']]]
+  ['loadcell_5frr_5fscale_13',['LOADCELL_RR_SCALE',['../MCU__rev15__defs_8h.html#aea7cdd2695fcb2f466dca1b9228251a2',1,'MCU_rev15_defs.h']]],
+  ['loggingname_14',['loggingName',['../structrtwCAPI__StateflowSignalLoggingInfo__tag.html#aa24f915a9fa57cad29d09bd9c422c49f',1,'rtwCAPI_StateflowSignalLoggingInfo_tag']]],
+  ['loginfo_15',['logInfo',['../structrtwCAPI__ModelMapLoggingStaticInfo__tag.html#abc645f1fba33dc876e304b163ffaec09',1,'rtwCAPI_ModelMapLoggingStaticInfo_tag']]]
 ];

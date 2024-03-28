@@ -190,7 +190,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  220</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  221</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  222</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  223</span>        false</div>
+<div class="line"><span class="lineno">  223</span>        <a class="code hl_define" href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div>
 <div class="line"><span class="lineno">  224</span>    );</div>
 <div class="line"><span class="lineno">  225</span> </div>
 <div class="line"><span class="lineno">  226</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
@@ -212,7 +212,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  242</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  243</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  244</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  245</span>        false</div>
+<div class="line"><span class="lineno">  245</span>        <a class="code hl_define" href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div>
 <div class="line"><span class="lineno">  246</span>    );</div>
 <div class="line"><span class="lineno">  247</span> </div>
 <div class="line"><span class="lineno">  248</span>    <span class="comment">// Now press the pedal. Torque should be requested</span></div>
@@ -226,7 +226,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  256</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  257</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  258</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  259</span>        false</div>
+<div class="line"><span class="lineno">  259</span>        <a class="code hl_define" href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div>
 <div class="line"><span class="lineno">  260</span>    );</div>
 <div class="line"><span class="lineno">  261</span> </div>
 <div class="line"><span class="lineno">  262</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
@@ -244,6 +244,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="aclassTorqueControllerMux_html_a71217aa07bca005b9131252473c4463d"><div class="ttname"><a href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">TorqueControllerMux::getDrivetrainCommand</a></div><div class="ttdeci">const DrivetrainCommand_s &amp; getDrivetrainCommand()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00070">TorqueControllerMux.h:70</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a90a48e36c38a01af7a9552466613ae99"><div class="ttname"><a href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">TorqueControllerMux::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const DrivetrainDynamicReport_s &amp;drivetrainData, const PedalsSystemData_s &amp;pedalsData, const SteeringSystemData_s &amp;steeringData, const AnalogConversion_s &amp;loadFLData, const AnalogConversion_s &amp;loadFRData, const AnalogConversion_s &amp;loadRLData, const AnalogConversion_s &amp;loadRRData, DialMode_e dashboardDialMode, bool dashboardTorqueModeButtonPressed)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00005">TorqueControllerMux.cpp:5</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
+<div class="ttc" id="artwtypes_8h_html_a65e9886d74aaee76545e83dd09011727"><div class="ttname"><a href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div><div class="ttdeci">#define false</div><div class="ttdef"><b>Definition:</b> <a href="rtwtypes_8h_source.html#l00026">rtwtypes.h:26</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_af8f6043c059e465412c7d1b34bc39a2c"><div class="ttname"><a href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a></div><div class="ttdeci">TorqueControllerMux torque_controller_mux(1.0, 0.4)</div></div>
 <div class="ttc" id="astructAnalogConversion__s_html"><div class="ttname"><a href="structAnalogConversion__s.html">AnalogConversion_s</a></div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00013">AnalogSensorsInterface.h:14</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html"><div class="ttname"><a href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a></div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00010">DrivetrainSystem.h:11</a></div></div>
@@ -331,7 +332,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  106</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  107</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  108</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  109</span>        false</div>
+<div class="line"><span class="lineno">  109</span>        <a class="code hl_define" href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div>
 <div class="line"><span class="lineno">  110</span>    );</div>
 <div class="line"><span class="lineno">  111</span> </div>
 <div class="line"><span class="lineno">  112</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
@@ -353,7 +354,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  128</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  129</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  130</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  131</span>        false</div>
+<div class="line"><span class="lineno">  131</span>        <a class="code hl_define" href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div>
 <div class="line"><span class="lineno">  132</span>    );</div>
 <div class="line"><span class="lineno">  133</span> </div>
 <div class="line"><span class="lineno">  134</span>    <span class="comment">// Now press the pedal again. Torque should be requested</span></div>
@@ -367,7 +368,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  142</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  143</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  144</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  145</span>        false</div>
+<div class="line"><span class="lineno">  145</span>        <a class="code hl_define" href="rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></div>
 <div class="line"><span class="lineno">  146</span>    );</div>
 <div class="line"><span class="lineno">  147</span> </div>
 <div class="line"><span class="lineno">  148</span>    resulting_torque_command = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>

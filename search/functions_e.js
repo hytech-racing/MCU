@@ -13,5 +13,20 @@ var searchData=
   ['retrieve_5ftemp_5fcan_10',['retrieve_temp_CAN',['../classAMSInterface.html#a51d4ea17c8cd32f66a7b76e1bf473e8b',1,'AMSInterface']]],
   ['retrieve_5fvoltage_5fcan_11',['retrieve_voltage_CAN',['../classAMSInterface.html#aa69f3ab240a9bbcae06e0ffedce52172',1,'AMSInterface']]],
   ['rightshifterbuttonpressed_12',['rightShifterButtonPressed',['../classDashboardInterface.html#a1a3979222495f3d30fb7bba0ae505b83',1,'DashboardInterface']]],
-  ['rununitytests_13',['runUnityTests',['../run__embedded__tests_8cpp.html#ae1cd91cff7ca45ac6a8069a2540e4ed6',1,'run_embedded_tests.cpp']]]
+  ['rtwcapi_5fcountsysran_13',['rtwCAPI_CountSysRan',['../rtw__modelmap_8h.html#a95b0ac45fb7114b47ce71db80f3c5daa',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fencodepath_14',['rtwCAPI_EncodePath',['../rtw__modelmap_8h.html#a327b9d3e8a3cf632419b296ccc0a1646',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5ffillsysran_15',['rtwCAPI_FillSysRan',['../rtw__modelmap_8h.html#aa18016bf177625f6f0c7053152fcbd4d',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5ffreefullpaths_16',['rtwCAPI_FreeFullPaths',['../rtw__modelmap_8h.html#a51ae9aecc59c49fdb8f5e89592118aa5',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetfullstateblockpath_17',['rtwCAPI_GetFullStateBlockPath',['../rtw__modelmap_8h.html#af22aafd7e188858dc936d4099ec59c41',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetnumcontstaterecords_18',['rtwCAPI_GetNumContStateRecords',['../rtw__modelmap_8h.html#a4a8ab37bff8f3c8400189a5fbc14f52f',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetnumsiglogrecords_19',['rtwCAPI_GetNumSigLogRecords',['../rtw__modelmap_8h.html#a33cd16876e74e2540f6ab85fd863749f',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetnumsiglogrecordsforrtwlogging_20',['rtwCAPI_GetNumSigLogRecordsForRTWLogging',['../rtw__modelmap_8h.html#a2d171f1246d655a8101bcf787737a910',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetnumstaterecords_21',['rtwCAPI_GetNumStateRecords',['../rtw__modelmap_8h.html#a22c3dc57796eec32c8d53e6091961375',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetnumstaterecordsforrtwlogging_22',['rtwCAPI_GetNumStateRecordsForRTWLogging',['../rtw__modelmap_8h.html#a088ac1373275e7b7e6ac5375948c098e',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetsiglogrecordinfo_23',['rtwCAPI_GetSigLogRecordInfo',['../rtw__modelmap_8h.html#aab656ceff0121b99912e8cb2c1f7052b',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetstaterecordinfo_24',['rtwCAPI_GetStateRecordInfo',['../rtw__modelmap_8h.html#a2be49f62f3b5f2bcd120e4a1fb5e13bd',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fgetstatewidth_25',['rtwCAPI_GetStateWidth',['../rtw__modelmap_8h.html#a73cb8fa515c97f1173477b2a99969315',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fhasstates_26',['rtwCAPI_HasStates',['../rtw__modelmap_8h.html#a1d35f0770fdd4a228d040b29c34b4f58',1,'rtw_modelmap.h']]],
+  ['rtwcapi_5fupdatefullpaths_27',['rtwCAPI_UpdateFullPaths',['../rtw__modelmap_8h.html#a6981f59e0e9354cddf0c8fbc0016a1c4',1,'rtw_modelmap.h']]],
+  ['rununitytests_28',['runUnityTests',['../run__embedded__tests_8cpp.html#ae1cd91cff7ca45ac6a8069a2540e4ed6',1,'run_embedded_tests.cpp']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['steeringencoderstatus_5fe_0',['SteeringEncoderStatus_e',['../SteeringEncoderInterface_8h.html#a272b077b05c72fabd58eccf09922d974',1,'SteeringEncoderInterface.h']]],
-  ['steeringsystemstatus_5fe_1',['SteeringSystemStatus_e',['../SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3',1,'SteeringSystem.h']]]
+  ['ledcolors_5fe_0',['LEDColors_e',['../interfaces_2include_2DashboardInterface_8h.html#a825fe008c126d33fd7d461eab39736d3',1,'LEDColors_e():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#a825fe008c126d33fd7d461eab39736d3',1,'LEDColors_e():&#160;DashboardInterface.h']]]
 ];
