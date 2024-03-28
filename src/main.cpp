@@ -321,6 +321,10 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // // tick drivetrain system
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
+
+
+    // TODO is this correct?
+    auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_current_data(),
@@ -331,5 +335,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         sab_interface.rlLoadCell.convert(),  // RL load cell reading. TODO: get data from rear load cells
         sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
-        dashboard.torqueModeButtonPressed());
+        dashboard.torqueModeButtonPressed(),
+        wheel_angle_rad
+        );
 }

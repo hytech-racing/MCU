@@ -11,7 +11,7 @@
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 #include "SABInterface.h"
-
+#include "VectornavInterface.h"
 /* 
     struct holding interfaces processed by process_ring_buffer() 
     FL = MC1
@@ -26,9 +26,11 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *front_right_inv;
     InverterInterface<circular_buffer> *rear_left_inv;
     InverterInterface<circular_buffer> *rear_right_inv;
+    VNInterface<circular_buffer> *vn_interface;
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
     SABInterface *sab_interface;
+
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
