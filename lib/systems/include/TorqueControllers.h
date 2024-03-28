@@ -16,8 +16,11 @@ const float AMK_MAX_RPM = 20000;
 // const float AMK_MAX_RPM = (2.235 * METERS_PER_SECOND_TO_RPM); // 5mph
 // const float AMK_MAX_RPM = (.89 * METERS_PER_SECOND_TO_RPM); // 1mph
 // const float
-const float AMK_MAX_TORQUE = 20.0; // TODO: update this with the true value
+const float AMK_MAX_TORQUE = 21.42; // TODO: update this with the true value
 const float MAX_REGEN_TORQUE = 10.0;
+
+const float DEFAULT_LAUNCH_RATE = 11.76;
+const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
 
 const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
     .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
@@ -34,7 +37,15 @@ enum TorqueController_e
     TC_NO_CONTROLLER = 0,
     TC_SAFE_MODE = 1,
     TC_LOAD_CELL_VECTORING = 2,
-    TC_NUM_CONTROLLERS = 3,
+    TC_SIMPLE_LAUNCH = 3,
+    TC_NUM_CONTROLLERS = 4,
+};
+
+enum class LaunchStates_e
+{
+    LAUNCH_NOT_READY,
+    LAUNCH_READY,
+    LAUNCHING
 };
 
 /// @brief If a command fed through this function exceeds the specified power limit, all torques will be scaled down equally
@@ -179,6 +190,47 @@ public:
         const AnalogConversion_s &frLoadCellData,
         const AnalogConversion_s &rlLoadCellData,
         const AnalogConversion_s &rrLoadCellData);
+};
+
+class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>
+{
+private:
+    const float launch_ready_accel_threshold = .1;
+    const float launch_ready_brake_threshold = .2;
+    const float launch_ready_speed_threshold = 5.0; // m/s
+    const float launch_go_accel_threshold = .9;
+    const float launch_stop_accel_threshold = .5;
+
+    TorqueControllerOutput_s &writeout_;
+    float launch_rate_target_;
+    int16_t init_speed_target_;
+    
+    LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
+    uint32_t time_of_launch;
+    float launch_speed_target = 0.0;
+public:
+
+    /*!
+        SIMPLE LAUNCH CONTROLLER
+        This launch controller is based off of a specified launch rate and an initial speed target
+        It will ramp up the speed target linearlly over time to accelerate
+        @param launch_rate specified launch rate in m/s^2
+        @param initial_speed_target the initial speed commanded to the wheels
+    */
+    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout, float launch_rate, int16_t initial_speed_target)
+        : writeout_(writeout),
+          launch_rate_target_(launch_rate),
+          init_speed_target_(initial_speed_target)
+    {
+        writeout_.command = TC_COMMAND_NO_TORQUE;
+        writeout_.ready = true;
+    }
+
+    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
+
+    void tick(const SysTick_s & tick, 
+              const PedalsSystemData_s &pedalsData,
+              const float wheel_rpms[]);
 };
 
 #endif /* __TORQUECONTROLLERS_H__ */
