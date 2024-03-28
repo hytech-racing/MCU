@@ -225,6 +225,7 @@ void TorqueControllerSimpleLaunch::tick(
             //check accel above launch threshold and launch
             break;
         case LaunchStates_e::LAUNCHING:
+            { // use brackets to ignore 'cross initialization' of secs_since_launch
             //check accel below launch threshold and brake above
             if(pedalsData.accelPercent <= launch_stop_accel_threshold
                || pedalsData.brakePercent >= launch_ready_brake_threshold)
@@ -241,8 +242,8 @@ void TorqueControllerSimpleLaunch::tick(
             */
             float secs_since_launch = (float)(tick.millis - time_of_launch) / 1000.0;
             launch_speed_target = (int16_t)((float) secs_since_launch * launch_rate_target_ * METERS_PER_SECOND_TO_RPM);
-            launch_speed_target += 1500;
-            launch_speed_target = std::min(AMK_MAX_RPM, std::max(0, (int)launch_speed_target));
+            launch_speed_target += init_speed_target_;
+            launch_speed_target = std::min((int)AMK_MAX_RPM, std::max(0, (int)launch_speed_target));
 
             writeout_.command.speeds_rpm[FL] = launch_speed_target;
             writeout_.command.speeds_rpm[FR] = launch_speed_target;
@@ -254,6 +255,7 @@ void TorqueControllerSimpleLaunch::tick(
             writeout_.command.torqueSetpoints[RL] = AMK_MAX_TORQUE;
             writeout_.command.torqueSetpoints[RR] = AMK_MAX_TORQUE;
 
+            }
             break;
         default:
             break;
