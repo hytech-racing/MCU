@@ -73,7 +73,8 @@ void DashboardInterface::tick10(MCUInterface* mcu,
                                 bool drivetrain_error, 
                                 TorqueLimit_e torque,
                                 float min_cell_voltage,
-                                AnalogConversion_s glv_voltage)
+                                AnalogConversion_s glv_voltage,
+                                int launch_state)
 {
     
     soundBuzzer(buzzer);
@@ -84,6 +85,21 @@ void DashboardInterface::tick10(MCUInterface* mcu,
     setLED(DashLED_e::START_LED, car_state == int(MCU_STATE::READY_TO_DRIVE) ? LEDColors_e::ON : LEDColors_e::RED);
     setLED(DashLED_e::MC_ERROR_LED, !drivetrain_error ? LEDColors_e::ON : LEDColors_e::RED);
     setLED(DashLED_e::COCKPIT_BRB_LED, mcu->brb_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
+
+    switch(launch_state){
+    case 1:
+        setLED(DashLED_e::LAUNCH_CONTROL_LED, LEDColors_e::RED);
+        break;
+    case 2:
+        setLED(DashLED_e::LAUNCH_CONTROL_LED, LEDColors_e::YELLOW);
+        break;
+    case 3:
+        setLED(DashLED_e::LAUNCH_CONTROL_LED, LEDColors_e::ON);
+        break;
+    default:
+        setLED(DashLED_e::LAUNCH_CONTROL_LED, LEDColors_e::OFF);
+        break;
+    }
 
     switch(torque){
     case TorqueLimit_e::TCMUX_LOW_TORQUE:
