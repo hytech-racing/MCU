@@ -7,7 +7,9 @@ template<typename message_queue>
 void VNInterface<message_queue>::retrieve_velocity_CAN(CAN_message_t &recvd_msg) {
     VN_VEL_t vel_data;
     Unpack_VN_VEL_hytech(&vel_data, recvd_msg.buf, recvd_msg.len);
-    vn_data.velocity = vel_data.velocity; // Correct access to vn_data within the class scope
+    vn_data.velocity_x = vel_data.vn_body_vel_x_ro; // Correct access to vn_data within the class scope
+    vn_data.velocity_y = vel_data.vn_body_vel_y_ro;
+    vn_data.velocity_z = vel_data.vn_body_vel_z_ro;
 }
 
 template<typename message_queue>
@@ -56,4 +58,15 @@ void VNInterface<message_queue>::retrieve_vn_status_CAN(CAN_message_t &recvd_msg
     VN_STATUS_t status_data;
     Unpack_VN_STATUS_hytech(&status_data, recvd_msg.buf, recvd_msg.len);
     vn_data.vn_status = status_data.vn_gps_status;
+}
+
+/**
+ * @brief 
+ * getter method for returning vn_data structure
+ * @tparam message_queue 
+ * @return vector_nav 
+ */
+template<typename message_queue>
+vector_nav VNInterface<message_queue>::get_vn_struct() {
+    return vn_data; 
 }

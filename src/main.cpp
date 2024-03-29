@@ -337,7 +337,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
-        vx_b,
+        vn_interface.get_vn_struct(),
         wheel_angle_rad
         );
 }

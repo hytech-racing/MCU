@@ -2,10 +2,11 @@
 #define VECTORNAVINTERFACE
 #include "FlexCAN_T4.h"
 #include "hytech.h"
-#include "MessageQueueDefine.h"
 
 struct vector_nav {
-        float velocity; 
+        float velocity_x;
+        float velocity_y; 
+        float velocity_z; 
         float linear_accel_x;
         float linear_accel_y;
         float linear_accel_z;
@@ -43,11 +44,10 @@ public:
     void retrieve_lat_lon_CAN(CAN_message_t &recvd_msg);
     void retrieve_gps_time_CAN(CAN_message_t &recvd_msg);
     void retrieve_vn_status_CAN(CAN_message_t &recvd_msg);
-    void retrieve_lat_lon_CAN(CAN_message_t &recvd_msg);
-
     // getters
-    vector_nav get_vn_struct() { return vn_data };
-    uint32_t get_id() { return can_id_; };
+    vector_nav get_vn_struct();
+    
+    uint32_t get_id() { return can_id_;};
 };
 #include "VectornavInterface.tpp"
 #endif /* __WATCHDOG_INTERFACE_H__ */
