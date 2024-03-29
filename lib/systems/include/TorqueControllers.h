@@ -43,6 +43,7 @@ enum TorqueController_e
 
 enum class LaunchStates_e
 {
+    NO_LAUNCH_MODE,
     LAUNCH_NOT_READY,
     LAUNCH_READY,
     LAUNCHING
@@ -68,8 +69,19 @@ static DrivetrainCommand_s TCTorqueLimit(
     DrivetrainCommand_s command,
     float torqueLimits[NUM_MOTORS]);
 
+/*
+    Base torque controller to allow access to internal torque controller members
+*/
+class TorqueControllerBase
+{
+    public:
+    /* returns the launch state for the purpose of lighting the dahsboard LED. To be overridden in launch torque modes */
+    virtual LaunchStates_e get_launch_state() { return LaunchStates_e::NO_LAUNCH_MODE; }
+
+};
+
 template <TorqueController_e TorqueControllerType>
-class TorqueController
+class TorqueController : public TorqueControllerBase
 {
 protected:
     void TCPowerLimitScaleDown(
@@ -197,7 +209,7 @@ class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>
 private:
     const float launch_ready_accel_threshold = .1;
     const float launch_ready_brake_threshold = .2;
-    const float launch_ready_speed_threshold = 5.0; // m/s
+    const float launch_ready_speed_threshold = 5.0 * METERS_PER_SECOND_TO_RPM; // rpm
     const float launch_go_accel_threshold = .9;
     const float launch_stop_accel_threshold = .5;
 
@@ -227,6 +239,8 @@ public:
     }
 
     TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
+
+    LaunchStates_e get_launch_state() override { return launch_state; }
 
     void tick(const SysTick_s & tick, 
               const PedalsSystemData_s &pedalsData,
