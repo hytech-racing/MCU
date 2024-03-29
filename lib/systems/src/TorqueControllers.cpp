@@ -263,3 +263,19 @@ void TorqueControllerSimpleLaunch::tick(
 
     }
 }
+
+void TorqueControllerPIDTV::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate)
+{
+
+    pid_input_.Vx_B = vx_b;
+    pid_input_.WheelDeltarad = wheel_angle_rad;
+    pid_input_.YawRaterads = yaw_rate;
+    pid_input_.FR_in = 1.0;
+    pid_input_.RR_in = 1.0;
+    pid_input_.FL_in = 1.0;
+    pid_input_.RL_in = 1.0;
+
+    tv_pid_.step();
+    const PID_TV::ExtY_PID_TV_T& out = tv_pid_.getExternalOutputs();
+    
+}

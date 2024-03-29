@@ -67,10 +67,11 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     // FSAE T.4.2.10
     bool pedal1_swapped = false;
     bool pedal2_swapped = false;
-    float margin_of_error = 0.10;
+    const float margin_of_error = 0.10;
+    int pedal1_margin = abs(params.max_sense_1 - params.min_sense_1) * margin_of_error;
+    int pedal2_margin = abs(params.max_sense_2 - params.min_sense_2) * margin_of_error;
     if (params.min_sense_1 > params.max_sense_1)
     {
-
         pedal1_swapped = true;
         // swap the logic: need to check and see if it is greater than min and less than max
     }
@@ -80,22 +81,21 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
         // swap the logic
     }
 
-    bool pedal_1_less_than_min = pedal1_swapped ? (pedalData1.raw > ((1.0 + margin_of_error) * params.min_sense_1))
-                                                : (pedalData1.raw < ((1.0 - margin_of_error) * params.min_sense_1));
+    bool pedal_1_less_than_min = pedal1_swapped ? (pedalData1.raw > (params.min_sense_1 + pedal1_margin))
+                                                : (pedalData1.raw < (params.min_sense_1 - pedal1_margin));
 
-    bool pedal_2_less_than_min = pedal2_swapped ? (pedalData2.raw > ((1.0 + margin_of_error) * params.min_sense_2))
-                                                : (pedalData2.raw < ((1.0 - margin_of_error) * params.min_sense_2));
+    bool pedal_2_less_than_min = pedal2_swapped ? (pedalData2.raw > (params.min_sense_2 + pedal2_margin))
+                                                : (pedalData2.raw < (params.min_sense_2 - pedal2_margin));
 
-    bool pedal_1_greater_than_max = pedal1_swapped ? (pedalData1.raw < ((1.0 - margin_of_error) * params.max_sense_1))
-                                                   : (pedalData1.raw > ((1.0 + margin_of_error) * params.max_sense_1));
+    bool pedal_1_greater_than_max = pedal1_swapped ? (pedalData1.raw < (params.max_sense_1 - pedal1_margin))
+                                                   : (pedalData1.raw > (params.max_sense_1 + pedal1_margin));
 
-    bool pedal_2_greater_than_max = pedal2_swapped ? (pedalData2.raw < ((1.0 - margin_of_error) * params.max_sense_2))
-                                                   : (pedalData2.raw > ((1.0 + margin_of_error) * params.max_sense_2));
+    bool pedal_2_greater_than_max = pedal2_swapped ? (pedalData2.raw < (params.max_sense_2 - pedal2_margin))
+                                                   : (pedalData2.raw > (params.max_sense_2 + pedal2_margin));
     
     
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
 
-    // bool pedalsClamped = (pedalData1.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED || pedalData2.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED);
     if (
         pedal_1_less_than_min ||
         pedal_2_less_than_min ||

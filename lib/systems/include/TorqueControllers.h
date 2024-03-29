@@ -9,6 +9,8 @@
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
 
+#include "PID_TV.h"
+
 const float AMK_MAX_RPM = 20000;
 // 10MPH LIMIT for lot testing lmao
 // const float AMK_MAX_RPM = (13.4 * METERS_PER_SECOND_TO_RPM); // 30mph
@@ -84,6 +86,7 @@ template <TorqueController_e TorqueControllerType>
 class TorqueController : public TorqueControllerBase
 {
 protected:
+
     void TCPowerLimitScaleDown(
         DrivetrainCommand_s &command,
         const DrivetrainDynamicReport_s &drivetrainData,

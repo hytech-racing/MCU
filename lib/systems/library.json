@@ -5,7 +5,8 @@
     "dependencies": {
       "interfaces-lib": "*",
       "shared-interfaces-lib": "*",
-      "shared-systems-lib": "*"
+      "shared-systems-lib": "*",
+      "PID_TV-lib": "*"
     },
     "frameworks": "*",
     "platforms": "*"
