@@ -129,36 +129,58 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   19</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {0, 0.3, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
 <div class="line"><span class="lineno">   20</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel2_val = {200, 0.3, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
 <div class="line"><span class="lineno">   21</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {200, 0.01, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   22</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
-<div class="line"><span class="lineno">   23</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   24</span>    EXPECT_TRUE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   25</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   26</span>    EXPECT_TRUE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   27</span>    test_accel1_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 4000;</div>
-<div class="line"><span class="lineno">   28</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   29</span>    EXPECT_TRUE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   30</span>    test_accel1_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 300;</div>
-<div class="line"><span class="lineno">   31</span>    <span class="comment">// brake min and max on raw</span></div>
-<div class="line"><span class="lineno">   32</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 0;</div>
-<div class="line"><span class="lineno">   33</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   34</span>    EXPECT_TRUE(data.brakeImplausible);</div>
-<div class="line"><span class="lineno">   35</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 40000;</div>
+<div class="line"><span class="lineno">   22</span> </div>
+<div class="line"><span class="lineno">   23</span>    <a class="code hl_struct" href="structPedalsParams.html">PedalsParams</a> params;</div>
+<div class="line"><span class="lineno">   24</span>    params.<a class="code hl_variable" href="structPedalsParams.html#acfdfe1737ffb028ace4bbec08ccae2ce">min_sense_1</a> = 1000;</div>
+<div class="line"><span class="lineno">   25</span>    params.<a class="code hl_variable" href="structPedalsParams.html#a95cc6ed6afd9d7672089b7d925182986">max_sense_1</a> = 2000;</div>
+<div class="line"><span class="lineno">   26</span>    params.<a class="code hl_variable" href="structPedalsParams.html#ab9e5088f82a67180f26af1795205c644">min_sense_2</a> = 1000;</div>
+<div class="line"><span class="lineno">   27</span>    params.<a class="code hl_variable" href="structPedalsParams.html#a2e0e8cdf66b1731afcdc8cda116becc0">max_sense_2</a> = 2000;</div>
+<div class="line"><span class="lineno">   28</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals(params, params, 0.0f);</div>
+<div class="line"><span class="lineno">   29</span> </div>
+<div class="line"><span class="lineno">   30</span> </div>
+<div class="line"><span class="lineno">   31</span> </div>
+<div class="line"><span class="lineno">   32</span>    <span class="comment">// this should be implausible since test accel1 and accel2 have values less than the min (1000)</span></div>
+<div class="line"><span class="lineno">   33</span>    <span class="keyword">auto</span> data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   34</span>    EXPECT_TRUE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   35</span>    <span class="comment">// ensuring that both accel in either position (since they have the same config, this should fail too)</span></div>
 <div class="line"><span class="lineno">   36</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   37</span>    EXPECT_TRUE(data.brakeImplausible);</div>
-<div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>    test_accel1_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 200;</div>
-<div class="line"><span class="lineno">   40</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 200;</div>
-<div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   43</span> </div>
-<div class="line"><span class="lineno">   44</span>    EXPECT_FALSE(data.brakeImplausible);</div>
-<div class="line"><span class="lineno">   45</span>    EXPECT_FALSE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   46</span>}</div>
+<div class="line"><span class="lineno">   37</span>    EXPECT_TRUE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   38</span>    </div>
+<div class="line"><span class="lineno">   39</span> </div>
+<div class="line"><span class="lineno">   40</span>    <span class="comment">// testing accel raw greater than max</span></div>
+<div class="line"><span class="lineno">   41</span>    test_accel1_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 4000;</div>
+<div class="line"><span class="lineno">   42</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   43</span>    EXPECT_TRUE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   44</span> </div>
+<div class="line"><span class="lineno">   45</span>    <span class="comment">// brake min and max on raw. testing that if accel is implaus and brake implaus (less than min) we still guchi</span></div>
+<div class="line"><span class="lineno">   46</span>    test_accel1_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 300;</div>
+<div class="line"><span class="lineno">   47</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 0;</div>
+<div class="line"><span class="lineno">   48</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   49</span>    EXPECT_TRUE(data.brakeImplausible);</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>    <span class="comment">// testing brake greater than max </span></div>
+<div class="line"><span class="lineno">   52</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 40000;</div>
+<div class="line"><span class="lineno">   53</span>    data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   54</span>    EXPECT_TRUE(data.brakeImplausible);</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   56</span>    <span class="comment">// testing good values still good</span></div>
+<div class="line"><span class="lineno">   57</span>    test_accel1_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 1300;</div>
+<div class="line"><span class="lineno">   58</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> = 1300;</div>
+<div class="line"><span class="lineno">   59</span> </div>
+<div class="line"><span class="lineno">   60</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   61</span> </div>
+<div class="line"><span class="lineno">   62</span>    EXPECT_FALSE(data.brakeImplausible);</div>
+<div class="line"><span class="lineno">   63</span>    EXPECT_FALSE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   64</span>}</div>
 <div class="ttc" id="aAnalogSensorsInterface_8h_html_a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef"><div class="ttname"><a href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a></div><div class="ttdeci">@ ANALOG_SENSOR_GOOD</div></div>
 <div class="ttc" id="aclassPedalsSystem_html"><div class="ttname"><a href="classPedalsSystem.html">PedalsSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00033">PedalsSystem.h:34</a></div></div>
-<div class="ttc" id="aclassPedalsSystem_html_a0b9ac2da0743454dd4438941885ef496"><div class="ttname"><a href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">PedalsSystem::evaluate_pedals</a></div><div class="ttdeci">PedalsSystemData_s evaluate_pedals(const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2, unsigned long curr_time)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00014">PedalsSystem.cpp:14</a></div></div>
 <div class="ttc" id="astructAnalogConversion__s_html"><div class="ttname"><a href="structAnalogConversion__s.html">AnalogConversion_s</a></div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00013">AnalogSensorsInterface.h:14</a></div></div>
 <div class="ttc" id="astructAnalogConversion__s_html_afe17b102dcd5f3eaa00d3e9004c9e37f"><div class="ttname"><a href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">AnalogConversion_s::raw</a></div><div class="ttdeci">int raw</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00015">AnalogSensorsInterface.h:15</a></div></div>
+<div class="ttc" id="astructPedalsParams_html"><div class="ttname"><a href="structPedalsParams.html">PedalsParams</a></div><div class="ttdoc">Pedals params struct that will hold min / max that will be used for evaluateion.</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00024">PedalsSystem.h:25</a></div></div>
+<div class="ttc" id="astructPedalsParams_html_a2e0e8cdf66b1731afcdc8cda116becc0"><div class="ttname"><a href="structPedalsParams.html#a2e0e8cdf66b1731afcdc8cda116becc0">PedalsParams::max_sense_2</a></div><div class="ttdeci">int max_sense_2</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00029">PedalsSystem.h:29</a></div></div>
+<div class="ttc" id="astructPedalsParams_html_a95cc6ed6afd9d7672089b7d925182986"><div class="ttname"><a href="structPedalsParams.html#a95cc6ed6afd9d7672089b7d925182986">PedalsParams::max_sense_1</a></div><div class="ttdeci">int max_sense_1</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00028">PedalsSystem.h:28</a></div></div>
+<div class="ttc" id="astructPedalsParams_html_ab9e5088f82a67180f26af1795205c644"><div class="ttname"><a href="structPedalsParams.html#ab9e5088f82a67180f26af1795205c644">PedalsParams::min_sense_2</a></div><div class="ttdeci">int min_sense_2</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00027">PedalsSystem.h:27</a></div></div>
+<div class="ttc" id="astructPedalsParams_html_acfdfe1737ffb028ace4bbec08ccae2ce"><div class="ttname"><a href="structPedalsParams.html#acfdfe1737ffb028ace4bbec08ccae2ce">PedalsParams::min_sense_1</a></div><div class="ttdeci">int min_sense_1</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00026">PedalsSystem.h:26</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -188,31 +210,32 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pedals__system__test_8h_source.html#l00048">48</a> of file <a class="el" href="pedals__system__test_8h_source.html">pedals_system_test.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   49</span>{</div>
-<div class="line"><span class="lineno">   50</span>    <span class="comment">// accel percentage outside of range</span></div>
-<div class="line"><span class="lineno">   51</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {200, 0.0, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   52</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel2_val = {200, 0.3, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   53</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {200, 0.01, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   54</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
-<div class="line"><span class="lineno">   55</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   56</span> </div>
-<div class="line"><span class="lineno">   57</span>    EXPECT_FALSE(data.brakeImplausible);</div>
-<div class="line"><span class="lineno">   58</span>    EXPECT_TRUE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   59</span> </div>
-<div class="line"><span class="lineno">   60</span>    <span class="comment">// brake percentage outside of range</span></div>
-<div class="line"><span class="lineno">   61</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> = 0.5;</div>
-<div class="line"><span class="lineno">   62</span>    <span class="keyword">auto</span> test_b2 = test_brake_val;</div>
-<div class="line"><span class="lineno">   63</span>    test_b2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> = 0.0;</div>
-<div class="line"><span class="lineno">   64</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_b2, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   65</span>    EXPECT_TRUE(data.brakeImplausible);</div>
-<div class="line"><span class="lineno">   66</span>    EXPECT_FALSE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>    EXPECT_FALSE(data.brakeImplausible);</div>
-<div class="line"><span class="lineno">   71</span>    EXPECT_FALSE(data.accelImplausible);</div>
-<div class="line"><span class="lineno">   72</span>}</div>
+<p class="definition">Definition at line <a class="el" href="pedals__system__test_8h_source.html#l00066">66</a> of file <a class="el" href="pedals__system__test_8h_source.html">pedals_system_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>{</div>
+<div class="line"><span class="lineno">   68</span>    <span class="comment">// accel percentage outside of range</span></div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {200, 0.0, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">   70</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel2_val = {200, 0.3, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">   71</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {200, 0.01, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">   72</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>    EXPECT_FALSE(data.brakeImplausible);</div>
+<div class="line"><span class="lineno">   76</span>    EXPECT_TRUE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>    <span class="comment">// brake percentage outside of range</span></div>
+<div class="line"><span class="lineno">   79</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> = 0.5;</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keyword">auto</span> test_b2 = test_brake_val;</div>
+<div class="line"><span class="lineno">   81</span>    test_b2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> = 0.0;</div>
+<div class="line"><span class="lineno">   82</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_b2, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   83</span>    EXPECT_TRUE(data.brakeImplausible);</div>
+<div class="line"><span class="lineno">   84</span>    EXPECT_FALSE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   85</span> </div>
+<div class="line"><span class="lineno">   86</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>    EXPECT_FALSE(data.brakeImplausible);</div>
+<div class="line"><span class="lineno">   89</span>    EXPECT_FALSE(data.accelImplausible);</div>
+<div class="line"><span class="lineno">   90</span>}</div>
+<div class="ttc" id="aclassPedalsSystem_html_a0b9ac2da0743454dd4438941885ef496"><div class="ttname"><a href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">PedalsSystem::evaluate_pedals</a></div><div class="ttdeci">PedalsSystemData_s evaluate_pedals(const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2, unsigned long curr_time)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00014">PedalsSystem.cpp:14</a></div></div>
 <div class="ttc" id="astructAnalogConversion__s_html_a1873377ed9fcaa212ebe08ef2aa6b6af"><div class="ttname"><a href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">AnalogConversion_s::conversion</a></div><div class="ttdeci">float conversion</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00016">AnalogSensorsInterface.h:16</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -243,23 +266,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pedals__system__test_8h_source.html#l00074">74</a> of file <a class="el" href="pedals__system__test_8h_source.html">pedals_system_test.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>{</div>
-<div class="line"><span class="lineno">   76</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {2000, 0.6, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   77</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {3000, 1.0, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   78</span> </div>
-<div class="line"><span class="lineno">   79</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
-<div class="line"><span class="lineno">   80</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   81</span>    EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);</div>
-<div class="line"><span class="lineno">   82</span>    EXPECT_TRUE(data.brakePressed);</div>
-<div class="line"><span class="lineno">   83</span> </div>
-<div class="line"><span class="lineno">   84</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> = 0.0;</div>
-<div class="line"><span class="lineno">   85</span> </div>
-<div class="line"><span class="lineno">   86</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   87</span> </div>
-<div class="line"><span class="lineno">   88</span>    EXPECT_FALSE(data.brakeAndAccelPressedImplausibility);</div>
-<div class="line"><span class="lineno">   89</span>    EXPECT_FALSE(data.brakePressed);</div>
-<div class="line"><span class="lineno">   90</span>}</div>
+<p class="definition">Definition at line <a class="el" href="pedals__system__test_8h_source.html#l00092">92</a> of file <a class="el" href="pedals__system__test_8h_source.html">pedals_system_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>{</div>
+<div class="line"><span class="lineno">   94</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {2000, 0.6, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">   95</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {3000, 1.0, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">   99</span>    EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);</div>
+<div class="line"><span class="lineno">  100</span>    EXPECT_TRUE(data.brakePressed);</div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>    test_brake_val.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> = 0.0;</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">  105</span> </div>
+<div class="line"><span class="lineno">  106</span>    EXPECT_FALSE(data.brakeAndAccelPressedImplausibility);</div>
+<div class="line"><span class="lineno">  107</span>    EXPECT_FALSE(data.brakePressed);</div>
+<div class="line"><span class="lineno">  108</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -289,22 +312,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pedals__system__test_8h_source.html#l00092">92</a> of file <a class="el" href="pedals__system__test_8h_source.html">pedals_system_test.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   93</span>{</div>
-<div class="line"><span class="lineno">   94</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {2000, 0.6, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   95</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {3000, 1.0, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
-<div class="line"><span class="lineno">   96</span> </div>
-<div class="line"><span class="lineno">   97</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
-<div class="line"><span class="lineno">   98</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
-<div class="line"><span class="lineno">   99</span>    EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);</div>
-<div class="line"><span class="lineno">  100</span>    EXPECT_TRUE(data.brakePressed);</div>
-<div class="line"><span class="lineno">  101</span>    EXPECT_FALSE(data.implausibilityExceededMaxDuration);</div>
-<div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1200);</div>
-<div class="line"><span class="lineno">  104</span> </div>
-<div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>    EXPECT_TRUE(data.implausibilityExceededMaxDuration);</div>
-<div class="line"><span class="lineno">  107</span>}</div>
+<p class="definition">Definition at line <a class="el" href="pedals__system__test_8h_source.html#l00110">110</a> of file <a class="el" href="pedals__system__test_8h_source.html">pedals_system_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>{</div>
+<div class="line"><span class="lineno">  112</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_accel1_val = {2000, 0.6, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">  113</span>    <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a> test_brake_val = {3000, 1.0, <a class="code hl_enumvalue" href="AnalogSensorsInterface_8h.html#a9509f369d8fa2f0f6ac798ea7b0f33ffab235d58d784d0f0bda92ba1678f8f1ef">AnalogSensorStatus_e::ANALOG_SENSOR_GOOD</a>};</div>
+<div class="line"><span class="lineno">  114</span> </div>
+<div class="line"><span class="lineno">  115</span>    <a class="code hl_class" href="classPedalsSystem.html">PedalsSystem</a> pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);</div>
+<div class="line"><span class="lineno">  116</span>    <span class="keyword">auto</span> data = pedals.<a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);</div>
+<div class="line"><span class="lineno">  117</span>    EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);</div>
+<div class="line"><span class="lineno">  118</span>    EXPECT_TRUE(data.brakePressed);</div>
+<div class="line"><span class="lineno">  119</span>    EXPECT_FALSE(data.implausibilityExceededMaxDuration);</div>
+<div class="line"><span class="lineno">  120</span> </div>
+<div class="line"><span class="lineno">  121</span>    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1200);</div>
+<div class="line"><span class="lineno">  122</span> </div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>    EXPECT_TRUE(data.implausibilityExceededMaxDuration);</div>
+<div class="line"><span class="lineno">  125</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
