@@ -267,7 +267,8 @@ void TorqueControllerSimpleLaunch::tick(
 void TorqueControllerSlipLaunch::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
-    const float wheel_rpms[])
+    const float wheel_rpms[],
+    float vx_body)
 {
 
     int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
@@ -354,7 +355,7 @@ void TorqueControllerSlipLaunch::tick(
                 is to always be pushing the car a certain 'slip_ratio_' faster than
                 the car is currently going, theoretically always keeping the car in slip
                 */
-                launch_speed_target = (1 + slip_ratio_) * body_velocity;
+                launch_speed_target = (1 + slip_ratio_) * vx_body;
                 launch_speed_target *= METERS_PER_SECOND_TO_RPM;
 
             }

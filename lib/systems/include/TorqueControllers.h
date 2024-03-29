@@ -302,7 +302,8 @@ public:
 
     void tick(const SysTick_s & tick, 
               const PedalsSystemData_s &pedalsData,
-              const float wheel_rpms[]);
+              const float wheel_rpms[],
+              float vx_body);
 };
 
 class TorqueControllerPIDTV: public TorqueController<TC_PID_VECTORING>
