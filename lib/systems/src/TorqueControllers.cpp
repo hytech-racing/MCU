@@ -264,6 +264,121 @@ void TorqueControllerSimpleLaunch::tick(
     }
 }
 
+void TorqueControllerSlipLaunch::tick(
+    const SysTick_s &tick,
+    const PedalsSystemData_s &pedalsData,
+    const float wheel_rpms[])
+{
+
+    int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
+
+    float max_speed = 0;
+    for(int i = 0; i < 4; i++){
+        max_speed = std::max(max_speed, abs(wheel_rpms[i]));
+    }
+
+    writeout_.ready = true;
+
+    switch(launch_state){
+        case LaunchStates_e::LAUNCH_NOT_READY:
+            // set torques and speed to 0
+            writeout_.command.speeds_rpm[FL] = 0.0;
+            writeout_.command.speeds_rpm[FR] = 0.0;
+            writeout_.command.speeds_rpm[RL] = 0.0;
+            writeout_.command.speeds_rpm[RR] = 0.0;
+
+            writeout_.command.torqueSetpoints[FL] = brake_torque_req;
+            writeout_.command.torqueSetpoints[FR] = brake_torque_req;
+            writeout_.command.torqueSetpoints[RL] = brake_torque_req;
+            writeout_.command.torqueSetpoints[RR] = brake_torque_req;
+
+            //init launch vars
+            launch_speed_target = 0;
+            time_of_launch = tick.millis;
+            // check speed is 0 and pedals not pressed
+            if((pedalsData.accelPercent < launch_ready_accel_threshold)
+               && (pedalsData.brakePercent < launch_ready_brake_threshold)
+               && (max_speed < launch_ready_speed_threshold))
+            {
+                launch_state = LaunchStates_e::LAUNCH_READY;
+            }
+
+            break;
+        case LaunchStates_e::LAUNCH_READY:
+            // set torques and speed to 0
+            writeout_.command.speeds_rpm[FL] = 0.0;
+            writeout_.command.speeds_rpm[FR] = 0.0;
+            writeout_.command.speeds_rpm[RL] = 0.0;
+            writeout_.command.speeds_rpm[RR] = 0.0;
+
+            writeout_.command.torqueSetpoints[FL] = brake_torque_req;
+            writeout_.command.torqueSetpoints[FR] = brake_torque_req;
+            writeout_.command.torqueSetpoints[RL] = brake_torque_req;
+            writeout_.command.torqueSetpoints[RR] = brake_torque_req;
+
+            //init launch vars
+            launch_speed_target = 0;
+            time_of_launch = tick.millis;
+
+            //check speed is 0 and brake not pressed
+            if ((pedalsData.brakePercent >= launch_ready_brake_threshold)
+                || (max_speed >= launch_ready_speed_threshold))
+            {
+                launch_state = LaunchStates_e::LAUNCH_NOT_READY;
+            } else if(pedalsData.accelPercent >= launch_go_accel_threshold){
+                launch_state = LaunchStates_e::LAUNCHING;
+            }
+
+            //check accel above launch threshold and launch
+            break;
+        case LaunchStates_e::LAUNCHING:
+            { // use brackets to ignore 'cross initialization' of secs_since_launch
+            //check accel below launch threshold and brake above
+            if((pedalsData.accelPercent <= launch_stop_accel_threshold)
+               || (pedalsData.brakePercent >= launch_ready_brake_threshold))
+            {
+                launch_state = LaunchStates_e::LAUNCH_NOT_READY;
+            }
+
+            uint32_t ms_since_launch = (tick.millis - time_of_launch);
+            // accelerate at constant speed for a period of time to get body velocity up
+            // may want to make this the ht07 launch algo
+            if(ms_since_launch < const_accel_time){
+
+                launch_speed_target = DEFAULT_LAUNCH_SPEED_TARGET;
+
+            } else {
+
+                /*
+                New slip-ratio based launch algorithm by Luke Chen. The basic idea
+                is to always be pushing the car a certain 'slip_ratio_' faster than
+                the car is currently going, theoretically always keeping the car in slip
+                */
+                launch_speed_target = (1 + slip_ratio_) * body_velocity;
+                launch_speed_target *= METERS_PER_SECOND_TO_RPM;
+
+            }
+
+            writeout_.command.speeds_rpm[FL] = launch_speed_target;
+            writeout_.command.speeds_rpm[FR] = launch_speed_target;
+            writeout_.command.speeds_rpm[RL] = launch_speed_target;
+            writeout_.command.speeds_rpm[RR] = launch_speed_target;
+
+            writeout_.command.torqueSetpoints[FL] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[FR] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[RL] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[RR] = AMK_MAX_TORQUE;
+
+            }
+            break;
+        default:
+            break;
+
+
+
+    }
+}
+
 void TorqueControllerPIDTV::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate)
 {
 

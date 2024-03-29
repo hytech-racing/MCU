@@ -11,6 +11,8 @@
 
 #include "PID_TV.h"
 
+/* MOTOR CONSTANTS */
+
 const float AMK_MAX_RPM = 20000;
 // 10MPH LIMIT for lot testing lmao
 // const float AMK_MAX_RPM = (13.4 * METERS_PER_SECOND_TO_RPM); // 30mph
@@ -21,8 +23,21 @@ const float AMK_MAX_RPM = 20000;
 const float AMK_MAX_TORQUE = 21.42; // TODO: update this with the true value
 const float MAX_REGEN_TORQUE = 10.0;
 
+/* LAUNCH CONSTANTS */
+
 const float DEFAULT_LAUNCH_RATE = 11.76;
 const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
+
+const float DEFAULT_SLIP_RATIO = 0.2f;
+const float const_accel_time = 500; //time to use launch speed target in ms
+
+const float launch_ready_accel_threshold = .1;
+const float launch_ready_brake_threshold = .2;
+const float launch_ready_speed_threshold = 5.0 * METERS_PER_SECOND_TO_RPM; // rpm
+const float launch_go_accel_threshold = .9;
+const float launch_stop_accel_threshold = .5;
+
+/* DRIVETRAIN STRUCTS */
 
 const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
     .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
@@ -34,14 +49,17 @@ struct TorqueControllerOutput_s
     bool ready;
 };
 
+/* ENUMS */
+
 enum TorqueController_e
 {
     TC_NO_CONTROLLER = 0,
     TC_SAFE_MODE = 1,
     TC_LOAD_CELL_VECTORING = 2,
     TC_SIMPLE_LAUNCH = 3,
-    TC_PID_VECTORING = 4,
-    TC_NUM_CONTROLLERS = 5,
+    TC_SLIP_LAUNCH = 4,
+    TC_PID_VECTORING = 5,
+    TC_NUM_CONTROLLERS = 6,
 };
 
 enum class LaunchStates_e
@@ -51,6 +69,8 @@ enum class LaunchStates_e
     LAUNCH_READY,
     LAUNCHING
 };
+
+/* CONTROLLER FUNCTIONS */
 
 /// @brief If a command fed through this function exceeds the specified power limit, all torques will be scaled down equally
 /// @param command
@@ -72,13 +92,15 @@ static DrivetrainCommand_s TCTorqueLimit(
     DrivetrainCommand_s command,
     float torqueLimits[NUM_MOTORS]);
 
+/* TORQUE CONTROLLERS */
+
 /*
     Base torque controller to allow access to internal torque controller members
 */
 class TorqueControllerBase
 {
     public:
-    /* returns the launch state for the purpose of lighting the dahsboard LED. To be overridden in launch torque modes */
+    /* returns the launch state for the purpose of lighting the dahsboard LED and unit testing. To be overridden in launch torque modes */
     virtual LaunchStates_e get_launch_state() { return LaunchStates_e::NO_LAUNCH_MODE; }
 
 };
@@ -211,12 +233,6 @@ public:
 class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>
 {
 private:
-    const float launch_ready_accel_threshold = .1;
-    const float launch_ready_brake_threshold = .2;
-    const float launch_ready_speed_threshold = 5.0 * METERS_PER_SECOND_TO_RPM; // rpm
-    const float launch_go_accel_threshold = .9;
-    const float launch_stop_accel_threshold = .5;
-
     TorqueControllerOutput_s &writeout_;
     float launch_rate_target_;
     int16_t init_speed_target_;
@@ -242,7 +258,45 @@ public:
         writeout_.ready = true;
     }
 
-    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
+    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
+
+    LaunchStates_e get_launch_state() override { return launch_state; }
+
+    void tick(const SysTick_s & tick, 
+              const PedalsSystemData_s &pedalsData,
+              const float wheel_rpms[]);
+};
+
+class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>
+{
+private:
+    TorqueControllerOutput_s &writeout_;
+    float slip_ratio_;
+    int16_t init_speed_target_;
+    
+    LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
+    uint32_t time_of_launch;
+    float launch_speed_target = 0.0;
+public:
+
+    /*!
+        SLIP LAUNCH CONTROLLER
+        This launch controller is based off of a specified slip constant. It will at all times attempt
+        to keep the wheelspeed at this certain higher percent of the body velocity of the car to keep it
+        in constant slip
+        @param slip_ratio specified launch rate in m/s^2
+        @param initial_speed_target the initial speed commanded to the wheels
+    */
+    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout, float slip_ratio, int16_t initial_speed_target)
+        : writeout_(writeout),
+          slip_ratio_(slip_ratio),
+          init_speed_target_(initial_speed_target)
+    {
+        writeout_.command = TC_COMMAND_NO_TORQUE;
+        writeout_.ready = true;
+    }
+
+    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
     LaunchStates_e get_launch_state() override { return launch_state; }
 
