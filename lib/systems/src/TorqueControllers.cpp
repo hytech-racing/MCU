@@ -188,9 +188,9 @@ void TorqueControllerSimpleLaunch::tick(
             launch_speed_target = 0;
             time_of_launch = tick.millis;
             // check speed is 0 and pedals not pressed
-            if(pedalsData.accelPercent < launch_ready_accel_threshold
-               && pedalsData.brakePercent < launch_ready_brake_threshold
-               && max_speed < launch_ready_speed_threshold)
+            if((pedalsData.accelPercent < launch_ready_accel_threshold)
+               && (pedalsData.brakePercent < launch_ready_brake_threshold)
+               && (max_speed < launch_ready_speed_threshold))
             {
                 launch_state = LaunchStates_e::LAUNCH_READY;
             }
@@ -213,8 +213,8 @@ void TorqueControllerSimpleLaunch::tick(
             time_of_launch = tick.millis;
 
             //check speed is 0 and brake not pressed
-            if (pedalsData.brakePercent >= launch_ready_brake_threshold
-                || max_speed >= launch_ready_speed_threshold)
+            if ((pedalsData.brakePercent >= launch_ready_brake_threshold)
+                || (max_speed >= launch_ready_speed_threshold))
             {
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
             } else if(pedalsData.accelPercent >= launch_go_accel_threshold){
@@ -226,8 +226,8 @@ void TorqueControllerSimpleLaunch::tick(
         case LaunchStates_e::LAUNCHING:
             { // use brackets to ignore 'cross initialization' of secs_since_launch
             //check accel below launch threshold and brake above
-            if(pedalsData.accelPercent <= launch_stop_accel_threshold
-               || pedalsData.brakePercent >= launch_ready_brake_threshold)
+            if((pedalsData.accelPercent <= launch_stop_accel_threshold)
+               || (pedalsData.brakePercent >= launch_ready_brake_threshold))
             {
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
             }
