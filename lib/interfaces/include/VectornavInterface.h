@@ -2,7 +2,7 @@
 #define VECTORNAVINTERFACE
 #include "FlexCAN_T4.h"
 #include "hytech.h"
-
+#include "MessageQueueDefine.h"
 
 struct vector_nav {
         float velocity; 
@@ -29,9 +29,8 @@ private:
     vector_nav vn_data;
     
 public:
-    VNInterface(message_queue *msg_output_queue, uint32_t can_id) {
+    VNInterface(message_queue *msg_output_queue) {
         msg_queue_ = msg_output_queue;
-        can_id_ = can_id;
     };
     /* Kick watchdog */
     
