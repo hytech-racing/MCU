@@ -94,6 +94,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a61d50d187c266fa65a1c3709d0207962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a160fa55363d010205f742fafab0e1b90"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">getMaxTorque</a> ()</td></tr>
 <tr class="separator:a160fa55363d010205f742fafab0e1b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a297210cf2e01c3cec82da871a623b25d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTorqueControllerBase.html">TorqueControllerBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a> ()</td></tr>
+<tr class="separator:a297210cf2e01c3cec82da871a623b25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -124,10 +126,11 @@ Public Member Functions</h2></td></tr>
 
 <p>torque controller mux in which default instances of all torque controllers are created for use </p>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00044">44</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>    : torqueControllerNone_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_NO_CONTROLLER)])</div>
-<div class="line"><span class="lineno">   46</span>    , torqueControllerSimple_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_SAFE_MODE)])</div>
-<div class="line"><span class="lineno">   47</span>    , torqueControllerLoadCellVectoring_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00054">54</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>    : torqueControllerNone_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_NO_CONTROLLER)])</div>
+<div class="line"><span class="lineno">   56</span>    , torqueControllerSimple_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_SAFE_MODE)])</div>
+<div class="line"><span class="lineno">   57</span>    , torqueControllerLoadCellVectoring_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_LOAD_CELL_VECTORING)])</div>
+<div class="line"><span class="lineno">   58</span>    , torqueControllerSimpleLaunch_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -174,14 +177,52 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00053">53</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   54</span>    : torqueControllerNone_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_NO_CONTROLLER)])</div>
-<div class="line"><span class="lineno">   55</span>    , torqueControllerSimple_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)</div>
-<div class="line"><span class="lineno">   56</span>    , torqueControllerLoadCellVectoring_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00064">64</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>    : torqueControllerNone_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_NO_CONTROLLER)])</div>
+<div class="line"><span class="lineno">   66</span>    , torqueControllerSimple_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)</div>
+<div class="line"><span class="lineno">   67</span>    , torqueControllerLoadCellVectoring_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_LOAD_CELL_VECTORING)])</div>
+<div class="line"><span class="lineno">   68</span>    , torqueControllerSimpleLaunch_(controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a297210cf2e01c3cec82da871a623b25d" name="a297210cf2e01c3cec82da871a623b25d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a297210cf2e01c3cec82da871a623b25d">&#9670;&#160;</a></span>activeController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTorqueControllerBase.html">TorqueControllerBase</a> * TorqueControllerMux::activeController </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00094">94</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   95</span>    {</div>
+<div class="line"><span class="lineno">   96</span>        <span class="comment">// check to make sure that there is actually a controller</span></div>
+<div class="line"><span class="lineno">   97</span>        <span class="comment">// at the muxMode_ idx</span></div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">if</span> (controllers[muxMode_] != NULL) {</div>
+<div class="line"><span class="lineno">   99</span>            <span class="keywordflow">return</span> controllers[muxMode_];</div>
+<div class="line"><span class="lineno">  100</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  101</span>            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classTorqueControllerBase.html">TorqueControllerBase</a>*<span class="keyword">&gt;</span>(&amp;torqueControllerNone_);</div>
+<div class="line"><span class="lineno">  102</span>        }</div>
+<div class="line"><span class="lineno">  103</span>    }</div>
+<div class="ttc" id="aclassTorqueControllerBase_html"><div class="ttname"><a href="classTorqueControllerBase.html">TorqueControllerBase</a></div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00078">TorqueControllers.h:79</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a71217aa07bca005b9131252473c4463d" name="a71217aa07bca005b9131252473c4463d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71217aa07bca005b9131252473c4463d">&#9670;&#160;</a></span>getDrivetrainCommand()</h2>
 
@@ -205,10 +246,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00070">70</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   71</span>    {</div>
-<div class="line"><span class="lineno">   72</span>        <span class="keywordflow">return</span> drivetrainCommand_;</div>
-<div class="line"><span class="lineno">   73</span>    };</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00082">82</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>    {</div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">return</span> drivetrainCommand_;</div>
+<div class="line"><span class="lineno">   85</span>    };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -235,10 +276,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00078">78</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   79</span>    {</div>
-<div class="line"><span class="lineno">   80</span>        <span class="keywordflow">return</span> torqueLimitMap_[torqueLimit_];</div>
-<div class="line"><span class="lineno">   81</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00090">90</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>    {</div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">return</span> torqueLimitMap_[torqueLimit_];</div>
+<div class="line"><span class="lineno">   93</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -265,10 +306,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00074">74</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>    {</div>
-<div class="line"><span class="lineno">   76</span>        <span class="keywordflow">return</span> torqueLimit_;</div>
-<div class="line"><span class="lineno">   77</span>    };</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00086">86</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   87</span>    {</div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">return</span> torqueLimit_;</div>
+<div class="line"><span class="lineno">   89</span>    };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -351,69 +392,71 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   17</span>    <span class="comment">// Tick all torque controllers</span></div>
 <div class="line"><span class="lineno">   18</span>    torqueControllerSimple_.<a class="code hl_function" href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">tick</a>(<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>, pedalsData, torqueLimitMap_[torqueLimit_]);</div>
 <div class="line"><span class="lineno">   19</span>    torqueControllerLoadCellVectoring_.<a class="code hl_function" href="classTorqueControllerLoadCellVectoring.html#acb8917f5c9fd34363e22357f62028a78">tick</a>(<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);</div>
-<div class="line"><span class="lineno">   20</span>    <span class="comment">// Tick torque button logic at 50hz</span></div>
-<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.triggers.trigger50)</div>
-<div class="line"><span class="lineno">   22</span>    {</div>
-<div class="line"><span class="lineno">   23</span>        <span class="comment">// detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms</span></div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">if</span> (</div>
-<div class="line"><span class="lineno">   25</span>            torqueLimitButtonPressed_ == <span class="keyword">true</span> &amp;&amp; dashboardTorqueModeButtonPressed == <span class="keyword">false</span> &amp;&amp; <a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.millis - torqueLimitButtonPressedTime_ &gt; <a class="code hl_variable" href="Utility_8h.html#a9b0b3b453f668ef79a9ea55051a2c10b">DEBOUNCE_MILLIS</a>)</div>
-<div class="line"><span class="lineno">   26</span>        {</div>
-<div class="line"><span class="lineno">   27</span>            <span class="comment">// WOW C++ is ass</span></div>
-<div class="line"><span class="lineno">   28</span>            torqueLimit_ = <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="interfaces_2include_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a><span class="keyword">&gt;</span>((<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(torqueLimit_) + 1) % (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));</div>
-<div class="line"><span class="lineno">   29</span>            torqueLimitButtonPressedTime_ = <a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.millis;</div>
-<div class="line"><span class="lineno">   30</span>        }</div>
-<div class="line"><span class="lineno">   31</span>        torqueLimitButtonPressed_ = dashboardTorqueModeButtonPressed;</div>
-<div class="line"><span class="lineno">   32</span>    }</div>
-<div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>    <span class="comment">// Tick TCMUX at 100hz</span></div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.triggers.trigger100)</div>
-<div class="line"><span class="lineno">   36</span>    {</div>
-<div class="line"><span class="lineno">   37</span>        <span class="comment">// Determine next state based on dashboard dial state</span></div>
-<div class="line"><span class="lineno">   38</span>        <span class="comment">// Only transisiton to the next state if:</span></div>
-<div class="line"><span class="lineno">   39</span>        <span class="comment">// Vehicle speed is below 5 m/s</span></div>
-<div class="line"><span class="lineno">   40</span>        <span class="comment">// AND torque delta between old and new controllers is &lt; 0.5nm on every wheel</span></div>
-<div class="line"><span class="lineno">   41</span>        <span class="comment">// AND the selected torque controller is in the ready state</span></div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">if</span> (muxMode_ != dialModeMap_[dashboardDialMode])</div>
-<div class="line"><span class="lineno">   43</span>        {</div>
-<div class="line"><span class="lineno">   44</span>            <span class="comment">// Check if speed permits mode change</span></div>
-<div class="line"><span class="lineno">   45</span>            <span class="keywordtype">bool</span> speedPreventsModeChange = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
-<div class="line"><span class="lineno">   47</span>                speedPreventsModeChange |= drivetrainData.<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">measuredSpeeds</a>[i] * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a> &gt;= <a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a>;</div>
-<div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>            <span class="comment">// Check if torque delta permits mode change</span></div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordtype">bool</span> torqueDeltaPreventsModeChange = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   51</span>            for (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
-<div class="line"><span class="lineno">   52</span>            {</div>
-<div class="line"><span class="lineno">   53</span>                <span class="keywordtype">float</span> torqueDelta = abs(</div>
-<div class="line"><span class="lineno">   54</span>                    controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(muxMode_)].command.torqueSetpoints[i] - controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(dialModeMap_[dashboardDialMode])].command.torqueSetpoints[i]);</div>
-<div class="line"><span class="lineno">   55</span> </div>
-<div class="line"><span class="lineno">   56</span>                <span class="keywordflow">if</span> (torqueDelta &gt; <a class="code hl_variable" href="TorqueControllerMux_8h.html#a7ef6befa59ffe5cc13b08b5e570fc1f6">MAX_TORQUE_DELTA_FOR_MODE_CHANGE</a>)</div>
-<div class="line"><span class="lineno">   57</span>                {</div>
-<div class="line"><span class="lineno">   58</span>                    torqueDeltaPreventsModeChange = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   59</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   60</span>                }</div>
-<div class="line"><span class="lineno">   61</span>            }</div>
-<div class="line"><span class="lineno">   62</span> </div>
-<div class="line"><span class="lineno">   63</span>            <span class="comment">// Check if targeted controller is ready to be selected</span></div>
-<div class="line"><span class="lineno">   64</span>            <span class="keywordtype">bool</span> controllerNotReadyPreventsModeChange = (controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(dialModeMap_[dashboardDialMode])].ready == <span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">   65</span> </div>
-<div class="line"><span class="lineno">   66</span>            <span class="keywordflow">if</span> (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))</div>
-<div class="line"><span class="lineno">   67</span>            {</div>
-<div class="line"><span class="lineno">   68</span>                muxMode_ = dialModeMap_[dashboardDialMode];</div>
-<div class="line"><span class="lineno">   69</span>            }</div>
-<div class="line"><span class="lineno">   70</span>        }</div>
-<div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>        <span class="comment">// Check if the current controller is ready. If it has faulted, revert to safe mode</span></div>
-<div class="line"><span class="lineno">   73</span>        <span class="comment">// When the car goes below 5m/s, it will attempt to re-engage the faulted controller</span></div>
-<div class="line"><span class="lineno">   74</span>        <span class="comment">// It will stay in safe mode if the controller is still faulted</span></div>
-<div class="line"><span class="lineno">   75</span>        <span class="keywordflow">if</span> (controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(muxMode_)].ready == <span class="keyword">false</span>)</div>
-<div class="line"><span class="lineno">   76</span>        {</div>
-<div class="line"><span class="lineno">   77</span>            muxMode_ = TorqueController_e::TC_SAFE_MODE;</div>
-<div class="line"><span class="lineno">   78</span>        }</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>        drivetrainCommand_ = controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(muxMode_)].command;</div>
-<div class="line"><span class="lineno">   81</span>    }</div>
-<div class="line"><span class="lineno">   82</span>}</div>
+<div class="line"><span class="lineno">   20</span>    torqueControllerSimpleLaunch_.<a class="code hl_function" href="classTorqueControllerSimpleLaunch.html#ac7c70a4a6b1349a2f68b24867ad7c6f4">tick</a>(<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>, pedalsData, drivetrainData.<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">measuredSpeeds</a>);</div>
+<div class="line"><span class="lineno">   21</span>    <span class="comment">// Tick torque button logic at 50hz</span></div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.triggers.trigger50)</div>
+<div class="line"><span class="lineno">   23</span>    {</div>
+<div class="line"><span class="lineno">   24</span>        <span class="comment">// detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms</span></div>
+<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">if</span> (</div>
+<div class="line"><span class="lineno">   26</span>            torqueLimitButtonPressed_ == <span class="keyword">true</span> &amp;&amp; dashboardTorqueModeButtonPressed == <span class="keyword">false</span> &amp;&amp; <a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.millis - torqueLimitButtonPressedTime_ &gt; <a class="code hl_variable" href="Utility_8h.html#a9b0b3b453f668ef79a9ea55051a2c10b">DEBOUNCE_MILLIS</a>)</div>
+<div class="line"><span class="lineno">   27</span>        {</div>
+<div class="line"><span class="lineno">   28</span>            <span class="comment">// WOW C++ is ass</span></div>
+<div class="line"><span class="lineno">   29</span>            torqueLimit_ = <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="interfaces_2include_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a><span class="keyword">&gt;</span>((<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(torqueLimit_) + 1) % (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));</div>
+<div class="line"><span class="lineno">   30</span>            torqueLimitButtonPressedTime_ = <a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.millis;</div>
+<div class="line"><span class="lineno">   31</span>        }</div>
+<div class="line"><span class="lineno">   32</span>        torqueLimitButtonPressed_ = dashboardTorqueModeButtonPressed;</div>
+<div class="line"><span class="lineno">   33</span>    }</div>
+<div class="line"><span class="lineno">   34</span> </div>
+<div class="line"><span class="lineno">   35</span>    <span class="comment">// Tick TCMUX at 100hz</span></div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">tick</a>.triggers.trigger100)</div>
+<div class="line"><span class="lineno">   37</span>    {</div>
+<div class="line"><span class="lineno">   38</span>        <span class="comment">// Determine next state based on dashboard dial state</span></div>
+<div class="line"><span class="lineno">   39</span>        <span class="comment">// Only transisiton to the next state if:</span></div>
+<div class="line"><span class="lineno">   40</span>        <span class="comment">// Vehicle speed is below 5 m/s</span></div>
+<div class="line"><span class="lineno">   41</span>        <span class="comment">// AND torque delta between old and new controllers is &lt; 0.5nm on every wheel</span></div>
+<div class="line"><span class="lineno">   42</span>        <span class="comment">// AND the selected torque controller is in the ready state</span></div>
+<div class="line"><span class="lineno">   43</span>        <span class="keywordflow">if</span> (muxMode_ != dialModeMap_[dashboardDialMode])</div>
+<div class="line"><span class="lineno">   44</span>        {</div>
+<div class="line"><span class="lineno">   45</span>            <span class="comment">// Check if speed permits mode change</span></div>
+<div class="line"><span class="lineno">   46</span>            <span class="keywordtype">bool</span> speedPreventsModeChange = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   47</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++) {</div>
+<div class="line"><span class="lineno">   48</span>                speedPreventsModeChange |= drivetrainData.<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">measuredSpeeds</a>[i] * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a> &gt;= <a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a>;</div>
+<div class="line"><span class="lineno">   49</span>            }</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>            <span class="comment">// Check if torque delta permits mode change</span></div>
+<div class="line"><span class="lineno">   52</span>            <span class="keywordtype">bool</span> torqueDeltaPreventsModeChange = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
+<div class="line"><span class="lineno">   54</span>            {</div>
+<div class="line"><span class="lineno">   55</span>                <span class="keywordtype">float</span> torqueDelta = abs(</div>
+<div class="line"><span class="lineno">   56</span>                    controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(muxMode_)].command.torqueSetpoints[i] - controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(dialModeMap_[dashboardDialMode])].command.torqueSetpoints[i]);</div>
+<div class="line"><span class="lineno">   57</span> </div>
+<div class="line"><span class="lineno">   58</span>                <span class="keywordflow">if</span> (torqueDelta &gt; <a class="code hl_variable" href="TorqueControllerMux_8h.html#a7ef6befa59ffe5cc13b08b5e570fc1f6">MAX_TORQUE_DELTA_FOR_MODE_CHANGE</a>)</div>
+<div class="line"><span class="lineno">   59</span>                {</div>
+<div class="line"><span class="lineno">   60</span>                    torqueDeltaPreventsModeChange = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   61</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   62</span>                }</div>
+<div class="line"><span class="lineno">   63</span>            }</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>            <span class="comment">// Check if targeted controller is ready to be selected</span></div>
+<div class="line"><span class="lineno">   66</span>            <span class="keywordtype">bool</span> controllerNotReadyPreventsModeChange = (controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(dialModeMap_[dashboardDialMode])].ready == <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">   67</span> </div>
+<div class="line"><span class="lineno">   68</span>            <span class="keywordflow">if</span> (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))</div>
+<div class="line"><span class="lineno">   69</span>            {</div>
+<div class="line"><span class="lineno">   70</span>                muxMode_ = dialModeMap_[dashboardDialMode];</div>
+<div class="line"><span class="lineno">   71</span>            }</div>
+<div class="line"><span class="lineno">   72</span>        }</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>        <span class="comment">// Check if the current controller is ready. If it has faulted, revert to safe mode</span></div>
+<div class="line"><span class="lineno">   75</span>        <span class="comment">// When the car goes below 5m/s, it will attempt to re-engage the faulted controller</span></div>
+<div class="line"><span class="lineno">   76</span>        <span class="comment">// It will stay in safe mode if the controller is still faulted</span></div>
+<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">if</span> (controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(muxMode_)].ready == <span class="keyword">false</span>)</div>
+<div class="line"><span class="lineno">   78</span>        {</div>
+<div class="line"><span class="lineno">   79</span>            muxMode_ = TorqueController_e::TC_SAFE_MODE;</div>
+<div class="line"><span class="lineno">   80</span>        }</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>        drivetrainCommand_ = controllerOutputs_[<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(muxMode_)].command;</div>
+<div class="line"><span class="lineno">   83</span>    }</div>
+<div class="line"><span class="lineno">   84</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_a4f06b38f5382594cf48bdd40e6d018fe"><div class="ttname"><a href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a></div><div class="ttdeci">const float RPM_TO_METERS_PER_SECOND</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00006">PhysicalParameters.h:6</a></div></div>
 <div class="ttc" id="aTorqueControllerMux_8h_html_a6ba155949a221de068fa4c52357d2292"><div class="ttname"><a href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a></div><div class="ttdeci">const float MAX_SPEED_FOR_MODE_CHANGE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00012">TorqueControllerMux.h:12</a></div></div>
 <div class="ttc" id="aTorqueControllerMux_8h_html_a7ef6befa59ffe5cc13b08b5e570fc1f6"><div class="ttname"><a href="TorqueControllerMux_8h.html#a7ef6befa59ffe5cc13b08b5e570fc1f6">MAX_TORQUE_DELTA_FOR_MODE_CHANGE</a></div><div class="ttdeci">const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00013">TorqueControllerMux.h:13</a></div></div>
@@ -421,8 +464,9 @@ Public Member Functions</h2></td></tr>
 <div class="ttc" id="aUtility_8h_html_ae84658f12c2f1b44f59af36678cf3dcc"><div class="ttname"><a href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a></div><div class="ttdeci">const int NUM_MOTORS</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00009">Utility.h:9</a></div></div>
 <div class="ttc" id="aclassTorqueControllerLoadCellVectoring_html_acb8917f5c9fd34363e22357f62028a78"><div class="ttname"><a href="classTorqueControllerLoadCellVectoring.html#acb8917f5c9fd34363e22357f62028a78">TorqueControllerLoadCellVectoring::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, float torqueLimit, const AnalogConversion_s &amp;flLoadCellData, const AnalogConversion_s &amp;frLoadCellData, const AnalogConversion_s &amp;rlLoadCellData, const AnalogConversion_s &amp;rrLoadCellData)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8cpp_source.html#l00061">TorqueControllers.cpp:61</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a90a48e36c38a01af7a9552466613ae99"><div class="ttname"><a href="classTorqueControllerMux.html#a90a48e36c38a01af7a9552466613ae99">TorqueControllerMux::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const DrivetrainDynamicReport_s &amp;drivetrainData, const PedalsSystemData_s &amp;pedalsData, const SteeringSystemData_s &amp;steeringData, const AnalogConversion_s &amp;loadFLData, const AnalogConversion_s &amp;loadFRData, const AnalogConversion_s &amp;loadRLData, const AnalogConversion_s &amp;loadRRData, DialMode_e dashboardDialMode, bool dashboardTorqueModeButtonPressed)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00005">TorqueControllerMux.cpp:5</a></div></div>
+<div class="ttc" id="aclassTorqueControllerSimpleLaunch_html_ac7c70a4a6b1349a2f68b24867ad7c6f4"><div class="ttname"><a href="classTorqueControllerSimpleLaunch.html#ac7c70a4a6b1349a2f68b24867ad7c6f4">TorqueControllerSimpleLaunch::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, const float wheel_rpms[])</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8cpp_source.html#l00159">TorqueControllers.cpp:159</a></div></div>
 <div class="ttc" id="aclassTorqueControllerSimple_html_ac6517b0493098838c2f923e23feff718"><div class="ttname"><a href="classTorqueControllerSimple.html#ac6517b0493098838c2f923e23feff718">TorqueControllerSimple::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, float torqueLimit)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8cpp_source.html#l00008">TorqueControllers.cpp:8</a></div></div>
-<div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a347b41a134c22d96f783682b6da8644b"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a></div><div class="ttdeci">TorqueLimit_e</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00016">DashboardInterface.h:17</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a347b41a134c22d96f783682b6da8644b"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a></div><div class="ttdeci">TorqueLimit_e</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2DashboardInterface_8h_source.html#l00018">DashboardInterface.h:19</a></div></div>
 <div class="ttc" id="astructDrivetrainDynamicReport__s_html_a77c47cfa97df348c8dd93b260975f980"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">DrivetrainDynamicReport_s::measuredSpeeds</a></div><div class="ttdeci">float measuredSpeeds[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00019">DrivetrainSystem.h:19</a></div></div>
 </div><!-- fragment -->
 </div>
