@@ -235,7 +235,7 @@ DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_current_data()
     {
         auto iq = inv_pointer->get_torque_current(); // iq in A
         auto id = inv_pointer->get_mag_current();    // id in A
-        data.measuredSpeeds[inverter_ind] = (float)inv_pointer->get_speed();
+        data.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
         data.measuredTorqueCurrents[inverter_ind] = iq;
         data.measuredMagnetizingCurrents[inverter_ind] = id;
 

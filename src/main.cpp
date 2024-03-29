@@ -247,7 +247,8 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                         drivetrain.drivetrain_error_occured(), 
                         torque_controller_mux.getTorqueLimit(),
                         ams_interface.get_filtered_min_cell_voltage(),
-                        telem_interface.get_glv_voltage(a1.get()));
+                        telem_interface.get_glv_voltage(a1.get()),
+                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()));
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),

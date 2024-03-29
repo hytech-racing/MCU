@@ -8,6 +8,8 @@
 #include "MCU_status.h"
 #include "InverterInterface.h"
 
+#include "TorqueControllers.h"
+
 /*
     Enum for the car's torque limits
     MOVE ME! - ideally into a TorqueControllerDefs.h file
@@ -141,7 +143,8 @@ public:
                 bool drivetrain_error, 
                 TorqueLimit_e torque,
                 float min_cell_voltage,
-                AnalogConversion_s glv_voltage);
+                AnalogConversion_s glv_voltage,
+                int launch_state);
 
     /*!
         getter for the dashboard's current dial position (drive profile)

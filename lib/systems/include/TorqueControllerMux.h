@@ -19,9 +19,9 @@ private:
     // Use this to map the dial to TCMUX modes
     std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
         {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_2, TorqueController_e::TC_LOAD_CELL_VECTORING},
-        {DialMode_e::MODE_3, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
+        {DialMode_e::MODE_2, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
         {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
@@ -30,11 +30,21 @@ private:
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
         {TorqueLimit_e::TCMUX_FULL_TORQUE, 20.0}
     };
+
+    TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
     TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
+
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
-    TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
+    TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
+    TorqueControllerBase* controllers[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)] = {
+        static_cast<TorqueControllerBase*>(&torqueControllerNone_),
+        static_cast<TorqueControllerBase*>(&torqueControllerSimple_),
+        static_cast<TorqueControllerBase*>(&torqueControllerLoadCellVectoring_),
+        static_cast<TorqueControllerBase*>(&torqueControllerSimpleLaunch_),
+    };
+
     DrivetrainCommand_s drivetrainCommand_;
     TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
     bool torqueLimitButtonPressed_ = false;
@@ -44,7 +54,8 @@ public:
     TorqueControllerMux()
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
+    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}
 
 
     /// @brief torque controller mux constructor that leaves all other TCs with defaults accept for simple TC
@@ -53,7 +64,8 @@ public:
     TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)]) {}
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
+    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}
 // Functions
     void tick(
         const SysTick_s& tick,
@@ -79,6 +91,17 @@ public:
     {
         return torqueLimitMap_[torqueLimit_];
     }
+    TorqueControllerBase* activeController()
+    {
+        // check to make sure that there is actually a controller
+        // at the muxMode_ idx
+        if (controllers[muxMode_] != NULL) {
+            return controllers[muxMode_];
+        } else {
+            return static_cast<TorqueControllerBase*>(&torqueControllerNone_);
+        }
+    }
+
 };
 
 #endif /* __TORQUECTRLMUX_H__ */
