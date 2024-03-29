@@ -18,6 +18,7 @@
 #include "InverterInterface.h"
 #include "TelemetryInterface.h"
 #include "SABInterface.h"
+#include "VectornavInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -51,7 +52,7 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
-
+VNInterface vectorNav(&CAN3_rxBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
 WatchdogInterface wd_interface(32);
@@ -336,6 +337,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
+        vx_b,
         wheel_angle_rad
         );
 }

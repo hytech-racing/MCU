@@ -2,9 +2,9 @@
 
 template <typename message_queue>
 void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_command msg_in)
-{   
+{
     auto test = msg_in;
-    if(timer_can_.check()){
+    if (timer_can_.check()) {
         CAN_message_t msg;
         msg.id = can_id_;
         msg.len = sizeof(msg_in);
