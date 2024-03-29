@@ -40,7 +40,8 @@ enum TorqueController_e
     TC_SAFE_MODE = 1,
     TC_LOAD_CELL_VECTORING = 2,
     TC_SIMPLE_LAUNCH = 3,
-    TC_NUM_CONTROLLERS = 4,
+    TC_PID_VECTORING = 4,
+    TC_NUM_CONTROLLERS = 5,
 };
 
 enum class LaunchStates_e
@@ -248,6 +249,26 @@ public:
     void tick(const SysTick_s & tick, 
               const PedalsSystemData_s &pedalsData,
               const float wheel_rpms[]);
+};
+
+class TorqueControllerPIDTV: public TorqueController<TC_PID_VECTORING>
+{
+public: 
+    void tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate);
+    TorqueControllerPIDTV(TorqueControllerOutput_s &writeout): writeout_(writeout)
+    {
+        tv_pid_.initialize();
+        tv_pid_.setExternalInputs(&pid_input_);
+        pid_input_.PID_P = 3.0;
+        pid_input_.PID_I = 1.0;
+        pid_input_.PID_D = 0.0;
+        pid_input_.PID_N = 100;
+    }
+private:
+    TorqueControllerOutput_s &writeout_;
+    
+    PID_TV::ExtU_PID_TV_T pid_input_;
+    PID_TV tv_pid_;
 };
 
 #endif /* __TORQUECONTROLLERS_H__ */
