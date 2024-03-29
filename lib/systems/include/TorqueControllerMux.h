@@ -7,6 +7,7 @@
 #include "PedalsSystem.h"
 #include "SteeringSystem.h"
 #include "DashboardInterface.h"
+#include "VectornavInterface.h"
 // #include "AnalogSensorsInterface.h"
 
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
@@ -68,9 +69,8 @@ public:
         const AnalogConversion_s &loadRRData,
         DialMode_e dashboardDialMode,
         bool dashboardTorqueModeButtonPressed,
-        float vx_b, 
-        float wheel_angle_rad,
-        float yaw_rate);
+        const vector_nav &vn_data, 
+        float wheel_angle_rad);
     const DrivetrainCommand_s &getDrivetrainCommand()
     {
         return drivetrainCommand_;

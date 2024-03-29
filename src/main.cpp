@@ -52,7 +52,7 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
-VNInterface vn_interface(&CAN3_txBuffer);
+VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
 WatchdogInterface wd_interface(32);
@@ -101,7 +101,7 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 // */
 
-CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface, &sab_interface};
+CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
 
 /*
     FUNCTION DEFINITIONS
