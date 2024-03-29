@@ -382,15 +382,31 @@ void TorqueControllerSlipLaunch::tick(
 void TorqueControllerPIDTV::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate)
 {
 
-    pid_input_.Vx_B = vx_b;
-    pid_input_.WheelDeltarad = wheel_angle_rad;
-    pid_input_.YawRaterads = yaw_rate;
-    pid_input_.FR_in = 1.0;
-    pid_input_.RR_in = 1.0;
-    pid_input_.FL_in = 1.0;
-    pid_input_.RL_in = 1.0;
+    float accelRequest = pedalsData.accelPercent;
+    auto torqueRequest = accelRequest * AMK_MAX_TORQUE;
 
-    tv_pid_.step();
-    const PID_TV::ExtY_PID_TV_T& out = tv_pid_.getExternalOutputs();
-    
+    if (tick.triggers.trigger100)
+    {
+        pid_input_.Vx_B = vx_b;
+        pid_input_.WheelDeltarad = wheel_angle_rad;
+        pid_input_.YawRaterads = yaw_rate;
+        pid_input_.FR_in = torqueRequest;
+
+        pid_input_.RR_in = torqueRequest;
+        pid_input_.FL_in = torqueRequest;
+        pid_input_.RL_in = torqueRequest;
+        
+        tv_pid_.step();
+        const PID_TV::ExtY_PID_TV_T &out = tv_pid_.getExternalOutputs();
+
+        writeout_.command.speeds_rpm[FL] = AMK_MAX_RPM;
+        writeout_.command.speeds_rpm[FR] = AMK_MAX_RPM;
+        writeout_.command.speeds_rpm[RL] = AMK_MAX_RPM;
+        writeout_.command.speeds_rpm[RR] = AMK_MAX_RPM;
+
+        writeout_.command.torqueSetpoints[FL] = out.FL_out;
+        writeout_.command.torqueSetpoints[FR] = out.FR_out;
+        writeout_.command.torqueSetpoints[RL] = out.RL_out;
+        writeout_.command.torqueSetpoints[RR] = out.RR_out;
+    }
 }

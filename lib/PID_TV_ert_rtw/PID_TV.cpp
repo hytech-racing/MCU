@@ -39,7 +39,7 @@ void PID_TV::step()
   //   Trigonometry: '<S3>/Tan'
 
   rtb_YawErrorrads = std::abs(PID_TV_U.Vx_B) * std::tan(PID_TV_U.WheelDeltarad) /
-    2.3 - PID_TV_U.YawRaterads;
+    1.535 - PID_TV_U.YawRaterads;
 
   // Product: '<S38>/NProd Out' incorporates:
   //   DiscreteIntegrator: '<S30>/Filter'

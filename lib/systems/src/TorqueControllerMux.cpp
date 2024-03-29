@@ -12,11 +12,14 @@ void TorqueControllerMux::tick(
     const AnalogConversion_s &loadRLData,
     const AnalogConversion_s &loadRRData,
     DialMode_e dashboardDialMode,
-    bool dashboardTorqueModeButtonPressed)
+    bool dashboardTorqueModeButtonPressed,
+    const vector_nav &vn_data,
+    float wheel_angle_rad)
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
     torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);
+    torqueControllerPIDTV_.tick(tick, pedalsData, vn_data.velocity_x, wheel_angle_rad, vn_data.yaw);
     torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds);
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)

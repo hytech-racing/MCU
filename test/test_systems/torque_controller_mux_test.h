@@ -13,6 +13,7 @@
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
 #include "TorqueControllers.h"
+#include "VectornavInterface.h"
 
 // TODO: Find out why this test intermittently fails
 // TEST(TorqueControllerMuxTesting, test_torque_button)
@@ -69,6 +70,8 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
     TorqueControllerMux torque_controller_mux = TorqueControllerMux();
     DrivetrainCommand_s resulting_torque_command;
 
+    vector_nav vn_data{};
+
     DrivetrainDynamicReport_s simulated_drivetrain_dynamics = {
         .measuredInverterFLPackVoltage = 550,
         .measuredSpeeds = {0.0, 0.0, 0.0, 0.0},
@@ -109,7 +112,9 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         DialMode_e::MODE_0,
-        false
+        false,
+        vn_data,
+        0.0
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -131,7 +136,9 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         DialMode_e::MODE_0,
-        false
+        false,
+        vn_data,
+        0.0
     );
 
     // Now press the pedal again. Torque should be requested
@@ -145,7 +152,9 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         DialMode_e::MODE_0,
-        false
+        false,
+        vn_data,
+        0.0
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -164,6 +173,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
     cur_tick = clock.tick(0);
     TorqueControllerMux torque_controller_mux = TorqueControllerMux();
     DrivetrainCommand_s resulting_torque_command;
+    vector_nav vn_data{};
 
     DrivetrainDynamicReport_s simulated_slow_drivetrain_dynamics = {
         .measuredInverterFLPackVoltage = 550,
@@ -223,7 +233,9 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         DialMode_e::MODE_0,
-        false
+        false,
+        vn_data,
+        0.0
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -245,7 +257,9 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         DialMode_e::MODE_0,
-        false
+        false,
+        vn_data,
+        0.0
     );
 
     // Now press the pedal. Torque should be requested
@@ -259,7 +273,9 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const AnalogConversion_s) {},
         (const AnalogConversion_s) {},
         DialMode_e::MODE_0,
-        false
+        false,
+        vn_data,
+        0.0
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();

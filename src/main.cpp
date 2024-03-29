@@ -18,6 +18,7 @@
 #include "InverterInterface.h"
 #include "TelemetryInterface.h"
 #include "SABInterface.h"
+#include "VectornavInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -51,7 +52,7 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
-
+VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
 WatchdogInterface wd_interface(32);
@@ -100,7 +101,7 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 // */
 
-CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &dashboard, &ams_interface, &sab_interface};
+CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
 
 /*
     FUNCTION DEFINITIONS
@@ -322,6 +323,10 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // // tick drivetrain system
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
+
+
+    // TODO is this correct?
+    auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_current_data(),
@@ -332,5 +337,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         sab_interface.rlLoadCell.convert(),  // RL load cell reading. TODO: get data from rear load cells
         sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
-        dashboard.torqueModeButtonPressed());
+        dashboard.torqueModeButtonPressed(),
+        vn_interface.get_vn_struct(),
+        wheel_angle_rad
+        );
 }
