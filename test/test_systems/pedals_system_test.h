@@ -19,25 +19,43 @@ TEST(PedalsSystemTesting, test_accel_and_brake_limits_plausibility)
     AnalogConversion_s test_accel1_val = {0, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_accel2_val = {200, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {200, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
+
+    PedalsParams params;
+    params.min_sense_1 = 1000;
+    params.max_sense_1 = 2000;
+    params.min_sense_2 = 1000;
+    params.max_sense_2 = 2000;
+    PedalsSystem pedals(params, params, 0.0f);
+
+
+
+    // this should be implausible since test accel1 and accel2 have values less than the min (1000)
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.accelImplausible);
+    // ensuring that both accel in either position (since they have the same config, this should fail too)
     data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.accelImplausible);
+    
+
+    // testing accel raw greater than max
     test_accel1_val.raw = 4000;
     data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.accelImplausible);
+
+    // brake min and max on raw. testing that if accel is implaus and brake implaus (less than min) we still guchi
     test_accel1_val.raw = 300;
-    // brake min and max on raw
     test_brake_val.raw = 0;
     data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeImplausible);
+
+    // testing brake greater than max 
     test_brake_val.raw = 40000;
     data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeImplausible);
 
-    test_accel1_val.raw = 200;
-    test_brake_val.raw = 200;
+    // testing good values still good
+    test_accel1_val.raw = 1300;
+    test_brake_val.raw = 1300;
 
     data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
 
