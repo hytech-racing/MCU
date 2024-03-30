@@ -340,13 +340,14 @@ void TorqueControllerSlipLaunch::tick(
             {
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
             }
+            float rpm_target = 0;
 
             uint32_t ms_since_launch = (tick.millis - time_of_launch);
             // accelerate at constant speed for a period of time to get body velocity up
             // may want to make this the ht07 launch algo
             if(ms_since_launch < const_accel_time){
 
-                launch_speed_target = DEFAULT_LAUNCH_SPEED_TARGET;
+                rpm_target = DEFAULT_LAUNCH_SPEED_TARGET;
 
             } else {
 
@@ -355,15 +356,16 @@ void TorqueControllerSlipLaunch::tick(
                 is to always be pushing the car a certain 'slip_ratio_' faster than
                 the car is currently going, theoretically always keeping the car in slip
                 */
-                launch_speed_target = (1 + slip_ratio_) * vx_body;
-                launch_speed_target *= METERS_PER_SECOND_TO_RPM;
+                float new_target = (1 + .2) * vx_body;
+                launch_speed_target = std::max(rpm_target * RPM_TO_METERS_PER_SECOND, new_target);
+                rpm_target = METERS_PER_SECOND_TO_RPM * launch_speed_target;
 
             }
 
-            writeout_.command.speeds_rpm[FL] = launch_speed_target;
-            writeout_.command.speeds_rpm[FR] = launch_speed_target;
-            writeout_.command.speeds_rpm[RL] = launch_speed_target;
-            writeout_.command.speeds_rpm[RR] = launch_speed_target;
+            writeout_.command.speeds_rpm[FL] = rpm_target;
+            writeout_.command.speeds_rpm[FR] = rpm_target;
+            writeout_.command.speeds_rpm[RL] = rpm_target;
+            writeout_.command.speeds_rpm[RR] = rpm_target;
 
             writeout_.command.torqueSetpoints[FL] = AMK_MAX_TORQUE;
             writeout_.command.torqueSetpoints[FR] = AMK_MAX_TORQUE;

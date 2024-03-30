@@ -29,7 +29,7 @@ const float DEFAULT_LAUNCH_RATE = 11.76;
 const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
 
 const float DEFAULT_SLIP_RATIO = 0.2f;
-const float const_accel_time = 500; //time to use launch speed target in ms
+const float const_accel_time = 1500; // time to use launch speed target in ms
 
 const float launch_ready_accel_threshold = .1;
 const float launch_ready_brake_threshold = .2;
@@ -258,7 +258,7 @@ public:
         writeout_.ready = true;
     }
 
-    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
+    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
     LaunchStates_e get_launch_state() override { return launch_state; }
 
@@ -296,7 +296,7 @@ public:
         writeout_.ready = true;
     }
 
-    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
+    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
     LaunchStates_e get_launch_state() override { return launch_state; }
 

@@ -23,7 +23,7 @@ private:
         {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
         {DialMode_e::MODE_2, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
-        {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_4, TorqueController_e::TC_SLIP_LAUNCH},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
