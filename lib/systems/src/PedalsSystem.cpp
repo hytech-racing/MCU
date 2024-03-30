@@ -36,7 +36,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     }
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
-    out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
+    out.brakePercent = brake2.conversion;
     out.regenPercent = std::max(std::min(out.brakePercent / mechBrakeActiveThreshold_, 1.0f), 0.0f);
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
     out.mechBrakeActive = out.brakePercent > mechBrakeActiveThreshold_;

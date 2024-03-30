@@ -111,7 +111,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         drivetrain_->command_drivetrain_no_torque();
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
-        if (buzzer_->done(current_millis) && !dashboard_->checkBuzzer())
+        if (buzzer_->done(current_millis, dashboard_->checkBuzzer()))
         {
             set_state_(CAR_STATE::READY_TO_DRIVE, current_millis);
         }
@@ -137,7 +137,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
+        if (safety_system_->get_software_is_ok())
         {
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         }
@@ -182,8 +182,9 @@ void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
         break;
     case CAR_STATE::READY_TO_DRIVE:
-    {
-        // drivetrain_->disable();
+    {   
+        // deactivate buzzer and reset it to turn on again later
+        buzzer_->deactivate();
         break;
     }
     }
