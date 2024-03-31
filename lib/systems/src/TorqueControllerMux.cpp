@@ -19,8 +19,8 @@ void TorqueControllerMux::tick(
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
     torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);
-    torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds);
-    torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, vn_data.velocity_x);
+    torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
+    torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
     // torqueControllerPIDTV_.tick(tick, pedalsData, vn_data.velocity_x, wheel_angle_rad, vn_data.yaw);
     
     // Tick torque button logic at 50hz

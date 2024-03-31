@@ -8,6 +8,9 @@
 #include "AnalogSensorsInterface.h"
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
+#include "VectornavInterface.h"
+
+#include "accel_lookup.h"
 
 #include "PID_TV.h"
 
@@ -58,8 +61,9 @@ enum TorqueController_e
     TC_LOAD_CELL_VECTORING = 2,
     TC_SIMPLE_LAUNCH = 3,
     TC_SLIP_LAUNCH = 4,
-    TC_PID_VECTORING = 5,
-    TC_NUM_CONTROLLERS = 6,
+    TC_LOOKUP_LAUNCH = 5,
+    TC_PID_VECTORING = 6,
+    TC_NUM_CONTROLLERS = 7,
 };
 
 enum class LaunchStates_e
@@ -230,16 +234,38 @@ public:
         const AnalogConversion_s &rrLoadCellData);
 };
 
-class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>
+class BaseLaunchController
 {
-private:
+protected:
     TorqueControllerOutput_s &writeout_;
-    float launch_rate_target_;
-    int16_t init_speed_target_;
-    
+
     LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
     uint32_t time_of_launch;
+    uint32_t current_millis;
     float launch_speed_target = 0.0;
+
+    int16_t init_speed_target_;
+public:
+    BaseLaunchController(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
+        : writeout_(writeout),
+        init_speed_target_(initial_speed_target)
+    {
+        writeout.command = TC_COMMAND_NO_TORQUE;
+        writeout_.ready = true;
+    }
+
+    void tick(const SysTick_s &tick,
+              const PedalsSystemData_s &pedalsData,
+              const float wheel_rpms[],
+              const vector_nav* vn_data);
+
+    virtual void calc_launch_algo(const vector_nav* vn_data) = 0;
+};
+
+class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>, public BaseLaunchController
+{
+private:
+    float launch_rate_target_;
 public:
 
     /*!
@@ -250,33 +276,20 @@ public:
         @param initial_speed_target the initial speed commanded to the wheels
     */
     TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout, float launch_rate, int16_t initial_speed_target)
-        : writeout_(writeout),
-          launch_rate_target_(launch_rate),
-          init_speed_target_(initial_speed_target)
-    {
-        writeout_.command = TC_COMMAND_NO_TORQUE;
-        writeout_.ready = true;
-    }
+        : BaseLaunchController(writeout, initial_speed_target),
+        launch_rate_target_(launch_rate) {}
 
     TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
     LaunchStates_e get_launch_state() override { return launch_state; }
 
-    void tick(const SysTick_s & tick, 
-              const PedalsSystemData_s &pedalsData,
-              const float wheel_rpms[]);
+    void calc_launch_algo(const vector_nav* vn_data) override;
 };
 
-class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>
+class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>, public BaseLaunchController
 {
 private:
-    TorqueControllerOutput_s &writeout_;
     float slip_ratio_;
-    int16_t init_speed_target_;
-    
-    LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
-    uint32_t time_of_launch;
-    float launch_speed_target = 0.0;
 public:
 
     /*!
@@ -288,22 +301,38 @@ public:
         @param initial_speed_target the initial speed commanded to the wheels
     */
     TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout, float slip_ratio, int16_t initial_speed_target)
-        : writeout_(writeout),
-          slip_ratio_(slip_ratio),
-          init_speed_target_(initial_speed_target)
-    {
-        writeout_.command = TC_COMMAND_NO_TORQUE;
-        writeout_.ready = true;
-    }
+        : BaseLaunchController(writeout, initial_speed_target),
+          slip_ratio_(slip_ratio) {}
 
     TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
     LaunchStates_e get_launch_state() override { return launch_state; }
 
-    void tick(const SysTick_s & tick, 
-              const PedalsSystemData_s &pedalsData,
-              const float wheel_rpms[],
-              float vx_body);
+    void calc_launch_algo(const vector_nav* vn_data) override;
+};
+
+class TorqueControllerLookupLaunch : public TorqueController<TC_LOOKUP_LAUNCH>, BaseLaunchController
+{
+private:
+
+public:
+
+    /*!
+        Lookup Launch Controller
+        This launch controller is based off of a matlab and symlink generated lookup table.
+        This has been converted to a C array with some basic python code using the array index
+        as the input for the controller
+        @param slip_ratio specified launch rate in m/s^2
+        @param initial_speed_target the initial speed commanded to the wheels
+    */
+    TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
+        : BaseLaunchController(writeout, initial_speed_target) {}
+
+    TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerLookupLaunch(writeout, DEFAULT_LAUNCH_SPEED_TARGET) {}
+
+    LaunchStates_e get_launch_state() override { return launch_state; }
+    
+    void calc_launch_algo(const vector_nav* vn_data) override;
 };
 
 class TorqueControllerPIDTV: public TorqueController<TC_PID_VECTORING>

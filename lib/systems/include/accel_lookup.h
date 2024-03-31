@@ -1,6 +1,9 @@
+#ifndef __ACCEL_LOOKUP_H__
+#define __ACCEL_LOOKUP_H__
+
 /* velocity lookup based on the current distance from start 
    The units are .1 of a meter */
-float vel_dist_lookup[750] = {
+const float vel_dist_lookup[750] = {
 2.050151543, 2.901229056, 3.555562361, 4.108259945, 4.596134835,
 5.038053945, 5.445217431, 5.824917835, 6.182217116, 6.520798332,
 6.843439975, 7.152299162, 7.449090141, 7.735201837, 8.011778115,
@@ -152,3 +155,5 @@ float vel_dist_lookup[750] = {
 34.72435339, 34.73369102, 34.74301137, 34.75231448, 34.76160039,
 34.77086914, 34.78012076, 34.7893553, 34.79857279, 34.80777328,
 };
+
+#endif
