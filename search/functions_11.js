@@ -14,6 +14,7 @@ var searchData=
   ['update_5fmcu_5fstatus_5fcan_5fsafety_11',['update_mcu_status_CAN_safety',['../classMCUInterface.html#ae5a4b72d324bae44aa759f364f7f9976',1,'MCUInterface']]],
   ['update_5fmcu_5fstatus_5fcan_5ftcmux_12',['update_mcu_status_CAN_TCMux',['../classMCUInterface.html#a5d538f83f51afbc9eef6175517509dcb',1,'MCUInterface']]],
   ['update_5fpedal_5freadings_5fcan_5fmsg_13',['update_pedal_readings_CAN_msg',['../classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8',1,'TelemetryInterface']]],
-  ['update_5fpenthouse_5faccum_5fcan_5fmsg_14',['update_penthouse_accum_CAN_msg',['../classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e',1,'TelemetryInterface']]],
-  ['update_5fsuspension_5fcan_5fmsg_15',['update_suspension_CAN_msg',['../classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38',1,'TelemetryInterface']]]
+  ['update_5fpedal_5freadings_5fraw_5fcan_5fmsg_14',['update_pedal_readings_raw_CAN_msg',['../classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123',1,'TelemetryInterface']]],
+  ['update_5fpenthouse_5faccum_5fcan_5fmsg_15',['update_penthouse_accum_CAN_msg',['../classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e',1,'TelemetryInterface']]],
+  ['update_5fsuspension_5fcan_5fmsg_16',['update_suspension_CAN_msg',['../classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38',1,'TelemetryInterface']]]
 ];

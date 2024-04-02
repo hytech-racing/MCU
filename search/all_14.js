@@ -20,10 +20,11 @@ var searchData=
   ['update_5fmcu_5fstatus_5fcan_5fsafety_17',['update_mcu_status_CAN_safety',['../classMCUInterface.html#ae5a4b72d324bae44aa759f364f7f9976',1,'MCUInterface']]],
   ['update_5fmcu_5fstatus_5fcan_5ftcmux_18',['update_mcu_status_CAN_TCMux',['../classMCUInterface.html#a5d538f83f51afbc9eef6175517509dcb',1,'MCUInterface']]],
   ['update_5fpedal_5freadings_5fcan_5fmsg_19',['update_pedal_readings_CAN_msg',['../classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8',1,'TelemetryInterface']]],
-  ['update_5fpenthouse_5faccum_5fcan_5fmsg_20',['update_penthouse_accum_CAN_msg',['../classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e',1,'TelemetryInterface']]],
-  ['update_5fsuspension_5fcan_5fmsg_21',['update_suspension_CAN_msg',['../classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38',1,'TelemetryInterface']]],
-  ['usecustomname_22',['useCustomName',['../structrtwCAPI__StateflowSignalLoggingInfo__tag.html#a531015edf098f7ebd41210a891b22f02',1,'rtwCAPI_StateflowSignalLoggingInfo_tag']]],
-  ['utfree_23',['utFree',['../rtw__modelmap_8h.html#acd680b5ba54ba6bbf125f0129ee549f2',1,'rtw_modelmap.h']]],
-  ['utility_2eh_24',['Utility.h',['../Utility_8h.html',1,'']]],
-  ['utmalloc_25',['utMalloc',['../rtw__modelmap_8h.html#a59b0c3d586d36906b607ebcd5bdde6de',1,'rtw_modelmap.h']]]
+  ['update_5fpedal_5freadings_5fraw_5fcan_5fmsg_20',['update_pedal_readings_raw_CAN_msg',['../classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123',1,'TelemetryInterface']]],
+  ['update_5fpenthouse_5faccum_5fcan_5fmsg_21',['update_penthouse_accum_CAN_msg',['../classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e',1,'TelemetryInterface']]],
+  ['update_5fsuspension_5fcan_5fmsg_22',['update_suspension_CAN_msg',['../classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38',1,'TelemetryInterface']]],
+  ['usecustomname_23',['useCustomName',['../structrtwCAPI__StateflowSignalLoggingInfo__tag.html#a531015edf098f7ebd41210a891b22f02',1,'rtwCAPI_StateflowSignalLoggingInfo_tag']]],
+  ['utfree_24',['utFree',['../rtw__modelmap_8h.html#acd680b5ba54ba6bbf125f0129ee549f2',1,'rtw_modelmap.h']]],
+  ['utility_2eh_25',['Utility.h',['../Utility_8h.html',1,'']]],
+  ['utmalloc_26',['utMalloc',['../rtw__modelmap_8h.html#a59b0c3d586d36906b607ebcd5bdde6de',1,'rtw_modelmap.h']]]
 ];
