@@ -222,8 +222,9 @@ void BaseLaunchController::tick(
                 launch_state = LaunchStates_e::LAUNCH_NOT_READY;
             } else if(pedalsData.accelPercent >= launch_go_accel_threshold){
 
-                initial_lat = vn_data->latitude;
-                initial_lon = vn_data->longitude;
+                initial_ecef_x = vn_data->ecef_coords[0];
+                initial_ecef_y = vn_data->ecef_coords[1];
+                initial_ecef_z = vn_data->ecef_coords[2];
 
                 launch_state = LaunchStates_e::LAUNCHING;
             }
@@ -303,20 +304,26 @@ void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
 
 void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
 
-    initial_lat = toRadians(initial_lat);
-    initial_lon = toRadians(initial_lon);
-    double lat = toRadians(vn_data->latitude);
-    double lon = toRadians(vn_data->longitude);
+    // initial_lat = toRadians(initial_lat);
+    // initial_lon = toRadians(initial_lon);
+    // double lat = toRadians(vn_data->latitude);
+    // double lon = toRadians(vn_data->longitude);
 
 
-    /* BEWARE PARTIALLY WRITTEN BY CHAT */
-    double dLat = lat - initial_lat;
-    double dLon = lon - initial_lon;
-    double a = sin(dLat / 2) * sin(dLat / 2) +
-               cos(lat) * cos(initial_lat) *
-               sin(dLon / 2) * sin(dLon / 2);
-    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    double distance = EARTH_RADIUS_KM * c;
+    // /* BEWARE PARTIALLY WRITTEN BY CHAT */
+    // double dLat = lat - initial_lat;
+    // double dLon = lon - initial_lon;
+    // double a = sin(dLat / 2) * sin(dLat / 2) +
+    //            cos(lat) * cos(initial_lat) *
+    //            sin(dLon / 2) * sin(dLon / 2);
+    // double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    // double distance = EARTH_RADIUS_KM * c;
+
+    double dx = vn_data->ecef_coords[0] - initial_ecef_x;
+    double dy = vn_data->ecef_coords[1] - initial_ecef_y;
+    double dz = vn_data->ecef_coords[2] - initial_ecef_z;
+
+    double distance = sqrt( sq(dx) + sq(dy) + sq(dz));
 
     // multiply by 10 to be used as index for meters in steps of 1/10
     uint32_t idx = (uint32_t)(distance * 10);

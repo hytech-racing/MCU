@@ -245,8 +245,10 @@ protected:
     TorqueControllerOutput_s &writeout_;
 
     uint32_t time_of_launch;
-    double initial_lat;
-    double initial_lon;
+
+    double initial_ecef_x;
+    double initial_ecef_y;
+    double initial_ecef_z;
 
     LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
     uint32_t current_millis;
