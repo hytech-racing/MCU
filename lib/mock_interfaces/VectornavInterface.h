@@ -14,6 +14,7 @@ struct vector_nav {
         float roll;
         double latitude;
         double longitude;
+        double ecef_coords[3]; // x,y,z
         uint64_t gps_time; // gps time
         uint8_t vn_status; // status
     };

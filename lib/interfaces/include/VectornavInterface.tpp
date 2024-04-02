@@ -60,6 +60,21 @@ void VNInterface<message_queue>::retrieve_vn_status_CAN(CAN_message_t &recvd_msg
     vn_data.vn_status = status_data.vn_gps_status;
 }
 
+template <typename message_queue>
+void VNInterface<message_queue>::retrieve_vn_ecef_pos_xy_CAN(CAN_message_t &recvd_msg) {
+    VN_ECEF_POS_XY_t ecef_xy;
+    Unpack_VN_ECEF_POS_XY_hytech(&ecef_xy, recvd_msg.buf, recvd_msg.len);
+    vn_data.ecef_coords[0] = HYTECH_vn_ecef_pos_x_ro_fromS(ecef_xy.vn_ecef_pos_x_ro);
+    vn_data.ecef_coords[1] = HYTECH_vn_ecef_pos_y_ro_fromS(ecef_xy.vn_ecef_pos_y_ro);
+}
+
+template <typename message_queue>
+void VNInterface<message_queue>::retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg) {
+    VN_ECEF_POS_Z_t ecef_z;
+    Unpack_VN_ECEF_POS_Z_hytech(&ecef_z, recvd_msg.buf, recvd_msg.len);
+    vn_data.ecef_coords[2] = HYTECH_vn_ecef_pos_z_ro_fromS(ecef_z.vn_ecef_pos_z_ro);
+}
+
 /**
  * @brief 
  * getter method for returning vn_data structure

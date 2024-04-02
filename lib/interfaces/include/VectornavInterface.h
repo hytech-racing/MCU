@@ -16,6 +16,7 @@ struct vector_nav {
         float roll;
         double latitude;
         double longitude;
+        double ecef_coords[3]; // x,y,z
         uint64_t gps_time; // gps time
         uint8_t vn_status; // status
     };
@@ -44,6 +45,8 @@ public:
     void retrieve_lat_lon_CAN(CAN_message_t &recvd_msg);
     void retrieve_gps_time_CAN(CAN_message_t &recvd_msg);
     void retrieve_vn_status_CAN(CAN_message_t &recvd_msg);
+    void retrieve_vn_ecef_pos_xy_CAN(CAN_message_t &recvd_msg);
+    void retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg);
     // getters
     vector_nav get_vn_struct();
     
