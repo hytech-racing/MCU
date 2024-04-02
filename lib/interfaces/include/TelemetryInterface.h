@@ -59,6 +59,12 @@ public:
         float brake_percent,
         float mech_brake_percent
     );
+    void update_pedal_readings_raw_CAN_msg(
+        const AnalogConversion_s &accel_1,
+        const AnalogConversion_s &accel_2,
+        const AnalogConversion_s &brake_1,
+        const AnalogConversion_s &brake_2
+    );
     void update_suspension_CAN_msg(
         const AnalogConversion_s &lc_fl,
         const AnalogConversion_s &lc_fr,
@@ -131,6 +137,10 @@ public:
         bool brake_implaus,
         float accel_per,
         float brake_per,
+        const AnalogConversion_s &accel_1,
+        const AnalogConversion_s &accel_2,
+        const AnalogConversion_s &brake_1,
+        const AnalogConversion_s &brake_2,
         float mech_brake_active_percent
     );
 
