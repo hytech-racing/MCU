@@ -42,8 +42,8 @@ template<typename message_queue>
 void VNInterface<message_queue>::retrieve_lat_lon_CAN(CAN_message_t &recvd_msg) {
     VN_LAT_LON_t lat_lon_data;
     Unpack_VN_LAT_LON_hytech(&lat_lon_data, recvd_msg.buf, recvd_msg.len);
-    vn_data.lateral = HYTECH_vn_gps_lat_ro_fromS(lat_lon_data.vn_gps_lat_ro);
-    vn_data.longitudnal = HYTECH_vn_gps_lon_ro_fromS(lat_lon_data.vn_gps_lon_ro);
+    vn_data.latitude = HYTECH_vn_gps_lat_ro_fromS(lat_lon_data.vn_gps_lat_ro);
+    vn_data.longitude = HYTECH_vn_gps_lon_ro_fromS(lat_lon_data.vn_gps_lon_ro);
 }
 
 template<typename message_queue>

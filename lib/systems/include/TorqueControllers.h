@@ -40,6 +40,11 @@ const float launch_ready_speed_threshold = 5.0 * METERS_PER_SECOND_TO_RPM; // rp
 const float launch_go_accel_threshold = .9;
 const float launch_stop_accel_threshold = .5;
 
+constexpr double EARTH_RADIUS_KM = 6371.0;
+constexpr double toRadians(double degrees) {
+    return degrees * M_PI / 180.0;
+}
+
 /* DRIVETRAIN STRUCTS */
 
 const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
@@ -239,8 +244,11 @@ class BaseLaunchController
 protected:
     TorqueControllerOutput_s &writeout_;
 
-    LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
     uint32_t time_of_launch;
+    double initial_lat;
+    double initial_lon;
+
+    LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
     uint32_t current_millis;
     float launch_speed_target = 0.0;
 
@@ -314,7 +322,7 @@ public:
 class TorqueControllerLookupLaunch : public TorqueController<TC_LOOKUP_LAUNCH>, BaseLaunchController
 {
 private:
-
+    bool init_position = false;
 public:
 
     /*!
@@ -329,7 +337,7 @@ public:
         : BaseLaunchController(writeout, initial_speed_target) {}
 
     TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerLookupLaunch(writeout, DEFAULT_LAUNCH_SPEED_TARGET) {}
-
+    
     LaunchStates_e get_launch_state() override { return launch_state; }
     
     void calc_launch_algo(const vector_nav* vn_data) override;

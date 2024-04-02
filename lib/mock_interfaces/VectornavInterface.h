@@ -12,8 +12,8 @@ struct vector_nav {
         float yaw;
         float pitch;
         float roll;
-        double lateral;
-        double longitudnal;
+        double latitude;
+        double longitude;
         uint64_t gps_time; // gps time
         uint8_t vn_status; // status
     };
