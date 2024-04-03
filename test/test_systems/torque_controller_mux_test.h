@@ -653,7 +653,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
 
     // press accel now with one wheelspeed barely under threshold
     torque_controller_mux.tick(
-        clock.tick(100),
+        clock.tick(100000),
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
@@ -669,7 +669,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
 
     // tick TCMUX (10k us will hit 100hz)
     torque_controller_mux.tick(
-        clock.tick(10000),
+        clock.tick(100000),
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
@@ -689,7 +689,6 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
 
     DrivetrainCommand_s commanded = torque_controller_mux.getDrivetrainCommand();
     ASSERT_EQ((int16_t)commanded.speeds_rpm[0], DEFAULT_LAUNCH_SPEED_TARGET);
-    
 
     torque_controller_mux.tick(
         clock.tick(const_accel_time * 1000), // const accel time sine launch

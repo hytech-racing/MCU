@@ -163,101 +163,103 @@ void BaseLaunchController::tick(
     const vector_nav* vn_data)
 {
 
-    current_millis = tick.millis;
+    if (tick.triggers.trigger100){
 
-    int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
+        current_millis = tick.millis;
 
-    float max_speed = 0;
-    for(int i = 0; i < 4; i++){
-        max_speed = std::max(max_speed, abs(wheel_rpms[i]));
-    }
+        int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
 
-    writeout_.ready = true;
+        float max_speed = 0;
+        for(int i = 0; i < 4; i++){
+            max_speed = std::max(max_speed, abs(wheel_rpms[i]));
+        }
 
-    switch(launch_state){
-        case LaunchStates_e::LAUNCH_NOT_READY:
-            // set torques and speed to 0
-            writeout_.command.speeds_rpm[FL] = 0.0;
-            writeout_.command.speeds_rpm[FR] = 0.0;
-            writeout_.command.speeds_rpm[RL] = 0.0;
-            writeout_.command.speeds_rpm[RR] = 0.0;
+        writeout_.ready = true;
 
-            writeout_.command.torqueSetpoints[FL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[FR] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RR] = brake_torque_req;
+        switch(launch_state){
+            case LaunchStates_e::LAUNCH_NOT_READY:
+                // set torques and speed to 0
+                writeout_.command.speeds_rpm[FL] = 0.0;
+                writeout_.command.speeds_rpm[FR] = 0.0;
+                writeout_.command.speeds_rpm[RL] = 0.0;
+                writeout_.command.speeds_rpm[RR] = 0.0;
 
-            //init launch vars
-            launch_speed_target = 0;
-            time_of_launch = tick.millis;
-            // check speed is 0 and pedals not pressed
-            if((pedalsData.accelPercent < launch_ready_accel_threshold)
-               && (pedalsData.brakePercent < launch_ready_brake_threshold)
-               && (max_speed < launch_ready_speed_threshold))
-            {
-                launch_state = LaunchStates_e::LAUNCH_READY;
-            }
+                writeout_.command.torqueSetpoints[FL] = brake_torque_req;
+                writeout_.command.torqueSetpoints[FR] = brake_torque_req;
+                writeout_.command.torqueSetpoints[RL] = brake_torque_req;
+                writeout_.command.torqueSetpoints[RR] = brake_torque_req;
 
-            break;
-        case LaunchStates_e::LAUNCH_READY:
-            // set torques and speed to 0
-            writeout_.command.speeds_rpm[FL] = 0.0;
-            writeout_.command.speeds_rpm[FR] = 0.0;
-            writeout_.command.speeds_rpm[RL] = 0.0;
-            writeout_.command.speeds_rpm[RR] = 0.0;
+                //init launch vars
+                launch_speed_target = 0;
+                time_of_launch = tick.millis;
+                // check speed is 0 and pedals not pressed
+                if((pedalsData.accelPercent < launch_ready_accel_threshold)
+                && (pedalsData.brakePercent < launch_ready_brake_threshold)
+                && (max_speed < launch_ready_speed_threshold))
+                {
+                    launch_state = LaunchStates_e::LAUNCH_READY;
+                }
 
-            writeout_.command.torqueSetpoints[FL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[FR] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RR] = brake_torque_req;
+                break;
+            case LaunchStates_e::LAUNCH_READY:
+                // set torques and speed to 0
+                writeout_.command.speeds_rpm[FL] = 0.0;
+                writeout_.command.speeds_rpm[FR] = 0.0;
+                writeout_.command.speeds_rpm[RL] = 0.0;
+                writeout_.command.speeds_rpm[RR] = 0.0;
 
-            //init launch vars
-            launch_speed_target = 0;
-            time_of_launch = current_millis;
+                writeout_.command.torqueSetpoints[FL] = brake_torque_req;
+                writeout_.command.torqueSetpoints[FR] = brake_torque_req;
+                writeout_.command.torqueSetpoints[RL] = brake_torque_req;
+                writeout_.command.torqueSetpoints[RR] = brake_torque_req;
 
-            //check speed is 0 and brake not pressed
-            if ((pedalsData.brakePercent >= launch_ready_brake_threshold)
-                || (max_speed >= launch_ready_speed_threshold))
-            {
-                launch_state = LaunchStates_e::LAUNCH_NOT_READY;
-            } else if(pedalsData.accelPercent >= launch_go_accel_threshold){
+                //init launch vars
+                launch_speed_target = 0;
+                time_of_launch = current_millis;
 
-                initial_ecef_x = vn_data->ecef_coords[0];
-                initial_ecef_y = vn_data->ecef_coords[1];
-                initial_ecef_z = vn_data->ecef_coords[2];
+                //check speed is 0 and brake not pressed
+                if ((pedalsData.brakePercent >= launch_ready_brake_threshold)
+                    || (max_speed >= launch_ready_speed_threshold))
+                {
+                    launch_state = LaunchStates_e::LAUNCH_NOT_READY;
+                } else if(pedalsData.accelPercent >= launch_go_accel_threshold){
 
-                launch_state = LaunchStates_e::LAUNCHING;
-            }
+                    initial_ecef_x = vn_data->ecef_coords[0];
+                    initial_ecef_y = vn_data->ecef_coords[1];
+                    initial_ecef_z = vn_data->ecef_coords[2];
 
-            //check accel above launch threshold and launch
-            break;
-        case LaunchStates_e::LAUNCHING:
-            { // use brackets to ignore 'cross initialization' of secs_since_launch
-            //check accel below launch threshold and brake above
-            if((pedalsData.accelPercent <= launch_stop_accel_threshold)
-               || (pedalsData.brakePercent >= launch_ready_brake_threshold))
-            {
-                launch_state = LaunchStates_e::LAUNCH_NOT_READY;
-            }
+                    launch_state = LaunchStates_e::LAUNCHING;
+                }
 
-            calc_launch_algo(vn_data);
+                //check accel above launch threshold and launch
+                break;
+            case LaunchStates_e::LAUNCHING:
+                { // use brackets to ignore 'cross initialization' of secs_since_launch
+                //check accel below launch threshold and brake above
+                if((pedalsData.accelPercent <= launch_stop_accel_threshold)
+                || (pedalsData.brakePercent >= launch_ready_brake_threshold))
+                {
+                    launch_state = LaunchStates_e::LAUNCH_NOT_READY;
+                }
 
-            writeout_.command.speeds_rpm[FL] = launch_speed_target;
-            writeout_.command.speeds_rpm[FR] = launch_speed_target;
-            writeout_.command.speeds_rpm[RL] = launch_speed_target;
-            writeout_.command.speeds_rpm[RR] = launch_speed_target;
+                calc_launch_algo(vn_data);
 
-            writeout_.command.torqueSetpoints[FL] = AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[FR] = AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[RL] = AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[RR] = AMK_MAX_TORQUE;
+                writeout_.command.speeds_rpm[FL] = launch_speed_target;
+                writeout_.command.speeds_rpm[FR] = launch_speed_target;
+                writeout_.command.speeds_rpm[RL] = launch_speed_target;
+                writeout_.command.speeds_rpm[RR] = launch_speed_target;
 
-            }
-            break;
-        default:
-            break;
+                writeout_.command.torqueSetpoints[FL] = AMK_MAX_TORQUE;
+                writeout_.command.torqueSetpoints[FR] = AMK_MAX_TORQUE;
+                writeout_.command.torqueSetpoints[RL] = AMK_MAX_TORQUE;
+                writeout_.command.torqueSetpoints[RR] = AMK_MAX_TORQUE;
 
+                }
+                break;
+            default:
+                break;
 
+        }
 
     }
 }
@@ -282,7 +284,6 @@ void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
             // accelerate at constant speed for a period of time to get body velocity up
             // may want to make this the ht07 launch algo
             if(ms_since_launch < const_accel_time){
-
                 launch_speed_target = DEFAULT_LAUNCH_SPEED_TARGET;
 
             } else {
@@ -319,15 +320,24 @@ void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
     // double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     // double distance = EARTH_RADIUS_KM * c;
 
+    launch_speed_target = std::max((float)DEFAULT_LAUNCH_SPEED_TARGET, launch_speed_target);
+
     double dx = vn_data->ecef_coords[0] - initial_ecef_x;
     double dy = vn_data->ecef_coords[1] - initial_ecef_y;
     double dz = vn_data->ecef_coords[2] - initial_ecef_z;
 
-    double distance = sqrt( sq(dx) + sq(dy) + sq(dz));
+    double distance = sqrt((dx*dx) + (dy*dy) + (dz*dz));
 
-    // multiply by 10 to be used as index for meters in steps of 1/10
-    uint32_t idx = (uint32_t)(distance * 10);
-    idx = std::min(idx, (uint32_t)sizeof(vel_dist_lookup));
+    /*
+    Distance-lookup launch algorithm. Takes in the vel_dist_lookup
+    generated from Luke's matlab/symlink to set speed targets based
+    on distance travelled from the start point.
+    This can also and may be better to replace with an integration
+    of body velocity.
+    */
+
+    uint32_t idx = (uint32_t)(distance * 10); // multiply by 10 to be used as index for meters in steps of 1/10
+    idx = std::min(idx, (uint32_t)(sizeof(vel_dist_lookup) / sizeof(float)));
     float mps_target = vel_dist_lookup[idx];
 
     float new_speed_target = mps_target * METERS_PER_SECOND_TO_RPM;
