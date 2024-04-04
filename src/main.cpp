@@ -276,6 +276,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                              data2.brakeImplausible, 
                              data2.accelPercent, 
                              data2.brakePercent,
+                             a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+                             a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+                             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+                             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
                              pedals_system.getMechBrakeActiveThreshold());
     }
 
