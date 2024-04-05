@@ -21,10 +21,10 @@ TEST(PedalsSystemTesting, test_accel_and_brake_limits_plausibility)
     AnalogConversion_s test_brake_val = {200, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
     PedalsParams params;
-    params.min_sense_1 = 1000;
-    params.max_sense_1 = 2000;
-    params.min_sense_2 = 1000;
-    params.max_sense_2 = 2000;
+    params.min_pedal_1 = 1000;
+    params.max_pedal_1 = 2000;
+    params.min_pedal_2 = 1000;
+    params.max_pedal_2 = 2000;
     PedalsSystem pedals(params, params, 0.0f);
 
 
