@@ -3,8 +3,6 @@
 
 #include <algorithm>
 
-// #include <Arduino.h>
-
 // TODO parameterize percentages in constructor
 void PedalsSystem::tick(const SysTick_s &tick, const AnalogConversion_s &accel1, const AnalogConversion_s &accel2, const AnalogConversion_s &brake1, const AnalogConversion_s &brake2)
 {
@@ -100,11 +98,11 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
 
-    if (
-        pedal_1_less_than_min ||
-        pedal_2_less_than_min ||
-        pedal_1_greater_than_max ||
-        pedal_2_greater_than_max)
+    if (pedal_1_less_than_min || pedal_2_less_than_min)
+    {
+        return true;
+    }
+    else if (pedal_1_greater_than_max || pedal_2_greater_than_max)
     {
         return true;
     }
@@ -129,7 +127,7 @@ float PedalsSystem::remove_deadzone_(float conversion_input, float deadzone)
     out /= range;
     // values are now 0 to 1.0555...
     // clamp at 0 to 1
-    out = std::max(out, 1.0f);
+    out = std::min(out, 1.0f);
 
     return out;
 }

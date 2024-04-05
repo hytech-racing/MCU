@@ -88,6 +88,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
+        // If motor controllers have error, but 
+        if (drivetrain_->drivetrain_error_occured())
+        {
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+        }
         // TODO handle drivetrain init timeout
         if (drivetrain_->handle_inverter_startup(current_millis))
         {
