@@ -59,9 +59,10 @@ class DashboardInterface
 {
 private:
 public:
+    bool buzzer = false;
     bool start_button_status_;
     bool startButtonPressed() { return  start_button_status_; };
-    bool checkBuzzer(){ return false; };
+    bool checkBuzzer(){ return buzzer; };
 };
 
 #endif /* DASHBOARDINTERFACE */

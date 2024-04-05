@@ -233,6 +233,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
     update_pedal_readings_CAN_msg(accel_per,
                                   brake_per,
                                   mech_brake_active_percent);
+                                  
     update_pedal_readings_raw_CAN_msg(accel_1,
                                       accel_2,
                                       brake_1,

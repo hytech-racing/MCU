@@ -36,7 +36,11 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     }
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
-    out.brakePercent = brake1.conversion;
+    // out.accelPercent = (brake1.conversion + brake2.conversion) / 2.0;
+    out.brakePercent = brake1.conversion; // lost half a sensor L
+    out.accelPercent = remove_deadzone_(out.accelPercent, default_deadzone);
+    out.brakePercent = remove_deadzone_(out.brakePercent, default_deadzone);
+
     out.regenPercent = std::max(std::min(out.brakePercent / mechBrakeActiveThreshold_, 1.0f), 0.0f);
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
     out.mechBrakeActive = out.brakePercent > mechBrakeActiveThreshold_;
@@ -116,11 +120,17 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
 
 float PedalsSystem::remove_deadzone_(float conversion_input, float deadzone)
 {
-    // first, subtract the start zone and ensure that the pedal is clamped at zero
+    float range = 1.0 - (deadzone * 2);
+    // e.g. vals from 0 to 1, deadzone is .05, range is .1
+    // subtract deadzone to be -.05 to .95 & clamp at 0
     float out = std::max(conversion_input - deadzone, 0.0f);
+    // values now are 0 to .95
+    // divide by range of values to scale up (.9)
+    out /= range;
+    // values are now 0 to 1.0555...
+    // clamp at 0 to 1
+    out = std::max(out, 1.0f);
 
-    // second, scale output from 0 to 1 with 1 being 100 percent at say 95 percent actually
-    out = std::min((out / (1 - deadzone)), 1.0f);
     return out;
 }
 
@@ -130,8 +140,8 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
                                                      const AnalogConversion_s &brakePedalData2)
 {
 
-    float accel_pedal1_real = remove_deadzone_(accelPedalData1.conversion, 0.05);
-    float accel_pedal2_real = remove_deadzone_(accelPedalData2.conversion, 0.05);
+    float accel_pedal1_real = remove_deadzone_(accelPedalData1.conversion, default_deadzone);
+    float accel_pedal2_real = remove_deadzone_(accelPedalData2.conversion, default_deadzone);
     bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
     bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, 0.80);                               // 0.05
     // Serial.println("brake percents:");

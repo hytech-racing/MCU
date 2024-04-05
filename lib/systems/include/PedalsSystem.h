@@ -5,6 +5,9 @@
 #include "AnalogSensorsInterface.h"
 
 #include "SysClock.h"
+
+const float default_deadzone = 0.05f;
+
 struct PedalsSystemData_s
 {
 
