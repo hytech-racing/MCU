@@ -2,7 +2,6 @@
 #include <iostream>
 
 #include <algorithm>
-#include "Arduino.h"
 
 // #include <Arduino.h>
 
@@ -38,8 +37,6 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.brakePercent = brake1.conversion;
-    if (millis()%100 == 0) Serial.printf("brake: %.2f\n",out.brakePercent);
-    if (millis()%100 == 0) Serial.printf("acc: %.2f\n",out.accelPercent);
     out.regenPercent = std::max(std::min(out.brakePercent / mechBrakeActiveThreshold_, 1.0f), 0.0f);
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
     out.mechBrakeActive = out.brakePercent > mechBrakeActiveThreshold_;
