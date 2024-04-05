@@ -40,12 +40,14 @@ const int ACCEL1_MAX_THRESH = 3283;
 const int ACCEL2_MAX_THRESH = 323;
 const float APPS_ACTIVATION_PERCENTAGE = 0.1;
 
-const int BRAKE1_MIN_THRESH = 2757;
-const int BRAKE2_MIN_THRESH = 867;
-const int BRAKE1_MAX_THRESH = 1421;
+const int BRAKE1_MAX_THRESH = 2198;
+const int BRAKE1_MIN_THRESH = 867;
+
 const int BRAKE2_MAX_THRESH = 2198;
+const int BRAKE2_MIN_THRESH = 867;
+
 const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
-const float BRAKE_MECH_THRESH = 0.55;
+const float BRAKE_MECH_THRESH = 0.40;
 
 // Load Cell Defs to convert raw to lbs
 // lbs = (scale)*raw + offset
