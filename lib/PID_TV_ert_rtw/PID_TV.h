@@ -48,6 +48,9 @@ class PID_TV final
 {
   // public data and function members
  public:
+
+  float shit_in;
+  float shit_out;
   // Block states (default storage) for system '<Root>'
   struct DW_PID_TV_T {
     real_T Integrator_DSTATE;          // '<S35>/Integrator'

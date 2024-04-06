@@ -61,10 +61,10 @@ TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_
                                                     MCU15_FL_POTS_CHANNEL, MCU15_FR_POTS_CHANNEL, MCU15_FL_LOADCELL_CHANNEL, MCU15_FR_LOADCELL_CHANNEL,
                                                     MCU15_STEERING_CHANNEL, MCU15_CUR_POS_SENSE_CHANNEL, MCU15_CUR_NEG_SENSE_CHANNEL, MCU15_GLV_SENSE_CHANNEL});
 SABInterface sab_interface(
-    LOADCELL_RL_SCALE, // RL Scale
+    LOADCELL_RL_SCALE,  // RL Scale
     LOADCELL_RL_OFFSET, // RL Offset (Migos)
-    LOADCELL_RR_SCALE, // RR Scale
-    LOADCELL_RR_OFFSET //  RR Offset
+    LOADCELL_RR_SCALE,  // RR Scale
+    LOADCELL_RR_OFFSET  //  RR Offset
 );
 
 // /* Inverter Interface Type */
@@ -143,11 +143,11 @@ void setup()
     a1.setChannelClamp(MCU15_BRAKE1_CHANNEL, 0.0, 1.0);
     a1.setChannelClamp(MCU15_BRAKE2_CHANNEL, 0.0, 1.0);
 
-    a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_SCALE/*Todo*/);
-    a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_SCALE/*Todo*/);
+    a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
+    a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
 
-    a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_OFFSET/*Todo*/);
-    a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_OFFSET/*Todo*/);
+    a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
+    a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
 
     Serial.begin(115200);
 
@@ -269,23 +269,23 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     {
         steering1.sample();
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-        telem_interface.tick(a1.get(), 
-                             a2.get(), 
-                             a3.get(), 
-                             steering1.convert(), 
-                             &inv.fl, 
-                             &inv.fr, 
-                             &inv.rl, 
-                             &inv.rr, 
-                             data2.accelImplausible, 
-                             data2.brakeImplausible, 
-                             data2.accelPercent, 
+        telem_interface.tick(a1.get(),
+                             a2.get(),
+                             a3.get(),
+                             steering1.convert(),
+                             &inv.fl,
+                             &inv.fr,
+                             &inv.rl,
+                             &inv.rr,
+                             data2.accelImplausible,
+                             data2.brakeImplausible,
+                             data2.accelPercent,
                              data2.brakePercent,
                              a1.get().conversions[MCU15_ACCEL1_CHANNEL],
                              a1.get().conversions[MCU15_ACCEL2_CHANNEL],
                              a1.get().conversions[MCU15_BRAKE1_CHANNEL],
                              a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-                             pedals_system.getMechBrakeActiveThreshold());
+                             pedals_system.getMechBrakeActiveThreshold(), torque_controller_mux.get_pidtv_data());
     }
 
     if (t.trigger100) // 100Hz
@@ -332,7 +332,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-
     // TODO is this correct?
     auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
     torque_controller_mux.tick(
@@ -342,11 +341,10 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
         a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
-        sab_interface.rlLoadCell.convert(),  // RL load cell reading. TODO: get data from rear load cells
-        sab_interface.rrLoadCell.convert(), // RR load cell reading. TODO: get data from rear load cells
+        sab_interface.rlLoadCell.convert(),              // RL load cell reading. TODO: get data from rear load cells
+        sab_interface.rrLoadCell.convert(),              // RR load cell reading. TODO: get data from rear load cells
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
-        wheel_angle_rad
-        );
+        wheel_angle_rad);
 }

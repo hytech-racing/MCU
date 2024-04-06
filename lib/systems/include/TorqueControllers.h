@@ -12,6 +12,7 @@
 
 #include "accel_lookup.h"
 
+#include "TorqueControllersData.h"
 #include "PID_TV.h"
 
 /* MOTOR CONSTANTS */
@@ -357,6 +358,18 @@ public:
         pid_input_.PID_I = 1.0;
         pid_input_.PID_D = 0.0;
         pid_input_.PID_N = 100;
+        
+    }
+    
+    PIDTVTorqueControllerData get_data(){
+        PIDTVTorqueControllerData data;
+        data.controller_input = tv_pid_.shit_in;
+        data.controller_output = tv_pid_.shit_out;
+        data.fl_torque_delta = pid_input_.FL_in - tv_pid_.getExternalOutputs().FL_out;
+        data.fr_torque_delta = pid_input_.FR_in - tv_pid_.getExternalOutputs().FR_out;
+        data.rl_torque_delta = pid_input_.RL_in - tv_pid_.getExternalOutputs().RL_out;
+        data.rr_torque_delta = pid_input_.RR_in - tv_pid_.getExternalOutputs().RR_out;
+        return data;
     }
 private:
     TorqueControllerOutput_s &writeout_;
