@@ -12,6 +12,9 @@ author: Lucas Plant
 #include <string>
 #include "PedalsSystem.h"
 #include <array>
+#include "MCU_rev15_defs.h"
+
+
 
 TEST(PedalsSystemTesting, test_accel_and_brake_limits_plausibility)
 {
@@ -25,6 +28,9 @@ TEST(PedalsSystemTesting, test_accel_and_brake_limits_plausibility)
     params.max_pedal_1 = 2000;
     params.min_pedal_2 = 1000;
     params.max_pedal_2 = 2000;
+    params.activation_percentage = 0.1;
+    params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+    params.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
     PedalsSystem pedals(params, params, 0.0f);
 
 
@@ -69,7 +75,17 @@ TEST(PedalsSystemTesting, test_accel_and_brake_percentages_implausibility)
     AnalogConversion_s test_accel1_val = {200, 0.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_accel2_val = {200, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {200, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
+
+    PedalsParams params2;
+    params2.min_pedal_1 = 100;
+    params2.min_pedal_2 = 100;
+    params2.max_pedal_1 = 3000;
+    params2.max_pedal_2 = 3000;
+    params2.activation_percentage = 0.1;
+    params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+    params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
+
+    PedalsSystem pedals(params2, params2, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
 
     EXPECT_FALSE(data.brakeImplausible);
@@ -94,7 +110,16 @@ TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activati
     AnalogConversion_s test_accel1_val = {2000, 0.6, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {3000, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
+    PedalsParams params2;
+    params2.min_pedal_1 = 100;
+    params2.min_pedal_2 = 100;
+    params2.max_pedal_1 = 3000;
+    params2.max_pedal_2 = 3000;
+    params2.activation_percentage = 0.1;
+    params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+    params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
+
+    PedalsSystem pedals(params2, params2, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);
@@ -112,7 +137,16 @@ TEST(PedalsSystemTesting, test_implausibility_duration)
     AnalogConversion_s test_accel1_val = {2000, 0.6, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_brake_val = {3000, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
-    PedalsSystem pedals({100, 100, 3000, 3000, 0.1}, {100, 100, 3000, 3000, 0.1}, 0.0f);
+    PedalsParams params2;
+    params2.min_pedal_1 = 100;
+    params2.max_pedal_1 = 100;
+    params2.min_pedal_2 = 3000;
+    params2.max_pedal_2 = 3000;
+    params2.activation_percentage = 0.1;
+    params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+    params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
+
+    PedalsSystem pedals(params2, params2, 0.0f);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);

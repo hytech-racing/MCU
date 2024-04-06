@@ -76,7 +76,12 @@ public:
                                        unsigned long curr_time);
 
 private:
-    PedalsSystemData_s data_;
+    PedalsSystemData_s data_ {};
+    PedalsParams accelParams_;
+    PedalsParams brakeParams_;
+    float mechBrakeActiveThreshold_;
+    unsigned long implausibilityStartTime_;
+
     float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
 
@@ -107,10 +112,6 @@ private:
                                            const AnalogConversion_s &brakePedalData1,
                                            const AnalogConversion_s &brakePedalData2);
     bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, float percent_threshold);
-    PedalsParams accelParams_;
-    PedalsParams brakeParams_;
-    float mechBrakeActiveThreshold_;
-    unsigned long implausibilityStartTime_;
 };
 
 #endif /* PEDALSSYSTEM */

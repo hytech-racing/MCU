@@ -1,6 +1,8 @@
 #ifndef __MCU15_H__
 #define __MCU15_H__
 
+#include "PedalsSystem.h"
+
 // pindefs
 const int ADC1_CS = 34;
 const int ADC2_CS = 33;
