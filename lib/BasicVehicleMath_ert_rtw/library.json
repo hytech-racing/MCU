@@ -1,0 +1,13 @@
+{
+    "name": "BasicVehicleMath-lib",
+    "version": "1.0.0",
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*",
+    "build": {
+      "flags": [
+        "-IR2023b/rtw/c/src",
+        "-IR2023b/simulink/include"
+      ]
+  }
+}
