@@ -142,7 +142,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
+        if (safety_system_->get_software_is_ok() /*&& !data.implausibilityExceededMaxDuration*/)
         {
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         }
