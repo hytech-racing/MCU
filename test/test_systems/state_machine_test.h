@@ -177,11 +177,13 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert)
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::WAITING_READY_TO_DRIVE_SOUND);
     sys_time += 20;
 
+    dash_interface.buzzer = true;
     state_machine.tick_state_machine(sys_time);
 
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::WAITING_READY_TO_DRIVE_SOUND);
     sys_time += 35;
 
+    dash_interface.buzzer = false;
     state_machine.tick_state_machine(sys_time);
 
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::READY_TO_DRIVE);
@@ -248,6 +250,9 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_acti
     sys_time += 70;
     drivetrain.hv_thresh_ = true;
 
+    dash_interface.buzzer = true;
+    state_machine.tick_state_machine(sys_time);
+    dash_interface.buzzer = false;
     state_machine.tick_state_machine(sys_time);
 
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::READY_TO_DRIVE);
@@ -293,6 +298,9 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_not_
     sys_time += 70;
     drivetrain.hv_thresh_ = true;
 
+    dash_interface.buzzer = true;
+    state_machine.tick_state_machine(sys_time);
+    dash_interface.buzzer = false;
     state_machine.tick_state_machine(sys_time);
 
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::READY_TO_DRIVE);

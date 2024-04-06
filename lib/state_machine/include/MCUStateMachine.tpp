@@ -88,6 +88,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
+        // If motor controllers have error, even though hv is over threshold
+        if (drivetrain_->drivetrain_error_occured())
+        {
+            set_state_(CAR_STATE::TRACTIVE_SYSTEM_ACTIVE, current_millis);
+        }
         // TODO handle drivetrain init timeout
         if (drivetrain_->handle_inverter_startup(current_millis))
         {
@@ -111,7 +116,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         drivetrain_->command_drivetrain_no_torque();
 
         // if the ready to drive sound has been playing for long enough, move to ready to drive mode
-        if (buzzer_->done(current_millis) && !dashboard_->checkBuzzer())
+        if (buzzer_->done(current_millis, dashboard_->checkBuzzer()))
         {
             set_state_(CAR_STATE::READY_TO_DRIVE, current_millis);
         }
@@ -182,8 +187,9 @@ void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
         break;
     case CAR_STATE::READY_TO_DRIVE:
-    {
-        // drivetrain_->disable();
+    {   
+        // deactivate buzzer and reset it to turn on again later
+        buzzer_->deactivate();
         break;
     }
     }

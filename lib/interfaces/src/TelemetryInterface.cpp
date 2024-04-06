@@ -15,6 +15,20 @@ void TelemetryInterface::update_pedal_readings_CAN_msg(float accel_percent,
 
     enqueue_new_CAN<MCU_PEDAL_READINGS_t>(&pedal_readings, &Pack_MCU_PEDAL_READINGS_hytech);
 }
+void TelemetryInterface::update_pedal_readings_raw_CAN_msg(const AnalogConversion_s &accel_1,
+                                                           const AnalogConversion_s &accel_2,
+                                                           const AnalogConversion_s &brake_1,
+                                                           const AnalogConversion_s &brake_2) {
+    MCU_PEDAL_RAW_t pedal_read;
+
+    pedal_read.accel_1_raw = accel_1.raw;
+    pedal_read.accel_2_raw = accel_2.raw;
+    pedal_read.brake_1_raw = brake_1.raw;
+    pedal_read.brake_2_raw = brake_2.raw;
+
+    enqueue_new_CAN<MCU_PEDAL_RAW_t>(&pedal_read, &Pack_MCU_PEDAL_RAW_hytech);
+
+}
 // MCP3204 returns structure
 void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_fl,
                                                    const AnalogConversion_s &lc_fr,
@@ -209,12 +223,21 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               bool brake_implaus,
                               float accel_per,
                               float brake_per,
+                              const AnalogConversion_s &accel_1,
+                              const AnalogConversion_s &accel_2,
+                              const AnalogConversion_s &brake_1,
+                              const AnalogConversion_s &brake_2,
                               float mech_brake_active_percent) {
 
     // Pedals
     update_pedal_readings_CAN_msg(accel_per,
                                   brake_per,
                                   mech_brake_active_percent);
+                                  
+    update_pedal_readings_raw_CAN_msg(accel_1,
+                                      accel_2,
+                                      brake_1,
+                                      brake_2); 
     // Analog readings
     update_analog_readings_CAN_msg(encoder,
                                    adc1.conversions[channels_.analog_steering_channel],
