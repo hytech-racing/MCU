@@ -6,9 +6,6 @@
 
 #include "SysClock.h"
 
-const float default_deadzone = 0.05f;
-const float default_implausibility_margin = 0.10f;
-
 struct PedalsSystemData_s
 {
 
@@ -32,26 +29,22 @@ struct PedalsParams
     int max_pedal_1;
     int max_pedal_2;
     float activation_percentage;
+    float deadzone_margin;
+    float implausibility_margin;
 };
 
 class PedalsSystem
 {
 public:
-    PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams, float mechBrakeActiveThreshold)
-        : PedalsSystem(accelParams, brakeParams, mechBrakeActiveThreshold, default_implausibility_margin, default_deadzone) {};
     
     PedalsSystem(const PedalsParams &accelParams,
                  const PedalsParams &brakeParams,
-                 float mechBrakeActiveThreshold,
-                 float implaus_margin,
-                 float deadzone_margin)
+                 float mechBrakeActiveThreshold)
     {
         accelParams_ = accelParams;
         brakeParams_ = brakeParams;
         implausibilityStartTime_ = 0;
         mechBrakeActiveThreshold_ = mechBrakeActiveThreshold;
-        deadzone_margin_ = deadzone_margin;
-        implausibility_margin_ = implaus_margin;
         // Setting of min and maxes for pedals via config file
     }
 
@@ -86,7 +79,7 @@ private:
     PedalsSystemData_s data_;
     float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
-    
+
     /*
         Evaluate pedal implausibilities_ determines if there is a software implausibility
         in the pedals caused by them going out of range.
@@ -105,6 +98,10 @@ private:
                                           const PedalsParams &params,
                                           float max_percent_diff);
 
+    bool evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData1,
+                                          const PedalsParams &params,
+                                          float max_percent_diff);
+
     bool evaluate_brake_and_accel_pressed_(const AnalogConversion_s &accelPedalData1,
                                            const AnalogConversion_s &accelPedalData2,
                                            const AnalogConversion_s &brakePedalData1,
@@ -114,9 +111,6 @@ private:
     PedalsParams brakeParams_;
     float mechBrakeActiveThreshold_;
     unsigned long implausibilityStartTime_;
-
-    float deadzone_margin_;
-    float implausibility_margin_;
 };
 
 #endif /* PEDALSSYSTEM */
