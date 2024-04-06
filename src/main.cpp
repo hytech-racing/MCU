@@ -137,10 +137,6 @@ void setup()
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_PEDAL_MIN);
-    a1.setChannelClamp(MCU15_ACCEL1_CHANNEL, 0.0, 1.0);
-    a1.setChannelClamp(MCU15_ACCEL2_CHANNEL, 0.0, 1.0);
-    a1.setChannelClamp(MCU15_BRAKE1_CHANNEL, 0.0, 1.0);
-    a1.setChannelClamp(MCU15_BRAKE2_CHANNEL, 0.0, 1.0);
 
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_SCALE/*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_SCALE/*Todo*/);

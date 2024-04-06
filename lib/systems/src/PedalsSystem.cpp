@@ -17,8 +17,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 {
 
     PedalsSystemData_s out;
-    
-    
+
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);
@@ -67,37 +66,7 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
 {
     // FSAE EV.5.5
     // FSAE T.4.2.10
-    bool pedal1_swapped = false;
-    bool pedal2_swapped = false;
-
-    //get the pedal margin. The margin will be a percentage of the range of the measured max values
-    int pedal1_margin = abs(params.max_pedal_1 - params.min_pedal_1) * params.implausibility_margin;
-    int pedal2_margin = abs(params.max_pedal_2 - params.min_pedal_2) * params.implausibility_margin;
-
-    if (params.min_pedal_1 > params.max_pedal_1)
-    {
-        pedal1_swapped = true;
-        // swap the logic: need to check and see if it is greater than min and less than max
-    }
-    if (params.min_pedal_2 > params.max_pedal_2)
-    {
-        pedal2_swapped = true;
-        // swap the logic
-    }
-
-    bool pedal_1_less_than_min = pedal1_swapped ? (pedalData1.raw > (params.min_pedal_1 + pedal1_margin))
-                                                : (pedalData1.raw < (params.min_pedal_1 - pedal1_margin));
-
-    bool pedal_2_less_than_min = pedal2_swapped ? (pedalData2.raw > (params.min_pedal_2 + pedal2_margin))
-                                                : (pedalData2.raw < (params.min_pedal_2 - pedal2_margin));
-
-    bool pedal_1_greater_than_max = pedal1_swapped ? (pedalData1.raw < (params.max_pedal_1 - pedal1_margin))
-                                                   : (pedalData1.raw > (params.max_pedal_1 + pedal1_margin));
-
-    bool pedal_2_greater_than_max = pedal2_swapped ? (pedalData2.raw < (params.max_pedal_2 - pedal2_margin))
-                                                   : (pedalData2.raw > (params.max_pedal_2 + pedal2_margin));
-    
-    
+    bool pedal1_min_max_implaus = evaluate_min_max_pedal_implausibilities_(oeda)
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
 
     if (pedal_1_less_than_min || pedal_2_less_than_min)
@@ -118,34 +87,71 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     }
 }
 
-bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData1,
+bool PedalsSystem::evaluate_min_max_pedal_implausibilities_(const AnalogConversion_s &pedalData,
+                                                            int min,
+                                                            int max,
+                                                            float implaus_margin_scale)
+{
+    // FSAE EV.5.5
+    // FSAE T.4.2.10
+    bool pedal_swapped = false;
+
+    // get the pedal margin. The margin will be a percentage of the range of the measured max values
+    int pedal_margin = abs(max - min) * implaus_margin_scale;
+
+    if (min > max)
+    {
+        pedal_swapped = true;
+        // swap the logic: need to check and see if it is greater than min and less than max
+    }
+
+    bool pedal_less_than_min = pedal_swapped ? (pedalData.raw > (min + pedal_margin))
+                                             : (pedalData.raw < (min - pedal_margin));
+
+    bool pedal_greater_than_max = pedal_swapped ? (pedalData.raw < (max - pedal_margin))
+                                                : (pedalData.raw > (max + pedal_margin));
+
+    if (pedal_less_than_min)
+    {
+        return true;
+    }
+    else if (pedal_greater_than_max)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData,
                                                     const PedalsParams &params,
                                                     float max_percent_diff)
 {
     // FSAE EV.5.5
     // FSAE T.4.2.10
-    bool pedal1_swapped = false;
+    bool pedal_swapped = false;
 
-    //get the pedal margin. The margin will be a percentage of the range of the measured max values
-    int pedal1_margin = abs(params.max_pedal_1 - params.min_pedal_1) * params.implausibility_margin;
+    // get the pedal margin. The margin will be a percentage of the range of the measured max values
+    int pedal1_margin = abs(max - min) * params.implausibility_margin;
 
-    if (params.min_pedal_1 > params.max_pedal_1)
+    if (min > max)
     {
-        pedal1_swapped = true;
+        pedal_swapped = true;
         // swap the logic: need to check and see if it is greater than min and less than max
     }
 
-    bool pedal_1_less_than_min = pedal1_swapped ? (pedalData1.raw > (params.min_pedal_1 + pedal1_margin))
-                                                : (pedalData1.raw < (params.min_pedal_1 - pedal1_margin));
+    bool pedal_less_than_min = pedal_swapped ? (pedalData.raw > (min + pedal1_margin))
+                                             : (pedalData.raw < (min - pedal1_margin));
+    bool pedal_1_greater_than_max = pedal_swapped ? (pedalData.raw < (max - pedal1_margin))
+                                                  : (pedalData.raw > (max + pedal1_margin));
 
-    bool pedal_1_greater_than_max = pedal1_swapped ? (pedalData1.raw < (params.max_pedal_1 - pedal1_margin))
-                                                   : (pedalData1.raw > (params.max_pedal_1 + pedal1_margin));
-
-    if (pedal_1_less_than_min)
+    if (pedal_less_than_min)
     {
         return true;
     }
-    else if (pedal_1_greater_than_max)
+    else if (pedal_greater_than_max)
     {
         return true;
     }
@@ -180,7 +186,7 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
     float accel_pedal1_real = remove_deadzone_(accelPedalData1.conversion, accelParams_.deadzone_margin);
     float accel_pedal2_real = remove_deadzone_(accelPedalData2.conversion, accelParams_.deadzone_margin);
     bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
-    bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, 0.80);                               // 0.05
+    bool brake_pressed = pedal_is_active_(brakePedalData2.conversion, brakePedalData1.conversion, 0.80);             // 0.05
     // Serial.println("brake percents:");
     // Serial.println(brakePedalData1.conversion);
     // Serial.println(brakePedalData2.conversion);
