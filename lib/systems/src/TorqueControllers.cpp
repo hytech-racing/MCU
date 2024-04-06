@@ -22,7 +22,7 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
             torqueRequest = accelRequest * AMK_MAX_TORQUE;
 
             // writeout_.command.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
-            // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;pid_input_
             // writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
             // writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
             writeout_.command.speeds_rpm[FL] = AMK_MAX_RPM;

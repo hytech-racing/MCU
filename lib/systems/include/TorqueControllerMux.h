@@ -83,6 +83,10 @@ public:
     {
         return torqueLimitMap_[torqueLimit_];
     }
+    PIDTVTorqueControllerData get_pidtv_data()
+    {
+        return torqueControllerPIDTV_.get_data();
+    }
 };
 
 #endif /* __TORQUECTRLMUX_H__ */

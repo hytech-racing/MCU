@@ -6,7 +6,8 @@
       "interfaces-lib": "*",
       "shared-interfaces-lib": "*",
       "shared-systems-lib": "*",
-      "PID_TV-lib": "*"
+      "PID_TV-lib": "*",
+      "shared_data": "*"
     },
     "frameworks": "*",
     "platforms": "*"
