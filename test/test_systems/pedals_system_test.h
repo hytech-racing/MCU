@@ -29,11 +29,10 @@ TEST(PedalsSystemTesting, test_accel_and_brake_limits_plausibility)
     params.min_pedal_2 = 1000;
     params.max_pedal_2 = 2000;
     params.activation_percentage = 0.1;
+    params.mechanical_activation_percentage = 0.6;
     params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
     params.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
-    PedalsSystem pedals(params, params, 0.0f);
-
-
+    PedalsSystem pedals(params, params);
 
     // this should be implausible since test accel1 and accel2 have values less than the min (1000)
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1000);
@@ -82,10 +81,11 @@ TEST(PedalsSystemTesting, test_accel_and_brake_percentages_implausibility)
     params2.max_pedal_1 = 3000;
     params2.max_pedal_2 = 3000;
     params2.activation_percentage = 0.1;
+    params2.mechanical_activation_percentage = 0.6;
     params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
     params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
 
-    PedalsSystem pedals(params2, params2, 0.0f);
+    PedalsSystem pedals(params2, params2);
     auto data = pedals.evaluate_pedals(test_accel2_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
 
     EXPECT_FALSE(data.brakeImplausible);
@@ -116,10 +116,11 @@ TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activati
     params2.max_pedal_1 = 3000;
     params2.max_pedal_2 = 3000;
     params2.activation_percentage = 0.1;
+    params2.mechanical_activation_percentage = 0.6;
     params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
     params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
 
-    PedalsSystem pedals(params2, params2, 0.0f);
+    PedalsSystem pedals(params2, params2);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);
@@ -143,10 +144,11 @@ TEST(PedalsSystemTesting, test_implausibility_duration)
     params2.min_pedal_2 = 3000;
     params2.max_pedal_2 = 3000;
     params2.activation_percentage = 0.1;
+    params2.mechanical_activation_percentage = 0.6;
     params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
     params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
 
-    PedalsSystem pedals(params2, params2, 0.0f);
+    PedalsSystem pedals(params2, params2);
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);
