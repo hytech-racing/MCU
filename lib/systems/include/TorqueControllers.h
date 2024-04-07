@@ -192,8 +192,7 @@ public:
     TorqueControllerPIDTV(TorqueControllerOutput_s &writeout): writeout_(writeout)
     {
         tv_pid_.initialize();
-        tv_pid_.setExternalInputs(&pid_input_);
-        pid_input_.PID_P = 2.0;
+        pid_input_.PID_P = 3.0;
         pid_input_.PID_I = 1.0;
         pid_input_.PID_D = 0.0;
         pid_input_.PID_N = 100;
@@ -213,6 +212,17 @@ public:
 private:
     TorqueControllerOutput_s &writeout_;
     
+    void update_input(float vx_b, float wheel_angle_rad, float yaw_rate, float fr_in,  float rr_in, float fl_in, float rl_in)
+    {
+        pid_input_.Vx_B = vx_b;
+        pid_input_.WheelDeltarad = wheel_angle_rad;
+        pid_input_.YawRaterads = yaw_rate;
+        pid_input_.FR_in = fr_in;
+        pid_input_.RR_in = rr_in;
+        pid_input_.FL_in = fl_in;
+        pid_input_.RL_in = rl_in;
+        tv_pid_.setExternalInputs(&pid_input_);
+    }
     PID_TV::ExtU_PID_TV_T pid_input_;
     PID_TV tv_pid_;
 };

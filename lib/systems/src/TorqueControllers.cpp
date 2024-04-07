@@ -159,27 +159,53 @@ void TorqueControllerLoadCellVectoring::tick(
 void TorqueControllerPIDTV::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate)
 {
 
-    float accelRequest = pedalsData.accelPercent;
-    auto torqueRequest = accelRequest * AMK_MAX_TORQUE;
-
+    
+    // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
     {
-        pid_input_.Vx_B = vx_b;
-        pid_input_.WheelDeltarad = wheel_angle_rad;
-        pid_input_.YawRaterads = yaw_rate;
-        pid_input_.FR_in = torqueRequest;
+        // Both pedals are not pressed and no implausibility has been detected
+        // accelRequest goes between 1.0 and -1.0
+        float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
+        float torqueRequest;
 
-        pid_input_.RR_in = torqueRequest;
-        pid_input_.FL_in = torqueRequest;
-        pid_input_.RL_in = torqueRequest;
-        
+        float fl_in, fr_in, rl_in, rr_in;
+        if (accelRequest >= 0.0)
+        {
+            // Positive torque request
+            torqueRequest = accelRequest * AMK_MAX_TORQUE;
+
+            
+            writeout_.command.speeds_rpm[FL] = AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[FR] = AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[RL] = AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[RR] = AMK_MAX_RPM;
+
+            fl_in = torqueRequest;
+            fr_in = torqueRequest;
+            rl_in = torqueRequest;
+            rr_in = torqueRequest;
+        }
+        else
+        {
+            // Negative torque request
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+
+            writeout_.command.speeds_rpm[FL] = 0.0;
+            writeout_.command.speeds_rpm[FR] = 0.0;
+            writeout_.command.speeds_rpm[RL] = 0.0;
+            writeout_.command.speeds_rpm[RR] = 0.0;
+
+            fl_in = torqueRequest;
+            fr_in = torqueRequest;
+            rl_in = torqueRequest;
+            rr_in = torqueRequest;
+        }
+
+        update_input(vx_b, wheel_angle_rad, yaw_rate, fr_in, rr_in, fl_in, rl_in);
+        // steppin
         tv_pid_.step();
-        const PID_TV::ExtY_PID_TV_T &out = tv_pid_.getExternalOutputs();
+        const PID_TV::ExtY_PID_TV_T& out = tv_pid_.getExternalOutputs();
 
-        writeout_.command.speeds_rpm[FL] = AMK_MAX_RPM;
-        writeout_.command.speeds_rpm[FR] = AMK_MAX_RPM;
-        writeout_.command.speeds_rpm[RL] = AMK_MAX_RPM;
-        writeout_.command.speeds_rpm[RR] = AMK_MAX_RPM;
 
         writeout_.command.torqueSetpoints[FL] = out.FL_out;
         writeout_.command.torqueSetpoints[FR] = out.FR_out;
