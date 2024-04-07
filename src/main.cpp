@@ -82,6 +82,15 @@ struct inverters
 // */
 
 SysClock sys_clock;
+
+
+// analog sensor
+// full left: 692
+// full right: 3170
+
+// serial sensor
+// full left 29000.00
+// full right -21933.00
 SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
@@ -321,9 +330,11 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // // tick torque controller mux
 
     // TODO is this correct?
-    auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
-    Serial.println("wheel rad:");
-    Serial.println(wheel_angle_rad);
+    // Serial.println("Steering 1 raw");
+    
+    // float wheel_angle_rad = a1.get().conversions[MCU15_STEERING_CHANNEL].raw;
+    float wheel_angle_rad = steering1.convert().raw;
+    // Serial.println(wheel_angle_rad);
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_current_data(),
