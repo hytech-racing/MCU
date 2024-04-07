@@ -210,4 +210,5 @@ void MCUInterface::tick(int fsm_state,
     update_mcu_status_CAN();
     // Push into buffer
     enqueue_CAN_mcu_status();
+    set_brake_light(pedals_data.brakePressed);
 }
