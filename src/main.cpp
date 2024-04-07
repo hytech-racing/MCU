@@ -315,8 +315,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+        a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
     // // tick steering system
     // steering_system.tick(
     //     current_system_tick,
