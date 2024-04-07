@@ -22,7 +22,7 @@ private:
         {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
         {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_MODE},
         {DialMode_e::MODE_2, TorqueController_e::TC_LOAD_CELL_VECTORING},
-        {DialMode_e::MODE_3, TorqueController_e::TC_PID_VECTORING},
+        {DialMode_e::MODE_3, TorqueController_e::TC_LOAD_CELL_VECTORING},
         {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_5, TorqueController_e::TC_PID_VECTORING},
     };

@@ -322,6 +322,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
     // TODO is this correct?
     auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
+    Serial.println("wheel rad:");
+    Serial.println(wheel_angle_rad);
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_current_data(),
