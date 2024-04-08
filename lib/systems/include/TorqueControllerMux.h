@@ -29,7 +29,7 @@ private:
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
-        {TorqueLimit_e::TCMUX_FULL_TORQUE, 20.0}
+        {TorqueLimit_e::TCMUX_FULL_TORQUE, 21.4}
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
