@@ -120,6 +120,14 @@ void drivetrain_reset();
 
 void setup()
 {
+    Serial.begin(115200);
+
+    while (!Serial);
+
+    Serial.println("*****************************************************");
+    Serial.println(" Com port is open");
+    Serial.println("*****************************************************");
+
     // initialize CAN communication
     init_all_CAN_devices();
 
@@ -143,7 +151,6 @@ void setup()
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL,LOADCELL_FL_OFFSET/*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL,LOADCELL_FR_OFFSET/*Todo*/);
 
-    Serial.begin(115200);
 
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
@@ -174,6 +181,7 @@ void setup()
 
 void loop()
 {
+    // Serial.println("test");
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -187,8 +195,8 @@ void loop()
     // tick systems
     tick_all_systems(curr_tick);
 
-    // // inverter procedure before entering state machine
-    // // reset inverters
+    // inverter procedure before entering state machine
+    // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
     {
         hal_println("resetting errored drivetrain");
@@ -316,14 +324,16 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
         a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
-    // // tick steering system
-    // steering_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_STEERING_CHANNEL]);
 
-    // // tick drivetrain system
+    // tick steering system
+    steering_system.tick(
+        current_system_tick,
+        a1.get().conversions[MCU15_STEERING_CHANNEL]);
+
+    // tick drivetrain system
     drivetrain.tick(current_system_tick);
-    // // tick torque controller mux
+
+    // tick torque controller mux
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_current_data(),

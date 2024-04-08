@@ -23,7 +23,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake, brakeParams_);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake);
-    bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
+    int implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
+
+    /* PROBLEMATIC CODE :*/
     if (implausibility && (implausibilityStartTime_ == 0))
     {
         implausibilityStartTime_ = curr_time;
@@ -42,8 +44,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.regenPercent = std::max(std::min(out.brakePercent / brakeParams_.mechanical_activation_percentage, 1.0f), 0.0f);
     out.mechBrakeActive = out.brakePercent > brakeParams_.mechanical_activation_percentage;
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
-
+    return out;
 }
+
 PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel1,
                                                  const AnalogConversion_s &accel2,
                                                  const AnalogConversion_s &brake1,

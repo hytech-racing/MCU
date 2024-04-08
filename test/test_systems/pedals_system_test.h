@@ -160,4 +160,27 @@ TEST(PedalsSystemTesting, test_implausibility_duration)
     EXPECT_TRUE(data.implausibilityExceededMaxDuration);
 }
 
+TEST(PedalsSystemTesting, single_brake_pedal_test_limits) {
+   // accel min and max on raw
+    AnalogConversion_s test_accel1_val = {0, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_accel2_val = {200, 0.3, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_brake1_val = {200, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_brake2_val = {500, 0.01, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+
+    PedalsParams params;
+    params.min_pedal_1 = 1000;
+    params.max_pedal_1 = 2000;
+    params.min_pedal_2 = 200;
+    params.max_pedal_2 = 300;
+    params.activation_percentage = 0.1;
+    params.mechanical_activation_percentage = 0.6;
+    params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+    params.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
+    PedalsSystem pedals(params, params);
+
+    auto data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake1_val, test_brake2_val, 1000);
+    EXPECT_TRUE(data.brakeImplausible);
+    
+}
+
 #endif /* PEDALS_SYSTEM_TEST */
