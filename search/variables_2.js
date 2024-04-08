@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['can1_5frxbuffer_0',['CAN1_rxBuffer',['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can1_5frxbuffer_0',['CAN1_rxBuffer',['../HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
   ['can1_5ftxbuffer_1',['CAN1_txBuffer',['../HytechCANInterface_8h.html#a8eaf661c1420c6b842b642eaef3355dc',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a8eaf661c1420c6b842b642eaef3355dc',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
   ['can2_5frxbuffer_2',['CAN2_rxBuffer',['../HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp']]],
   ['can2_5ftxbuffer_3',['CAN2_txBuffer',['../HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93',1,'CAN2_txBuffer():&#160;test_can_interface.cpp'],['../HytechCANInterface_8cpp.html#a0d766d98fda98e3b8740244b2fe7b855',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp'],['../test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f',1,'CAN2_txBuffer():&#160;test_can_interface.cpp']]],
@@ -23,10 +23,14 @@ var searchData=
   ['command_20',['command',['../structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957',1,'TorqueControllerOutput_s']]],
   ['compilationdb_5finclude_5ftoolchain_21',['COMPILATIONDB_INCLUDE_TOOLCHAIN',['../namespaceextra__script.html#a707181d946ac1a67eab44ec6d8a053e5',1,'extra_script']]],
   ['compilationdb_5fpath_22',['COMPILATIONDB_PATH',['../namespaceextra__script.html#ad9519e93460a11fea43a49dc2a14da9e',1,'extra_script']]],
-  ['contextsystems_23',['contextSystems',['../structrtwCAPI__ModelMapLoggingStaticInfo__tag.html#a6949a962ce91f028ab6f0a443d53e767',1,'rtwCAPI_ModelMapLoggingStaticInfo_tag']]],
-  ['contstatestartindex_24',['contStateStartIndex',['../structrtwCAPI__States__tag.html#ad812b9a472437ff6d100103953fe727a',1,'rtwCAPI_States_tag::contStateStartIndex()'],['../structrtwCAPI__ModelMappingInfo__tag.html#ad08d01ba43d486bd9ca074aa34c25f2e',1,'rtwCAPI_ModelMappingInfo_tag::contStateStartIndex()']]],
-  ['conversion_25',['conversion',['../structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af',1,'AnalogConversion_s']]],
-  ['conversions_26',['conversions',['../structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171',1,'AnalogConversionPacket_s']]],
-  ['current_5fchannel_27',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
-  ['current_5fref_5fchannel_28',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]]
+  ['const_5faccel_5ftime_23',['const_accel_time',['../TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c',1,'TorqueControllers.h']]],
+  ['contextsystems_24',['contextSystems',['../structrtwCAPI__ModelMapLoggingStaticInfo__tag.html#a6949a962ce91f028ab6f0a443d53e767',1,'rtwCAPI_ModelMapLoggingStaticInfo_tag']]],
+  ['controller_5finput_25',['controller_input',['../structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24',1,'PIDTVTorqueControllerData']]],
+  ['controller_5foutput_26',['controller_output',['../structPIDTVTorqueControllerData.html#a005ba00c0d38fe79e5fa4ebf0150550b',1,'PIDTVTorqueControllerData']]],
+  ['contstatestartindex_27',['contStateStartIndex',['../structrtwCAPI__States__tag.html#ad812b9a472437ff6d100103953fe727a',1,'rtwCAPI_States_tag::contStateStartIndex()'],['../structrtwCAPI__ModelMappingInfo__tag.html#ad08d01ba43d486bd9ca074aa34c25f2e',1,'rtwCAPI_ModelMappingInfo_tag::contStateStartIndex()']]],
+  ['conversion_28',['conversion',['../structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af',1,'AnalogConversion_s']]],
+  ['conversions_29',['conversions',['../structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171',1,'AnalogConversionPacket_s']]],
+  ['current_5fchannel_30',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
+  ['current_5fmillis_31',['current_millis',['../classBaseLaunchController.html#a383933ca8acd0408f32ac755c6b04755',1,'BaseLaunchController']]],
+  ['current_5fref_5fchannel_32',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]]
 ];

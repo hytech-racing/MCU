@@ -134,6 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a68582bb3eea83e9f95c54110cc5a3f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99498f404d473df849fa5524eb429a62"><td class="memItemLeft" align="right" valign="top">MC_temps&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a> ()</td></tr>
 <tr class="separator:a99498f404d473df849fa5524eb429a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d82741b6d7ab88ebdaf18249fd3c60"><td class="memItemLeft" align="right" valign="top">MC_setpoints_command&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a> ()</td></tr>
+<tr class="separator:aa9d82741b6d7ab88ebdaf18249fd3c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename message_queue&gt;<br />
@@ -322,6 +324,36 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00124">124</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  124</span>{ <span class="keywordflow">return</span> actual_torque_nm_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa9d82741b6d7ab88ebdaf18249fd3c60" name="aa9d82741b6d7ab88ebdaf18249fd3c60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9d82741b6d7ab88ebdaf18249fd3c60">&#9670;&#160;</a></span>get_cmd_msg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MC_setpoints_command <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::get_cmd_msg </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00127">127</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>{ <span class="keywordflow">return</span> curr_cmd_; }</div>
 </div><!-- fragment -->
 </div>
 </div>

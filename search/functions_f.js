@@ -10,7 +10,7 @@ var searchData=
   ['set_5fstart_5fstate_7',['set_start_state',['../classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c',1,'AMSInterface::set_start_state()'],['../classWatchdogInterface.html#a3199f96fdab9350d72f8cb73388dc4cf',1,'WatchdogInterface::set_start_state()'],['../classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c',1,'AMSInterface::set_start_state()'],['../classWatchdogInterface.html#a3199f96fdab9350d72f8cb73388dc4cf',1,'WatchdogInterface::set_start_state()']]],
   ['set_5fstate_5fok_5fhigh_8',['set_state_ok_high',['../classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced',1,'AMSInterface::set_state_ok_high(bool ok_high)'],['../classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced',1,'AMSInterface::set_state_ok_high(bool ok_high)']]],
   ['set_5fwatchdog_5fstate_9',['set_watchdog_state',['../classWatchdogInterface.html#adaca5cdf8ef4e8cf078a774cf617cd8f',1,'WatchdogInterface']]],
-  ['setexternalinputs_10',['setExternalInputs',['../classPID__TV.html#ad6b0b685ec44db63cd24e62bf39744fe',1,'PID_TV']]],
+  ['setexternalinputs_10',['setExternalInputs',['../classBasicVehicleMath.html#a44826c436312df4b4940e0c227bd5c1a',1,'BasicVehicleMath::setExternalInputs()'],['../classPID__TV.html#ad6b0b685ec44db63cd24e62bf39744fe',1,'PID_TV::setExternalInputs()']]],
   ['setled_11',['setLED',['../classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580',1,'DashboardInterface']]],
   ['setoffset_12',['setOffset',['../classSteeringEncoderInterface.html#a21d80ffe4422366eb4dfd0f02b970244',1,'SteeringEncoderInterface']]],
   ['setup_13',['setUp',['../run__embedded__tests_8cpp.html#a95c834d6178047ce9e1bce7cbfea2836',1,'run_embedded_tests.cpp']]],
@@ -22,5 +22,5 @@ var searchData=
   ['specialbuttonpressed_19',['specialButtonPressed',['../classDashboardInterface.html#a6bb4f5035c68cbeff26976005db6c425',1,'DashboardInterface']]],
   ['startbuttonpressed_20',['startButtonPressed',['../classDashboardInterface.html#a7eda5298ff583aedbea17fdee159ac0d',1,'DashboardInterface::startButtonPressed()'],['../classDashboardInterface.html#a7eda5298ff583aedbea17fdee159ac0d',1,'DashboardInterface::startButtonPressed()']]],
   ['steeringsystem_21',['SteeringSystem',['../classSteeringSystem.html#a804f2381aaecaa21d905097b116f5934',1,'SteeringSystem']]],
-  ['step_22',['step',['../classPID__TV.html#a910a19cc2de060b25243291f35b3706e',1,'PID_TV']]]
+  ['step_22',['step',['../classBasicVehicleMath.html#a4d77e9528c9b9a87961e0ee4478a99d5',1,'BasicVehicleMath::step()'],['../classPID__TV.html#a910a19cc2de060b25243291f35b3706e',1,'PID_TV::step()']]]
 ];

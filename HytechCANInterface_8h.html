@@ -88,6 +88,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="interfaces_2include_2DashboardInterface_8h_source.html">DashboardInterface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="SABInterface_8h_source.html">SABInterface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html">VectornavInterface.h</a>&quot;</code><br />
 </div>
 <p><a href="HytechCANInterface_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -240,86 +241,113 @@ template&lt;typename BufferType , typename InterfaceType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HytechCANInterface_8h_source.html#l00072">72</a> of file <a class="el" href="HytechCANInterface_8h_source.html">HytechCANInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>{</div>
-<div class="line"><span class="lineno">   74</span>    <span class="comment">// TODO switch to using the global CAN receive function from the generated CAN library</span></div>
-<div class="line"><span class="lineno">   75</span>    <span class="comment">// if(rx_buffer.size() &gt; 0){</span></div>
-<div class="line"><span class="lineno">   76</span> </div>
-<div class="line"><span class="lineno">   77</span>    <span class="comment">// Serial.println(rx_buffer.size());</span></div>
-<div class="line"><span class="lineno">   78</span>    <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">while</span> (rx_buffer.available())</div>
-<div class="line"><span class="lineno">   80</span>    {</div>
-<div class="line"><span class="lineno">   81</span>        CAN_message_t recvd_msg;</div>
-<div class="line"><span class="lineno">   82</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">   83</span>        rx_buffer.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">   84</span>        memmove(&amp;recvd_msg, buf, <span class="keyword">sizeof</span>(recvd_msg));</div>
-<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">switch</span> (recvd_msg.id)</div>
-<div class="line"><span class="lineno">   86</span>        {</div>
-<div class="line"><span class="lineno">   87</span> </div>
-<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">case</span> DASHBOARD_STATE_CANID:</div>
-<div class="line"><span class="lineno">   89</span>            interfaces.dash_interface-&gt;read(recvd_msg);</div>
-<div class="line"><span class="lineno">   90</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   91</span>        </div>
-<div class="line"><span class="lineno">   92</span>        <span class="comment">// AMS msg receives</span></div>
-<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">case</span> ID_BMS_STATUS:</div>
-<div class="line"><span class="lineno">   94</span>            interfaces.ams_interface-&gt;retrieve_status_CAN(curr_millis, recvd_msg);</div>
-<div class="line"><span class="lineno">   95</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">case</span> ID_BMS_TEMPERATURES:</div>
-<div class="line"><span class="lineno">   97</span>            interfaces.ams_interface-&gt;retrieve_temp_CAN(recvd_msg);</div>
-<div class="line"><span class="lineno">   98</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">case</span> ID_BMS_VOLTAGES:</div>
-<div class="line"><span class="lineno">  100</span>            interfaces.ams_interface-&gt;retrieve_voltage_CAN(recvd_msg);</div>
-<div class="line"><span class="lineno">  101</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  102</span>        </div>
-<div class="line"><span class="lineno">  103</span>            <span class="comment">// MC status msgs</span></div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">case</span> ID_MC1_STATUS:</div>
-<div class="line"><span class="lineno">  105</span>            interfaces.front_left_inv-&gt;receive_status_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  106</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  107</span>        <span class="keywordflow">case</span> ID_MC2_STATUS:</div>
-<div class="line"><span class="lineno">  108</span>            interfaces.front_right_inv-&gt;receive_status_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  109</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">case</span> ID_MC3_STATUS:</div>
-<div class="line"><span class="lineno">  111</span>            interfaces.rear_left_inv-&gt;receive_status_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  112</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">case</span> ID_MC4_STATUS:</div>
-<div class="line"><span class="lineno">  114</span>            interfaces.rear_right_inv-&gt;receive_status_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  115</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  116</span> </div>
-<div class="line"><span class="lineno">  117</span>            <span class="comment">// MC temp msgs</span></div>
-<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">case</span> ID_MC1_TEMPS:</div>
-<div class="line"><span class="lineno">  119</span>            interfaces.front_left_inv-&gt;receive_temp_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  120</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">case</span> ID_MC2_TEMPS:</div>
-<div class="line"><span class="lineno">  122</span>            interfaces.front_right_inv-&gt;receive_temp_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  123</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">case</span> ID_MC3_TEMPS:</div>
-<div class="line"><span class="lineno">  125</span>            interfaces.rear_left_inv-&gt;receive_temp_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  126</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">case</span> ID_MC4_TEMPS:</div>
-<div class="line"><span class="lineno">  128</span>            interfaces.rear_right_inv-&gt;receive_temp_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  129</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  130</span> </div>
-<div class="line"><span class="lineno">  131</span>            <span class="comment">// MC energy msgs</span></div>
-<div class="line"><span class="lineno">  132</span>        <span class="keywordflow">case</span> ID_MC1_ENERGY:</div>
-<div class="line"><span class="lineno">  133</span>            interfaces.front_left_inv-&gt;receive_energy_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  134</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">case</span> ID_MC2_ENERGY:</div>
-<div class="line"><span class="lineno">  136</span>            interfaces.front_right_inv-&gt;receive_energy_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  137</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  138</span>        <span class="keywordflow">case</span> ID_MC3_ENERGY:</div>
-<div class="line"><span class="lineno">  139</span>            interfaces.rear_left_inv-&gt;receive_energy_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  140</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  141</span>        <span class="keywordflow">case</span> ID_MC4_ENERGY:</div>
-<div class="line"><span class="lineno">  142</span>            interfaces.rear_right_inv-&gt;receive_energy_msg(recvd_msg);</div>
-<div class="line"><span class="lineno">  143</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  144</span> </div>
-<div class="line"><span class="lineno">  145</span>            <span class="comment">// SAB msgs</span></div>
-<div class="line"><span class="lineno">  146</span>        <span class="keywordflow">case</span> SAB_SUSPENSION_CANID:</div>
-<div class="line"><span class="lineno">  147</span>            interfaces.sab_interface-&gt;retrieve_pots_and_load_cells_CAN(recvd_msg);</div>
-<div class="line"><span class="lineno">  148</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  149</span>        }</div>
-<div class="line"><span class="lineno">  150</span>    }</div>
-<div class="line"><span class="lineno">  151</span>}</div>
+<p class="definition">Definition at line <a class="el" href="HytechCANInterface_8h_source.html#l00073">73</a> of file <a class="el" href="HytechCANInterface_8h_source.html">HytechCANInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>{</div>
+<div class="line"><span class="lineno">   75</span>    <span class="comment">// TODO switch to using the global CAN receive function from the generated CAN library</span></div>
+<div class="line"><span class="lineno">   76</span>    <span class="comment">// if(rx_buffer.size() &gt; 0){</span></div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>    <span class="comment">// Serial.println(rx_buffer.size());</span></div>
+<div class="line"><span class="lineno">   79</span>    <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">while</span> (rx_buffer.available())</div>
+<div class="line"><span class="lineno">   81</span>    {</div>
+<div class="line"><span class="lineno">   82</span>        CAN_message_t recvd_msg;</div>
+<div class="line"><span class="lineno">   83</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
+<div class="line"><span class="lineno">   84</span>        rx_buffer.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">   85</span>        memmove(&amp;recvd_msg, buf, <span class="keyword">sizeof</span>(recvd_msg));</div>
+<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">switch</span> (recvd_msg.id)</div>
+<div class="line"><span class="lineno">   87</span>        {</div>
+<div class="line"><span class="lineno">   88</span> </div>
+<div class="line"><span class="lineno">   89</span>        <span class="keywordflow">case</span> DASHBOARD_STATE_CANID:</div>
+<div class="line"><span class="lineno">   90</span>            interfaces.dash_interface-&gt;read(recvd_msg);</div>
+<div class="line"><span class="lineno">   91</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   92</span> </div>
+<div class="line"><span class="lineno">   93</span>        <span class="comment">// AMS msg receives</span></div>
+<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">case</span> ID_BMS_STATUS:</div>
+<div class="line"><span class="lineno">   95</span>            interfaces.ams_interface-&gt;retrieve_status_CAN(curr_millis, recvd_msg);</div>
+<div class="line"><span class="lineno">   96</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">case</span> ID_BMS_TEMPERATURES:</div>
+<div class="line"><span class="lineno">   98</span>            interfaces.ams_interface-&gt;retrieve_temp_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">   99</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">case</span> ID_BMS_VOLTAGES:</div>
+<div class="line"><span class="lineno">  101</span>            interfaces.ams_interface-&gt;retrieve_voltage_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>            <span class="comment">// MC status msgs</span></div>
+<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">case</span> ID_MC1_STATUS:</div>
+<div class="line"><span class="lineno">  106</span>            interfaces.front_left_inv-&gt;receive_status_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  107</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  108</span>        <span class="keywordflow">case</span> ID_MC2_STATUS:</div>
+<div class="line"><span class="lineno">  109</span>            interfaces.front_right_inv-&gt;receive_status_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  110</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">case</span> ID_MC3_STATUS:</div>
+<div class="line"><span class="lineno">  112</span>            interfaces.rear_left_inv-&gt;receive_status_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  113</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  114</span>        <span class="keywordflow">case</span> ID_MC4_STATUS:</div>
+<div class="line"><span class="lineno">  115</span>            interfaces.rear_right_inv-&gt;receive_status_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  116</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>            <span class="comment">// MC temp msgs</span></div>
+<div class="line"><span class="lineno">  119</span>        <span class="keywordflow">case</span> ID_MC1_TEMPS:</div>
+<div class="line"><span class="lineno">  120</span>            interfaces.front_left_inv-&gt;receive_temp_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  121</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  122</span>        <span class="keywordflow">case</span> ID_MC2_TEMPS:</div>
+<div class="line"><span class="lineno">  123</span>            interfaces.front_right_inv-&gt;receive_temp_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  124</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">case</span> ID_MC3_TEMPS:</div>
+<div class="line"><span class="lineno">  126</span>            interfaces.rear_left_inv-&gt;receive_temp_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  127</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">case</span> ID_MC4_TEMPS:</div>
+<div class="line"><span class="lineno">  129</span>            interfaces.rear_right_inv-&gt;receive_temp_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>            <span class="comment">// MC energy msgs</span></div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">case</span> ID_MC1_ENERGY:</div>
+<div class="line"><span class="lineno">  134</span>            interfaces.front_left_inv-&gt;receive_energy_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  135</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  136</span>        <span class="keywordflow">case</span> ID_MC2_ENERGY:</div>
+<div class="line"><span class="lineno">  137</span>            interfaces.front_right_inv-&gt;receive_energy_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  138</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">case</span> ID_MC3_ENERGY:</div>
+<div class="line"><span class="lineno">  140</span>            interfaces.rear_left_inv-&gt;receive_energy_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  141</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  142</span>        <span class="keywordflow">case</span> ID_MC4_ENERGY:</div>
+<div class="line"><span class="lineno">  143</span>            interfaces.rear_right_inv-&gt;receive_energy_msg(recvd_msg);</div>
+<div class="line"><span class="lineno">  144</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>            <span class="comment">// SAB msgs</span></div>
+<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">case</span> SAB_SUSPENSION_CANID:</div>
+<div class="line"><span class="lineno">  148</span>            interfaces.sab_interface-&gt;retrieve_pots_and_load_cells_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  149</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>            <span class="comment">// vector nav msgs</span></div>
+<div class="line"><span class="lineno">  152</span>        <span class="keywordflow">case</span> VN_VEL_CANID:</div>
+<div class="line"><span class="lineno">  153</span>            interfaces.vn_interface-&gt;retrieve_velocity_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  154</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  155</span>        <span class="keywordflow">case</span> VN_LINEAR_ACCEL_CANID:</div>
+<div class="line"><span class="lineno">  156</span>            interfaces.vn_interface-&gt;retrieve_linear_accel_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  157</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  158</span>        <span class="keywordflow">case</span> VN_LINEAR_ACCEL_UNCOMP_CANID:</div>
+<div class="line"><span class="lineno">  159</span>            interfaces.vn_interface-&gt;retrieve_uncompLinear_accel_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  160</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  161</span>        <span class="keywordflow">case</span> VN_YPR_CANID:</div>
+<div class="line"><span class="lineno">  162</span>            interfaces.vn_interface-&gt;retrieve_ypr_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  163</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  164</span> </div>
+<div class="line"><span class="lineno">  165</span>        <span class="keywordflow">case</span> VN_LAT_LON_CANID:</div>
+<div class="line"><span class="lineno">  166</span>            interfaces.vn_interface-&gt;retrieve_lat_lon_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  167</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  168</span>        <span class="keywordflow">case</span> VN_GPS_TIME_CANID:</div>
+<div class="line"><span class="lineno">  169</span>            interfaces.vn_interface-&gt;retrieve_gps_time_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  170</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  171</span>        <span class="keywordflow">case</span> VN_STATUS_CANID:</div>
+<div class="line"><span class="lineno">  172</span>            interfaces.vn_interface-&gt;retrieve_vn_status_CAN(recvd_msg); <span class="comment">// double check this</span></div>
+<div class="line"><span class="lineno">  173</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  174</span>        <span class="keywordflow">case</span> VN_ANGULAR_RATE_CANID:</div>
+<div class="line"><span class="lineno">  175</span>            interfaces.vn_interface-&gt;retrieve_lat_lon_CAN(recvd_msg);</div>
+<div class="line"><span class="lineno">  176</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  177</span>        }</div>
+<div class="line"><span class="lineno">  178</span>    }</div>
+<div class="line"><span class="lineno">  179</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -351,19 +379,19 @@ template&lt;typename bufferType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HytechCANInterface_8h_source.html#l00158">158</a> of file <a class="el" href="HytechCANInterface_8h_source.html">HytechCANInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  159</span>{</div>
-<div class="line"><span class="lineno">  160</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">while</span> (buffer.available())</div>
-<div class="line"><span class="lineno">  162</span>    {</div>
-<div class="line"><span class="lineno">  163</span>        CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><span class="lineno">  164</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">  165</span>        buffer.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">  166</span>        memmove(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, buf, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
-<div class="line"><span class="lineno">  167</span>        can_interface-&gt;write(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>);</div>
-<div class="line"><span class="lineno">  168</span>        <span class="comment">// delayMicroseconds(2500);</span></div>
-<div class="line"><span class="lineno">  169</span>    }</div>
-<div class="line"><span class="lineno">  170</span>}</div>
+<p class="definition">Definition at line <a class="el" href="HytechCANInterface_8h_source.html#l00185">185</a> of file <a class="el" href="HytechCANInterface_8h_source.html">HytechCANInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  186</span>{</div>
+<div class="line"><span class="lineno">  187</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">while</span> (buffer.available())</div>
+<div class="line"><span class="lineno">  189</span>    {</div>
+<div class="line"><span class="lineno">  190</span>        CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  191</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
+<div class="line"><span class="lineno">  192</span>        buffer.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  193</span>        memmove(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, buf, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
+<div class="line"><span class="lineno">  194</span>        can_interface-&gt;write(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>);</div>
+<div class="line"><span class="lineno">  195</span>        <span class="comment">// delayMicroseconds(2500);</span></div>
+<div class="line"><span class="lineno">  196</span>    }</div>
+<div class="line"><span class="lineno">  197</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -508,7 +536,7 @@ template&lt;typename bufferType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00058">58</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00056">56</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>

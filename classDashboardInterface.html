@@ -87,7 +87,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a13849bd01a439ddd3588f27144c77608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f1a5c0cc0b5227a05041003afa8765"><td class="memItemLeft" align="right" valign="top">CAN_message_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765">write</a> ()</td></tr>
 <tr class="separator:a72f1a5c0cc0b5227a05041003afa8765"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac65d3ac3604fd0a7d03391f4a04c45b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#aac65d3ac3604fd0a7d03391f4a04c45b">tick10</a> (<a class="el" href="classMCUInterface.html">MCUInterface</a> *mcu, int car_state, bool <a class="el" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>, bool drivetrain_error, <a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> torque, float min_cell_voltage, <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> glv_voltage, int launch_state)</td></tr>
+<tr class="memitem:aac65d3ac3604fd0a7d03391f4a04c45b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#aac65d3ac3604fd0a7d03391f4a04c45b">tick10</a> (<a class="el" href="classMCUInterface.html">MCUInterface</a> *mcu, int car_state, bool <a class="el" href="classDashboardInterface.html#a5e28f0c17ab67f3bee62b78c41e012ca">buzzer</a>, bool drivetrain_error, <a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> torque, float min_cell_voltage, <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> glv_voltage, int launch_state)</td></tr>
 <tr class="separator:aac65d3ac3604fd0a7d03391f4a04c45b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a111879c011f5cb5bddfc8ed09f736099"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mock__interfaces_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8">DialMode_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a111879c011f5cb5bddfc8ed09f736099">getDialMode</a> ()</td></tr>
 <tr class="separator:a111879c011f5cb5bddfc8ed09f736099"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,6 +126,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a5e28f0c17ab67f3bee62b78c41e012ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a5e28f0c17ab67f3bee62b78c41e012ca">buzzer</a> = <a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></td></tr>
+<tr class="separator:a5e28f0c17ab67f3bee62b78c41e012ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a073fc48d849bacc4b3503f9f32d0f36c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDashboardInterface.html#a073fc48d849bacc4b3503f9f32d0f36c">start_button_status_</a></td></tr>
 <tr class="separator:a073fc48d849bacc4b3503f9f32d0f36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -216,8 +218,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00064">64</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; };</div>
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00065">65</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classDashboardInterface.html#a5e28f0c17ab67f3bee62b78c41e012ca">buzzer</a>; };</div>
+<div class="ttc" id="aclassDashboardInterface_html_a5e28f0c17ab67f3bee62b78c41e012ca"><div class="ttname"><a href="classDashboardInterface.html#a5e28f0c17ab67f3bee62b78c41e012ca">DashboardInterface::buzzer</a></div><div class="ttdeci">bool buzzer</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2DashboardInterface_8h_source.html#l00062">DashboardInterface.h:62</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -572,9 +575,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00063">63</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>{ <span class="keywordflow">return</span>  <a class="code hl_variable" href="classDashboardInterface.html#a073fc48d849bacc4b3503f9f32d0f36c">start_button_status_</a>; };</div>
-<div class="ttc" id="aclassDashboardInterface_html_a073fc48d849bacc4b3503f9f32d0f36c"><div class="ttname"><a href="classDashboardInterface.html#a073fc48d849bacc4b3503f9f32d0f36c">DashboardInterface::start_button_status_</a></div><div class="ttdeci">bool start_button_status_</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2DashboardInterface_8h_source.html#l00062">DashboardInterface.h:62</a></div></div>
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00064">64</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>{ <span class="keywordflow">return</span>  <a class="code hl_variable" href="classDashboardInterface.html#a073fc48d849bacc4b3503f9f32d0f36c">start_button_status_</a>; };</div>
+<div class="ttc" id="aclassDashboardInterface_html_a073fc48d849bacc4b3503f9f32d0f36c"><div class="ttname"><a href="classDashboardInterface.html#a073fc48d849bacc4b3503f9f32d0f36c">DashboardInterface::start_button_status_</a></div><div class="ttdeci">bool start_button_status_</div><div class="ttdef"><b>Definition:</b> <a href="mock__interfaces_2DashboardInterface_8h_source.html#l00063">DashboardInterface.h:63</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -643,7 +646,7 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="DashboardInterface_8cpp_source.html#l00070">70</a> of file <a class="el" href="DashboardInterface_8cpp_source.html">DashboardInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   78</span>{</div>
 <div class="line"><span class="lineno">   79</span>    </div>
-<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="classDashboardInterface.html#ac5f8d8515637b1b2a3d7d6067ba446e4">soundBuzzer</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>);</div>
+<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="classDashboardInterface.html#ac5f8d8515637b1b2a3d7d6067ba446e4">soundBuzzer</a>(<a class="code hl_variable" href="classDashboardInterface.html#a5e28f0c17ab67f3bee62b78c41e012ca">buzzer</a>);</div>
 <div class="line"><span class="lineno">   81</span> </div>
 <div class="line"><span class="lineno">   82</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::AMS_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#afb2dff221a9f0c91319af9d9189077e2">bms_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
 <div class="line"><span class="lineno">   83</span>    <a class="code hl_function" href="classDashboardInterface.html#a2b862f16ae263ade4c00bc9277a1f580">setLED</a>(DashLED_e::IMD_LED, mcu-&gt;<a class="code hl_function" href="classMCUInterface.html#a16f0bb4fe742e2042a93f610bccb5ae8">imd_ok_is_high</a>() ? LEDColors_e::ON : LEDColors_e::RED);</div>
@@ -695,7 +698,6 @@ Public Attributes</h2></td></tr>
 <div class="ttc" id="aclassMCUInterface_html_a16f0bb4fe742e2042a93f610bccb5ae8"><div class="ttname"><a href="classMCUInterface.html#a16f0bb4fe742e2042a93f610bccb5ae8">MCUInterface::imd_ok_is_high</a></div><div class="ttdeci">bool imd_ok_is_high()</div><div class="ttdef"><b>Definition:</b> <a href="MCUInterface_8cpp_source.html#l00078">MCUInterface.cpp:78</a></div></div>
 <div class="ttc" id="aclassMCUInterface_html_a748730d4238924e66f60c8029b113467"><div class="ttname"><a href="classMCUInterface.html#a748730d4238924e66f60c8029b113467">MCUInterface::get_bots_ok</a></div><div class="ttdeci">bool get_bots_ok()</div><div class="ttdef"><b>Definition:</b> <a href="MCUInterface_8cpp_source.html#l00089">MCUInterface.cpp:89</a></div></div>
 <div class="ttc" id="aclassMCUInterface_html_afb2dff221a9f0c91319af9d9189077e2"><div class="ttname"><a href="classMCUInterface.html#afb2dff221a9f0c91319af9d9189077e2">MCUInterface::bms_ok_is_high</a></div><div class="ttdeci">bool bms_ok_is_high()</div><div class="ttdef"><b>Definition:</b> <a href="MCUInterface_8cpp_source.html#l00073">MCUInterface.cpp:73</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a9b1d074ed9dae4fd92f949d027378c2d"><div class="ttname"><a href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a></div><div class="ttdeci">BuzzerController buzzer(BUZZER_ON_INTERVAL)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00097">main.cpp:97</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -789,6 +791,22 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5e28f0c17ab67f3bee62b78c41e012ca" name="a5e28f0c17ab67f3bee62b78c41e012ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e28f0c17ab67f3bee62b78c41e012ca">&#9670;&#160;</a></span>buzzer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DashboardInterface::buzzer = <a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00062">62</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
+
+</div>
+</div>
 <a id="a073fc48d849bacc4b3503f9f32d0f36c" name="a073fc48d849bacc4b3503f9f32d0f36c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a073fc48d849bacc4b3503f9f32d0f36c">&#9670;&#160;</a></span>start_button_status_</h2>
 
@@ -801,7 +819,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00062">62</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html#l00063">63</a> of file <a class="el" href="mock__interfaces_2DashboardInterface_8h_source.html">DashboardInterface.h</a>.</p>
 
 </div>
 </div>

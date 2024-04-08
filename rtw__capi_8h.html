@@ -81,7 +81,7 @@ $(function() {
   <div class="headertitle"><div class="title">rtw_capi.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="rtwtypes_8h_source.html">rtwtypes.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;rtwtypes.h&quot;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 </div>
 <p><a href="rtw__capi_8h_source.html">Go to the source code of this file.</a></p>
@@ -111,9 +111,9 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ace8ca20981e6c5b86230dced0f76e82c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#ace8ca20981e6c5b86230dced0f76e82c">SIMPLIFIED_RTWTYPES_COMPATIBILITY</a></td></tr>
 <tr class="separator:ace8ca20981e6c5b86230dced0f76e82c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cfff0c7ce916177fd677d6a699b9067"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a6cfff0c7ce916177fd677d6a699b9067">SS_ENUM_TYPE</a>&#160;&#160;&#160;(((<a class="el" href="rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U))-1)</td></tr>
+<tr class="memitem:a6cfff0c7ce916177fd677d6a699b9067"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a6cfff0c7ce916177fd677d6a699b9067">SS_ENUM_TYPE</a>&#160;&#160;&#160;(((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U))-1)</td></tr>
 <tr class="separator:a6cfff0c7ce916177fd677d6a699b9067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab688abe888c0e4b41ea92f3719ebe440"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#ab688abe888c0e4b41ea92f3719ebe440">SS_STRUCT</a>&#160;&#160;&#160;(((<a class="el" href="rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U)))</td></tr>
+<tr class="memitem:ab688abe888c0e4b41ea92f3719ebe440"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#ab688abe888c0e4b41ea92f3719ebe440">SS_STRUCT</a>&#160;&#160;&#160;(((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U)))</td></tr>
 <tr class="separator:ab688abe888c0e4b41ea92f3719ebe440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3433740d5a750c5f62525f63d5ea3a54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a3433740d5a750c5f62525f63d5ea3a54">rt_offsetof</a>(s,  el)&#160;&#160;&#160;offsetof(s,el)</td></tr>
 <tr class="separator:a3433740d5a750c5f62525f63d5ea3a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,9 +237,9 @@ Macros</h2></td></tr>
 <tr class="separator:af21191e47bcb2285c7976dceeb4a6b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af94fcaadb4e08a978a9b91a9de8e08e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#af94fcaadb4e08a978a9b91a9de8e08e3">rtwCAPI_GetFxpIsSigned</a>(fxpMap,  i)&#160;&#160;&#160;((fxpMap)[(i)].isSigned)</td></tr>
 <tr class="separator:af94fcaadb4e08a978a9b91a9de8e08e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90217d3c7824d23dd96b31fb5705554c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a90217d3c7824d23dd96b31fb5705554c">rtwCAPI_GetFxpFracSlope</a>(fxpMap,  i)&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a62cf23fb5c4598c30eab0151887980d9">rtwCAPI_GetFxpFracSlopePtr</a>(fxpMap,i)))</td></tr>
+<tr class="memitem:a90217d3c7824d23dd96b31fb5705554c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a90217d3c7824d23dd96b31fb5705554c">rtwCAPI_GetFxpFracSlope</a>(fxpMap,  i)&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a62cf23fb5c4598c30eab0151887980d9">rtwCAPI_GetFxpFracSlopePtr</a>(fxpMap,i)))</td></tr>
 <tr class="separator:a90217d3c7824d23dd96b31fb5705554c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9264a94325fa771669731c0622ad7381"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a9264a94325fa771669731c0622ad7381">rtwCAPI_GetFxpBias</a>(fxpMap,  i)&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a66ee48f84fc4c586f6ff40730ab2afbf">rtwCAPI_GetFxpBiasPtr</a>(fxpMap, i)))</td></tr>
+<tr class="memitem:a9264a94325fa771669731c0622ad7381"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a9264a94325fa771669731c0622ad7381">rtwCAPI_GetFxpBias</a>(fxpMap,  i)&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a66ee48f84fc4c586f6ff40730ab2afbf">rtwCAPI_GetFxpBiasPtr</a>(fxpMap, i)))</td></tr>
 <tr class="separator:a9264a94325fa771669731c0622ad7381"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6d4915b8303e24261999c46b7b11771"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#ad6d4915b8303e24261999c46b7b11771">rtwCAPI_GetSamplePeriodPtr</a>(sampTimeMap,  i)&#160;&#160;&#160;((sampTimeMap)[(i)].samplePeriodPtr)</td></tr>
 <tr class="separator:ad6d4915b8303e24261999c46b7b11771"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,9 +249,9 @@ Macros</h2></td></tr>
 <tr class="separator:a53e0bb24606a58a59c08fc8d721248cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a167298c4cf4ce540b222e817e5bf0a65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a167298c4cf4ce540b222e817e5bf0a65">rtwCAPI_GetSamplingMode</a>(sampTimeMap,  i)&#160;&#160;&#160;((sampTimeMap)[(i)].samplingMode)</td></tr>
 <tr class="separator:a167298c4cf4ce540b222e817e5bf0a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a2cee8b5b43113060595408e5acc695"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a9a2cee8b5b43113060595408e5acc695">rtwCAPI_GetSamplePeriod</a>(sampTimeMap,  i)&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#ad6d4915b8303e24261999c46b7b11771">rtwCAPI_GetSamplePeriodPtr</a>(sampTimeMap, i)))</td></tr>
+<tr class="memitem:a9a2cee8b5b43113060595408e5acc695"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a9a2cee8b5b43113060595408e5acc695">rtwCAPI_GetSamplePeriod</a>(sampTimeMap,  i)&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#ad6d4915b8303e24261999c46b7b11771">rtwCAPI_GetSamplePeriodPtr</a>(sampTimeMap, i)))</td></tr>
 <tr class="separator:a9a2cee8b5b43113060595408e5acc695"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c21c1f2c9a240299ef0c32381e95b80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a7c21c1f2c9a240299ef0c32381e95b80">rtwCAPI_GetSampleOffset</a>(sampTimeMap,  i)&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#a021b5e55fb1a9d49de91586eff67de2b">rtwCAPI_GetSampleOffsetPtr</a>(sampTimeMap, i)))</td></tr>
+<tr class="memitem:a7c21c1f2c9a240299ef0c32381e95b80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a7c21c1f2c9a240299ef0c32381e95b80">rtwCAPI_GetSampleOffset</a>(sampTimeMap,  i)&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#a021b5e55fb1a9d49de91586eff67de2b">rtwCAPI_GetSampleOffsetPtr</a>(sampTimeMap, i)))</td></tr>
 <tr class="separator:a7c21c1f2c9a240299ef0c32381e95b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a72967e8b4106fa29703820034403b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtw__capi_8h.html#a8a72967e8b4106fa29703820034403b6">rtwCAPI_GetDataAddress</a>(dataAddrMap,  addrIdx)&#160;&#160;&#160;((dataAddrMap)[(addrIdx)])</td></tr>
 <tr class="separator:a8a72967e8b4106fa29703820034403b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1216,7 +1216,7 @@ Enumerations</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a66ee48f84fc4c586f6ff40730ab2afbf">rtwCAPI_GetFxpBiasPtr</a>(fxpMap, i)))</td>
+          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a66ee48f84fc4c586f6ff40730ab2afbf">rtwCAPI_GetFxpBiasPtr</a>(fxpMap, i)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1306,7 +1306,7 @@ Enumerations</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a62cf23fb5c4598c30eab0151887980d9">rtwCAPI_GetFxpFracSlopePtr</a>(fxpMap,i)))</td>
+          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a>*) <a class="el" href="rtw__capi_8h.html#a62cf23fb5c4598c30eab0151887980d9">rtwCAPI_GetFxpFracSlopePtr</a>(fxpMap,i)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1666,7 +1666,7 @@ Enumerations</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#a021b5e55fb1a9d49de91586eff67de2b">rtwCAPI_GetSampleOffsetPtr</a>(sampTimeMap, i)))</td>
+          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#a021b5e55fb1a9d49de91586eff67de2b">rtwCAPI_GetSampleOffsetPtr</a>(sampTimeMap, i)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1726,7 +1726,7 @@ Enumerations</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#ad6d4915b8303e24261999c46b7b11771">rtwCAPI_GetSamplePeriodPtr</a>(sampTimeMap, i)))</td>
+          <td></td><td>&#160;&#160;&#160;(*((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2e4078fe4daba4fe064f5c7614b361a2">real_T</a> *) <a class="el" href="rtw__capi_8h.html#ad6d4915b8303e24261999c46b7b11771">rtwCAPI_GetSamplePeriodPtr</a>(sampTimeMap, i)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2478,7 +2478,7 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SS_ENUM_TYPE&#160;&#160;&#160;(((<a class="el" href="rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U))-1)</td>
+          <td class="memname">#define SS_ENUM_TYPE&#160;&#160;&#160;(((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U))-1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2494,7 +2494,7 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SS_STRUCT&#160;&#160;&#160;(((<a class="el" href="rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U)))</td>
+          <td class="memname">#define SS_STRUCT&#160;&#160;&#160;(((<a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a2532a6244e023eee49f315c10f1f7c53">uint8_T</a>)(255U)))</td>
         </tr>
       </table>
 </div><div class="memdoc">

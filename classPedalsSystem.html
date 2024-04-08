@@ -95,7 +95,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00033">33</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00036">36</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a84fa563fc169ac90288522cd43fe77a6" name="a84fa563fc169ac90288522cd43fe77a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84fa563fc169ac90288522cd43fe77a6">&#9670;&#160;</a></span>PedalsSystem()</h2>
@@ -137,14 +137,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00036">36</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>    {</div>
-<div class="line"><span class="lineno">   38</span>        accelParams_ = accelParams;</div>
-<div class="line"><span class="lineno">   39</span>        brakeParams_ = brakeParams;</div>
-<div class="line"><span class="lineno">   40</span>        implausibilityStartTime_ = 0;</div>
-<div class="line"><span class="lineno">   41</span>        mechBrakeActiveThreshold_ = mechBrakeActiveThreshold;</div>
-<div class="line"><span class="lineno">   42</span>        <span class="comment">// Setting of min and maxes for pedals via config file</span></div>
-<div class="line"><span class="lineno">   43</span>    };</div>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00040">40</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span>    {</div>
+<div class="line"><span class="lineno">   44</span>        accelParams_ = accelParams;</div>
+<div class="line"><span class="lineno">   45</span>        brakeParams_ = brakeParams;</div>
+<div class="line"><span class="lineno">   46</span>        implausibilityStartTime_ = 0;</div>
+<div class="line"><span class="lineno">   47</span>        mechBrakeActiveThreshold_ = mechBrakeActiveThreshold;</div>
+<div class="line"><span class="lineno">   48</span>        <span class="comment">// Setting of min and maxes for pedals via config file</span></div>
+<div class="line"><span class="lineno">   49</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -193,47 +193,52 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8cpp_source.html#l00014">14</a> of file <a class="el" href="PedalsSystem_8cpp_source.html">PedalsSystem.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   19</span>{</div>
-<div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> out;</div>
-<div class="line"><span class="lineno">   22</span>    </div>
-<div class="line"><span class="lineno">   23</span>    </div>
-<div class="line"><span class="lineno">   24</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);</div>
-<div class="line"><span class="lineno">   25</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">brakeImplausible</a> = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);</div>
-<div class="line"><span class="lineno">   26</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">brakeAndAccelPressedImplausibility</a> = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);</div>
-<div class="line"><span class="lineno">   27</span>    <span class="keywordtype">bool</span> implausibility = (out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">brakeAndAccelPressedImplausibility</a> || out.<a class="code hl_variable" href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">brakeImplausible</a> || out.<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a>);</div>
-<div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> (implausibility &amp;&amp; (implausibilityStartTime_ == 0))</div>
-<div class="line"><span class="lineno">   30</span>    {</div>
-<div class="line"><span class="lineno">   31</span>        implausibilityStartTime_ = curr_time;</div>
-<div class="line"><span class="lineno">   32</span>    }</div>
-<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!implausibility)</div>
-<div class="line"><span class="lineno">   34</span>    {</div>
-<div class="line"><span class="lineno">   35</span>        implausibilityStartTime_ = 0;</div>
-<div class="line"><span class="lineno">   36</span>    }</div>
-<div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> = (accel1.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> + accel2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>) / 2.0;</div>
-<div class="line"><span class="lineno">   39</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> = (brake1.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> + brake2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>) / 2.0;</div>
-<div class="line"><span class="lineno">   40</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">regenPercent</a> = std::max(std::min(out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> / mechBrakeActiveThreshold_, 1.0f), 0.0f);</div>
-<div class="line"><span class="lineno">   41</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e">brakePressed</a> = pedal_is_active_(brake1.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>, brake2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>, brakeParams_.<a class="code hl_variable" href="structPedalsParams.html#a573cf044fd7510e4e988764e13dd43c4">activation_percentage</a>);</div>
-<div class="line"><span class="lineno">   42</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a57aae961a223b79e18f8f75e83b33f0f">mechBrakeActive</a> = out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &gt; mechBrakeActiveThreshold_;</div>
-<div class="line"><span class="lineno">   43</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#aa0abaf0a205603315888d746ce5a7e95">implausibilityExceededMaxDuration</a> = max_duration_of_implausibility_exceeded_(curr_time);</div>
-<div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">return</span> out;</div>
-<div class="line"><span class="lineno">   46</span>}</div>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8cpp_source.html#l00012">12</a> of file <a class="el" href="PedalsSystem_8cpp_source.html">PedalsSystem.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>{</div>
+<div class="line"><span class="lineno">   18</span> </div>
+<div class="line"><span class="lineno">   19</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> out;</div>
+<div class="line"><span class="lineno">   20</span>    </div>
+<div class="line"><span class="lineno">   21</span>    </div>
+<div class="line"><span class="lineno">   22</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);</div>
+<div class="line"><span class="lineno">   23</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">brakeImplausible</a> = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);</div>
+<div class="line"><span class="lineno">   24</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">brakeAndAccelPressedImplausibility</a> = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);</div>
+<div class="line"><span class="lineno">   25</span>    <span class="keywordtype">bool</span> implausibility = (out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">brakeAndAccelPressedImplausibility</a> || out.<a class="code hl_variable" href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">brakeImplausible</a> || out.<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a>);</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">if</span> (implausibility &amp;&amp; (implausibilityStartTime_ == 0))</div>
+<div class="line"><span class="lineno">   28</span>    {</div>
+<div class="line"><span class="lineno">   29</span>        implausibilityStartTime_ = curr_time;</div>
+<div class="line"><span class="lineno">   30</span>    }</div>
+<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!implausibility)</div>
+<div class="line"><span class="lineno">   32</span>    {</div>
+<div class="line"><span class="lineno">   33</span>        implausibilityStartTime_ = 0;</div>
+<div class="line"><span class="lineno">   34</span>    }</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> = (accel1.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> + accel2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>) / 2.0;</div>
+<div class="line"><span class="lineno">   37</span>    <span class="comment">// out.accelPercent = (brake1.conversion + brake2.conversion) / 2.0;</span></div>
+<div class="line"><span class="lineno">   38</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> = brake1.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>; <span class="comment">// lost half a sensor L</span></div>
+<div class="line"><span class="lineno">   39</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> = remove_deadzone_(out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a>, accelParams_.<a class="code hl_variable" href="structPedalsParams.html#a09edf688133f17c84478af8d1f94991c">deadzone_margin</a>);</div>
+<div class="line"><span class="lineno">   40</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> = remove_deadzone_(out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a>, brakeParams_.<a class="code hl_variable" href="structPedalsParams.html#a09edf688133f17c84478af8d1f94991c">deadzone_margin</a>);</div>
+<div class="line"><span class="lineno">   41</span> </div>
+<div class="line"><span class="lineno">   42</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">regenPercent</a> = std::max(std::min(out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> / mechBrakeActiveThreshold_, 1.0f), 0.0f);</div>
+<div class="line"><span class="lineno">   43</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e">brakePressed</a> = pedal_is_active_(brake1.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>, brake2.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>, brakeParams_.<a class="code hl_variable" href="structPedalsParams.html#a573cf044fd7510e4e988764e13dd43c4">activation_percentage</a>);</div>
+<div class="line"><span class="lineno">   44</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a57aae961a223b79e18f8f75e83b33f0f">mechBrakeActive</a> = out.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &gt; mechBrakeActiveThreshold_;</div>
+<div class="line"><span class="lineno">   45</span>    out.<a class="code hl_variable" href="structPedalsSystemData__s.html#aa0abaf0a205603315888d746ce5a7e95">implausibilityExceededMaxDuration</a> = max_duration_of_implausibility_exceeded_(curr_time);</div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">return</span> out;</div>
+<div class="line"><span class="lineno">   48</span>}</div>
 <div class="ttc" id="astructAnalogConversion__s_html_a1873377ed9fcaa212ebe08ef2aa6b6af"><div class="ttname"><a href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">AnalogConversion_s::conversion</a></div><div class="ttdeci">float conversion</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00016">AnalogSensorsInterface.h:16</a></div></div>
-<div class="ttc" id="astructPedalsParams_html_a573cf044fd7510e4e988764e13dd43c4"><div class="ttname"><a href="structPedalsParams.html#a573cf044fd7510e4e988764e13dd43c4">PedalsParams::activation_percentage</a></div><div class="ttdeci">float activation_percentage</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00030">PedalsSystem.h:30</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html"><div class="ttname"><a href="structPedalsSystemData__s.html">PedalsSystemData_s</a></div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00008">PedalsSystem.h:9</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a03435669a9f0c4fea7e268e6ce3eb4d8"><div class="ttname"><a href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">PedalsSystemData_s::brakePercent</a></div><div class="ttdeci">float brakePercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00018">PedalsSystem.h:18</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a57aae961a223b79e18f8f75e83b33f0f"><div class="ttname"><a href="structPedalsSystemData__s.html#a57aae961a223b79e18f8f75e83b33f0f">PedalsSystemData_s::mechBrakeActive</a></div><div class="ttdeci">bool mechBrakeActive</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00014">PedalsSystem.h:14</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a6c4e6145913766af3968ad78d6789f3f"><div class="ttname"><a href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">PedalsSystemData_s::accelPercent</a></div><div class="ttdeci">float accelPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00017">PedalsSystem.h:17</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a6fbbc6f3e3c526a1b1c8f37f04764e4b"><div class="ttname"><a href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">PedalsSystemData_s::brakeAndAccelPressedImplausibility</a></div><div class="ttdeci">bool brakeAndAccelPressedImplausibility</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00015">PedalsSystem.h:15</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a71792b1ecf0e495d43f94169dd3248ca"><div class="ttname"><a href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">PedalsSystemData_s::regenPercent</a></div><div class="ttdeci">float regenPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00019">PedalsSystem.h:19</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_aa0abaf0a205603315888d746ce5a7e95"><div class="ttname"><a href="structPedalsSystemData__s.html#aa0abaf0a205603315888d746ce5a7e95">PedalsSystemData_s::implausibilityExceededMaxDuration</a></div><div class="ttdeci">bool implausibilityExceededMaxDuration</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00016">PedalsSystem.h:16</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_aea42e9eaad23539f4ebbac93b6a3cc5e"><div class="ttname"><a href="structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e">PedalsSystemData_s::brakePressed</a></div><div class="ttdeci">bool brakePressed</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00013">PedalsSystem.h:13</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_af714ca909b990948479a9193d2d1f5c3"><div class="ttname"><a href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">PedalsSystemData_s::accelImplausible</a></div><div class="ttdeci">bool accelImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00011">PedalsSystem.h:11</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_afaca612a833a6fed9f726222d976c122"><div class="ttname"><a href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">PedalsSystemData_s::brakeImplausible</a></div><div class="ttdeci">bool brakeImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00012">PedalsSystem.h:12</a></div></div>
+<div class="ttc" id="astructPedalsParams_html_a09edf688133f17c84478af8d1f94991c"><div class="ttname"><a href="structPedalsParams.html#a09edf688133f17c84478af8d1f94991c">PedalsParams::deadzone_margin</a></div><div class="ttdeci">float deadzone_margin</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00032">PedalsSystem.h:32</a></div></div>
+<div class="ttc" id="astructPedalsParams_html_a573cf044fd7510e4e988764e13dd43c4"><div class="ttname"><a href="structPedalsParams.html#a573cf044fd7510e4e988764e13dd43c4">PedalsParams::activation_percentage</a></div><div class="ttdeci">float activation_percentage</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00031">PedalsSystem.h:31</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html"><div class="ttname"><a href="structPedalsSystemData__s.html">PedalsSystemData_s</a></div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00009">PedalsSystem.h:10</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a03435669a9f0c4fea7e268e6ce3eb4d8"><div class="ttname"><a href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">PedalsSystemData_s::brakePercent</a></div><div class="ttdeci">float brakePercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00019">PedalsSystem.h:19</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a57aae961a223b79e18f8f75e83b33f0f"><div class="ttname"><a href="structPedalsSystemData__s.html#a57aae961a223b79e18f8f75e83b33f0f">PedalsSystemData_s::mechBrakeActive</a></div><div class="ttdeci">bool mechBrakeActive</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00015">PedalsSystem.h:15</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a6c4e6145913766af3968ad78d6789f3f"><div class="ttname"><a href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">PedalsSystemData_s::accelPercent</a></div><div class="ttdeci">float accelPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00018">PedalsSystem.h:18</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a6fbbc6f3e3c526a1b1c8f37f04764e4b"><div class="ttname"><a href="structPedalsSystemData__s.html#a6fbbc6f3e3c526a1b1c8f37f04764e4b">PedalsSystemData_s::brakeAndAccelPressedImplausibility</a></div><div class="ttdeci">bool brakeAndAccelPressedImplausibility</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00016">PedalsSystem.h:16</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a71792b1ecf0e495d43f94169dd3248ca"><div class="ttname"><a href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">PedalsSystemData_s::regenPercent</a></div><div class="ttdeci">float regenPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00020">PedalsSystem.h:20</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_aa0abaf0a205603315888d746ce5a7e95"><div class="ttname"><a href="structPedalsSystemData__s.html#aa0abaf0a205603315888d746ce5a7e95">PedalsSystemData_s::implausibilityExceededMaxDuration</a></div><div class="ttdeci">bool implausibilityExceededMaxDuration</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00017">PedalsSystem.h:17</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_aea42e9eaad23539f4ebbac93b6a3cc5e"><div class="ttname"><a href="structPedalsSystemData__s.html#aea42e9eaad23539f4ebbac93b6a3cc5e">PedalsSystemData_s::brakePressed</a></div><div class="ttdeci">bool brakePressed</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00014">PedalsSystem.h:14</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_af714ca909b990948479a9193d2d1f5c3"><div class="ttname"><a href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">PedalsSystemData_s::accelImplausible</a></div><div class="ttdeci">bool accelImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00012">PedalsSystem.h:12</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_afaca612a833a6fed9f726222d976c122"><div class="ttname"><a href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">PedalsSystemData_s::brakeImplausible</a></div><div class="ttdeci">bool brakeImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00013">PedalsSystem.h:13</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -260,10 +265,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00055">55</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   56</span>    {</div>
-<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">return</span> mechBrakeActiveThreshold_;</div>
-<div class="line"><span class="lineno">   58</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00061">61</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>    {</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> mechBrakeActiveThreshold_;</div>
+<div class="line"><span class="lineno">   64</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -290,10 +295,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00045">45</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>    {</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> data_;</div>
-<div class="line"><span class="lineno">   48</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00051">51</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>    {</div>
+<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">return</span> data_;</div>
+<div class="line"><span class="lineno">   54</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -320,10 +325,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00050">50</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>    {</div>
-<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">return</span> data_;</div>
-<div class="line"><span class="lineno">   53</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8h_source.html#l00056">56</a> of file <a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>    {</div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">return</span> data_;</div>
+<div class="line"><span class="lineno">   59</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -371,12 +376,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PedalsSystem_8cpp_source.html#l00009">9</a> of file <a class="el" href="PedalsSystem_8cpp_source.html">PedalsSystem.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   10</span>{</div>
-<div class="line"><span class="lineno">   11</span>    data_ = <a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(accel1, accel2, brake1, brake2, <a class="code hl_function" href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">tick</a>.millis);</div>
-<div class="line"><span class="lineno">   12</span>}</div>
-<div class="ttc" id="aclassPedalsSystem_html_a0b9ac2da0743454dd4438941885ef496"><div class="ttname"><a href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">PedalsSystem::evaluate_pedals</a></div><div class="ttdeci">PedalsSystemData_s evaluate_pedals(const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2, unsigned long curr_time)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00014">PedalsSystem.cpp:14</a></div></div>
-<div class="ttc" id="aclassPedalsSystem_html_af7c5e74cc4c5eb90c282b07b161f9b80"><div class="ttname"><a href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">PedalsSystem::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00009">PedalsSystem.cpp:9</a></div></div>
+<p class="definition">Definition at line <a class="el" href="PedalsSystem_8cpp_source.html#l00007">7</a> of file <a class="el" href="PedalsSystem_8cpp_source.html">PedalsSystem.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    8</span>{</div>
+<div class="line"><span class="lineno">    9</span>    data_ = <a class="code hl_function" href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">evaluate_pedals</a>(accel1, accel2, brake1, brake2, <a class="code hl_function" href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">tick</a>.millis);</div>
+<div class="line"><span class="lineno">   10</span>}</div>
+<div class="ttc" id="aclassPedalsSystem_html_a0b9ac2da0743454dd4438941885ef496"><div class="ttname"><a href="classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496">PedalsSystem::evaluate_pedals</a></div><div class="ttdeci">PedalsSystemData_s evaluate_pedals(const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2, unsigned long curr_time)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00012">PedalsSystem.cpp:12</a></div></div>
+<div class="ttc" id="aclassPedalsSystem_html_af7c5e74cc4c5eb90c282b07b161f9b80"><div class="ttname"><a href="classPedalsSystem.html#af7c5e74cc4c5eb90c282b07b161f9b80">PedalsSystem::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2)</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8cpp_source.html#l00007">PedalsSystem.cpp:7</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

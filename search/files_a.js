@@ -10,5 +10,6 @@ var searchData=
   ['torquecontrollermux_2ecpp_7',['TorqueControllerMux.cpp',['../TorqueControllerMux_8cpp.html',1,'']]],
   ['torquecontrollermux_2eh_8',['TorqueControllerMux.h',['../TorqueControllerMux_8h.html',1,'']]],
   ['torquecontrollers_2ecpp_9',['TorqueControllers.cpp',['../TorqueControllers_8cpp.html',1,'']]],
-  ['torquecontrollers_2eh_10',['TorqueControllers.h',['../TorqueControllers_8h.html',1,'']]]
+  ['torquecontrollers_2eh_10',['TorqueControllers.h',['../TorqueControllers_8h.html',1,'']]],
+  ['torquecontrollersdata_2eh_11',['TorqueControllersData.h',['../TorqueControllersData_8h.html',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['false_0',['false',['../rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727',1,'rtwtypes.h']]],
+  ['false_0',['false',['../PID__TV__ert__rtw_2rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727',1,'false():&#160;rtwtypes.h'],['../BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727',1,'false():&#160;rtwtypes.h']]],
   ['filter_5fdstate_1',['Filter_DSTATE',['../structPID__TV_1_1DW__PID__TV__T.html#ad3091a6d2f39d06f9a5d102bd7caa550',1,'PID_TV::DW_PID_TV_T']]],
   ['fixed_5fpoint_5fprecision_2',['FIXED_POINT_PRECISION',['../TelemetryInterface_8h.html#ae069efbbf221b03b1a1c93a9f3495ea3',1,'TelemetryInterface.h']]],
   ['fixptmap_3',['fixPtMap',['../structrtwCAPI__ModelMappingStaticInfo__tag.html#acc4f4b9c5a50eaaa0a81c8e02751dfc8',1,'rtwCAPI_ModelMappingStaticInfo_tag']]],
@@ -8,14 +8,16 @@ var searchData=
   ['fl_5',['FL',['../Utility_8h.html#a232e53b0b909b708971e1ff0886a269e',1,'Utility.h']]],
   ['fl_5fin_6',['FL_in',['../structPID__TV_1_1ExtU__PID__TV__T.html#ae21fb884167f1d116cc5040100cd55f7',1,'PID_TV::ExtU_PID_TV_T']]],
   ['fl_5fout_7',['FL_out',['../structPID__TV_1_1ExtY__PID__TV__T.html#ad189da0272684c0eb1ce3260ce7c141b',1,'PID_TV::ExtY_PID_TV_T']]],
-  ['flatelemidx_8',['flatElemIdx',['../structrtwCAPI__States__tag.html#aafae4a5a344e4003b510a3d4175fb6c1',1,'rtwCAPI_States_tag']]],
-  ['fr_9',['FR',['../Utility_8h.html#a47968b41e57a835656473a78eb95a36c',1,'Utility.h']]],
-  ['fr_10',['fr',['../structinverters.html#a9f76fc53b189f72fbd7dfce987175a9d',1,'inverters']]],
-  ['fr_5fin_11',['FR_in',['../structPID__TV_1_1ExtU__PID__TV__T.html#ae65276141f0f98f4ae846b88252450b9',1,'PID_TV::ExtU_PID_TV_T']]],
-  ['fr_5fout_12',['FR_out',['../structPID__TV_1_1ExtY__PID__TV__T.html#a0ff0c928823991aa3fcedeb5c9fd46d6',1,'PID_TV::ExtY_PID_TV_T']]],
-  ['fracslopeptr_13',['fracSlopePtr',['../structrtwCAPI__FixPtMap__tag.html#a214eeb81dd43d306abfbe8fd98fbd101',1,'rtwCAPI_FixPtMap_tag']]],
-  ['front_5fleft_5finv_14',['front_left_inv',['../structCANInterfaces.html#a23480f6f133858123ca290ddd1cc0063',1,'CANInterfaces']]],
-  ['front_5fright_5finv_15',['front_right_inv',['../structCANInterfaces.html#ab5f3b577f9e63dacf2f0863b51fa902e',1,'CANInterfaces']]],
-  ['fullpath_16',['fullPath',['../structrtwCAPI__ModelMappingInfo__tag.html#a9547de0b0f044af738b1b2d25209c7f6',1,'rtwCAPI_ModelMappingInfo_tag']]],
-  ['fxpindex_17',['fxpIndex',['../structrtwCAPI__Signals__tag.html#a2f076a24f5aab346e2a7188c86b0484f',1,'rtwCAPI_Signals_tag::fxpIndex()'],['../structrtwCAPI__BlockParameters__tag.html#af1fe165320c002bae4ce120f06f4ec9a',1,'rtwCAPI_BlockParameters_tag::fxpIndex()'],['../structrtwCAPI__ModelParameters__tag.html#a8e5f1990fbb4081986b5754f77f77df8',1,'rtwCAPI_ModelParameters_tag::fxpIndex()'],['../structrtwCAPI__States__tag.html#ad62f25d6adb0f127035e78282488a7ac',1,'rtwCAPI_States_tag::fxpIndex()'],['../structrtwCAPI__ElementMap__tag.html#a61b46c0c68fa28283208fec8baa35478',1,'rtwCAPI_ElementMap_tag::fxpIndex()']]]
+  ['fl_5ftorque_5fdelta_8',['fl_torque_delta',['../structPIDTVTorqueControllerData.html#adfc64daca8dff87e746189286eeb14bc',1,'PIDTVTorqueControllerData']]],
+  ['flatelemidx_9',['flatElemIdx',['../structrtwCAPI__States__tag.html#aafae4a5a344e4003b510a3d4175fb6c1',1,'rtwCAPI_States_tag']]],
+  ['fr_10',['FR',['../Utility_8h.html#a47968b41e57a835656473a78eb95a36c',1,'Utility.h']]],
+  ['fr_11',['fr',['../structinverters.html#a9f76fc53b189f72fbd7dfce987175a9d',1,'inverters']]],
+  ['fr_5fin_12',['FR_in',['../structPID__TV_1_1ExtU__PID__TV__T.html#ae65276141f0f98f4ae846b88252450b9',1,'PID_TV::ExtU_PID_TV_T']]],
+  ['fr_5fout_13',['FR_out',['../structPID__TV_1_1ExtY__PID__TV__T.html#a0ff0c928823991aa3fcedeb5c9fd46d6',1,'PID_TV::ExtY_PID_TV_T']]],
+  ['fr_5ftorque_5fdelta_14',['fr_torque_delta',['../structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25',1,'PIDTVTorqueControllerData']]],
+  ['fracslopeptr_15',['fracSlopePtr',['../structrtwCAPI__FixPtMap__tag.html#a214eeb81dd43d306abfbe8fd98fbd101',1,'rtwCAPI_FixPtMap_tag']]],
+  ['front_5fleft_5finv_16',['front_left_inv',['../structCANInterfaces.html#a23480f6f133858123ca290ddd1cc0063',1,'CANInterfaces']]],
+  ['front_5fright_5finv_17',['front_right_inv',['../structCANInterfaces.html#ab5f3b577f9e63dacf2f0863b51fa902e',1,'CANInterfaces']]],
+  ['fullpath_18',['fullPath',['../structrtwCAPI__ModelMappingInfo__tag.html#a9547de0b0f044af738b1b2d25209c7f6',1,'rtwCAPI_ModelMappingInfo_tag']]],
+  ['fxpindex_19',['fxpIndex',['../structrtwCAPI__Signals__tag.html#a2f076a24f5aab346e2a7188c86b0484f',1,'rtwCAPI_Signals_tag::fxpIndex()'],['../structrtwCAPI__BlockParameters__tag.html#af1fe165320c002bae4ce120f06f4ec9a',1,'rtwCAPI_BlockParameters_tag::fxpIndex()'],['../structrtwCAPI__ModelParameters__tag.html#a8e5f1990fbb4081986b5754f77f77df8',1,'rtwCAPI_ModelParameters_tag::fxpIndex()'],['../structrtwCAPI__States__tag.html#ad62f25d6adb0f127035e78282488a7ac',1,'rtwCAPI_States_tag::fxpIndex()'],['../structrtwCAPI__ElementMap__tag.html#a61b46c0c68fa28283208fec8baa35478',1,'rtwCAPI_ElementMap_tag::fxpIndex()']]]
 ];

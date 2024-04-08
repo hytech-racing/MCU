@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['watchdoginterface_0',['WatchdogInterface',['../classWatchdogInterface.html#af72ba190ba5c29ce541799267bec971a',1,'WatchdogInterface::WatchdogInterface(int wd_input_pin)'],['../classWatchdogInterface.html#af72ba190ba5c29ce541799267bec971a',1,'WatchdogInterface::WatchdogInterface(int wd_input_pin)']]],
-  ['write_1',['write',['../classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765',1,'DashboardInterface']]]
+  ['vninterface_0',['VNInterface',['../classVNInterface.html#a5a822c2c19b5039408e70c18d925da56',1,'VNInterface::VNInterface(message_queue *msg_output_queue)'],['../classVNInterface.html#a5a822c2c19b5039408e70c18d925da56',1,'VNInterface::VNInterface(message_queue *msg_output_queue)']]]
 ];
