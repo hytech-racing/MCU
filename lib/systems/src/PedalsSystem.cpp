@@ -23,9 +23,8 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake, brakeParams_);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake);
-    int implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
+    bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
 
-    /* PROBLEMATIC CODE :*/
     if (implausibility && (implausibilityStartTime_ == 0))
     {
         implausibilityStartTime_ = curr_time;

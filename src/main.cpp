@@ -120,13 +120,6 @@ void drivetrain_reset();
 
 void setup()
 {
-    Serial.begin(115200);
-
-    while (!Serial);
-
-    Serial.println("*****************************************************");
-    Serial.println(" Com port is open");
-    Serial.println("*****************************************************");
 
     // initialize CAN communication
     init_all_CAN_devices();
@@ -164,6 +157,8 @@ void setup()
     ams_interface.init(curr_tick.millis); // initialize last heartbeat time
     steering1.init();
 
+    Serial.begin(115200);
+    
     /*
         Init Systems
     */
