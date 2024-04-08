@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MCU: Main Page</title>
+<title>MCU: building testing and running</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,10 +68,238 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">MCU Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">building testing and running </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p ><a class="anchor" id="md_README"></a>This project uses <a href="https://docs.platformio.org/en/latest/">Platformio</a> for building, testing, checking and packaging.</p>
+<p >There are two main options for using Platformio:</p><ol type="1">
+<li><a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation">as a VSCode extension</a></li>
+<li><a href="https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html">the platformio core CLI</a></li>
+</ol>
+<p >Quick start guide on how to use VSCode's extension through the <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar">platformio toolbar</a></p>
+<div class="image">
+<img src="image.png" alt=""/>
+<div class="caption">
+ide upload and build</div></div>
+    <p >The main thing to understand is that there exists two "environments" that this project gets built in (<code>test_env</code>). One of them is for native running of tests and the other is for building for the teensy and deploying to the teensy (<code>teensy41</code>).</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Building</h2>
+<p >To build the project for an environment, simply use platformio build check mark after switching to the specified <code>env</code></p>
+<p >To build using platformio core CLI simply run <code>pio run -e teensy41</code></p>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Testing</h2>
+<p ><img src="image-2.png" alt="" class="inline" title="testing through vscode"/>    </p>
+<p >Before your feature / code addition / branch can get put into the <code>master</code> branch you must ensure the unit tests run with your code and that your code compiles. The remote CI will check your work and ensure that your code compiles and that it passes the unit tests however to check locally simply switch to the <code>test_env</code> and run the unit tests. This can be done through the VSCode IDE extension through the <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#project-tasks">project tasks menu</a> and selecting under <code>test_env</code> &gt; <code>Advanced</code> &gt; <code>Test</code>.</p>
+<p >To test using platformio core CLI simply run <code>pio test -e test_env</code>.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Uploading</h2>
+<p >To upload to the teensy simply use the platformio upload arrow shown <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar">here at number 3</a>.</p>
+<h4><a class="anchor" id="autotoc_md4"></a>
+On Implementing and Importance of tests</h4>
+<p >Unit tests are a great way to ensure that new features and new code in general can integrate and work well with other code. It provides a framework to verify that your stuff works the way it should and lets you know when and how it doesnt.</p>
+<p >This project uses unit tests in the <code>test</code> folder to for both local testing and testing in the CI on github.</p>
+<p >The remote github CI testing currently only encompases system level testing and not the hardware dependent testing that is available locally for running.</p>
+<p >You can see results of previous test runs on commits here: <a href="https://github.com/hytech-racing/MCU/actions">https://github.com/hytech-racing/MCU/actions</a></p>
+<p >These MUST be maintained for functionality of the car.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+setup vscode</h2>
+<h4><a class="anchor" id="autotoc_md6"></a>
+with auto-completition and advanced navigation using compile commands</h4>
+<p >the <code>compile_commands.json</code> file is a file that gets generated in the build folder upon excution of the <a href="https://docs.platformio.org/en/latest/integration/compile_commands.html">compiledb platformio task</a> that sets up the include paths for vscode. <a href="https://clangd.llvm.org/design/compile-commands">more about compile_commands.json here</a>.</p>
+<p >If you enter the platformio terminal, you can generate compile commands with</p><ol type="1">
+<li><img src="image-1.png" alt="" class="inline" title="alt text"/>    </li>
+</ol>
+<p >then</p><ol type="1">
+<li><code>pio run -t compiledb -e teensy41</code></li>
+</ol>
+<p >this will generate the compile commands for the <code>teensy41</code> environment which is the environment we use to build and flash to the car. in a similar fashion, other environments (eg: <code>test_env</code>) can have their compile commands generated.</p>
+<ol type="1">
+<li>then you need to setup vscode to recognize where this file is, which gets put into the <code>.pio</code> folder in your workspace. To do this, simply create a <code>.vscode</code> folder in the workspace and add a file called <code>c_cpp_properties.json</code> and it should look like this:</li>
+</ol>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;configurations&quot;: [</div>
+<div class="line">        {</div>
+<div class="line">            &quot;name&quot;: &quot;teensy41&quot;,</div>
+<div class="line">            &quot;includePath&quot;: [</div>
+<div class="line">                &quot;${workspaceFolder}/**&quot;</div>
+<div class="line">            ],</div>
+<div class="line">            &quot;defines&quot;: [],</div>
+<div class="line">            &quot;cStandard&quot;: &quot;c17&quot;,</div>
+<div class="line">            &quot;cppStandard&quot;: &quot;gnu++17&quot;,</div>
+<div class="line">            &quot;intelliSenseMode&quot;: &quot;linux-gcc-x64&quot;,</div>
+<div class="line">            &quot;compileCommands&quot;: &quot;${workspaceFolder}/.pio/build/teensy41/compile_commands.json&quot;</div>
+<div class="line">        }</div>
+<div class="line">    ],</div>
+<div class="line">    &quot;version&quot;: 4</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> then you can select this configuration to be used with <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">this c/c++ extension</a> in vscode for auto-completition and code navigation.</p>
+<p >to select the configuration, use the hotkey <code>ctrl+shift+p</code> to open the command prompt in vscode, and then type `C/C++: Select a Configuration` and then select your configuration for which you named above.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Design Lore of the Code</h1>
+<h2><a class="anchor" id="autotoc_md8"></a>
+outline</h2>
+<p >Levels represent the layer of abstraction they are on. The reason for keeping track of this is to minimize the layers of abstraction for ease of understanding while also creating logical structure and getting maximum benefit per abstraction.</p>
+<h4><a class="anchor" id="autotoc_md9"></a>
+state diagram legend</h4>
+<p ><code>+</code> = Public <code>-</code> = Private</p>
+<h3><a class="anchor" id="autotoc_md10"></a>
+level 1: state machine goals for interface design and implementation</h3>
+<ul>
+<li><b>Reason for abstraction</b>: allows for easy swapping and adding of different portable systems and better <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> from <a href="https://www.techtarget.com/whatis/definition/business-logic">business logic</a> of the car to the business logic of the system.</li>
+</ul>
+<p >Any firmware project that needs to have different states needs each system that creates outputs and / or controls real systems of the car needs can be thought of as each system being controlled by the state machine. What I am thinking is that in a similar fashion to the shared bus, each system can contain a pointer to the state machine. The system can know what state the car is in and based on the state it can determine how to behave. Obviously the state machine also needs to know about what the system is doing as well to determine the state, so the system also needs to be able to pass back data to the state machine.</p>
+<p >For example, our state machine needs to handle understand the state of the pedals system. The pedals dont know about the state of the car, but it does know whether or not the pedals are outputting valid data. Each system can manage their own state and the abstract system base class could contain the set of system-agnostic states through which the statemachine evaluates.</p>
+<p >It is only within the logic of our state machine that the systems are allowed to communicate with one another.</p>
+<p >The main idea is that each firmware project has a specific implementation of a state machine, however the systems are portable between firmware projects. Additionally, the systems remain as concrete</p>
+<div class="fragment"><div class="line">---</div>
+<div class="line">title: state machine and system state abstraction</div>
+<div class="line">---</div>
+<div class="line">classDiagram</div>
+<div class="line"> </div>
+<div class="line">    </div>
+<div class="line">    class car_state{</div>
+<div class="line">        &lt;&lt;enumeration&gt;&gt;</div>
+<div class="line">        STARTUP</div>
+<div class="line">        INITIALIZING </div>
+<div class="line">        READY_TO_DRIVE</div>
+<div class="line">        ERROR</div>
+<div class="line">    }</div>
+<div class="line">    class StateMachine {</div>
+<div class="line">        </div>
+<div class="line">        </div>
+<div class="line">        VectornavSystem* vectornav</div>
+<div class="line">        PedalsSystel* pedals</div>
+<div class="line">        DashInterface* dashboard</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">        DrivetrainSystem* drivetrain</div>
+<div class="line"> </div>
+<div class="line">        TorqueVectoringControllerSystem* tvc</div>
+<div class="line">        LaunchControlSystem* launch_control</div>
+<div class="line"> </div>
+<div class="line">        car_state state</div>
+<div class="line">        void init()</div>
+<div class="line">        void loop()</div>
+<div class="line">        bool set_state(car_state state)</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line"> </div>
+<div class="line">    car_state &quot;1&quot; *-- StateMachine : contains</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
+level 2 portable Systems: interfaces, logic and structure</h3>
+<ul>
+<li><b>Reason for abstraction</b>: these Systems allow us to have board portable pieces so that when newer iterations of boards are made, the same systems that the previous iteration handled can be kept while only the hardware specific code changes.</li>
+</ul>
+<p >For instance, when a new MCU board is created with a new steering sensor input, code within the controller systems will not need to change, only that a new sensor system will be used within the state machine to feed the controller input.</p>
+<p >below are some hypothetical system class definitions. </p><div class="fragment"><div class="line">---</div>
+<div class="line">title: systems</div>
+<div class="line">---</div>
+<div class="line">classDiagram</div>
+<div class="line">    class PedalsSystem{</div>
+<div class="line">        -void validate_accel_pedals()</div>
+<div class="line">        -void validate_brake_pedals()</div>
+<div class="line"> </div>
+<div class="line">        +void set_accel_pedal_values(float apps1, float apps2)</div>
+<div class="line">        +void set_brake_pedal_values(float brake1, float brake2)</div>
+<div class="line">        +float get_desired_throttle()</div>
+<div class="line">        +void validate()</div>
+<div class="line">    } </div>
+<div class="line">    class TorqueVectoringControllerSystem{</div>
+<div class="line">        </div>
+<div class="line">        +void init(torque_vectoring_params params)</div>
+<div class="line">        +void set_state_estimate(car_state state)</div>
+<div class="line">        +torque_cmds get_torque_cmds(float desired_throttle)</div>
+<div class="line">        -void calculate_estimated_wheel_slip()</div>
+<div class="line">        -void predict()</div>
+<div class="line">        -void run_pid()</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    class LaunchControlSystem{</div>
+<div class="line">        </div>
+<div class="line">        +void init(launch_control_params params)</div>
+<div class="line">        +void set_state_estimate(car_state state)</div>
+<div class="line">        +torque_cmds get_torque_cmds(float desired_throttle)</div>
+<div class="line">        -void pull_from_table(float current_speed)</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md12"></a>
+level 2 SPI / i2c data bus abstraction from hardware specific implementations</h3>
+<ul>
+<li><b>Reason for abstraction</b>: this allows us to create a specific type of system that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other systems.</li>
+</ul>
+<p >This is currently aimed at our use of a SPI bus. The read data functions are what convert the data gotten from the shared bus to the real-world values for each one of the sensors. This was being attempted with ADC_SPI versus STEERING_SPI using just copies of the class.</p>
+<div class="fragment"><div class="line">---</div>
+<div class="line">title: shared data bus class inheritting</div>
+<div class="line">---</div>
+<div class="line">classDiagram</div>
+<div class="line">    </div>
+<div class="line">    class Sensor~SharedDataBusType~{</div>
+<div class="line">        SharedBusType* bus</div>
+<div class="line">        Sensor&lt;SharedDataBusType&gt;(const SharedDataBusType&amp; bus)</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    class SteeringSensor~SharedDataBusType~{</div>
+<div class="line">        float readPosition()</div>
+<div class="line">    }</div>
+<div class="line">    class LoadSensor~SharedDataBusType~{</div>
+<div class="line">        float readForce()</div>
+<div class="line">    }</div>
+<div class="line">    class CurrentSensor~SharedDataBusType~{</div>
+<div class="line">        float readCurrent()</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    Sensor &lt;|-- LoadSensor : implements</div>
+<div class="line">    Sensor &lt;|-- SteeringSensor : implements</div>
+<div class="line">    Sensor &lt;|-- CurrentSensor : implements</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+state machine documentation</h2>
+<div class="fragment"><div class="line">stateDiagram-v2</div>
+<div class="line">    startup : STARTUP</div>
+<div class="line">    trac_sys_na : TRACTIVE_SYSTEM_NOT_ACTIVE</div>
+<div class="line">    trac_sys_a : TRACTIVE_SYSTEM_ACTIVE</div>
+<div class="line">    inv_en : ENABLING_INVERTERS</div>
+<div class="line">    rtd_s : WAITING_READY_TO_DRIVE_SOUND</div>
+<div class="line">    rtd : READY_TO_DRIVE</div>
+<div class="line"> </div>
+<div class="line">    startup --&gt; trac_sys_na: first tick of state machine</div>
+<div class="line">    trac_sys_na --&gt; trac_sys_a: drivetrain voltage over threshold </div>
+<div class="line">    trac_sys_a --&gt; trac_sys_na: drivetrain voltage _not_ over threshold</div>
+<div class="line">    trac_sys_a --&gt; inv_en: brake and start button pressed</div>
+<div class="line">    inv_en --&gt; trac_sys_na: drivetrain voltage _not_ over threshold</div>
+<div class="line">    inv_en  --&gt; rtd_s: drivetrain enabled</div>
+<div class="line">    rtd_s --&gt; trac_sys_na: drivetrain voltage _not_ over threshold</div>
+<div class="line">    rtd_s --&gt; rtd: buzzer done buzzing</div>
+<div class="line">    rtd --&gt; trac_sys_na: drivetrain voltage _not_ over threshold</div>
+<div class="line">    rtd --&gt; trac_sys_a: drivetrain error occured</div>
+</div><!-- fragment --> <h3><a class="anchor" id="autotoc_md14"></a>
+running the tests</h3>
+<p >This repo uses platformio testing for CI unit testing. these tests can be run locally with <code>pio test -e test_env</code>. The CI checks to ensure that the code both compiles for the teensy and ensures that the tests are passing.</p>
+<h3><a class="anchor" id="autotoc_md15"></a>
+notes</h3>
+<p >new MCU code:</p><ul>
+<li>system definition: an abstract sub-system of the physical car or the code that requires logic to be evaluated by the MCU to determine what input to give it or logic required to handle output from.</li>
+<li>interface definition:<ul>
+<li>code required to purely unpack / pack data into internal structs / classes for use by systems or logic</li>
+</ul>
+</li>
+<li>architecture:<ul>
+<li>over-arching state machine</li>
+<li>systems level<ul>
+<li>inverters (multiple)</li>
+<li>pedals</li>
+<li>torque / speed controller</li>
+<li>dashboard interface</li>
+</ul>
+</li>
+<li>interface level:<ul>
+<li>hytech_can interface</li>
+<li>spi interfaces: SPI adcs for load cells, steering input, glv, etc. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
