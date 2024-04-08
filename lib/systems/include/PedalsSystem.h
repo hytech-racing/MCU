@@ -5,6 +5,7 @@
 #include "AnalogSensorsInterface.h"
 
 #include "SysClock.h"
+
 struct PedalsSystemData_s
 {
 
@@ -23,24 +24,29 @@ struct PedalsSystemData_s
 //          NOTE: min and max may be need to be flipped depending on the sensor. (looking at you brake pedal sensor 2)
 struct PedalsParams
 {
-    int min_sense_1;
-    int min_sense_2;
-    int max_sense_1;
-    int max_sense_2;
+    int min_pedal_1;
+    int min_pedal_2;
+    int max_pedal_1;
+    int max_pedal_2;
     float activation_percentage;
+    float deadzone_margin;
+    float implausibility_margin;
 };
 
 class PedalsSystem
 {
 public:
-    PedalsSystem(const PedalsParams &accelParams, const PedalsParams &brakeParams, float mechBrakeActiveThreshold)
+    
+    PedalsSystem(const PedalsParams &accelParams,
+                 const PedalsParams &brakeParams,
+                 float mechBrakeActiveThreshold)
     {
         accelParams_ = accelParams;
         brakeParams_ = brakeParams;
         implausibilityStartTime_ = 0;
         mechBrakeActiveThreshold_ = mechBrakeActiveThreshold;
         // Setting of min and maxes for pedals via config file
-    };
+    }
 
     const PedalsSystemData_s &getPedalsSystemData()
     {
@@ -70,11 +76,34 @@ public:
                                        unsigned long curr_time);
 
 private:
-    PedalsSystemData_s data_;
+    PedalsSystemData_s data_ {};
+    PedalsParams accelParams_;
+    PedalsParams brakeParams_;
+    float mechBrakeActiveThreshold_;
+    unsigned long implausibilityStartTime_;
+
     float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
+
+    /*
+        Evaluate pedal implausibilities_ determines if there is a software implausibility
+        in the pedals caused by them going out of range.
+
+        Our max/min sensor ranges are calcuated from the pedal min/max values
+        The pedal min/max values are defined in MCU_defs and are the real world raw
+        values that we determine from the pedal output.
+
+        The max/min sensor values are then a certain percent higher than these real world
+        values as determined by the implausibility margin. This protects against physical
+        damage to the sensor or pedal, but will not accidentally trip implausibility if 
+        pedal values fluctuate
+    */
     bool evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData1,
                                           const AnalogConversion_s &pedalData2,
+                                          const PedalsParams &params,
+                                          float max_percent_diff);
+
+    bool evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData1,
                                           const PedalsParams &params,
                                           float max_percent_diff);
 
@@ -83,10 +112,6 @@ private:
                                            const AnalogConversion_s &brakePedalData1,
                                            const AnalogConversion_s &brakePedalData2);
     bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, float percent_threshold);
-    PedalsParams accelParams_;
-    PedalsParams brakeParams_;
-    float mechBrakeActiveThreshold_;
-    unsigned long implausibilityStartTime_;
 };
 
 #endif /* PEDALSSYSTEM */

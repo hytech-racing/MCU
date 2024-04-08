@@ -1,6 +1,8 @@
 #ifndef __MCU15_H__
 #define __MCU15_H__
 
+#include "PedalsSystem.h"
+
 // pindefs
 const int ADC1_CS = 34;
 const int ADC2_CS = 33;
@@ -34,18 +36,27 @@ const unsigned long INV_CAN_BAUDRATE    = 500000;
 const unsigned long TELEM_CAN_BAUDRATE  = 500000;
 
 // APPS/Brake pedal parameters
-const int ACCEL1_MIN_THRESH = 2087;
-const int ACCEL2_MIN_THRESH = 1472;
-const int ACCEL1_MAX_THRESH = 3283;
-const int ACCEL2_MAX_THRESH = 323;
-const float APPS_ACTIVATION_PERCENTAGE = 0.1;
+// All of these values are the PEDAL min/max
+// the sensor min/max that trip implaus are calculated
+// in the PedalsSystem constructor
+const int ACCEL1_PEDAL_MAX = 3283;
+const int ACCEL2_PEDAL_MAX = 323;
 
-const int BRAKE1_MIN_THRESH = 2757;
-const int BRAKE2_MIN_THRESH = 867;
-const int BRAKE1_MAX_THRESH = 1421;
-const int BRAKE2_MAX_THRESH = 2198;
+const int ACCEL1_PEDAL_MIN = 2087;
+const int ACCEL2_PEDAL_MIN = 1472;
+
+const int BRAKE1_PEDAL_MAX = 2198;
+const int BRAKE2_PEDAL_MAX = 2198;
+
+const int BRAKE1_PEDAL_MIN = 867;
+const int BRAKE2_PEDAL_MIN = 867;
+
+const float DEFAULT_PEDAL_DEADZONE = 0.05f;
+const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.10f;
+
+const float APPS_ACTIVATION_PERCENTAGE = 0.1;
 const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
-const float BRAKE_MECH_THRESH = 0.55;
+const float BRAKE_MECH_THRESH = 0.40;
 
 // Load Cell Defs to convert raw to lbs
 // lbs = (scale)*raw + offset

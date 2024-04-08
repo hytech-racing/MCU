@@ -16,12 +16,12 @@
 
 enum class CAR_STATE
 {
-    STARTUP                      = 0,
-    TRACTIVE_SYSTEM_NOT_ACTIVE   = 1,
-    TRACTIVE_SYSTEM_ACTIVE       = 2,
-    ENABLING_INVERTERS           = 3,
+    STARTUP = 0,
+    TRACTIVE_SYSTEM_NOT_ACTIVE = 1,
+    TRACTIVE_SYSTEM_ACTIVE = 2,
+    ENABLING_INVERTERS = 3,
     WAITING_READY_TO_DRIVE_SOUND = 4,
-    READY_TO_DRIVE               = 5
+    READY_TO_DRIVE = 5
 };
 
 template <typename DrivetrainSysType>
@@ -73,8 +73,6 @@ private:
     // IMDInterface *imd_;
     SafetySystem *safety_system_;
     TorqueControllerMux *controller_mux_;
-    
-
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */

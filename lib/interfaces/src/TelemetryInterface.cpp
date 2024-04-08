@@ -83,7 +83,7 @@ void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvI
     }
     
 }
-//Pack_DRIVETRAIN_STATUS_TELEM_hytech
+
 void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
                                                                 InvInt_t* fl,
                                                                 InvInt_t* fr,
@@ -142,12 +142,19 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
     MC_temps mc3_temps = rl->get_temps_msg();
     MC_temps mc4_temps = rr->get_temps_msg();
     
+    MC_setpoints_command mc1_cmd = fl->get_cmd_msg();
+    MC_setpoints_command mc2_cmd = fr->get_cmd_msg();
+    MC_setpoints_command mc3_cmd = rl->get_cmd_msg();
+    MC_setpoints_command mc4_cmd = rr->get_cmd_msg();
+
     enqueue_CAN<MC_temps>(mc1_temps, ID_MC1_TEMPS);
     enqueue_CAN<MC_temps>(mc2_temps, ID_MC2_TEMPS);
     enqueue_CAN<MC_temps>(mc3_temps, ID_MC3_TEMPS);
     enqueue_CAN<MC_temps>(mc4_temps, ID_MC4_TEMPS);
-
-    
+    enqueue_CAN<MC_setpoints_command>(mc1_cmd, ID_MC1_SETPOINTS_COMMAND);
+    enqueue_CAN<MC_setpoints_command>(mc2_cmd, ID_MC2_SETPOINTS_COMMAND);
+    enqueue_CAN<MC_setpoints_command>(mc3_cmd, ID_MC3_SETPOINTS_COMMAND);
+    enqueue_CAN<MC_setpoints_command>(mc4_cmd, ID_MC4_SETPOINTS_COMMAND);
     enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }
 
@@ -164,12 +171,6 @@ void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
     torque.fr_motor_torque = fr->get_torque_current();
     torque.rl_motor_torque = rl->get_torque_current();
     torque.rr_motor_torque = rr->get_torque_current();
-
-    // Serial.printf("TORQUE:\nFL: %d\nFR: %d\nRL: %d\nRR: %d\n",
-    //                 torque.fl_motor_torque,
-    //                 torque.fr_motor_torque,
-    //                 torque.rl_motor_torque,
-    //                 torque.rr_motor_torque);
 
     enqueue_new_CAN<DRIVETRAIN_TORQUE_TELEM_t>(&torque, &Pack_DRIVETRAIN_TORQUE_TELEM_hytech);
 }
@@ -209,16 +210,34 @@ void TelemetryInterface::enqueue_new_CAN(U* structure, uint32_t (* pack_function
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 
+void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerData& data)
+{
+    CONTROLLER_PID_TV_DATA_t msg;
+    msg.controller_input_ro = HYTECH_controller_input_ro_toS(data.controller_input);
+    msg.controller_output_ro = HYTECH_controller_output_ro_toS(data.controller_output);
+    enqueue_new_CAN<CONTROLLER_PID_TV_DATA_t>(&msg, &Pack_CONTROLLER_PID_TV_DATA_hytech);
+
+    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;
+    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.fl_torque_delta);
+    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.fr_torque_delta);
+    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.rl_torque_delta);
+    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.rr_torque_delta);
+    
+    enqueue_new_CAN<CONTROLLER_PID_TV_DELTA_DATA_t>(&delta_msg, &Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);
+
+    
+}
+
 
 /* Tick SysClock */
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const AnalogConversionPacket_s<4> &adc2,
                               const AnalogConversionPacket_s<4> &adc3,
                               const SteeringEncoderConversion_s &encoder,
-                              const InvInt_t* fl,
-                              const InvInt_t* fr,
-                              const InvInt_t* rl,
-                              const InvInt_t* rr,
+                              InvInt_t* fl,
+                              InvInt_t* fr,
+                              InvInt_t* rl,
+                              InvInt_t* rr,
                               bool accel_implaus,
                               bool brake_implaus,
                               float accel_per,
@@ -227,12 +246,14 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const AnalogConversion_s &accel_2,
                               const AnalogConversion_s &brake_1,
                               const AnalogConversion_s &brake_2,
-                              float mech_brake_active_percent) {
+                              float mech_brake_active_percent,
+                              const PIDTVTorqueControllerData& data) {
 
     // Pedals
     update_pedal_readings_CAN_msg(accel_per,
                                   brake_per,
                                   mech_brake_active_percent);
+                                  
     update_pedal_readings_raw_CAN_msg(accel_1,
                                       accel_2,
                                       brake_1,
@@ -256,5 +277,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
 
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);
+
+    enqeue_controller_CAN_msg(data);
 
 }

@@ -11,9 +11,9 @@
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 #include "SABInterface.h"
-
-/* 
-    struct holding interfaces processed by process_ring_buffer() 
+#include "VectornavInterface.h"
+/*
+    struct holding interfaces processed by process_ring_buffer()
     FL = MC1
     FR = MC2
     RL = MC3
@@ -26,6 +26,7 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *front_right_inv;
     InverterInterface<circular_buffer> *rear_left_inv;
     InverterInterface<circular_buffer> *rear_right_inv;
+    VNInterface<circular_buffer> *vn_interface;
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
     SABInterface *sab_interface;
@@ -88,7 +89,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case DASHBOARD_STATE_CANID:
             interfaces.dash_interface->read(recvd_msg);
             break;
-        
+
         // AMS msg receives
         case ID_BMS_STATUS:
             interfaces.ams_interface->retrieve_status_CAN(curr_millis, recvd_msg);
@@ -99,7 +100,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case ID_BMS_VOLTAGES:
             interfaces.ams_interface->retrieve_voltage_CAN(recvd_msg);
             break;
-        
+
             // MC status msgs
         case ID_MC1_STATUS:
             interfaces.front_left_inv->receive_status_msg(recvd_msg);
@@ -146,10 +147,36 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case SAB_SUSPENSION_CANID:
             interfaces.sab_interface->retrieve_pots_and_load_cells_CAN(recvd_msg);
             break;
+
+            // vector nav msgs
+        case VN_VEL_CANID:
+            interfaces.vn_interface->retrieve_velocity_CAN(recvd_msg);
+            break;
+        case VN_LINEAR_ACCEL_CANID:
+            interfaces.vn_interface->retrieve_linear_accel_CAN(recvd_msg);
+            break;
+        case VN_LINEAR_ACCEL_UNCOMP_CANID:
+            interfaces.vn_interface->retrieve_uncompLinear_accel_CAN(recvd_msg);
+            break;
+        case VN_YPR_CANID:
+            interfaces.vn_interface->retrieve_ypr_CAN(recvd_msg);
+            break;
+
+        case VN_LAT_LON_CANID:
+            interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
+            break;
+        case VN_GPS_TIME_CANID:
+            interfaces.vn_interface->retrieve_gps_time_CAN(recvd_msg);
+            break;
+        case VN_STATUS_CANID:
+            interfaces.vn_interface->retrieve_vn_status_CAN(recvd_msg); // double check this
+            break;
+        case VN_ANGULAR_RATE_CANID:
+            interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
+            break;
         }
     }
 }
-
 
 /*
     Sends out all CAN messages on the specified buffer
