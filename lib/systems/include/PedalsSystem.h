@@ -19,7 +19,7 @@ struct PedalsSystemData_s
     float regenPercent;
 };
 
-/// @brief Pedals params struct that will hold min / max that will be used for evaluateion.
+/// @brief Pedals params struct that will hold min / max that will be used for evaluation.
 //          NOTE: min and max may be need to be flipped depending on the sensor. (looking at you brake pedal sensor 2)
 struct PedalsParams
 {

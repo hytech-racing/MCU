@@ -4,6 +4,9 @@
 #include "SteeringEncoderInterface.h"
 #include "AnalogSensorsInterface.h"
 #include "SysClock.h"
+#include "ORBIS_BR10.h" // digital sensor
+#include "MCP_ADC.h" // analogue sensor 
+
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
 
@@ -34,6 +37,8 @@ private:
     SteeringEncoderInterface *primarySensor_;
     SteeringEncoderConversion_s primaryConversion_;
     SteeringSystemData_s data_;
+    int steeringDataMap[2] = {-130, 130}; // max and min range of converted steering data (change depending on data)
+    int wheelSteerRange[2] = {23, -23}; // max and min of final wheel steering (correct if actual limits of car are different)
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor) : primarySensor_(primarySensor) {}
 
@@ -51,6 +56,8 @@ public:
     {
         return data_;
     }
+    double interpolateSteering(double x, double x1, double x2, double y1, double y2);
+    double normalizeSteering(double value, double minVal, double maxVal);
 };
 
 #endif /* __STEERINGSYSTEM_H__ */

@@ -3,6 +3,8 @@
 #include "FlexCAN_T4.h"
 #include "hytech.h"
 
+// 24 degree +- max
+
 struct vector_nav {
         float velocity_x;
         float velocity_y; 
