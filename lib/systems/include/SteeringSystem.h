@@ -4,8 +4,6 @@
 #include "SteeringEncoderInterface.h"
 #include "AnalogSensorsInterface.h"
 #include "SysClock.h"
-#include "ORBIS_BR10.h" // digital sensor
-#include "MCP_ADC.h" // analogue sensor 
 
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
