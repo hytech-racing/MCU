@@ -67,8 +67,8 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.accelPressed = pedal_is_active_(accel1.conversion, accel2.conversion, accelParams_, false);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     
-    out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
-    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
+    auto percent = (accel1.conversion + accel2.conversion) / 2.0;
+    out.accelPercent = remove_deadzone_(percent, accelParams_.deadzone_margin);
     out.accelPercent = std::max(out.accelPercent, 0.0f);
     
 

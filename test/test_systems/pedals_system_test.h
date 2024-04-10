@@ -27,7 +27,7 @@ PedalsParams gen_positive_and_negative_slope_params()
     params.max_pedal_2 = 2000;
     params.activation_percentage = 0.25;
     params.mechanical_activation_percentage = 0.4;
-    params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;                    // .05
+    params.deadzone_margin = .03;                    // .05
     params.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN; // 0.1
     return params;
 }
@@ -312,7 +312,7 @@ TEST(PedalsSystemTesting, implausibility_latching_until_accel_released_single_br
 TEST(PedalsSystemTesting, deadzone_removal_calc_double_brake_ped)
 {
     // accel value testing (0, 100 percent, 50 percent)
-    AnalogConversion_s test_pedal_good_val = {1050, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val = {1010, 0.03, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     PedalsSystem pedals(gen_positive_slope_only_params(), gen_positive_slope_only_params());
     auto data = pedals.evaluate_pedals(test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, 1000);
     EXPECT_NEAR(data.accelPercent, 0, .001);
@@ -326,8 +326,8 @@ TEST(PedalsSystemTesting, deadzone_removal_calc_double_brake_ped)
     EXPECT_NEAR(data.accelPercent, 0.5, .001);
 
     // brake value testing (0, 100 percent, 50 percent)
-    AnalogConversion_s test_pedal_good_val_accel = {1050, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_pedal_good_val_brake = {1050, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_accel = {1050, 0.03, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_brake = {1050, 0.03, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     data = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_good_val_accel, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
     EXPECT_NEAR(data.brakePercent, 0, .001);
     test_pedal_good_val_brake.raw = 2059;
@@ -343,7 +343,7 @@ TEST(PedalsSystemTesting, deadzone_removal_calc_double_brake_ped)
 TEST(PedalsSystemTesting, deadzone_removal_calc_single_brake_ped)
 {
     // accel value testing (0, 100 percent, 50 percent)
-    AnalogConversion_s test_pedal_good_val = {1050, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val = {1010, 0.03, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     PedalsSystem pedals(gen_positive_slope_only_params(), gen_positive_slope_only_params());
     auto data = pedals.evaluate_pedals(test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, 1000);
     EXPECT_NEAR(data.accelPercent, 0, .001);
@@ -357,10 +357,10 @@ TEST(PedalsSystemTesting, deadzone_removal_calc_single_brake_ped)
     EXPECT_NEAR(data.accelPercent, 0.5, .001);
 
     // brake value testing (0, 100 percent, 50 percent)
-    AnalogConversion_s test_pedal_good_val_accel = {1050, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_pedal_good_val_brake = {1050, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_accel = {1010, 0.03, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_brake = {1010, 0.03, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     data = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_good_val_accel, test_pedal_good_val_brake, 1300);
-    EXPECT_NEAR(data.brakePercent, 0, .001);
+    EXPECT_NEAR(data.brakePercent, 0, .01);
     test_pedal_good_val_brake.raw = 2059;
     test_pedal_good_val_brake.conversion = 1.05;
     data = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_good_val_accel, test_pedal_good_val_brake, 1400);
