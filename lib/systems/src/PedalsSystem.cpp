@@ -40,8 +40,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.brakePercent = brake.conversion;
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
 
-    out.regenPercent = std::max(std::min(out.brakePercent / brakeParams_.mechanical_activation_percentage, 1.0f), 0.0f);
     out.mechBrakeActive = out.brakePercent > brakeParams_.mechanical_activation_percentage;
+    out.regenPercent = std::max(std::min(out.brakePercent / brakeParams_.mechanical_activation_percentage, 1.0f), 0.0f);
+    out.brakePressed = out.brakePercent > brakeParams_.activation_percentage;
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
     return out;
 }
@@ -70,12 +71,14 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
+
     out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
 
     out.regenPercent = std::max(std::min(out.brakePercent / brakeParams_.mechanical_activation_percentage, 1.0f), 0.0f);
+    
     out.brakePressed = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.activation_percentage);
-    out.mechBrakeActive = out.brakePercent > brakeParams_.mechanical_activation_percentage;
+    out.mechBrakeActive = pedal_is_active_(brake1.conversion, brake2.conversion, brakeParams_.mechanical_activation_percentage);
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
 
     return out;
@@ -97,17 +100,7 @@ bool PedalsSystem::max_duration_of_implausibility_exceeded_(unsigned long curr_t
 // only checks implaus based on first min / max
 bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData, const PedalsParams &params)
 {
-    bool pedal1_min_max_implaus = evaluate_min_max_pedal_implausibilities_(pedalData, params.min_pedal_1, params.max_pedal_1, params.implausibility_margin);
-    
-    
-    if (pedal1_min_max_implaus)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return evaluate_min_max_pedal_implausibilities_(pedalData, params.min_pedal_1, params.max_pedal_1, params.implausibility_margin);
 }
 
 bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pedalData1,
@@ -197,6 +190,7 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
     bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
     bool brake_pressed = brake_pedal_real >= brakeParams_.mechanical_activation_percentage;
 
+    bool both_pedals_implausible;
     if (accel_pressed && brake_pressed) {
         both_pedals_implausible = true;
     }
@@ -221,8 +215,9 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
     float brake_pedal2_real = remove_deadzone_(brakePedalData2.conversion, brakeParams_.deadzone_margin);
     bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
     bool brake_pressed = pedal_is_active_(brake_pedal1_real, brake_pedal2_real, brakeParams_.mechanical_activation_percentage);             // 0.05
-
-    if (accel_pressed && brake_pressed) {
+    
+    bool both_pedals_implausible;
+    if (accel_pressed && brake_pressed) {   
         both_pedals_implausible = true;
     }
 
