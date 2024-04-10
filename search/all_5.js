@@ -19,7 +19,7 @@ var searchData=
   ['error_5f_16',['error_',['../classInverterMock.html#a893f491343191644b2cacf91e89aafd5',1,'InverterMock']]],
   ['errorstatus_17',['errorStatus',['../structBasicVehicleMath_1_1RT__MODEL__BasicVehicleMath__T.html#aa0e960ff4a07dbb5077166f0a6e060f2',1,'BasicVehicleMath::RT_MODEL_BasicVehicleMath_T::errorStatus()'],['../structPID__TV_1_1RT__MODEL__PID__TV__T.html#a70c737b218e69ac1490861b7d5e2f7f1',1,'PID_TV::RT_MODEL_PID_TV_T::errorStatus()']]],
   ['ert_5fmain_2ecpp_18',['ert_main.cpp',['../ert__main_8cpp.html',1,'']]],
-  ['evaluate_5fpedals_19',['evaluate_pedals',['../classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496',1,'PedalsSystem']]],
+  ['evaluate_5fpedals_19',['evaluate_pedals',['../classPedalsSystem.html#a3a79cf841053084f8e158f9cccf7651e',1,'PedalsSystem::evaluate_pedals(const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake, unsigned long curr_time)'],['../classPedalsSystem.html#a0b9ac2da0743454dd4438941885ef496',1,'PedalsSystem::evaluate_pedals(const AnalogConversion_s &amp;accel1, const AnalogConversion_s &amp;accel2, const AnalogConversion_s &amp;brake1, const AnalogConversion_s &amp;brake2, unsigned long curr_time)']]],
   ['exponent_20',['exponent',['../structrtwCAPI__FixPtMap__tag.html#afdb5e27f9ae6d7d39ec0520d9f04489b',1,'rtwCAPI_FixPtMap_tag']]],
   ['extra_5fscript_21',['extra_script',['../namespaceextra__script.html',1,'']]],
   ['extra_5fscript_2epy_22',['extra_script.py',['../extra__script_8py.html',1,'']]],
