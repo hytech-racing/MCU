@@ -54,9 +54,9 @@ const int BRAKE2_PEDAL_MIN = 867;
 const float DEFAULT_PEDAL_DEADZONE = 0.05f;
 const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.10f;
 
-const float APPS_ACTIVATION_PERCENTAGE = 0.1;
-const float BRAKE_ACTIVATION_PERCENTAGE = 0.05;
-const float BRAKE_MECH_THRESH = 0.40;
+const float APPS_ACTIVATION_PERCENTAGE = 0.1f;
+const float BRAKE_ACTIVATION_PERCENTAGE = 0.05f;
+const float BRAKE_MECH_THRESH = 0.40f;
 
 // Load Cell Defs to convert raw to lbs
 // lbs = (scale)*raw + offset

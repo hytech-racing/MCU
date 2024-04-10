@@ -24,6 +24,10 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
                                                  unsigned long curr_time)
 {
     PedalsSystemData_s out;
+
+    out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
+    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
+    
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake, brakeParams_);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake);
@@ -33,13 +37,11 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     {
         implausibilityStartTime_ = curr_time;
     }
-    else if (!implausibility)
+    else if ((!implausibility) && (!(out.accelPercent > 0.05)))
     {
         implausibilityStartTime_ = 0;
     }
 
-    out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
-    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
     
     out.brakePercent = brake.conversion;
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
@@ -63,6 +65,12 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     PedalsSystemData_s out;
     out.accelPressed = pedal_is_active_(accel1.conversion, accel2.conversion, accelParams_, false);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
+    
+    out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
+    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
+    
+    
+
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);
     bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
@@ -71,14 +79,13 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     {
         implausibilityStartTime_ = curr_time;
     }
-    else if ((!implausibility) && (!out.accelPressed))
+    else if ((!implausibility) && (!(out.accelPercent > 0.05)))
     {
         implausibilityStartTime_ = 0;
     }
 
     
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
-
     
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
 
