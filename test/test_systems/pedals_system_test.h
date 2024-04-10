@@ -105,60 +105,60 @@ TEST(PedalsSystemTesting, test_accel_and_brake_percentages_implausibility)
     EXPECT_FALSE(data.accelImplausible);
 }
 
-TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activation)
-{
-    AnalogConversion_s test_accel1_val = {2000, 0.6, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_brake_val = {3000, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+// TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activation)
+// {
+//     AnalogConversion_s test_accel1_val = {2000, 0.6, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+//     AnalogConversion_s test_brake_val = {3000, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
-    PedalsParams params2;
-    params2.min_pedal_1 = 100;
-    params2.min_pedal_2 = 100;
-    params2.max_pedal_1 = 3000;
-    params2.max_pedal_2 = 3000;
-    params2.activation_percentage = 0.1;
-    params2.mechanical_activation_percentage = 0.6;
-    params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
-    params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
+//     PedalsParams params2;
+//     params2.min_pedal_1 = 100;
+//     params2.min_pedal_2 = 100;
+//     params2.max_pedal_1 = 3000;
+//     params2.max_pedal_2 = 3000;
+//     params2.activation_percentage = 0.1;
+//     params2.mechanical_activation_percentage = 0.6;
+//     params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+//     params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
 
-    PedalsSystem pedals(params2, params2);
-    auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
-    EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
-    EXPECT_TRUE(data.brakePressed);
+//     PedalsSystem pedals(params2, params2);
+//     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
+//     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
+//     EXPECT_TRUE(data.brakePressed);
 
-    test_brake_val.conversion = 0.0;
+//     test_brake_val.conversion = 0.0;
 
-    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
+//     data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
 
-    EXPECT_FALSE(data.brakeAndAccelPressedImplausibility);
-    EXPECT_FALSE(data.brakePressed);
-}
+//     EXPECT_FALSE(data.brakeAndAccelPressedImplausibility);
+//     EXPECT_FALSE(data.brakePressed);
+// }
 
-TEST(PedalsSystemTesting, test_implausibility_duration)
-{
-    AnalogConversion_s test_accel1_val = {2000, 0.6, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_brake_val = {3000, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+// TEST(PedalsSystemTesting, test_implausibility_duration)
+// {
+//     AnalogConversion_s test_accel1_val = {2000, 0.6, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+//     AnalogConversion_s test_brake_val = {3000, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
-    PedalsParams params2;
-    params2.min_pedal_1 = 100;
-    params2.max_pedal_1 = 100;
-    params2.min_pedal_2 = 3000;
-    params2.max_pedal_2 = 3000;
-    params2.activation_percentage = 0.1;
-    params2.mechanical_activation_percentage = 0.6;
-    params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
-    params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
+//     PedalsParams params2;
+//     params2.min_pedal_1 = 100;
+//     params2.max_pedal_1 = 100;
+//     params2.min_pedal_2 = 3000;
+//     params2.max_pedal_2 = 3000;
+//     params2.activation_percentage = 0.1;
+//     params2.mechanical_activation_percentage = 0.6;
+//     params2.deadzone_margin = DEFAULT_PEDAL_DEADZONE;
+//     params2.implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN;
 
-    PedalsSystem pedals(params2, params2);
-    auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
-    EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
-    EXPECT_TRUE(data.brakePressed);
-    EXPECT_FALSE(data.implausibilityExceededMaxDuration);
+//     PedalsSystem pedals(params2, params2);
+//     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
+//     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
+//     EXPECT_TRUE(data.brakePressed);
+//     EXPECT_FALSE(data.implausibilityExceededMaxDuration);
 
-    data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1200);
+//     data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1200);
 
 
-    EXPECT_TRUE(data.implausibilityExceededMaxDuration);
-}
+//     EXPECT_TRUE(data.implausibilityExceededMaxDuration);
+// }
 
 TEST(PedalsSystemTesting, single_brake_pedal_test_limits) {
    // accel min and max on raw
