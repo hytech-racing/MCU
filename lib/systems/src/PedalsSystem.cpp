@@ -25,9 +25,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 {
     PedalsSystemData_s out;
 
-    out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
+    out.accelPercent = ((accel1.conversion + accel2.conversion) / 2.0);
     out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
-    
+    out.accelPercent = std::max(out.accelPercent, 0.0f);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake, brakeParams_);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake);
@@ -46,7 +46,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.brakePercent = brake.conversion;
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
 
-    out.mechBrakeActive = out.brakePercent > brakeParams_.mechanical_activation_percentage;
+    out.mechBrakeActive = out.brakePercent >= brakeParams_.mechanical_activation_percentage;
     out.regenPercent = std::max(std::min(out.brakePercent / brakeParams_.mechanical_activation_percentage, 1.0f), 0.0f);
     out.brakePressed = out.brakePercent > brakeParams_.activation_percentage;
 
@@ -68,7 +68,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     
     out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
     out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
-    
+    out.accelPercent = std::max(out.accelPercent, 0.0f);
     
 
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
