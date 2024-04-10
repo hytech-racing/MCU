@@ -124,6 +124,7 @@ public:
     float get_actual_torque() { return actual_torque_nm_; }
     uint16_t get_error_status();
     MC_temps get_temps_msg() { return mc_temps_; }
+    MC_setpoints_command get_cmd_msg() { return curr_cmd_; }
 
 private:
     float id110_val_;                            // for scaling to proper iq and id vals
@@ -143,7 +144,8 @@ private:
     bool quit_inverter_on_;
     bool inverter_on_;
     bool derating_on_;
-    MC_temps mc_temps_;
+    MC_setpoints_command curr_cmd_; // TODO unfuck this this is stupid HACK
+    MC_temps mc_temps_; // TODO unfuck this this is stupid HACK
     message_queue *msg_queue_;
     uint32_t can_id_;
     Metro timer_can_ = Metro(20);

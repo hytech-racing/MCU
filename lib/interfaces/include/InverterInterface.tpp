@@ -2,9 +2,10 @@
 
 template <typename message_queue>
 void InverterInterface<message_queue>::write_cmd_msg_to_queue_(MC_setpoints_command msg_in)
-{   
+{
     auto test = msg_in;
-    if(timer_can_.check()){
+    curr_cmd_ = msg_in;
+    if (timer_can_.check()) {
         CAN_message_t msg;
         msg.id = can_id_;
         msg.len = sizeof(msg_in);
@@ -92,7 +93,7 @@ void InverterInterface<message_queue>::handle_command(const InverterCommand &com
     mc_setpoints_command.set_driver_enable(true);
     mc_setpoints_command.set_hv_enable(true);
     mc_setpoints_command.set_inverter_enable(true);
-    int16_t torque_cmd = (command.torque_setpoint_nm/21.42)*1000;
+    int16_t torque_cmd = (command.torque_setpoint_nm)*100;
     
     // Serial.println(torque_cmd);
     mc_setpoints_command.set_speed_setpoint((int16_t)command.speed_setpoint_rpm);

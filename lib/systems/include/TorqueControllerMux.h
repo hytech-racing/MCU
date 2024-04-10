@@ -7,12 +7,13 @@
 #include "PedalsSystem.h"
 #include "SteeringSystem.h"
 #include "DashboardInterface.h"
+#include "VectornavInterface.h"
 // #include "AnalogSensorsInterface.h"
 
-const float MAX_SPEED_FOR_MODE_CHANGE = 5.0; // m/s
+const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
 
-/// @brief 
+/// @brief
 class TorqueControllerMux
 {
 private:
@@ -22,13 +23,13 @@ private:
         {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
         {DialMode_e::MODE_2, TorqueController_e::TC_NO_CONTROLLER},
         {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
-        {DialMode_e::MODE_4, TorqueController_e::TC_NO_CONTROLLER},
+        {DialMode_e::MODE_4, TorqueController_e::TC_SLIP_LAUNCH},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
-        {TorqueLimit_e::TCMUX_FULL_TORQUE, 20.0}
+        {TorqueLimit_e::TCMUX_FULL_TORQUE, 21.4}
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
@@ -38,24 +39,31 @@ private:
     TorqueControllerSimple torqueControllerSimple_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
     TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
+    TorqueControllerSlipLaunch torqueControllerSlipLaunch_;
+    TorqueControllerPIDTV torqueControllerPIDTV_;
     TorqueControllerBase* controllers[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)] = {
         static_cast<TorqueControllerBase*>(&torqueControllerNone_),
         static_cast<TorqueControllerBase*>(&torqueControllerSimple_),
         static_cast<TorqueControllerBase*>(&torqueControllerLoadCellVectoring_),
         static_cast<TorqueControllerBase*>(&torqueControllerSimpleLaunch_),
+        static_cast<TorqueControllerBase*>(&torqueControllerSlipLaunch_),
+        // static_cast<TorqueControllerBase*>(&torqueControllerPIDTV_),
     };
 
     DrivetrainCommand_s drivetrainCommand_;
     TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
     bool torqueLimitButtonPressed_ = false;
     unsigned long torqueLimitButtonPressedTime_ = 0;
+
 public:
     /// @brief torque controller mux in which default instances of all torque controllers are created for use
     TorqueControllerMux()
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
-    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}
+    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
+    , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
+    , torqueControllerPIDTV_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_PID_VECTORING)]) {}
 
 
     /// @brief torque controller mux constructor that leaves all other TCs with defaults accept for simple TC
@@ -65,25 +73,28 @@ public:
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
-    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)]) {}
+    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
+    , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
+    , torqueControllerPIDTV_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_PID_VECTORING)]) {}
 // Functions
     void tick(
-        const SysTick_s& tick,
-        const DrivetrainDynamicReport_s& drivetrainData,
-        const PedalsSystemData_s& pedalsData,
-        const SteeringSystemData_s& steeringData,
-        const AnalogConversion_s& loadFLData,
-        const AnalogConversion_s& loadFRData,
-        const AnalogConversion_s& loadRLData,
-        const AnalogConversion_s& loadRRData,
+        const SysTick_s &tick,
+        const DrivetrainDynamicReport_s &drivetrainData,
+        const PedalsSystemData_s &pedalsData,
+        const SteeringSystemData_s &steeringData,
+        const AnalogConversion_s &loadFLData,
+        const AnalogConversion_s &loadFRData,
+        const AnalogConversion_s &loadRLData,
+        const AnalogConversion_s &loadRRData,
         DialMode_e dashboardDialMode,
-        bool dashboardTorqueModeButtonPressed
-    );
-    const DrivetrainCommand_s& getDrivetrainCommand()
+        bool dashboardTorqueModeButtonPressed,
+        const vector_nav &vn_data, 
+        float wheel_angle_rad);
+    const DrivetrainCommand_s &getDrivetrainCommand()
     {
         return drivetrainCommand_;
     };
-    const TorqueLimit_e& getTorqueLimit()
+    const TorqueLimit_e &getTorqueLimit()
     {
         return torqueLimit_;
     };
@@ -102,6 +113,10 @@ public:
         }
     }
 
+    PIDTVTorqueControllerData get_pidtv_data()
+    {
+        return torqueControllerPIDTV_.get_data();
+    }
 };
 
 #endif /* __TORQUECTRLMUX_H__ */
