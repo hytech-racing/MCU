@@ -39,6 +39,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     
     out.brakePercent = brake.conversion;
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
+    out.brakePressed = brake.conversion >= brakeParams_.activation_percentage;
 
     out.mechBrakeActive = out.brakePercent > brakeParams_.mechanical_activation_percentage;
     out.regenPercent = std::max(std::min(out.brakePercent / brakeParams_.mechanical_activation_percentage, 1.0f), 0.0f);
