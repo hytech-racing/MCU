@@ -115,6 +115,8 @@ private:
     PedalsParams brakeParams_{};
     unsigned long implausibilityStartTime_;
 
+    bool both_pedals_implausible;
+
     float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
 

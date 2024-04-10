@@ -196,7 +196,17 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
     float brake_pedal_real = remove_deadzone_(brakePedalData.conversion, brakeParams_.deadzone_margin);
     bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
     bool brake_pressed = brake_pedal_real >= brakeParams_.mechanical_activation_percentage;
-    return (accel_pressed && brake_pressed);
+
+    if (accel_pressed && brake_pressed) {
+        both_pedals_implausible = true;
+    }
+
+    // make sure that implausibility does not clear until both pedals are completely depressed
+    if (!accel_pressed && !brake_pressed) {
+        both_pedals_implausible = false;
+    }
+
+    return (both_pedals_implausible);
 }
 
 bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &accelPedalData1,
@@ -211,7 +221,17 @@ bool PedalsSystem::evaluate_brake_and_accel_pressed_(const AnalogConversion_s &a
     float brake_pedal2_real = remove_deadzone_(brakePedalData2.conversion, brakeParams_.deadzone_margin);
     bool accel_pressed = pedal_is_active_(accel_pedal1_real, accel_pedal2_real, accelParams_.activation_percentage); // .1
     bool brake_pressed = pedal_is_active_(brake_pedal1_real, brake_pedal2_real, brakeParams_.mechanical_activation_percentage);             // 0.05
-    return (accel_pressed && brake_pressed);
+
+    if (accel_pressed && brake_pressed) {
+        both_pedals_implausible = true;
+    }
+
+    // make sure that implausibility does not clear until both pedals are completely depressed
+    if (!accel_pressed && !brake_pressed) {
+        both_pedals_implausible = false;
+    }
+
+    return (both_pedals_implausible);
 }
 
 bool PedalsSystem::pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, float percent_threshold)
