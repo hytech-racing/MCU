@@ -37,7 +37,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     {
         implausibilityStartTime_ = curr_time;
     }
-    else if ((!implausibility) && (!(out.accelPercent > 0.05)))
+    else if ((!implausibility) && ((out.accelPercent <= 0.05)))
     {
         implausibilityStartTime_ = 0;
     }
