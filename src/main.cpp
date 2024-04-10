@@ -87,9 +87,8 @@ BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
 // SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
-PedalsSystem pedals_system({ACCEL1_PEDAL_MIN, ACCEL2_PEDAL_MIN, ACCEL1_PEDAL_MAX, ACCEL2_PEDAL_MAX, APPS_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN},
-                           {BRAKE1_PEDAL_MIN, BRAKE2_PEDAL_MIN, BRAKE1_PEDAL_MAX, BRAKE2_PEDAL_MAX, BRKAE_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN},
-                           BRAKE_MECH_THRESH);
+PedalsSystem pedals_system({ACCEL1_PEDAL_MIN, ACCEL2_PEDAL_MIN, ACCEL1_PEDAL_MAX, ACCEL2_PEDAL_MAX, APPS_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, APPS_ACTIVATION_PERCENTAGE},
+                           {BRAKE1_PEDAL_MIN, BRAKE2_PEDAL_MIN, BRAKE1_PEDAL_MAX, BRAKE2_PEDAL_MAX, BRAKE_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, BRAKE_MECH_THRESH});
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
@@ -122,6 +121,7 @@ void drivetrain_reset();
 
 void setup()
 {
+
     // initialize CAN communication
     init_all_CAN_devices();
 
@@ -138,10 +138,6 @@ void setup()
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_PEDAL_MIN);
-    a1.setChannelClamp(MCU15_ACCEL1_CHANNEL, 0.0, 1.0);
-    a1.setChannelClamp(MCU15_ACCEL2_CHANNEL, 0.0, 1.0);
-    a1.setChannelClamp(MCU15_BRAKE1_CHANNEL, 0.0, 1.0);
-    a1.setChannelClamp(MCU15_BRAKE2_CHANNEL, 0.0, 1.0);
 
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
@@ -149,7 +145,6 @@ void setup()
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
 
-    Serial.begin(115200);
 
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
@@ -163,6 +158,8 @@ void setup()
     ams_interface.init(curr_tick.millis); // initialize last heartbeat time
     steering1.init();
 
+    Serial.begin(115200);
+    
     /*
         Init Systems
     */
@@ -180,6 +177,7 @@ void setup()
 
 void loop()
 {
+    // Serial.println("test");
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -193,8 +191,8 @@ void loop()
     // tick systems
     tick_all_systems(curr_tick);
 
-    // // inverter procedure before entering state machine
-    // // reset inverters
+    // inverter procedure before entering state machine
+    // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
     {
         hal_println("resetting errored drivetrain");
@@ -321,14 +319,14 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // // tick steering system
-    // steering_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_STEERING_CHANNEL]);
+        a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
 
-    // // tick drivetrain system
+    // tick steering system
+    steering_system.tick(
+        current_system_tick,
+        a1.get().conversions[MCU15_STEERING_CHANNEL]);
+
+    // tick drivetrain system
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 

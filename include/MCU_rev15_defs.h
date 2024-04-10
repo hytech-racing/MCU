@@ -55,7 +55,7 @@ const float DEFAULT_PEDAL_DEADZONE = 0.05f;
 const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.10f;
 
 const float APPS_ACTIVATION_PERCENTAGE = 0.1;
-const float BRKAE_ACTIVATION_PERCENTAGE = 0.05;
+const float BRAKE_ACTIVATION_PERCENTAGE = 0.05;
 const float BRAKE_MECH_THRESH = 0.40;
 
 // Load Cell Defs to convert raw to lbs
