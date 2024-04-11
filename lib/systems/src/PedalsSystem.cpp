@@ -46,6 +46,8 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     bool oor = evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
             || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2);
     out.accelPercent = (oor) ? 0 : out.accelPercent;
+
+    if(out.a)
     
     out.brakePercent = brake.conversion;
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
@@ -56,6 +58,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
 
     
     out.implausibilityExceededMaxDuration = max_duration_of_implausibility_exceeded_(curr_time);
+    prevData_ = out;
     return out;
 }
 
@@ -88,11 +91,14 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
         implausibilityStartTime_ = 0;
     }
 
-    bool oor = evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
-            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2);
+    bool oor = implausability && (evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
+            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
     out.accelPercent = (oor) ? 0 : out.accelPercent;
 
-    
+    if(std::abs(out.accelPercent - prevData.accelPercent) > VAL) {
+        out.accelPercent = 0;
+        implausabilityStartTime_ = curr_time;
+    }
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
     
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);

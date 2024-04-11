@@ -122,10 +122,10 @@ public:
 
 private:
     PedalsSystemData_s data_{};
+    PedalsSystemData_s prevData_{};
     PedalsParams accelParams_{};
     PedalsParams brakeParams_{};
     unsigned long implausibilityStartTime_;
-
     float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
 
