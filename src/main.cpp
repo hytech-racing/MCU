@@ -195,7 +195,6 @@ void loop()
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
     {
-        hal_println("resetting errored drivetrain");
         drivetrain.reset_drivetrain();
     }
     // tick state machine

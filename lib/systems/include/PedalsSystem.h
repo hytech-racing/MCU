@@ -12,6 +12,7 @@ struct PedalsSystemData_s
     bool accelImplausible : 1;
     bool brakeImplausible : 1;
     bool brakePressed : 1;
+    bool accelPressed : 1;
     bool mechBrakeActive : 1;
     bool brakeAndAccelPressedImplausibility : 1;
     bool implausibilityExceededMaxDuration : 1;
@@ -43,9 +44,15 @@ public:
     PedalsSystem(const PedalsParams &accelParams,
                  const PedalsParams &brakeParams)
     {
+        setParams(accelParams, brakeParams);
+        implausibilityStartTime_ = 0;
+    }
+
+    void setParams(const PedalsParams &accelParams,
+                   const PedalsParams &brakeParams)
+    {
         accelParams_ = accelParams;
         brakeParams_ = brakeParams;
-        implausibilityStartTime_ = 0;
     }
 
     const PedalsSystemData_s &getPedalsSystemData()
@@ -115,8 +122,6 @@ private:
     PedalsParams brakeParams_{};
     unsigned long implausibilityStartTime_;
 
-    bool both_pedals_implausible;
-
     float remove_deadzone_(float conversion_input, float deadzone);
     bool max_duration_of_implausibility_exceeded_(unsigned long curr_time);
 
@@ -179,7 +184,13 @@ private:
                                                   int max,
                                                   float implaus_margin_scale);
 
-    bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, float percent_threshold);
+    /// @brief check whether or not pedal is active according to input parameters. returns true if either pedal is over threshold. removes the deadzone before checking.
+    /// @param pedal1ConvertedData the value 0 to 1 of the first pedal without deadzone removed
+    /// @param pedal2ConvertedData ... second pedal 0 to 1 val
+    /// @param params the pedal parameters for this specific pedal
+    /// @param check_mech_activation if this is true, function will check percentages against the mechanical activation percentage
+    /// @return true or false accordingly
+    bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, const PedalsParams &params, bool check_mech_activation);
 };
 
 #endif /* PEDALSSYSTEM */

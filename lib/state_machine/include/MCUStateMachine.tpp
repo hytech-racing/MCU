@@ -39,12 +39,14 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.print(" ");
         // Serial.print(data.brakeAndAccelPressedImplausibility);
         // Serial.print(" ");
-        // Serial.print(data.implausibilityExceededMaxDuration);
-        // Serial.println();
+        
+        // Serial.println("accel, brake:");
         // Serial.print(data.accelPercent);
         // Serial.print(" ");
         // Serial.print(data.brakePercent);
-        // Serial.print(" ");
+        // Serial.print(" \n");
+        // Serial.print(data.implausibilityExceededMaxDuration);
+        // Serial.println();
 
 
         // if TS is above HV threshold, move to Tractive System Active
