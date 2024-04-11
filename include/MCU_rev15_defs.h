@@ -51,6 +51,20 @@ const int BRAKE2_PEDAL_MAX = 2198;
 const int BRAKE1_PEDAL_MIN = 867;
 const int BRAKE2_PEDAL_MIN = 867;
 
+const int ACCEL1_PEDAL_OOR_MIN = 90;
+const int ACCEL2_PEDAL_OOR_MIN = 90;
+
+const int ACCEL1_PEDAL_OOR_MAX = 4000;
+const int ACCEL2_PEDAL_OOR_MAX = 4000;
+
+const int BRAKE1_PEDAL_OOR_MIN = 90;
+const int BRAKE2_PEDAL_OOR_MIN = 90;
+
+const int BRAKE1_PEDAL_OOR_MAX = 4000;
+const int BRAKE2_PEDAL_OOR_MAX = 4000;
+
+
+
 const float DEFAULT_PEDAL_DEADZONE = 0.03f;
 const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.10f;
 

@@ -191,6 +191,8 @@ private:
     /// @param check_mech_activation if this is true, function will check percentages against the mechanical activation percentage
     /// @return true or false accordingly
     bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, const PedalsParams &params, bool check_mech_activation);
+`   
+    bool pedal_oor(const AnalogConversion_s &pedalData1, const AnalogConversion_s &pedalData2)
 };
 
 #endif /* PEDALSSYSTEM */
