@@ -177,6 +177,10 @@ private:
     bool evaluate_brake_and_accel_pressed_(const AnalogConversion_s &accelPedalData1,
                                            const AnalogConversion_s &accelPedalData2,
                                            const AnalogConversion_s &brakePedalData);
+    /// @brief This checks to see if any pedal sensor is out of range :(
+    /// @param PedalData The analog pedal Value
+    /// @return 
+    bool evalute_pedal_oor(const AnalogConversion_s &PedalData);
     /// @brief
     /// @param pedalData
     /// @param min
