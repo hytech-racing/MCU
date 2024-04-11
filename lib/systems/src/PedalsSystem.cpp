@@ -95,7 +95,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
             || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
     out.accelPercent = (oor) ? 0 : out.accelPercent;
 
-    if(std::abs(out.accelPercent - prevData.accelPercent) > VAL) {
+    if(implausability && std::abs(out.accelPercent - prevData.accelPercent) > VAL) {
         out.accelPercent = 0;
         implausabilityStartTime_ = curr_time;
     }
