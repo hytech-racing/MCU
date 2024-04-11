@@ -2,6 +2,8 @@
 #include "Utility.h"
 #include "PhysicalParameters.h"
 
+#include <stdio.h>
+
 void TorqueControllerMux::tick(
     const SysTick_s &tick,
     const DrivetrainDynamicReport_s &drivetrainData,
@@ -154,12 +156,17 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s* command)
     }
     avg_torque /= NUM_MOTORS;
     
+    printf("max torque: %.2f\n", max_torque);
+    printf("avg torque: %.2f\n", avg_torque);
     // if this is greather than the torque limit, scale down
     if (avg_torque > max_torque) {
         // get the scale of avg torque above max torque
         float scale = avg_torque / max_torque;
         // divide by scale to lower avg below max torque
-        for (int i = 0; i < NUM_MOTORS; i++) { command->torqueSetpoints[i] /= scale; }
+        printf("scale: %.2f\n", scale);
+        for (int i = 0; i < NUM_MOTORS; i++) {
+            command->torqueSetpoints[i] /= scale;
+        }
     }
 
 }

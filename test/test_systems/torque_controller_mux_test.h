@@ -316,6 +316,43 @@ TEST(TorqueControllerMuxTesting, test_power_limit) {
     
 }
 
+TEST(TorqueControllerMuxTesting, test_torque_limit) {
+    TorqueControllerMux mux = TorqueControllerMux();
+    DrivetrainCommand_s drive_command;
+
+    for (int i = 0; i < 4; i++) {
+        drive_command.speeds_rpm[i] = 500.0f;
+        drive_command.torqueSetpoints[i] = 10.0f;
+    }
+
+    drive_command.torqueSetpoints[0] = 5;
+
+    mux.applyTorqueLimit(&drive_command);
+
+    ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);
+    ASSERT_EQ(drive_command.torqueSetpoints[1], 10.0f);
+    ASSERT_EQ(drive_command.torqueSetpoints[2], 10.0f);
+    ASSERT_EQ(drive_command.torqueSetpoints[3], 10.0f);
+
+    for (int i = 0; i < 4; i++) {
+        drive_command.speeds_rpm[i] = 500.0f;
+        drive_command.torqueSetpoints[i] = 20.0f;
+    }
+    drive_command.torqueSetpoints[0] = 5;
+
+    mux.applyTorqueLimit(&drive_command);
+
+    ASSERT_LT(drive_command.torqueSetpoints[0], 3.5f);
+    ASSERT_LT(drive_command.torqueSetpoints[1], 12.5f);
+    ASSERT_LT(drive_command.torqueSetpoints[2], 12.5f);
+    ASSERT_LT(drive_command.torqueSetpoints[3], 12.5f);
+
+    printf("torque 1: %.2f\n", drive_command.torqueSetpoints[0]);
+    printf("torque 2: %.2f\n", drive_command.torqueSetpoints[1]);
+    printf("torque 3: %.2f\n", drive_command.torqueSetpoints[2]);
+    printf("torque 4: %.2f\n", drive_command.torqueSetpoints[3]);
+}
+
 TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
      SysClock clock = SysClock();
     SysTick_s cur_tick;
