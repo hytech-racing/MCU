@@ -88,38 +88,77 @@ void TorqueControllerMux::tick(
 
         applyPowerLimit(&drivetrainCommand_);
         applyTorqueLimit(&drivetrainCommand_);
+        applyPosSpeedLimit(&drivetrainCommand_);
 
     }
 }
 
+/*
+    Apply power limit such that the mechanical power of all wheels never
+    exceeds the preset mechanical power limit. Scales all wheels down to
+    preserve functionality of torque controllers
+*/
 void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command)
 {
     float net_torque_mag = 0;
 
     for (int i = 0; i < NUM_MOTORS; i++) {
+        // get the total magnitude of torque from all 4 wheels
+        #ifdef ARDUINO_TEENSY41
         net_torque_mag += abs(command->torqueSetpoints[i]);
+        #else
+        net_torque_mag += std::abs(command->torqueSetpoints[i]);
+        #endif
     }
     
     for (int i = 0; i < NUM_MOTORS; i++) {
-        float power_per_corner = (command->torqueSetpoints[i] / net_torque_mag) * MAX_POWER_LIMIT * 1000;
+        // calculate the percent of total torque requested per wheel
+        float torque_percent = command->torqueSetpoints[i] / net_torque_mag;
+        // based on the torque percent and max power limit, get the max power each wheel can use
+        float power_per_corner = (torque_percent * MAX_POWER_LIMIT) * 1000;
+        // power / omega (motor rad/s) to get torque per wheel
         command->torqueSetpoints[i] = power_per_corner / (command->speeds_rpm[i] * RPM_TO_RAD_PER_SECOND);
+
+        // isn't this just always distributing max power to all wheels?
     }
 
 }
 
+/*
+    Apply limit such that the average wheel torque is never above the max
+    torque allowed in the current torque mode.
+    This will uniformally scale down all torques as to not affect the functionality
+    of non-symmetrical torque controllers.
+*/
 void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s* command)
 {  
     float max_torque = getMaxTorque();
-    float avg_torque;
+    float avg_torque = 0;
 
+    // get the average torque accross all 4 wheels
     for (int i = 0; i < NUM_MOTORS; i++) {
+        #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         avg_torque += abs(command->torqueSetpoints[i]);
+        #else
+        avg_torque += std::abs(command->torqueSetpoints[i]);
+        #endif
     }
     avg_torque /= NUM_MOTORS;
     
+    // if this is greather than the torque limit, scale down
     if (avg_torque > max_torque) {
+        // get the scale of avg torque above max torque
         float scale = avg_torque / max_torque;
+        // divide by scale to lower avg below max torque
         for (int i = 0; i < NUM_MOTORS; i++) { command->torqueSetpoints[i] /= scale; }
     }
 
+}
+
+/* Apply limit such that wheelspeed never goes negative */
+void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s* command) {
+    for (int i = 0; i < NUM_MOTORS; i++)
+    {
+        command->torqueSetpoints[i] = std::max(0.0f, command->torqueSetpoints[i]);
+    }
 }

@@ -111,6 +111,8 @@ public:
 
     void applyTorqueLimit(DrivetrainCommand_s* command);
 
+    void applyPosSpeedLimit(DrivetrainCommand_s* command);
+
     TorqueControllerBase* activeController()
     {
         // check to make sure that there is actually a controller
