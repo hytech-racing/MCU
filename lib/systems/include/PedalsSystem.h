@@ -180,7 +180,9 @@ private:
     /// @brief This checks to see if any pedal sensor is out of range :(
     /// @param PedalData The analog pedal Value
     /// @return 
-    bool evalute_pedal_oor(const AnalogConversion_s &PedalData);
+    bool evalute_pedal_oor(const AnalogConversion_s &pedalData
+                           int min,
+                           int max);
     /// @brief
     /// @param pedalData
     /// @param min
