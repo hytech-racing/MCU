@@ -2,6 +2,8 @@
 #define __TORQUECTRLMUX_H__
 
 #include <unordered_map>
+#include <cmath>
+
 #include "TorqueControllers.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
@@ -29,7 +31,7 @@ private:
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
-        {TorqueLimit_e::TCMUX_FULL_TORQUE, 21.4}
+        {TorqueLimit_e::TCMUX_FULL_TORQUE, AMK_MAX_TORQUE}
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
@@ -94,14 +96,21 @@ public:
     {
         return drivetrainCommand_;
     };
+    
     const TorqueLimit_e &getTorqueLimit()
     {
         return torqueLimit_;
     };
+
     const float getMaxTorque()
     {
         return torqueLimitMap_[torqueLimit_];
     }
+
+    void applyPowerLimit(DrivetrainCommand_s* command);
+
+    void applyTorqueLimit(DrivetrainCommand_s* command);
+
     TorqueControllerBase* activeController()
     {
         // check to make sure that there is actually a controller

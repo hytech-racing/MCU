@@ -85,5 +85,41 @@ void TorqueControllerMux::tick(
         }
 
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
+
+        applyPowerLimit(&drivetrainCommand_);
+        applyTorqueLimit(&drivetrainCommand_);
+
     }
+}
+
+void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command)
+{
+    float net_torque_mag = 0;
+
+    for (int i = 0; i < NUM_MOTORS; i++) {
+        net_torque_mag += abs(command->torqueSetpoints[i]);
+    }
+    
+    for (int i = 0; i < NUM_MOTORS; i++) {
+        float power_per_corner = (command->torqueSetpoints[i] / net_torque_mag) * MAX_POWER_LIMIT * 1000;
+        command->torqueSetpoints[i] = power_per_corner / (command->speeds_rpm[i] * RPM_TO_RAD_PER_SECOND);
+    }
+
+}
+
+void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s* command)
+{  
+    float max_torque = getMaxTorque();
+    float avg_torque;
+
+    for (int i = 0; i < NUM_MOTORS; i++) {
+        avg_torque += abs(command->torqueSetpoints[i]);
+    }
+    avg_torque /= NUM_MOTORS;
+    
+    if (avg_torque > max_torque) {
+        float scale = avg_torque / max_torque;
+        for (int i = 0; i < NUM_MOTORS; i++) { command->torqueSetpoints[i] /= scale; }
+    }
+
 }

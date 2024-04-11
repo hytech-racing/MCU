@@ -15,6 +15,10 @@
 #include "TorqueControllersData.h"
 #include "PID_TV.h"
 
+/* CONTROLLER CONSTANTS */
+
+const float MAX_POWER_LIMIT = 63.0; // max mechanical power limit in KW
+
 /* MOTOR CONSTANTS */
 
 const float AMK_MAX_RPM = 20000;
@@ -119,22 +123,6 @@ template <TorqueController_e TorqueControllerType>
 class TorqueController : public TorqueControllerBase
 {
 protected:
-
-    void TCPowerLimitScaleDown(
-        DrivetrainCommand_s &command,
-        const DrivetrainDynamicReport_s &drivetrainData,
-        float powerLimit)
-    {
-        // TODO
-        // probably requires AMS interface
-    }
-    void TCPosTorqueLimit(DrivetrainCommand_s &command, float torqueLimit)
-    {
-        for (int i = 0; i < NUM_MOTORS; i++)
-        {
-            command.torqueSetpoints[i] = std::min(command.torqueSetpoints[i], torqueLimit);
-        }
-    }
 
 public:
 };
