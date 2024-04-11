@@ -28,6 +28,10 @@ struct PedalsParams
     int min_pedal_2;
     int max_pedal_1;
     int max_pedal_2;
+    int min_sensor_pedal_1;
+    int max_sensor_pedal_1;
+    int min_sensor_pedal_2;
+    int max_sensor_pedal_2;
     float activation_percentage;
     float deadzone_margin;
     float implausibility_margin;
