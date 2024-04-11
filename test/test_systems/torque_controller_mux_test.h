@@ -287,6 +287,35 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
     }    
 }
 
+TEST(TorqueControllerMuxTesting, test_power_limit) {
+    TorqueControllerMux mux = TorqueControllerMux();
+    DrivetrainCommand_s drive_command;
+
+    for (int i = 0; i < 4; i++) {
+        drive_command.speeds_rpm[i] = 500.0f;
+        drive_command.torqueSetpoints[i] = 10.0f;
+    }
+
+    mux.applyPowerLimit(&drive_command);
+
+    for (int i = 0; i < 4; i++) {
+        ASSERT_EQ(drive_command.speeds_rpm[i], 500.0f);
+        ASSERT_EQ(drive_command.torqueSetpoints[i], 10.0f);
+    }
+
+    for (int i = 0; i < 4; i++) {
+        drive_command.speeds_rpm[i] = 20000.0f;
+        drive_command.torqueSetpoints[i] = 21.0f;
+    }
+
+    mux.applyPowerLimit(&drive_command);
+
+    for (int i = 0; i < 4; i++) {
+        ASSERT_LT(drive_command.torqueSetpoints[i], 7.6); // hardcoded value based on online calculator
+    }
+    
+}
+
 TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
      SysClock clock = SysClock();
     SysTick_s cur_tick;

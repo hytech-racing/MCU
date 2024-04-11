@@ -17,7 +17,7 @@
 
 /* CONTROLLER CONSTANTS */
 
-const float MAX_POWER_LIMIT = 63.0; // max mechanical power limit in KW
+const float MAX_POWER_LIMIT = 63000.0; // max mechanical power limit in KW
 
 /* MOTOR CONSTANTS */
 

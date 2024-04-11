@@ -92,6 +92,7 @@ public:
         bool dashboardTorqueModeButtonPressed,
         const vector_nav &vn_data, 
         float wheel_angle_rad);
+
     const DrivetrainCommand_s &getDrivetrainCommand()
     {
         return drivetrainCommand_;

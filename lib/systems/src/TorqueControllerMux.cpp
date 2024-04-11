@@ -101,25 +101,34 @@ void TorqueControllerMux::tick(
 void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command)
 {
     float net_torque_mag = 0;
+    float net_wheelspeed = 0;
 
     for (int i = 0; i < NUM_MOTORS; i++) {
         // get the total magnitude of torque from all 4 wheels
-        #ifdef ARDUINO_TEENSY41
+        #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         net_torque_mag += abs(command->torqueSetpoints[i]);
+        net_wheelspeed += abs(command->speeds_rpm[i]);
         #else
         net_torque_mag += std::abs(command->torqueSetpoints[i]);
+        net_wheelspeed += std::abs(command->speeds_rpm[i]);
         #endif
     }
-    
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        // calculate the percent of total torque requested per wheel
-        float torque_percent = command->torqueSetpoints[i] / net_torque_mag;
-        // based on the torque percent and max power limit, get the max power each wheel can use
-        float power_per_corner = (torque_percent * MAX_POWER_LIMIT) * 1000;
-        // power / omega (motor rad/s) to get torque per wheel
-        command->torqueSetpoints[i] = power_per_corner / (command->speeds_rpm[i] * RPM_TO_RAD_PER_SECOND);
 
-        // isn't this just always distributing max power to all wheels?
+    // get current total mechanical power
+    float cur_power = net_torque_mag * (net_wheelspeed * RPM_TO_RAD_PER_SECOND);
+    
+    // only evaluate power limit if current power exceeds it
+    if (cur_power > (MAX_POWER_LIMIT)) {
+        for (int i = 0; i < NUM_MOTORS; i++) {
+            // calculate the percent of total torque requested per wheel
+            float torque_percent = command->torqueSetpoints[i] / net_torque_mag;
+            // based on the torque percent and max power limit, get the max power each wheel can use
+            float power_per_corner = (torque_percent * MAX_POWER_LIMIT);
+            // power / omega (motor rad/s) to get torque per wheel
+            command->torqueSetpoints[i] = power_per_corner / (command->speeds_rpm[i] * RPM_TO_RAD_PER_SECOND);
+
+            // isn't this just always distributing max power to all wheels?
+        }
     }
 
 }
