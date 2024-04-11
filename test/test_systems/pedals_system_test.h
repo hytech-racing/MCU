@@ -476,4 +476,12 @@ TEST(PedalsSystemTesting, check_accel_pressed)
     EXPECT_TRUE(data_single.accelPressed);
 }
 
+TEST(PedalsSystemTesting, check_accel_oor) 
+{
+    AnalogConversion_s test_pedal_oor_hi_val_accel = {40, 0.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_oor_lo_val_accel = {4095, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    
+
+}
+
 #endif /* PEDALS_SYSTEM_TEST */
