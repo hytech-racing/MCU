@@ -91,13 +91,12 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
         implausibilityStartTime_ = 0;
     }
 
-    bool oor = implausability && (evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
-            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
-    out.accelPercent = (oor) ? 0 : out.accelPercent;
 
-    if(implausability && std::abs(out.accelPercent - prevData.accelPercent) > VAL) {
+    if(implausability && (std::abs(out.accelPercent - prevData.accelPercent) > 0.25f 
+                      ||  evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1 
+                      ||  evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2)))) 
+    {
         out.accelPercent = 0;
-        implausabilityStartTime_ = curr_time;
     }
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
     
