@@ -88,6 +88,10 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
         implausibilityStartTime_ = 0;
     }
 
+    bool oor = evaluate_pedal_oor(accel1, accel_params_.min_sensor_pedal_1, accel_params_.max_sensor_pedal_1) 
+            || evaluate_pedal_oor(accel2, accel_params_.min_sensor_pedal_2, accel_params_.max_sensor_pedal_2);
+    out.accelPercent = (oor) ? 0 : out.accelPercent;
+
     
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
     

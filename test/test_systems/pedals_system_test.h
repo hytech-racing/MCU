@@ -472,8 +472,14 @@ TEST(PedalsSystemTesting, check_accel_oor)
 {
     AnalogConversion_s test_pedal_oor_hi_val_accel = {40, 0.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_pedal_oor_lo_val_accel = {4095, 1.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_accel = {1200, 0.2, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_brake = {1001, 0.0, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     
-
+    auto params = gen_positive_slope_only_params();
+    PedalsSystem pedals(params, params);
+    PedalsSystem pedals_single(params, params);
+    auto data_double = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_oor_hi_val_accel, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
+    
 }
 
 #endif /* PEDALS_SYSTEM_TEST */
