@@ -29,8 +29,8 @@ struct PedalsParams
     int max_pedal_1;
     int max_pedal_2;
     int min_sensor_pedal_1;
-    int max_sensor_pedal_1;
     int min_sensor_pedal_2;
+    int max_sensor_pedal_1;
     int max_sensor_pedal_2;
     float activation_percentage;
     float deadzone_margin;
@@ -180,7 +180,7 @@ private:
     /// @brief This checks to see if any pedal sensor is out of range :(
     /// @param PedalData The analog pedal Value
     /// @return 
-    bool evalute_pedal_oor(const AnalogConversion_s &pedalData
+    bool evaluate_pedal_oor(const AnalogConversion_s &pedalData,
                            int min,
                            int max);
     /// @brief
@@ -201,8 +201,7 @@ private:
     /// @param check_mech_activation if this is true, function will check percentages against the mechanical activation percentage
     /// @return true or false accordingly
     bool pedal_is_active_(float pedal1ConvertedData, float pedal2ConvertedData, const PedalsParams &params, bool check_mech_activation);
-`   
-    bool pedal_oor(const AnalogConversion_s &pedalData1, const AnalogConversion_s &pedalData2)
+
 };
 
 #endif /* PEDALSSYSTEM */

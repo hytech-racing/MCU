@@ -79,6 +79,10 @@ PedalsParams gen_positive_slope_only_params()
     params.max_pedal_1 = 2000;
     params.min_pedal_2 = 1000;
     params.max_pedal_2 = 2000;
+    params.min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN;
+    params.max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX;
+    params.min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN;
+    params.max_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MAX;
     params.activation_percentage = 0.1;
     params.mechanical_activation_percentage = 0.4;
     params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;                    // .05
@@ -328,8 +332,8 @@ TEST(PedalsSystemTesting, deadzone_removal_calc_double_brake_ped)
     PedalsSystem pedals(gen_positive_slope_only_params(), gen_positive_slope_only_params());
     auto data = pedals.evaluate_pedals(test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, 1000);
     EXPECT_NEAR(data.accelPercent, 0, .001);
-    test_pedal_good_val.raw = 2059;
-    test_pedal_good_val.conversion = 1.05;
+    test_pedal_good_val.raw = 200;
+    test_pedal_good_val.conversion = 1.03;
     data = pedals.evaluate_pedals(test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, 1100);
     EXPECT_NEAR(data.accelPercent, 1, .001);
     test_pedal_good_val.raw = 1500;
@@ -359,8 +363,8 @@ TEST(PedalsSystemTesting, deadzone_removal_calc_single_brake_ped)
     PedalsSystem pedals(gen_positive_slope_only_params(), gen_positive_slope_only_params());
     auto data = pedals.evaluate_pedals(test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, 1000);
     EXPECT_NEAR(data.accelPercent, 0, .001);
-    test_pedal_good_val.raw = 2059;
-    test_pedal_good_val.conversion = 1.05;
+    test_pedal_good_val.raw = 2009;
+    test_pedal_good_val.conversion = 1.03;
     data = pedals.evaluate_pedals(test_pedal_good_val, test_pedal_good_val, test_pedal_good_val, 1100);
     EXPECT_NEAR(data.accelPercent, 1, .001);
     test_pedal_good_val.raw = 1500;
@@ -486,8 +490,15 @@ TEST(PedalsSystemTesting, check_accel_oor)
     auto params = gen_positive_slope_only_params();
     PedalsSystem pedals(params, params);
     PedalsSystem pedals_single(params, params);
-    auto data_double = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_oor_hi_val_accel, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
-    
+    auto data_double_oor_hi = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_oor_hi_val_accel, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_double_oor_hi.accelPercent, 0, .001);
+    auto data_single_oor_hi = pedals_single.evaluate_pedals(test_pedal_good_val_accel, test_pedal_oor_hi_val_accel, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_single_oor_hi.accelPercent, 0, .001);
+    auto data_double_oor_lo = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_oor_lo_val_accel, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_double_oor_lo.accelPercent, 0, .001);
+    auto data_single_oor_lo = pedals_single.evaluate_pedals(test_pedal_good_val_accel, test_pedal_oor_lo_val_accel, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_single_oor_lo.accelPercent, 0, .001);
+
 }
 
 #endif /* PEDALS_SYSTEM_TEST */
