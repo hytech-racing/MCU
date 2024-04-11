@@ -25,6 +25,10 @@ PedalsParams gen_positive_and_negative_slope_params()
     params.max_pedal_1 = 1000;
     params.min_pedal_2 = 1000;
     params.max_pedal_2 = 2000;
+    params.min_sensor_pedal_1 = 90;
+    params.min_sensor_pedal_2 = 90;
+    params.max_sensor_pedal_1 = 4000;
+    params.max_sensor_pedal_2 = 4000;
     params.activation_percentage = 0.25;
     params.mechanical_activation_percentage = 0.4;
     params.deadzone_margin = .03;                    // .05
@@ -471,6 +475,5 @@ TEST(PedalsSystemTesting, check_accel_oor)
     
 
 }
-
 
 #endif /* PEDALS_SYSTEM_TEST */
