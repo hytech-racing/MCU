@@ -44,6 +44,10 @@ PedalsParams get_real_accel_pedal_params()
     params.max_pedal_1 = ACCEL1_PEDAL_MAX;
     params.min_pedal_2 = ACCEL2_PEDAL_MIN;
     params.max_pedal_2 = ACCEL2_PEDAL_MAX;
+    params.min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN;
+    params.max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX;
+    params.min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN;
+    params.max_sensor_pedal_2 = ACCEL1_PEDAL_OOR_MAX;
     params.activation_percentage = APPS_ACTIVATION_PERCENTAGE;
     params.mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE;
     params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;                    // .05
@@ -57,6 +61,10 @@ PedalsParams get_real_brake_pedal_params()
     params.max_pedal_1 = BRAKE1_PEDAL_MAX;
     params.min_pedal_2 = BRAKE2_PEDAL_MIN;
     params.max_pedal_2 = BRAKE2_PEDAL_MAX;
+    params.min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN;
+    params.max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX;
+    params.min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN;
+    params.max_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MAX;
     params.activation_percentage = APPS_ACTIVATION_PERCENTAGE;
     params.mechanical_activation_percentage = BRAKE_MECH_THRESH;
     params.deadzone_margin = DEFAULT_PEDAL_DEADZONE;                    // .05
