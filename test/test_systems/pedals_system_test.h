@@ -500,5 +500,25 @@ TEST(PedalsSystemTesting, check_accel_oor)
     EXPECT_NEAR(data_single_oor_lo.accelPercent, 0, .001);
 
 }
+TEST(PedalsSystemTesting, check_accel1_implaus_fix) 
+{
+    
+    AnalogConversion_s test_pedal_good_val_accel = {2152, 0.05, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_implaus_1 = {1250, 0.2, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_implaus_2 = {600, 0.5, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_pedal_good_val_brake = {900, 0.02, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    
+    auto params = gen_positive_slope_only_params();
+    PedalsSystem pedals(params, params);
+    PedalsSystem pedals_single(params, params);
+    auto data_double_implause_1 = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_implaus_1, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_double_implause_1.accelPercent, 0, .001);
+    auto data_single_implause_1 = pedals_single.evaluate_pedals(test_pedal_good_val_accel, test_pedal_implaus_1, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_single_implause_1.accelPercent, 0, .001);
+    auto data_double_implause_2 = pedals.evaluate_pedals(test_pedal_good_val_accel, test_pedal_implaus_2, test_pedal_good_val_brake, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_double_implause_2.accelPercent, 0, .001);
+    auto data_single_implause_2 = pedals_single.evaluate_pedals(test_pedal_good_val_accel, test_pedal_implaus_2, test_pedal_good_val_brake, 1300);
+    EXPECT_NEAR(data_single_implause_2.accelPercent, 0, .001);
 
+}
 #endif /* PEDALS_SYSTEM_TEST */

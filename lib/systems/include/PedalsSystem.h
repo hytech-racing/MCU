@@ -122,7 +122,6 @@ public:
 
 private:
     PedalsSystemData_s data_{};
-    PedalsSystemData_s prevData_{};
     PedalsParams accelParams_{};
     PedalsParams brakeParams_{};
     unsigned long implausibilityStartTime_;
