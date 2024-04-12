@@ -352,30 +352,13 @@ public:
     void tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float vx_b, float wheel_angle_rad, float yaw_rate);
     TorqueControllerPIDTV(TorqueControllerOutput_s &writeout): writeout_(writeout)
     {
-        tv_pid_.initialize();
-        tv_pid_.setExternalInputs(&pid_input_);
-        pid_input_.PID_P = 2.0;
-        pid_input_.PID_I = 1.0;
-        pid_input_.PID_D = 0.0;
-        pid_input_.PID_N = 100;
-        
+
     }
     
-    PIDTVTorqueControllerData get_data(){
-        PIDTVTorqueControllerData data;
-        data.controller_input = tv_pid_.shit_in;
-        data.controller_output = tv_pid_.shit_out;
-        data.fl_torque_delta = pid_input_.FL_in - tv_pid_.getExternalOutputs().FL_out;
-        data.fr_torque_delta = pid_input_.FR_in - tv_pid_.getExternalOutputs().FR_out;
-        data.rl_torque_delta = pid_input_.RL_in - tv_pid_.getExternalOutputs().RL_out;
-        data.rr_torque_delta = pid_input_.RR_in - tv_pid_.getExternalOutputs().RR_out;
-        return data;
-    }
+    PIDTVTorqueControllerData get_data();
 private:
     TorqueControllerOutput_s &writeout_;
     
-    PID_TV::ExtU_PID_TV_T pid_input_;
-    PID_TV tv_pid_;
 };
 
 #endif /* __TORQUECONTROLLERS_H__ */

@@ -24,6 +24,8 @@ void VNInterface<message_queue>::retrieve_linear_accel_CAN(CAN_message_t &recvd_
 template<typename message_queue>
 void VNInterface<message_queue>::retrieve_uncompLinear_accel_CAN(CAN_message_t &recvd_msg) {
     VN_LINEAR_ACCEL_UNCOMP_t linear_accel_uncomp_data;
+    Unpack_VN_LINEAR_ACCEL_UNCOMP_hytech(&linear_accel_uncomp_data, recvd_msg.buf, recvd_msg.len);
+
     vn_data.uncompLinear_accel[0] = HYTECH_vn_lin_uncomp_accel_x_ro_fromS(linear_accel_uncomp_data.vn_lin_uncomp_accel_x_ro);
     vn_data.uncompLinear_accel[1] = HYTECH_vn_lin_uncomp_accel_y_ro_fromS(linear_accel_uncomp_data.vn_lin_uncomp_accel_y_ro);
     vn_data.uncompLinear_accel[2] = HYTECH_vn_lin_uncomp_accel_z_ro_fromS(linear_accel_uncomp_data.vn_lin_uncomp_accel_z_ro);

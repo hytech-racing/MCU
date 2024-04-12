@@ -145,6 +145,10 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
 {
     // if ((curr_system_millis_ - last_general_cmd_time_) > min_cmd_period_)
     // {
+        data_.commandedTorques.FL = data.torqueSetpoints[0] / 100.0f;
+        data_.commandedTorques.FR = data.torqueSetpoints[1] / 100.0f;
+        data_.commandedTorques.RL = data.torqueSetpoints[2] / 100.0f;
+        data_.commandedTorques.RR = data.torqueSetpoints[3] / 100.0f;
         int index = 0;
         for (auto inv_pointer : inverters_)
         {
@@ -227,21 +231,21 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
 template <typename InverterType>
 DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_current_data()
 {
-    DrivetrainDynamicReport_s data;
+    
     // TODO idk
-    data.measuredInverterFLPackVoltage = inverters_[0]->dc_bus_voltage();
+    data_.measuredInverterFLPackVoltage = inverters_[0]->dc_bus_voltage();
     int inverter_ind = 0;
     for (auto inv_pointer : inverters_)
     {
         auto iq = inv_pointer->get_torque_current(); // iq in A
         auto id = inv_pointer->get_mag_current();    // id in A
-        data.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
-        data.measuredTorqueCurrents[inverter_ind] = iq;
-        data.measuredMagnetizingCurrents[inverter_ind] = id;
+        data_.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
+        data_.measuredTorqueCurrents[inverter_ind] = iq;
+        data_.measuredMagnetizingCurrents[inverter_ind] = id;
 
         // TODO
         // data.measuredTorques[inverter_ind] = inv_pointer->get_actual_torque();
         inverter_ind++;
     }
-    return data;
+    return data_;
 }

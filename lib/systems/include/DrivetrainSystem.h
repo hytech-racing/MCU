@@ -6,7 +6,7 @@
 #include "stdint.h"
 #include "SysClock.h"
 #include "MCUInterface.h"
-
+#include "StateData.h"
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
@@ -20,6 +20,7 @@ struct DrivetrainDynamicReport_s
     float measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
+    veh_vec commandedTorques; // in nm
 };
 
 template <typename InverterType>
@@ -45,6 +46,7 @@ public:
         last_disable_cmd_time_ = 0;
         last_general_cmd_time_ = 0; // ms
         mcu_interface_ = mcu_interface;
+        data_ = {};
     }
     void tick(const SysTick_s &tick);
 
@@ -105,6 +107,7 @@ private:
 
     unsigned long drivetrain_initialization_phase_start_time_;
     DrivetrainCommand_s current_drivetrain_command_;
+    DrivetrainDynamicReport_s data_;
 };
 
 #include "DrivetrainSystem.tpp"

@@ -1,0 +1,24 @@
+{
+    "name": "CASE_lib",
+    "version": "1.0.0",
+    "build": {
+        "flags": [
+            "-IHyTech_sim",
+            "-IHyTech_sim/HT08_CONTROL_SYSTEM_ert_rtw",
+            "-IHyTech_sim/slprj",
+            "-IHyTech_sim/slprj/ert",
+            "-IHyTech_sim/slprj/ert/BasicVehicleMath",
+            "-IHyTech_sim/slprj/ert/LAUNCH_CONTROL",
+            "-IHyTech_sim/slprj/ert/NORMAL_FORCE_TV",
+            "-IHyTech_sim/slprj/ert/PID_TV",
+            "-IHyTech_sim/slprj/ert/POWER_LIMIT",
+            "-IHyTech_sim/slprj/ert/_sharedutils",
+            "-IR2023b",
+            "-IR2023b/simulink",
+            "-IR2023b/simulink/include",
+            "-IR2023b/rtw",
+            "-IR2023b/rtw/c",
+            "-IR2023b/rtw/c/src"
+        ]
+    }
+}

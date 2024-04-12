@@ -28,8 +28,10 @@
 #include "PedalsSystem.h"
 #include "TorqueControllerMux.h"
 
+#include "CASESystem.h"
 // /* State machine */
 #include "MCUStateMachine.h"
+#include "HT08_CONTROL_SYSTEM.h"
 
 /*
     DATA SOURCES
@@ -93,6 +95,8 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, {false, true, false, false, false});
+
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
@@ -145,7 +149,6 @@ void setup()
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
 
-
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -159,7 +162,7 @@ void setup()
     steering1.init();
 
     Serial.begin(115200);
-    
+
     /*
         Init Systems
     */
@@ -244,13 +247,13 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger10) // 10Hz
     {
         // Serial.println("before buzzer");
-        dashboard.tick10(&main_ecu, int(fsm.get_state()), 
-                        buzzer.buzzer_is_on(), 
-                        drivetrain.drivetrain_error_occured(), 
-                        torque_controller_mux.getTorqueLimit(),
-                        ams_interface.get_filtered_min_cell_voltage(),
-                        telem_interface.get_glv_voltage(a1.get()),
-                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()));
+        dashboard.tick10(&main_ecu, int(fsm.get_state()),
+                         buzzer.buzzer_is_on(),
+                         drivetrain.drivetrain_error_occured(),
+                         torque_controller_mux.getTorqueLimit(),
+                         ams_interface.get_filtered_min_cell_voltage(),
+                         telem_interface.get_glv_voltage(a1.get()),
+                         static_cast<int>(torque_controller_mux.activeController()->get_launch_state()));
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),
@@ -331,9 +334,16 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
     // TODO is this correct?
     auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
+
+    DrivetrainDynamicReport_s drivetrain_data = drivetrain.get_current_data();
+    xy_vec body_vel = {0.0, 0.0};
+    veh_vec wheel_rpms = {drivetrain_data.measuredSpeeds[0], drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
+    veh_vec load_cell_vals = {0.0f, 0.0f, 0.0f, 300.0f};
+    veh_vec wheel_torques_nm = drivetrain_data.commandedTorques;
+    // case_system.evaluate(current_system_tick, body_vel, 0.0, 0.0, wheel_rpms, load_cell_vals, wheel_torques_nm, 0);
     torque_controller_mux.tick(
         current_system_tick,
-        drivetrain.get_current_data(),
+        drivetrain_data,
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
         a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index

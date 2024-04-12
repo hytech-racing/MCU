@@ -12,6 +12,7 @@
 #include "AMSInterface.h"
 #include "SABInterface.h"
 #include "VectornavInterface.h"
+#include "HT08_CONTROL_SYSTEM_types.h"
 /*
     struct holding interfaces processed by process_ring_buffer()
     FL = MC1
@@ -195,5 +196,29 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
         // delayMicroseconds(2500);
     }
 }
+
+// TODO should this be here? my reasoning right now for this being here is that right now this interface is 
+//      only being used on MCU and is also tied integrally into other interfaces however the existence of this
+//      function necessitates the CAN_MESSAGE_BUS type from generated simulink code which in theory we want to keep
+//      segregated to the CASESystem. what we probably want our own CAN message type that we can use in the shared
+//      data lib that is seperate from both. idk, not worth it for now just leaving this brain dump here.
+
+/// @brief message enque function for matlab generated CAN_MESSAGE_BUS type
+/// @tparam bufferType the message buffer template type onto which you are enquing a msg
+/// @param msg_queue the pointer to the msg queue that will contain the generic message
+/// @param structure the matlab generated CAN message type that will be sent
+template <typename bufferType>
+void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS & structure)
+{
+    CAN_message_t can_msg = {};
+    can_msg.id = structure.ID;
+    can_msg.len = structure.Length;
+    // TODO ensure memory safety of this, but this should be fine
+    memmove( can_msg.buf, structure.Data, structure.Length );
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &can_msg, sizeof(CAN_message_t));
+    msg_queue->push_back(buf, sizeof(CAN_message_t));
+}
+
 
 #endif /* HYTECHCANINTERFACE */
