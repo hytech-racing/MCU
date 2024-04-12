@@ -2,8 +2,6 @@
 #include "Utility.h"
 #include "PhysicalParameters.h"
 
-#include <stdio.h>
-
 void TorqueControllerMux::tick(
     const SysTick_s &tick,
     const DrivetrainDynamicReport_s &drivetrainData,
@@ -88,7 +86,7 @@ void TorqueControllerMux::tick(
 
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
 
-        applyPowerLimit(&drivetrainCommand_);
+        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         applyTorqueLimit(&drivetrainCommand_);
         applyPosSpeedLimit(&drivetrainCommand_);
 
@@ -100,7 +98,7 @@ void TorqueControllerMux::tick(
     exceeds the preset mechanical power limit. Scales all wheels down to
     preserve functionality of torque controllers
 */
-void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command)
+void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain)
 {
     float net_torque_mag = 0;
     float net_wheelspeed = 0;
@@ -109,10 +107,10 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command)
         // get the total magnitude of torque from all 4 wheels
         #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         net_torque_mag += abs(command->torqueSetpoints[i]);
-        net_wheelspeed += abs(command->speeds_rpm[i]);
+        net_wheelspeed += abs(drivetrain->measuredSpeeds[i]);
         #else
         net_torque_mag += std::abs(command->torqueSetpoints[i]);
-        net_wheelspeed += std::abs(command->speeds_rpm[i]);
+        net_wheelspeed += std::abs(drivetrain->measuredSpeeds[i]);
         #endif
     }
 
@@ -127,7 +125,7 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command)
             // based on the torque percent and max power limit, get the max power each wheel can use
             float power_per_corner = (torque_percent * MAX_POWER_LIMIT);
             // power / omega (motor rad/s) to get torque per wheel
-            command->torqueSetpoints[i] = power_per_corner / (command->speeds_rpm[i] * RPM_TO_RAD_PER_SECOND);
+            command->torqueSetpoints[i] = power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND);
 
             // isn't this just always distributing max power to all wheels?
         }
@@ -155,15 +153,12 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s* command)
         #endif
     }
     avg_torque /= NUM_MOTORS;
-    
-    printf("max torque: %.2f\n", max_torque);
-    printf("avg torque: %.2f\n", avg_torque);
+
     // if this is greather than the torque limit, scale down
     if (avg_torque > max_torque) {
         // get the scale of avg torque above max torque
         float scale = avg_torque / max_torque;
         // divide by scale to lower avg below max torque
-        printf("scale: %.2f\n", scale);
         for (int i = 0; i < NUM_MOTORS; i++) {
             command->torqueSetpoints[i] /= scale;
         }

@@ -108,7 +108,7 @@ public:
         return torqueLimitMap_[torqueLimit_];
     }
 
-    void applyPowerLimit(DrivetrainCommand_s* command);
+    void applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
 
     void applyTorqueLimit(DrivetrainCommand_s* command);
 

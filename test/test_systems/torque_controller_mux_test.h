@@ -291,24 +291,29 @@ TEST(TorqueControllerMuxTesting, test_power_limit) {
     TorqueControllerMux mux = TorqueControllerMux();
     DrivetrainCommand_s drive_command;
 
+    DrivetrainDynamicReport_s edit;
+
     for (int i = 0; i < 4; i++) {
-        drive_command.speeds_rpm[i] = 500.0f;
+        edit.measuredSpeeds[i] = 500.0f;
         drive_command.torqueSetpoints[i] = 10.0f;
     }
 
-    mux.applyPowerLimit(&drive_command);
+    const DrivetrainDynamicReport_s drivetrain1 = edit;
+
+    mux.applyPowerLimit(&drive_command, &drivetrain1);
 
     for (int i = 0; i < 4; i++) {
-        ASSERT_EQ(drive_command.speeds_rpm[i], 500.0f);
         ASSERT_EQ(drive_command.torqueSetpoints[i], 10.0f);
     }
 
     for (int i = 0; i < 4; i++) {
-        drive_command.speeds_rpm[i] = 20000.0f;
+        edit.measuredSpeeds[i] = 20000.0f;
         drive_command.torqueSetpoints[i] = 21.0f;
     }
 
-    mux.applyPowerLimit(&drive_command);
+    const DrivetrainDynamicReport_s drivetrain2 = edit;
+
+    mux.applyPowerLimit(&drive_command, &drivetrain2);
 
     for (int i = 0; i < 4; i++) {
         ASSERT_LT(drive_command.torqueSetpoints[i], 7.6); // hardcoded value based on online calculator
