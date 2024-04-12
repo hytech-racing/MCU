@@ -88,6 +88,14 @@ public:
     {
         config_ = config;
     }
+    float get_rpm_setpoint(float final_torque)
+    {
+        if(final_torque > 0){
+            return config_.max_rpm;
+        } else {
+            return 0;
+        }
+    }
 
 private:
     CASEConfiguration config_;

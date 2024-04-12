@@ -121,10 +121,11 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     }
     // TODO make these real
     veh_vec rpms;
-    rpms.FL = config_.max_rpm;
-    rpms.FR = config_.max_rpm;
-    rpms.RL = config_.max_rpm;
-    rpms.RR = config_.max_rpm;
+    
+    rpms.FL = get_rpm_setpoint(res.FinalTorqueFL);
+    rpms.FR = get_rpm_setpoint(res.FinalTorqueFR);
+    rpms.RL = get_rpm_setpoint(res.FinalTorqueRL);
+    rpms.RR = get_rpm_setpoint(res.FinalTorqueRR);
     veh_vec torques;
     torques.FL = res.FinalTorqueFL;
     torques.FR = res.FinalTorqueFR;
