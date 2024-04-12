@@ -13,6 +13,7 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "HT08_CONTROL_SYSTEM_types.h"
+#include "MessageQueueDefine.h"
 /*
     struct holding interfaces processed by process_ring_buffer()
     FL = MC1
@@ -48,14 +49,11 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
 /* TX buffer for CAN1 */
-extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
-    CAN1_txBuffer;
+extern CANBufferType CAN1_txBuffer;
 /* TX buffer for CAN2 */
-extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
-    CAN2_txBuffer;
+extern CANBufferType CAN2_txBuffer;
 /* TX buffer for CAN3 */
-extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
-    CAN3_txBuffer;
+extern CANBufferType CAN3_txBuffer;
 
 /* Receive callback function for CAN1 that pushes to circ. buffer */
 void on_can1_receive(const CAN_message_t &msg);

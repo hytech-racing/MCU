@@ -4,9 +4,9 @@ Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)> CAN1_rxBuffer;
 Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)> CAN2_rxBuffer;
 Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)> CAN3_rxBuffer;
 
-Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)> CAN1_txBuffer;
-Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)> CAN2_txBuffer;
-Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)> CAN3_txBuffer;
+CANBufferType CAN1_txBuffer;
+CANBufferType CAN2_txBuffer;
+CANBufferType CAN3_txBuffer;
 
 
 void on_can1_receive(const CAN_message_t &msg)

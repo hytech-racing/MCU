@@ -42,7 +42,8 @@ FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both a
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
 
 /* Set up CAN circular buffer */
-using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>;
+// using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>;
+using CircularBufferType = CANBufferType;
 
 /* Sensors */
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
@@ -95,7 +96,7 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, {false, true, false, false, false});
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, {false, true, false, false, false});
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -119,6 +120,29 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
+double normalize(double currentValue, double centerValue, double leftValue, double rightValue)
+{
+    // Determine the smaller range side to normalize against it
+    double leftRange = std::abs(centerValue - leftValue);
+    double rightRange = std::abs(rightValue - centerValue);
+
+    double minRange = std::min(leftRange, rightRange);
+    double normalizedValue = 0.0;
+
+    if (currentValue < centerValue)
+    {
+        // Normalize on the left side
+        normalizedValue = (currentValue - centerValue) / minRange;
+    }
+    else
+    {
+        // Normalize on the right side
+        normalizedValue = (currentValue - centerValue) / minRange;
+    }
+
+    // Normalize within the adjusted range where the side with the greater range may exceed +/- 1
+    return normalizedValue;
+}
 /*
     SETUP
 */
@@ -264,10 +288,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                       pedals_system.getPedalsSystemData(),
                       ams_interface.pack_charge_is_critical(),
                       dashboard.launchControlButtonPressed());
-    }
-    if (t.trigger50) // 50Hz
-    {
-        steering1.sample();
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
         telem_interface.tick(a1.get(),
                              a2.get(),
@@ -285,7 +305,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                              a1.get().conversions[MCU15_ACCEL2_CHANNEL],
                              a1.get().conversions[MCU15_BRAKE1_CHANNEL],
                              a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-                             pedals_system.getMechBrakeActiveThreshold(), torque_controller_mux.get_pidtv_data());
+                             pedals_system.getMechBrakeActiveThreshold(), {});
+    }
+    if (t.trigger50) // 50Hz
+    {
+        steering1.sample();
     }
 
     if (t.trigger100) // 100Hz
@@ -336,11 +360,13 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
 
     DrivetrainDynamicReport_s drivetrain_data = drivetrain.get_current_data();
-    xy_vec body_vel = {0.0, 0.0};
+    xy_vec body_vel = {1.0, 0.5};
     veh_vec wheel_rpms = {drivetrain_data.measuredSpeeds[0], drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
     veh_vec load_cell_vals = {0.0f, 0.0f, 0.0f, 300.0f};
     veh_vec wheel_torques_nm = drivetrain_data.commandedTorques;
-    // case_system.evaluate(current_system_tick, body_vel, 0.0, 0.0, wheel_rpms, load_cell_vals, wheel_torques_nm, 0);
+    // 
+    float steering_normed = normalize(a1.get().conversions[MCU15_STEERING_CHANNEL].raw, 1874, 692, 3170);
+    case_system.evaluate(current_system_tick, body_vel, 0.0, steering_normed, wheel_rpms, load_cell_vals, wheel_torques_nm, 0);
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain_data,
