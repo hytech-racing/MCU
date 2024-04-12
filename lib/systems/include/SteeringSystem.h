@@ -28,6 +28,9 @@ struct SteeringSystemData_s
     float angle;
     SteeringSystemStatus_e status;
 };
+// basic statistical methods
+double interpolateSteering(double x, double x1, double x2, double y1, double y2);
+double normalizeSteering(double value, double minVal, double maxVal);
 
 class SteeringSystem
 {
@@ -35,8 +38,8 @@ private:
     SteeringEncoderInterface *primarySensor_;
     SteeringEncoderConversion_s primaryConversion_;
     SteeringSystemData_s data_;
-    int steeringDataMap[2] = {-130, 130}; // max and min range of converted steering data (change depending on data)
-    int wheelSteerRange[2] = {23, -23}; // max and min of final wheel steering (correct if actual limits of car are different)
+    int steeringDataMap_[2] = {-130, 130}; // max and min range of converted steering data (change depending on data)
+    int wheelSteerRange_[2] = {23, -23}; // max and min of final wheel steering (correct if actual limits of car are different)
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor) : primarySensor_(primarySensor) {}
 
@@ -54,8 +57,16 @@ public:
     {
         return data_;
     }
-    double interpolateSteering(double x, double x1, double x2, double y1, double y2);
-    double normalizeSteering(double value, double minVal, double maxVal);
+    
+    // getters
+    const int* getSteeringDataMap() const {
+        return steeringDataMap_;
+    }
+
+    const int* getWheelSteerRange() const {
+        return wheelSteerRange_;
+    }
+    
 };
 
 #endif /* __STEERINGSYSTEM_H__ */
