@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CONTROL_SYSTEM'.
 //
-// Model version                  : 1.36
+// Model version                  : 1.39
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 00:46:13 2024
+// C/C++ source code generated on : Fri Apr 12 08:20:02 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -426,10 +426,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 2019922437U,
-    806208577U,
-    83679222U,
-    3823260154U },
+  { 3575903955U,
+    2871529340U,
+    1359099450U,
+    1514647703U },
   (nullptr), 0,
   (boolean_T)0
 };

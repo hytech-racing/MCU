@@ -96,7 +96,7 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, {false, true, false, false, false, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE});
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, {true, true, false, false, false, 3500, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 0.0, 0.0});
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -362,13 +362,26 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     DrivetrainDynamicReport_s drivetrain_data = drivetrain.get_current_data();
     auto pedals_data = pedals_system.getPedalsSystemData();
     vector_nav vn_data = vn_interface.get_vn_struct();
+    // REAL
     xy_vec body_vel = {vn_data.velocity_x, vn_data.velocity_y};
+    // FAKE
+    // xy_vec body_vel = {2.0f, 0.0f};
     veh_vec wheel_rpms = {drivetrain_data.measuredSpeeds[0], drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
-    veh_vec load_cell_vals = {0.0f, 0.0f, 0.0f, 300.0f};
+    
+    veh_vec load_cell_vals = {a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL].conversion, a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL].conversion, sab_interface.rlLoadCell.convert().conversion, sab_interface.rrLoadCell.convert().conversion};
     veh_vec wheel_torques_nm = drivetrain_data.commandedTorques;
-    // 
+    
     float steering_normed = normalize(a1.get().conversions[MCU15_STEERING_CHANNEL].raw, 1874, 692, 3170);
-    CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, vn_data.angular_rates.z, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0);
+    bool reset_I_term = false;
+    if( (fsm.get_state() == CAR_STATE::READY_TO_DRIVE) && (dashboard.startButtonPressed()))
+    {
+        reset_I_term = true;
+    }
+    // Serial.println(reset_I_term);
+    CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, vn_data.angular_rates.z, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, vn_data.vn_status);
+    // FAKE
+    // CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, 0.5, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, vn_data.vn_status);
+
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain_data,

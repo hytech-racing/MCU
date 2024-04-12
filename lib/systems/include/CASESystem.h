@@ -17,6 +17,9 @@ struct CASEConfiguration
     float max_rpm;
     float max_regen_torque;
     float max_torque;
+    float pid_p;
+    float pid_i;
+    float pid_d;
 };
 
 struct CASEControllerOutput
@@ -40,7 +43,7 @@ public:
     {
         msg_queue_ = can_queue;
         case_.initialize();
-
+        vn_active_start_time_ = 0;
         config_ = config;
         last_controller_pt1_send_time_ = 0;
         last_controller_pt2_send_time_ = 0;
@@ -59,6 +62,7 @@ public:
     /// @param pedals_data current pedals data
     /// @param load_cell_vals load cell forces in N
     /// @param power_kw current electrical power in kilo-watts
+    /// @param reset_integral bool of whether or not to reset integral term
     /// @return controller output
     CASEControllerOutput evaluate(const SysTick_s &tick,
                            const xy_vec &body_velocity_ms,
@@ -67,7 +71,16 @@ public:
                            const veh_vec &wheel_rpms,
                            const veh_vec &load_cell_vals,
                            const PedalsSystemData_s &pedals_data,
-                           float power_kw);
+                           float power_kw,
+                           bool reset_integral, 
+                           uint8_t vn_status);
+
+    void update_pid(float p, float i, float d)
+    {
+        config_.pid_p = p;
+        config_.pid_p = i;
+        config_.pid_p = d;
+    }
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
@@ -81,7 +94,8 @@ private:
     message_queue *msg_queue_;
     HT08_CONTROL_SYSTEM case_;
     pstate state_;
-    unsigned long vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_,  last_vehm_send_time_, controller_send_period_ms_;
+
+    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_,  last_vehm_send_time_, controller_send_period_ms_;
 };
 
 #include "CASESystem.tpp"

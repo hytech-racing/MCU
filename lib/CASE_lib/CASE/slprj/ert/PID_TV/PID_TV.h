@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'PID_TV'.
 //
-// Model version                  : 1.31
+// Model version                  : 1.35
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 00:45:57 2024
+// C/C++ source code generated on : Fri Apr 12 08:19:45 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -34,8 +34,8 @@ class PID_TV final
  public:
   // Block states (default storage) for model 'PID_TV'
   struct DW_PID_TV_T {
-    real_T Integrator_DSTATE;          // '<S35>/Integrator'
-    real_T Filter_DSTATE;              // '<S30>/Filter'
+    real_T Integrator_DSTATE;          // '<S37>/Integrator'
+    real_T Filter_DSTATE;              // '<S32>/Filter'
   };
 
   // Invariant block signals for model 'PID_TV'
@@ -90,9 +90,9 @@ class PID_TV final
             *rtu_PID_D, const real_T *rtu_PID_N, const real_T *rtu_PID_P, const
             real_T *rtu_FR_in, const real_T *rtu_RR_in, const real_T *rtu_FL_in,
             const real_T *rtu_RL_in, const boolean_T *rtu_usePIDTV, const real_T
-            *rtu_KinematicDesiredYawRaterad, real_T *rty_FR_out, real_T
-            *rty_RR_out, real_T *rty_FL_out, real_T *rty_RL_out, real_T
-            *rty_YawRateErrorrads, real_T *rty_YawPIDOutput);
+            *rtu_KinematicDesiredYawRaterad, const real_T *rtu_Inport, real_T
+            *rty_FR_out, real_T *rty_RR_out, real_T *rty_FL_out, real_T
+            *rty_RL_out, real_T *rty_YawRateErrorrads, real_T *rty_YawPIDOutput);
 
   // Constructor
   PID_TV();
@@ -160,30 +160,32 @@ extern const PID_TV::ConstB_PID_TV_h_T PID_TV_ConstB;
 //  '<S25>'  : 'PID_TV/PID_TV/PID Controller/Tsamp - Ngain'
 //  '<S26>'  : 'PID_TV/PID_TV/PID Controller/postSat Signal'
 //  '<S27>'  : 'PID_TV/PID_TV/PID Controller/preSat Signal'
-//  '<S28>'  : 'PID_TV/PID_TV/PID Controller/Anti-windup/Passthrough'
-//  '<S29>'  : 'PID_TV/PID_TV/PID Controller/D Gain/External Parameters'
-//  '<S30>'  : 'PID_TV/PID_TV/PID Controller/Filter/Disc. Forward Euler Filter'
-//  '<S31>'  : 'PID_TV/PID_TV/PID Controller/Filter ICs/Internal IC - Filter'
-//  '<S32>'  : 'PID_TV/PID_TV/PID Controller/I Gain/External Parameters'
-//  '<S33>'  : 'PID_TV/PID_TV/PID Controller/Ideal P Gain/Passthrough'
-//  '<S34>'  : 'PID_TV/PID_TV/PID Controller/Ideal P Gain Fdbk/Disabled'
-//  '<S35>'  : 'PID_TV/PID_TV/PID Controller/Integrator/Discrete'
-//  '<S36>'  : 'PID_TV/PID_TV/PID Controller/Integrator ICs/Internal IC'
-//  '<S37>'  : 'PID_TV/PID_TV/PID Controller/N Copy/Disabled'
-//  '<S38>'  : 'PID_TV/PID_TV/PID Controller/N Gain/External Parameters'
-//  '<S39>'  : 'PID_TV/PID_TV/PID Controller/P Copy/Disabled'
-//  '<S40>'  : 'PID_TV/PID_TV/PID Controller/Parallel P Gain/External Parameters'
-//  '<S41>'  : 'PID_TV/PID_TV/PID Controller/Reset Signal/Disabled'
-//  '<S42>'  : 'PID_TV/PID_TV/PID Controller/Saturation/Passthrough'
-//  '<S43>'  : 'PID_TV/PID_TV/PID Controller/Saturation Fdbk/Disabled'
-//  '<S44>'  : 'PID_TV/PID_TV/PID Controller/Sum/Sum_PID'
-//  '<S45>'  : 'PID_TV/PID_TV/PID Controller/Sum Fdbk/Disabled'
-//  '<S46>'  : 'PID_TV/PID_TV/PID Controller/Tracking Mode/Disabled'
-//  '<S47>'  : 'PID_TV/PID_TV/PID Controller/Tracking Mode Sum/Passthrough'
-//  '<S48>'  : 'PID_TV/PID_TV/PID Controller/Tsamp - Integral/TsSignalSpecification'
-//  '<S49>'  : 'PID_TV/PID_TV/PID Controller/Tsamp - Ngain/Passthrough'
-//  '<S50>'  : 'PID_TV/PID_TV/PID Controller/postSat Signal/Forward_Path'
-//  '<S51>'  : 'PID_TV/PID_TV/PID Controller/preSat Signal/Forward_Path'
+//  '<S28>'  : 'PID_TV/PID_TV/PID Controller/Anti-windup/Disc. Clamping Parallel'
+//  '<S29>'  : 'PID_TV/PID_TV/PID Controller/Anti-windup/Disc. Clamping Parallel/Dead Zone'
+//  '<S30>'  : 'PID_TV/PID_TV/PID Controller/Anti-windup/Disc. Clamping Parallel/Dead Zone/Enabled'
+//  '<S31>'  : 'PID_TV/PID_TV/PID Controller/D Gain/External Parameters'
+//  '<S32>'  : 'PID_TV/PID_TV/PID Controller/Filter/Disc. Forward Euler Filter'
+//  '<S33>'  : 'PID_TV/PID_TV/PID Controller/Filter ICs/Internal IC - Filter'
+//  '<S34>'  : 'PID_TV/PID_TV/PID Controller/I Gain/External Parameters'
+//  '<S35>'  : 'PID_TV/PID_TV/PID Controller/Ideal P Gain/Passthrough'
+//  '<S36>'  : 'PID_TV/PID_TV/PID Controller/Ideal P Gain Fdbk/Disabled'
+//  '<S37>'  : 'PID_TV/PID_TV/PID Controller/Integrator/Discrete'
+//  '<S38>'  : 'PID_TV/PID_TV/PID Controller/Integrator ICs/Internal IC'
+//  '<S39>'  : 'PID_TV/PID_TV/PID Controller/N Copy/Disabled'
+//  '<S40>'  : 'PID_TV/PID_TV/PID Controller/N Gain/External Parameters'
+//  '<S41>'  : 'PID_TV/PID_TV/PID Controller/P Copy/Disabled'
+//  '<S42>'  : 'PID_TV/PID_TV/PID Controller/Parallel P Gain/External Parameters'
+//  '<S43>'  : 'PID_TV/PID_TV/PID Controller/Reset Signal/Disabled'
+//  '<S44>'  : 'PID_TV/PID_TV/PID Controller/Saturation/Enabled'
+//  '<S45>'  : 'PID_TV/PID_TV/PID Controller/Saturation Fdbk/Disabled'
+//  '<S46>'  : 'PID_TV/PID_TV/PID Controller/Sum/Sum_PID'
+//  '<S47>'  : 'PID_TV/PID_TV/PID Controller/Sum Fdbk/Disabled'
+//  '<S48>'  : 'PID_TV/PID_TV/PID Controller/Tracking Mode/Disabled'
+//  '<S49>'  : 'PID_TV/PID_TV/PID Controller/Tracking Mode Sum/Passthrough'
+//  '<S50>'  : 'PID_TV/PID_TV/PID Controller/Tsamp - Integral/TsSignalSpecification'
+//  '<S51>'  : 'PID_TV/PID_TV/PID Controller/Tsamp - Ngain/Passthrough'
+//  '<S52>'  : 'PID_TV/PID_TV/PID Controller/postSat Signal/Forward_Path'
+//  '<S53>'  : 'PID_TV/PID_TV/PID Controller/preSat Signal/Forward_Path'
 
 #endif                                 // RTW_HEADER_PID_TV_h_
 

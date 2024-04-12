@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'PID_TV'.
 //
-// Model version                  : 1.31
+// Model version                  : 1.35
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 00:45:57 2024
+// C/C++ source code generated on : Fri Apr 12 08:19:45 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -27,66 +27,151 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
                   *rtu_PID_P, const real_T *rtu_FR_in, const real_T *rtu_RR_in,
                   const real_T *rtu_FL_in, const real_T *rtu_RL_in, const
                   boolean_T *rtu_usePIDTV, const real_T
-                  *rtu_KinematicDesiredYawRaterad, real_T *rty_FR_out, real_T
-                  *rty_RR_out, real_T *rty_FL_out, real_T *rty_RL_out, real_T
-                  *rty_YawRateErrorrads, real_T *rty_YawPIDOutput)
+                  *rtu_KinematicDesiredYawRaterad, const real_T *rtu_Inport,
+                  real_T *rty_FR_out, real_T *rty_RR_out, real_T *rty_FL_out,
+                  real_T *rty_RL_out, real_T *rty_YawRateErrorrads, real_T
+                  *rty_YawPIDOutput)
 {
   real_T rtb_DProdOut;
+  real_T rtb_IProdOut;
   real_T rtb_PProdOut;
+  real_T rtb_Switch_m;
+  int8_T tmp;
+  int8_T tmp_0;
 
   // Outputs for Atomic SubSystem: '<Root>/PID_TV'
   // Sum: '<S3>/Subtract'
   *rty_YawRateErrorrads = *rtu_KinematicDesiredYawRaterad - *rtu_YawRaterads;
 
-  // Product: '<S40>/PProd Out'
-  rtb_PProdOut = *rty_YawRateErrorrads * *rtu_PID_P;
+  // Switch: '<S1>/Switch1' incorporates:
+  //   Constant: '<S1>/Constant1'
 
-  // Product: '<S29>/DProd Out'
-  rtb_DProdOut = *rty_YawRateErrorrads * *rtu_PID_D;
+  if (*rtu_Inport > 1.0) {
+    rtb_IProdOut = *rty_YawRateErrorrads;
+  } else {
+    rtb_IProdOut = 0.0;
+  }
 
-  // Product: '<S38>/NProd Out' incorporates:
-  //   DiscreteIntegrator: '<S30>/Filter'
-  //   Sum: '<S30>/SumD'
+  // End of Switch: '<S1>/Switch1'
+
+  // Product: '<S42>/PProd Out'
+  rtb_PProdOut = rtb_IProdOut * *rtu_PID_P;
+
+  // Product: '<S31>/DProd Out'
+  rtb_DProdOut = rtb_IProdOut * *rtu_PID_D;
+
+  // Product: '<S40>/NProd Out' incorporates:
+  //   DiscreteIntegrator: '<S32>/Filter'
+  //   Sum: '<S32>/SumD'
 
   rtb_DProdOut = (rtb_DProdOut - PID_TV_DW.Filter_DSTATE) * *rtu_PID_N;
 
-  // Gain: '<S1>/Gain' incorporates:
-  //   DiscreteIntegrator: '<S35>/Integrator'
-  //   Sum: '<S44>/Sum'
+  // Sum: '<S46>/Sum' incorporates:
+  //   DiscreteIntegrator: '<S37>/Integrator'
 
-  *rty_YawPIDOutput = -((rtb_PProdOut + PID_TV_DW.Integrator_DSTATE) +
-                        rtb_DProdOut);
+  rtb_PProdOut = (rtb_PProdOut + PID_TV_DW.Integrator_DSTATE) + rtb_DProdOut;
+
+  // Saturate: '<S44>/Saturation'
+  if (rtb_PProdOut > 5.0) {
+    // Gain: '<S1>/Gain'
+    *rty_YawPIDOutput = -5.0;
+  } else if (rtb_PProdOut < -5.0) {
+    // Gain: '<S1>/Gain'
+    *rty_YawPIDOutput = 5.0;
+  } else {
+    // Gain: '<S1>/Gain'
+    *rty_YawPIDOutput = -rtb_PProdOut;
+  }
+
+  // End of Saturate: '<S44>/Saturation'
 
   // Switch: '<S1>/Switch' incorporates:
   //   Constant: '<S1>/Constant'
 
   if (*rtu_usePIDTV) {
-    rtb_PProdOut = *rty_YawPIDOutput;
+    rtb_Switch_m = *rty_YawPIDOutput;
   } else {
-    rtb_PProdOut = 0.0;
+    rtb_Switch_m = 0.0;
   }
 
   // End of Switch: '<S1>/Switch'
 
   // Sum: '<S1>/Sum'
-  *rty_FR_out = rtb_PProdOut + *rtu_FR_in;
+  *rty_FR_out = rtb_Switch_m + *rtu_FR_in;
 
   // Sum: '<S1>/Sum1'
-  *rty_RR_out = rtb_PProdOut + *rtu_RR_in;
+  *rty_RR_out = rtb_Switch_m + *rtu_RR_in;
 
   // Sum: '<S1>/Sum2'
-  *rty_FL_out = *rtu_FL_in - rtb_PProdOut;
+  *rty_FL_out = *rtu_FL_in - rtb_Switch_m;
 
   // Sum: '<S1>/Sum3'
-  *rty_RL_out = *rtu_RL_in - rtb_PProdOut;
+  *rty_RL_out = *rtu_RL_in - rtb_Switch_m;
 
-  // Product: '<S32>/IProd Out'
-  rtb_PProdOut = *rty_YawRateErrorrads * *rtu_PID_I;
+  // DeadZone: '<S30>/DeadZone'
+  if (rtb_PProdOut > 5.0) {
+    rtb_PProdOut -= 5.0;
+  } else if (rtb_PProdOut >= -5.0) {
+    rtb_PProdOut = 0.0;
+  } else {
+    rtb_PProdOut -= -5.0;
+  }
 
-  // Update for DiscreteIntegrator: '<S35>/Integrator'
-  PID_TV_DW.Integrator_DSTATE += 0.001 * rtb_PProdOut;
+  // End of DeadZone: '<S30>/DeadZone'
 
-  // Update for DiscreteIntegrator: '<S30>/Filter'
+  // Product: '<S34>/IProd Out'
+  rtb_IProdOut *= *rtu_PID_I;
+
+  // Switch: '<S28>/Switch1' incorporates:
+  //   Constant: '<S28>/Clamping_zero'
+  //   Constant: '<S28>/Constant'
+  //   Constant: '<S28>/Constant2'
+  //   RelationalOperator: '<S28>/fix for DT propagation issue'
+
+  if (rtb_PProdOut > 0.0) {
+    tmp = 1;
+  } else {
+    tmp = -1;
+  }
+
+  // Switch: '<S28>/Switch2' incorporates:
+  //   Constant: '<S28>/Clamping_zero'
+  //   Constant: '<S28>/Constant3'
+  //   Constant: '<S28>/Constant4'
+  //   RelationalOperator: '<S28>/fix for DT propagation issue1'
+
+  if (rtb_IProdOut > 0.0) {
+    tmp_0 = 1;
+  } else {
+    tmp_0 = -1;
+  }
+
+  // Switch: '<S28>/Switch' incorporates:
+  //   Constant: '<S28>/Clamping_zero'
+  //   Constant: '<S28>/Constant1'
+  //   Logic: '<S28>/AND3'
+  //   RelationalOperator: '<S28>/Equal1'
+  //   RelationalOperator: '<S28>/Relational Operator'
+  //   Switch: '<S28>/Switch1'
+  //   Switch: '<S28>/Switch2'
+
+  if ((rtb_PProdOut != 0.0) && (tmp == tmp_0)) {
+    rtb_IProdOut = 0.0;
+  }
+
+  // Update for DiscreteIntegrator: '<S37>/Integrator' incorporates:
+  //   Switch: '<S28>/Switch'
+
+  PID_TV_DW.Integrator_DSTATE += 0.001 * rtb_IProdOut;
+  if (PID_TV_DW.Integrator_DSTATE > 1.5) {
+    PID_TV_DW.Integrator_DSTATE = 1.5;
+  } else if (PID_TV_DW.Integrator_DSTATE < -1.5) {
+    PID_TV_DW.Integrator_DSTATE = -1.5;
+  }
+
+  // End of Update for DiscreteIntegrator: '<S37>/Integrator'
+
+  // Update for DiscreteIntegrator: '<S32>/Filter'
   PID_TV_DW.Filter_DSTATE += 0.001 * rtb_DProdOut;
 
   // End of Outputs for SubSystem: '<Root>/PID_TV'

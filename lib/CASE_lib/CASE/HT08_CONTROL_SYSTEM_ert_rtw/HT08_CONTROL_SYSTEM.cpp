@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CONTROL_SYSTEM'.
 //
-// Model version                  : 1.36
+// Model version                  : 1.39
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 00:46:13 2024
+// C/C++ source code generated on : Fri Apr 12 08:20:02 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -309,23 +309,24 @@ void HT08_CONTROL_SYSTEM::step()
     //   ActionPort: '<S5>/Action Port'
 
     // ModelReference: '<S5>/PID_TV' incorporates:
-    //   Constant: '<S5>/Constant2'
-    //   Constant: '<S5>/Constant3'
-    //   Constant: '<S5>/Constant4'
     //   Constant: '<S5>/Constant5'
+    //   Inport generated from: '<Root>/PIDConfig'
     //   Inport generated from: '<Root>/Torque Average [Nm]'
+    //   Inport generated from: '<Root>/Vx_B'
     //   Inport generated from: '<Root>/Yaw Rate [rad//s]'
     //   Inport generated from: '<Root>/usePIDTV'
 
-    PID_TVMDLOBJ5.step(&HT08_CONTROL_SYSTEM_U.YawRaterads, &rtCP_Constant3_Value,
-                       &rtCP_Constant4_Value, &rtCP_Constant5_Value,
-                       &rtCP_Constant2_Value,
+    PID_TVMDLOBJ5.step(&HT08_CONTROL_SYSTEM_U.YawRaterads,
+                       &HT08_CONTROL_SYSTEM_U.PIDConfig[1],
+                       &HT08_CONTROL_SYSTEM_U.PIDConfig[2],
+                       &rtCP_Constant5_Value, &HT08_CONTROL_SYSTEM_U.PIDConfig[0],
                        &HT08_CONTROL_SYSTEM_U.TorqueAverageNm,
                        &HT08_CONTROL_SYSTEM_U.TorqueAverageNm,
                        &HT08_CONTROL_SYSTEM_U.TorqueAverageNm,
                        &HT08_CONTROL_SYSTEM_U.TorqueAverageNm,
                        &HT08_CONTROL_SYSTEM_U.usePIDTV,
                        &HT08_CONTROL_SYSTEM_B.DesiredYawRaterads,
+                       &HT08_CONTROL_SYSTEM_U.Vx_B,
                        &HT08_CONTROL_SYSTEM_B.FRTORQUEPID,
                        &HT08_CONTROL_SYSTEM_B.RRTORQUEPID,
                        &HT08_CONTROL_SYSTEM_B.FLTORQUEPID,

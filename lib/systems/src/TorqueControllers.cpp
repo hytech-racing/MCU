@@ -357,5 +357,7 @@ void TorqueControllerCASEWrapper::tick(const veh_vec &CASE_rpm_output, const veh
     writeout_.command.torqueSetpoints[FR] = CASE_torque_outputs.FR;
     writeout_.command.torqueSetpoints[RL] = CASE_torque_outputs.RL;
     writeout_.command.torqueSetpoints[RR] = CASE_torque_outputs.RR;
+    
     writeout_.ready = true;
+    
 }
