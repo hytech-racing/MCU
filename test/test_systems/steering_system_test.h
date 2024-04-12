@@ -9,7 +9,7 @@
 #define STEERING_SYSTEM_TEST
 #include <gtest/gtest.h>
 #include <string>
-#include "C:\Users\aksha\OneDrive\MCU\lib\systems\include\SteeringSystem.h"
+#include "SteeringSystem.h"
 #include <array>
 #include <iostream>
 using namespace std;
