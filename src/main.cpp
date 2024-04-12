@@ -96,7 +96,7 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, {true, true, false, false, false, 3500, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 0.0, 0.0});
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, {false, true, false, false, false, 3500, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 0.0, 0.0});
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -378,7 +378,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         reset_I_term = true;
     }
     // Serial.println(reset_I_term);
-    CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, vn_data.angular_rates.z, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, vn_data.vn_status);
+    CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, vn_data.angular_rates.z, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, 3);
     // FAKE
     // CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, 0.5, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, vn_data.vn_status);
 

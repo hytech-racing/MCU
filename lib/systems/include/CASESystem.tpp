@@ -19,22 +19,20 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     in.PIDConfig[1] = config_.pid_i;
     in.PIDConfig[2] = config_.pid_d;
 
-    if((vn_active_start_time_ == 0) && (vn_status >=2))
-    {
-        vn_active_start_time_ = tick.millis;
-    }
-    
-    if(vn_status < 2)
-    {
-        vn_active_start_time_ = 0;
-    }
+    // if((vn_active_start_time_ == 0) && (vn_status >=2))
+    // {
+    //     vn_active_start_time_ = tick.millis;
+    // } else if(vn_status < 2)
+    // {
+    //     vn_active_start_time_ = 0;
+    // }
 
-    bool vn_active_for_long_enough = (vn_active_start_time_ >= 5000);
-    if(vn_active_for_long_enough){
-        in.usePIDTV = config_.usePIDTV;
-    } else {
-        in.usePIDTV = false;
-    }
+    // bool vn_active_for_long_enough = (vn_active_start_time_ >= 5000);
+    // if(vn_active_for_long_enough){
+    in.usePIDTV = config_.usePIDTV;
+    // } else {
+        // in.usePIDTV = false;
+    // }
     
     in.useNormalForce = config_.useNormalForce;
     in.usePowerLimit = config_.usePowerLimit;
