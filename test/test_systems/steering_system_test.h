@@ -24,12 +24,12 @@ TEST(SteeringSystemTesting, test_steering_angle_map_and_normalization)
     double expectedValues[testLength] = {-1.0000, 0.0954, 0, -0.0223, 0.7692, 0.8769, 0.8615, -0.0385, -0.1385, -0.1538}; // expected values calculated on matlab
     double tempAngle = 0.0;
     int steeringDataMap[2] = {-130, 130}; // max and min range of converted steering data (change depending on data)
-    int wheelSteerRange[2] = {23, -23}; // max and min of final wheel steering (correct if actual limits of car are different)
+    int wheelSteerRange[2] = {-23, 23}; // max and min of final wheel steering (correct if actual limits of car are different)
     for (int i = 0; i < testLength; ++i) {
         tempAngle = interpolateSteering(rawDataRandom[i], steeringDataMap[0], steeringDataMap[1], wheelSteerRange[0], wheelSteerRange[1]);
-        // cout << "Interpolated value of wheel angle : " << tempAngle << ", raw input value is " << rawDataRandom[i] << "\n";
+        cout << "Interpolated value of wheel angle : " << tempAngle << ", raw input value is " << rawDataRandom[i] << "\n";
         tempAngle = normalizeSteering(tempAngle, wheelSteerRange[0], wheelSteerRange[1]);
-        // cout << "Normalized value : " << tempAngle;
+        cout << "Normalized value : " << tempAngle;
         convertedValues[i] = tempAngle;
         EXPECT_TRUE(convertedValues[i] == expectedValues[i]);
     }

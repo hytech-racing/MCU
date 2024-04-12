@@ -39,7 +39,7 @@ private:
     SteeringEncoderConversion_s primaryConversion_;
     SteeringSystemData_s data_;
     int steeringDataMap_[2] = {-130, 130}; // max and min range of converted steering data (change depending on data)
-    int wheelSteerRange_[2] = {23, -23}; // max and min of final wheel steering (correct if actual limits of car are different)
+    int wheelSteerRange_[2] = {-23, 23}; // max and min of final wheel steering (correct if actual limits of car are different)
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor) : primarySensor_(primarySensor) {}
 
