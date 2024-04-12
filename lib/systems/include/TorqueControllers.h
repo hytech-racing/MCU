@@ -33,7 +33,7 @@ const float DEFAULT_LAUNCH_RATE = 11.76;
 const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
 
 const float DEFAULT_SLIP_RATIO = 0.2f;
-const float const_accel_time = 1500; // time to use launch speed target in ms
+const float const_accel_time = 100; // time to use launch speed target in ms
 
 const float launch_ready_accel_threshold = .1;
 const float launch_ready_brake_threshold = .2;
