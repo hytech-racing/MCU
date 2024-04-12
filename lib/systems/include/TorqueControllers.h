@@ -14,6 +14,9 @@
 
 #include "TorqueControllersData.h"
 #include "PID_TV.h"
+#ifndef M_PI 
+#define M_PI 3.141592653589
+#endif
 /* MOTOR CONSTANTS */
 
 const float AMK_MAX_RPM = 20000;

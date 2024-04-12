@@ -28,15 +28,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     
     out.accelPressed = pedal_is_active_(accel1.conversion, accel2.conversion, accelParams_, false);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
-    
-    //if accel is implausible use accel1 for conversion
-    if(out.accelImplausible) 
-    {
-        out.accelPercent = accel1.conversion;
-    } else {
-        out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
-    }
+    out.accelPercent = (out.accelImplausible) ? accel1.conversion : (accel1.conversion + accel2.conversion) / 2.0;
     out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
+    out.accelPercent = std::max(out.accelPercent, 0.0f);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake, brakeParams_);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake);
     bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
@@ -50,12 +44,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
         implausibilityStartTime_ = 0;
     }
 
-    //check if accel pedals are electrically out of range
-    bool oor = implausibility && (evaluate_pedal_oor(accel1, accelParams_.min_pedal_1, accelParams_.max_pedal_1) || evaluate_pedal_oor(accel2, accelParams_.min_pedal_2, accelParams_.max_pedal_2));
-    if(oor) 
-    {
-        out.accelPercent = 0;
-    }
+    bool oor = implausibility && (evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
+            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
+    out.accelPercent = (oor) ? 0 : out.accelPercent;
 
     
     out.brakePercent = brake.conversion;
@@ -81,15 +72,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.accelPressed = pedal_is_active_(accel1.conversion, accel2.conversion, accelParams_, false);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     
-    //if accel is implausible use accel1 for conversion
-    if(out.accelImplausible) 
-    {
-        out.accelPercent = accel1.conversion;
-    } else {
-        out.accelPercent = (accel1.conversion + accel2.conversion) / 2.0;
-    }
-    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
-    
+    auto percent = (out.accelImplausible) ? accel1.conversion : (accel1.conversion + accel2.conversion) / 2.0;
+    out.accelPercent = remove_deadzone_(percent, accelParams_.deadzone_margin);
+    out.accelPercent = std::max(out.accelPercent, 0.0f);
     
 
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
@@ -105,12 +90,9 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
         implausibilityStartTime_ = 0;
     }
 
-    //check if accel pedals are electrically out of range
-    bool oor = implausibility && (evaluate_pedal_oor(accel1, accelParams_.min_pedal_1, accelParams_.max_pedal_1) || evaluate_pedal_oor(accel2, accelParams_.min_pedal_2, accelParams_.max_pedal_2));
-    if(oor) 
-    {
-        out.accelPercent = 0;
-    }
+    bool oor = implausibility && (evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
+            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
+    out.accelPercent = (oor) ? 0 : out.accelPercent;
 
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
     
