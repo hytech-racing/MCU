@@ -285,7 +285,7 @@ void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
             // may want to make this the ht07 launch algo
             
             // makes sure that the car launches at the target launch speed
-            launch_speed_target = std::max(launch_speed_target, DEFAULT_LAUNCH_SPEED_TARGET);
+            launch_speed_target = std::max(launch_speed_target, (float)DEFAULT_LAUNCH_SPEED_TARGET);
 
             /*
             New slip-ratio based launch algorithm by Luke Chen. The basic idea
