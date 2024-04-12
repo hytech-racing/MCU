@@ -10,6 +10,13 @@ struct veh_vec
     float RR;
 };
 
+struct xyz_vec
+{
+    float x;
+    float y;
+    float z;
+};
+
 struct xy_vec
 {
     float x;

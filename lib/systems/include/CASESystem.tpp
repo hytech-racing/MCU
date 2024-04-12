@@ -1,13 +1,13 @@
 #include "CASESystem.h"
 
 template <typename message_queue>
-const pstate &CASESystem<message_queue>::evaluate(const SysTick_s &tick,
+CASEControllerOutput CASESystem<message_queue>::    evaluate(const SysTick_s &tick,
                                                   const xy_vec &body_velocity_ms,
                                                   float yaw_rate_rads,
                                                   float steering_norm,
                                                   const veh_vec &wheel_rpms,
                                                   const veh_vec &load_cell_vals,
-                                                  const veh_vec &wheel_torques_nm,
+                                                  const PedalsSystemData_s &pedals_data,
                                                   float power_kw)
 {
     HT08_CONTROL_SYSTEM::ExtU_HT08_CONTROL_SYSTEM_T in;
@@ -22,8 +22,7 @@ const pstate &CASESystem<message_queue>::evaluate(const SysTick_s &tick,
 
     in.SteeringWheelAngleDeg = steering_value;
 
-    float nm_avg = (wheel_torques_nm.FL + wheel_torques_nm.FR + wheel_torques_nm.RL + wheel_torques_nm.RR) / 4.0f;
-    in.TorqueAverageNm = nm_avg;
+    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_torque, config_.max_rpm);
 
     in.YawRaterads = yaw_rate_rads;
     in.Vx_B = body_velocity_ms.x;
@@ -70,8 +69,8 @@ const pstate &CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         last_controller_pt1_send_time_ = tick.millis;
     }
 
-    if( ((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_/2)) &&
-        ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_) )
+    if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 2)) &&
+        ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
@@ -80,10 +79,9 @@ const pstate &CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
         last_controller_pt2_send_time_ = tick.millis;
     }
-    
-    if ( ((tick.millis - last_controller_pt1_send_time_) >= vehicle_math_offset_ms_) &&
-         ((tick.millis - last_vehm_send_time_) > controller_send_period_ms_)
-        )
+
+    if (((tick.millis - last_controller_pt1_send_time_) >= vehicle_math_offset_ms_) &&
+        ((tick.millis - last_vehm_send_time_) > controller_send_period_ms_))
     {
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_alpha_deg);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_sl);
@@ -93,5 +91,40 @@ const pstate &CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
         last_vehm_send_time_ = tick.millis;
     }
-    return state_;
+    // TODO make these real
+    veh_vec rpms;
+    rpms.FL = 4000;
+    rpms.FR = 4000;
+    rpms.RL = 4000;
+    rpms.RR = 4000;
+    veh_vec torques;
+    torques.FL = res.FinalTorqueFL;
+    torques.FR = res.FinalTorqueFR;
+    torques.RL = res.FinalTorqueRL;
+    torques.RR = res.FinalTorqueRR;
+
+    return {rpms, torques};
+}
+
+template <typename message_queue>
+float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_torque, float max_rpm)
+{
+    // Both pedals are not pressed and no implausibility has been detected
+    // accelRequest goes between 1.0 and -1.0
+    float accelRequest = pedals_data.accelPercent - pedals_data.regenPercent;
+    float torqueRequest;
+
+    if (accelRequest >= 0.0)
+    {
+        // Positive torque request
+        torqueRequest = accelRequest * max_torque;
+
+    }
+    else
+    {
+        // Negative torque request
+        torqueRequest = max_regen_torque * accelRequest * -1.0;
+
+    }
+    return torqueRequest;
 }

@@ -4,6 +4,8 @@
 #include "HT08_CONTROL_SYSTEM.h"
 #include "StateData.h"
 #include "HytechCANInterface.h"
+#include "PedalsSystem.h"
+
 
 struct CASEConfiguration
 {
@@ -12,7 +14,17 @@ struct CASEConfiguration
     bool usePowerLimit;
     bool usePIDPowerLimit;
     bool useLaunch;
+    float max_rpm;
+    float max_regen_torque;
+    float max_torque;
 };
+
+struct CASEControllerOutput
+{
+    veh_vec rpms;
+    veh_vec torques;
+};
+
 /// @brief this class with both take in sensor inputs as well as handle calculations for various derived states of the car.
 //         this class will also handle output onto the CAN bus of data
 /// @tparam message_queue the msg queue that is being used with the underlying msging interfaces
@@ -38,25 +50,25 @@ public:
         vehicle_math_offset_ms_= vehicle_math_offset_ms;
     }
 
-    /// @brief function that evaluates the CASE (controller and state estimation) system
+    /// @brief function that evaluates the CASE (controller and state estimation) system. updates the internal pstate_ and returns controller result
     /// @param tick current system tick
     /// @param body_velocity_ms body velocity vector
     /// @param yaw_rate_rads yaw rate in rad / s
     /// @param steering_norm steering value between -1 and 1 ish
     /// @param wheel_rpms wheel rpms
-    /// @param wheel_torques_nm current request wheel torque values
+    /// @param pedals_data current pedals data
     /// @param load_cell_vals load cell forces in N
     /// @param power_kw current electrical power in kilo-watts
-    /// @return state of the car
-    const pstate &evaluate(const SysTick_s &tick,
+    /// @return controller output
+    CASEControllerOutput evaluate(const SysTick_s &tick,
                            const xy_vec &body_velocity_ms,
                            float yaw_rate_rads,
                            float steering_norm,
                            const veh_vec &wheel_rpms,
                            const veh_vec &load_cell_vals,
-                           const veh_vec &wheel_torques_nm,
+                           const PedalsSystemData_s &pedals_data,
                            float power_kw);
-
+    float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
     void configure(const CASEConfiguration &config)

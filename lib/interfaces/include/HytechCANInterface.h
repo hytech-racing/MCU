@@ -171,7 +171,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             interfaces.vn_interface->retrieve_vn_status_CAN(recvd_msg); // double check this
             break;
         case VN_ANGULAR_RATE_CANID:
-            interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
+            interfaces.vn_interface->receive_ang_rates_CAN(recvd_msg);
             break;
         }
     }

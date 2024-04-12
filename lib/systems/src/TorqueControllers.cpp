@@ -344,3 +344,18 @@ void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
     launch_speed_target = std::max(launch_speed_target, new_speed_target);
 
 }
+
+void TorqueControllerCASEWrapper::tick(const veh_vec &CASE_rpm_output, const veh_vec &CASE_torque_outputs)
+{
+
+    writeout_.command.speeds_rpm[FL] = CASE_rpm_output.FL;
+    writeout_.command.speeds_rpm[FR] = CASE_rpm_output.FR;
+    writeout_.command.speeds_rpm[RL] = CASE_rpm_output.RL;
+    writeout_.command.speeds_rpm[RR] = CASE_rpm_output.RR;
+
+    writeout_.command.torqueSetpoints[FL] = CASE_torque_outputs.FL;
+    writeout_.command.torqueSetpoints[FR] = CASE_torque_outputs.FR;
+    writeout_.command.torqueSetpoints[RL] = CASE_torque_outputs.RL;
+    writeout_.command.torqueSetpoints[RR] = CASE_torque_outputs.RR;
+    writeout_.ready = true;
+}

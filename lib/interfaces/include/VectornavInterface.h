@@ -2,6 +2,7 @@
 #define VECTORNAVINTERFACE
 #include "FlexCAN_T4.h"
 #include "hytech.h"
+#include "StateData.h"
 
 struct vector_nav {
         float velocity_x;
@@ -19,6 +20,7 @@ struct vector_nav {
         double ecef_coords[3]; // x,y,z
         uint64_t gps_time; // gps time
         uint8_t vn_status; // status
+        xyz_vec angular_rates; 
     };
 
 template <typename message_queue>
@@ -39,6 +41,7 @@ public:
 
     // retrieve methods
     void retrieve_velocity_CAN(CAN_message_t &recvd_msg);
+    
     void retrieve_linear_accel_CAN(CAN_message_t &recvd_msg);
     void retrieve_uncompLinear_accel_CAN(CAN_message_t &recvd_msg);
     void retrieve_ypr_CAN(CAN_message_t &recvd_msg);
@@ -47,6 +50,7 @@ public:
     void retrieve_vn_status_CAN(CAN_message_t &recvd_msg);
     void retrieve_vn_ecef_pos_xy_CAN(CAN_message_t &recvd_msg);
     void retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg);
+    void receive_ang_rates_CAN(CAN_message_t &recvd_msg);
     // getters
     vector_nav get_vn_struct();
     

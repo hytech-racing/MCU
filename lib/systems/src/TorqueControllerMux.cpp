@@ -14,14 +14,16 @@ void TorqueControllerMux::tick(
     DialMode_e dashboardDialMode,
     bool dashboardTorqueModeButtonPressed,
     const vector_nav &vn_data,
-    float wheel_angle_rad)
+    float wheel_angle_rad,
+    const veh_vec &CASE_rpm_output,
+    const veh_vec &CASE_torque_outputs)
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
     torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);
     torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
     torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
-    // torqueControllerPIDTV_.tick(tick, pedalsData, vn_data.velocity_x, wheel_angle_rad, vn_data.yaw);
+    tcCASEWrapper_.tick(CASE_rpm_output, CASE_torque_outputs);
     
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)

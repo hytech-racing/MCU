@@ -77,6 +77,15 @@ void VNInterface<message_queue>::retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd
     vn_data.ecef_coords[2] = HYTECH_vn_ecef_pos_z_ro_fromS(ecef_z.vn_ecef_pos_z_ro);
 }
 
+template <typename message_queue>
+void VNInterface<message_queue>::receive_ang_rates_CAN(CAN_message_t & recvd_msg)
+{
+    VN_ANGULAR_RATE_t ang_rates;
+    Unpack_VN_ANGULAR_RATE_hytech(&ang_rates,  recvd_msg.buf, recvd_msg.len);
+    vn_data.angular_rates.x = HYTECH_angular_rate_x_ro_fromS(ang_rates.angular_rate_x_ro);
+    vn_data.angular_rates.y = HYTECH_angular_rate_y_ro_fromS(ang_rates.angular_rate_y_ro);
+    vn_data.angular_rates.z = HYTECH_angular_rate_z_ro_fromS(ang_rates.angular_rate_z_ro);
+}
 /**
  * @brief 
  * getter method for returning vn_data structure
