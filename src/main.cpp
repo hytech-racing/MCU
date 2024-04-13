@@ -96,7 +96,7 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
-CASEConfiguration case_config = {true, true, false, false, false, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 0.0, 0.0};
+CASEConfiguration case_config = {true, true, false, false, false, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 1.0, 0.0};
 // usePIDTV
 // useNormalForce
 // usePowerLimit
@@ -377,7 +377,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // REAL
     xy_vec body_vel = {vn_data.velocity_x, vn_data.velocity_y};
     // FAKE
-    // xy_vec body_vel = {2.0f, 0.0f};
+    // xy_vec body_vel = {1.5f, 0.25f};
     veh_vec wheel_rpms = {drivetrain_data.measuredSpeeds[0], drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
     
     veh_vec load_cell_vals = {a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL].conversion, a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL].conversion, sab_interface.rlLoadCell.convert().conversion, sab_interface.rrLoadCell.convert().conversion};
