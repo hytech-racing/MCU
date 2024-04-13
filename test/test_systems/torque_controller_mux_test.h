@@ -138,7 +138,9 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // Now press the pedal again. Torque should be requested
@@ -154,7 +156,9 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -235,7 +239,9 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -259,7 +265,9 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // Now press the pedal. Torque should be requested
@@ -275,7 +283,9 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -380,7 +390,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // change mode to mode 3
@@ -396,7 +408,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // tick again to calculate state switch
@@ -412,7 +426,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     LaunchStates_e launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -432,7 +448,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -452,7 +470,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -628,7 +648,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // tick again to calculate state switch
@@ -644,7 +666,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     LaunchStates_e launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -664,7 +688,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // tick TCMUX (10k us will hit 100hz)
@@ -680,7 +706,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -702,7 +730,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -727,7 +757,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     commanded = torque_controller_mux.getDrivetrainCommand();
@@ -750,7 +782,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     commanded = torque_controller_mux.getDrivetrainCommand();
