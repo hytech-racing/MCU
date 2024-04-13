@@ -114,7 +114,9 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -492,7 +494,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -511,7 +515,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     DrivetrainCommand_s commanded = torque_controller_mux.getDrivetrainCommand();
@@ -531,7 +537,9 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -632,7 +640,9 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        0.0,
+        {},
+        {}
     );
 
     // change mode to mode 3
