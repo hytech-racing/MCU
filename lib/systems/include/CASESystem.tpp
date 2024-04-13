@@ -2,15 +2,15 @@
 
 template <typename message_queue>
 CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
-                                                  const xy_vec &body_velocity_ms,
-                                                  float yaw_rate_rads,
-                                                  float steering_norm,
-                                                  const veh_vec &wheel_rpms,
-                                                  const veh_vec &load_cell_vals,
-                                                  const PedalsSystemData_s &pedals_data,
-                                                  float power_kw,
-                                                  bool reset_integral, 
-                                                  uint8_t vn_status)
+                                                         const xy_vec &body_velocity_ms,
+                                                         float yaw_rate_rads,
+                                                         float steering_norm,
+                                                         const veh_vec &wheel_rpms,
+                                                         const veh_vec &load_cell_vals,
+                                                         const PedalsSystemData_s &pedals_data,
+                                                         float power_kw,
+                                                         bool reset_integral,
+                                                         uint8_t vn_status)
 {
     HT08_CONTROL_SYSTEM::ExtU_HT08_CONTROL_SYSTEM_T in;
 
@@ -19,21 +19,25 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     in.PIDConfig[1] = config_.pid_i;
     in.PIDConfig[2] = config_.pid_d;
 
-    // if((vn_active_start_time_ == 0) && (vn_status >=2))
-    // {
-    //     vn_active_start_time_ = tick.millis;
-    // } else if(vn_status < 2)
-    // {
-    //     vn_active_start_time_ = 0;
-    // }
+    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
+    {
+        vn_active_start_time_ = tick.millis;
+    }
+    else if (vn_status < 2)
+    {
+        vn_active_start_time_ = 0;
+    }
 
-    // bool vn_active_for_long_enough = (vn_active_start_time_ >= 5000);
-    // if(vn_active_for_long_enough){
-    in.usePIDTV = config_.usePIDTV;
-    // } else {
-        // in.usePIDTV = false;
-    // }
-    
+    bool vn_active_for_long_enough = (vn_active_start_time_ >= 5000);
+    if (vn_active_for_long_enough)
+    {
+        in.usePIDTV = config_.usePIDTV;
+    }
+    else
+    {
+        in.usePIDTV = false;
+    }
+
     in.useNormalForce = config_.useNormalForce;
     in.usePowerLimit = config_.usePowerLimit;
     in.usePIDPowerLimit = config_.usePIDPowerLimit;
@@ -58,16 +62,16 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     in.MotorOmegaRRrpm = wheel_rpms.RR;
 
     case_.setExternalInputs(&in);
-    if( (tick.millis - last_eval_time_ ) >= 1 )
+    if ((tick.millis - last_eval_time_) >= 1)
     {
-        if(reset_integral)
+        if (reset_integral)
         {
             in.PIDConfig[1] = 0.0f;
         }
         case_.step();
         last_eval_time_ = tick.millis;
     }
-    
+
     auto res = case_.getExternalOutputs();
 
     // state_.Alphadeg.FL = res.AlphaFLDeg;
@@ -121,7 +125,7 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     }
     // TODO make these real
     veh_vec rpms;
-    
+
     rpms.FL = get_rpm_setpoint(res.FinalTorqueFL);
     rpms.FR = get_rpm_setpoint(res.FinalTorqueFR);
     rpms.RL = get_rpm_setpoint(res.FinalTorqueRL);
@@ -152,7 +156,6 @@ float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData
     {
         // Negative torque request
         torqueRequest = max_regen_torque * accelRequest * -1.0;
-
     }
     return torqueRequest;
 }
