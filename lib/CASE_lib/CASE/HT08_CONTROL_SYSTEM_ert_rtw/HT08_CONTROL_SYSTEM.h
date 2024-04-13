@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CONTROL_SYSTEM'.
 //
-// Model version                  : 1.39
+// Model version                  : 1.40
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 08:20:02 2024
+// C/C++ source code generated on : Sat Apr 13 09:40:20 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -69,7 +69,7 @@ class HT08_CONTROL_SYSTEM final
     real_T LongCornerVelFR;            // '<Root>/Vehicle Math'
     real_T LongCornerVelRL;            // '<Root>/Vehicle Math'
     real_T LongCornerVelRR;            // '<Root>/Vehicle Math'
-    real_T DesiredYawRaterads;         // '<Root>/Vehicle Math'
+    real_T VehicleMath_o10;            // '<Root>/Vehicle Math'
     real_T SLFL;                       // '<Root>/Vehicle Math'
     real_T SLFR;                       // '<Root>/Vehicle Math'
     real_T SLRL;                       // '<Root>/Vehicle Math'

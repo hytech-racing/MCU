@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
-// Model version                  : 1.9
+// Model version                  : 1.13
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Thu Apr 11 21:44:52 2024
+// C/C++ source code generated on : Sat Apr 13 09:39:36 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CONTROL_SYSTEM'.
 //
-// Model version                  : 1.39
+// Model version                  : 1.40
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 08:20:02 2024
+// C/C++ source code generated on : Sat Apr 13 09:40:20 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -252,7 +252,7 @@ static void HT08_CONTROL_SYSTEM_InitializeDataAddr(void* dataAddr[],
   dataAddr[26] = (void*) (&HT08_CONTROL_SYSTEM_B->LongCornerVelFR);
   dataAddr[27] = (void*) (&HT08_CONTROL_SYSTEM_B->LongCornerVelRL);
   dataAddr[28] = (void*) (&HT08_CONTROL_SYSTEM_B->LongCornerVelRR);
-  dataAddr[29] = (void*) (&HT08_CONTROL_SYSTEM_B->DesiredYawRaterads);
+  dataAddr[29] = (void*) (&HT08_CONTROL_SYSTEM_B->VehicleMath_o10);
   dataAddr[30] = (void*) (&HT08_CONTROL_SYSTEM_B->SLFL);
   dataAddr[31] = (void*) (&HT08_CONTROL_SYSTEM_B->SLFR);
   dataAddr[32] = (void*) (&HT08_CONTROL_SYSTEM_B->SLRL);
@@ -426,10 +426,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 3575903955U,
-    2871529340U,
-    1359099450U,
-    1514647703U },
+  { 2735992676U,
+    2990759065U,
+    1065848691U,
+    1748252431U },
   (nullptr), 0,
   (boolean_T)0
 };

@@ -95,8 +95,20 @@ PedalsSystem pedals_system({ACCEL1_PEDAL_MIN, ACCEL2_PEDAL_MIN, ACCEL1_PEDAL_MAX
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
-
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, {false, true, false, false, false, 3500, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 0.0, 0.0});
+// TODO ensure that case uses max regen torque, right now its not
+CASEConfiguration case_config = {true, true, false, false, false, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 0.0, 0.0};
+// usePIDTV
+// useNormalForce
+// usePowerLimit
+// usePIDPowerLimit
+// useLaunch
+// max_rpm
+// max_regen_torque
+// max_torque
+// pid_p
+// pid_i
+// pid_d
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, case_config);
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CONTROL_SYSTEM'.
 //
-// Model version                  : 1.39
+// Model version                  : 1.40
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 08:20:02 2024
+// C/C++ source code generated on : Sat Apr 13 09:40:20 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -115,7 +115,7 @@ void HT08_CONTROL_SYSTEM::step()
       uint32_T packingValue = 0;
 
       {
-        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.usePIDTV);
+        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.useNormalForce);
 
         // no scaling required
         packingValue = result;
@@ -155,7 +155,7 @@ void HT08_CONTROL_SYSTEM::step()
       uint32_T packingValue = 0;
 
       {
-        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.useNormalForce);
+        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.usePIDPowerLimit);
 
         // no scaling required
         packingValue = result;
@@ -195,7 +195,7 @@ void HT08_CONTROL_SYSTEM::step()
       uint32_T packingValue = 0;
 
       {
-        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.usePowerLimit);
+        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.usePIDTV);
 
         // no scaling required
         packingValue = result;
@@ -235,7 +235,7 @@ void HT08_CONTROL_SYSTEM::step()
       uint32_T packingValue = 0;
 
       {
-        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.usePIDPowerLimit);
+        uint32_T result = (uint32_T) (HT08_CONTROL_SYSTEM_U.usePowerLimit);
 
         // no scaling required
         packingValue = result;
@@ -285,7 +285,7 @@ void HT08_CONTROL_SYSTEM::step()
     &HT08_CONTROL_SYSTEM_B.LongCornerVelFR,
     &HT08_CONTROL_SYSTEM_B.LongCornerVelRL,
     &HT08_CONTROL_SYSTEM_B.LongCornerVelRR,
-    &HT08_CONTROL_SYSTEM_B.DesiredYawRaterads, &HT08_CONTROL_SYSTEM_B.SLFL,
+    &HT08_CONTROL_SYSTEM_B.VehicleMath_o10, &HT08_CONTROL_SYSTEM_B.SLFL,
     &HT08_CONTROL_SYSTEM_B.SLFR, &HT08_CONTROL_SYSTEM_B.SLRL,
     &HT08_CONTROL_SYSTEM_B.SLRR, &HT08_CONTROL_SYSTEM_B.WheelSteerAvgDeg,
     &rtb_VehicleMath_o16, &rtb_VehicleMath_o17, &rtb_VehicleMath_o18,
@@ -325,7 +325,7 @@ void HT08_CONTROL_SYSTEM::step()
                        &HT08_CONTROL_SYSTEM_U.TorqueAverageNm,
                        &HT08_CONTROL_SYSTEM_U.TorqueAverageNm,
                        &HT08_CONTROL_SYSTEM_U.usePIDTV,
-                       &HT08_CONTROL_SYSTEM_B.DesiredYawRaterads,
+                       &HT08_CONTROL_SYSTEM_B.VehicleMath_o10,
                        &HT08_CONTROL_SYSTEM_U.Vx_B,
                        &HT08_CONTROL_SYSTEM_B.FRTORQUEPID,
                        &HT08_CONTROL_SYSTEM_B.RRTORQUEPID,
@@ -1044,7 +1044,7 @@ void HT08_CONTROL_SYSTEM::step()
       real_T outValue = 0;
 
       {
-        real_T result = HT08_CONTROL_SYSTEM_B.DesiredYawRaterads;
+        real_T result = HT08_CONTROL_SYSTEM_B.VehicleMath_o10;
 
         // no offset to apply
         result = result * (1 / 0.0001);
@@ -3094,7 +3094,7 @@ void HT08_CONTROL_SYSTEM::step()
       real_T outValue = 0;
 
       {
-        real_T result = HT08_CONTROL_SYSTEM_B.DesiredYawRaterads;
+        real_T result = HT08_CONTROL_SYSTEM_B.VehicleMath_o10;
 
         // no offset to apply
         result = result * (1 / 0.0001);

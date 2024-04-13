@@ -123,7 +123,7 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
         last_vehm_send_time_ = tick.millis;
     }
-    // TODO make these real
+    
     veh_vec rpms;
 
     rpms.FL = get_rpm_setpoint(res.FinalTorqueFL);

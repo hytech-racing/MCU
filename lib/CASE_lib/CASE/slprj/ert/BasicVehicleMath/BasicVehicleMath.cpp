@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
-// Model version                  : 1.9
+// Model version                  : 1.13
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Thu Apr 11 21:44:52 2024
+// C/C++ source code generated on : Sat Apr 13 09:39:36 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -135,68 +135,87 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   *rty_WheelOmegaRRrads)
 {
   real_T Alpha_FL;
-  real_T Alpha_FR;
+  real_T Alpha_FL_tmp;
   real_T den;
   real_T den_tmp;
-  real_T rtb_Abs;
-  real_T rtb_Abs1;
+  real_T rtb_Abs_l;
+  real_T rtb_Abs_tmp;
   real_T rtb_Alpha_RL;
-  real_T rtb_Divide2;
-  real_T rtb_Gain1_e_tmp;
   real_T rtb_Gain2_e;
   real_T rtb_Gain3_m;
   real_T rtb_LongCornerVel_FL_B;
   real_T rtb_LongCornerVel_FR_B;
   real_T rtb_SL;
+  real_T rtb_Switch1;
+  real_T rtb_Switch_p;
+  real_T test1;
 
   // Abs: '<Root>/Abs'
-  rtb_Abs1 = std::abs(*rtu_SteeringWheelAngleDeg);
+  rtb_Abs_l = std::abs(*rtu_SteeringWheelAngleDeg);
 
-  // Switch: '<S1>/Switch' incorporates:
-  //   Constant: '<S1>/Constant2'
+  // Lookup_n-D: '<Root>/1-D Lookup Table' incorporates:
+  //   Abs: '<S8>/Abs'
 
-  if (*rtu_Vx_Bms > 0.0) {
-    rtb_Abs = *rtu_Vx_Bms;
+  rtb_Abs_l = look1_binlxpw(rtb_Abs_l, rtCP_uDLookupTable_bp01Data,
+    rtCP_uDLookupTable_tableData, 200U);
+
+  // Abs: '<S1>/Abs'
+  rtb_Switch1 = std::abs(*rtu_Vy_Bms);
+
+  // Switch: '<S1>/Switch1' incorporates:
+  //   Constant: '<S1>/Constant'
+  //   Trigonometry: '<S1>/Atan'
+
+  if (rtb_Switch1 > 1.0) {
+    // Switch: '<S1>/Switch' incorporates:
+    //   Constant: '<S1>/Constant2'
+
+    if (*rtu_Vx_Bms > 0.0) {
+      rtb_Switch_p = *rtu_Vx_Bms;
+    } else {
+      rtb_Switch_p = (rtInf);
+    }
+
+    // End of Switch: '<S1>/Switch'
+
+    // Product: '<S1>/Divide2'
+    rtb_Switch_p = *rtu_Vy_Bms / rtb_Switch_p;
+    rtb_Switch1 = std::atan(rtb_Switch_p);
   } else {
-    rtb_Abs = (rtInf);
+    rtb_Switch1 = 0.0;
   }
 
-  // End of Switch: '<S1>/Switch'
-
-  // Product: '<S1>/Divide2'
-  rtb_Divide2 = *rtu_Vy_Bms / rtb_Abs;
+  // End of Switch: '<S1>/Switch1'
 
   // Signum: '<Root>/Sign'
-  rtb_Abs = *rtu_SteeringWheelAngleDeg;
-  if (std::isnan(rtb_Abs)) {
-    rtb_Gain1_e_tmp = (rtNaN);
-  } else if (rtb_Abs < 0.0) {
-    rtb_Gain1_e_tmp = -1.0;
+  rtb_Switch_p = *rtu_SteeringWheelAngleDeg;
+  if (std::isnan(rtb_Switch_p)) {
+    rtb_SL = (rtNaN);
+  } else if (rtb_Switch_p < 0.0) {
+    rtb_SL = -1.0;
   } else {
-    rtb_Gain1_e_tmp = (rtb_Abs > 0.0);
+    rtb_SL = (rtb_Switch_p > 0.0);
   }
 
   // Product: '<Root>/Product' incorporates:
-  //   Abs: '<S8>/Abs1'
-  //   Lookup_n-D: '<Root>/1-D Lookup Table'
   //   Signum: '<Root>/Sign'
 
-  *rty_WheelSteerAvgDeg = look1_binlxpw(rtb_Abs1, rtCP_uDLookupTable_bp01Data,
-    rtCP_uDLookupTable_tableData, 200U) * rtb_Gain1_e_tmp;
+  *rty_WheelSteerAvgDeg = rtb_Abs_l * rtb_SL;
 
   // Gain: '<S2>/Gain1' incorporates:
   //   Gain: '<S3>/Gain1'
   //   Gain: '<S4>/Gain1'
   //   Gain: '<S5>/Gain1'
   //   Gain: '<S6>/Gain1'
+  //   Switch: '<S7>/Switch'
 
-  rtb_Gain1_e_tmp = 0.017453292519943295 * *rty_WheelSteerAvgDeg;
+  test1 = 0.017453292519943295 * *rty_WheelSteerAvgDeg;
 
   // Gain: '<Root>/Gain'
-  rtb_Abs1 = 0.10471975511965977 * *rtu_MotorOmegaRRrpm;
+  rtb_Abs_l = 0.10471975511965977 * *rtu_MotorOmegaRRrpm;
 
   // Gain: '<Root>/Gain1'
-  rtb_Abs = 0.10471975511965977 * *rtu_MotorOmegaRLrpm;
+  rtb_Switch_p = 0.10471975511965977 * *rtu_MotorOmegaRLrpm;
 
   // Gain: '<Root>/Gain2'
   rtb_Gain2_e = 0.10471975511965977 * *rtu_MotorOmegaFRrpm;
@@ -204,14 +223,28 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   // Gain: '<Root>/Gain3'
   rtb_Gain3_m = 0.10471975511965977 * *rtu_MotorOmegaFLrpm;
 
-  // Abs: '<S7>/Abs'
-  rtb_SL = std::abs(*rtu_Vx_Bms);
+  // Abs: '<S7>/Abs' incorporates:
+  //   MATLAB Function: '<S14>/MATLAB Function'
 
-  // Product: '<S7>/Divide' incorporates:
+  rtb_Abs_tmp = std::abs(*rtu_Vx_Bms);
+
+  // Switch: '<S7>/Switch' incorporates:
+  //   Abs: '<S7>/Abs'
+  //   Constant: '<S7>/Constant'
   //   Constant: '<S7>/wb'
+  //   Product: '<S7>/Divide'
   //   Trigonometry: '<S7>/Tan'
 
-  *rty_KinematicDesiredYawRaterad = rtb_SL * std::tan(rtb_Gain1_e_tmp) / 1.535;
+  if (rtb_Abs_tmp > 1.0) {
+    *rty_KinematicDesiredYawRaterad = rtb_Abs_tmp * std::tan(test1) / 1.535;
+  } else {
+    *rty_KinematicDesiredYawRaterad = 0.0;
+  }
+
+  // Abs: '<S8>/Abs1' incorporates:
+  //   Abs: '<S8>/Abs'
+
+  rtb_SL = std::abs(test1);
 
   // MATLAB Function: '<S14>/MATLAB Function' incorporates:
   //   Constant: '<S14>/Constant'
@@ -224,12 +257,12 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
 
   den_tmp = *rtu_YawRaterads * 0.96437803790837118 * 0.62216265449318331;
   den = den_tmp + *rtu_Vx_Bms;
-  rtb_SL = *rtu_YawRaterads * 0.96437803790837118 * 0.78288800690392224 +
-    *rtu_Vy_Bms;
-  Alpha_FL = -(rtb_Gain1_e_tmp - rt_atan2d_snf(rtb_SL, den));
+  Alpha_FL_tmp = *rtu_YawRaterads * 0.96437803790837118 * 0.78288800690392224 + *
+    rtu_Vy_Bms;
+  Alpha_FL = -(test1 - rt_atan2d_snf(Alpha_FL_tmp, den));
   if (std::isnan(Alpha_FL)) {
-    if (rtb_Gain1_e_tmp != 0.0) {
-      Alpha_FL = -rtb_Gain1_e_tmp;
+    if (test1 != 0.0) {
+      Alpha_FL = -test1;
     } else {
       Alpha_FL = 0.0;
     }
@@ -237,48 +270,57 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
 
   rtb_LongCornerVel_FL_B = den;
   den = *rtu_Vx_Bms - den_tmp;
-  Alpha_FR = -(rtb_Gain1_e_tmp - rt_atan2d_snf(rtb_SL, den));
-  if (std::isnan(Alpha_FR)) {
-    if (rtb_Gain1_e_tmp != 0.0) {
-      Alpha_FR = -rtb_Gain1_e_tmp;
+  Alpha_FL_tmp = -(test1 - rt_atan2d_snf(Alpha_FL_tmp, den));
+  if (std::isnan(Alpha_FL_tmp)) {
+    if (test1 != 0.0) {
+      Alpha_FL_tmp = -test1;
     } else {
-      Alpha_FR = 0.0;
+      Alpha_FL_tmp = 0.0;
     }
   }
 
   rtb_LongCornerVel_FR_B = den;
   den_tmp = *rtu_YawRaterads * 0.98407316801140354 * 0.60971076084969233;
   den = den_tmp + *rtu_Vx_Bms;
-  rtb_SL = rt_atan2d_snf(*rtu_Vy_Bms - *rtu_YawRaterads * 0.98407316801140354 *
-    0.79262398910460008, den);
-  rtb_Alpha_RL = rtb_SL;
-  if (std::isnan(rtb_SL)) {
+  test1 = rt_atan2d_snf(*rtu_Vy_Bms - *rtu_YawRaterads * 0.98407316801140354 *
+                        0.79262398910460008, den);
+  rtb_Alpha_RL = test1;
+  if (std::isnan(test1)) {
     rtb_Alpha_RL = 0.0;
   }
 
   *rty_LongitudinalCornerVelWRLm = den;
   den = *rtu_Vx_Bms - den_tmp;
-  rtb_SL = rt_atan2d_snf(*rtu_Vy_Bms - *rtu_YawRaterads * 0.98407316801140354 *
-    0.79262398910460019, den);
-  if (std::isnan(rtb_SL)) {
-    rtb_SL = 0.0;
+  test1 = rt_atan2d_snf(*rtu_Vy_Bms - *rtu_YawRaterads * 0.98407316801140354 *
+                        0.79262398910460019, den);
+  if (std::isnan(test1)) {
+    test1 = 0.0;
   }
 
   *rty_LongitudinalCornerVelWRRm = den;
+  if (rtb_Abs_tmp < 1.0) {
+    Alpha_FL = 0.0;
+    Alpha_FL_tmp = 0.0;
+    rtb_Alpha_RL = 0.0;
+    test1 = 0.0;
+    rtb_LongCornerVel_FL_B = 0.0;
+    rtb_LongCornerVel_FR_B = 0.0;
+    *rty_LongitudinalCornerVelWRLm = 0.0;
+    *rty_LongitudinalCornerVelWRRm = 0.0;
+  }
 
   // Trigonometry: '<S8>/Cos' incorporates:
-  //   Abs: '<S8>/Abs'
   //   Trigonometry: '<S8>/Cos1'
 
-  rtb_Gain1_e_tmp = std::cos(std::abs(rtb_Gain1_e_tmp));
+  rtb_SL = std::cos(rtb_SL);
 
   // Product: '<S8>/Product' incorporates:
   //   Trigonometry: '<S8>/Cos'
 
-  *rty_LongitudinalCornerVelWFLm = rtb_LongCornerVel_FL_B * rtb_Gain1_e_tmp;
+  *rty_LongitudinalCornerVelWFLm = rtb_LongCornerVel_FL_B * rtb_SL;
 
   // Product: '<S8>/Product1'
-  *rty_LongitudinalCornerVelWFRm = rtb_LongCornerVel_FR_B * rtb_Gain1_e_tmp;
+  *rty_LongitudinalCornerVelWFRm = rtb_LongCornerVel_FR_B * rtb_SL;
 
   // Gain: '<S9>/Gain' incorporates:
   //   MATLAB Function: '<S14>/MATLAB Function'
@@ -288,18 +330,16 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   // Gain: '<S10>/Gain' incorporates:
   //   MATLAB Function: '<S14>/MATLAB Function'
 
-  *rty_AlphaFRDeg = 57.295779513082323 * Alpha_FR;
+  *rty_AlphaFRDeg = 57.295779513082323 * Alpha_FL_tmp;
 
   // Gain: '<S11>/Gain'
   *rty_AlphaRLDeg = 57.295779513082323 * rtb_Alpha_RL;
 
   // Gain: '<S12>/Gain'
-  *rty_AlphaRRDeg = 57.295779513082323 * rtb_SL;
+  *rty_AlphaRRDeg = 57.295779513082323 * test1;
 
-  // Gain: '<S13>/Gain' incorporates:
-  //   Trigonometry: '<S1>/Atan'
-
-  *rty_BetaDeg = 57.295779513082323 * std::atan(rtb_Divide2);
+  // Gain: '<S13>/Gain'
+  *rty_BetaDeg = 57.295779513082323 * rtb_Switch1;
 
   // Gain: '<S15>/Gain'
   *rty_WheelOmegaFLrads = 0.084317032040472181 * rtb_Gain3_m;
@@ -307,13 +347,13 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   // Product: '<S17>/Product1' incorporates:
   //   Constant: '<S17>/Constant2'
 
-  rtb_Divide2 = *rty_WheelOmegaFLrads * 0.2;
+  rtb_SL = *rty_WheelOmegaFLrads * 0.2;
 
   // Sum: '<S17>/Subtract1'
-  rtb_Divide2 -= *rty_LongitudinalCornerVelWFLm;
+  rtb_SL -= *rty_LongitudinalCornerVelWFLm;
 
   // If: '<S17>/If2'
-  if (rtb_Divide2 > 0.0) {
+  if (rtb_SL > 0.0) {
     // Outputs for IfAction SubSystem: '<S17>/Accel. Calc' incorporates:
     //   ActionPort: '<S21>/Action Port'
 
@@ -321,7 +361,7 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
       *rty_WheelOmegaFLrads, &rtb_SL);
 
     // End of Outputs for SubSystem: '<S17>/Accel. Calc'
-  } else if (rtb_Divide2 < 0.0) {
+  } else if (rtb_SL < 0.0) {
     // Outputs for IfAction SubSystem: '<S17>/Brake Calc' incorporates:
     //   ActionPort: '<S22>/Action Port'
 
@@ -352,13 +392,13 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   // Product: '<S18>/Product1' incorporates:
   //   Constant: '<S18>/Constant2'
 
-  rtb_Gain2_e = *rty_WheelOmegaFRrads * 0.2;
+  rtb_SL = *rty_WheelOmegaFRrads * 0.2;
 
   // Sum: '<S18>/Subtract1'
-  rtb_Gain2_e -= *rty_LongitudinalCornerVelWFRm;
+  rtb_SL -= *rty_LongitudinalCornerVelWFRm;
 
   // If: '<S18>/If2'
-  if (rtb_Gain2_e > 0.0) {
+  if (rtb_SL > 0.0) {
     // Outputs for IfAction SubSystem: '<S18>/Accel. Calc' incorporates:
     //   ActionPort: '<S24>/Action Port'
 
@@ -366,7 +406,7 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
       *rty_WheelOmegaFRrads, &rtb_SL);
 
     // End of Outputs for SubSystem: '<S18>/Accel. Calc'
-  } else if (rtb_Gain2_e < 0.0) {
+  } else if (rtb_SL < 0.0) {
     // Outputs for IfAction SubSystem: '<S18>/Brake Calc' incorporates:
     //   ActionPort: '<S25>/Action Port'
 
@@ -392,18 +432,18 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   *rty_SLFR = rtb_SL;
 
   // Gain: '<S15>/Gain2'
-  *rty_WheelOmegaRLrads = 0.084317032040472181 * rtb_Abs;
+  *rty_WheelOmegaRLrads = 0.084317032040472181 * rtb_Switch_p;
 
   // Product: '<S19>/Product1' incorporates:
   //   Constant: '<S19>/Constant2'
 
-  rtb_Abs = *rty_WheelOmegaRLrads * 0.2;
+  rtb_Switch_p = *rty_WheelOmegaRLrads * 0.2;
 
   // Sum: '<S19>/Subtract1'
-  rtb_Abs -= *rty_LongitudinalCornerVelWRLm;
+  rtb_Switch_p -= *rty_LongitudinalCornerVelWRLm;
 
   // If: '<S19>/If2'
-  if (rtb_Abs > 0.0) {
+  if (rtb_Switch_p > 0.0) {
     // Outputs for IfAction SubSystem: '<S19>/Accel. Calc' incorporates:
     //   ActionPort: '<S27>/Action Port'
 
@@ -411,7 +451,7 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
       *rty_WheelOmegaRLrads, &rtb_SL);
 
     // End of Outputs for SubSystem: '<S19>/Accel. Calc'
-  } else if (rtb_Abs < 0.0) {
+  } else if (rtb_Switch_p < 0.0) {
     // Outputs for IfAction SubSystem: '<S19>/Brake Calc' incorporates:
     //   ActionPort: '<S28>/Action Port'
 
@@ -437,18 +477,18 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   *rty_SLRL = rtb_SL;
 
   // Gain: '<S15>/Gain3'
-  *rty_WheelOmegaRRrads = 0.084317032040472181 * rtb_Abs1;
+  *rty_WheelOmegaRRrads = 0.084317032040472181 * rtb_Abs_l;
 
   // Product: '<S20>/Product1' incorporates:
   //   Constant: '<S20>/Constant2'
 
-  rtb_Abs1 = *rty_WheelOmegaRRrads * 0.2;
+  rtb_Abs_l = *rty_WheelOmegaRRrads * 0.2;
 
   // Sum: '<S20>/Subtract1'
-  rtb_Abs1 -= *rty_LongitudinalCornerVelWRRm;
+  rtb_Abs_l -= *rty_LongitudinalCornerVelWRRm;
 
   // If: '<S20>/If2'
-  if (rtb_Abs1 > 0.0) {
+  if (rtb_Abs_l > 0.0) {
     // Outputs for IfAction SubSystem: '<S20>/Accel. Calc' incorporates:
     //   ActionPort: '<S30>/Action Port'
 
@@ -456,7 +496,7 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
       *rty_WheelOmegaRRrads, &rtb_SL);
 
     // End of Outputs for SubSystem: '<S20>/Accel. Calc'
-  } else if (rtb_Abs1 < 0.0) {
+  } else if (rtb_Abs_l < 0.0) {
     // Outputs for IfAction SubSystem: '<S20>/Brake Calc' incorporates:
     //   ActionPort: '<S31>/Action Port'
 
