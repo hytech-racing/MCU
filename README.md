@@ -1,3 +1,14 @@
+## updating CASE
+
+1. generate the .zip file in HyTech_sim by generating the code for CASE
+2. while in the HyTech_sim directory, there exists `process_lib.py`. use this by running:
+```
+python3 process_lib.py HT08_CONTROL_SYSTEM.zip /path/to/MCU/lib/CASE_lib CASE_lib
+```
+while ensuring that you fill in your path to MCU.
+
+3. profit
+
 ## building testing and running
 This project uses [Platformio](https://docs.platformio.org/en/latest/) for building, testing, checking and packaging. 
 
