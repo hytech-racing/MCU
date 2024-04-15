@@ -155,7 +155,7 @@ float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData
     else
     {
         // Negative torque request
-        torqueRequest = max_regen_torque * accelRequest * -1.0;
+        torqueRequest = max_regen_torque * accelRequest;
     }
     return torqueRequest;
 }
