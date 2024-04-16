@@ -86,10 +86,33 @@ void TorqueControllerMux::tick(
 
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
 
-        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        // apply torque limit before power limit to not power limit
+        applyRegenLimit(&drivetrainCommand_, &drivetrainData);
         applyTorqueLimit(&drivetrainCommand_);
+        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         applyPosSpeedLimit(&drivetrainCommand_);
 
+    }
+}
+
+/*
+    Apply limit to make sure that regenerative braking is not applied when
+    wheelspeed is below 5m/s on all wheels.
+*/
+void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain)
+{
+    float max_wheelspeed = 0;
+    bool regen = false;
+
+    for (int i = 0; i < NUM_MOTORS; i++) {
+        max_wheelspeed = std::max(max_wheelspeed, drivetrain->measuredSpeeds[i]);
+        regen = (command->speeds_rpm[i] == 0);
+    }
+
+    if ((max_wheelspeed * RPM_TO_METERS_PER_SECOND) < 5 && regen) {
+        for (int i = 0; i < NUM_MOTORS; i++) {
+            command->torqueSetpoints[i] = 0;
+        }
     }
 }
 
