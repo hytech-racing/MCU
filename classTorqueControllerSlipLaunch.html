@@ -259,27 +259,25 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  283</span>            uint32_t ms_since_launch = (<a class="code hl_variable" href="classBaseLaunchController.html#a383933ca8acd0408f32ac755c6b04755">current_millis</a> - <a class="code hl_variable" href="classBaseLaunchController.html#a0c891ff8379cae0422cb8bb4b7106dbf">time_of_launch</a>);</div>
 <div class="line"><span class="lineno">  284</span>            <span class="comment">// accelerate at constant speed for a period of time to get body velocity up</span></div>
 <div class="line"><span class="lineno">  285</span>            <span class="comment">// may want to make this the ht07 launch algo</span></div>
-<div class="line"><span class="lineno">  286</span>            <span class="keywordflow">if</span>(ms_since_launch &lt; <a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a>){</div>
-<div class="line"><span class="lineno">  287</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>;</div>
-<div class="line"><span class="lineno">  288</span> </div>
-<div class="line"><span class="lineno">  289</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>                <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">  292</span><span class="comment">                New slip-ratio based launch algorithm by Luke Chen. The basic idea</span></div>
-<div class="line"><span class="lineno">  293</span><span class="comment">                is to always be pushing the car a certain &#39;slip_ratio_&#39; faster than</span></div>
-<div class="line"><span class="lineno">  294</span><span class="comment">                the car is currently going, theoretically always keeping the car in slip</span></div>
-<div class="line"><span class="lineno">  295</span><span class="comment">                */</span></div>
-<div class="line"><span class="lineno">  296</span>                <span class="comment">// m/s</span></div>
-<div class="line"><span class="lineno">  297</span>                <span class="keywordtype">float</span> new_speed_target = (1 + slip_ratio_) * (vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#aae1d0320b2a6dafbd439483081ca736c">velocity_x</a>);</div>
-<div class="line"><span class="lineno">  298</span>                <span class="comment">// rpm</span></div>
-<div class="line"><span class="lineno">  299</span>                new_speed_target *= <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>;</div>
-<div class="line"><span class="lineno">  300</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max(<a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>, new_speed_target);</div>
-<div class="line"><span class="lineno">  301</span> </div>
-<div class="line"><span class="lineno">  302</span>            }</div>
-<div class="line"><span class="lineno">  303</span> </div>
-<div class="line"><span class="lineno">  304</span>}</div>
+<div class="line"><span class="lineno">  286</span>            </div>
+<div class="line"><span class="lineno">  287</span>            <span class="comment">// makes sure that the car launches at the target launch speed</span></div>
+<div class="line"><span class="lineno">  288</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max(<a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>, (<span class="keywordtype">float</span>)<a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>);</div>
+<div class="line"><span class="lineno">  289</span> </div>
+<div class="line"><span class="lineno">  290</span>            <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  291</span><span class="comment">            New slip-ratio based launch algorithm by Luke Chen. The basic idea</span></div>
+<div class="line"><span class="lineno">  292</span><span class="comment">            is to always be pushing the car a certain &#39;slip_ratio_&#39; faster than</span></div>
+<div class="line"><span class="lineno">  293</span><span class="comment">            the car is currently going, theoretically always keeping the car in slip</span></div>
+<div class="line"><span class="lineno">  294</span><span class="comment">            */</span></div>
+<div class="line"><span class="lineno">  295</span>            <span class="comment">// m/s</span></div>
+<div class="line"><span class="lineno">  296</span>            <span class="keywordtype">float</span> new_speed_target = (1 + slip_ratio_) * (vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#aae1d0320b2a6dafbd439483081ca736c">velocity_x</a>);</div>
+<div class="line"><span class="lineno">  297</span>            <span class="comment">// rpm</span></div>
+<div class="line"><span class="lineno">  298</span>            new_speed_target *= <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>;</div>
+<div class="line"><span class="lineno">  299</span>            <span class="comment">// makes sure the car target speed never goes lower than prev. target</span></div>
+<div class="line"><span class="lineno">  300</span>            <span class="comment">// allows for the vn to &#39;spool&#39; up and us to get reliable vx data</span></div>
+<div class="line"><span class="lineno">  301</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max(<a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>, new_speed_target);</div>
+<div class="line"><span class="lineno">  302</span> </div>
+<div class="line"><span class="lineno">  303</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_a2e2740dd9746589ef0bea73831ff3a2d"><div class="ttname"><a href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a></div><div class="ttdeci">const float METERS_PER_SECOND_TO_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00007">PhysicalParameters.h:7</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ae354ab8317fa70c138b225cd3de7959c"><div class="ttname"><a href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a></div><div class="ttdeci">const float const_accel_time</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00036">TorqueControllers.h:36</a></div></div>
 <div class="ttc" id="aclassBaseLaunchController_html_a0c891ff8379cae0422cb8bb4b7106dbf"><div class="ttname"><a href="classBaseLaunchController.html#a0c891ff8379cae0422cb8bb4b7106dbf">BaseLaunchController::time_of_launch</a></div><div class="ttdeci">uint32_t time_of_launch</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00248">TorqueControllers.h:248</a></div></div>
 <div class="ttc" id="aclassBaseLaunchController_html_a383933ca8acd0408f32ac755c6b04755"><div class="ttname"><a href="classBaseLaunchController.html#a383933ca8acd0408f32ac755c6b04755">BaseLaunchController::current_millis</a></div><div class="ttdeci">uint32_t current_millis</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00255">TorqueControllers.h:255</a></div></div>
 <div class="ttc" id="aclassBaseLaunchController_html_a935b92bad521457a8df21e44cc98df49"><div class="ttname"><a href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">BaseLaunchController::launch_speed_target</a></div><div class="ttdeci">float launch_speed_target</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00256">TorqueControllers.h:256</a></div></div>

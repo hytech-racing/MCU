@@ -219,48 +219,48 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseLaunchController.html#af0f7e58e2e72dba782eca4db9b2c5e2b">BaseLaunchController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8cpp_source.html#l00306">306</a> of file <a class="el" href="TorqueControllers_8cpp_source.html">TorqueControllers.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  306</span>                                                                             {</div>
-<div class="line"><span class="lineno">  307</span> </div>
-<div class="line"><span class="lineno">  308</span>    <span class="comment">// initial_lat = toRadians(initial_lat);</span></div>
-<div class="line"><span class="lineno">  309</span>    <span class="comment">// initial_lon = toRadians(initial_lon);</span></div>
-<div class="line"><span class="lineno">  310</span>    <span class="comment">// double lat = toRadians(vn_data-&gt;latitude);</span></div>
-<div class="line"><span class="lineno">  311</span>    <span class="comment">// double lon = toRadians(vn_data-&gt;longitude);</span></div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8cpp_source.html#l00305">305</a> of file <a class="el" href="TorqueControllers_8cpp_source.html">TorqueControllers.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  305</span>                                                                             {</div>
+<div class="line"><span class="lineno">  306</span> </div>
+<div class="line"><span class="lineno">  307</span>    <span class="comment">// initial_lat = toRadians(initial_lat);</span></div>
+<div class="line"><span class="lineno">  308</span>    <span class="comment">// initial_lon = toRadians(initial_lon);</span></div>
+<div class="line"><span class="lineno">  309</span>    <span class="comment">// double lat = toRadians(vn_data-&gt;latitude);</span></div>
+<div class="line"><span class="lineno">  310</span>    <span class="comment">// double lon = toRadians(vn_data-&gt;longitude);</span></div>
+<div class="line"><span class="lineno">  311</span> </div>
 <div class="line"><span class="lineno">  312</span> </div>
-<div class="line"><span class="lineno">  313</span> </div>
-<div class="line"><span class="lineno">  314</span>    <span class="comment">// /* BEWARE PARTIALLY WRITTEN BY CHAT */</span></div>
-<div class="line"><span class="lineno">  315</span>    <span class="comment">// double dLat = lat - initial_lat;</span></div>
-<div class="line"><span class="lineno">  316</span>    <span class="comment">// double dLon = lon - initial_lon;</span></div>
-<div class="line"><span class="lineno">  317</span>    <span class="comment">// double a = sin(dLat / 2) * sin(dLat / 2) +</span></div>
-<div class="line"><span class="lineno">  318</span>    <span class="comment">//            cos(lat) * cos(initial_lat) *</span></div>
-<div class="line"><span class="lineno">  319</span>    <span class="comment">//            sin(dLon / 2) * sin(dLon / 2);</span></div>
-<div class="line"><span class="lineno">  320</span>    <span class="comment">// double c = 2 * atan2(sqrt(a), sqrt(1 - a));</span></div>
-<div class="line"><span class="lineno">  321</span>    <span class="comment">// double distance = EARTH_RADIUS_KM * c;</span></div>
-<div class="line"><span class="lineno">  322</span> </div>
-<div class="line"><span class="lineno">  323</span>    <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max((<span class="keywordtype">float</span>)<a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>, <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>);</div>
-<div class="line"><span class="lineno">  324</span> </div>
-<div class="line"><span class="lineno">  325</span>    <span class="keywordtype">double</span> dx = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[0] - <a class="code hl_variable" href="classBaseLaunchController.html#a7c3dbaa06e5feeca7a269a11fd3c0907">initial_ecef_x</a>;</div>
-<div class="line"><span class="lineno">  326</span>    <span class="keywordtype">double</span> dy = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[1] - <a class="code hl_variable" href="classBaseLaunchController.html#ae4ddbf6ef41e3d89d5f6380d570fa415">initial_ecef_y</a>;</div>
-<div class="line"><span class="lineno">  327</span>    <span class="keywordtype">double</span> dz = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[2] - <a class="code hl_variable" href="classBaseLaunchController.html#abde13a4a2ce617c86767e394317c5faa">initial_ecef_z</a>;</div>
-<div class="line"><span class="lineno">  328</span> </div>
-<div class="line"><span class="lineno">  329</span>    <span class="keywordtype">double</span> distance = sqrt((dx*dx) + (dy*dy) + (dz*dz));</div>
-<div class="line"><span class="lineno">  330</span> </div>
-<div class="line"><span class="lineno">  331</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">  332</span><span class="comment">    Distance-lookup launch algorithm. Takes in the vel_dist_lookup</span></div>
-<div class="line"><span class="lineno">  333</span><span class="comment">    generated from Luke&#39;s matlab/symlink to set speed targets based</span></div>
-<div class="line"><span class="lineno">  334</span><span class="comment">    on distance travelled from the start point.</span></div>
-<div class="line"><span class="lineno">  335</span><span class="comment">    This can also and may be better to replace with an integration</span></div>
-<div class="line"><span class="lineno">  336</span><span class="comment">    of body velocity.</span></div>
-<div class="line"><span class="lineno">  337</span><span class="comment">    */</span></div>
-<div class="line"><span class="lineno">  338</span> </div>
-<div class="line"><span class="lineno">  339</span>    uint32_t idx = (uint32_t)(distance * 10); <span class="comment">// multiply by 10 to be used as index for meters in steps of 1/10</span></div>
-<div class="line"><span class="lineno">  340</span>    idx = std::min(idx, (uint32_t)(<span class="keyword">sizeof</span>(<a class="code hl_variable" href="accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca">vel_dist_lookup</a>) / <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)));</div>
-<div class="line"><span class="lineno">  341</span>    <span class="keywordtype">float</span> mps_target = <a class="code hl_variable" href="accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca">vel_dist_lookup</a>[idx];</div>
-<div class="line"><span class="lineno">  342</span> </div>
-<div class="line"><span class="lineno">  343</span>    <span class="keywordtype">float</span> new_speed_target = mps_target * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>;</div>
-<div class="line"><span class="lineno">  344</span>    <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max(<a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>, new_speed_target);</div>
-<div class="line"><span class="lineno">  345</span> </div>
-<div class="line"><span class="lineno">  346</span>}</div>
+<div class="line"><span class="lineno">  313</span>    <span class="comment">// /* BEWARE PARTIALLY WRITTEN BY CHAT */</span></div>
+<div class="line"><span class="lineno">  314</span>    <span class="comment">// double dLat = lat - initial_lat;</span></div>
+<div class="line"><span class="lineno">  315</span>    <span class="comment">// double dLon = lon - initial_lon;</span></div>
+<div class="line"><span class="lineno">  316</span>    <span class="comment">// double a = sin(dLat / 2) * sin(dLat / 2) +</span></div>
+<div class="line"><span class="lineno">  317</span>    <span class="comment">//            cos(lat) * cos(initial_lat) *</span></div>
+<div class="line"><span class="lineno">  318</span>    <span class="comment">//            sin(dLon / 2) * sin(dLon / 2);</span></div>
+<div class="line"><span class="lineno">  319</span>    <span class="comment">// double c = 2 * atan2(sqrt(a), sqrt(1 - a));</span></div>
+<div class="line"><span class="lineno">  320</span>    <span class="comment">// double distance = EARTH_RADIUS_KM * c;</span></div>
+<div class="line"><span class="lineno">  321</span> </div>
+<div class="line"><span class="lineno">  322</span>    <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max((<span class="keywordtype">float</span>)<a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>, <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>);</div>
+<div class="line"><span class="lineno">  323</span> </div>
+<div class="line"><span class="lineno">  324</span>    <span class="keywordtype">double</span> dx = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[0] - <a class="code hl_variable" href="classBaseLaunchController.html#a7c3dbaa06e5feeca7a269a11fd3c0907">initial_ecef_x</a>;</div>
+<div class="line"><span class="lineno">  325</span>    <span class="keywordtype">double</span> dy = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[1] - <a class="code hl_variable" href="classBaseLaunchController.html#ae4ddbf6ef41e3d89d5f6380d570fa415">initial_ecef_y</a>;</div>
+<div class="line"><span class="lineno">  326</span>    <span class="keywordtype">double</span> dz = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[2] - <a class="code hl_variable" href="classBaseLaunchController.html#abde13a4a2ce617c86767e394317c5faa">initial_ecef_z</a>;</div>
+<div class="line"><span class="lineno">  327</span> </div>
+<div class="line"><span class="lineno">  328</span>    <span class="keywordtype">double</span> distance = sqrt((dx*dx) + (dy*dy) + (dz*dz));</div>
+<div class="line"><span class="lineno">  329</span> </div>
+<div class="line"><span class="lineno">  330</span>    <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">  331</span><span class="comment">    Distance-lookup launch algorithm. Takes in the vel_dist_lookup</span></div>
+<div class="line"><span class="lineno">  332</span><span class="comment">    generated from Luke&#39;s matlab/symlink to set speed targets based</span></div>
+<div class="line"><span class="lineno">  333</span><span class="comment">    on distance travelled from the start point.</span></div>
+<div class="line"><span class="lineno">  334</span><span class="comment">    This can also and may be better to replace with an integration</span></div>
+<div class="line"><span class="lineno">  335</span><span class="comment">    of body velocity.</span></div>
+<div class="line"><span class="lineno">  336</span><span class="comment">    */</span></div>
+<div class="line"><span class="lineno">  337</span> </div>
+<div class="line"><span class="lineno">  338</span>    uint32_t idx = (uint32_t)(distance * 10); <span class="comment">// multiply by 10 to be used as index for meters in steps of 1/10</span></div>
+<div class="line"><span class="lineno">  339</span>    idx = std::min(idx, (uint32_t)(<span class="keyword">sizeof</span>(<a class="code hl_variable" href="accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca">vel_dist_lookup</a>) / <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)));</div>
+<div class="line"><span class="lineno">  340</span>    <span class="keywordtype">float</span> mps_target = <a class="code hl_variable" href="accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca">vel_dist_lookup</a>[idx];</div>
+<div class="line"><span class="lineno">  341</span> </div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordtype">float</span> new_speed_target = mps_target * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>;</div>
+<div class="line"><span class="lineno">  343</span>    <a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a> = std::max(<a class="code hl_variable" href="classBaseLaunchController.html#a935b92bad521457a8df21e44cc98df49">launch_speed_target</a>, new_speed_target);</div>
+<div class="line"><span class="lineno">  344</span> </div>
+<div class="line"><span class="lineno">  345</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_a2e2740dd9746589ef0bea73831ff3a2d"><div class="ttname"><a href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a></div><div class="ttdeci">const float METERS_PER_SECOND_TO_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00007">PhysicalParameters.h:7</a></div></div>
 <div class="ttc" id="aaccel__lookup_8h_html_ad7897ffe38fbc6c7fcd38231f7add5ca"><div class="ttname"><a href="accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca">vel_dist_lookup</a></div><div class="ttdeci">const float vel_dist_lookup[750]</div><div class="ttdef"><b>Definition:</b> <a href="accel__lookup_8h_source.html#l00006">accel_lookup.h:6</a></div></div>
 <div class="ttc" id="aclassBaseLaunchController_html_a7c3dbaa06e5feeca7a269a11fd3c0907"><div class="ttname"><a href="classBaseLaunchController.html#a7c3dbaa06e5feeca7a269a11fd3c0907">BaseLaunchController::initial_ecef_x</a></div><div class="ttdeci">double initial_ecef_x</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00250">TorqueControllers.h:250</a></div></div>
