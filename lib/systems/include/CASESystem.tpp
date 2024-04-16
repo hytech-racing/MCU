@@ -12,12 +12,19 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
                                                          bool reset_integral,
                                                          uint8_t vn_status)
 {
-    HT08_CONTROL_SYSTEM::ExtU_HT08_CONTROL_SYSTEM_T in;
+    HT08_CASE::ExtU_HT08_CASE_T in;
 
     float steering_value = steering_norm * 130;
-    in.PIDConfig[0] = config_.pid_p;
-    in.PIDConfig[1] = config_.pid_i;
-    in.PIDConfig[2] = config_.pid_d;
+
+    in.YawPIDConfig[0] = config_.yaw_pid_p;
+    in.YawPIDConfig[1] = config_.yaw_pid_i;
+    in.YawPIDConfig[2] = config_.yaw_pid_d;
+
+    in.TCSPIDConfig[0] = config_.tcs_pid_p;
+    in.TCSPIDConfig[1] = config_.tcs_pid_i;
+    in.TCSPIDConfig[2] = config_.tcs_pid_d;
+
+    // in.
 
     if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
@@ -29,19 +36,27 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     }
 
     bool vn_active_for_long_enough = (vn_active_start_time_ >= 5000);
-    if (vn_active_for_long_enough)
-    {
+    // if (vn_active_for_long_enough)
+    // {
         in.usePIDTV = config_.usePIDTV;
-    }
-    else
-    {
-        in.usePIDTV = false;
-    }
+    // }
+    // else
+    // {
+    //     in.usePIDTV = false;
+    // }
 
     in.useNormalForce = config_.useNormalForce;
     in.usePowerLimit = config_.usePowerLimit;
     in.usePIDPowerLimit = config_.usePIDPowerLimit;
+
     in.useLaunch = config_.useLaunch;
+    in.useTractionControl = config_.useTractionControl;
+    in.TCSThreshold = config_.tcsThreshold;
+    in.LaunchSL = config_.launchSL;
+    in.LaunchDeadZone = config_.launchDeadZone;
+
+    in.TorqueLimit = config_.torqueLimit;
+
 
     in.SteeringWheelAngleDeg = steering_value;
 
@@ -66,7 +81,7 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     {
         if (reset_integral)
         {
-            in.PIDConfig[1] = 0.0f;
+            in.YawPIDConfig[1] = 0.0f;
         }
         case_.step();
         last_eval_time_ = tick.millis;
@@ -98,10 +113,14 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
+        
         last_controller_pt1_send_time_ = tick.millis;
     }
 
-    if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 2)) &&
+    if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
         ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
@@ -109,6 +128,8 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
         last_controller_pt2_send_time_ = tick.millis;
     }
 
@@ -121,6 +142,7 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_steer_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
         last_vehm_send_time_ = tick.millis;
     }
     

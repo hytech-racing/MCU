@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'POWER_LIMIT'.
 //
-// Model version                  : 1.34
+// Model version                  : 1.37
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Thu Apr 11 21:52:16 2024
+// C/C++ source code generated on : Mon Apr 15 17:38:49 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -80,30 +80,50 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
         powerPerCorner_kW_idx_1 = *rtu_TorqueFR / torqueNet_Mag * 80.0 * 1000.0;
         powerPerCorner_kW_idx_2 = *rtu_TorqueRL / torqueNet_Mag * 80.0 * 1000.0;
         torqueNet_Mag = *rtu_TorqueRR / torqueNet_Mag * 80.0 * 1000.0;
-        POWER_LIMIT_B.cornerPower_FL_i = powerPerCorner_kW_idx_0;
-        POWER_LIMIT_B.cornerPower_FR_k = powerPerCorner_kW_idx_0;
-        POWER_LIMIT_B.cornerPower_RL_b = powerPerCorner_kW_idx_0;
-        POWER_LIMIT_B.cornerPower_RR_b = powerPerCorner_kW_idx_0;
+        rtb_Gain = powerPerCorner_kW_idx_0 / rtb_Gain;
+        powerPerCorner_kW_idx_1 /= rtb_Gain1;
+        powerPerCorner_kW_idx_2 /= rtb_Gain2;
+        torqueNet_Mag /= rtb_Gain3;
+        if (rtb_Gain > 21.4) {
+          rtb_Gain = 21.4;
+        }
+
+        if (powerPerCorner_kW_idx_1 > 21.4) {
+          powerPerCorner_kW_idx_1 = 21.4;
+        }
+
+        if (powerPerCorner_kW_idx_2 > 21.4) {
+          powerPerCorner_kW_idx_2 = 21.4;
+        }
+
+        if (torqueNet_Mag > 21.4) {
+          torqueNet_Mag = 21.4;
+        }
+
+        POWER_LIMIT_B.cornerPower_FL_a = powerPerCorner_kW_idx_0;
+        POWER_LIMIT_B.cornerPower_FR_c = powerPerCorner_kW_idx_0;
+        POWER_LIMIT_B.cornerPower_RL_k = powerPerCorner_kW_idx_0;
+        POWER_LIMIT_B.cornerPower_RR_p = powerPerCorner_kW_idx_0;
 
         // SignalConversion generated from: '<S5>/PLTorque_FL' incorporates:
         //   MATLAB Function: '<S5>/MATLAB Function'
 
-        *rty_PLTorqueFL = powerPerCorner_kW_idx_0 / rtb_Gain;
+        *rty_PLTorqueFL = rtb_Gain;
 
         // SignalConversion generated from: '<S5>/PLTorque_FR' incorporates:
         //   MATLAB Function: '<S5>/MATLAB Function'
 
-        *rty_PLTorqueFR = powerPerCorner_kW_idx_1 / rtb_Gain1;
+        *rty_PLTorqueFR = powerPerCorner_kW_idx_1;
 
         // SignalConversion generated from: '<S5>/PLTorque_RL' incorporates:
         //   MATLAB Function: '<S5>/MATLAB Function'
 
-        *rty_PLTorqueRL = powerPerCorner_kW_idx_2 / rtb_Gain2;
+        *rty_PLTorqueRL = powerPerCorner_kW_idx_2;
 
         // SignalConversion generated from: '<S5>/PLTorque_RR' incorporates:
         //   MATLAB Function: '<S5>/MATLAB Function'
 
-        *rty_PLTorqueRR = torqueNet_Mag / rtb_Gain3;
+        *rty_PLTorqueRR = torqueNet_Mag;
 
         // SignalConversion generated from: '<S5>/Power Lim Status' incorporates:
         //   Constant: '<S5>/Constant1'
@@ -112,7 +132,7 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
 
         // End of Outputs for SubSystem: '<S3>/HT07 POWER LIMIT'
       } else if (*rtu_CurrentPowerkW >= 75.0) {
-        real_T powerPerCorner_kW_idx_1;
+        real_T powerPerCorner_kW_idx_0;
         real_T powerPerCorner_kW_idx_2;
         real_T torqueNet_Mag;
 
@@ -130,21 +150,21 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
         // Gain: '<S35>/Derivative Gain' incorporates:
         //   Gain: '<S38>/Integral Gain'
 
-        powerPerCorner_kW_idx_2 = 0.0 * *rty_PowerLimErrorkW;
+        powerPerCorner_kW_idx_0 = 0.0 * *rty_PowerLimErrorkW;
 
         // Gain: '<S44>/Filter Coefficient' incorporates:
         //   DiscreteIntegrator: '<S36>/Filter'
         //   Gain: '<S35>/Derivative Gain'
         //   Sum: '<S36>/SumD'
 
-        powerPerCorner_kW_idx_1 = (powerPerCorner_kW_idx_2 -
+        powerPerCorner_kW_idx_2 = (powerPerCorner_kW_idx_0 -
           POWER_LIMIT_DW.Filter_DSTATE) * 100.0;
 
         // Sum: '<S50>/Sum' incorporates:
         //   DiscreteIntegrator: '<S41>/Integrator'
 
         torqueNet_Mag = (torqueNet_Mag + POWER_LIMIT_DW.Integrator_DSTATE) +
-          powerPerCorner_kW_idx_1;
+          powerPerCorner_kW_idx_2;
 
         // Switch: '<S7>/Switch' incorporates:
         //   Constant: '<S7>/Constant2'
@@ -175,10 +195,10 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
         *rty_PowerLimStatus = 1.0;
 
         // Update for DiscreteIntegrator: '<S41>/Integrator'
-        POWER_LIMIT_DW.Integrator_DSTATE += 0.001 * powerPerCorner_kW_idx_2;
+        POWER_LIMIT_DW.Integrator_DSTATE += 0.001 * powerPerCorner_kW_idx_0;
 
         // Update for DiscreteIntegrator: '<S36>/Filter'
-        POWER_LIMIT_DW.Filter_DSTATE += 0.001 * powerPerCorner_kW_idx_1;
+        POWER_LIMIT_DW.Filter_DSTATE += 0.001 * powerPerCorner_kW_idx_2;
 
         // End of Outputs for SubSystem: '<S3>/PID POWER LIMIT'
       } else {
@@ -208,16 +228,16 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
       // End of If: '<S3>/If'
 
       // SignalConversion generated from: '<S3>/cornerPower_FL'
-      *rty_CornerPowerFLkW = POWER_LIMIT_B.cornerPower_FL_i;
+      *rty_CornerPowerFLkW = POWER_LIMIT_B.cornerPower_FL_a;
 
       // SignalConversion generated from: '<S3>/cornerPower_FR'
-      *rty_CornerPowerFRkW = POWER_LIMIT_B.cornerPower_FR_k;
+      *rty_CornerPowerFRkW = POWER_LIMIT_B.cornerPower_FR_c;
 
       // SignalConversion generated from: '<S3>/cornerPower_RL'
-      *rty_CornerPowerRLkW = POWER_LIMIT_B.cornerPower_RL_b;
+      *rty_CornerPowerRLkW = POWER_LIMIT_B.cornerPower_RL_k;
 
       // SignalConversion generated from: '<S3>/cornerPower_RR'
-      *rty_CornerPowerRRkW = POWER_LIMIT_B.cornerPower_RR_b;
+      *rty_CornerPowerRRkW = POWER_LIMIT_B.cornerPower_RR_p;
 
       // End of Outputs for SubSystem: '<S1>/If Action Subsystem'
     } else {
@@ -260,6 +280,26 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
         powerPerCorner_kW_idx_1 = *rtu_TorqueFR / torqueNet_Mag * 80.0 * 1000.0;
         powerPerCorner_kW_idx_2 = *rtu_TorqueRL / torqueNet_Mag * 80.0 * 1000.0;
         torqueNet_Mag = *rtu_TorqueRR / torqueNet_Mag * 80.0 * 1000.0;
+        rtb_Gain = powerPerCorner_kW_idx_0 / rtb_Gain;
+        powerPerCorner_kW_idx_1 /= rtb_Gain1;
+        powerPerCorner_kW_idx_2 /= rtb_Gain2;
+        torqueNet_Mag /= rtb_Gain3;
+        if (rtb_Gain > 21.4) {
+          rtb_Gain = 21.4;
+        }
+
+        if (powerPerCorner_kW_idx_1 > 21.4) {
+          powerPerCorner_kW_idx_1 = 21.4;
+        }
+
+        if (powerPerCorner_kW_idx_2 > 21.4) {
+          powerPerCorner_kW_idx_2 = 21.4;
+        }
+
+        if (torqueNet_Mag > 21.4) {
+          torqueNet_Mag = 21.4;
+        }
+
         POWER_LIMIT_B.cornerPower_FL = powerPerCorner_kW_idx_0;
         POWER_LIMIT_B.cornerPower_FR = powerPerCorner_kW_idx_0;
         POWER_LIMIT_B.cornerPower_RL = powerPerCorner_kW_idx_0;
@@ -268,22 +308,22 @@ void POWER_LIMIT::step(const real_T *rtu_CurrentPowerkW, const real_T
         // SignalConversion generated from: '<S58>/PLTorque_FL' incorporates:
         //   MATLAB Function: '<S58>/MATLAB Function'
 
-        *rty_PLTorqueFL = powerPerCorner_kW_idx_0 / rtb_Gain;
+        *rty_PLTorqueFL = rtb_Gain;
 
         // SignalConversion generated from: '<S58>/PLTorque_FR' incorporates:
         //   MATLAB Function: '<S58>/MATLAB Function'
 
-        *rty_PLTorqueFR = powerPerCorner_kW_idx_1 / rtb_Gain1;
+        *rty_PLTorqueFR = powerPerCorner_kW_idx_1;
 
         // SignalConversion generated from: '<S58>/PLTorque_RL' incorporates:
         //   MATLAB Function: '<S58>/MATLAB Function'
 
-        *rty_PLTorqueRL = powerPerCorner_kW_idx_2 / rtb_Gain2;
+        *rty_PLTorqueRL = powerPerCorner_kW_idx_2;
 
         // SignalConversion generated from: '<S58>/PLTorque_RR' incorporates:
         //   MATLAB Function: '<S58>/MATLAB Function'
 
-        *rty_PLTorqueRR = torqueNet_Mag / rtb_Gain3;
+        *rty_PLTorqueRR = torqueNet_Mag;
 
         // SignalConversion generated from: '<S58>/Power Lim Status' incorporates:
         //   Constant: '<S58>/Constant1'

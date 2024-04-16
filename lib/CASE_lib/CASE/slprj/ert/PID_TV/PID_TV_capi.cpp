@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'PID_TV'.
 //
-// Model version                  : 1.35
+// Model version                  : 1.38
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 12 08:19:45 2024
+// C/C++ source code generated on : Mon Apr 15 17:36:51 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -43,7 +43,7 @@ static rtwCAPI_Signals rtBlockSignals[]{
   // addrMapIndex, sysNum, blockPath,
   //  signalName, portNumber, dataTypeIndex, dimIndex, fxpIndex, sTimeIndex
 
-  { 0, 2, TARGET_STRING("PID_TV/Constant1"),
+  { 0, 8, TARGET_STRING("PID_TV/Constant1"),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
   {
@@ -165,10 +165,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 84333415U,
-    2926266895U,
-    1939239020U,
-    1333053572U },
+  { 2929238870U,
+    3371536925U,
+    95322136U,
+    1210266346U },
   (nullptr), 0,
   (boolean_T)0
 };

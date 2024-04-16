@@ -1,7 +1,7 @@
 #ifndef CASESYSTEM
 #define CASESYSTEM
 
-#include "HT08_CONTROL_SYSTEM.h"
+#include "HT08_CASE.h"
 #include "StateData.h"
 #include "HytechCANInterface.h"
 #include "PedalsSystem.h"
@@ -9,17 +9,25 @@
 
 struct CASEConfiguration
 {
+    float torqueLimit;
+    float yaw_pid_p;
+    float yaw_pid_i;
+    float yaw_pid_d;
+    float tcs_pid_p;
+    float tcs_pid_i;
+    float tcs_pid_d;
+    bool useLaunch;
     bool usePIDTV;
     bool useNormalForce;
+    bool useTractionControl;
     bool usePowerLimit;
     bool usePIDPowerLimit;
-    bool useLaunch;
+    float tcsThreshold;
+    float launchSL;
+    float launchDeadZone;
     float max_rpm;
     float max_regen_torque;
     float max_torque;
-    float pid_p;
-    float pid_i;
-    float pid_d;
 };
 
 struct CASEControllerOutput
@@ -39,7 +47,7 @@ public:
     /// @param can_queue the pointer to the message queue that will have the CAN messages put onto it
     /// @param send_period_ms the period in which messages will be put into the queue to be sent in milliseconds.
     /// @param vehicle_math_offset_ms the offset in ms from controller message sending that the vehicle math messages will be sent
-    CASESystem(message_queue *can_queue, unsigned long controller_send_period_ms, unsigned long vehicle_math_offset_ms, const CASEConfiguration &config)
+    CASESystem(message_queue *can_queue, unsigned long controller_send_period_ms, unsigned long vehicle_math_offset_ms, CASEConfiguration config)
     {
         msg_queue_ = can_queue;
         case_.initialize();
@@ -75,11 +83,15 @@ public:
                            bool reset_integral, 
                            uint8_t vn_status);
 
-    void update_pid(float p, float i, float d)
+    void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d)
     {
-        config_.pid_p = p;
-        config_.pid_p = i;
-        config_.pid_p = d;
+        config_.yaw_pid_p = yaw_p;
+        config_.yaw_pid_p = yaw_i;
+        config_.yaw_pid_p = yaw_d;
+
+        config_.tcs_pid_p = tcs_p;
+        config_.tcs_pid_i = tcs_i;
+        config_.tcs_pid_d = tcs_d;
     }
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
@@ -100,7 +112,7 @@ public:
 private:
     CASEConfiguration config_;
     message_queue *msg_queue_;
-    HT08_CONTROL_SYSTEM case_;
+    HT08_CASE case_;
     pstate state_;
 
     unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_,  last_vehm_send_time_, controller_send_period_ms_;

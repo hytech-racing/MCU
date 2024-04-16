@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'POWER_LIMIT'.
 //
-// Model version                  : 1.34
+// Model version                  : 1.37
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Thu Apr 11 21:52:16 2024
+// C/C++ source code generated on : Mon Apr 15 17:38:49 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -127,18 +127,18 @@ static rtwCAPI_ModelParameters rtModelParameters[]{
 static void POWER_LIMIT_InitializeDataAddr(void* dataAddr[], POWER_LIMIT::
   B_POWER_LIMIT_T *POWER_LIMIT_B)
 {
-  dataAddr[0] = (void*) (&POWER_LIMIT_B->cornerPower_FL_i);
-  dataAddr[1] = (void*) (&POWER_LIMIT_B->cornerPower_FR_k);
-  dataAddr[2] = (void*) (&POWER_LIMIT_B->cornerPower_RL_b);
-  dataAddr[3] = (void*) (&POWER_LIMIT_B->cornerPower_RR_b);
+  dataAddr[0] = (void*) (&POWER_LIMIT_B->cornerPower_FL_a);
+  dataAddr[1] = (void*) (&POWER_LIMIT_B->cornerPower_FR_c);
+  dataAddr[2] = (void*) (&POWER_LIMIT_B->cornerPower_RL_k);
+  dataAddr[3] = (void*) (&POWER_LIMIT_B->cornerPower_RR_p);
   dataAddr[4] = (void*) (&POWER_LIMIT_B->cornerPower_FL);
   dataAddr[5] = (void*) (&POWER_LIMIT_B->cornerPower_FR);
   dataAddr[6] = (void*) (&POWER_LIMIT_B->cornerPower_RL);
   dataAddr[7] = (void*) (&POWER_LIMIT_B->cornerPower_RR);
-  dataAddr[8] = (void*) (&POWER_LIMIT_B->cornerPower_FL_i);
-  dataAddr[9] = (void*) (&POWER_LIMIT_B->cornerPower_FR_k);
-  dataAddr[10] = (void*) (&POWER_LIMIT_B->cornerPower_RL_b);
-  dataAddr[11] = (void*) (&POWER_LIMIT_B->cornerPower_RR_b);
+  dataAddr[8] = (void*) (&POWER_LIMIT_B->cornerPower_FL_a);
+  dataAddr[9] = (void*) (&POWER_LIMIT_B->cornerPower_FR_c);
+  dataAddr[10] = (void*) (&POWER_LIMIT_B->cornerPower_RL_k);
+  dataAddr[11] = (void*) (&POWER_LIMIT_B->cornerPower_RR_p);
   dataAddr[12] = (void*) (&POWER_LIMIT_B->cornerPower_FL);
   dataAddr[13] = (void*) (&POWER_LIMIT_B->cornerPower_FR);
   dataAddr[14] = (void*) (&POWER_LIMIT_B->cornerPower_RL);
@@ -259,10 +259,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 3992655642U,
-    3328685578U,
-    2105116223U,
-    3709368840U },
+  { 3808348402U,
+    3007524604U,
+    876997043U,
+    3186581000U },
   (nullptr), 0,
   (boolean_T)0
 };

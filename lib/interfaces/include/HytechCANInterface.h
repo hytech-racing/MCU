@@ -12,7 +12,7 @@
 #include "AMSInterface.h"
 #include "SABInterface.h"
 #include "VectornavInterface.h"
-#include "HT08_CONTROL_SYSTEM_types.h"
+#include "HT08_CASE_types.h"
 #include "MessageQueueDefine.h"
 /*
     struct holding interfaces processed by process_ring_buffer()

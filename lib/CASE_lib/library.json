@@ -4,21 +4,21 @@
     "build": {
         "flags": [
             "-ICASE",
-            "-ICASE/HT08_CONTROL_SYSTEM_ert_rtw",
+            "-ICASE/HT08_CASE_ert_rtw",
             "-ICASE/slprj",
             "-ICASE/slprj/ert",
             "-ICASE/slprj/ert/BasicVehicleMath",
-            "-ICASE/slprj/ert/LAUNCH_CONTROL",
             "-ICASE/slprj/ert/NORMAL_FORCE_TV",
             "-ICASE/slprj/ert/PID_TV",
             "-ICASE/slprj/ert/POWER_LIMIT",
+            "-ICASE/slprj/ert/TRACTION_CONTROL",
             "-ICASE/slprj/ert/_sharedutils",
             "-IR2023b",
-            "-IR2023b/simulink",
-            "-IR2023b/simulink/include",
             "-IR2023b/rtw",
             "-IR2023b/rtw/c",
-            "-IR2023b/rtw/c/src"
+            "-IR2023b/rtw/c/src",
+            "-IR2023b/simulink",
+            "-IR2023b/simulink/include"
         ]
     }
 }

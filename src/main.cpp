@@ -31,7 +31,7 @@
 #include "CASESystem.h"
 // /* State machine */
 #include "MCUStateMachine.h"
-#include "HT08_CONTROL_SYSTEM.h"
+#include "HT08_CASE.h"
 
 /*
     DATA SOURCES
@@ -96,18 +96,26 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
-CASEConfiguration case_config = {true, true, false, false, false, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE, 1.0, 1.0, 0.0};
-// usePIDTV
-// useNormalForce
-// usePowerLimit
-// usePIDPowerLimit
-// useLaunch
-// max_rpm
-// max_regen_torque
-// max_torque
-// pid_p
-// pid_i
-// pid_d
+CASEConfiguration case_config = {21.4, 1.0, 0.0, 0.0, 40.0, 0, 0, false, true, false, false, false, false, 0.2, 0.2, 20, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE};
+// Torque limit used for yaw pid torque split overflow
+// Yaw PID P
+// Yaw PID I
+// Yaw PID D
+// TCS PID P
+// TCS PID I
+// TCS PID D
+// Use launch
+// Use PID TV
+// Use normal force TV
+// Use Traction Control (TCS)
+// Use power limit
+// Use PID power limit
+// TCS activation threshold
+// TCS launch SL target
+// TCS launch torque deadzone (N-m)
+// Max motor rpm
+// Max regen torque
+// Max torque
 CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, case_config);
 
 /* Declare state machine */
@@ -379,7 +387,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // FAKE
     // xy_vec body_vel = {1.5f, 0.25f};
     veh_vec wheel_rpms = {drivetrain_data.measuredSpeeds[0], drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
-    
+    // veh_vec wheel_rpms = {5000, drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
+
     veh_vec load_cell_vals = {a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL].conversion, a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL].conversion, sab_interface.rlLoadCell.convert().conversion, sab_interface.rrLoadCell.convert().conversion};
     veh_vec wheel_torques_nm = drivetrain_data.commandedTorques;
     

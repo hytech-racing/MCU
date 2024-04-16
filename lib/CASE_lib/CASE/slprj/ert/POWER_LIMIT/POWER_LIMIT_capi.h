@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'POWER_LIMIT'.
 //
-// Model version                  : 1.34
+// Model version                  : 1.37
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Thu Apr 11 21:52:16 2024
+// C/C++ source code generated on : Mon Apr 15 17:38:49 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
