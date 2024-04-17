@@ -106,7 +106,7 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const Dr
 
     for (int i = 0; i < NUM_MOTORS; i++) {
         max_wheelspeed = std::max(max_wheelspeed, drivetrain->measuredSpeeds[i]);
-        regen = (command->speeds_rpm[i] == 0);
+        regen &= (command->speeds_rpm[i] == 0);
     }
 
     if ((max_wheelspeed * RPM_TO_METERS_PER_SECOND) < 5 && regen) {
