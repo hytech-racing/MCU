@@ -149,11 +149,10 @@ private:
     float rearRegenTorqueScale_ = 1.0;
 
 public:
-    /// @brief simple TC in which a scaling can be applied to both regen and accel torques for scaling accel request (accel percent - regen percent)
+    /// @brief simple TC with tunable F/R torque balance. Accel torque balance can be tuned independently of regen torque balance
     /// @param writeout the reference to the torque controller output being sent that contains the drivetrain command
-    /// @param rearTorqueScale the 0 to 2 scaling with which 0 represents 200 percent of the accel percent with which to request torque from front wheels, 2 being vice versa to the rear and 1 being balanced.
-    /// @param regenTorqueScale same as rearTorqueScale, accept applied to negative accel percents which correspond to regen
-
+    /// @param rearTorqueScale 0 to 2 scale on forward torque to rear wheels. 0 = FWD, 1 = Balanced, 2 = RWD
+    /// @param regenTorqueScale same as rearTorqueScale but applies to regen torque split. 0 = All regen torque on the front, 1 = 50/50, 2 = all regen torque on the rear
     TorqueControllerSimple(TorqueControllerOutput_s &writeout, float rearTorqueScale, float regenTorqueScale)
         : writeout_(writeout),
           frontTorqueScale_(2.0 - rearTorqueScale),
@@ -175,6 +174,8 @@ private:
     TorqueControllerOutput_s &writeout_;
     float frontTorqueScale_ = 1.0;
     float rearTorqueScale_ = 1.0;
+    float frontRegenTorqueScale_ = 1.0;
+    float rearRegenTorqueScale_ = 1.0;
     /*
     FIR filter designed with
     http://t-filter.appspot.com
@@ -208,15 +209,21 @@ private:
     bool ready_ = false;
 
 public:
-    TorqueControllerLoadCellVectoring(TorqueControllerOutput_s &writeout, float rearTorqueScale)
+    /// @brief load cell TC with tunable F/R torque balance. Accel torque balance can be tuned independently of regen torque balance
+    /// @param writeout the reference to the torque controller output being sent that contains the drivetrain command
+    /// @param rearTorqueScale 0 to 2 scale on forward torque to rear wheels. 0 = FWD, 1 = Balanced, 2 = RWD
+    /// @param regenTorqueScale same as rearTorqueScale but applies to regen torque split. 0 = All regen torque on the front, 1 = 50/50, 2 = all regen torque on the rear
+    TorqueControllerLoadCellVectoring(TorqueControllerOutput_s &writeout, float rearTorqueScale, float regenTorqueScale)
         : writeout_(writeout),
           frontTorqueScale_(2.0 - rearTorqueScale),
-          rearTorqueScale_(rearTorqueScale)
+          rearTorqueScale_(rearTorqueScale),
+          frontRegenTorqueScale_(2.0 - regenTorqueScale),
+          rearRegenTorqueScale_(regenTorqueScale)
     {
         writeout_.command = TC_COMMAND_NO_TORQUE;
         writeout_.ready = false;
     }
-    TorqueControllerLoadCellVectoring(TorqueControllerOutput_s &writeout) : TorqueControllerLoadCellVectoring(writeout, 1.0) {}
+    TorqueControllerLoadCellVectoring(TorqueControllerOutput_s &writeout) : TorqueControllerLoadCellVectoring(writeout, 1.0, 1.0) {}
 
     void tick(
         const SysTick_s &tick,

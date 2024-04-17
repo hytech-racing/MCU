@@ -74,7 +74,7 @@ public:
     TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
     , torqueControllerPIDTV_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_PID_VECTORING)]) {}

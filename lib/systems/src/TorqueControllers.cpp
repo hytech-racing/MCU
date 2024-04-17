@@ -137,10 +137,10 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torqueRequest;
-                writeout_.command.torqueSetpoints[FR] = torqueRequest;
-                writeout_.command.torqueSetpoints[RL] = torqueRequest;
-                writeout_.command.torqueSetpoints[RR] = torqueRequest;
+                writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
             }
         }
         else
