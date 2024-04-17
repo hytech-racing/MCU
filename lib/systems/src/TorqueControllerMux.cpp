@@ -97,21 +97,29 @@ void TorqueControllerMux::tick(
 
 /*
     Apply limit to make sure that regenerative braking is not applied when
-    wheelspeed is below 5m/s on all wheels.
+    wheelspeed is below 5kph on all wheels.
 */
 void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain)
 {
-    float max_wheelspeed = 0;
-    bool regen = false;
+    const float noRegenLimitKPH = 10.0;
+    const float fullRegenLimitKPH = 5.0;
+    float maxWheelSpeed = 0.0;
+    float torqueScaleDown = 0.0;
+    bool allWheelsRegen = true; // true when all wheels are targeting speeds below the current wheel speed
 
     for (int i = 0; i < NUM_MOTORS; i++) {
-        max_wheelspeed = std::max(max_wheelspeed, drivetrain->measuredSpeeds[i]);
-        regen &= (command->speeds_rpm[i] == 0);
+        maxWheelSpeed = std::max(maxWheelSpeed, drivetrain->measuredSpeeds[i] * RPM_TO_KILOMETERS_PER_HOUR);
+        allWheelsRegen &= (command->speeds_rpm[i] < drivetrain->measuredSpeeds[i]);
     }
 
-    if ((max_wheelspeed * RPM_TO_METERS_PER_SECOND) < 5 && regen) {
+    // begin limiting regen at noRegenLimitKPH and completely limit regen at fullRegenLimitKPH
+    // linearly interpolate the scale factor between noRegenLimitKPH and fullRegenLimitKPH
+    torqueScaleDown = std::min(1.0f, std::max(0.0f, (maxWheelSpeed - fullRegenLimitKPH) / (noRegenLimitKPH - fullRegenLimitKPH)));
+
+    if (allWheelsRegen)
+    {
         for (int i = 0; i < NUM_MOTORS; i++) {
-            command->torqueSetpoints[i] = 0;
+            command->torqueSetpoints[i] *= torqueScaleDown;
         }
     }
 }
