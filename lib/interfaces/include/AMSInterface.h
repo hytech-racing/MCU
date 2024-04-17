@@ -3,6 +3,7 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "hytech.h"
 
 /* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
 const unsigned long HEARTBEAT_INTERVAL                      = 2000;   // milliseconds
@@ -15,6 +16,7 @@ const float DEFAULT_INIT_TEMP       = 40.0;
 const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
+const int MAX_PACK_CHARGE           = 48600;
 
 
 /// @brief this class is for interfacing with the AMS (accumulator management system) 
@@ -49,6 +51,8 @@ public:
     /* Check if either lowest cell or total pack is below threshold*/
     bool pack_charge_is_critical(); 
 
+    void coulomb_counter();
+
     //SETTERS//    
     /* set software OK pin */
     void set_state_ok_high(bool ok_high);    
@@ -61,6 +65,9 @@ public:
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
 
+    float get_SoC();
+    void tick50();
+
     //RETRIEVE CAN MESSAGES//
     /* read BMS status messages */
     void retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg);
@@ -68,6 +75,8 @@ public:
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     /* read BMS voltage messages */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
+    /* read ACU current shunt messages */
+    void read_current_shunt_CAN(const CAN_message_t &can_msg);
 
 private:
     /* Private functions */
@@ -80,6 +89,7 @@ private:
     BMS_status          bms_status_;
     BMS_temperatures    bms_temperatures_;
     BMS_voltages        bms_voltages_;
+    ACU_SHUNT_MEASUREMENTS_t         acu_shunt_measurements_;
 
     /* AMS last heartbeat time */
     unsigned long last_heartbeat_time;
@@ -94,6 +104,10 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
+    float current;
+    float charge;
+    float SoC;
+    elapsedMicros CC_integrator_timer = 0;
 };
 
 #endif /* __AMSINTERFACE_H__ */

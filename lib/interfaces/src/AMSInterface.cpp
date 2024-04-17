@@ -63,6 +63,17 @@ float AMSInterface::get_filtered_min_cell_voltage() {
     return filtered_min_cell_voltage;
 }
 
+float AMSInterface::get_SoC() {
+    current = acu_shunt_measurements_.shunt_current;
+    charge -= (current * CC_integrator_timer) / 1000;
+    SoC = (charge / MAX_PACK_CHARGE) * 100;
+    return SoC;
+}
+
+void AMSInterface::tick50() {
+    get_SoC();
+}
+
 //RETRIEVE CAN MESSAGES//
 void AMSInterface::retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg) {
     bms_status_.load(recvd_msg.buf);
@@ -76,5 +87,11 @@ void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
 void AMSInterface::retrieve_voltage_CAN(CAN_message_t &recvd_msg) {
     bms_voltages_.load(recvd_msg.buf);
 }
+
+
+void AMSInterface::read_current_shunt_CAN(const CAN_message_t &can_msg) {
+    Unpack_ACU_SHUNT_MEASUREMENTS_hytech(&acu_shunt_measurements_, can_msg.buf, can_msg.len);
+}
+
 
 
