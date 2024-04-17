@@ -132,24 +132,24 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const Dr
 void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain)
 {
     float net_torque_mag = 0;
-    float net_wheelspeed = 0;
+    float net_power = 0;
 
+    // calculate current mechanical power
     for (int i = 0; i < NUM_MOTORS; i++) {
         // get the total magnitude of torque from all 4 wheels
         #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         net_torque_mag += abs(command->torqueSetpoints[i]);
-        net_wheelspeed += abs(drivetrain->measuredSpeeds[i]);
+        net_power += abs(command->torqueSetpoints[i] * (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
         #else
+        // sum up net torque
         net_torque_mag += std::abs(command->torqueSetpoints[i]);
-        net_wheelspeed += std::abs(drivetrain->measuredSpeeds[i]);
+        // calculate P = T*w for each wheel and sum together
+        net_power += std::abs(command->torqueSetpoints[i] * (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
         #endif
     }
-
-    // get current total mechanical power
-    float cur_power = net_torque_mag * (net_wheelspeed * RPM_TO_RAD_PER_SECOND);
     
     // only evaluate power limit if current power exceeds it
-    if (cur_power > (MAX_POWER_LIMIT)) {
+    if (net_power > (MAX_POWER_LIMIT)) {
         for (int i = 0; i < NUM_MOTORS; i++) {
             // calculate the percent of total torque requested per wheel
             float torque_percent = command->torqueSetpoints[i] / net_torque_mag;
@@ -157,8 +157,6 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command, const Dr
             float power_per_corner = (torque_percent * MAX_POWER_LIMIT);
             // power / omega (motor rad/s) to get torque per wheel
             command->torqueSetpoints[i] = power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND);
-
-            // isn't this just always distributing max power to all wheels?
         }
     }
 
