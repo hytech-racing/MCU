@@ -209,9 +209,9 @@ TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activati
     EXPECT_TRUE(reset_pedals_system_implaus_time(pedals));
 
     // test with real data (accel = ~37%) accel pressed
-    float accel1 = 2583;
-    float accel2 = 1068;
-    float brake = 1510;
+    int accel1 = 2583;
+    int accel2 = 1068;
+    int brake = 1510;
     pedals.setParams({ACCEL1_PEDAL_MIN, ACCEL2_PEDAL_MIN, ACCEL1_PEDAL_MAX, ACCEL2_PEDAL_MAX, APPS_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, APPS_ACTIVATION_PERCENTAGE},
                      {BRAKE1_PEDAL_MIN, BRAKE2_PEDAL_MIN, BRAKE1_PEDAL_MAX, BRAKE2_PEDAL_MAX, BRAKE_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, BRAKE_MECH_THRESH});
     float conv1 = get_pedal_conversion_val(ACCEL1_PEDAL_MIN, ACCEL1_PEDAL_MAX, accel1);
