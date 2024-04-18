@@ -3,27 +3,24 @@
 #include "PhysicalParameters.h"
 
 void TorqueControllerMux::tick(
-    const SysTick_s &tick,
-    const DrivetrainDynamicReport_s &drivetrainData,
-    const PedalsSystemData_s &pedalsData,
-    const SteeringSystemData_s &steeringData,
-    const AnalogConversion_s &loadFLData,
-    const AnalogConversion_s &loadFRData,
-    const AnalogConversion_s &loadRLData,
-    const AnalogConversion_s &loadRRData,
-    DialMode_e dashboardDialMode,
-    bool dashboardTorqueModeButtonPressed,
-    const vector_nav &vn_data,
-    float wheel_angle_rad,
-    const veh_vec &CASE_rpm_output,
-    const veh_vec &CASE_torque_outputs)
+        const SysTick_s &tick,
+        const DrivetrainDynamicReport_s &drivetrainData,
+        const PedalsSystemData_s &pedalsData,
+        const SteeringSystemData_s &steeringData,
+        const veh_vec<AnalogConversion_s> &loadCellData,
+        DialMode_e dashboardDialMode,
+        bool dashboardTorqueModeButtonPressed,
+        const vector_nav &vn_data, 
+        float wheel_angle_rad,
+        const DrivetrainCommand_s &CASECommand
+    )
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
-    torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadFLData, loadFRData, loadRLData, loadRRData);
+    torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadCellData);
     torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
     torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
-    tcCASEWrapper_.tick(CASE_rpm_output, CASE_torque_outputs);
+    tcCASEWrapper_.tick(CASECommand);
     
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)

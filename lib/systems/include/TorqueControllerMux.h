@@ -84,16 +84,13 @@ public:
         const DrivetrainDynamicReport_s &drivetrainData,
         const PedalsSystemData_s &pedalsData,
         const SteeringSystemData_s &steeringData,
-        const AnalogConversion_s &loadFLData,
-        const AnalogConversion_s &loadFRData,
-        const AnalogConversion_s &loadRLData,
-        const AnalogConversion_s &loadRRData,
+        const veh_vec<AnalogConversion_s> &loadCellData,
         DialMode_e dashboardDialMode,
         bool dashboardTorqueModeButtonPressed,
         const vector_nav &vn_data, 
         float wheel_angle_rad,
-        const veh_vec &CASE_rpm_output,
-        const veh_vec &CASE_torque_outputs);
+        const DrivetrainCommand_s &CASECommand
+    );
     const DrivetrainCommand_s &getDrivetrainCommand()
     {
         return drivetrainCommand_;

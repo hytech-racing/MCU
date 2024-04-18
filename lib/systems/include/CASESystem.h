@@ -5,7 +5,7 @@
 #include "StateData.h"
 #include "HytechCANInterface.h"
 #include "PedalsSystem.h"
-
+#include "DrivetrainSystem.h"
 
 struct CASEConfiguration
 {
@@ -30,12 +30,6 @@ struct CASEConfiguration
     float max_torque;
 };
 
-struct CASEControllerOutput
-{
-    veh_vec rpms;
-    veh_vec torques;
-};
-
 /// @brief this class with both take in sensor inputs as well as handle calculations for various derived states of the car.
 //         this class will also handle output onto the CAN bus of data
 /// @tparam message_queue the msg queue that is being used with the underlying msging interfaces
@@ -47,7 +41,12 @@ public:
     /// @param can_queue the pointer to the message queue that will have the CAN messages put onto it
     /// @param send_period_ms the period in which messages will be put into the queue to be sent in milliseconds.
     /// @param vehicle_math_offset_ms the offset in ms from controller message sending that the vehicle math messages will be sent
-    CASESystem(message_queue *can_queue, unsigned long controller_send_period_ms, unsigned long vehicle_math_offset_ms, CASEConfiguration config)
+    CASESystem(
+        message_queue *can_queue, 
+        unsigned long controller_send_period_ms, 
+        unsigned long vehicle_math_offset_ms, 
+        CASEConfiguration config
+    )
     {
         msg_queue_ = can_queue;
         case_.initialize();
@@ -72,16 +71,18 @@ public:
     /// @param power_kw current electrical power in kilo-watts
     /// @param reset_integral bool of whether or not to reset integral term
     /// @return controller output
-    CASEControllerOutput evaluate(const SysTick_s &tick,
-                           const xy_vec &body_velocity_ms,
-                           float yaw_rate_rads,
-                           float steering_norm,
-                           const veh_vec &wheel_rpms,
-                           const veh_vec &load_cell_vals,
-                           const PedalsSystemData_s &pedals_data,
-                           float power_kw,
-                           bool reset_integral, 
-                           uint8_t vn_status);
+    DrivetrainCommand_s evaluate(
+        const SysTick_s &tick,
+        const xy_vec<float> &body_velocity_ms,
+        float yaw_rate_rads,
+        float steering_norm,
+        const DrivetrainDynamicReport_s &drivetrain_data,
+        const veh_vec<AnalogConversion_s> &load_cell_vals,
+        const PedalsSystemData_s &pedals_data,
+        float power_kw,
+        bool reset_integral, 
+        uint8_t vn_status
+    );
 
     void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d)
     {

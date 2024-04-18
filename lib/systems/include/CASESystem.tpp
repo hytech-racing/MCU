@@ -1,16 +1,18 @@
 #include "CASESystem.h"
 
 template <typename message_queue>
-CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
-                                                         const xy_vec &body_velocity_ms,
-                                                         float yaw_rate_rads,
-                                                         float steering_norm,
-                                                         const veh_vec &wheel_rpms,
-                                                         const veh_vec &load_cell_vals,
-                                                         const PedalsSystemData_s &pedals_data,
-                                                         float power_kw,
-                                                         bool reset_integral,
-                                                         uint8_t vn_status)
+DrivetrainCommand_s CASESystem<message_queue>::evaluate(
+    const SysTick_s &tick,
+    const xy_vec<float> &body_velocity_ms,
+    float yaw_rate_rads,
+    float steering_norm,
+    const DrivetrainDynamicReport_s &drivetrain_data,
+    const veh_vec<AnalogConversion_s> &load_cell_vals,
+    const PedalsSystemData_s &pedals_data,
+    float power_kw,
+    bool reset_integral, 
+    uint8_t vn_status
+)
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
 
@@ -34,16 +36,8 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     {
         vn_active_start_time_ = 0;
     }
-
-    bool vn_active_for_long_enough = (vn_active_start_time_ >= 5000);
-    // if (vn_active_for_long_enough)
-    // {
-        in.usePIDTV = config_.usePIDTV;
-    // }
-    // else
-    // {
-    //     in.usePIDTV = false;
-    // }
+    
+    in.usePIDTV = config_.usePIDTV;
 
     in.useNormalForce = config_.useNormalForce;
     in.usePowerLimit = config_.usePowerLimit;
@@ -57,7 +51,6 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
 
     in.TorqueLimit = config_.torqueLimit;
 
-
     in.SteeringWheelAngleDeg = steering_value;
 
     in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_torque, config_.max_rpm);
@@ -66,15 +59,15 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
     in.Vx_B = body_velocity_ms.x;
     in.Vy_B = body_velocity_ms.y;
 
-    in.FZFL = load_cell_vals.FL;
-    in.FZFR = load_cell_vals.FR;
-    in.FZRL = load_cell_vals.RL;
-    in.FZRR = load_cell_vals.RR;
+    in.FZFL = load_cell_vals.FL.conversion;
+    in.FZFR = load_cell_vals.FR.conversion;
+    in.FZRL = load_cell_vals.RL.conversion;
+    in.FZRR = load_cell_vals.RR.conversion;
     in.CurrentPowerkW = power_kw;
-    in.MotorOmegaFLrpm = wheel_rpms.FL;
-    in.MotorOmegaFRrpm = wheel_rpms.FR;
-    in.MotorOmegaRLrpm = wheel_rpms.RL;
-    in.MotorOmegaRRrpm = wheel_rpms.RR;
+    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
+    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
+    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
+    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
 
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
@@ -145,20 +138,20 @@ CASEControllerOutput CASESystem<message_queue>::evaluate(const SysTick_s &tick,
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
         last_vehm_send_time_ = tick.millis;
     }
+
+    DrivetrainCommand_s command;
+
+    command.torqueSetpoints[0] = res.FinalTorqueFL;
+    command.torqueSetpoints[1] = res.FinalTorqueFR;
+    command.torqueSetpoints[2] = res.FinalTorqueRL;
+    command.torqueSetpoints[3] = res.FinalTorqueRR;
     
-    veh_vec rpms;
+    command.speeds_rpm[0] = get_rpm_setpoint(res.FinalTorqueFL);
+    command.speeds_rpm[1] = get_rpm_setpoint(res.FinalTorqueFR);
+    command.speeds_rpm[2] = get_rpm_setpoint(res.FinalTorqueRL);
+    command.speeds_rpm[3] = get_rpm_setpoint(res.FinalTorqueRR);
 
-    rpms.FL = get_rpm_setpoint(res.FinalTorqueFL);
-    rpms.FR = get_rpm_setpoint(res.FinalTorqueFR);
-    rpms.RL = get_rpm_setpoint(res.FinalTorqueRL);
-    rpms.RR = get_rpm_setpoint(res.FinalTorqueRR);
-    veh_vec torques;
-    torques.FL = res.FinalTorqueFL;
-    torques.FR = res.FinalTorqueFR;
-    torques.RL = res.FinalTorqueRL;
-    torques.RR = res.FinalTorqueRR;
-
-    return {rpms, torques};
+    return command;
 }
 
 template <typename message_queue>

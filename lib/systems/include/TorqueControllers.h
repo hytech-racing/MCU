@@ -24,7 +24,7 @@ const float AMK_MAX_RPM = 20000;
 // const float AMK_MAX_RPM = (2.235 * METERS_PER_SECOND_TO_RPM); // 5mph
 // const float AMK_MAX_RPM = (.89 * METERS_PER_SECOND_TO_RPM); // 1mph
 // const float
-const float AMK_MAX_TORQUE = 21.42; // TODO: update this with the true value
+const float AMK_MAX_TORQUE = 21.42;
 const float MAX_REGEN_TORQUE = 10.0;
 
 /* LAUNCH CONSTANTS */
@@ -40,12 +40,6 @@ const float launch_ready_brake_threshold = .2;
 const float launch_ready_speed_threshold = 5.0 * METERS_PER_SECOND_TO_RPM; // rpm
 const float launch_go_accel_threshold = .9;
 const float launch_stop_accel_threshold = .5;
-
-constexpr double EARTH_RADIUS_KM = 6371.0;
-constexpr double toRadians(double degrees)
-{
-    return degrees * M_PI / 180.0;
-}
 
 /* DRIVETRAIN STRUCTS */
 
@@ -233,29 +227,22 @@ public:
         const SysTick_s &tick,
         const PedalsSystemData_s &pedalsData,
         float torqueLimit,
-        const AnalogConversion_s &flLoadCellData,
-        const AnalogConversion_s &frLoadCellData,
-        const AnalogConversion_s &rlLoadCellData,
-        const AnalogConversion_s &rrLoadCellData);
+        const veh_vec<AnalogConversion_s> &loadCellData
+    );
 };
 
 class BaseLaunchController
 {
 protected:
     TorqueControllerOutput_s &writeout_;
-
-    uint32_t time_of_launch;
-
-    double initial_ecef_x;
-    double initial_ecef_y;
-    double initial_ecef_z;
-
-    LaunchStates_e launch_state = LaunchStates_e::LAUNCH_NOT_READY;
-    uint32_t current_millis;
-    float launch_speed_target = 0.0;
-
-    int16_t init_speed_target_;
-
+    uint32_t time_of_launch_;
+    double initial_ecef_x_;
+    double initial_ecef_y_;
+    double initial_ecef_z_;
+    LaunchStates_e launch_state_ = LaunchStates_e::LAUNCH_NOT_READY;
+    uint32_t current_millis_;
+    float launch_speed_target_ = 0.0;
+    int16_t init_speed_target_ = 0.0;
 public:
     BaseLaunchController(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
         : writeout_(writeout),
@@ -292,7 +279,7 @@ public:
 
     TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state; }
+    LaunchStates_e get_launch_state() override { return launch_state_; }
 
     void calc_launch_algo(const vector_nav *vn_data) override;
 };
@@ -317,7 +304,7 @@ public:
 
     TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state; }
+    LaunchStates_e get_launch_state() override { return launch_state_; }
 
     void calc_launch_algo(const vector_nav *vn_data) override;
 };
@@ -341,7 +328,7 @@ public:
 
     TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerLookupLaunch(writeout, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state; }
+    LaunchStates_e get_launch_state() override { return launch_state_; }
 
     void calc_launch_algo(const vector_nav *vn_data) override;
 };
@@ -349,7 +336,7 @@ public:
 class TorqueControllerCASEWrapper : public TorqueController<TC_CASE_SYSTEM>
 {
 public:
-    void tick(const veh_vec &CASE_rpm_output, const veh_vec &CASE_torque_outputs);
+    void tick(const DrivetrainCommand_s &command);
     TorqueControllerCASEWrapper(TorqueControllerOutput_s &writeout) : writeout_(writeout)
     {
         writeout_ = writeout;

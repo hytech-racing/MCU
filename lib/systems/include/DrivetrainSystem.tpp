@@ -145,10 +145,6 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
 {
     // if ((curr_system_millis_ - last_general_cmd_time_) > min_cmd_period_)
     // {
-        data_.commandedTorques.FL = data.torqueSetpoints[0] / 100.0f;
-        data_.commandedTorques.FR = data.torqueSetpoints[1] / 100.0f;
-        data_.commandedTorques.RL = data.torqueSetpoints[2] / 100.0f;
-        data_.commandedTorques.RR = data.torqueSetpoints[3] / 100.0f;
         int index = 0;
         for (auto inv_pointer : inverters_)
         {

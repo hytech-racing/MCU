@@ -96,7 +96,27 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
-CASEConfiguration case_config = {21.4, 1.0, 0.0, 0.0, 40.0, 0, 0, false, true, false, false, false, false, 0.2, 0.2, 20, AMK_MAX_RPM, MAX_REGEN_TORQUE, AMK_MAX_TORQUE};
+CASEConfiguration case_config = {
+    .torqueLimit = 21.4,
+    .yaw_pid_p = 1.0,
+    .yaw_pid_i = 0.0,
+    .yaw_pid_d = 0.0,
+    .tcs_pid_p = 40.0,
+    .tcs_pid_i = 0.0,
+    .tcs_pid_d = 0.0,
+    .useLaunch = false,
+    .usePIDTV = true,
+    .useNormalForce = false,
+    .useTractionControl = false,
+    .usePowerLimit = false,
+    .usePIDPowerLimit = false,
+    .tcsThreshold = 0.2,
+    .launchSL = 0.2,
+    .launchDeadZone = 20,
+    .max_rpm = AMK_MAX_RPM,
+    .max_regen_torque = MAX_REGEN_TORQUE,
+    .max_torque = AMK_MAX_TORQUE,
+};
 // Torque limit used for yaw pid torque split overflow
 // Yaw PID P
 // Yaw PID I
@@ -290,43 +310,54 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     TriggerBits_s t = current_system_tick.triggers;
     if (t.trigger10) // 10Hz
     {
-        // Serial.println("before buzzer");
-        dashboard.tick10(&main_ecu, int(fsm.get_state()),
-                         buzzer.buzzer_is_on(),
-                         drivetrain.drivetrain_error_occured(),
-                         torque_controller_mux.getTorqueLimit(),
-                         ams_interface.get_filtered_min_cell_voltage(),
-                         telem_interface.get_glv_voltage(a1.get()),
-                         static_cast<int>(torque_controller_mux.activeController()->get_launch_state()));
+        dashboard.tick10(
+            &main_ecu, 
+            int(fsm.get_state()),
+            buzzer.buzzer_is_on(),
+            drivetrain.drivetrain_error_occured(),
+            torque_controller_mux.getTorqueLimit(),
+            ams_interface.get_filtered_min_cell_voltage(),
+            telem_interface.get_glv_voltage(a1.get()),
+            static_cast<int>(torque_controller_mux.activeController()->get_launch_state())
+        );
 
-        main_ecu.tick(static_cast<int>(fsm.get_state()),
-                      drivetrain.drivetrain_error_occured(),
-                      safety_system.get_software_is_ok(),
-                      static_cast<int>(torque_controller_mux.getTorqueLimit()),
-                      torque_controller_mux.getMaxTorque(),
-                      buzzer.buzzer_is_on(),
-                      pedals_system.getPedalsSystemData(),
-                      ams_interface.pack_charge_is_critical(),
-                      dashboard.launchControlButtonPressed());
+        main_ecu.tick(
+            static_cast<int>(fsm.get_state()),
+            drivetrain.drivetrain_error_occured(),
+            safety_system.get_software_is_ok(),
+            static_cast<int>(torque_controller_mux.getTorqueLimit()),
+            torque_controller_mux.getMaxTorque(),
+            buzzer.buzzer_is_on(),
+            pedals_system.getPedalsSystemData(),
+            ams_interface.pack_charge_is_critical(),
+            dashboard.launchControlButtonPressed()
+        
+        );
+
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-        telem_interface.tick(a1.get(),
-                             a2.get(),
-                             a3.get(),
-                             steering1.convert(),
-                             &inv.fl,
-                             &inv.fr,
-                             &inv.rl,
-                             &inv.rr,
-                             data2.accelImplausible,
-                             data2.brakeImplausible,
-                             data2.accelPercent,
-                             data2.brakePercent,
-                             a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-                             a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-                             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-                             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-                             pedals_system.getMechBrakeActiveThreshold(), {});
+
+        telem_interface.tick(
+            a1.get(),
+            a2.get(),
+            a3.get(),
+            steering1.convert(),
+            &inv.fl,
+            &inv.fr,
+            &inv.rl,
+            &inv.rr,
+            data2.accelImplausible,
+            data2.brakeImplausible,
+            data2.accelPercent,
+            data2.brakePercent,
+            a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+            a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+            a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+            a1.get().conversions[MCU15_BRAKE2_CHANNEL],
+            pedals_system.getMechBrakeActiveThreshold(),
+            {}
+        );
     }
+
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
@@ -376,46 +407,52 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    // TODO is this correct?
+    // TODO FIX THE STEERING SYSTEM
     auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
 
-    DrivetrainDynamicReport_s drivetrain_data = drivetrain.get_current_data();
-    auto pedals_data = pedals_system.getPedalsSystemData();
+    // Data for CASE
     vector_nav vn_data = vn_interface.get_vn_struct();
-    // REAL
-    xy_vec body_vel = {vn_data.velocity_x, vn_data.velocity_y};
-    // FAKE
-    // xy_vec body_vel = {1.5f, 0.25f};
-    veh_vec wheel_rpms = {drivetrain_data.measuredSpeeds[0], drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
-    // veh_vec wheel_rpms = {5000, drivetrain_data.measuredSpeeds[1], drivetrain_data.measuredSpeeds[2], drivetrain_data.measuredSpeeds[3]};
-
-    veh_vec load_cell_vals = {a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL].conversion, a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL].conversion, sab_interface.rlLoadCell.convert().conversion, sab_interface.rrLoadCell.convert().conversion};
-    veh_vec wheel_torques_nm = drivetrain_data.commandedTorques;
+    xy_vec<float> body_vel = {vn_data.velocity_x, vn_data.velocity_y};
+    veh_vec<AnalogConversion_s> loadCellData = {
+        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], 
+        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], 
+        sab_interface.rlLoadCell.convert(), 
+        sab_interface.rrLoadCell.convert()
+    };
     
+    // TODO FIX THE STEERING SYSTEM
     float steering_normed = normalize(a1.get().conversions[MCU15_STEERING_CHANNEL].raw, 1874, 692, 3170);
+    
+    // This should be done inside the tick
     bool reset_I_term = false;
     if( (fsm.get_state() == CAR_STATE::READY_TO_DRIVE) && (dashboard.startButtonPressed()))
     {
         reset_I_term = true;
     }
-    // Serial.println(reset_I_term);
-    CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, vn_data.angular_rates.z, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, 3);
-    // FAKE
-    // CASEControllerOutput controller_output = case_system.evaluate(current_system_tick, body_vel, 0.5, steering_normed, wheel_rpms, load_cell_vals, pedals_data, 0, reset_I_term, vn_data.vn_status);
+
+    DrivetrainCommand_s controller_output = case_system.evaluate(
+        current_system_tick, 
+        body_vel, 
+        vn_data.angular_rates.z, 
+        steering_normed, 
+        drivetrain.get_current_data(), 
+        loadCellData, 
+        pedals_system.getPedalsSystemData(), 
+        0, 
+        reset_I_term, 
+        3
+    );
 
     torque_controller_mux.tick(
         current_system_tick,
-        drivetrain_data,
-        pedals_data,
+        drivetrain.get_current_data(),
+        pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
-        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
-        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
-        sab_interface.rlLoadCell.convert(),              // RL load cell reading. TODO: get data from rear load cells
-        sab_interface.rrLoadCell.convert(),              // RR load cell reading. TODO: get data from rear load cells
+        loadCellData,
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
         vn_data,
         wheel_angle_rad,
-        controller_output.rpms, 
-        controller_output.torques);
+        controller_output
+    );
 }

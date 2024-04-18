@@ -20,7 +20,6 @@ struct DrivetrainDynamicReport_s
     float measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
-    veh_vec commandedTorques; // in nm
 };
 
 template <typename InverterType>
