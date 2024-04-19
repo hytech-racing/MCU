@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['can1_5frxbuffer_0',['CAN1_rxBuffer',['../HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can1_5ftxbuffer_1',['CAN1_txBuffer',['../HytechCANInterface_8h.html#a8eaf661c1420c6b842b642eaef3355dc',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a8eaf661c1420c6b842b642eaef3355dc',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can2_5frxbuffer_2',['CAN2_rxBuffer',['../HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can2_5ftxbuffer_3',['CAN2_txBuffer',['../HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93',1,'CAN2_txBuffer():&#160;test_can_interface.cpp'],['../HytechCANInterface_8cpp.html#a0d766d98fda98e3b8740244b2fe7b855',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp'],['../test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f',1,'CAN2_txBuffer():&#160;test_can_interface.cpp']]],
+  ['can1_5frxbuffer_0',['CAN1_rxBuffer',['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can1_5ftxbuffer_1',['CAN1_txBuffer',['../HytechCANInterface_8cpp.html#a8eaf661c1420c6b842b642eaef3355dc',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8h.html#a8eaf661c1420c6b842b642eaef3355dc',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can2_5frxbuffer_2',['CAN2_rxBuffer',['../HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can2_5ftxbuffer_3',['CAN2_txBuffer',['../test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f',1,'CAN2_txBuffer():&#160;test_can_interface.cpp'],['../HytechCANInterface_8cpp.html#a0d766d98fda98e3b8740244b2fe7b855',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93',1,'CAN2_txBuffer():&#160;test_can_interface.cpp']]],
   ['can3_5frxbuffer_4',['CAN3_rxBuffer',['../HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7',1,'CAN3_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a29aa040358a501c30e482164867b44a7',1,'CAN3_rxBuffer():&#160;HytechCANInterface.cpp']]],
   ['can3_5ftxbuffer_5',['CAN3_txBuffer',['../HytechCANInterface_8h.html#a8946aa5dd54ef2d76ecca1d0ba9fcb99',1,'CAN3_txBuffer():&#160;main.cpp'],['../HytechCANInterface_8cpp.html#a0cbb016f987a7e41cc73f4440f8907c2',1,'CAN3_txBuffer():&#160;HytechCANInterface.cpp'],['../src_2main_8cpp.html#a03aea0f270016e8f260986478975f3a5',1,'CAN3_txBuffer():&#160;main.cpp']]],
   ['can_5finterfaces_6',['CAN_interfaces',['../test__can__interface_8cpp.html#a84410d7cf1ca10a4641d0e47b76535be',1,'test_can_interface.cpp']]],
@@ -27,10 +27,11 @@ var searchData=
   ['contextsystems_24',['contextSystems',['../structrtwCAPI__ModelMapLoggingStaticInfo__tag.html#a6949a962ce91f028ab6f0a443d53e767',1,'rtwCAPI_ModelMapLoggingStaticInfo_tag']]],
   ['controller_5finput_25',['controller_input',['../structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24',1,'PIDTVTorqueControllerData']]],
   ['controller_5foutput_26',['controller_output',['../structPIDTVTorqueControllerData.html#a005ba00c0d38fe79e5fa4ebf0150550b',1,'PIDTVTorqueControllerData']]],
-  ['contstatestartindex_27',['contStateStartIndex',['../structrtwCAPI__States__tag.html#ad812b9a472437ff6d100103953fe727a',1,'rtwCAPI_States_tag::contStateStartIndex()'],['../structrtwCAPI__ModelMappingInfo__tag.html#ad08d01ba43d486bd9ca074aa34c25f2e',1,'rtwCAPI_ModelMappingInfo_tag::contStateStartIndex()']]],
+  ['contstatestartindex_27',['contStateStartIndex',['../structrtwCAPI__ModelMappingInfo__tag.html#ad08d01ba43d486bd9ca074aa34c25f2e',1,'rtwCAPI_ModelMappingInfo_tag::contStateStartIndex()'],['../structrtwCAPI__States__tag.html#ad812b9a472437ff6d100103953fe727a',1,'rtwCAPI_States_tag::contStateStartIndex()']]],
   ['conversion_28',['conversion',['../structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af',1,'AnalogConversion_s']]],
   ['conversions_29',['conversions',['../structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171',1,'AnalogConversionPacket_s']]],
-  ['current_5fchannel_30',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
-  ['current_5fmillis_31',['current_millis',['../classBaseLaunchController.html#a383933ca8acd0408f32ac755c6b04755',1,'BaseLaunchController']]],
-  ['current_5fref_5fchannel_32',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]]
+  ['cur_5fdial_5fmode_30',['cur_dial_mode',['../structDashComponentInterface__s.html#a3f6fdb187c4408d60d279d8fb249a88c',1,'DashComponentInterface_s']]],
+  ['current_5fchannel_31',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
+  ['current_5fmillis_32',['current_millis',['../classBaseLaunchController.html#a383933ca8acd0408f32ac755c6b04755',1,'BaseLaunchController']]],
+  ['current_5fref_5fchannel_33',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]]
 ];
