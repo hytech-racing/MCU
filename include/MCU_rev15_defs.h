@@ -39,17 +39,17 @@ const unsigned long TELEM_CAN_BAUDRATE  = 500000;
 // All of these values are the PEDAL min/max
 // the sensor min/max that trip implaus are calculated
 // in the PedalsSystem constructor
-const int ACCEL1_PEDAL_MAX = 3283;
-const int ACCEL2_PEDAL_MAX = 323;
+const int ACCEL1_PEDAL_MAX = 3330;
+const int ACCEL2_PEDAL_MAX = 388;
 
-const int ACCEL1_PEDAL_MIN = 2087;
-const int ACCEL2_PEDAL_MIN = 1472;
+const int ACCEL1_PEDAL_MIN = 2124;
+const int ACCEL2_PEDAL_MIN = 1517;
 
-const int BRAKE1_PEDAL_MAX = 2198;
-const int BRAKE2_PEDAL_MAX = 2198;
+const int BRAKE1_PEDAL_MAX = 2200;
+const int BRAKE2_PEDAL_MAX = 2200;
 
-const int BRAKE1_PEDAL_MIN = 867;
-const int BRAKE2_PEDAL_MIN = 867;
+const int BRAKE1_PEDAL_MIN = 785;
+const int BRAKE2_PEDAL_MIN = 785;
 
 const int ACCEL1_PEDAL_OOR_MIN = 90;
 const int ACCEL2_PEDAL_OOR_MIN = 90;

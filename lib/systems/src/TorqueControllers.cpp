@@ -50,9 +50,6 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
             writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
             writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
         }
-
-        // Apply the torque limit
-        TCPosTorqueLimit(writeout_.command, torqueLimit);
     }
 }
 
@@ -140,14 +137,11 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torqueRequest;
-                writeout_.command.torqueSetpoints[FR] = torqueRequest;
-                writeout_.command.torqueSetpoints[RL] = torqueRequest;
-                writeout_.command.torqueSetpoints[RR] = torqueRequest;
+                writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
             }
-
-            // Apply the torque limit
-            TCPosTorqueLimit(writeout_.command, torqueLimit);
         }
         else
         {
@@ -283,23 +277,22 @@ void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
             uint32_t ms_since_launch = (current_millis - time_of_launch);
             // accelerate at constant speed for a period of time to get body velocity up
             // may want to make this the ht07 launch algo
-            if(ms_since_launch < const_accel_time){
-                launch_speed_target = DEFAULT_LAUNCH_SPEED_TARGET;
+            
+            // makes sure that the car launches at the target launch speed
+            launch_speed_target = std::max(launch_speed_target, (float)DEFAULT_LAUNCH_SPEED_TARGET);
 
-            } else {
-
-                /*
-                New slip-ratio based launch algorithm by Luke Chen. The basic idea
-                is to always be pushing the car a certain 'slip_ratio_' faster than
-                the car is currently going, theoretically always keeping the car in slip
-                */
-                // m/s
-                float new_speed_target = (1 + slip_ratio_) * (vn_data->velocity_x);
-                // rpm
-                new_speed_target *= METERS_PER_SECOND_TO_RPM;
-                launch_speed_target = std::max(launch_speed_target, new_speed_target);
-
-            }
+            /*
+            New slip-ratio based launch algorithm by Luke Chen. The basic idea
+            is to always be pushing the car a certain 'slip_ratio_' faster than
+            the car is currently going, theoretically always keeping the car in slip
+            */
+            // m/s
+            float new_speed_target = (1 + slip_ratio_) * (vn_data->velocity_x);
+            // rpm
+            new_speed_target *= METERS_PER_SECOND_TO_RPM;
+            // makes sure the car target speed never goes lower than prev. target
+            // allows for the vn to 'spool' up and us to get reliable vx data
+            launch_speed_target = std::max(launch_speed_target, new_speed_target);
 
 }
 
