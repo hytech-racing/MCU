@@ -4,7 +4,7 @@ template <typename message_queue>
 DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     const SysTick_s &tick,
     const vector_nav &vn_data,
-    float steering_norm,
+    const SteeringSystemData_s &steering_data,
     const DrivetrainDynamicReport_s &drivetrain_data,
     const veh_vec<AnalogConversion_s> &load_cell_vals,
     const PedalsSystemData_s &pedals_data,
@@ -15,8 +15,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 )
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
-
-    float steering_value = steering_norm * 130;
 
     in.YawPIDConfig[0] = config_.yaw_pid_p;
     in.YawPIDConfig[1] = config_.yaw_pid_i;
@@ -51,7 +49,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.TorqueLimit = config_.torqueLimit;
 
-    in.SteeringWheelAngleDeg = steering_value;
+    in.SteeringWheelAngleDeg = steering_data.angle;
 
     in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
 

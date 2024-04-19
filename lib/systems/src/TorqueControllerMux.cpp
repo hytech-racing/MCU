@@ -20,7 +20,13 @@ void TorqueControllerMux::tick(
     torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadCellData);
     torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
     torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
-    tcCASEWrapper_.tick(CASECommand);
+    tcCASEWrapper_.tick(
+        (TCCaseWrapperTick_s)
+        {
+            .command = CASECommand,
+            .steeringData = steeringData
+        }
+    );
     
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)

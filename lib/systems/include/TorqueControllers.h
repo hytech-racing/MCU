@@ -57,6 +57,13 @@ struct TorqueControllerOutput_s
     bool ready;
 };
 
+/* TC STRUCTS */
+struct TCCaseWrapperTick_s
+{
+    const DrivetrainCommand_s &command;
+    const SteeringSystemData_s &steeringData;
+};
+
 /* ENUMS */
 
 enum TorqueController_e
@@ -332,7 +339,7 @@ public:
 class TorqueControllerCASEWrapper : public TorqueController<TC_CASE_SYSTEM>
 {
 public:
-    void tick(const DrivetrainCommand_s &command);
+    void tick(const TCCaseWrapperTick_s &intake);
     TorqueControllerCASEWrapper(TorqueControllerOutput_s &writeout) : writeout_(writeout)
     {
         writeout_ = writeout;

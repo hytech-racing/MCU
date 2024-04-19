@@ -321,15 +321,15 @@ void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
 
 }
 
-void TorqueControllerCASEWrapper::tick(const DrivetrainCommand_s &command)
+void TorqueControllerCASEWrapper::tick(const TCCaseWrapperTick_s &intake)
 {
 
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        writeout_.command.speeds_rpm[i] = command.speeds_rpm[i];
-        writeout_.command.torqueSetpoints[i] = command.torqueSetpoints[i];
+        writeout_.command.speeds_rpm[i] = intake.command.speeds_rpm[i];
+        writeout_.command.torqueSetpoints[i] = intake.command.torqueSetpoints[i];
     }
     
-    writeout_.ready = true;
+    writeout_.ready = intake.steeringData.status != SteeringSystemStatus_e::STEERING_SYSTEM_ERROR;
     
 }

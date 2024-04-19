@@ -5,6 +5,7 @@
 #include "HytechCANInterface.h"
 #include "PedalsSystem.h"
 #include "DrivetrainSystem.h"
+#include "SteeringSystem.h"
 #include "MCUStateMachine.h"
 
 struct CASEConfiguration
@@ -74,7 +75,7 @@ public:
     DrivetrainCommand_s evaluate(
     const SysTick_s &tick,
     const vector_nav &vn_data,
-    float steering_norm,
+    const SteeringSystemData_s &steering_data,
     const DrivetrainDynamicReport_s &drivetrain_data,
     const veh_vec<AnalogConversion_s> &load_cell_vals,
     const PedalsSystemData_s &pedals_data,

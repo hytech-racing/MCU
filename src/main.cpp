@@ -206,29 +206,6 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
-double normalize(double currentValue, double centerValue, double leftValue, double rightValue)
-{
-    // Determine the smaller range side to normalize against it
-    double leftRange = std::abs(centerValue - leftValue);
-    double rightRange = std::abs(rightValue - centerValue);
-
-    double minRange = std::min(leftRange, rightRange);
-    double normalizedValue = 0.0;
-
-    if (currentValue < centerValue)
-    {
-        // Normalize on the left side
-        normalizedValue = (currentValue - centerValue) / minRange;
-    }
-    else
-    {
-        // Normalize on the right side
-        normalizedValue = (currentValue - centerValue) / minRange;
-    }
-
-    // Normalize within the adjusted range where the side with the greater range may exceed +/- 1
-    return normalizedValue;
-}
 /*
     SETUP
 */
@@ -252,6 +229,8 @@ void setup()
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_PEDAL_MIN);
+    a1.setChannelOffset(MCU15_STEERING_CHANNEL, -1 * SECONDARY_STEERING_SENSE_CENTER);
+    a1.setChannelScale(MCU15_STEERING_CHANNEL, STEERING_RANGE_DEGREES / ((float)SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND - (float)SECONDARY_STEERING_SENSE_LEFTMOST_BOUND));
 
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
@@ -270,6 +249,7 @@ void setup()
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
     ams_interface.init(curr_tick.millis); // initialize last heartbeat time
     steering1.init();
+    steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
     Serial.begin(115200);
 
@@ -447,8 +427,17 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
     // tick steering system
     steering_system.tick(
-        current_system_tick,
-        a1.get().conversions[MCU15_STEERING_CHANNEL]);
+        (SteeringSystemTick_s)
+        {
+            .tick = current_system_tick,
+            .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]
+        }
+    );
+
+    // Serial.println("Steering angle");
+    // Serial.println(steering_system.getSteeringSystemData().angle);
+    // Serial.println("Steering status");
+    // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
 
     // tick drivetrain system
     drivetrain.tick(current_system_tick);
@@ -464,14 +453,11 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         sab_interface.rlLoadCell.convert(), 
         sab_interface.rrLoadCell.convert()
     };
-    
-    // TODO FIX THE STEERING SYSTEM
-    float steering_normed = normalize(a1.get().conversions[MCU15_STEERING_CHANNEL].raw, 1874, 692, 3170);
 
     DrivetrainCommand_s controller_output = case_system.evaluate(
         current_system_tick, 
         vn_interface.get_vn_struct(), 
-        steering_normed, 
+        steering_system.getSteeringSystemData(),
         drivetrain.get_dynamic_data(), 
         loadCellData, 
         pedals_system.getPedalsSystemData(), 
