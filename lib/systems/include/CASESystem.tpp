@@ -3,14 +3,14 @@
 template <typename message_queue>
 DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     const SysTick_s &tick,
-    const xy_vec<float> &body_velocity_ms,
-    float yaw_rate_rads,
+    const vector_nav &vn_data,
     float steering_norm,
     const DrivetrainDynamicReport_s &drivetrain_data,
     const veh_vec<AnalogConversion_s> &load_cell_vals,
     const PedalsSystemData_s &pedals_data,
     float power_kw,
-    bool reset_integral, 
+    CAR_STATE fsm_state, 
+    bool start_button_pressed,
     uint8_t vn_status
 )
 {
@@ -53,11 +53,11 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.SteeringWheelAngleDeg = steering_value;
 
-    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_torque, config_.max_rpm);
+    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
 
-    in.YawRaterads = yaw_rate_rads;
-    in.Vx_B = body_velocity_ms.x;
-    in.Vy_B = body_velocity_ms.y;
+    in.YawRaterads = vn_data.angular_rates.z;
+    in.Vx_B = vn_data.velocity_x;
+    in.Vy_B = vn_data.velocity_y;
 
     in.FZFL = load_cell_vals.FL.conversion;
     in.FZFR = load_cell_vals.FR.conversion;
@@ -72,7 +72,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
     {
-        if (reset_integral)
+        if ((fsm_state == CAR_STATE::READY_TO_DRIVE) && (start_button_pressed))
         {
             in.YawPIDConfig[1] = 0.0f;
         }
@@ -81,22 +81,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     }
 
     auto res = case_.getExternalOutputs();
-
-    // state_.Alphadeg.FL = res.AlphaFLDeg;
-    // state_.Alphadeg.FR = res.AlphaFRDeg;
-    // state_.Alphadeg.RL = res.AlphaRLDeg;
-    // state_.Alphadeg.RR = res.AlphaRRDeg;
-    // state_.bodyVel = body_velocity_ms;
-    // state_.KinematicDesiredYawRaterads = res.KinematicDesiredYawRaterads;
-    // state_.LongitudinalCornerVelms.FL = res.LongitudinalCornerVelWFLms;
-    // state_.LongitudinalCornerVelms.FR = res.LongitudinalCornerVelWFRms;
-    // state_.LongitudinalCornerVelms.RL = res.LongitudinalCornerVelWRLms;
-    // state_.LongitudinalCornerVelms.RR = res.LongitudinalCornerVelWRRms;
-    // state_.longitudinalSlip.FL = res.SLFL;
-    // state_.longitudinalSlip.FR = res.SLFR;
-    // state_.longitudinalSlip.RL = res.SLRL;
-    // state_.longitudinalSlip.RR = res.SLRR;
-    // state_.beta = res.BetaDeg;
 
     // send these out at the send period
 
@@ -155,9 +139,8 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 }
 
 template <typename message_queue>
-float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_torque, float max_rpm)
+float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm)
 {
-    // Both pedals are not pressed and no implausibility has been detected
     // accelRequest goes between 1.0 and -1.0
     float accelRequest = pedals_data.accelPercent - pedals_data.regenPercent;
     float torqueRequest;
@@ -165,7 +148,7 @@ float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData
     if (accelRequest >= 0.0)
     {
         // Positive torque request
-        torqueRequest = accelRequest * max_torque;
+        torqueRequest = accelRequest * AMK_MAX_TORQUE;
     }
     else
     {

@@ -411,8 +411,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
 
     // Data for CASE
-    vector_nav vn_data = vn_interface.get_vn_struct();
-    xy_vec<float> body_vel = {vn_data.velocity_x, vn_data.velocity_y};
     veh_vec<AnalogConversion_s> loadCellData = {
         a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], 
         a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], 
@@ -422,36 +420,29 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     
     // TODO FIX THE STEERING SYSTEM
     float steering_normed = normalize(a1.get().conversions[MCU15_STEERING_CHANNEL].raw, 1874, 692, 3170);
-    
-    // This should be done inside the tick
-    bool reset_I_term = false;
-    if( (fsm.get_state() == CAR_STATE::READY_TO_DRIVE) && (dashboard.startButtonPressed()))
-    {
-        reset_I_term = true;
-    }
 
     DrivetrainCommand_s controller_output = case_system.evaluate(
         current_system_tick, 
-        body_vel, 
-        vn_data.angular_rates.z, 
+        vn_interface.get_vn_struct(), 
         steering_normed, 
-        drivetrain.get_current_data(), 
+        drivetrain.get_dynamic_data(), 
         loadCellData, 
         pedals_system.getPedalsSystemData(), 
         0, 
-        reset_I_term, 
+        fsm.get_state(),
+        dashboard.startButtonPressed(),
         3
     );
 
     torque_controller_mux.tick(
         current_system_tick,
-        drivetrain.get_current_data(),
+        drivetrain.get_dynamic_data(),
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
         loadCellData,
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
-        vn_data,
+        vn_interface.get_vn_struct(),
         wheel_angle_rad,
         controller_output
     );

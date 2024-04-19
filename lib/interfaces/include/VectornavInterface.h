@@ -2,7 +2,6 @@
 #define VECTORNAVINTERFACE
 #include "FlexCAN_T4.h"
 #include "hytech.h"
-#include "StateData.h"
 
 struct vector_nav {
         float velocity_x;

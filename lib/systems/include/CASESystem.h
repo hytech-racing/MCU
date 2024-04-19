@@ -2,10 +2,10 @@
 #define CASESYSTEM
 
 #include "HT08_CASE.h"
-#include "StateData.h"
 #include "HytechCANInterface.h"
 #include "PedalsSystem.h"
 #include "DrivetrainSystem.h"
+#include "MCUStateMachine.h"
 
 struct CASEConfiguration
 {
@@ -72,17 +72,17 @@ public:
     /// @param reset_integral bool of whether or not to reset integral term
     /// @return controller output
     DrivetrainCommand_s evaluate(
-        const SysTick_s &tick,
-        const xy_vec<float> &body_velocity_ms,
-        float yaw_rate_rads,
-        float steering_norm,
-        const DrivetrainDynamicReport_s &drivetrain_data,
-        const veh_vec<AnalogConversion_s> &load_cell_vals,
-        const PedalsSystemData_s &pedals_data,
-        float power_kw,
-        bool reset_integral, 
-        uint8_t vn_status
-    );
+    const SysTick_s &tick,
+    const vector_nav &vn_data,
+    float steering_norm,
+    const DrivetrainDynamicReport_s &drivetrain_data,
+    const veh_vec<AnalogConversion_s> &load_cell_vals,
+    const PedalsSystemData_s &pedals_data,
+    float power_kw,
+    CAR_STATE fsm_state, 
+    bool start_button_pressed,
+    uint8_t vn_status
+);
 
     void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d)
     {
@@ -94,7 +94,7 @@ public:
         config_.tcs_pid_i = tcs_i;
         config_.tcs_pid_d = tcs_d;
     }
-    float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_torque, float max_rpm);
+    float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
     void configure(const CASEConfiguration &config)
@@ -114,7 +114,6 @@ private:
     CASEConfiguration config_;
     message_queue *msg_queue_;
     HT08_CASE case_;
-    pstate state_;
 
     unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_,  last_vehm_send_time_, controller_send_period_ms_;
 };

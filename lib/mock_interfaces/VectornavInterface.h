@@ -17,6 +17,7 @@ struct vector_nav {
         double ecef_coords[3]; // x,y,z
         uint64_t gps_time; // gps time
         uint8_t vn_status; // status
+        xyz_vec<float> angular_rates; 
     };
 
 template <typename message_queue>
