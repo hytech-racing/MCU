@@ -89,8 +89,14 @@ Variables</h2></td></tr>
 <tr class="separator:a8f307256fa2a407634b97cf749a54a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f06b38f5382594cf48bdd40e6d018fe"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a> = <a class="el" href="PhysicalParameters_8h.html#a8f307256fa2a407634b97cf749a54a6c">WHEEL_DIAMETER</a> * 3.1415 / <a class="el" href="PhysicalParameters_8h.html#ada247e0900a0dbcf272473bed1822280">GEARBOX_RATIO</a> / 60.0</td></tr>
 <tr class="separator:a4f06b38f5382594cf48bdd40e6d018fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab626262966d5bb2a71729aa68673f1ae"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhysicalParameters_8h.html#ab626262966d5bb2a71729aa68673f1ae">RPM_TO_KILOMETERS_PER_HOUR</a> = <a class="el" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a> * 3600.0 / 1000.0</td></tr>
+<tr class="separator:ab626262966d5bb2a71729aa68673f1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e2740dd9746589ef0bea73831ff3a2d"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a> = 1.0 / <a class="el" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a></td></tr>
 <tr class="separator:a2e2740dd9746589ef0bea73831ff3a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafafe227a03de7be5332f7cce15d5b41"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41">RPM_TO_RAD_PER_SECOND</a> = 2 * 3.1415 / 60.0</td></tr>
+<tr class="separator:aafafe227a03de7be5332f7cce15d5b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f5fe159de325a36dc45ba05982601d"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhysicalParameters_8h.html#af0f5fe159de325a36dc45ba05982601d">RAD_PER_SECOND_TO_RPM</a> = 1 / <a class="el" href="PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41">RPM_TO_RAD_PER_SECOND</a></td></tr>
+<tr class="separator:af0f5fe159de325a36dc45ba05982601d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="ada247e0900a0dbcf272473bed1822280" name="ada247e0900a0dbcf272473bed1822280"></a>
@@ -121,6 +127,38 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="PhysicalParameters_8h_source.html#l00008">8</a> of file <a class="el" href="PhysicalParameters_8h_source.html">PhysicalParameters.h</a>.</p>
+
+</div>
+</div>
+<a id="af0f5fe159de325a36dc45ba05982601d" name="af0f5fe159de325a36dc45ba05982601d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f5fe159de325a36dc45ba05982601d">&#9670;&#160;</a></span>RAD_PER_SECOND_TO_RPM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float RAD_PER_SECOND_TO_RPM = 1 / <a class="el" href="PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41">RPM_TO_RAD_PER_SECOND</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PhysicalParameters_8h_source.html#l00011">11</a> of file <a class="el" href="PhysicalParameters_8h_source.html">PhysicalParameters.h</a>.</p>
+
+</div>
+</div>
+<a id="ab626262966d5bb2a71729aa68673f1ae" name="ab626262966d5bb2a71729aa68673f1ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab626262966d5bb2a71729aa68673f1ae">&#9670;&#160;</a></span>RPM_TO_KILOMETERS_PER_HOUR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float RPM_TO_KILOMETERS_PER_HOUR = <a class="el" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a> * 3600.0 / 1000.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 <p class="definition">Definition at line <a class="el" href="PhysicalParameters_8h_source.html#l00007">7</a> of file <a class="el" href="PhysicalParameters_8h_source.html">PhysicalParameters.h</a>.</p>
 
 </div>
@@ -138,6 +176,22 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="PhysicalParameters_8h_source.html#l00006">6</a> of file <a class="el" href="PhysicalParameters_8h_source.html">PhysicalParameters.h</a>.</p>
+
+</div>
+</div>
+<a id="aafafe227a03de7be5332f7cce15d5b41" name="aafafe227a03de7be5332f7cce15d5b41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafafe227a03de7be5332f7cce15d5b41">&#9670;&#160;</a></span>RPM_TO_RAD_PER_SECOND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float RPM_TO_RAD_PER_SECOND = 2 * 3.1415 / 60.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PhysicalParameters_8h_source.html#l00010">10</a> of file <a class="el" href="PhysicalParameters_8h_source.html">PhysicalParameters.h</a>.</p>
 
 </div>
 </div>

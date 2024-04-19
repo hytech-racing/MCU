@@ -98,14 +98,87 @@ Functions</h2></td></tr>
 <tr class="separator:a58d908109d3799d9fe08f9c8eaa0ebcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5d617660a64ffaa72ad952ae2f8c9c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="torque__controller__mux__test_8h.html#ac5d617660a64ffaa72ad952ae2f8c9c2">TEST</a> (TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)</td></tr>
 <tr class="separator:ac5d617660a64ffaa72ad952ae2f8c9c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5831b8b21312d6229649bc2d28fd814"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="torque__controller__mux__test_8h.html#ac5831b8b21312d6229649bc2d28fd814">TEST</a> (TorqueControllerMuxTesting, test_power_limit)</td></tr>
+<tr class="separator:ac5831b8b21312d6229649bc2d28fd814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ef89825fd95d70f001771f00ec4dc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="torque__controller__mux__test_8h.html#a81ef89825fd95d70f001771f00ec4dc5">TEST</a> (TorqueControllerMuxTesting, test_torque_limit)</td></tr>
+<tr class="separator:a81ef89825fd95d70f001771f00ec4dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc6b785815127547a307a8ee7e8cdc48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="torque__controller__mux__test_8h.html#afc6b785815127547a307a8ee7e8cdc48">TEST</a> (TorqueControllerMuxTesting, test_simple_launch_controller)</td></tr>
 <tr class="separator:afc6b785815127547a307a8ee7e8cdc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac24b30f09e6ddb6bffcbe5148b09e9e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="torque__controller__mux__test_8h.html#ac24b30f09e6ddb6bffcbe5148b09e9e5">TEST</a> (TorqueControllerMuxTesting, test_slip_launch_controller)</td></tr>
 <tr class="separator:ac24b30f09e6ddb6bffcbe5148b09e9e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ac5831b8b21312d6229649bc2d28fd814" name="ac5831b8b21312d6229649bc2d28fd814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5831b8b21312d6229649bc2d28fd814">&#9670;&#160;</a></span>TEST() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">TorqueControllerMuxTesting&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">test_power_limit&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="torque__controller__mux__test_8h_source.html#l00290">290</a> of file <a class="el" href="torque__controller__mux__test_8h_source.html">torque_controller_mux_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  290</span>                                                   {</div>
+<div class="line"><span class="lineno">  291</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> mux = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
+<div class="line"><span class="lineno">  292</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> drive_command;</div>
+<div class="line"><span class="lineno">  293</span> </div>
+<div class="line"><span class="lineno">  294</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> edit;</div>
+<div class="line"><span class="lineno">  295</span> </div>
+<div class="line"><span class="lineno">  296</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"><span class="lineno">  297</span>        edit.<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">measuredSpeeds</a>[i] = 500.0f;</div>
+<div class="line"><span class="lineno">  298</span>        drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i] = 10.0f;</div>
+<div class="line"><span class="lineno">  299</span>    }</div>
+<div class="line"><span class="lineno">  300</span> </div>
+<div class="line"><span class="lineno">  301</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain1 = edit;</div>
+<div class="line"><span class="lineno">  302</span> </div>
+<div class="line"><span class="lineno">  303</span>    mux.<a class="code hl_function" href="classTorqueControllerMux.html#a55f8725f93730b3935f683be70685e2d">applyPowerLimit</a>(&amp;drive_command, &amp;drivetrain1);</div>
+<div class="line"><span class="lineno">  304</span> </div>
+<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"><span class="lineno">  306</span>        ASSERT_EQ(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i], 10.0f);</div>
+<div class="line"><span class="lineno">  307</span>    }</div>
+<div class="line"><span class="lineno">  308</span> </div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"><span class="lineno">  310</span>        edit.<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">measuredSpeeds</a>[i] = 20000.0f;</div>
+<div class="line"><span class="lineno">  311</span>        drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i] = 21.0f;</div>
+<div class="line"><span class="lineno">  312</span>    }</div>
+<div class="line"><span class="lineno">  313</span> </div>
+<div class="line"><span class="lineno">  314</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain2 = edit;</div>
+<div class="line"><span class="lineno">  315</span> </div>
+<div class="line"><span class="lineno">  316</span>    mux.<a class="code hl_function" href="classTorqueControllerMux.html#a55f8725f93730b3935f683be70685e2d">applyPowerLimit</a>(&amp;drive_command, &amp;drivetrain2);</div>
+<div class="line"><span class="lineno">  317</span> </div>
+<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"><span class="lineno">  319</span>        ASSERT_LT(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i], 7.6); <span class="comment">// hardcoded value based on online calculator</span></div>
+<div class="line"><span class="lineno">  320</span>    }</div>
+<div class="line"><span class="lineno">  321</span>    </div>
+<div class="line"><span class="lineno">  322</span>}</div>
+<div class="ttc" id="aclassTorqueControllerMux_html"><div class="ttname"><a href="classTorqueControllerMux.html">TorqueControllerMux</a></div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00019">TorqueControllerMux.h:20</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a55f8725f93730b3935f683be70685e2d"><div class="ttname"><a href="classTorqueControllerMux.html#a55f8725f93730b3935f683be70685e2d">TorqueControllerMux::applyPowerLimit</a></div><div class="ttdeci">void applyPowerLimit(DrivetrainCommand_s *command, const DrivetrainDynamicReport_s *drivetrain)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00132">TorqueControllerMux.cpp:132</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html"><div class="ttname"><a href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a></div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00010">DrivetrainSystem.h:11</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
+<div class="ttc" id="astructDrivetrainDynamicReport__s_html"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a></div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00016">DrivetrainSystem.h:17</a></div></div>
+<div class="ttc" id="astructDrivetrainDynamicReport__s_html_a77c47cfa97df348c8dd93b260975f980"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">DrivetrainDynamicReport_s::measuredSpeeds</a></div><div class="ttdeci">float measuredSpeeds[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00019">DrivetrainSystem.h:19</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="afc6b785815127547a307a8ee7e8cdc48" name="afc6b785815127547a307a8ee7e8cdc48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc6b785815127547a307a8ee7e8cdc48">&#9670;&#160;</a></span>TEST() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afc6b785815127547a307a8ee7e8cdc48">&#9670;&#160;</a></span>TEST() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,255 +203,252 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="torque__controller__mux__test_8h_source.html#l00290">290</a> of file <a class="el" href="torque__controller__mux__test_8h_source.html">torque_controller_mux_test.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  290</span>                                                                {</div>
-<div class="line"><span class="lineno">  291</span>     SysClock clock = SysClock();</div>
-<div class="line"><span class="lineno">  292</span>    SysTick_s cur_tick;</div>
-<div class="line"><span class="lineno">  293</span>    cur_tick = clock.tick(0);</div>
-<div class="line"><span class="lineno">  294</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
-<div class="line"><span class="lineno">  295</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> resulting_torque_command;</div>
-<div class="line"><span class="lineno">  296</span> </div>
-<div class="line"><span class="lineno">  297</span>    <a class="code hl_struct" href="structvector__nav.html">vector_nav</a> vn_data{};</div>
-<div class="line"><span class="lineno">  298</span> </div>
-<div class="line"><span class="lineno">  299</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_slow_drivetrain_dynamics = {</div>
-<div class="line"><span class="lineno">  300</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
-<div class="line"><span class="lineno">  301</span>        .measuredSpeeds = {</div>
-<div class="line"><span class="lineno">  302</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  303</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  304</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  305</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>)</div>
-<div class="line"><span class="lineno">  306</span>        },</div>
-<div class="line"><span class="lineno">  307</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  308</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  309</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
-<div class="line"><span class="lineno">  310</span>    };</div>
-<div class="line"><span class="lineno">  311</span> </div>
-<div class="line"><span class="lineno">  312</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_barely_launch_drivetrain_dynamics = {</div>
-<div class="line"><span class="lineno">  313</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
-<div class="line"><span class="lineno">  314</span>        .measuredSpeeds = {0, 2785.86, 0, 0},</div>
-<div class="line"><span class="lineno">  315</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  316</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  317</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
-<div class="line"><span class="lineno">  318</span>    };</div>
-<div class="line"><span class="lineno">  319</span> </div>
-<div class="line"><span class="lineno">  320</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_no_launch_drivetrain_dynamics = {</div>
-<div class="line"><span class="lineno">  321</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
-<div class="line"><span class="lineno">  322</span>        .measuredSpeeds = {0, 2786.86, 0, 0},</div>
-<div class="line"><span class="lineno">  323</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  324</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  325</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
-<div class="line"><span class="lineno">  326</span>    };</div>
-<div class="line"><span class="lineno">  327</span> </div>
-<div class="line"><span class="lineno">  328</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_fast_drivetrain_dynamics = {</div>
-<div class="line"><span class="lineno">  329</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
-<div class="line"><span class="lineno">  330</span>        .measuredSpeeds = {</div>
-<div class="line"><span class="lineno">  331</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  332</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  333</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  334</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>)</div>
-<div class="line"><span class="lineno">  335</span>        },</div>
-<div class="line"><span class="lineno">  336</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  337</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  338</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
-<div class="line"><span class="lineno">  339</span>    };</div>
-<div class="line"><span class="lineno">  340</span> </div>
-<div class="line"><span class="lineno">  341</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_full_accel_press = {</div>
-<div class="line"><span class="lineno">  342</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  343</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  344</span>        .brakePressed = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  345</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  346</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  347</span>        .accelPercent = 1.0,</div>
-<div class="line"><span class="lineno">  348</span>        .brakePercent = 0.0</div>
-<div class="line"><span class="lineno">  349</span>    };</div>
-<div class="line"><span class="lineno">  350</span> </div>
-<div class="line"><span class="lineno">  351</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_no_accel_press = {</div>
-<div class="line"><span class="lineno">  352</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  353</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  354</span>        .brakePressed = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  355</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  356</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  357</span>        .accelPercent = 0.0,</div>
-<div class="line"><span class="lineno">  358</span>        .brakePercent = 0.0</div>
-<div class="line"><span class="lineno">  359</span>    };</div>
-<div class="line"><span class="lineno">  360</span> </div>
-<div class="line"><span class="lineno">  361</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_accel_and_brake_press = {</div>
-<div class="line"><span class="lineno">  362</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  363</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  364</span>        .brakePressed = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  365</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  366</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  367</span>        .accelPercent = 1.0,</div>
-<div class="line"><span class="lineno">  368</span>        .brakePercent = 0.3</div>
-<div class="line"><span class="lineno">  369</span>    };</div>
-<div class="line"><span class="lineno">  370</span> </div>
-<div class="line"><span class="lineno">  371</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  372</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  373</span>        simulated_slow_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  374</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  375</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  376</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  377</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  378</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  379</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  380</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  381</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  382</span>        vn_data,</div>
-<div class="line"><span class="lineno">  383</span>        0.0</div>
-<div class="line"><span class="lineno">  384</span>    );</div>
-<div class="line"><span class="lineno">  385</span> </div>
-<div class="line"><span class="lineno">  386</span>    <span class="comment">// change mode to mode 3</span></div>
-<div class="line"><span class="lineno">  387</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  388</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  389</span>        simulated_slow_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  390</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  391</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  392</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  393</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  394</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  395</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  396</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  397</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  398</span>        vn_data,</div>
-<div class="line"><span class="lineno">  399</span>        0.0</div>
-<div class="line"><span class="lineno">  400</span>    );</div>
-<div class="line"><span class="lineno">  401</span> </div>
-<div class="line"><span class="lineno">  402</span>    <span class="comment">// tick again to calculate state switch</span></div>
-<div class="line"><span class="lineno">  403</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  404</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  405</span>        simulated_slow_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  406</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  407</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  408</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  409</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  410</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  411</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  412</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  413</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  414</span>        vn_data,</div>
-<div class="line"><span class="lineno">  415</span>        0.0</div>
-<div class="line"><span class="lineno">  416</span>    );</div>
-<div class="line"><span class="lineno">  417</span> </div>
-<div class="line"><span class="lineno">  418</span>    <a class="code hl_enumeration" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  419</span> </div>
-<div class="line"><span class="lineno">  420</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a>);</div>
+<p class="definition">Definition at line <a class="el" href="torque__controller__mux__test_8h_source.html#l00361">361</a> of file <a class="el" href="torque__controller__mux__test_8h_source.html">torque_controller_mux_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  361</span>                                                                {</div>
+<div class="line"><span class="lineno">  362</span>     SysClock clock = SysClock();</div>
+<div class="line"><span class="lineno">  363</span>    SysTick_s cur_tick;</div>
+<div class="line"><span class="lineno">  364</span>    cur_tick = clock.tick(0);</div>
+<div class="line"><span class="lineno">  365</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
+<div class="line"><span class="lineno">  366</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> resulting_torque_command;</div>
+<div class="line"><span class="lineno">  367</span> </div>
+<div class="line"><span class="lineno">  368</span>    <a class="code hl_struct" href="structvector__nav.html">vector_nav</a> vn_data{};</div>
+<div class="line"><span class="lineno">  369</span> </div>
+<div class="line"><span class="lineno">  370</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_slow_drivetrain_dynamics = {</div>
+<div class="line"><span class="lineno">  371</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
+<div class="line"><span class="lineno">  372</span>        .measuredSpeeds = {</div>
+<div class="line"><span class="lineno">  373</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  374</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  375</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  376</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>)</div>
+<div class="line"><span class="lineno">  377</span>        },</div>
+<div class="line"><span class="lineno">  378</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  379</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  380</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
+<div class="line"><span class="lineno">  381</span>    };</div>
+<div class="line"><span class="lineno">  382</span> </div>
+<div class="line"><span class="lineno">  383</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_barely_launch_drivetrain_dynamics = {</div>
+<div class="line"><span class="lineno">  384</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
+<div class="line"><span class="lineno">  385</span>        .measuredSpeeds = {0, 2785.86, 0, 0},</div>
+<div class="line"><span class="lineno">  386</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  387</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  388</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
+<div class="line"><span class="lineno">  389</span>    };</div>
+<div class="line"><span class="lineno">  390</span> </div>
+<div class="line"><span class="lineno">  391</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_no_launch_drivetrain_dynamics = {</div>
+<div class="line"><span class="lineno">  392</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
+<div class="line"><span class="lineno">  393</span>        .measuredSpeeds = {0, 2786.86, 0, 0},</div>
+<div class="line"><span class="lineno">  394</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  395</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  396</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
+<div class="line"><span class="lineno">  397</span>    };</div>
+<div class="line"><span class="lineno">  398</span> </div>
+<div class="line"><span class="lineno">  399</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_fast_drivetrain_dynamics = {</div>
+<div class="line"><span class="lineno">  400</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
+<div class="line"><span class="lineno">  401</span>        .measuredSpeeds = {</div>
+<div class="line"><span class="lineno">  402</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  403</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  404</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  405</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> + 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>)</div>
+<div class="line"><span class="lineno">  406</span>        },</div>
+<div class="line"><span class="lineno">  407</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  408</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  409</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
+<div class="line"><span class="lineno">  410</span>    };</div>
+<div class="line"><span class="lineno">  411</span> </div>
+<div class="line"><span class="lineno">  412</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_full_accel_press = {</div>
+<div class="line"><span class="lineno">  413</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  414</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  415</span>        .brakePressed = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  416</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  417</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  418</span>        .accelPercent = 1.0,</div>
+<div class="line"><span class="lineno">  419</span>        .brakePercent = 0.0</div>
+<div class="line"><span class="lineno">  420</span>    };</div>
 <div class="line"><span class="lineno">  421</span> </div>
-<div class="line"><span class="lineno">  422</span>    <span class="comment">// press accelerator but with one wheel right at max speed threshold</span></div>
-<div class="line"><span class="lineno">  423</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  424</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  425</span>        simulated_no_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  426</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  427</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  428</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  429</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  430</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  431</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  432</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  433</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  434</span>        vn_data,</div>
-<div class="line"><span class="lineno">  435</span>        0.0</div>
-<div class="line"><span class="lineno">  436</span>    );</div>
-<div class="line"><span class="lineno">  437</span> </div>
-<div class="line"><span class="lineno">  438</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  439</span> </div>
-<div class="line"><span class="lineno">  440</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LaunchStates_e::LAUNCH_NOT_READY</a>);</div>
+<div class="line"><span class="lineno">  422</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_no_accel_press = {</div>
+<div class="line"><span class="lineno">  423</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  424</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  425</span>        .brakePressed = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  426</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  427</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  428</span>        .accelPercent = 0.0,</div>
+<div class="line"><span class="lineno">  429</span>        .brakePercent = 0.0</div>
+<div class="line"><span class="lineno">  430</span>    };</div>
+<div class="line"><span class="lineno">  431</span> </div>
+<div class="line"><span class="lineno">  432</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_accel_and_brake_press = {</div>
+<div class="line"><span class="lineno">  433</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  434</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  435</span>        .brakePressed = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  436</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  437</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  438</span>        .accelPercent = 1.0,</div>
+<div class="line"><span class="lineno">  439</span>        .brakePercent = 0.3</div>
+<div class="line"><span class="lineno">  440</span>    };</div>
 <div class="line"><span class="lineno">  441</span> </div>
-<div class="line"><span class="lineno">  442</span>    <span class="comment">// go back to launch ready state</span></div>
-<div class="line"><span class="lineno">  443</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  444</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  445</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  446</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  447</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  442</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  443</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  444</span>        simulated_slow_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  445</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  446</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  447</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  448</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  449</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  450</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  451</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  452</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  453</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  454</span>        vn_data,</div>
-<div class="line"><span class="lineno">  455</span>        0.0</div>
-<div class="line"><span class="lineno">  456</span>    );</div>
-<div class="line"><span class="lineno">  457</span> </div>
-<div class="line"><span class="lineno">  458</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  459</span> </div>
-<div class="line"><span class="lineno">  460</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a>);</div>
-<div class="line"><span class="lineno">  461</span> </div>
-<div class="line"><span class="lineno">  462</span>    <span class="comment">// press accel now with one wheelspeed barely under threshold</span></div>
-<div class="line"><span class="lineno">  463</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  464</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  465</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  466</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  467</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  468</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  469</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  470</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  471</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  472</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  473</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  474</span>        vn_data,</div>
-<div class="line"><span class="lineno">  475</span>        0.0</div>
-<div class="line"><span class="lineno">  476</span>    );</div>
-<div class="line"><span class="lineno">  477</span> </div>
-<div class="line"><span class="lineno">  478</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  479</span> </div>
-<div class="line"><span class="lineno">  480</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a>);</div>
-<div class="line"><span class="lineno">  481</span> </div>
-<div class="line"><span class="lineno">  482</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  483</span>        clock.tick(1000000), <span class="comment">// 1 second since launch</span></div>
-<div class="line"><span class="lineno">  484</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  485</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  486</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  487</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  488</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  489</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  490</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  491</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  492</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  493</span>        vn_data,</div>
-<div class="line"><span class="lineno">  494</span>        0.0</div>
-<div class="line"><span class="lineno">  495</span>    );</div>
-<div class="line"><span class="lineno">  496</span> </div>
-<div class="line"><span class="lineno">  497</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
-<div class="line"><span class="lineno">  498</span> </div>
-<div class="line"><span class="lineno">  499</span>    <span class="comment">// this fails, but the value is close enough</span></div>
-<div class="line"><span class="lineno">  500</span>    <span class="comment">// ASSERT_EQ((float)((int)((commanded.speeds_rpm[0] - 1500) * RPM_TO_METERS_PER_SECOND * 100)) / 100, 11.76f);</span></div>
-<div class="line"><span class="lineno">  501</span> </div>
-<div class="line"><span class="lineno">  502</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  503</span>        clock.tick(1000000), <span class="comment">// 1 second since launch</span></div>
-<div class="line"><span class="lineno">  504</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  505</span>        simulated_accel_and_brake_press,</div>
-<div class="line"><span class="lineno">  506</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  507</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  508</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  509</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  510</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  511</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
-<div class="line"><span class="lineno">  512</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  513</span>        vn_data,</div>
-<div class="line"><span class="lineno">  514</span>        0.0</div>
-<div class="line"><span class="lineno">  515</span>    );</div>
-<div class="line"><span class="lineno">  516</span> </div>
-<div class="line"><span class="lineno">  517</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  518</span> </div>
-<div class="line"><span class="lineno">  519</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LaunchStates_e::LAUNCH_NOT_READY</a>);</div>
-<div class="line"><span class="lineno">  520</span>}</div>
-<div class="ttc" id="aPhysicalParameters_8h_html_a2e2740dd9746589ef0bea73831ff3a2d"><div class="ttname"><a href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a></div><div class="ttdeci">const float METERS_PER_SECOND_TO_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00007">PhysicalParameters.h:7</a></div></div>
-<div class="ttc" id="aTorqueControllerMux_8h_html_a6ba155949a221de068fa4c52357d2292"><div class="ttname"><a href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a></div><div class="ttdeci">const float MAX_SPEED_FOR_MODE_CHANGE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00013">TorqueControllerMux.h:13</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a></div><div class="ttdeci">LaunchStates_e</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00075">TorqueControllers.h:76</a></div></div>
+<div class="line"><span class="lineno">  451</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
+<div class="line"><span class="lineno">  452</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  453</span>        vn_data,</div>
+<div class="line"><span class="lineno">  454</span>        0.0</div>
+<div class="line"><span class="lineno">  455</span>    );</div>
+<div class="line"><span class="lineno">  456</span> </div>
+<div class="line"><span class="lineno">  457</span>    <span class="comment">// change mode to mode 3</span></div>
+<div class="line"><span class="lineno">  458</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  459</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  460</span>        simulated_slow_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  461</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  462</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  463</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  464</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  465</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  466</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  467</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  468</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  469</span>        vn_data,</div>
+<div class="line"><span class="lineno">  470</span>        0.0</div>
+<div class="line"><span class="lineno">  471</span>    );</div>
+<div class="line"><span class="lineno">  472</span> </div>
+<div class="line"><span class="lineno">  473</span>    <span class="comment">// tick again to calculate state switch</span></div>
+<div class="line"><span class="lineno">  474</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  475</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  476</span>        simulated_slow_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  477</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  478</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  479</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  480</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  481</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  482</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  483</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  484</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  485</span>        vn_data,</div>
+<div class="line"><span class="lineno">  486</span>        0.0</div>
+<div class="line"><span class="lineno">  487</span>    );</div>
+<div class="line"><span class="lineno">  488</span> </div>
+<div class="line"><span class="lineno">  489</span>    <a class="code hl_enumeration" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  490</span> </div>
+<div class="line"><span class="lineno">  491</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a>);</div>
+<div class="line"><span class="lineno">  492</span> </div>
+<div class="line"><span class="lineno">  493</span>    <span class="comment">// press accelerator but with one wheel right at max speed threshold</span></div>
+<div class="line"><span class="lineno">  494</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  495</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  496</span>        simulated_no_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  497</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  498</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  499</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  500</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  501</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  502</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  503</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  504</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  505</span>        vn_data,</div>
+<div class="line"><span class="lineno">  506</span>        0.0</div>
+<div class="line"><span class="lineno">  507</span>    );</div>
+<div class="line"><span class="lineno">  508</span> </div>
+<div class="line"><span class="lineno">  509</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  510</span> </div>
+<div class="line"><span class="lineno">  511</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LaunchStates_e::LAUNCH_NOT_READY</a>);</div>
+<div class="line"><span class="lineno">  512</span> </div>
+<div class="line"><span class="lineno">  513</span>    <span class="comment">// go back to launch ready state</span></div>
+<div class="line"><span class="lineno">  514</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  515</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  516</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  517</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  518</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  519</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  520</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  521</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  522</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  523</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  524</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  525</span>        vn_data,</div>
+<div class="line"><span class="lineno">  526</span>        0.0</div>
+<div class="line"><span class="lineno">  527</span>    );</div>
+<div class="line"><span class="lineno">  528</span> </div>
+<div class="line"><span class="lineno">  529</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  530</span> </div>
+<div class="line"><span class="lineno">  531</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a>);</div>
+<div class="line"><span class="lineno">  532</span> </div>
+<div class="line"><span class="lineno">  533</span>    <span class="comment">// press accel now with one wheelspeed barely under threshold</span></div>
+<div class="line"><span class="lineno">  534</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  535</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  536</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  537</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  538</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  539</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  540</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  541</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  542</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  543</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  544</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  545</span>        vn_data,</div>
+<div class="line"><span class="lineno">  546</span>        0.0</div>
+<div class="line"><span class="lineno">  547</span>    );</div>
+<div class="line"><span class="lineno">  548</span> </div>
+<div class="line"><span class="lineno">  549</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  550</span> </div>
+<div class="line"><span class="lineno">  551</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a>);</div>
+<div class="line"><span class="lineno">  552</span> </div>
+<div class="line"><span class="lineno">  553</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  554</span>        clock.tick(1000000), <span class="comment">// 1 second since launch</span></div>
+<div class="line"><span class="lineno">  555</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  556</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  557</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  558</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  559</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  560</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  561</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  562</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  563</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  564</span>        vn_data,</div>
+<div class="line"><span class="lineno">  565</span>        0.0</div>
+<div class="line"><span class="lineno">  566</span>    );</div>
+<div class="line"><span class="lineno">  567</span> </div>
+<div class="line"><span class="lineno">  568</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  569</span> </div>
+<div class="line"><span class="lineno">  570</span>    <span class="comment">// this fails, but the value is close enough</span></div>
+<div class="line"><span class="lineno">  571</span>    <span class="comment">// ASSERT_EQ((float)((int)((commanded.speeds_rpm[0] - 1500) * RPM_TO_METERS_PER_SECOND * 100)) / 100, 11.76f);</span></div>
+<div class="line"><span class="lineno">  572</span> </div>
+<div class="line"><span class="lineno">  573</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  574</span>        clock.tick(1000000), <span class="comment">// 1 second since launch</span></div>
+<div class="line"><span class="lineno">  575</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  576</span>        simulated_accel_and_brake_press,</div>
+<div class="line"><span class="lineno">  577</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  578</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  579</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  580</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  581</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  582</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a>,</div>
+<div class="line"><span class="lineno">  583</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  584</span>        vn_data,</div>
+<div class="line"><span class="lineno">  585</span>        0.0</div>
+<div class="line"><span class="lineno">  586</span>    );</div>
+<div class="line"><span class="lineno">  587</span> </div>
+<div class="line"><span class="lineno">  588</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  589</span> </div>
+<div class="line"><span class="lineno">  590</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LaunchStates_e::LAUNCH_NOT_READY</a>);</div>
+<div class="line"><span class="lineno">  591</span>}</div>
+<div class="ttc" id="aPhysicalParameters_8h_html_a2e2740dd9746589ef0bea73831ff3a2d"><div class="ttname"><a href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a></div><div class="ttdeci">const float METERS_PER_SECOND_TO_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00008">PhysicalParameters.h:8</a></div></div>
+<div class="ttc" id="aTorqueControllerMux_8h_html_a6ba155949a221de068fa4c52357d2292"><div class="ttname"><a href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a></div><div class="ttdeci">const float MAX_SPEED_FOR_MODE_CHANGE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00015">TorqueControllerMux.h:15</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a></div><div class="ttdeci">LaunchStates_e</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00079">TorqueControllers.h:80</a></div></div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a></div><div class="ttdeci">@ LAUNCH_READY</div></div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a></div><div class="ttdeci">@ LAUNCHING</div></div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LaunchStates_e::LAUNCH_NOT_READY</a></div><div class="ttdeci">@ LAUNCH_NOT_READY</div></div>
-<div class="ttc" id="aclassTorqueControllerBase_html_a46648b6b5e5121fefa3ae9e07af79bf9"><div class="ttname"><a href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">TorqueControllerBase::get_launch_state</a></div><div class="ttdeci">virtual LaunchStates_e get_launch_state()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00114">TorqueControllers.h:114</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html"><div class="ttname"><a href="classTorqueControllerMux.html">TorqueControllerMux</a></div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00017">TorqueControllerMux.h:18</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a297210cf2e01c3cec82da871a623b25d"><div class="ttname"><a href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">TorqueControllerMux::activeController</a></div><div class="ttdeci">TorqueControllerBase * activeController()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00105">TorqueControllerMux.h:105</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a71217aa07bca005b9131252473c4463d"><div class="ttname"><a href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">TorqueControllerMux::getDrivetrainCommand</a></div><div class="ttdeci">const DrivetrainCommand_s &amp; getDrivetrainCommand()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00093">TorqueControllerMux.h:93</a></div></div>
+<div class="ttc" id="aclassTorqueControllerBase_html_a46648b6b5e5121fefa3ae9e07af79bf9"><div class="ttname"><a href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">TorqueControllerBase::get_launch_state</a></div><div class="ttdeci">virtual LaunchStates_e get_launch_state()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00118">TorqueControllers.h:118</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a297210cf2e01c3cec82da871a623b25d"><div class="ttname"><a href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">TorqueControllerMux::activeController</a></div><div class="ttdeci">TorqueControllerBase * activeController()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00120">TorqueControllerMux.h:120</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a71217aa07bca005b9131252473c4463d"><div class="ttname"><a href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">TorqueControllerMux::getDrivetrainCommand</a></div><div class="ttdeci">const DrivetrainCommand_s &amp; getDrivetrainCommand()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00096">TorqueControllerMux.h:96</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a7ee4ed6d826415d0d6c913ead9646ea9"><div class="ttname"><a href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">TorqueControllerMux::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const DrivetrainDynamicReport_s &amp;drivetrainData, const PedalsSystemData_s &amp;pedalsData, const SteeringSystemData_s &amp;steeringData, const AnalogConversion_s &amp;loadFLData, const AnalogConversion_s &amp;loadFRData, const AnalogConversion_s &amp;loadRLData, const AnalogConversion_s &amp;loadRRData, DialMode_e dashboardDialMode, bool dashboardTorqueModeButtonPressed, const vector_nav &amp;vn_data, float wheel_angle_rad)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00005">TorqueControllerMux.cpp:5</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8ac5b781763a4c930367500c96e64a0166">DialMode_e::MODE_3</a></div><div class="ttdeci">@ MODE_3</div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_af8f6043c059e465412c7d1b34bc39a2c"><div class="ttname"><a href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a></div><div class="ttdeci">TorqueControllerMux torque_controller_mux(1.0, 0.4)</div></div>
 <div class="ttc" id="astructAnalogConversion__s_html"><div class="ttname"><a href="structAnalogConversion__s.html">AnalogConversion_s</a></div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00013">AnalogSensorsInterface.h:14</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html"><div class="ttname"><a href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a></div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00010">DrivetrainSystem.h:11</a></div></div>
-<div class="ttc" id="astructDrivetrainDynamicReport__s_html"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a></div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00016">DrivetrainSystem.h:17</a></div></div>
 <div class="ttc" id="astructDrivetrainDynamicReport__s_html_ab0441c85e9a1a81f716a75256aba48f6"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">DrivetrainDynamicReport_s::measuredInverterFLPackVoltage</a></div><div class="ttdeci">uint16_t measuredInverterFLPackVoltage</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00018">DrivetrainSystem.h:18</a></div></div>
 <div class="ttc" id="astructPedalsSystemData__s_html"><div class="ttname"><a href="structPedalsSystemData__s.html">PedalsSystemData_s</a></div><div class="ttdoc">system interface struct that contains the data from the pedal system</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00010">PedalsSystem.h:11</a></div></div>
 <div class="ttc" id="astructPedalsSystemData__s_html_af714ca909b990948479a9193d2d1f5c3"><div class="ttname"><a href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">PedalsSystemData_s::accelImplausible</a></div><div class="ttdeci">bool accelImplausible</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00012">PedalsSystem.h:12</a></div></div>
@@ -388,7 +458,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a id="ac24b30f09e6ddb6bffcbe5148b09e9e5" name="ac24b30f09e6ddb6bffcbe5148b09e9e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac24b30f09e6ddb6bffcbe5148b09e9e5">&#9670;&#160;</a></span>TEST() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac24b30f09e6ddb6bffcbe5148b09e9e5">&#9670;&#160;</a></span>TEST() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -413,259 +483,259 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="torque__controller__mux__test_8h_source.html#l00522">522</a> of file <a class="el" href="torque__controller__mux__test_8h_source.html">torque_controller_mux_test.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  522</span>                                                              {</div>
-<div class="line"><span class="lineno">  523</span>    SysClock clock = SysClock();</div>
-<div class="line"><span class="lineno">  524</span>    SysTick_s cur_tick;</div>
-<div class="line"><span class="lineno">  525</span>    cur_tick = clock.tick(0);</div>
-<div class="line"><span class="lineno">  526</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
-<div class="line"><span class="lineno">  527</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> resulting_torque_command;</div>
-<div class="line"><span class="lineno">  528</span> </div>
-<div class="line"><span class="lineno">  529</span>    <a class="code hl_struct" href="structvector__nav.html">vector_nav</a> vn_data{};</div>
-<div class="line"><span class="lineno">  530</span> </div>
-<div class="line"><span class="lineno">  531</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_slow_drivetrain_dynamics = {</div>
-<div class="line"><span class="lineno">  532</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
-<div class="line"><span class="lineno">  533</span>        .measuredSpeeds = {</div>
-<div class="line"><span class="lineno">  534</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  535</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  536</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
-<div class="line"><span class="lineno">  537</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>)</div>
-<div class="line"><span class="lineno">  538</span>        },</div>
-<div class="line"><span class="lineno">  539</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  540</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  541</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
-<div class="line"><span class="lineno">  542</span>    };</div>
-<div class="line"><span class="lineno">  543</span> </div>
-<div class="line"><span class="lineno">  544</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_barely_launch_drivetrain_dynamics = {</div>
-<div class="line"><span class="lineno">  545</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
-<div class="line"><span class="lineno">  546</span>        .measuredSpeeds = {0, 2785.86, 0, 0},</div>
-<div class="line"><span class="lineno">  547</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  548</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
-<div class="line"><span class="lineno">  549</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
-<div class="line"><span class="lineno">  550</span>    };</div>
-<div class="line"><span class="lineno">  551</span> </div>
-<div class="line"><span class="lineno">  552</span>    <span class="comment">// DrivetrainDynamicReport_s simulated_no_launch_drivetrain_dynamics = {</span></div>
-<div class="line"><span class="lineno">  553</span>    <span class="comment">//     .measuredInverterFLPackVoltage = 550,</span></div>
-<div class="line"><span class="lineno">  554</span>    <span class="comment">//     .measuredSpeeds = {0, 2786.86, 0, 0},</span></div>
-<div class="line"><span class="lineno">  555</span>    <span class="comment">//     .measuredTorques = {0.0, 0.0, 0.0, 0.0},</span></div>
-<div class="line"><span class="lineno">  556</span>    <span class="comment">//     .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</span></div>
-<div class="line"><span class="lineno">  557</span>    <span class="comment">//     .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</span></div>
-<div class="line"><span class="lineno">  558</span>    <span class="comment">// };</span></div>
-<div class="line"><span class="lineno">  559</span> </div>
-<div class="line"><span class="lineno">  560</span>    <span class="comment">// DrivetrainDynamicReport_s simulated_fast_drivetrain_dynamics = {</span></div>
-<div class="line"><span class="lineno">  561</span>    <span class="comment">//     .measuredInverterFLPackVoltage = 550,</span></div>
-<div class="line"><span class="lineno">  562</span>    <span class="comment">//     .measuredSpeeds = {</span></div>
-<div class="line"><span class="lineno">  563</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM), </span></div>
-<div class="line"><span class="lineno">  564</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM), </span></div>
-<div class="line"><span class="lineno">  565</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM), </span></div>
-<div class="line"><span class="lineno">  566</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM)</span></div>
-<div class="line"><span class="lineno">  567</span>    <span class="comment">//     },</span></div>
-<div class="line"><span class="lineno">  568</span>    <span class="comment">//     .measuredTorques = {0.0, 0.0, 0.0, 0.0},</span></div>
-<div class="line"><span class="lineno">  569</span>    <span class="comment">//     .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</span></div>
-<div class="line"><span class="lineno">  570</span>    <span class="comment">//     .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</span></div>
-<div class="line"><span class="lineno">  571</span>    <span class="comment">// };</span></div>
-<div class="line"><span class="lineno">  572</span> </div>
-<div class="line"><span class="lineno">  573</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_full_accel_press = {</div>
-<div class="line"><span class="lineno">  574</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  575</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  576</span>        .brakePressed = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  577</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  578</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  579</span>        .accelPercent = 1.0,</div>
-<div class="line"><span class="lineno">  580</span>        .brakePercent = 0.0</div>
-<div class="line"><span class="lineno">  581</span>    };</div>
-<div class="line"><span class="lineno">  582</span> </div>
-<div class="line"><span class="lineno">  583</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_no_accel_press = {</div>
-<div class="line"><span class="lineno">  584</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  585</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  586</span>        .brakePressed = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  587</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  588</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  589</span>        .accelPercent = 0.0,</div>
-<div class="line"><span class="lineno">  590</span>        .brakePercent = 0.0</div>
-<div class="line"><span class="lineno">  591</span>    };</div>
-<div class="line"><span class="lineno">  592</span> </div>
-<div class="line"><span class="lineno">  593</span>    <span class="comment">// PedalsSystemData_s simulated_accel_and_brake_press = {</span></div>
-<div class="line"><span class="lineno">  594</span>    <span class="comment">//     .accelImplausible = false,</span></div>
-<div class="line"><span class="lineno">  595</span>    <span class="comment">//     .brakeImplausible = false,</span></div>
-<div class="line"><span class="lineno">  596</span>    <span class="comment">//     .brakePressed = false,</span></div>
-<div class="line"><span class="lineno">  597</span>    <span class="comment">//     .brakeAndAccelPressedImplausibility = false,</span></div>
-<div class="line"><span class="lineno">  598</span>    <span class="comment">//     .implausibilityExceededMaxDuration = false,</span></div>
-<div class="line"><span class="lineno">  599</span>    <span class="comment">//     .accelPercent = 1.0,</span></div>
-<div class="line"><span class="lineno">  600</span>    <span class="comment">//     .brakePercent = 0.3</span></div>
-<div class="line"><span class="lineno">  601</span>    <span class="comment">// };</span></div>
-<div class="line"><span class="lineno">  602</span> </div>
-<div class="line"><span class="lineno">  603</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  604</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  605</span>        simulated_slow_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  606</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  607</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  608</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  609</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  610</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  611</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  612</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
-<div class="line"><span class="lineno">  613</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  614</span>        vn_data,</div>
-<div class="line"><span class="lineno">  615</span>        0.0</div>
-<div class="line"><span class="lineno">  616</span>    );</div>
-<div class="line"><span class="lineno">  617</span> </div>
-<div class="line"><span class="lineno">  618</span>    <span class="comment">// change mode to mode 3</span></div>
-<div class="line"><span class="lineno">  619</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  620</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  621</span>        simulated_slow_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  622</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  623</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  624</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  625</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  626</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  627</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  628</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  629</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  630</span>        vn_data,</div>
-<div class="line"><span class="lineno">  631</span>        0.0</div>
-<div class="line"><span class="lineno">  632</span>    );</div>
-<div class="line"><span class="lineno">  633</span> </div>
-<div class="line"><span class="lineno">  634</span>    <span class="comment">// tick again to calculate state switch</span></div>
-<div class="line"><span class="lineno">  635</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  636</span>        cur_tick,</div>
-<div class="line"><span class="lineno">  637</span>        simulated_slow_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  638</span>        simulated_no_accel_press,</div>
-<div class="line"><span class="lineno">  639</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  640</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  641</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  642</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  643</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  644</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  645</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  646</span>        vn_data,</div>
-<div class="line"><span class="lineno">  647</span>        0.0</div>
-<div class="line"><span class="lineno">  648</span>    );</div>
-<div class="line"><span class="lineno">  649</span> </div>
-<div class="line"><span class="lineno">  650</span>    <a class="code hl_enumeration" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  651</span> </div>
-<div class="line"><span class="lineno">  652</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a>);</div>
+<p class="definition">Definition at line <a class="el" href="torque__controller__mux__test_8h_source.html#l00593">593</a> of file <a class="el" href="torque__controller__mux__test_8h_source.html">torque_controller_mux_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  593</span>                                                              {</div>
+<div class="line"><span class="lineno">  594</span>    SysClock clock = SysClock();</div>
+<div class="line"><span class="lineno">  595</span>    SysTick_s cur_tick;</div>
+<div class="line"><span class="lineno">  596</span>    cur_tick = clock.tick(0);</div>
+<div class="line"><span class="lineno">  597</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a> = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
+<div class="line"><span class="lineno">  598</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> resulting_torque_command;</div>
+<div class="line"><span class="lineno">  599</span> </div>
+<div class="line"><span class="lineno">  600</span>    <a class="code hl_struct" href="structvector__nav.html">vector_nav</a> vn_data{};</div>
+<div class="line"><span class="lineno">  601</span> </div>
+<div class="line"><span class="lineno">  602</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_slow_drivetrain_dynamics = {</div>
+<div class="line"><span class="lineno">  603</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
+<div class="line"><span class="lineno">  604</span>        .measuredSpeeds = {</div>
+<div class="line"><span class="lineno">  605</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  606</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  607</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>), </div>
+<div class="line"><span class="lineno">  608</span>            ((<a class="code hl_variable" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> - 0.1f) * <a class="code hl_variable" href="PhysicalParameters_8h.html#a2e2740dd9746589ef0bea73831ff3a2d">METERS_PER_SECOND_TO_RPM</a>)</div>
+<div class="line"><span class="lineno">  609</span>        },</div>
+<div class="line"><span class="lineno">  610</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  611</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  612</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
+<div class="line"><span class="lineno">  613</span>    };</div>
+<div class="line"><span class="lineno">  614</span> </div>
+<div class="line"><span class="lineno">  615</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> simulated_barely_launch_drivetrain_dynamics = {</div>
+<div class="line"><span class="lineno">  616</span>        .<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6">measuredInverterFLPackVoltage</a> = 550,</div>
+<div class="line"><span class="lineno">  617</span>        .measuredSpeeds = {0, 2785.86, 0, 0},</div>
+<div class="line"><span class="lineno">  618</span>        .measuredTorques = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  619</span>        .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</div>
+<div class="line"><span class="lineno">  620</span>        .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</div>
+<div class="line"><span class="lineno">  621</span>    };</div>
+<div class="line"><span class="lineno">  622</span> </div>
+<div class="line"><span class="lineno">  623</span>    <span class="comment">// DrivetrainDynamicReport_s simulated_no_launch_drivetrain_dynamics = {</span></div>
+<div class="line"><span class="lineno">  624</span>    <span class="comment">//     .measuredInverterFLPackVoltage = 550,</span></div>
+<div class="line"><span class="lineno">  625</span>    <span class="comment">//     .measuredSpeeds = {0, 2786.86, 0, 0},</span></div>
+<div class="line"><span class="lineno">  626</span>    <span class="comment">//     .measuredTorques = {0.0, 0.0, 0.0, 0.0},</span></div>
+<div class="line"><span class="lineno">  627</span>    <span class="comment">//     .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</span></div>
+<div class="line"><span class="lineno">  628</span>    <span class="comment">//     .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</span></div>
+<div class="line"><span class="lineno">  629</span>    <span class="comment">// };</span></div>
+<div class="line"><span class="lineno">  630</span> </div>
+<div class="line"><span class="lineno">  631</span>    <span class="comment">// DrivetrainDynamicReport_s simulated_fast_drivetrain_dynamics = {</span></div>
+<div class="line"><span class="lineno">  632</span>    <span class="comment">//     .measuredInverterFLPackVoltage = 550,</span></div>
+<div class="line"><span class="lineno">  633</span>    <span class="comment">//     .measuredSpeeds = {</span></div>
+<div class="line"><span class="lineno">  634</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM), </span></div>
+<div class="line"><span class="lineno">  635</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM), </span></div>
+<div class="line"><span class="lineno">  636</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM), </span></div>
+<div class="line"><span class="lineno">  637</span>    <span class="comment">//         ((MAX_SPEED_FOR_MODE_CHANGE + 0.1f) * METERS_PER_SECOND_TO_RPM)</span></div>
+<div class="line"><span class="lineno">  638</span>    <span class="comment">//     },</span></div>
+<div class="line"><span class="lineno">  639</span>    <span class="comment">//     .measuredTorques = {0.0, 0.0, 0.0, 0.0},</span></div>
+<div class="line"><span class="lineno">  640</span>    <span class="comment">//     .measuredTorqueCurrents = {0.0, 0.0, 0.0, 0.0},</span></div>
+<div class="line"><span class="lineno">  641</span>    <span class="comment">//     .measuredMagnetizingCurrents = {0.0, 0.0, 0.0, 0.0}</span></div>
+<div class="line"><span class="lineno">  642</span>    <span class="comment">// };</span></div>
+<div class="line"><span class="lineno">  643</span> </div>
+<div class="line"><span class="lineno">  644</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_full_accel_press = {</div>
+<div class="line"><span class="lineno">  645</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  646</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  647</span>        .brakePressed = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  648</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  649</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  650</span>        .accelPercent = 1.0,</div>
+<div class="line"><span class="lineno">  651</span>        .brakePercent = 0.0</div>
+<div class="line"><span class="lineno">  652</span>    };</div>
 <div class="line"><span class="lineno">  653</span> </div>
-<div class="line"><span class="lineno">  654</span>    <span class="comment">// press accel now with one wheelspeed barely under threshold</span></div>
-<div class="line"><span class="lineno">  655</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  656</span>        clock.tick(100000),</div>
-<div class="line"><span class="lineno">  657</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  658</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  659</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  660</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  661</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  662</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  663</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  664</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  665</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  666</span>        vn_data,</div>
-<div class="line"><span class="lineno">  667</span>        0.0</div>
-<div class="line"><span class="lineno">  668</span>    );</div>
-<div class="line"><span class="lineno">  669</span> </div>
-<div class="line"><span class="lineno">  670</span>    <span class="comment">// tick TCMUX (10k us will hit 100hz)</span></div>
-<div class="line"><span class="lineno">  671</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  672</span>        clock.tick(100000),</div>
-<div class="line"><span class="lineno">  673</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  674</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  675</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  676</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  677</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  678</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  654</span>    <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> simulated_no_accel_press = {</div>
+<div class="line"><span class="lineno">  655</span>        .<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a> = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  656</span>        .brakeImplausible = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  657</span>        .brakePressed = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  658</span>        .brakeAndAccelPressedImplausibility = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  659</span>        .implausibilityExceededMaxDuration = <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  660</span>        .accelPercent = 0.0,</div>
+<div class="line"><span class="lineno">  661</span>        .brakePercent = 0.0</div>
+<div class="line"><span class="lineno">  662</span>    };</div>
+<div class="line"><span class="lineno">  663</span> </div>
+<div class="line"><span class="lineno">  664</span>    <span class="comment">// PedalsSystemData_s simulated_accel_and_brake_press = {</span></div>
+<div class="line"><span class="lineno">  665</span>    <span class="comment">//     .accelImplausible = false,</span></div>
+<div class="line"><span class="lineno">  666</span>    <span class="comment">//     .brakeImplausible = false,</span></div>
+<div class="line"><span class="lineno">  667</span>    <span class="comment">//     .brakePressed = false,</span></div>
+<div class="line"><span class="lineno">  668</span>    <span class="comment">//     .brakeAndAccelPressedImplausibility = false,</span></div>
+<div class="line"><span class="lineno">  669</span>    <span class="comment">//     .implausibilityExceededMaxDuration = false,</span></div>
+<div class="line"><span class="lineno">  670</span>    <span class="comment">//     .accelPercent = 1.0,</span></div>
+<div class="line"><span class="lineno">  671</span>    <span class="comment">//     .brakePercent = 0.3</span></div>
+<div class="line"><span class="lineno">  672</span>    <span class="comment">// };</span></div>
+<div class="line"><span class="lineno">  673</span> </div>
+<div class="line"><span class="lineno">  674</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  675</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  676</span>        simulated_slow_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  677</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  678</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
 <div class="line"><span class="lineno">  679</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  680</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  681</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  682</span>        vn_data,</div>
-<div class="line"><span class="lineno">  683</span>        0.0</div>
-<div class="line"><span class="lineno">  684</span>    );</div>
-<div class="line"><span class="lineno">  685</span> </div>
-<div class="line"><span class="lineno">  686</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  687</span> </div>
-<div class="line"><span class="lineno">  688</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a>);</div>
-<div class="line"><span class="lineno">  689</span> </div>
-<div class="line"><span class="lineno">  690</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
-<div class="line"><span class="lineno">  691</span>    ASSERT_EQ((int16_t)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0], <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>);</div>
-<div class="line"><span class="lineno">  692</span> </div>
-<div class="line"><span class="lineno">  693</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  694</span>        clock.tick(<a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a> * 1000), <span class="comment">// const accel time sine launch</span></div>
-<div class="line"><span class="lineno">  695</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  696</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  697</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  680</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  681</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  682</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  683</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a3a769a916836dccf98801212615595d3">DialMode_e::MODE_0</a>,</div>
+<div class="line"><span class="lineno">  684</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  685</span>        vn_data,</div>
+<div class="line"><span class="lineno">  686</span>        0.0</div>
+<div class="line"><span class="lineno">  687</span>    );</div>
+<div class="line"><span class="lineno">  688</span> </div>
+<div class="line"><span class="lineno">  689</span>    <span class="comment">// change mode to mode 3</span></div>
+<div class="line"><span class="lineno">  690</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  691</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  692</span>        simulated_slow_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  693</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  694</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  695</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  696</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  697</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  698</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  699</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  700</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  701</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  702</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  703</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  704</span>        vn_data,</div>
-<div class="line"><span class="lineno">  705</span>        0.0</div>
-<div class="line"><span class="lineno">  706</span>    );</div>
-<div class="line"><span class="lineno">  707</span> </div>
-<div class="line"><span class="lineno">  708</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
-<div class="line"><span class="lineno">  709</span> </div>
-<div class="line"><span class="lineno">  710</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a>);</div>
-<div class="line"><span class="lineno">  711</span> </div>
-<div class="line"><span class="lineno">  712</span>    commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
-<div class="line"><span class="lineno">  713</span>    ASSERT_EQ((int16_t)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0], <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>);</div>
-<div class="line"><span class="lineno">  714</span> </div>
-<div class="line"><span class="lineno">  715</span>    <span class="comment">// if velocity is less than the default speed, it should still go at launch speed</span></div>
-<div class="line"><span class="lineno">  716</span>    vn_data.velocity_x = 0; <span class="comment">// m/s</span></div>
-<div class="line"><span class="lineno">  717</span> </div>
-<div class="line"><span class="lineno">  718</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  719</span>        clock.tick((<a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a> * 1000) + 1000000), <span class="comment">// 1 second after const accel time</span></div>
-<div class="line"><span class="lineno">  720</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  721</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  722</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  723</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  724</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  725</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  726</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  727</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  728</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  729</span>        vn_data,</div>
-<div class="line"><span class="lineno">  730</span>        0.0</div>
-<div class="line"><span class="lineno">  731</span>    );</div>
-<div class="line"><span class="lineno">  732</span> </div>
-<div class="line"><span class="lineno">  733</span>    commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
-<div class="line"><span class="lineno">  734</span>    printf(<span class="stringliteral">&quot;lower vx_body: %.2f\n&quot;</span>, (<span class="keywordtype">float</span>)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>);</div>
-<div class="line"><span class="lineno">  735</span>    ASSERT_EQ(commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] , <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>); <span class="comment">// should still be at initial launch target</span></div>
-<div class="line"><span class="lineno">  736</span> </div>
-<div class="line"><span class="lineno">  737</span>    <span class="comment">// this is approx. the speed the car would be going at 1500 rpm</span></div>
-<div class="line"><span class="lineno">  738</span>    <span class="comment">// we should expect the next calculation to be approx. DEFAULT_SLIP_RATIO % higher than this</span></div>
-<div class="line"><span class="lineno">  739</span>    vn_data.velocity_x = <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a> * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>; <span class="comment">// m/s</span></div>
+<div class="line"><span class="lineno">  699</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  700</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  701</span>        vn_data,</div>
+<div class="line"><span class="lineno">  702</span>        0.0</div>
+<div class="line"><span class="lineno">  703</span>    );</div>
+<div class="line"><span class="lineno">  704</span> </div>
+<div class="line"><span class="lineno">  705</span>    <span class="comment">// tick again to calculate state switch</span></div>
+<div class="line"><span class="lineno">  706</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  707</span>        cur_tick,</div>
+<div class="line"><span class="lineno">  708</span>        simulated_slow_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  709</span>        simulated_no_accel_press,</div>
+<div class="line"><span class="lineno">  710</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  711</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  712</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  713</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  714</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  715</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  716</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  717</span>        vn_data,</div>
+<div class="line"><span class="lineno">  718</span>        0.0</div>
+<div class="line"><span class="lineno">  719</span>    );</div>
+<div class="line"><span class="lineno">  720</span> </div>
+<div class="line"><span class="lineno">  721</span>    <a class="code hl_enumeration" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  722</span> </div>
+<div class="line"><span class="lineno">  723</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a>);</div>
+<div class="line"><span class="lineno">  724</span> </div>
+<div class="line"><span class="lineno">  725</span>    <span class="comment">// press accel now with one wheelspeed barely under threshold</span></div>
+<div class="line"><span class="lineno">  726</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  727</span>        clock.tick(100000),</div>
+<div class="line"><span class="lineno">  728</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  729</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  730</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  731</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  732</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  733</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  734</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  735</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  736</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  737</span>        vn_data,</div>
+<div class="line"><span class="lineno">  738</span>        0.0</div>
+<div class="line"><span class="lineno">  739</span>    );</div>
 <div class="line"><span class="lineno">  740</span> </div>
-<div class="line"><span class="lineno">  741</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
-<div class="line"><span class="lineno">  742</span>        clock.tick((<a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a> * 1000) + 1000000), <span class="comment">// 1 second after const accel time</span></div>
-<div class="line"><span class="lineno">  743</span>        simulated_barely_launch_drivetrain_dynamics,</div>
-<div class="line"><span class="lineno">  744</span>        simulated_full_accel_press,</div>
-<div class="line"><span class="lineno">  745</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
-<div class="line"><span class="lineno">  746</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  741</span>    <span class="comment">// tick TCMUX (10k us will hit 100hz)</span></div>
+<div class="line"><span class="lineno">  742</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  743</span>        clock.tick(100000),</div>
+<div class="line"><span class="lineno">  744</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  745</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  746</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
 <div class="line"><span class="lineno">  747</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  748</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
 <div class="line"><span class="lineno">  749</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
-<div class="line"><span class="lineno">  750</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
-<div class="line"><span class="lineno">  751</span>        <span class="keyword">false</span>,</div>
-<div class="line"><span class="lineno">  752</span>        vn_data,</div>
-<div class="line"><span class="lineno">  753</span>        0.0</div>
-<div class="line"><span class="lineno">  754</span>    );</div>
-<div class="line"><span class="lineno">  755</span> </div>
-<div class="line"><span class="lineno">  756</span>    commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
-<div class="line"><span class="lineno">  757</span>    printf(<span class="stringliteral">&quot;launch vx_body: %.2f\n&quot;</span>, (<span class="keywordtype">float</span>)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>);</div>
-<div class="line"><span class="lineno">  758</span>    ASSERT_EQ((int16_t)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] &gt; (<a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a> * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>), <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  759</span> </div>
+<div class="line"><span class="lineno">  750</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  751</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  752</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  753</span>        vn_data,</div>
+<div class="line"><span class="lineno">  754</span>        0.0</div>
+<div class="line"><span class="lineno">  755</span>    );</div>
+<div class="line"><span class="lineno">  756</span> </div>
+<div class="line"><span class="lineno">  757</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  758</span> </div>
+<div class="line"><span class="lineno">  759</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a>);</div>
 <div class="line"><span class="lineno">  760</span> </div>
-<div class="line"><span class="lineno">  761</span>    <span class="comment">// this fails, but the value is close enough</span></div>
-<div class="line"><span class="lineno">  762</span>    <span class="comment">// ASSERT_EQ((float)((int)((commanded.speeds_rpm[0] - 1500) * RPM_TO_METERS_PER_SECOND * 100)) / 100, 11.76f);</span></div>
-<div class="line"><span class="lineno">  763</span>}</div>
+<div class="line"><span class="lineno">  761</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  762</span>    ASSERT_EQ((int16_t)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0], <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>);</div>
+<div class="line"><span class="lineno">  763</span> </div>
+<div class="line"><span class="lineno">  764</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  765</span>        clock.tick(<a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a> * 1000), <span class="comment">// const accel time sine launch</span></div>
+<div class="line"><span class="lineno">  766</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  767</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  768</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  769</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  770</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  771</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  772</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  773</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  774</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  775</span>        vn_data,</div>
+<div class="line"><span class="lineno">  776</span>        0.0</div>
+<div class="line"><span class="lineno">  777</span>    );</div>
+<div class="line"><span class="lineno">  778</span> </div>
+<div class="line"><span class="lineno">  779</span>    launch_state = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>();</div>
+<div class="line"><span class="lineno">  780</span> </div>
+<div class="line"><span class="lineno">  781</span>    ASSERT_EQ(launch_state, <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a>);</div>
+<div class="line"><span class="lineno">  782</span> </div>
+<div class="line"><span class="lineno">  783</span>    commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  784</span>    ASSERT_EQ((int16_t)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0], <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>);</div>
+<div class="line"><span class="lineno">  785</span> </div>
+<div class="line"><span class="lineno">  786</span>    <span class="comment">// if velocity is less than the default speed, it should still go at launch speed</span></div>
+<div class="line"><span class="lineno">  787</span>    vn_data.velocity_x = 0; <span class="comment">// m/s</span></div>
+<div class="line"><span class="lineno">  788</span> </div>
+<div class="line"><span class="lineno">  789</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  790</span>        clock.tick((<a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a> * 1000) + 1000000), <span class="comment">// 1 second after const accel time</span></div>
+<div class="line"><span class="lineno">  791</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  792</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  793</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  794</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  795</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  796</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  797</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  798</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  799</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  800</span>        vn_data,</div>
+<div class="line"><span class="lineno">  801</span>        0.0</div>
+<div class="line"><span class="lineno">  802</span>    );</div>
+<div class="line"><span class="lineno">  803</span> </div>
+<div class="line"><span class="lineno">  804</span>    commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  805</span>    printf(<span class="stringliteral">&quot;lower vx_body: %.2f\n&quot;</span>, (<span class="keywordtype">float</span>)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>);</div>
+<div class="line"><span class="lineno">  806</span>    ASSERT_EQ(commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] , <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a>); <span class="comment">// should still be at initial launch target</span></div>
+<div class="line"><span class="lineno">  807</span> </div>
+<div class="line"><span class="lineno">  808</span>    <span class="comment">// this is approx. the speed the car would be going at 1500 rpm</span></div>
+<div class="line"><span class="lineno">  809</span>    <span class="comment">// we should expect the next calculation to be approx. DEFAULT_SLIP_RATIO % higher than this</span></div>
+<div class="line"><span class="lineno">  810</span>    vn_data.velocity_x = <a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a> * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>; <span class="comment">// m/s</span></div>
+<div class="line"><span class="lineno">  811</span> </div>
+<div class="line"><span class="lineno">  812</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7ee4ed6d826415d0d6c913ead9646ea9">tick</a>(</div>
+<div class="line"><span class="lineno">  813</span>        clock.tick((<a class="code hl_variable" href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a> * 1000) + 1000000), <span class="comment">// 1 second after const accel time</span></div>
+<div class="line"><span class="lineno">  814</span>        simulated_barely_launch_drivetrain_dynamics,</div>
+<div class="line"><span class="lineno">  815</span>        simulated_full_accel_press,</div>
+<div class="line"><span class="lineno">  816</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>) {},</div>
+<div class="line"><span class="lineno">  817</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  818</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  819</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  820</span>        (<span class="keyword">const</span> <a class="code hl_struct" href="structAnalogConversion__s.html">AnalogConversion_s</a>) {},</div>
+<div class="line"><span class="lineno">  821</span>        <a class="code hl_enumvalue" href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a>,</div>
+<div class="line"><span class="lineno">  822</span>        <span class="keyword">false</span>,</div>
+<div class="line"><span class="lineno">  823</span>        vn_data,</div>
+<div class="line"><span class="lineno">  824</span>        0.0</div>
+<div class="line"><span class="lineno">  825</span>    );</div>
+<div class="line"><span class="lineno">  826</span> </div>
+<div class="line"><span class="lineno">  827</span>    commanded = <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">getDrivetrainCommand</a>();</div>
+<div class="line"><span class="lineno">  828</span>    printf(<span class="stringliteral">&quot;launch vx_body: %.2f\n&quot;</span>, (<span class="keywordtype">float</span>)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>);</div>
+<div class="line"><span class="lineno">  829</span>    ASSERT_EQ((int16_t)commanded.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[0] &gt; (<a class="code hl_variable" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a> * <a class="code hl_variable" href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a>), <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  830</span> </div>
+<div class="line"><span class="lineno">  831</span> </div>
+<div class="line"><span class="lineno">  832</span>    <span class="comment">// this fails, but the value is close enough</span></div>
+<div class="line"><span class="lineno">  833</span>    <span class="comment">// ASSERT_EQ((float)((int)((commanded.speeds_rpm[0] - 1500) * RPM_TO_METERS_PER_SECOND * 100)) / 100, 11.76f);</span></div>
+<div class="line"><span class="lineno">  834</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_a4f06b38f5382594cf48bdd40e6d018fe"><div class="ttname"><a href="PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe">RPM_TO_METERS_PER_SECOND</a></div><div class="ttdeci">const float RPM_TO_METERS_PER_SECOND</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00006">PhysicalParameters.h:6</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a06b87987a80cf43e298c6621606b008c"><div class="ttname"><a href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a></div><div class="ttdeci">const int16_t DEFAULT_LAUNCH_SPEED_TARGET</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00033">TorqueControllers.h:33</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ae354ab8317fa70c138b225cd3de7959c"><div class="ttname"><a href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a></div><div class="ttdeci">const float const_accel_time</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00036">TorqueControllers.h:36</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_a06b87987a80cf43e298c6621606b008c"><div class="ttname"><a href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a></div><div class="ttdeci">const int16_t DEFAULT_LAUNCH_SPEED_TARGET</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00037">TorqueControllers.h:37</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ae354ab8317fa70c138b225cd3de7959c"><div class="ttname"><a href="TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c">const_accel_time</a></div><div class="ttdeci">const float const_accel_time</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00040">TorqueControllers.h:40</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2DashboardInterface_8h_html_a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6"><div class="ttname"><a href="interfaces_2include_2DashboardInterface_8h.html#a4e7d16dfc742c2e5e2364c3b84ee31d8a89b1c811012c8d7e515b0216c9ab73f6">DialMode_e::MODE_4</a></div><div class="ttdeci">@ MODE_4</div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00012">DrivetrainSystem.h:12</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="ac5d617660a64ffaa72ad952ae2f8c9c2" name="ac5d617660a64ffaa72ad952ae2f8c9c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5d617660a64ffaa72ad952ae2f8c9c2">&#9670;&#160;</a></span>TEST() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d617660a64ffaa72ad952ae2f8c9c2">&#9670;&#160;</a></span>TEST() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -811,12 +881,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  287</span>    }    </div>
 <div class="line"><span class="lineno">  288</span>}</div>
 <div class="ttc" id="aUtility_8h_html_ae84658f12c2f1b44f59af36678cf3dcc"><div class="ttname"><a href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a></div><div class="ttdeci">const int NUM_MOTORS</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00009">Utility.h:9</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="a58d908109d3799d9fe08f9c8eaa0ebcd" name="a58d908109d3799d9fe08f9c8eaa0ebcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58d908109d3799d9fe08f9c8eaa0ebcd">&#9670;&#160;</a></span>TEST() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a58d908109d3799d9fe08f9c8eaa0ebcd">&#9670;&#160;</a></span>TEST() <span class="overload">[5/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -944,6 +1013,73 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  165</span>        ASSERT_GT(resulting_torque_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[i], 5.0);</div>
 <div class="line"><span class="lineno">  166</span>    }    </div>
 <div class="line"><span class="lineno">  167</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a81ef89825fd95d70f001771f00ec4dc5" name="a81ef89825fd95d70f001771f00ec4dc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ef89825fd95d70f001771f00ec4dc5">&#9670;&#160;</a></span>TEST() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">TorqueControllerMuxTesting&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">test_torque_limit&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="torque__controller__mux__test_8h_source.html#l00324">324</a> of file <a class="el" href="torque__controller__mux__test_8h_source.html">torque_controller_mux_test.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  324</span>                                                    {</div>
+<div class="line"><span class="lineno">  325</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a> mux = <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux</a>();</div>
+<div class="line"><span class="lineno">  326</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> drive_command;</div>
+<div class="line"><span class="lineno">  327</span> </div>
+<div class="line"><span class="lineno">  328</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"><span class="lineno">  329</span>        drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[i] = 500.0f;</div>
+<div class="line"><span class="lineno">  330</span>        drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i] = 10.0f;</div>
+<div class="line"><span class="lineno">  331</span>    }</div>
+<div class="line"><span class="lineno">  332</span> </div>
+<div class="line"><span class="lineno">  333</span>    drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
+<div class="line"><span class="lineno">  334</span> </div>
+<div class="line"><span class="lineno">  335</span>    mux.<a class="code hl_function" href="classTorqueControllerMux.html#a5b643ef28baf597d89c41484b880d534">applyTorqueLimit</a>(&amp;drive_command);</div>
+<div class="line"><span class="lineno">  336</span> </div>
+<div class="line"><span class="lineno">  337</span>    ASSERT_EQ(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0], 5.0f);</div>
+<div class="line"><span class="lineno">  338</span>    ASSERT_EQ(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[1], 10.0f);</div>
+<div class="line"><span class="lineno">  339</span>    ASSERT_EQ(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[2], 10.0f);</div>
+<div class="line"><span class="lineno">  340</span>    ASSERT_EQ(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[3], 10.0f);</div>
+<div class="line"><span class="lineno">  341</span> </div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"><span class="lineno">  343</span>        drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[i] = 500.0f;</div>
+<div class="line"><span class="lineno">  344</span>        drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i] = 20.0f;</div>
+<div class="line"><span class="lineno">  345</span>    }</div>
+<div class="line"><span class="lineno">  346</span>    drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
+<div class="line"><span class="lineno">  347</span> </div>
+<div class="line"><span class="lineno">  348</span>    mux.<a class="code hl_function" href="classTorqueControllerMux.html#a5b643ef28baf597d89c41484b880d534">applyTorqueLimit</a>(&amp;drive_command);</div>
+<div class="line"><span class="lineno">  349</span> </div>
+<div class="line"><span class="lineno">  350</span>    ASSERT_LT(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0], 3.5f);</div>
+<div class="line"><span class="lineno">  351</span>    ASSERT_LT(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[1], 12.5f);</div>
+<div class="line"><span class="lineno">  352</span>    ASSERT_LT(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[2], 12.5f);</div>
+<div class="line"><span class="lineno">  353</span>    ASSERT_LT(drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[3], 12.5f);</div>
+<div class="line"><span class="lineno">  354</span> </div>
+<div class="line"><span class="lineno">  355</span>    printf(<span class="stringliteral">&quot;torque 1: %.2f\n&quot;</span>, drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0]);</div>
+<div class="line"><span class="lineno">  356</span>    printf(<span class="stringliteral">&quot;torque 2: %.2f\n&quot;</span>, drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[1]);</div>
+<div class="line"><span class="lineno">  357</span>    printf(<span class="stringliteral">&quot;torque 3: %.2f\n&quot;</span>, drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[2]);</div>
+<div class="line"><span class="lineno">  358</span>    printf(<span class="stringliteral">&quot;torque 4: %.2f\n&quot;</span>, drive_command.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[3]);</div>
+<div class="line"><span class="lineno">  359</span>}</div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a5b643ef28baf597d89c41484b880d534"><div class="ttname"><a href="classTorqueControllerMux.html#a5b643ef28baf597d89c41484b880d534">TorqueControllerMux::applyTorqueLimit</a></div><div class="ttdeci">void applyTorqueLimit(DrivetrainCommand_s *command)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8cpp_source.html#l00171">TorqueControllerMux.cpp:171</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
