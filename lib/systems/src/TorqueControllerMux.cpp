@@ -73,6 +73,7 @@ void TorqueControllerMux::tick(
             if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
             {
                 muxMode_ = dialModeMap_[dashboardDialMode];
+                cur_dial_mode_ = dashboardDialMode;
             }
         }
 

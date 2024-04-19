@@ -5,7 +5,6 @@
 #include "FlexCAN_T4.h"
 #include "hytech.h"
 #include "MCUInterface.h"
-#include "MCU_status.h"
 #include "InverterInterface.h"
 
 #include "TorqueControllers.h"
@@ -84,6 +83,7 @@ struct DashComponentInterface_s
     /* READ DATA */
     // enum for dial position read by controller mux
     DialMode_e dial_mode;
+    DialMode_e cur_dial_mode;
     // Buttons struct for better naming
     DashButtons_s button;
     bool ssok; // safety system OK (IMD?) RENAME
@@ -144,7 +144,8 @@ public:
                 TorqueLimit_e torque,
                 float min_cell_voltage,
                 AnalogConversion_s glv_voltage,
-                int launch_state);
+                int launch_state,
+                DialMode_e dial_mode);
 
     /*!
         getter for the dashboard's current dial position (drive profile)

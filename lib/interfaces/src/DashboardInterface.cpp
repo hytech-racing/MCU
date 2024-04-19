@@ -31,6 +31,8 @@ CAN_message_t DashboardInterface::write()
     DASHBOARD_MCU_STATE_t dash_mcu_state;
     dash_mcu_state.drive_buzzer = _data.buzzer_cmd;
 
+    dash_mcu_state.dial_state = static_cast<uint8_t>(_data.cur_dial_mode);
+
     // TODO: use logic as to not write data for LEDs that have not changed
     dash_mcu_state.launch_control_led = _data.LED[static_cast<int>(DashLED_e::LAUNCH_CONTROL_LED)];
     dash_mcu_state.mode_led = _data.LED[static_cast<int>(DashLED_e::MODE_LED)];
@@ -74,8 +76,11 @@ void DashboardInterface::tick10(MCUInterface* mcu,
                                 TorqueLimit_e torque,
                                 float min_cell_voltage,
                                 AnalogConversion_s glv_voltage,
-                                int launch_state)
+                                int launch_state,
+                                DialMode_e dial_mode)
 {
+
+    _data.cur_dial_mode = dial_mode;
     
     soundBuzzer(buzzer);
 
