@@ -24,16 +24,17 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
                                                  unsigned long curr_time)
 {
     PedalsSystemData_s out;
-
-    out.accelPercent = ((accel1.conversion + accel2.conversion) / 2.0);
-    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
-    out.accelPercent = std::max(out.accelPercent, 0.0f);
+    
+    
     out.accelPressed = pedal_is_active_(accel1.conversion, accel2.conversion, accelParams_, false);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
+    out.accelPercent = (out.accelImplausible) ? accel1.conversion : (accel1.conversion + accel2.conversion) / 2.0;
+    out.accelPercent = remove_deadzone_(out.accelPercent, accelParams_.deadzone_margin);
+    out.accelPercent = std::max(out.accelPercent, 0.0f);
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake, brakeParams_);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake);
     bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
-
+    
     if (implausibility && (implausibilityStartTime_ == 0))
     {
         implausibilityStartTime_ = curr_time;
@@ -42,6 +43,10 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     {
         implausibilityStartTime_ = 0;
     }
+
+    bool oor = implausibility && (evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
+            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
+    out.accelPercent = (oor) ? 0 : out.accelPercent;
 
     
     out.brakePercent = brake.conversion;
@@ -67,7 +72,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.accelPressed = pedal_is_active_(accel1.conversion, accel2.conversion, accelParams_, false);
     out.accelImplausible = evaluate_pedal_implausibilities_(accel1, accel2, accelParams_, 0.1);
     
-    auto percent = (accel1.conversion + accel2.conversion) / 2.0;
+    auto percent = (out.accelImplausible) ? accel1.conversion : (accel1.conversion + accel2.conversion) / 2.0;
     out.accelPercent = remove_deadzone_(percent, accelParams_.deadzone_margin);
     out.accelPercent = std::max(out.accelPercent, 0.0f);
     
@@ -75,7 +80,7 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
     out.brakeImplausible = evaluate_pedal_implausibilities_(brake1, brake2, brakeParams_, 0.25);
     out.brakeAndAccelPressedImplausibility = evaluate_brake_and_accel_pressed_(accel1, accel2, brake1, brake2);
     bool implausibility = (out.brakeAndAccelPressedImplausibility || out.brakeImplausible || out.accelImplausible);
-
+     
     if (implausibility && (implausibilityStartTime_ == 0))
     {
         implausibilityStartTime_ = curr_time;
@@ -85,7 +90,10 @@ PedalsSystemData_s PedalsSystem::evaluate_pedals(const AnalogConversion_s &accel
         implausibilityStartTime_ = 0;
     }
 
-    
+    bool oor = implausibility && (evaluate_pedal_oor(accel1, accelParams_.min_sensor_pedal_1, accelParams_.max_sensor_pedal_1) 
+            || evaluate_pedal_oor(accel2, accelParams_.min_sensor_pedal_2, accelParams_.max_sensor_pedal_2));
+    out.accelPercent = (oor) ? 0 : out.accelPercent;
+
     out.brakePercent = (brake1.conversion + brake2.conversion) / 2.0;
     
     out.brakePercent = remove_deadzone_(out.brakePercent, brakeParams_.deadzone_margin);
@@ -239,3 +247,10 @@ bool PedalsSystem::pedal_is_active_(float pedal1ConvertedData, float pedal2Conve
     }
     return (pedal_1_is_active || pedal_2_is_active);
 }
+
+bool PedalsSystem::evaluate_pedal_oor(const AnalogConversion_s &pedalData,
+                                      int min,
+                                      int max)
+{
+    return (pedalData.raw >= max || pedalData.raw <= min);
+} 

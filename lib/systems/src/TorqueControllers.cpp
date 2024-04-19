@@ -50,9 +50,6 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
             writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
             writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
         }
-
-        // Apply the torque limit
-        TCPosTorqueLimit(writeout_.command, torqueLimit);
     }
 }
 
@@ -138,14 +135,11 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torqueRequest;
-                writeout_.command.torqueSetpoints[FR] = torqueRequest;
-                writeout_.command.torqueSetpoints[RL] = torqueRequest;
-                writeout_.command.torqueSetpoints[RR] = torqueRequest;
+                writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
             }
-
-            // Apply the torque limit
-            TCPosTorqueLimit(writeout_.command, torqueLimit);
         }
         else
         {
