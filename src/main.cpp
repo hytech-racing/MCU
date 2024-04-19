@@ -296,11 +296,13 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                         torque_controller_mux.getTorqueLimit(),
                         ams_interface.get_filtered_min_cell_voltage(),
                         telem_interface.get_glv_voltage(a1.get()),
-                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()));
+                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
+                        torque_controller_mux.getDialMode());
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),
                       safety_system.get_software_is_ok(),
+                      static_cast<int>(torque_controller_mux.getDriveMode()),
                       static_cast<int>(torque_controller_mux.getTorqueLimit()),
                       torque_controller_mux.getMaxTorque(),
                       buzzer.buzzer_is_on(),

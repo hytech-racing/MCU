@@ -35,6 +35,8 @@ private:
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
+    DialMode_e cur_dial_mode_ = DialMode_e::MODE_0;
+
     TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
 
     TorqueControllerNone torqueControllerNone_;
@@ -116,6 +118,17 @@ public:
 
     void applyPosSpeedLimit(DrivetrainCommand_s* command);
 
+
+
+    const DialMode_e getDialMode()
+    {
+        return cur_dial_mode_;
+    }
+
+    const TorqueController_e getDriveMode()
+    {
+        return muxMode_;
+    }
 
     TorqueControllerBase* activeController()
     {

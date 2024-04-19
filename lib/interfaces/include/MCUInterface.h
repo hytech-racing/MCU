@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "hytech.h"
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
 
@@ -47,7 +48,7 @@ private:
     MainECUHardwareReadPins pins_;
 
     /* Outbound CAN message */
-    MCU_status mcu_status_;
+    MCU_STATUS_t mcu_status_;
 
     /* Shutdown circuit input */
     bool bms_ok_high;
@@ -107,12 +108,12 @@ public:
     // Systems
     void update_mcu_status_CAN_drivetrain(bool has_error);
     void update_mcu_status_CAN_safety(bool is_ok);
-    void update_mcu_status_CAN_TCMux(int torque_mode, float max_torque);
+    void update_mcu_status_CAN_TCMux(int drive_mode, int torque_mode, float max_torque);
     void update_mcu_status_CAN_buzzer(bool is_on);
     void update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals);
     // Interfaces
     void update_mcu_status_CAN_ams(bool is_critical);
-    void update_mcu_status_CAN_dashboard(bool is_pressed);
+    void update_mcu_status_CAN_dashboard(bool is_active);
 
     /* Enqueue MCU_status CAN  */
     void enqueue_CAN_mcu_status();
@@ -122,6 +123,7 @@ public:
         int fsm_state,
         bool inv_has_error,
         bool software_is_ok,
+        int drive_mode,
         int torque_mode,
         float max_torque,
         bool buzzer_is_on,
