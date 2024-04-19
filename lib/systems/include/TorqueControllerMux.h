@@ -2,6 +2,8 @@
 #define __TORQUECTRLMUX_H__
 
 #include <unordered_map>
+#include <cmath>
+
 #include "TorqueControllers.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
@@ -29,7 +31,7 @@ private:
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
         {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
-        {TorqueLimit_e::TCMUX_FULL_TORQUE, 21.4}
+        {TorqueLimit_e::TCMUX_FULL_TORQUE, AMK_MAX_TORQUE}
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
@@ -74,7 +76,7 @@ public:
     TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
+    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
     , torqueControllerPIDTV_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_PID_VECTORING)]) {}
@@ -97,7 +99,7 @@ public:
     {
         return drivetrainCommand_;
     };
-
+    
     const TorqueLimit_e &getTorqueLimit()
     {
         return torqueLimit_;
@@ -107,6 +109,16 @@ public:
     {
         return torqueLimitMap_[torqueLimit_];
     }
+
+    void applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
+
+    void applyTorqueLimit(DrivetrainCommand_s* command);
+
+    void applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
+
+    void applyPosSpeedLimit(DrivetrainCommand_s* command);
+
+
 
     const DialMode_e getDialMode()
     {
