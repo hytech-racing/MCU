@@ -88,28 +88,6 @@ enum class LaunchStates_e
     LAUNCHING
 };
 
-/* CONTROLLER FUNCTIONS */
-
-/// @brief If a command fed through this function exceeds the specified power limit, all torques will be scaled down equally
-/// @param command
-/// @param drivetrainData
-/// @param powerLimit In watts, not kilowatts
-/// @param
-/// @return A scaled down DrivetrainCommand_s
-static DrivetrainCommand_s TCPowerLimitScaleDown(
-    DrivetrainCommand_s command,
-    DrivetrainDynamicReport_s *drivetrainData,
-    float powerLimit);
-
-/// @brief Apply a per-wheel torque limit
-/// @param command
-/// @param torqueLimits
-/// @param
-/// @return A torque-limited DrivetrainCommand_s
-static DrivetrainCommand_s TCTorqueLimit(
-    DrivetrainCommand_s command,
-    float torqueLimits[NUM_MOTORS]);
-
 /* TORQUE CONTROLLERS */
 
 /*

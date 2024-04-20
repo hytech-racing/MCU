@@ -271,27 +271,24 @@ void TorqueControllerSimpleLaunch::calc_launch_algo(const vector_nav* vn_data) {
 }
 
 void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
+    // accelerate at constant speed for a period of time to get body velocity up
+    // may want to make this the ht07 launch algo
+    
+    // makes sure that the car launches at the target launch speed
+    launch_speed_target_ = std::max(launch_speed_target_, (float)DEFAULT_LAUNCH_SPEED_TARGET);
 
-            uint32_t ms_since_launch = (current_millis_ - time_of_launch_);
-            // accelerate at constant speed for a period of time to get body velocity up
-            // may want to make this the ht07 launch algo
-            
-            // makes sure that the car launches at the target launch speed
-            launch_speed_target_ = std::max(launch_speed_target_, (float)DEFAULT_LAUNCH_SPEED_TARGET);
-
-            /*
-            New slip-ratio based launch algorithm by Luke Chen. The basic idea
-            is to always be pushing the car a certain 'slip_ratio_' faster than
-            the car is currently going, theoretically always keeping the car in slip
-            */
-            // m/s
-            float new_speed_target = (1 + slip_ratio_) * (vn_data->velocity_x);
-            // rpm
-            new_speed_target *= METERS_PER_SECOND_TO_RPM;
-            // makes sure the car target speed never goes lower than prev. target
-            // allows for the vn to 'spool' up and us to get reliable vx data
-            launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
-
+    /*
+    New slip-ratio based launch algorithm by Luke Chen. The basic idea
+    is to always be pushing the car a certain 'slip_ratio_' faster than
+    the car is currently going, theoretically always keeping the car in slip
+    */
+    // m/s
+    float new_speed_target = (1 + slip_ratio_) * (vn_data->velocity_x);
+    // rpm
+    new_speed_target *= METERS_PER_SECOND_TO_RPM;
+    // makes sure the car target speed never goes lower than prev. target
+    // allows for the vn to 'spool' up and us to get reliable vx data
+    launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
 }
 
 void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
