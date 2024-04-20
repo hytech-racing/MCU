@@ -7,11 +7,10 @@ void TorqueControllerMux::tick(
         const DrivetrainDynamicReport_s &drivetrainData,
         const PedalsSystemData_s &pedalsData,
         const SteeringSystemData_s &steeringData,
-        const veh_vec<AnalogConversion_s> &loadCellData,
+        const LoadCellInterfaceOutput_s &loadCellData,
         DialMode_e dashboardDialMode,
         bool dashboardTorqueModeButtonPressed,
         const vector_nav &vn_data, 
-        float wheel_angle_rad,
         const DrivetrainCommand_s &CASECommand
     )
 {

@@ -19,6 +19,7 @@
 #include "TelemetryInterface.h"
 #include "SABInterface.h"
 #include "VectornavInterface.h"
+#include "LoadCellInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -116,6 +117,7 @@ SABInterface sab_interface(
     LOADCELL_RR_SCALE,  // RR Scale
     LOADCELL_RR_OFFSET  //  RR Offset
 );
+LoadCellInterface load_cell_interface;
 
 // /* Inverter Interface Type */
 using InvInt_t = InverterInterface<CircularBufferType>;
@@ -231,6 +233,7 @@ void setup()
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_PEDAL_MIN);
     a1.setChannelOffset(MCU15_STEERING_CHANNEL, -1 * SECONDARY_STEERING_SENSE_CENTER);
     a1.setChannelScale(MCU15_STEERING_CHANNEL, STEERING_RANGE_DEGREES / ((float)SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND - (float)SECONDARY_STEERING_SENSE_LEFTMOST_BOUND));
+    a1.setChannelClamp(MCU15_STEERING_CHANNEL, -STEERING_RANGE_DEGREES / 0.5 * 1.15, STEERING_RANGE_DEGREES / 0.5 * 1.15); // 15% tolerance on each end of the steering sensor
 
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
@@ -396,6 +399,15 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         a1.tick();
         a2.tick();
         a3.tick();
+        load_cell_interface.tick(
+            (LoadCellInterfaceTick_s)
+            {
+                .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
+                .FRConversion = a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
+                .RLConversion = sab_interface.rlLoadCell.convert(), 
+                .RRConversion = sab_interface.rrLoadCell.convert()
+            }
+        );
     }
     // // Untriggered
     main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
@@ -443,23 +455,12 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    // TODO FIX THE STEERING SYSTEM
-    auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
-
-    // Data for CASE
-    veh_vec<AnalogConversion_s> loadCellData = {
-        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], 
-        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], 
-        sab_interface.rlLoadCell.convert(), 
-        sab_interface.rrLoadCell.convert()
-    };
-
     DrivetrainCommand_s controller_output = case_system.evaluate(
         current_system_tick, 
         vn_interface.get_vn_struct(), 
         steering_system.getSteeringSystemData(),
         drivetrain.get_dynamic_data(), 
-        loadCellData, 
+        load_cell_interface.getLoadCellForces().loadCellConversions,  // should CASE use filtered load cells?
         pedals_system.getPedalsSystemData(), 
         0, 
         fsm.get_state(),
@@ -472,11 +473,10 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         drivetrain.get_dynamic_data(),
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
-        loadCellData,
+        load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
-        wheel_angle_rad,
         controller_output
     );
 }

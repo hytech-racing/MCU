@@ -1,6 +1,5 @@
 #include "SteeringSystem.h"
 #include <cmath>
-#include "Arduino.h"
 
 void SteeringSystem::tick(const SteeringSystemTick_s &intake)
 {

@@ -10,7 +10,7 @@
 #include "SteeringSystem.h"
 #include "DashboardInterface.h"
 #include "VectornavInterface.h"
-// #include "AnalogSensorsInterface.h"
+#include "LoadCellInterface.h"
 
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
@@ -88,11 +88,10 @@ public:
         const DrivetrainDynamicReport_s &drivetrainData,
         const PedalsSystemData_s &pedalsData,
         const SteeringSystemData_s &steeringData,
-        const veh_vec<AnalogConversion_s> &loadCellData,
+        const LoadCellInterfaceOutput_s &loadCellData,
         DialMode_e dashboardDialMode,
         bool dashboardTorqueModeButtonPressed,
         const vector_nav &vn_data, 
-        float wheel_angle_rad,
         const DrivetrainCommand_s &CASECommand
     );
     const DrivetrainCommand_s &getDrivetrainCommand()

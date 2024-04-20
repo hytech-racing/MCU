@@ -9,6 +9,8 @@
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
 #include "VectornavInterface.h"
+#include "SteeringSystem.h"
+#include "LoadCellInterface.h"
 
 #include "accel_lookup.h"
 
@@ -230,7 +232,7 @@ public:
         const SysTick_s &tick,
         const PedalsSystemData_s &pedalsData,
         float torqueLimit,
-        const veh_vec<AnalogConversion_s> &loadCellData
+        const LoadCellInterfaceOutput_s &loadCellData
     );
 };
 

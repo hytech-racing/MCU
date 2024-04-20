@@ -59,17 +59,17 @@ void TorqueControllerLoadCellVectoring::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
     float torqueLimit,
-    const veh_vec<AnalogConversion_s> &loadCellData
+    const LoadCellInterfaceOutput_s &loadCellData
 )
 {
     // Calculate torque commands at 100hz
     if (tick.triggers.trigger100)
     {
         // Apply FIR filter to load cell data
-        loadCellForcesRaw_[0][FIRCircBufferHead] = loadCellData.FL.conversion;
-        loadCellForcesRaw_[1][FIRCircBufferHead] = loadCellData.FR.conversion;
-        loadCellForcesRaw_[2][FIRCircBufferHead] = loadCellData.RL.conversion;
-        loadCellForcesRaw_[3][FIRCircBufferHead] = loadCellData.RR.conversion;
+        loadCellForcesRaw_[0][FIRCircBufferHead] = loadCellData.loadCellForcesFiltered.FL;
+        loadCellForcesRaw_[1][FIRCircBufferHead] = loadCellData.loadCellForcesFiltered.FR;
+        loadCellForcesRaw_[2][FIRCircBufferHead] = loadCellData.loadCellForcesFiltered.RL;
+        loadCellForcesRaw_[3][FIRCircBufferHead] = loadCellData.loadCellForcesFiltered.RR;
 
         for (int i = 0; i < 4; i++)
         {
@@ -85,10 +85,10 @@ void TorqueControllerLoadCellVectoring::tick(
             FIRSaturated_ = true;
 
         // Do sanity checks on raw data
-        loadCellsErrorCounter_[0] = loadCellData.FL.raw != 4095 && loadCellData.FL.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[0] + 1;
-        loadCellsErrorCounter_[1] = loadCellData.FR.raw != 4095 && loadCellData.FR.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[1] + 1;
-        loadCellsErrorCounter_[2] = loadCellData.RL.raw != 4095 && loadCellData.RL.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[2] + 1;
-        loadCellsErrorCounter_[3] = loadCellData.RR.raw != 4095 && loadCellData.RR.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[3] + 1;
+        loadCellsErrorCounter_[0] = loadCellData.loadCellConversions.FL.raw != 4095 && loadCellData.loadCellConversions.FL.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[0] + 1;
+        loadCellsErrorCounter_[1] = loadCellData.loadCellConversions.FR.raw != 4095 && loadCellData.loadCellConversions.FR.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[1] + 1;
+        loadCellsErrorCounter_[2] = loadCellData.loadCellConversions.RL.raw != 4095 && loadCellData.loadCellConversions.RL.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[2] + 1;
+        loadCellsErrorCounter_[3] = loadCellData.loadCellConversions.RR.raw != 4095 && loadCellData.loadCellConversions.RR.status != AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED ? 0 : loadCellsErrorCounter_[3] + 1;
         ready_ = FIRSaturated_ && loadCellsErrorCounter_[0] < errorCountThreshold_ && loadCellsErrorCounter_[1] < errorCountThreshold_ && loadCellsErrorCounter_[2] < errorCountThreshold_ && loadCellsErrorCounter_[3] < errorCountThreshold_;
 
         writeout_.ready = ready_;
