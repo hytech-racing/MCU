@@ -9,8 +9,8 @@
 
 // Definitions
 // TODO: evalaute reasonable thresholds for agreement
-#define STEERING_DIVERGENCE_ERROR_THRESHOLD (5.0) // Steering sensors can disagree by 5 degrees before output is considered erroneous
-#define STEERING_DIVERGENCE_WARN_THRESHOLD (2.5) // Warning condition will be raised when steering sensors diverge 2.5 degrees
+#define STEERING_DIVERGENCE_ERROR_THRESHOLD (14.0) // Steering sensors can disagree by 5 degrees before output is considered erroneous
+#define STEERING_DIVERGENCE_WARN_THRESHOLD (8.0) // Warning condition will be raised when steering sensors diverge 2.5 degrees
 
 // Enums
 enum class SteeringSystemStatus_e
@@ -40,7 +40,6 @@ private:
     SteeringEncoderInterface *primarySensor_;
     SteeringEncoderConversion_s primaryConversion_;
     SteeringSystemData_s steeringData_;
-    bool primarySensorAlive_ = false;
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor)
     : primarySensor_(primarySensor)
