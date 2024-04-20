@@ -6,8 +6,8 @@
 
 class FakeMessageQueue
 {
-    public:
-        FakeMessageQueue() {}
+public:
+    FakeMessageQueue() {}
 };
 
 void enqueue_matlab_msg(FakeMessageQueue *, const CAN_MESSAGE_BUS &msg)
@@ -37,7 +37,7 @@ TEST(CASESystemTesting, test_vn_start_time)
         .launchDeadZone = 20,        // N-m
         .launchVelThreshold = 0.75,  // m/s
         .tcsVelThreshold = 2.5,      // m/s
-        .yawPIDMaxDifferential = 5,  // N-m
+        .yawPIDMaxDifferential = 10, // N-m
         .yawPIDErrorThreshold = 0.1, // rad/s
         .yawPIDVelThreshold = 1,     // m/s
         .yawPIDCoastThreshold = 2.5, // m/s

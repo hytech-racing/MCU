@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'PID_TV'.
 //
-// Model version                  : 1.54
+// Model version                  : 1.55
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:30 2024
+// C/C++ source code generated on : Sat Apr 20 05:23:43 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -62,16 +62,16 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
                   real_T *rty_YawRateErrorrads, real_T *rty_YawPIDOutput)
 {
   real_T Torque_Output_FL;
+  real_T Torque_Output_FR;
   real_T Torque_Output_RL;
   real_T Torque_Output_RR;
   real_T rtb_Abs;
   real_T rtb_Integrator;
-  real_T rtb_Switch2;
   real_T rtb_YawErrorrads;
   int32_T rtb_Switch7;
   int8_T rtb_Switch1_p;
   int8_T tmp;
-  boolean_T rtb_LowerRelop1;
+  boolean_T rtb_RelationalOperator;
 
   // Outputs for Atomic SubSystem: '<Root>/PID_TV'
   // Sum: '<S5>/Subtract'
@@ -139,32 +139,31 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   rtb_YawErrorrads = (rtb_YawErrorrads + PID_TV_DW.Integrator_DSTATE) +
     rtb_Integrator;
 
-  // Gain: '<S1>/Gain1'
-  rtb_Abs = -*rtu_YawPIDMaxDifferential;
+  // Gain: '<S1>/Gain2'
+  rtb_Abs = 0.5 * *rtu_YawPIDMaxDifferential;
 
   // Switch: '<S1>/Switch' incorporates:
   //   Constant: '<S1>/Constant'
-  //   Gain: '<S1>/Gain'
+  //   Switch: '<S48>/Switch2'
 
   if (*rtu_usePIDTV) {
-    // RelationalOperator: '<S48>/LowerRelop1'
-    rtb_LowerRelop1 = (rtb_YawErrorrads > *rtu_YawPIDMaxDifferential);
-
     // Switch: '<S48>/Switch2' incorporates:
+    //   Gain: '<S1>/Gain'
+    //   Gain: '<S1>/Gain1'
+    //   RelationalOperator: '<S48>/LowerRelop1'
     //   RelationalOperator: '<S48>/UpperRelop'
     //   Switch: '<S48>/Switch'
 
-    if (rtb_LowerRelop1) {
-      rtb_Switch2 = *rtu_YawPIDMaxDifferential;
-    } else if (rtb_YawErrorrads < rtb_Abs) {
-      // Switch: '<S48>/Switch'
-      rtb_Switch2 = rtb_Abs;
-    } else {
-      rtb_Switch2 = rtb_YawErrorrads;
-    }
+    if (rtb_YawErrorrads > rtb_Abs) {
+      *rty_YawPIDOutput = -rtb_Abs;
+    } else if (rtb_YawErrorrads < -rtb_Abs) {
+      // Switch: '<S48>/Switch' incorporates:
+      //   Gain: '<S1>/Gain1'
 
-    // End of Switch: '<S48>/Switch2'
-    *rty_YawPIDOutput = -rtb_Switch2;
+      *rty_YawPIDOutput = rtb_Abs;
+    } else {
+      *rty_YawPIDOutput = -rtb_YawErrorrads;
+    }
   } else {
     *rty_YawPIDOutput = 0.0;
   }
@@ -174,35 +173,35 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   // MATLAB Function: '<S1>/MATLAB Function'
   if (*rtu_InitialTorqueAvgRequest > 0.0) {
     Torque_Output_FL = *rtu_FL_in - *rty_YawPIDOutput;
-    rtb_Switch2 = *rtu_FR_in + *rty_YawPIDOutput;
+    Torque_Output_FR = *rtu_FR_in + *rty_YawPIDOutput;
     Torque_Output_RL = *rtu_RL_in - *rty_YawPIDOutput;
     Torque_Output_RR = *rtu_RR_in + *rty_YawPIDOutput;
   } else if (*rtu_InitialTorqueAvgRequest == 0.0) {
     if (std::abs(*rtu_Vx_B) > *rtu_YawPIDCoastThreshold) {
       Torque_Output_FL = *rtu_FL_in - *rty_YawPIDOutput;
-      rtb_Switch2 = *rtu_FR_in + *rty_YawPIDOutput;
+      Torque_Output_FR = *rtu_FR_in + *rty_YawPIDOutput;
       Torque_Output_RL = *rtu_RL_in - *rty_YawPIDOutput;
       Torque_Output_RR = *rtu_RR_in + *rty_YawPIDOutput;
     } else {
       Torque_Output_FL = 0.0;
-      rtb_Switch2 = 0.0;
+      Torque_Output_FR = 0.0;
       Torque_Output_RL = 0.0;
       Torque_Output_RR = 0.0;
     }
   } else {
     if (*rty_YawPIDOutput < 0.0) {
       Torque_Output_FL = *rtu_FL_in;
-      rtb_Switch2 = *rtu_FR_in + *rty_YawPIDOutput;
+      Torque_Output_FR = *rtu_FR_in + *rty_YawPIDOutput;
       Torque_Output_RL = *rtu_RL_in;
       Torque_Output_RR = *rtu_RR_in + *rty_YawPIDOutput;
     } else if (*rty_YawPIDOutput > 0.0) {
       Torque_Output_FL = *rtu_FL_in - *rty_YawPIDOutput;
-      rtb_Switch2 = *rtu_FR_in;
+      Torque_Output_FR = *rtu_FR_in;
       Torque_Output_RL = *rtu_RL_in - *rty_YawPIDOutput;
       Torque_Output_RR = *rtu_RR_in;
     } else {
       Torque_Output_FL = *rtu_FL_in;
-      rtb_Switch2 = *rtu_FR_in;
+      Torque_Output_FR = *rtu_FR_in;
       Torque_Output_RL = *rtu_RL_in;
       Torque_Output_RR = *rtu_RR_in;
     }
@@ -211,8 +210,8 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
       Torque_Output_FL = 0.0;
     }
 
-    if (rtb_Switch2 > 0.0) {
-      rtb_Switch2 = 0.0;
+    if (Torque_Output_FR > 0.0) {
+      Torque_Output_FR = 0.0;
     }
 
     if (Torque_Output_RL > 0.0) {
@@ -229,8 +228,8 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
       Torque_Output_FL = *rtu_FL_in;
     }
 
-    if ((*rtu_TCSStatusFR == 1.0) && (rtb_Switch2 > *rtu_FR_in)) {
-      rtb_Switch2 = *rtu_FR_in;
+    if ((*rtu_TCSStatusFR == 1.0) && (Torque_Output_FR > *rtu_FR_in)) {
+      Torque_Output_FR = *rtu_FR_in;
     }
 
     if ((*rtu_TCSStatusRL == 1.0) && (Torque_Output_RL > *rtu_RL_in)) {
@@ -246,7 +245,7 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   //   MATLAB Function: '<S1>/MATLAB Function'
 
   *rty_FL_out = Torque_Output_FL;
-  *rty_FR_out = rtb_Switch2;
+  *rty_FR_out = Torque_Output_FR;
   *rty_RL_out = Torque_Output_RL;
   *rty_RR_out = Torque_Output_RR;
   if (std::abs(Torque_Output_FL) > *rtu_TorqueLimit) {
@@ -261,13 +260,13 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
     *rty_FL_out = *rtu_TorqueLimit * Torque_Output_FL;
   }
 
-  if (std::abs(rtb_Switch2) > *rtu_TorqueLimit) {
-    if (std::isnan(rtb_Switch2)) {
+  if (std::abs(Torque_Output_FR) > *rtu_TorqueLimit) {
+    if (std::isnan(Torque_Output_FR)) {
       Torque_Output_FL = (rtNaN);
-    } else if (rtb_Switch2 < 0.0) {
+    } else if (Torque_Output_FR < 0.0) {
       Torque_Output_FL = -1.0;
     } else {
-      Torque_Output_FL = (rtb_Switch2 > 0.0);
+      Torque_Output_FL = (Torque_Output_FR > 0.0);
     }
 
     *rty_FR_out = *rtu_TorqueLimit * Torque_Output_FL;
@@ -299,29 +298,32 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
 
   // End of MATLAB Function: '<S1>/PID Torque Overflow Check2'
 
-  // RelationalOperator: '<S33>/u_GTE_up'
-  rtb_LowerRelop1 = (rtb_YawErrorrads >= *rtu_YawPIDMaxDifferential);
-
   // Switch: '<S33>/Switch' incorporates:
-  //   RelationalOperator: '<S33>/u_GT_lo'
-  //   Switch: '<S33>/Switch1'
+  //   RelationalOperator: '<S33>/u_GTE_up'
 
-  if (rtb_LowerRelop1) {
-    rtb_Abs = *rtu_YawPIDMaxDifferential;
-  } else if (rtb_YawErrorrads > rtb_Abs) {
-    // Switch: '<S33>/Switch1'
-    rtb_Abs = rtb_YawErrorrads;
+  if (!(rtb_YawErrorrads >= rtb_Abs)) {
+    // Switch: '<S33>/Switch1' incorporates:
+    //   Gain: '<S1>/Gain1'
+    //   RelationalOperator: '<S33>/u_GT_lo'
+
+    if (rtb_YawErrorrads > -rtb_Abs) {
+      rtb_Abs = rtb_YawErrorrads;
+    } else {
+      rtb_Abs = -rtb_Abs;
+    }
+
+    // End of Switch: '<S33>/Switch1'
   }
 
-  // End of Switch: '<S33>/Switch'
+  // Sum: '<S33>/Diff' incorporates:
+  //   Switch: '<S33>/Switch'
 
-  // Sum: '<S33>/Diff'
-  rtb_Abs = rtb_YawErrorrads - rtb_Abs;
+  rtb_YawErrorrads -= rtb_Abs;
 
   // RelationalOperator: '<S30>/Relational Operator' incorporates:
   //   Constant: '<S30>/Clamping_zero'
 
-  rtb_LowerRelop1 = (rtb_Abs != 0.0);
+  rtb_RelationalOperator = (rtb_YawErrorrads != 0.0);
 
   // Switch: '<S30>/Switch1' incorporates:
   //   Constant: '<S30>/Clamping_zero'
@@ -329,7 +331,7 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   //   Constant: '<S30>/Constant2'
   //   RelationalOperator: '<S30>/fix for DT propagation issue'
 
-  if (rtb_Abs > 0.0) {
+  if (rtb_YawErrorrads > 0.0) {
     rtb_Switch1_p = 1;
   } else {
     rtb_Switch1_p = -1;
@@ -338,7 +340,7 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   // End of Switch: '<S30>/Switch1'
 
   // Product: '<S37>/IProd Out'
-  rtb_Abs = *rty_YawRateErrorrads * *rtu_PID_I;
+  rtb_YawErrorrads = *rty_YawRateErrorrads * *rtu_PID_I;
 
   // Switch: '<S30>/Switch2' incorporates:
   //   Constant: '<S30>/Clamping_zero'
@@ -346,7 +348,7 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   //   Constant: '<S30>/Constant4'
   //   RelationalOperator: '<S30>/fix for DT propagation issue1'
 
-  if (rtb_Abs > 0.0) {
+  if (rtb_YawErrorrads > 0.0) {
     tmp = 1;
   } else {
     tmp = -1;
@@ -358,15 +360,15 @@ void PID_TV::step(const real_T *rtu_YawRaterads, const real_T *rtu_PID_I, const
   //   RelationalOperator: '<S30>/Equal1'
   //   Switch: '<S30>/Switch2'
 
-  if (rtb_LowerRelop1 && (rtb_Switch1_p == tmp)) {
-    rtb_Abs = 0.0;
+  if (rtb_RelationalOperator && (rtb_Switch1_p == tmp)) {
+    rtb_YawErrorrads = 0.0;
   }
 
   // Update for DiscreteIntegrator: '<S40>/Integrator' incorporates:
   //   DiscreteIntegrator: '<S35>/Filter'
   //   Switch: '<S30>/Switch'
 
-  PID_TV_DW.Integrator_DSTATE += 0.001 * rtb_Abs;
+  PID_TV_DW.Integrator_DSTATE += 0.001 * rtb_YawErrorrads;
   if (PID_TV_DW.Integrator_DSTATE > 1.5) {
     PID_TV_DW.Integrator_DSTATE = 1.5;
   } else if (PID_TV_DW.Integrator_DSTATE < -1.5) {
