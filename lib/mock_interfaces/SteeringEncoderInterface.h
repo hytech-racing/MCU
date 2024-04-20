@@ -29,9 +29,6 @@ public:
     /// @brief Set the upper steering sensor's offset. 0 degrees should be centered.
     /// @param newOffset 
     virtual void setOffset(float newOffset);
-    /// @brief Checks whether the upper steering sensor alive
-    /// @return Returns whether the upper steering sensor was detected
-    virtual bool isAlive();
 };
 
 #endif /* __UPPERSTEERINGSENSOR_H__ */
