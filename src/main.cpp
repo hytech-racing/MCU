@@ -49,8 +49,7 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .analog_steering_channel = MCU15_STEERING_CHANNEL,
     .current_channel = MCU15_CUR_POS_SENSE_CHANNEL,
     .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
-    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL
-};
+    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL};
 
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
@@ -64,8 +63,7 @@ const PedalsParams accel_params = {
     .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
-    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE
-};
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
 
 const PedalsParams brake_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
@@ -143,7 +141,7 @@ DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_e
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
-    .torqueLimit = 21.4,
+    .torqueLimit = AMK_MAX_TORQUE, // N-m
     .yaw_pid_p = 1.0,
     .yaw_pid_i = 0.0,
     .yaw_pid_d = 0.0,
@@ -152,13 +150,20 @@ CASEConfiguration case_config = {
     .tcs_pid_d = 0.0,
     .useLaunch = false,
     .usePIDTV = true,
+    .useTCSLimitedYawPID = false,
     .useNormalForce = false,
     .useTractionControl = false,
     .usePowerLimit = false,
     .usePIDPowerLimit = false,
-    .tcsThreshold = 0.2,
+    .tcsSLThreshold = 0.2,
     .launchSL = 0.2,
-    .launchDeadZone = 20,
+    .launchDeadZone = 20,        // N-m
+    .launchVelThreshold = 0.75,  // m/s
+    .tcsVelThreshold = 2.5,      // m/s
+    .yawPIDMaxDifferential = 5,  // N-m
+    .yawPIDErrorThreshold = 0.1, // rad/s
+    .yawPIDVelThreshold = 1,     // m/s
+    .yawPIDCoastThreshold = 2.5, // m/s
     .max_rpm = AMK_MAX_RPM,
     .max_regen_torque = MAX_REGEN_TORQUE,
     .max_torque = AMK_MAX_TORQUE,
@@ -357,7 +362,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger10) // 10Hz
     {
         dashboard.tick10(
-            &main_ecu, 
+            &main_ecu,
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
             drivetrain.drivetrain_error_occured(),
@@ -365,8 +370,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             ams_interface.get_filtered_min_cell_voltage(),
             telem_interface.get_glv_voltage(a1.get()),
             static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
-            dashboard.getDialMode()
-        );
+            dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
@@ -378,8 +382,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             buzzer.buzzer_is_on(),
             pedals_system.getPedalsSystemData(),
             ams_interface.pack_charge_is_critical(),
-            dashboard.launchControlButtonPressed()
-        );
+            dashboard.launchControlButtonPressed());
 
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
 
@@ -401,8 +404,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            {}
-        );
+            {});
     }
 
     if (t.trigger50) // 50Hz
@@ -459,27 +461,25 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
     // Data for CASE
     veh_vec<AnalogConversion_s> loadCellData = {
-        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], 
-        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], 
-        sab_interface.rlLoadCell.convert(), 
-        sab_interface.rrLoadCell.convert()
-    };
-    
+        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
+        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
+        sab_interface.rlLoadCell.convert(),
+        sab_interface.rrLoadCell.convert()};
+
     // TODO FIX THE STEERING SYSTEM
     float steering_normed = normalize(a1.get().conversions[MCU15_STEERING_CHANNEL].raw, 1874, 692, 3170);
 
     DrivetrainCommand_s controller_output = case_system.evaluate(
-        current_system_tick, 
-        vn_interface.get_vn_struct(), 
-        steering_normed, 
-        drivetrain.get_dynamic_data(), 
-        loadCellData, 
-        pedals_system.getPedalsSystemData(), 
-        0, 
+        current_system_tick,
+        vn_interface.get_vn_struct(),
+        steering_normed,
+        drivetrain.get_dynamic_data(),
+        loadCellData,
+        pedals_system.getPedalsSystemData(),
+        0,
         fsm.get_state(),
         dashboard.startButtonPressed(),
-        3
-    );
+        3);
 
     torque_controller_mux.tick(
         current_system_tick,
@@ -491,6 +491,5 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         wheel_angle_rad,
-        controller_output
-    );
+        controller_output);
 }
