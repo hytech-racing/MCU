@@ -9,10 +9,9 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     const veh_vec<AnalogConversion_s> &load_cell_vals,
     const PedalsSystemData_s &pedals_data,
     float power_kw,
-    CAR_STATE fsm_state, 
+    CAR_STATE fsm_state,
     bool start_button_pressed,
-    uint8_t vn_status
-)
+    uint8_t vn_status)
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
 
@@ -20,9 +19,28 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.YawPIDConfig[1] = config_.yaw_pid_i;
     in.YawPIDConfig[2] = config_.yaw_pid_d;
 
+    in.TorqueLimit = config_.torqueLimit;
+
+    in.useTractionControl = config_.useTractionControl;
+
+    in.TCS_SLThreshold = config_.tcsSLThreshold;
+    in.LaunchSL = config_.launchSL;
+    in.LaunchDeadZone = config_.launchDeadZone;
+
     in.TCSPIDConfig[0] = config_.tcs_pid_p;
     in.TCSPIDConfig[1] = config_.tcs_pid_i;
     in.TCSPIDConfig[2] = config_.tcs_pid_d;
+
+    in.LaunchVelThreshold = config_.launchVelThreshold;
+    in.TCSVelThreshold = config_.tcsVelThreshold;
+
+    in.YawPIDErrorThreshold = config_.yawPIDErrorThreshold;
+    in.YawPIDVelThreshold = config_.yawPIDVelThreshold;
+    in.YawPIDCoastThreshold = config_.yawPIDCoastThreshold;
+
+    in.useTCSLimitedYawPID = config_.useTCSLimitedYawPID;
+
+    in.YawPIDMaxDifferential = config_.yawPIDMaxDifferential;
 
     // in.
 
@@ -88,23 +106,24 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
-        
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
+
         last_controller_pt1_send_time_ = tick.millis;
     }
 
     if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
         ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
+
+        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
+        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
+
         last_controller_pt2_send_time_ = tick.millis;
     }
 
@@ -117,7 +136,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_steer_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
+        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
         last_vehm_send_time_ = tick.millis;
     }
 
@@ -127,7 +146,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     command.torqueSetpoints[1] = res.FinalTorqueFR;
     command.torqueSetpoints[2] = res.FinalTorqueRL;
     command.torqueSetpoints[3] = res.FinalTorqueRR;
-    
+
     command.speeds_rpm[0] = get_rpm_setpoint(res.FinalTorqueFL);
     command.speeds_rpm[1] = get_rpm_setpoint(res.FinalTorqueFR);
     command.speeds_rpm[2] = get_rpm_setpoint(res.FinalTorqueRL);

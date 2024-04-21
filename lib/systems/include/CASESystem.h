@@ -19,13 +19,20 @@ struct CASEConfiguration
     float tcs_pid_d;
     bool useLaunch;
     bool usePIDTV;
+    bool useTCSLimitedYawPID;
     bool useNormalForce;
     bool useTractionControl;
     bool usePowerLimit;
     bool usePIDPowerLimit;
-    float tcsThreshold;
+    float tcsSLThreshold;
     float launchSL;
     float launchDeadZone;
+    float launchVelThreshold;
+    float tcsVelThreshold;
+    float yawPIDMaxDifferential;
+    float yawPIDErrorThreshold;
+    float yawPIDVelThreshold;
+    float yawPIDCoastThreshold;
     float max_rpm;
     float max_regen_torque;
     float max_torque;
@@ -43,11 +50,10 @@ public:
     /// @param send_period_ms the period in which messages will be put into the queue to be sent in milliseconds.
     /// @param vehicle_math_offset_ms the offset in ms from controller message sending that the vehicle math messages will be sent
     CASESystem(
-        message_queue *can_queue, 
-        unsigned long controller_send_period_ms, 
-        unsigned long vehicle_math_offset_ms, 
-        CASEConfiguration config
-    )
+        message_queue *can_queue,
+        unsigned long controller_send_period_ms,
+        unsigned long vehicle_math_offset_ms,
+        CASEConfiguration config)
     {
         msg_queue_ = can_queue;
         case_.initialize();
@@ -58,7 +64,7 @@ public:
 
         controller_send_period_ms_ = controller_send_period_ms;
         last_vehm_send_time_ = 0;
-        vehicle_math_offset_ms_= vehicle_math_offset_ms;
+        vehicle_math_offset_ms_ = vehicle_math_offset_ms;
     }
 
     /// @brief function that evaluates the CASE (controller and state estimation) system. updates the internal pstate_ and returns controller result
@@ -104,9 +110,12 @@ public:
     }
     float get_rpm_setpoint(float final_torque)
     {
-        if(final_torque > 0){
+        if (final_torque > 0)
+        {
             return config_.max_rpm;
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -116,7 +125,7 @@ private:
     message_queue *msg_queue_;
     HT08_CASE case_;
 
-    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_,  last_vehm_send_time_, controller_send_period_ms_;
+    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_, last_vehm_send_time_, controller_send_period_ms_;
 };
 
 #include "CASESystem.tpp"
