@@ -204,6 +204,6 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s* command)
 void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s* command) {
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        command->torqueSetpoints[i] = std::max(0.0f, command->torqueSetpoints[i]);
+        command->speeds_rpm[i] = std::max(0.0f, command->speeds_rpm[i]);
     }
 }
