@@ -63,15 +63,33 @@ float AMSInterface::get_filtered_min_cell_voltage() {
     return filtered_min_cell_voltage;
 }
 
-float AMSInterface::get_SoC() {
-    current = acu_shunt_measurements_.shunt_current;
+float AMSInterface::initialize_charge() {
+    int i = 0;
+    while (abs((low_voltage_ro) - voltage_lookup_table[i]) <= abs(low_voltage_ro - voltage_lookup_table[i+1])) {
+    i++;
+    }
+  charge = ((100 - i)/100) * MAX_PACK_CHARGE;
+}
+
+float AMSInterface::get_SoC_em() {
+    current = em_measurements_.em_current_ro;
     charge -= (current * CC_integrator_timer) / 1000;
     SoC = (charge / MAX_PACK_CHARGE) * 100;
     return SoC;
 }
 
+float AMSInterface::get_SoC_acu() {
+    current = HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro);
+    shunt_voltage = (current * (9.22 / 5.1)) - 3.3 - 0.03;
+    calc_current = (shunt_voltage / 0.005);
+    charge -= (calc_current * CC_integrator_timer) / 1000;
+    SoC = (charge / MAX_PACK_CHARGE) * 100;
+    return SoC;
+}
+
 void AMSInterface::tick50() {
-    get_SoC();
+    get_SoC_em();
+    get_SoC_acu();
 }
 
 //RETRIEVE CAN MESSAGES//

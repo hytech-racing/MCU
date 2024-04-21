@@ -16,7 +16,7 @@ const float DEFAULT_INIT_TEMP       = 40.0;
 const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
-const int MAX_PACK_CHARGE           = 48600;
+const uint16_t MAX_PACK_CHARGE      = 48600;
 
 
 /// @brief this class is for interfacing with the AMS (accumulator management system) 
@@ -65,7 +65,9 @@ public:
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
 
-    float get_SoC();
+    float initialize_charge();
+    float get_SoC_em();
+    float get_SoC_acu();
     void tick50();
 
     //RETRIEVE CAN MESSAGES//
@@ -90,6 +92,8 @@ private:
     BMS_temperatures    bms_temperatures_;
     BMS_voltages        bms_voltages_;
     ACU_SHUNT_MEASUREMENTS_t         acu_shunt_measurements_;
+    EM_MEASUREMENT_t                 em_measurements_;
+    BMS_VOLTAGES_t                   low_voltage_ro;
 
     /* AMS last heartbeat time */
     unsigned long last_heartbeat_time;
@@ -104,9 +108,17 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
+    float calc_current;
+    float shunt_voltage;
     float current;
     float charge;
     float SoC;
+    float voltage_lookup_table[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
+    3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3,701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
+    3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
+    3.56, 3.56, 3.549, 3.549, 3.549, 3.549, 3.538, 3.538, 3.551, 3.546, 3.535, 3.535, 3.535, 3.53, 3.524, 3.524, 3.524, 3.513,
+    3.513, 3.513, 3.503, 3.503, 3.492, 3.492, 3.492, 3.487, 3.481, 3.481, 3.476, 3.471, 3.46, 3.46, 3.449, 3.444, 3.428, 3.428,
+    3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 0};
     elapsedMicros CC_integrator_timer = 0;
 };
 
