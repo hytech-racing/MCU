@@ -261,11 +261,11 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  200</span>                                                                         {</div>
 <div class="line"><span class="lineno">  201</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>; i++)</div>
 <div class="line"><span class="lineno">  202</span>    {</div>
-<div class="line"><span class="lineno">  203</span>        command-&gt;<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i] = std::max(0.0f, command-&gt;<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[i]);</div>
+<div class="line"><span class="lineno">  203</span>        command-&gt;<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[i] = std::max(0.0f, command-&gt;<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[i]);</div>
 <div class="line"><span class="lineno">  204</span>    }</div>
 <div class="line"><span class="lineno">  205</span>}</div>
 <div class="ttc" id="aUtility_8h_html_ae84658f12c2f1b44f59af36678cf3dcc"><div class="ttname"><a href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a></div><div class="ttdeci">const int NUM_MOTORS</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00009">Utility.h:9</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00012">DrivetrainSystem.h:12</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -330,6 +330,7 @@ Public Member Functions</h2></td></tr>
 <div class="ttc" id="aPhysicalParameters_8h_html_aafafe227a03de7be5332f7cce15d5b41"><div class="ttname"><a href="PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41">RPM_TO_RAD_PER_SECOND</a></div><div class="ttdeci">const float RPM_TO_RAD_PER_SECOND</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00010">PhysicalParameters.h:10</a></div></div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7d09c3c504518e5450a627fcf7c57506"><div class="ttname"><a href="TorqueControllers_8h.html#a7d09c3c504518e5450a627fcf7c57506">MAX_POWER_LIMIT</a></div><div class="ttdeci">const float MAX_POWER_LIMIT</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00020">TorqueControllers.h:20</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00139">main.cpp:139</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -384,7 +385,6 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">  125</span>    }</div>
 <div class="line"><span class="lineno">  126</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_ab626262966d5bb2a71729aa68673f1ae"><div class="ttname"><a href="PhysicalParameters_8h.html#ab626262966d5bb2a71729aa68673f1ae">RPM_TO_KILOMETERS_PER_HOUR</a></div><div class="ttdeci">const float RPM_TO_KILOMETERS_PER_HOUR</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00007">PhysicalParameters.h:7</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00012">DrivetrainSystem.h:12</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
