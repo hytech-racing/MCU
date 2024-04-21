@@ -15,6 +15,46 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
 
+    // in.
+    in.SteeringWheelAngleDeg = steering_data.angle;
+
+    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
+
+    in.YawRaterads = vn_data.angular_rates.z;
+
+    // REAL
+    in.Vx_B = vn_data.velocity_x;
+
+    // FAKE
+    // in.Vx_B = 5;
+
+    in.FZFL = load_cell_vals.FL.conversion;
+    in.FZFR = load_cell_vals.FR.conversion;
+    in.FZRL = load_cell_vals.RL.conversion;
+    in.FZRR = load_cell_vals.RR.conversion;
+
+    in.CurrentPowerkW = power_kw;
+
+    // REAL
+    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
+    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
+    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
+    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
+
+    // FAKE
+    // in.MotorOmegaFLrpm = 566.27330024 * 6.3;
+    // in.MotorOmegaFRrpm = 566.27330024 * 6.3;
+    // in.MotorOmegaRRrpm = 566.27330024 * 6.3;
+    // in.MotorOmegaRLrpm = 566.27330024 * 6.3;
+
+    in.usePIDTV = config_.usePIDTV;
+    in.useNormalForce = config_.useNormalForce;
+    in.usePowerLimit = config_.usePowerLimit;
+    in.usePIDPowerLimit = config_.usePIDPowerLimit;
+    in.useLaunch = config_.useLaunch;
+
+    in.Vy_B = vn_data.velocity_y;
+
     in.YawPIDConfig[0] = config_.yaw_pid_p;
     in.YawPIDConfig[1] = config_.yaw_pid_i;
     in.YawPIDConfig[2] = config_.yaw_pid_d;
@@ -42,8 +82,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.YawPIDMaxDifferential = config_.yawPIDMaxDifferential;
 
-    // in.
-
     if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
         vn_active_start_time_ = tick.millis;
@@ -52,38 +90,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     {
         vn_active_start_time_ = 0;
     }
-    
-    in.usePIDTV = config_.usePIDTV;
-
-    in.useNormalForce = config_.useNormalForce;
-    in.usePowerLimit = config_.usePowerLimit;
-    in.usePIDPowerLimit = config_.usePIDPowerLimit;
-
-    in.useLaunch = config_.useLaunch;
-    in.useTractionControl = config_.useTractionControl;
-    in.TCSThreshold = config_.tcsThreshold;
-    in.LaunchSL = config_.launchSL;
-    in.LaunchDeadZone = config_.launchDeadZone;
-
-    in.TorqueLimit = config_.torqueLimit;
-
-    in.SteeringWheelAngleDeg = steering_data.angle;
-
-    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
-
-    in.YawRaterads = vn_data.angular_rates.z;
-    in.Vx_B = vn_data.velocity_x;
-    in.Vy_B = vn_data.velocity_y;
-
-    in.FZFL = load_cell_vals.FL.conversion;
-    in.FZFR = load_cell_vals.FR.conversion;
-    in.FZRL = load_cell_vals.RL.conversion;
-    in.FZRR = load_cell_vals.RR.conversion;
-    in.CurrentPowerkW = power_kw;
-    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
-    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
-    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
-    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
 
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
