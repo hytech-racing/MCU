@@ -143,6 +143,7 @@ DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_e
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
+    // Following used for generated code
     .AbsoluteTorqueLimit = AMK_MAX_TORQUE, // N-m
     .yaw_pid_p = 1.33369,
     .yaw_pid_i = 0.25,
@@ -171,11 +172,12 @@ CASEConfiguration case_config = {
     .yaw_pid_brakes_p = 0.25,
     .yaw_pid_brakes_i = 0,
     .yaw_pid_brakes_d = 0,
-    .decoupledYawPIDBrakesMaxDIfference = 2,
+    .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
     .discontinuousBrakesPercentThreshold = 0.4,
-    .TorqueMode = AMK_MAX_TORQUE,
-    .RegenLimit = -10.0,
+    .TorqueMode = AMK_MAX_TORQUE, // N-m
+    .RegenLimit = -10.0,          // N-m
 
+    // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = AMK_MAX_RPM,
     .max_regen_torque = AMK_MAX_TORQUE,
     .max_torque = AMK_MAX_TORQUE,
