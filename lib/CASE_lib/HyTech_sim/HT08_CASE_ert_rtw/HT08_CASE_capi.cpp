@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.61
+// Model version                  : 1.66
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:55 2024
+// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -136,46 +136,49 @@ static rtwCAPI_Signals rtBlockSignals[]{
   { 30, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
     TARGET_STRING("Wheel Steer Avg [Deg]"), 14, 0, 0, 0, 0 },
 
-  { 31, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal FL"), 0, 0, 0, 0, 0 },
+  { 31, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 19, 0, 0, 0, 0 },
 
   { 32, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal FR"), 1, 0, 0, 0, 0 },
+    TARGET_STRING("Torque Normal FL"), 0, 0, 0, 0, 0 },
 
   { 33, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal RL"), 2, 0, 0, 0, 0 },
+    TARGET_STRING("Torque Normal FR"), 1, 0, 0, 0, 0 },
 
   { 34, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal RR"), 3, 0, 0, 0, 0 },
+    TARGET_STRING("Torque Normal RL"), 2, 0, 0, 0, 0 },
 
   { 35, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING(""), 4, 0, 0, 0, 0 },
+    TARGET_STRING("Torque Normal RR"), 3, 0, 0, 0, 0 },
 
   { 36, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING(""), 5, 0, 0, 0, 0 },
-
-  { 37, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING(""), 6, 0, 0, 0, 0 },
-
-  { 38, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING(""), 7, 0, 0, 0, 0 },
-
-  { 39, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("FR TORQUE PID"), 0, 0, 0, 0, 0 },
-
-  { 40, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("RR TORQUE PID"), 1, 0, 0, 0, 0 },
-
-  { 41, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("FL TORQUE PID"), 2, 0, 0, 0, 0 },
-
-  { 42, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("RL TORQUE PID"), 3, 0, 0, 0, 0 },
-
-  { 43, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
     TARGET_STRING(""), 4, 0, 0, 0, 0 },
 
+  { 37, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+    TARGET_STRING(""), 5, 0, 0, 0, 0 },
+
+  { 38, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+    TARGET_STRING(""), 6, 0, 0, 0, 0 },
+
+  { 39, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+    TARGET_STRING(""), 7, 0, 0, 0, 0 },
+
+  { 40, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+    TARGET_STRING("FR TORQUE PID"), 0, 0, 0, 0, 0 },
+
+  { 41, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+    TARGET_STRING("RR TORQUE PID"), 1, 0, 0, 0, 0 },
+
+  { 42, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+    TARGET_STRING("FL TORQUE PID"), 2, 0, 0, 0, 0 },
+
+  { 43, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+    TARGET_STRING("RL TORQUE PID"), 3, 0, 0, 0, 0 },
+
   { 44, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+    TARGET_STRING(""), 4, 0, 0, 0, 0 },
+
+  { 45, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
     TARGET_STRING(""), 5, 0, 0, 0, 0 },
 
   {
@@ -239,20 +242,21 @@ static void HT08_CASE_InitializeDataAddr(void* dataAddr[], HT08_CASE::
   dataAddr[28] = (void*) (&HT08_CASE_B->SLRL);
   dataAddr[29] = (void*) (&HT08_CASE_B->SLRR);
   dataAddr[30] = (void*) (&HT08_CASE_B->WheelSteerAvgDeg);
-  dataAddr[31] = (void*) (&HT08_CASE_B->TorqueNormalFL);
-  dataAddr[32] = (void*) (&HT08_CASE_B->TorqueNormalFR);
-  dataAddr[33] = (void*) (&HT08_CASE_B->TorqueNormalRL);
-  dataAddr[34] = (void*) (&HT08_CASE_B->TorqueNormalRR);
-  dataAddr[35] = (void*) (&HT08_CASE_B->Normal_Percent_FL);
-  dataAddr[36] = (void*) (&HT08_CASE_B->Normal_Percent_FR);
-  dataAddr[37] = (void*) (&HT08_CASE_B->Normal_Percent_RL);
-  dataAddr[38] = (void*) (&HT08_CASE_B->Normal_Percent_RR);
-  dataAddr[39] = (void*) (&HT08_CASE_B->FRTORQUEPID);
-  dataAddr[40] = (void*) (&HT08_CASE_B->RRTORQUEPID);
-  dataAddr[41] = (void*) (&HT08_CASE_B->FLTORQUEPID);
-  dataAddr[42] = (void*) (&HT08_CASE_B->RLTORQUEPID);
-  dataAddr[43] = (void*) (&HT08_CASE_B->PID_TV_o5);
-  dataAddr[44] = (void*) (&HT08_CASE_B->PID_TV_o6);
+  dataAddr[31] = (void*) (&HT08_CASE_B->modeConstrainedTorqueRequest);
+  dataAddr[32] = (void*) (&HT08_CASE_B->TorqueNormalFL);
+  dataAddr[33] = (void*) (&HT08_CASE_B->TorqueNormalFR);
+  dataAddr[34] = (void*) (&HT08_CASE_B->TorqueNormalRL);
+  dataAddr[35] = (void*) (&HT08_CASE_B->TorqueNormalRR);
+  dataAddr[36] = (void*) (&HT08_CASE_B->Normal_Percent_FL);
+  dataAddr[37] = (void*) (&HT08_CASE_B->Normal_Percent_FR);
+  dataAddr[38] = (void*) (&HT08_CASE_B->Normal_Percent_RL);
+  dataAddr[39] = (void*) (&HT08_CASE_B->Normal_Percent_RR);
+  dataAddr[40] = (void*) (&HT08_CASE_B->FRTORQUEPID);
+  dataAddr[41] = (void*) (&HT08_CASE_B->RRTORQUEPID);
+  dataAddr[42] = (void*) (&HT08_CASE_B->FLTORQUEPID);
+  dataAddr[43] = (void*) (&HT08_CASE_B->RLTORQUEPID);
+  dataAddr[44] = (void*) (&HT08_CASE_B->PID_TV_o5);
+  dataAddr[45] = (void*) (&HT08_CASE_B->PID_TV_o6);
 }
 
 #endif
@@ -317,6 +321,7 @@ static void HT08_CASE_InitializeLoggingFunctions(RTWLoggingFcnPtr loggingPtrs[])
   loggingPtrs[42] = (nullptr);
   loggingPtrs[43] = (nullptr);
   loggingPtrs[44] = (nullptr);
+  loggingPtrs[45] = (nullptr);
 }
 
 #endif
@@ -389,7 +394,7 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
   //           elementMap, sampleTimeMap, dimensionArray},
   //  TargetType: targetType
 
-  { rtBlockSignals, 45,
+  { rtBlockSignals, 46,
     (nullptr), 0,
     (nullptr), 0 },
 
@@ -402,10 +407,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 3889057229U,
-    1836662284U,
-    863743702U,
-    1558041043U },
+  { 3407668697U,
+    4011304782U,
+    2244932535U,
+    399722524U },
   (nullptr), 0,
   (boolean_T)0
 };

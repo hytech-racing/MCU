@@ -143,9 +143,9 @@ DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_e
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
-    .torqueLimit = AMK_MAX_TORQUE, // N-m
-    .yaw_pid_p = 1.0,
-    .yaw_pid_i = 0.0,
+    .AbsoluteTorqueLimit = AMK_MAX_TORQUE, // N-m
+    .yaw_pid_p = 1.33369,
+    .yaw_pid_i = 0.25,
     .yaw_pid_d = 0.0,
     .tcs_pid_p = 40.0,
     .tcs_pid_i = 0.0,
@@ -157,6 +157,8 @@ CASEConfiguration case_config = {
     .useTractionControl = true,
     .usePowerLimit = false,
     .usePIDPowerLimit = false,
+    .useDecoupledYawBrakes = false,
+    .useDiscontinuousYawPIDBrakes = true,
     .tcsSLThreshold = 0.2,
     .launchSL = 0.2,
     .launchDeadZone = 20,        // N-m
@@ -166,8 +168,16 @@ CASEConfiguration case_config = {
     .yawPIDErrorThreshold = 0.1, // rad/s
     .yawPIDVelThreshold = 1,     // m/s
     .yawPIDCoastThreshold = 2.5, // m/s
+    .yaw_pid_brakes_p = 0.25,
+    .yaw_pid_brakes_i = 0,
+    .yaw_pid_brakes_d = 0,
+    .decoupledYawPIDBrakesMaxDIfference = 2,
+    .discontinuousBrakesPercentThreshold = 0.4,
+    .TorqueMode = AMK_MAX_TORQUE,
+    .RegenLimit = -10.0,
+
     .max_rpm = AMK_MAX_RPM,
-    .max_regen_torque = MAX_REGEN_TORQUE,
+    .max_regen_torque = AMK_MAX_TORQUE,
     .max_torque = AMK_MAX_TORQUE,
 };
 // Torque limit used for yaw pid torque split overflow
@@ -402,14 +412,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         a2.tick();
         a3.tick();
         load_cell_interface.tick(
-            (LoadCellInterfaceTick_s)
-            {
+            (LoadCellInterfaceTick_s){
                 .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
                 .FRConversion = a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
-                .RLConversion = sab_interface.rlLoadCell.convert(), 
-                .RRConversion = sab_interface.rrLoadCell.convert()
-            }
-        );
+                .RLConversion = sab_interface.rlLoadCell.convert(),
+                .RRConversion = sab_interface.rrLoadCell.convert()});
     }
     // // Untriggered
     main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
@@ -441,12 +448,9 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
     // tick steering system
     steering_system.tick(
-        (SteeringSystemTick_s)
-        {
+        (SteeringSystemTick_s){
             .tick = current_system_tick,
-            .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]
-        }
-    );
+            .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]});
 
     // Serial.println("Steering angle");
     // Serial.println(steering_system.getSteeringSystemData().angle);
@@ -458,13 +462,13 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     // // tick torque controller mux
 
     DrivetrainCommand_s controller_output = case_system.evaluate(
-        current_system_tick, 
-        vn_interface.get_vn_struct(), 
+        current_system_tick,
+        vn_interface.get_vn_struct(),
         steering_system.getSteeringSystemData(),
-        drivetrain.get_dynamic_data(), 
-        load_cell_interface.getLoadCellForces().loadCellConversions,  // should CASE use filtered load cells?
-        pedals_system.getPedalsSystemData(), 
-        0, 
+        drivetrain.get_dynamic_data(),
+        load_cell_interface.getLoadCellForces().loadCellConversions, // should CASE use filtered load cells?
+        pedals_system.getPedalsSystemData(),
+        0,
         fsm.get_state(),
         dashboard.startButtonPressed(),
         3);
@@ -478,6 +482,5 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
-        controller_output
-    );
+        controller_output);
 }

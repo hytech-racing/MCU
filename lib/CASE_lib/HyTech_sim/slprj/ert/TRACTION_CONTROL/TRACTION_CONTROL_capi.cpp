@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'TRACTION_CONTROL'.
 //
-// Model version                  : 1.25
+// Model version                  : 1.26
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:42:08 2024
+// C/C++ source code generated on : Sun Apr 21 22:13:39 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -256,10 +256,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 1757332126U,
-    196582724U,
-    1862237776U,
-    3063935998U },
+  { 1339949857U,
+    1131015136U,
+    2938031934U,
+    2494903637U },
   (nullptr), 0,
   (boolean_T)0
 };

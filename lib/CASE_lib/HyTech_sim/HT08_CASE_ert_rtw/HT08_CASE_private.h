@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.61
+// Model version                  : 1.66
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:55 2024
+// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
-// Model version                  : 1.20
+// Model version                  : 1.21
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:13 2024
+// C/C++ source code generated on : Sun Apr 21 22:12:16 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -86,16 +86,20 @@ class BasicVehicleMath final
             *rtu_YawRaterads, const real_T *rtu_MotorOmegaFLrpm, const real_T
             *rtu_MotorOmegaFRrpm, const real_T *rtu_MotorOmegaRLrpm, const
             real_T *rtu_MotorOmegaRRrpm, const real_T *rtu_SteeringWheelAngleDeg,
-            const real_T *rtu_YawPIDVelThreshold, real_T *rty_BetaDeg, real_T
-            *rty_AlphaFLDeg, real_T *rty_AlphaFRDeg, real_T *rty_AlphaRLDeg,
-            real_T *rty_AlphaRRDeg, real_T *rty_LongitudinalCornerVelWFLm,
-            real_T *rty_LongitudinalCornerVelWFRm, real_T
+            const real_T *rtu_YawPIDVelThreshold, const real_T
+            *rtu_InitialTorqueRequest, const real_T *rtu_TorqueMode, const
+            real_T *rtu_AbsoluteTorqueLimit, const real_T *rtu_RegenLimit,
+            real_T *rty_BetaDeg, real_T *rty_AlphaFLDeg, real_T *rty_AlphaFRDeg,
+            real_T *rty_AlphaRLDeg, real_T *rty_AlphaRRDeg, real_T
+            *rty_LongitudinalCornerVelWFLm, real_T
+            *rty_LongitudinalCornerVelWFRm, real_T
             *rty_LongitudinalCornerVelWRLm, real_T
             *rty_LongitudinalCornerVelWRRm, real_T
             *rty_KinematicDesiredYawRaterad, real_T *rty_SLFL, real_T *rty_SLFR,
             real_T *rty_SLRL, real_T *rty_SLRR, real_T *rty_WheelSteerAvgDeg,
             real_T *rty_WheelOmegaFLrads, real_T *rty_WheelOmegaFRrads, real_T
-            *rty_WheelOmegaRLrads, real_T *rty_WheelOmegaRRrads);
+            *rty_WheelOmegaRLrads, real_T *rty_WheelOmegaRRrads, real_T
+            *rty_ModeConstrainedTorqueReques);
 
   // Constructor
   BasicVehicleMath();
@@ -105,11 +109,11 @@ class BasicVehicleMath final
 
   // private data and function members
  private:
-  // private member function(s) for subsystem '<S21>/Accel. Calc'
+  // private member function(s) for subsystem '<S22>/Accel. Calc'
   static void BasicVehicleMath_AccelCalc(real_T rtu_CornerSpeed, real_T
     rtu_WheelOmega1, real_T *rty_SL);
 
-  // private member function(s) for subsystem '<S21>/Brake Calc'
+  // private member function(s) for subsystem '<S22>/Brake Calc'
   static void BasicVehicleMath_BrakeCalc(real_T rtu_WheelOmega, real_T
     rtu_CornerSpeed, real_T *rty_SL);
 
@@ -120,10 +124,10 @@ class BasicVehicleMath final
 //-
 //  These blocks were eliminated from the model due to optimizations:
 //
-//  Block '<S21>/Scope' : Unused code path elimination
 //  Block '<S22>/Scope' : Unused code path elimination
 //  Block '<S23>/Scope' : Unused code path elimination
 //  Block '<S24>/Scope' : Unused code path elimination
+//  Block '<S25>/Scope' : Unused code path elimination
 //  Block '<S15>/Constant' : Unused code path elimination
 //  Block '<S15>/Constant1' : Unused code path elimination
 //  Block '<S15>/Constant2' : Unused code path elimination
@@ -168,23 +172,25 @@ class BasicVehicleMath final
 //  '<S17>'  : 'BasicVehicleMath/Subsystem2'
 //  '<S18>'  : 'BasicVehicleMath/Subsystem3'
 //  '<S19>'  : 'BasicVehicleMath/Subsystem4'
-//  '<S20>'  : 'BasicVehicleMath/Slip Angle and Corner Velocity/MATLAB Function'
-//  '<S21>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL'
-//  '<S22>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR'
-//  '<S23>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL'
-//  '<S24>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR'
-//  '<S25>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL/Accel. Calc'
-//  '<S26>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL/Brake Calc'
-//  '<S27>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL/If Action Subsystem'
-//  '<S28>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR/Accel. Calc'
-//  '<S29>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR/Brake Calc'
-//  '<S30>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR/If Action Subsystem'
-//  '<S31>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL/Accel. Calc'
-//  '<S32>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL/Brake Calc'
-//  '<S33>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL/If Action Subsystem'
-//  '<S34>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR/Accel. Calc'
-//  '<S35>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR/Brake Calc'
-//  '<S36>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR/If Action Subsystem'
+//  '<S20>'  : 'BasicVehicleMath/Subsystem5'
+//  '<S21>'  : 'BasicVehicleMath/Slip Angle and Corner Velocity/MATLAB Function'
+//  '<S22>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL'
+//  '<S23>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR'
+//  '<S24>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL'
+//  '<S25>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR'
+//  '<S26>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL/Accel. Calc'
+//  '<S27>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL/Brake Calc'
+//  '<S28>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL/If Action Subsystem'
+//  '<S29>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR/Accel. Calc'
+//  '<S30>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR/Brake Calc'
+//  '<S31>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FR/If Action Subsystem'
+//  '<S32>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL/Accel. Calc'
+//  '<S33>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL/Brake Calc'
+//  '<S34>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RL/If Action Subsystem'
+//  '<S35>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR/Accel. Calc'
+//  '<S36>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR/Brake Calc'
+//  '<S37>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc RR/If Action Subsystem'
+//  '<S38>'  : 'BasicVehicleMath/Subsystem5/MATLAB Function'
 
 #endif                                 // RTW_HEADER_BasicVehicleMath_h_
 

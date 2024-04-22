@@ -10,7 +10,7 @@
 
 struct CASEConfiguration
 {
-    float torqueLimit;
+    float AbsoluteTorqueLimit;
     float yaw_pid_p;
     float yaw_pid_i;
     float yaw_pid_d;
@@ -24,6 +24,8 @@ struct CASEConfiguration
     bool useTractionControl;
     bool usePowerLimit;
     bool usePIDPowerLimit;
+    bool useDecoupledYawBrakes;
+    bool useDiscontinuousYawPIDBrakes;
     float tcsSLThreshold;
     float launchSL;
     float launchDeadZone;
@@ -33,6 +35,14 @@ struct CASEConfiguration
     float yawPIDErrorThreshold;
     float yawPIDVelThreshold;
     float yawPIDCoastThreshold;
+    float yaw_pid_brakes_p;
+    float yaw_pid_brakes_i;
+    float yaw_pid_brakes_d;
+    float decoupledYawPIDBrakesMaxDIfference;
+    float discontinuousBrakesPercentThreshold;
+    float TorqueMode;
+    float RegenLimit;
+
     float max_rpm;
     float max_regen_torque;
     float max_torque;
@@ -79,19 +89,18 @@ public:
     /// @param reset_integral bool of whether or not to reset integral term
     /// @return controller output
     DrivetrainCommand_s evaluate(
-    const SysTick_s &tick,
-    const vector_nav &vn_data,
-    const SteeringSystemData_s &steering_data,
-    const DrivetrainDynamicReport_s &drivetrain_data,
-    const veh_vec<AnalogConversion_s> &load_cell_vals,
-    const PedalsSystemData_s &pedals_data,
-    float power_kw,
-    CAR_STATE fsm_state, 
-    bool start_button_pressed,
-    uint8_t vn_status
-);
+        const SysTick_s &tick,
+        const vector_nav &vn_data,
+        const SteeringSystemData_s &steering_data,
+        const DrivetrainDynamicReport_s &drivetrain_data,
+        const veh_vec<AnalogConversion_s> &load_cell_vals,
+        const PedalsSystemData_s &pedals_data,
+        float power_kw,
+        CAR_STATE fsm_state,
+        bool start_button_pressed,
+        uint8_t vn_status);
 
-    void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d)
+    void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d, float brake_p, float brake_i, float brake_d)
     {
         config_.yaw_pid_p = yaw_p;
         config_.yaw_pid_p = yaw_i;
@@ -100,6 +109,10 @@ public:
         config_.tcs_pid_p = tcs_p;
         config_.tcs_pid_i = tcs_i;
         config_.tcs_pid_d = tcs_d;
+
+        config_.yaw_pid_brakes_p = brake_p;
+        config_.yaw_pid_brakes_i = brake_i;
+        config_.yaw_pid_brakes_d = brake_d;
     }
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE

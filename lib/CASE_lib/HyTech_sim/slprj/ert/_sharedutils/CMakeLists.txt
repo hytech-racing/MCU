@@ -48,7 +48,8 @@ add_library(rtwshared STATIC ${START_DIR}/slprj/ert/_sharedutils/const_params.cp
     ${START_DIR}/slprj/ert/_sharedutils/rtGetInf.cpp
     ${START_DIR}/slprj/ert/_sharedutils/rtGetNaN.cpp
     ${START_DIR}/slprj/ert/_sharedutils/rt_atan2d_snf.cpp
-    ${START_DIR}/slprj/ert/_sharedutils/rt_nonfinite.cpp)
+    ${START_DIR}/slprj/ert/_sharedutils/rt_nonfinite.cpp
+    ${START_DIR}/slprj/ert/_sharedutils/interp1_fDh6ZCtI.cpp)
 
 # Set properties for target "rtwshared".
 set_target_properties(rtwshared PROPERTIES PREFIX ""

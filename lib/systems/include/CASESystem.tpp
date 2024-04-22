@@ -15,7 +15,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
 
-    // in.
+    // in. as defined in HT08_CASE.h
     in.SteeringWheelAngleDeg = steering_data.angle;
 
     in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
@@ -59,7 +59,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.YawPIDConfig[1] = config_.yaw_pid_i;
     in.YawPIDConfig[2] = config_.yaw_pid_d;
 
-    in.TorqueLimit = config_.torqueLimit;
+    in.AbsoluteTorqueLimit = config_.AbsoluteTorqueLimit;
 
     in.useTractionControl = config_.useTractionControl;
 
@@ -81,6 +81,22 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.useTCSLimitedYawPID = config_.useTCSLimitedYawPID;
 
     in.YawPIDMaxDifferential = config_.yawPIDMaxDifferential;
+
+    in.useDecoupledYawBrakes = config_.useDecoupledYawBrakes;
+
+    in.YawPIDBrakesConfig[0] = config_.yaw_pid_brakes_p;
+    in.YawPIDBrakesConfig[1] = config_.yaw_pid_brakes_i;
+    in.YawPIDBrakesConfig[2] = config_.yaw_pid_brakes_d;
+
+    in.decoupledYawPIDBrakesMaxDIffere = config_.decoupledYawPIDBrakesMaxDIfference;
+
+    in.useDiscontinuousYawPIDBrakes = config_.useDiscontinuousYawPIDBrakes;
+
+    in.discontinuousBrakesPercentThres = config_.discontinuousBrakesPercentThreshold;
+
+    in.TorqueMode = config_.TorqueMode;
+
+    in.RegenLimit = config_.RegenLimit;
 
     if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {

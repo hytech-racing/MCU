@@ -3,7 +3,7 @@
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
 //
-// File: BasicVehicleMath_types.h
+// File: interp1_fDh6ZCtI.h
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
@@ -11,14 +11,14 @@
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
 // C/C++ source code generated on : Sun Apr 21 22:12:16 2024
 //
-// Target selection: ert.tlc
-// Embedded hardware selection: Intel->x86-64 (Windows64)
-// Code generation objectives: Unspecified
-// Validation result: Not run
-//
-#ifndef RTW_HEADER_BasicVehicleMath_types_h_
-#define RTW_HEADER_BasicVehicleMath_types_h_
-#endif                                 // RTW_HEADER_BasicVehicleMath_types_h_
+#ifndef RTW_HEADER_interp1_fDh6ZCtI_h_
+#define RTW_HEADER_interp1_fDh6ZCtI_h_
+#include "rtwtypes.h"
+
+extern real_T interp1_fDh6ZCtI(const real_T varargin_1[2], const real_T
+  varargin_2[2], real_T varargin_3);
+
+#endif                                 // RTW_HEADER_interp1_fDh6ZCtI_h_
 
 //
 // File trailer for generated code.

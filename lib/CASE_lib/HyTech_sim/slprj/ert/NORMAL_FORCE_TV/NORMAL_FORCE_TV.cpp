@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'NORMAL_FORCE_TV'.
 //
-// Model version                  : 1.30
+// Model version                  : 1.31
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:24 2024
+// C/C++ source code generated on : Sun Apr 21 22:12:48 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -35,7 +35,7 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
   *rtu_FZ_FL, const real_T *rtu_FZ_FR, const real_T *rtu_FZ_RL, const real_T
   *rtu_FZ_RR, const real_T *rtu_TORQUE_IN_FL, const real_T *rtu_TORQUE_IN_FR,
   const real_T *rtu_TORQUE_IN_RL, const real_T *rtu_TORQUE_IN_RR, const
-  boolean_T *rtu_usePIDTV, const real_T *rtu_TorqueLimit, real_T
+  boolean_T *rtu_usePIDTV, const real_T *rtu_AbsoluteTorqueLimit, real_T
   *rty_FL_torque_out, real_T *rty_FR_torque_out, real_T *rty_RL_torque_out,
   real_T *rty_RR_torque_out, real_T *rty_Normal_Percent_FL, real_T
   *rty_Normal_Percent_FR, real_T *rty_Normal_Percent_RL, real_T
@@ -142,7 +142,7 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
       }
 
       T_NET_MAG = rtb_Abs3 * T_NET_MAG * u;
-      if (std::abs(F_NET_LEFT) > *rtu_TorqueLimit) {
+      if (std::abs(F_NET_LEFT) > *rtu_AbsoluteTorqueLimit) {
         u = *rtu_TORQUE_IN_FL;
         if (tmp) {
           u = (rtNaN);
@@ -152,10 +152,10 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
           u = (u > 0.0);
         }
 
-        F_NET_LEFT = *rtu_TorqueLimit * u;
+        F_NET_LEFT = *rtu_AbsoluteTorqueLimit * u;
       }
 
-      if (std::abs(F_NET) > *rtu_TorqueLimit) {
+      if (std::abs(F_NET) > *rtu_AbsoluteTorqueLimit) {
         u = *rtu_TORQUE_IN_FR;
         if (tmp_0) {
           u = (rtNaN);
@@ -165,10 +165,10 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
           u = (u > 0.0);
         }
 
-        F_NET = *rtu_TorqueLimit * u;
+        F_NET = *rtu_AbsoluteTorqueLimit * u;
       }
 
-      if (std::abs(T_NET_LEFT_MAG) > *rtu_TorqueLimit) {
+      if (std::abs(T_NET_LEFT_MAG) > *rtu_AbsoluteTorqueLimit) {
         u = *rtu_TORQUE_IN_RL;
         if (tmp_1) {
           u = (rtNaN);
@@ -178,10 +178,10 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
           u = (u > 0.0);
         }
 
-        T_NET_LEFT_MAG = *rtu_TorqueLimit * u;
+        T_NET_LEFT_MAG = *rtu_AbsoluteTorqueLimit * u;
       }
 
-      if (std::abs(T_NET_MAG) > *rtu_TorqueLimit) {
+      if (std::abs(T_NET_MAG) > *rtu_AbsoluteTorqueLimit) {
         u = *rtu_TORQUE_IN_RR;
         if (tmp_2) {
           u = (rtNaN);
@@ -191,7 +191,7 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
           u = (u > 0.0);
         }
 
-        T_NET_MAG = *rtu_TorqueLimit * u;
+        T_NET_MAG = *rtu_AbsoluteTorqueLimit * u;
       }
     } else {
       real_T FL_torque_out_tmp;
@@ -265,20 +265,20 @@ void NORMAL_FORCE_TV::step(const boolean_T *rtu_useNormalForce, const real_T
       }
 
       T_NET_MAG = rtb_Abs3 * T_NET_MAG * u;
-      if (std::abs(F_NET_LEFT) > *rtu_TorqueLimit) {
-        F_NET_LEFT = *rtu_TorqueLimit * FL_torque_out_tmp;
+      if (std::abs(F_NET_LEFT) > *rtu_AbsoluteTorqueLimit) {
+        F_NET_LEFT = *rtu_AbsoluteTorqueLimit * FL_torque_out_tmp;
       }
 
-      if (std::abs(F_NET) > *rtu_TorqueLimit) {
-        F_NET = *rtu_TorqueLimit * FR_torque_out_tmp;
+      if (std::abs(F_NET) > *rtu_AbsoluteTorqueLimit) {
+        F_NET = *rtu_AbsoluteTorqueLimit * FR_torque_out_tmp;
       }
 
-      if (std::abs(T_NET_LEFT_MAG) > *rtu_TorqueLimit) {
-        T_NET_LEFT_MAG = *rtu_TorqueLimit * RL_torque_out_tmp;
+      if (std::abs(T_NET_LEFT_MAG) > *rtu_AbsoluteTorqueLimit) {
+        T_NET_LEFT_MAG = *rtu_AbsoluteTorqueLimit * RL_torque_out_tmp;
       }
 
-      if (std::abs(T_NET_MAG) > *rtu_TorqueLimit) {
-        T_NET_MAG = *rtu_TorqueLimit * u;
+      if (std::abs(T_NET_MAG) > *rtu_AbsoluteTorqueLimit) {
+        T_NET_MAG = *rtu_AbsoluteTorqueLimit * u;
       }
     }
   } else {

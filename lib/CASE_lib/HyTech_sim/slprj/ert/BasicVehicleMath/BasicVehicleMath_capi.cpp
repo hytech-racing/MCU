@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
-// Model version                  : 1.20
+// Model version                  : 1.21
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:13 2024
+// C/C++ source code generated on : Sun Apr 21 22:12:16 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -135,10 +135,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 3794283063U,
-    2133276040U,
-    2492637000U,
-    3749956628U },
+  { 730039177U,
+    2871553190U,
+    3480209202U,
+    1463418864U },
   (nullptr), 0,
   (boolean_T)0
 };

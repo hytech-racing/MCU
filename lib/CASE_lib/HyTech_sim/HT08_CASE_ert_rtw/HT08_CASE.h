@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.61
+// Model version                  : 1.66
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:55 2024
+// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -75,6 +75,7 @@ class HT08_CASE final
     real_T SLRL;                       // '<Root>/Vehicle Math'
     real_T SLRR;                       // '<Root>/Vehicle Math'
     real_T WheelSteerAvgDeg;           // '<Root>/Vehicle Math'
+    real_T modeConstrainedTorqueRequest;// '<Root>/Vehicle Math'
     real_T TCS_o1;                     // '<Root>/TCS'
     real_T TCS_o2;                     // '<Root>/TCS'
     real_T TCS_o3;                     // '<Root>/TCS'
@@ -153,7 +154,7 @@ class HT08_CASE final
     boolean_T useLaunch;               // '<Root>/useLaunch'
     real_T Vy_B;                       // '<Root>/Vy_B'
     real_T YawPIDConfig[3];            // '<Root>/Yaw PID Config'
-    real_T TorqueLimit;                // '<Root>/Torque Limit'
+    real_T AbsoluteTorqueLimit;        // '<Root>/Absolute Torque Limit'
     boolean_T useTractionControl;      // '<Root>/useTractionControl'
     real_T TCS_SLThreshold;            // '<Root>/TCS_SLThreshold'
     real_T LaunchSL;                   // '<Root>/Launch SL'
@@ -164,8 +165,17 @@ class HT08_CASE final
     real_T YawPIDErrorThreshold;       // '<Root>/Yaw PID Error Threshold'
     real_T YawPIDVelThreshold;         // '<Root>/Yaw PID Vel Threshold'
     real_T YawPIDCoastThreshold;       // '<Root>/Yaw PID Coast Threshold'
-    real_T useTCSLimitedYawPID;        // '<Root>/useTCSLimitedYawPID'
+    boolean_T useTCSLimitedYawPID;     // '<Root>/useTCSLimitedYawPID'
     real_T YawPIDMaxDifferential;      // '<Root>/Yaw PID Max Differential'
+    boolean_T useDecoupledYawBrakes;   // '<Root>/useDecoupledYawBrakes'
+    real_T YawPIDBrakesConfig[3];      // '<Root>/Yaw PID Brakes Config'
+    real_T decoupledYawPIDBrakesMaxDIffere;
+                               // '<Root>/decoupledYawPIDBrakesMaxDIfferential'
+    boolean_T useDiscontinuousYawPIDBrakes;// '<Root>/useDiscontinuousYawPIDBrakes' 
+    real_T discontinuousBrakesPercentThres;
+                                // '<Root>/discontinuousBrakesPercentThreshold'
+    real_T TorqueMode;                 // '<Root>/Torque Mode'
+    real_T RegenLimit;                 // '<Root>/Regen Limit'
   };
 
   // External outputs (root outports fed by signals with default storage)
@@ -224,9 +234,9 @@ class HT08_CASE final
 
     struct {
       rtwCAPI_ModelMappingInfo mmi;
-      void* dataAddress[45];
-      int32_T* vardimsAddress[45];
-      RTWLoggingFcnPtr loggingPtrs[45];
+      void* dataAddress[46];
+      int32_T* vardimsAddress[46];
+      RTWLoggingFcnPtr loggingPtrs[46];
       rtwCAPI_ModelMappingInfo* childMMI[5];
     } DataMapInfo;
   };

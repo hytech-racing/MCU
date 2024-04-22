@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.61
+// Model version                  : 1.66
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sat Apr 20 04:12:55 2024
+// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -35,11 +35,14 @@ void HT08_CASE::step()
   real_T rtb_VehicleMath_o19;
 
   // S-Function (scanpack): '<S1>/CAN Pack' incorporates:
+  //   Inport generated from: '<Root>/useDecoupledYawBrakes'
+  //   Inport generated from: '<Root>/useDiscontinuousYawPIDBrakes'
   //   Inport generated from: '<Root>/useLaunch'
   //   Inport generated from: '<Root>/useNormalForce'
   //   Inport generated from: '<Root>/usePIDPowerLimit'
   //   Inport generated from: '<Root>/usePIDTV'
   //   Inport generated from: '<Root>/usePowerLimit'
+  //   Inport generated from: '<Root>/useTCSLimitedYawPID'
   //   Inport generated from: '<Root>/useTractionControl'
   //   Outport generated from: '<Root>/Out Bus Element2'
 
@@ -59,6 +62,86 @@ void HT08_CASE::step()
 
   {
     // --------------- START Packing signal 0 ------------------
+    //   startBit                = 7
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      uint32_T packingValue = 0;
+
+      {
+        uint32_T result = (uint32_T) (HT08_CASE_U.useDecoupledYawBrakes);
+
+        // no scaling required
+        packingValue = result;
+      }
+
+      {
+        uint8_T packedValue;
+        if (packingValue > (boolean_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (packingValue < (boolean_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (packingValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_boolea.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_boolea.Data[0] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 7));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 1 ------------------
+    //   startBit                = 8
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      uint32_T packingValue = 0;
+
+      {
+        uint32_T result = (uint32_T) (HT08_CASE_U.useDiscontinuousYawPIDBrakes);
+
+        // no scaling required
+        packingValue = result;
+      }
+
+      {
+        uint8_T packedValue;
+        if (packingValue > (boolean_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (packingValue < (boolean_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (packingValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_boolea.Data[1] =
+              HT08_CASE_Y.controllerBus_controller_boolea.Data[1] | (uint8_T)
+              ((uint8_T)(packedValue & (uint8_T)0x1U));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 2 ------------------
     //   startBit                = 0
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -98,7 +181,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 1 ------------------
+    // --------------- START Packing signal 3 ------------------
     //   startBit                = 2
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -138,7 +221,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 2 ------------------
+    // --------------- START Packing signal 4 ------------------
     //   startBit                = 3
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -178,7 +261,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 3 ------------------
+    // --------------- START Packing signal 5 ------------------
     //   startBit                = 1
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -218,7 +301,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 4 ------------------
+    // --------------- START Packing signal 6 ------------------
     //   startBit                = 4
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -258,7 +341,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 5 ------------------
+    // --------------- START Packing signal 7 ------------------
     //   startBit                = 5
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -297,14 +380,58 @@ void HT08_CASE::step()
         }
       }
     }
+
+    // --------------- START Packing signal 8 ------------------
+    //   startBit                = 6
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      uint32_T packingValue = 0;
+
+      {
+        uint32_T result = (uint32_T) (HT08_CASE_U.useTCSLimitedYawPID);
+
+        // no scaling required
+        packingValue = result;
+      }
+
+      {
+        uint8_T packedValue;
+        if (packingValue > (boolean_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (packingValue < (boolean_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (packingValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_boolea.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_boolea.Data[0] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 6));
+          }
+        }
+      }
+    }
   }
 
   // ModelReference: '<Root>/Vehicle Math' incorporates:
+  //   Inport generated from: '<Root>/Absolute Torque Limit'
   //   Inport generated from: '<Root>/Motor Omega FL [rpm]'
   //   Inport generated from: '<Root>/Motor Omega FR [rpm]'
   //   Inport generated from: '<Root>/Motor Omega RL [rpm]'
   //   Inport generated from: '<Root>/Motor Omega RR [rpm]'
+  //   Inport generated from: '<Root>/Regen Limit'
   //   Inport generated from: '<Root>/Steering Wheel Angle [Deg]'
+  //   Inport generated from: '<Root>/Torque Average [Nm]'
+  //   Inport generated from: '<Root>/Torque Mode'
   //   Inport generated from: '<Root>/Vx_B'
   //   Inport generated from: '<Root>/Vy_B'
   //   Inport generated from: '<Root>/Yaw PID Vel Threshold'
@@ -314,14 +441,16 @@ void HT08_CASE::step()
     &HT08_CASE_U.YawRaterads, &HT08_CASE_U.MotorOmegaFLrpm,
     &HT08_CASE_U.MotorOmegaFRrpm, &HT08_CASE_U.MotorOmegaRLrpm,
     &HT08_CASE_U.MotorOmegaRRrpm, &HT08_CASE_U.SteeringWheelAngleDeg,
-    &HT08_CASE_U.YawPIDVelThreshold, &HT08_CASE_B.BetaDeg,
-    &HT08_CASE_B.AlphaFLDeg, &HT08_CASE_B.AlphaFRDeg, &HT08_CASE_B.AlphaRLDeg,
-    &HT08_CASE_B.AlphaRRDeg, &HT08_CASE_B.LongCornerVelFL,
-    &HT08_CASE_B.LongCornerVelFR, &HT08_CASE_B.LongCornerVelRL,
-    &HT08_CASE_B.LongCornerVelRR, &HT08_CASE_B.VehicleMath_o10,
-    &HT08_CASE_B.SLFL, &HT08_CASE_B.SLFR, &HT08_CASE_B.SLRL, &HT08_CASE_B.SLRR,
-    &HT08_CASE_B.WheelSteerAvgDeg, &rtb_VehicleMath_o16, &rtb_VehicleMath_o17,
-    &rtb_VehicleMath_o18, &rtb_VehicleMath_o19);
+    &HT08_CASE_U.YawPIDVelThreshold, &HT08_CASE_U.TorqueAverageNm,
+    &HT08_CASE_U.TorqueMode, &HT08_CASE_U.AbsoluteTorqueLimit,
+    &HT08_CASE_U.RegenLimit, &HT08_CASE_B.BetaDeg, &HT08_CASE_B.AlphaFLDeg,
+    &HT08_CASE_B.AlphaFRDeg, &HT08_CASE_B.AlphaRLDeg, &HT08_CASE_B.AlphaRRDeg,
+    &HT08_CASE_B.LongCornerVelFL, &HT08_CASE_B.LongCornerVelFR,
+    &HT08_CASE_B.LongCornerVelRL, &HT08_CASE_B.LongCornerVelRR,
+    &HT08_CASE_B.VehicleMath_o10, &HT08_CASE_B.SLFL, &HT08_CASE_B.SLFR,
+    &HT08_CASE_B.SLRL, &HT08_CASE_B.SLRR, &HT08_CASE_B.WheelSteerAvgDeg,
+    &rtb_VehicleMath_o16, &rtb_VehicleMath_o17, &rtb_VehicleMath_o18,
+    &rtb_VehicleMath_o19, &HT08_CASE_B.modeConstrainedTorqueRequest);
 
   // ModelReference: '<Root>/TCS' incorporates:
   //   Inport generated from: '<Root>/Launch Dead Zone'
@@ -336,9 +465,11 @@ void HT08_CASE::step()
   //   Inport generated from: '<Root>/useTractionControl'
 
   TCSMDLOBJ2.step(&HT08_CASE_U.TorqueAverageNm, &HT08_CASE_U.useTractionControl,
-                  &HT08_CASE_U.TCS_SLThreshold, &HT08_CASE_U.TorqueAverageNm,
-                  &HT08_CASE_U.TorqueAverageNm, &HT08_CASE_U.TorqueAverageNm,
-                  &HT08_CASE_U.TorqueAverageNm, &HT08_CASE_B.SLFL,
+                  &HT08_CASE_U.TCS_SLThreshold,
+                  &HT08_CASE_B.modeConstrainedTorqueRequest,
+                  &HT08_CASE_B.modeConstrainedTorqueRequest,
+                  &HT08_CASE_B.modeConstrainedTorqueRequest,
+                  &HT08_CASE_B.modeConstrainedTorqueRequest, &HT08_CASE_B.SLFL,
                   &HT08_CASE_B.SLFR, &HT08_CASE_B.SLRL, &HT08_CASE_B.SLRR,
                   &HT08_CASE_U.useLaunch, &HT08_CASE_U.LaunchSL,
                   &HT08_CASE_U.LaunchDeadZone, &HT08_CASE_U.TCSPIDConfig[0],
@@ -350,15 +481,21 @@ void HT08_CASE::step()
 
   // ModelReference: '<S4>/PID_TV' incorporates:
   //   Constant: '<S4>/Constant5'
+  //   Inport generated from: '<Root>/Absolute Torque Limit'
+  //   Inport generated from: '<Root>/Regen Limit'
   //   Inport generated from: '<Root>/Torque Average [Nm]'
-  //   Inport generated from: '<Root>/Torque Limit'
   //   Inport generated from: '<Root>/Vx_B'
+  //   Inport generated from: '<Root>/Yaw PID Brakes Config'
   //   Inport generated from: '<Root>/Yaw PID Coast Threshold'
   //   Inport generated from: '<Root>/Yaw PID Config'
   //   Inport generated from: '<Root>/Yaw PID Error Threshold'
   //   Inport generated from: '<Root>/Yaw PID Max Differential'
   //   Inport generated from: '<Root>/Yaw PID Vel Threshold'
   //   Inport generated from: '<Root>/Yaw Rate [rad//s]'
+  //   Inport generated from: '<Root>/decoupledYawPIDBrakesMaxDIfferential'
+  //   Inport generated from: '<Root>/discontinuousBrakesPercentThreshold'
+  //   Inport generated from: '<Root>/useDecoupledYawBrakes'
+  //   Inport generated from: '<Root>/useDiscontinuousYawPIDBrakes'
   //   Inport generated from: '<Root>/usePIDTV'
   //   Inport generated from: '<Root>/useTCSLimitedYawPID'
 
@@ -368,23 +505,32 @@ void HT08_CASE::step()
                      &HT08_CASE_B.TCS_o4, &HT08_CASE_B.TCS_o1,
                      &HT08_CASE_B.TCS_o3, &HT08_CASE_U.usePIDTV,
                      &HT08_CASE_B.VehicleMath_o10, &HT08_CASE_U.Vx_B,
-                     &HT08_CASE_U.TorqueLimit, &HT08_CASE_U.TorqueAverageNm,
+                     &HT08_CASE_U.AbsoluteTorqueLimit,
+                     &HT08_CASE_U.TorqueAverageNm,
                      &HT08_CASE_U.YawPIDErrorThreshold,
                      &HT08_CASE_U.YawPIDCoastThreshold,
                      &HT08_CASE_U.YawPIDVelThreshold,
                      &HT08_CASE_U.useTCSLimitedYawPID, &HT08_CASE_B.TCS_o5,
                      &HT08_CASE_B.TCS_o6, &HT08_CASE_B.TCS_o7,
                      &HT08_CASE_B.TCS_o8, &HT08_CASE_U.YawPIDMaxDifferential,
-                     &HT08_CASE_B.FRTORQUEPID, &HT08_CASE_B.RRTORQUEPID,
-                     &HT08_CASE_B.FLTORQUEPID, &HT08_CASE_B.RLTORQUEPID,
-                     &HT08_CASE_B.PID_TV_o5, &HT08_CASE_B.PID_TV_o6);
+                     &HT08_CASE_U.YawPIDBrakesConfig[0],
+                     &HT08_CASE_U.YawPIDBrakesConfig[1],
+                     &HT08_CASE_U.YawPIDBrakesConfig[2],
+                     &HT08_CASE_U.useDecoupledYawBrakes,
+                     &HT08_CASE_U.useDiscontinuousYawPIDBrakes,
+                     &HT08_CASE_U.decoupledYawPIDBrakesMaxDIffere,
+                     &HT08_CASE_U.discontinuousBrakesPercentThres,
+                     &HT08_CASE_U.RegenLimit, &HT08_CASE_B.FRTORQUEPID,
+                     &HT08_CASE_B.RRTORQUEPID, &HT08_CASE_B.FLTORQUEPID,
+                     &HT08_CASE_B.RLTORQUEPID, &HT08_CASE_B.PID_TV_o5,
+                     &HT08_CASE_B.PID_TV_o6);
 
   // ModelReference: '<S4>/Model' incorporates:
+  //   Inport generated from: '<Root>/Absolute Torque Limit'
   //   Inport generated from: '<Root>/FZ FL'
   //   Inport generated from: '<Root>/FZ FR'
   //   Inport generated from: '<Root>/FZ RL'
   //   Inport generated from: '<Root>/FZ RR'
-  //   Inport generated from: '<Root>/Torque Limit'
   //   Inport generated from: '<Root>/useNormalForce'
   //   Inport generated from: '<Root>/usePIDTV'
 
@@ -392,7 +538,7 @@ void HT08_CASE::step()
                     &HT08_CASE_U.FZFR, &HT08_CASE_U.FZRL, &HT08_CASE_U.FZRR,
                     &HT08_CASE_B.FLTORQUEPID, &HT08_CASE_B.FRTORQUEPID,
                     &HT08_CASE_B.RLTORQUEPID, &HT08_CASE_B.RRTORQUEPID,
-                    &HT08_CASE_U.usePIDTV, &HT08_CASE_U.TorqueLimit,
+                    &HT08_CASE_U.usePIDTV, &HT08_CASE_U.AbsoluteTorqueLimit,
                     &HT08_CASE_B.TorqueNormalFL, &HT08_CASE_B.TorqueNormalFR,
                     &HT08_CASE_B.TorqueNormalRL, &HT08_CASE_B.TorqueNormalRR,
                     &HT08_CASE_B.Normal_Percent_FL,
@@ -2056,7 +2202,9 @@ void HT08_CASE::step()
   }
 
   // S-Function (scanpack): '<S1>/CAN Pack8' incorporates:
+  //   Inport generated from: '<Root>/Regen Limit'
   //   Inport generated from: '<Root>/Torque Average [Nm]'
+  //   Inport generated from: '<Root>/Torque Mode'
   //   Outport generated from: '<Root>/Out Bus Element10'
 
   // S-Function (scanpack): '<S1>/CAN Pack8'
@@ -2075,6 +2223,64 @@ void HT08_CASE::step()
 
   {
     // --------------- START Packing signal 0 ------------------
+    //   startBit                = 16
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.modeConstrainedTorqueRequest;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_initia.Data[2] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[2] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_initia.Data[3] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[3] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 1 ------------------
     //   startBit                = 0
     //   length                  = 16
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -2127,6 +2333,113 @@ void HT08_CASE::step()
             HT08_CASE_Y.controllerBus_controller_initia.Data[1] =
               HT08_CASE_Y.controllerBus_controller_initia.Data[1] | (uint8_T)
               ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 2 ------------------
+    //   startBit                = 32
+    //   length                  = 13
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.01
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_U.RegenLimit;
+
+        // no offset to apply
+        result = result * (1 / 0.01);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (4095)) {
+          packedValue = 4095;
+        } else if (scaledValue < (int32_T)((-(4095)-1))) {
+          packedValue = (-(4095)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_initia.Data[4] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[4] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_initia.Data[5] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[5] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0x1F00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 3 ------------------
+    //   startBit                = 45
+    //   length                  = 12
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 0.01
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_U.TorqueMode;
+
+        // no offset to apply
+        result = result * (1 / 0.01);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        uint16_T packedValue;
+        if (outValue > (real_T)(4095)) {
+          packedValue = (uint16_T) 4095;
+        } else if (outValue < (real_T)(0)) {
+          packedValue = (uint16_T) 0;
+        } else {
+          packedValue = (uint16_T) (outValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_initia.Data[5] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[5] | (uint8_T)
+              ((uint16_T)((uint16_T)(packedValue & (uint16_T)0x7U) << 5));
+            HT08_CASE_Y.controllerBus_controller_initia.Data[6] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[6] | (uint8_T)
+              ((uint16_T)((uint16_T)(packedValue & (uint16_T)0x7F8U) >> 3));
+            HT08_CASE_Y.controllerBus_controller_initia.Data[7] =
+              HT08_CASE_Y.controllerBus_controller_initia.Data[7] | (uint8_T)
+              ((uint16_T)((uint16_T)(packedValue & (uint16_T)0x800U) >> 11));
           }
         }
       }
