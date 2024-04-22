@@ -39,11 +39,11 @@ bool AMSInterface::heartbeat_received(unsigned long curr_millis) {
 }
 
 bool AMSInterface::is_below_pack_charge_critical_low_thresh() {
-    return (bms_voltages_.get_low() < PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD);
+    return (HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) < PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD);
 }
 
 bool AMSInterface::is_below_pack_charge_critical_total_thresh() {
-    return (bms_voltages_.get_total() < PACK_CHARGE_CRIT_TOTAL_THRESHOLD);
+    return (HYTECH_total_voltage_ro_fromS(bms_voltages_.total_voltage_ro) < PACK_CHARGE_CRIT_TOTAL_THRESHOLD);
 }
 
 bool AMSInterface::pack_charge_is_critical() {
@@ -58,17 +58,17 @@ float AMSInterface::get_filtered_max_cell_temp() {
 }
 
 float AMSInterface::get_filtered_min_cell_voltage() {
-    bms_low_voltage = bms_voltages_.get_low() / 10000.0;
+    bms_low_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) / 10000.0;
     filtered_min_cell_voltage = filtered_min_cell_voltage * cell_temp_alpha + (1.0 - cell_voltage_alpha) * bms_low_voltage;
     return filtered_min_cell_voltage;
 }
 
 float AMSInterface::initialize_charge() {
     int i = 0;
-    while (abs((low_voltage_ro) - voltage_lookup_table[i]) <= abs(low_voltage_ro - voltage_lookup_table[i+1])) {
-    i++;
+    while (abs(HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - voltage_lookup_table[i]) <= abs(HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - voltage_lookup_table[i+1])) {
+        i++;
     }
-  charge = ((100 - i)/100) * MAX_PACK_CHARGE;
+    charge = ((100 - i)/100) * MAX_PACK_CHARGE;
 }
 
 float AMSInterface::get_SoC_em() {
@@ -102,8 +102,8 @@ void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
     bms_temperatures_.load(recvd_msg.buf);
 }
 
-void AMSInterface::retrieve_voltage_CAN(CAN_message_t &recvd_msg) {
-    bms_voltages_.load(recvd_msg.buf);
+void AMSInterface::retrieve_voltage_CAN(CAN_message_t &can_msg) {
+    Unpack_BMS_VOLTAGES_hytech(&bms_voltages_, can_msg.buf, can_msg.len);
 }
 
 

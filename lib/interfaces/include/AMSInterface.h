@@ -90,10 +90,9 @@ private:
     /* AMS CAN messages */
     BMS_status          bms_status_;
     BMS_temperatures    bms_temperatures_;
-    BMS_voltages        bms_voltages_;
     ACU_SHUNT_MEASUREMENTS_t         acu_shunt_measurements_;
     EM_MEASUREMENT_t                 em_measurements_;
-    BMS_VOLTAGES_t                   low_voltage_ro;
+    BMS_VOLTAGES_t                   bms_voltages_;
 
     /* AMS last heartbeat time */
     unsigned long last_heartbeat_time;
