@@ -3,16 +3,15 @@
 #include "PhysicalParameters.h"
 
 void TorqueControllerMux::tick(
-        const SysTick_s &tick,
-        const DrivetrainDynamicReport_s &drivetrainData,
-        const PedalsSystemData_s &pedalsData,
-        const SteeringSystemData_s &steeringData,
-        const LoadCellInterfaceOutput_s &loadCellData,
-        DialMode_e dashboardDialMode,
-        bool dashboardTorqueModeButtonPressed,
-        const vector_nav &vn_data, 
-        const DrivetrainCommand_s &CASECommand
-    )
+    const SysTick_s &tick,
+    const DrivetrainDynamicReport_s &drivetrainData,
+    const PedalsSystemData_s &pedalsData,
+    const SteeringSystemData_s &steeringData,
+    const LoadCellInterfaceOutput_s &loadCellData,
+    DialMode_e dashboardDialMode,
+    bool dashboardTorqueModeButtonPressed,
+    const vector_nav &vn_data,
+    const DrivetrainCommand_s &CASECommand)
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
@@ -20,13 +19,10 @@ void TorqueControllerMux::tick(
     torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
     torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
     tcCASEWrapper_.tick(
-        (TCCaseWrapperTick_s)
-        {
+        (TCCaseWrapperTick_s){
             .command = CASECommand,
-            .steeringData = steeringData
-        }
-    );
-    
+            .steeringData = steeringData});
+
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
     {
@@ -53,7 +49,8 @@ void TorqueControllerMux::tick(
         {
             // Check if speed permits mode change
             bool speedPreventsModeChange = false;
-            for (int i = 0; i < NUM_MOTORS; i++) {
+            for (int i = 0; i < NUM_MOTORS; i++)
+            {
                 speedPreventsModeChange |= drivetrainData.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND >= MAX_SPEED_FOR_MODE_CHANGE;
             }
 
@@ -96,7 +93,6 @@ void TorqueControllerMux::tick(
         applyTorqueLimit(&drivetrainCommand_);
         applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         applyPosSpeedLimit(&drivetrainCommand_);
-
     }
 }
 
@@ -104,7 +100,7 @@ void TorqueControllerMux::tick(
     Apply limit to make sure that regenerative braking is not applied when
     wheelspeed is below 5kph on all wheels.
 */
-void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain)
+void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const DrivetrainDynamicReport_s *drivetrain)
 {
     const float noRegenLimitKPH = 10.0;
     const float fullRegenLimitKPH = 5.0;
@@ -112,7 +108,8 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const Dr
     float torqueScaleDown = 0.0;
     bool allWheelsRegen = true; // true when all wheels are targeting speeds below the current wheel speed
 
-    for (int i = 0; i < NUM_MOTORS; i++) {
+    for (int i = 0; i < NUM_MOTORS; i++)
+    {
         maxWheelSpeed = std::max(maxWheelSpeed, drivetrain->measuredSpeeds[i] * RPM_TO_KILOMETERS_PER_HOUR);
         allWheelsRegen &= (command->speeds_rpm[i] < drivetrain->measuredSpeeds[i]);
     }
@@ -123,7 +120,8 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const Dr
 
     if (allWheelsRegen)
     {
-        for (int i = 0; i < NUM_MOTORS; i++) {
+        for (int i = 0; i < NUM_MOTORS; i++)
+        {
             command->torqueSetpoints[i] *= torqueScaleDown;
         }
     }
@@ -134,28 +132,35 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s* command, const Dr
     exceeds the preset mechanical power limit. Scales all wheels down to
     preserve functionality of torque controllers
 */
-void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain)
+void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s *command, const DrivetrainDynamicReport_s *drivetrain)
 {
     float net_torque_mag = 0;
     float net_power = 0;
 
     // calculate current mechanical power
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        // get the total magnitude of torque from all 4 wheels
-        #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
+    for (int i = 0; i < NUM_MOTORS; i++)
+    {
+// get the total magnitude of torque from all 4 wheels
+#ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         net_torque_mag += abs(command->torqueSetpoints[i]);
         net_power += abs(command->torqueSetpoints[i] * (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-        #else
+#else
         // sum up net torque
         net_torque_mag += std::abs(command->torqueSetpoints[i]);
         // calculate P = T*w for each wheel and sum together
         net_power += std::abs(command->torqueSetpoints[i] * (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-        #endif
+#endif
     }
-    
+
     // only evaluate power limit if current power exceeds it
-    if (net_power > (MAX_POWER_LIMIT)) {
-        for (int i = 0; i < NUM_MOTORS; i++) {
+    if (net_power > (MAX_POWER_LIMIT))
+    {
+        for (int i = 0; i < NUM_MOTORS; i++)
+        {
+
+            // TODO: SOMEBODY PLZ MAKE THIS WORK
+            // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
+
             // calculate the percent of total torque requested per wheel
             float torque_percent = command->torqueSetpoints[i] / net_torque_mag;
             // based on the torque percent and max power limit, get the max power each wheel can use
@@ -164,7 +169,6 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command, const Dr
             command->torqueSetpoints[i] = power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND);
         }
     }
-
 }
 
 /*
@@ -173,35 +177,38 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s* command, const Dr
     This will uniformally scale down all torques as to not affect the functionality
     of non-symmetrical torque controllers.
 */
-void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s* command)
-{  
+void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s *command)
+{
     float max_torque = getMaxTorque();
     float avg_torque = 0;
 
     // get the average torque accross all 4 wheels
-    for (int i = 0; i < NUM_MOTORS; i++) {
-        #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
+    for (int i = 0; i < NUM_MOTORS; i++)
+    {
+#ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         avg_torque += abs(command->torqueSetpoints[i]);
-        #else
+#else
         avg_torque += std::abs(command->torqueSetpoints[i]);
-        #endif
+#endif
     }
     avg_torque /= NUM_MOTORS;
 
     // if this is greather than the torque limit, scale down
-    if (avg_torque > max_torque) {
+    if (avg_torque > max_torque)
+    {
         // get the scale of avg torque above max torque
         float scale = avg_torque / max_torque;
         // divide by scale to lower avg below max torque
-        for (int i = 0; i < NUM_MOTORS; i++) {
+        for (int i = 0; i < NUM_MOTORS; i++)
+        {
             command->torqueSetpoints[i] /= scale;
         }
     }
-
 }
 
 /* Apply limit such that wheelspeed never goes negative */
-void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s* command) {
+void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s *command)
+{
     for (int i = 0; i < NUM_MOTORS; i++)
     {
         command->speeds_rpm[i] = std::max(0.0f, command->speeds_rpm[i]);
