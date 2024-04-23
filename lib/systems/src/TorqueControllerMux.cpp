@@ -90,9 +90,9 @@ void TorqueControllerMux::tick(
 
         // apply torque limit before power limit to not power limit
         applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        applyTorqueLimit(&drivetrainCommand_);
-        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
-        applyPosSpeedLimit(&drivetrainCommand_);
+        // applyTorqueLimit(&drivetrainCommand_);
+        // applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        // applyPosSpeedLimit(&drivetrainCommand_);
     }
 }
 
@@ -140,11 +140,11 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s *command, const Dr
     // calculate current mechanical power
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-// get the total magnitude of torque from all 4 wheels
-#ifdef ARDUINO_TEENSY41 // screw arduino.h macros
+        // get the total magnitude of torque from all 4 wheels
+        #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         net_torque_mag += abs(command->torqueSetpoints[i]);
         net_power += abs(command->torqueSetpoints[i] * (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-#else
+        #else
         // sum up net torque
         net_torque_mag += std::abs(command->torqueSetpoints[i]);
         // calculate P = T*w for each wheel and sum together
@@ -162,12 +162,19 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s *command, const Dr
             // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
 
             // calculate the percent of total torque requested per wheel
-            float torque_percent = command->torqueSetpoints[i] / net_torque_mag;
+            float torque_percent = abs(command->torqueSetpoints[i] / net_torque_mag);
             // based on the torque percent and max power limit, get the max power each wheel can use
             float power_per_corner = (torque_percent * MAX_POWER_LIMIT);
+
             // power / omega (motor rad/s) to get torque per wheel
-            command->torqueSetpoints[i] = power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND);
-        }
+            #ifdef ARDUINO_TEENSY41
+            command->torqueSetpoints[i] = abs(power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
+            #else
+            command->torqueSetpoints[i] = std::abs(power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
+            #endif
+            command->torqueSetpoints[i] = std::max(0.0f, std::min(command->torqueSetpoints[i], getMaxTorque()));
+
+        } 
     }
 }
 
