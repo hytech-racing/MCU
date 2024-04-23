@@ -90,9 +90,9 @@ void TorqueControllerMux::tick(
 
         // apply torque limit before power limit to not power limit
         applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        // applyTorqueLimit(&drivetrainCommand_);
-        // applyPowerLimit(&drivetrainCommand_, &drivetrainData);
-        // applyPosSpeedLimit(&drivetrainCommand_);
+        applyTorqueLimit(&drivetrainCommand_);
+        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        applyPosSpeedLimit(&drivetrainCommand_);
     }
 }
 
