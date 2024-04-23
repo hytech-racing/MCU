@@ -110,8 +110,13 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const Dr
 
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        maxWheelSpeed = std::max(maxWheelSpeed, drivetrain->measuredSpeeds[i] * RPM_TO_KILOMETERS_PER_HOUR);
-        allWheelsRegen &= (command->speeds_rpm[i] < drivetrain->measuredSpeeds[i]);
+        #ifdef ARDUINO_TEENSY41
+        maxWheelSpeed = std::max(maxWheelSpeed, abs(drivetrain->measuredSpeeds[i]) * RPM_TO_KILOMETERS_PER_HOUR);
+        allWheelsRegen &= (command->speeds_rpm[i] < abs(drivetrain->measuredSpeeds[i]) || command->speeds_rpm[i] == 0);
+        #else
+        maxWheelSpeed = std::max(maxWheelSpeed, std::abs(drivetrain->measuredSpeeds[i]) * RPM_TO_KILOMETERS_PER_HOUR);
+        allWheelsRegen &= (command->speeds_rpm[i] < std::abs(drivetrain->measuredSpeeds[i]) || command->speeds_rpm[i] == 0);
+        #endif
     }
 
     // begin limiting regen at noRegenLimitKPH and completely limit regen at fullRegenLimitKPH
