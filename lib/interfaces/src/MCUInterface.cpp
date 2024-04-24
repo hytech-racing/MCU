@@ -97,7 +97,7 @@ void MCUInterface::enqueue_CAN_mcu_status()
 {
     CAN_message_t msg;
     
-    Pack_MCU_STATUS_hytech(&mcu_status_, msg.buf, &msg.len, (uint8_t*) &msg.flags.extended);
+    msg.id = Pack_MCU_STATUS_hytech(&mcu_status_, msg.buf, &msg.len, (uint8_t*) &msg.flags.extended);
 
     uint8_t buf[sizeof(CAN_message_t)] = {};
     memmove(buf, &msg, sizeof(CAN_message_t));
