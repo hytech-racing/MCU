@@ -49,6 +49,9 @@ find_library(FOUND_LIBM m NO_SYSTEM_ENVIRONMENT_PATH PATHS ${CMAKE_C_IMPLICIT_LI
 if(NOT TARGET BasicVehicleMath_rtwlib)
     add_subdirectory(../slprj/ert/BasicVehicleMath ${BINARY_START_DIR}/slprj/ert/BasicVehicleMath)
 endif()
+if(NOT TARGET NOREGEN_5KPH_rtwlib)
+    add_subdirectory(../slprj/ert/NOREGEN_5KPH ${BINARY_START_DIR}/slprj/ert/NOREGEN_5KPH)
+endif()
 if(NOT TARGET NORMAL_FORCE_TV_rtwlib)
     add_subdirectory(../slprj/ert/NORMAL_FORCE_TV ${BINARY_START_DIR}/slprj/ert/NORMAL_FORCE_TV)
 endif()
@@ -57,6 +60,9 @@ if(NOT TARGET PID_TV_rtwlib)
 endif()
 if(NOT TARGET POWER_LIMIT_rtwlib)
     add_subdirectory(../slprj/ert/POWER_LIMIT ${BINARY_START_DIR}/slprj/ert/POWER_LIMIT)
+endif()
+if(NOT TARGET TORQUE_BIAS_rtwlib)
+    add_subdirectory(../slprj/ert/TORQUE_BIAS ${BINARY_START_DIR}/slprj/ert/TORQUE_BIAS)
 endif()
 if(NOT TARGET TRACTION_CONTROL_rtwlib)
     add_subdirectory(../slprj/ert/TRACTION_CONTROL ${BINARY_START_DIR}/slprj/ert/TRACTION_CONTROL)
@@ -98,9 +104,11 @@ target_compile_definitions(HT08_CASE PRIVATE -DMODEL=HT08_CASE
 
 # Specify include directories for target "HT08_CASE".
 target_include_directories(HT08_CASE PRIVATE ${START_DIR}/slprj/ert/TRACTION_CONTROL
+    ${START_DIR}/slprj/ert/TORQUE_BIAS
     ${START_DIR}/slprj/ert/POWER_LIMIT
     ${START_DIR}/slprj/ert/PID_TV
     ${START_DIR}/slprj/ert/NORMAL_FORCE_TV
+    ${START_DIR}/slprj/ert/NOREGEN_5KPH
     ${START_DIR}/slprj/ert/BasicVehicleMath
     ${START_DIR}
     ${START_DIR}/HT08_CASE_ert_rtw
@@ -117,9 +125,11 @@ target_include_directories(HT08_CASE PRIVATE ${START_DIR}/slprj/ert/TRACTION_CON
 # supports multiple platforms with differently named system library 
 # dependencies.
 target_link_libraries(HT08_CASE PRIVATE BasicVehicleMath_rtwlib
+    NOREGEN_5KPH_rtwlib
     NORMAL_FORCE_TV_rtwlib
     PID_TV_rtwlib
     POWER_LIMIT_rtwlib
+    TORQUE_BIAS_rtwlib
     TRACTION_CONTROL_rtwlib
     rtwshared
     $<$<BOOL:${FOUND_LIBM}>:m>

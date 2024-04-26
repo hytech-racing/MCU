@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
-// Model version                  : 1.21
+// Model version                  : 1.22
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sun Apr 21 22:12:16 2024
+// C/C++ source code generated on : Fri Apr 26 00:57:44 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -136,7 +136,9 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   *rty_SLRL, real_T *rty_SLRR, real_T *rty_WheelSteerAvgDeg, real_T
   *rty_WheelOmegaFLrads, real_T *rty_WheelOmegaFRrads, real_T
   *rty_WheelOmegaRLrads, real_T *rty_WheelOmegaRRrads, real_T
-  *rty_ModeConstrainedTorqueReques)
+  *rty_ModeConstrainedTorqueReques, real_T *rty_WheelLinearSpeedFLms, real_T
+  *rty_WheelLinearSpeedFRms, real_T *rty_WheelLinearSpeedRLms, real_T
+  *rty_WheelLinearSpeedRRms)
 {
   real_T tmp[2];
   real_T tmp_0[2];
@@ -150,42 +152,54 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
   real_T rtb_Gain1_e_tmp;
   real_T rtb_LongCornerVel_FL_B;
   real_T rtb_LongCornerVel_FR_B;
-  real_T rtb_SL;
   real_T rtb_Subtract;
   real_T rtb_Subtract_b;
   real_T rtb_Switch1;
   real_T rtb_Switch1_tmp;
-  real_T rtb_Switch_b;
+  real_T rtb_Switch_a;
+  real_T rtb_Switch_j;
 
   // Abs: '<Root>/Abs'
   rtb_Abs_l = std::abs(*rtu_SteeringWheelAngleDeg);
 
   // Lookup_n-D: '<Root>/1-D Lookup Table' incorporates:
-  //   Abs: '<S8>/Abs'
+  //   Abs: '<S9>/Abs'
 
   rtb_Abs_l = look1_binlxpw(rtb_Abs_l, rtCP_uDLookupTable_bp01Data,
     rtCP_uDLookupTable_tableData, 200U);
 
-  // Abs: '<S1>/Abs' incorporates:
-  //   MATLAB Function: '<S14>/MATLAB Function'
+  // Gain: '<Root>/Gain'
+  rtb_Switch_j = 0.10471975511965977 * *rtu_MotorOmegaRRrpm;
+
+  // Switch: '<S1>/Switch' incorporates:
+  //   Constant: '<S1>/Constant'
+
+  if (!(rtb_Switch_j > 50.0)) {
+    rtb_Switch_j = 0.0;
+  }
+
+  // End of Switch: '<S1>/Switch'
+
+  // Abs: '<S2>/Abs' incorporates:
+  //   MATLAB Function: '<S15>/MATLAB Function'
 
   rtb_Switch1_tmp = std::abs(*rtu_Vy_Bms);
 
-  // Sum: '<S1>/Subtract' incorporates:
-  //   Abs: '<S1>/Abs'
+  // Sum: '<S2>/Subtract' incorporates:
+  //   Abs: '<S2>/Abs'
 
   rtb_Subtract = rtb_Switch1_tmp - *rtu_YawPIDVelThreshold;
 
-  // Switch: '<S1>/Switch1' incorporates:
-  //   Constant: '<S1>/Constant'
-  //   Trigonometry: '<S1>/Atan'
+  // Switch: '<S2>/Switch1' incorporates:
+  //   Constant: '<S2>/Constant'
+  //   Trigonometry: '<S2>/Atan'
 
   if (rtb_Subtract > 0.0) {
-    // Abs: '<S1>/Abs1'
+    // Abs: '<S2>/Abs1'
     rtb_Subtract = std::abs(*rtu_Vx_Bms);
 
-    // Switch: '<S1>/Switch' incorporates:
-    //   Constant: '<S1>/Constant2'
+    // Switch: '<S2>/Switch' incorporates:
+    //   Constant: '<S2>/Constant2'
 
     if (rtb_Subtract > 0.0) {
       rtb_Subtract = *rtu_Vx_Bms;
@@ -193,16 +207,16 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
       rtb_Subtract = (rtInf);
     }
 
-    // End of Switch: '<S1>/Switch'
+    // End of Switch: '<S2>/Switch'
 
-    // Product: '<S1>/Divide2'
+    // Product: '<S2>/Divide2'
     rtb_Subtract = *rtu_Vy_Bms / rtb_Subtract;
     rtb_Switch1 = std::atan(rtb_Subtract);
   } else {
     rtb_Switch1 = 0.0;
   }
 
-  // End of Switch: '<S1>/Switch1'
+  // End of Switch: '<S2>/Switch1'
 
   // Signum: '<Root>/Sign'
   rtb_Subtract = *rtu_SteeringWheelAngleDeg;
@@ -219,43 +233,40 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
 
   *rty_WheelSteerAvgDeg = rtb_Abs_l * rtb_Gain1_e_tmp;
 
-  // Gain: '<S2>/Gain1' incorporates:
-  //   Gain: '<S3>/Gain1'
+  // Gain: '<S3>/Gain1' incorporates:
   //   Gain: '<S4>/Gain1'
   //   Gain: '<S5>/Gain1'
   //   Gain: '<S6>/Gain1'
-  //   Switch: '<S7>/Switch'
+  //   Gain: '<S7>/Gain1'
+  //   Switch: '<S8>/Switch'
 
   rtb_Gain1_e_tmp = 0.017453292519943295 * *rty_WheelSteerAvgDeg;
-
-  // Gain: '<Root>/Gain'
-  rtb_Abs_l = 0.10471975511965977 * *rtu_MotorOmegaRRrpm;
 
   // Gain: '<Root>/Gain1'
   rtb_Subtract = 0.10471975511965977 * *rtu_MotorOmegaRLrpm;
 
   // Gain: '<Root>/Gain2'
-  rtb_Switch_b = 0.10471975511965977 * *rtu_MotorOmegaFRrpm;
+  rtb_Switch_a = 0.10471975511965977 * *rtu_MotorOmegaFRrpm;
 
   // Gain: '<Root>/Gain3'
-  rtb_SL = 0.10471975511965977 * *rtu_MotorOmegaFLrpm;
+  rtb_Abs_l = 0.10471975511965977 * *rtu_MotorOmegaFLrpm;
 
-  // Abs: '<S7>/Abs' incorporates:
-  //   MATLAB Function: '<S14>/MATLAB Function'
+  // Abs: '<S8>/Abs' incorporates:
+  //   MATLAB Function: '<S15>/MATLAB Function'
 
   rtb_Abs_tmp = std::abs(*rtu_Vx_Bms);
 
-  // Sum: '<S7>/Subtract' incorporates:
-  //   Abs: '<S7>/Abs'
+  // Sum: '<S8>/Subtract' incorporates:
+  //   Abs: '<S8>/Abs'
 
   rtb_Subtract_b = rtb_Abs_tmp - *rtu_YawPIDVelThreshold;
 
-  // Switch: '<S7>/Switch' incorporates:
-  //   Abs: '<S7>/Abs'
-  //   Constant: '<S7>/Constant'
-  //   Constant: '<S7>/wb'
-  //   Product: '<S7>/Divide'
-  //   Trigonometry: '<S7>/Tan'
+  // Switch: '<S8>/Switch' incorporates:
+  //   Abs: '<S8>/Abs'
+  //   Constant: '<S8>/Constant'
+  //   Constant: '<S8>/wb'
+  //   Product: '<S8>/Divide'
+  //   Trigonometry: '<S8>/Tan'
 
   if (rtb_Subtract_b > 0.0) {
     *rty_KinematicDesiredYawRaterad = rtb_Abs_tmp * std::tan(rtb_Gain1_e_tmp) /
@@ -264,14 +275,14 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
     *rty_KinematicDesiredYawRaterad = 0.0;
   }
 
-  // MATLAB Function: '<S14>/MATLAB Function' incorporates:
-  //   Constant: '<S14>/Constant'
-  //   Constant: '<S14>/Constant2'
-  //   Constant: '<S14>/Constant3'
-  //   Constant: '<S14>/Constant4'
-  //   Constant: '<S14>/Constant6'
-  //   Constant: '<S14>/Constant7'
-  //   Gain: '<S2>/Gain1'
+  // MATLAB Function: '<S15>/MATLAB Function' incorporates:
+  //   Constant: '<S15>/Constant'
+  //   Constant: '<S15>/Constant2'
+  //   Constant: '<S15>/Constant3'
+  //   Constant: '<S15>/Constant4'
+  //   Constant: '<S15>/Constant6'
+  //   Constant: '<S15>/Constant7'
+  //   Gain: '<S3>/Gain1'
 
   den_tmp = *rtu_YawRaterads * 0.96437803790837118 * 0.62216265449318331;
   den = den_tmp + *rtu_Vx_Bms;
@@ -330,74 +341,77 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
     *rty_LongitudinalCornerVelWRRm = 0.0;
   }
 
-  // Trigonometry: '<S8>/Cos' incorporates:
-  //   Abs: '<S8>/Abs'
-  //   Trigonometry: '<S8>/Cos1'
+  // Trigonometry: '<S9>/Cos' incorporates:
+  //   Abs: '<S9>/Abs'
+  //   Trigonometry: '<S9>/Cos1'
 
   rtb_Gain1_e_tmp = std::cos(std::abs(rtb_Gain1_e_tmp));
 
-  // Product: '<S8>/Product' incorporates:
-  //   Trigonometry: '<S8>/Cos'
+  // Product: '<S9>/Product' incorporates:
+  //   Trigonometry: '<S9>/Cos'
 
   *rty_LongitudinalCornerVelWFLm = rtb_LongCornerVel_FL_B * rtb_Gain1_e_tmp;
 
-  // Product: '<S8>/Product1'
+  // Product: '<S9>/Product1'
   *rty_LongitudinalCornerVelWFRm = rtb_LongCornerVel_FR_B * rtb_Gain1_e_tmp;
 
-  // Gain: '<S9>/Gain' incorporates:
-  //   MATLAB Function: '<S14>/MATLAB Function'
+  // Gain: '<S10>/Gain' incorporates:
+  //   MATLAB Function: '<S15>/MATLAB Function'
 
   *rty_AlphaFLDeg = 57.295779513082323 * Alpha_FL;
 
-  // Gain: '<S10>/Gain' incorporates:
-  //   MATLAB Function: '<S14>/MATLAB Function'
+  // Gain: '<S11>/Gain' incorporates:
+  //   MATLAB Function: '<S15>/MATLAB Function'
 
   *rty_AlphaFRDeg = 57.295779513082323 * Alpha_FR;
 
-  // Gain: '<S11>/Gain'
+  // Gain: '<S12>/Gain'
   *rty_AlphaRLDeg = 57.295779513082323 * rtb_Alpha_RL;
 
-  // Gain: '<S12>/Gain'
+  // Gain: '<S13>/Gain'
   *rty_AlphaRRDeg = 57.295779513082323 * rtb_Subtract_b;
 
-  // Gain: '<S13>/Gain'
+  // Gain: '<S14>/Gain'
   *rty_BetaDeg = 57.295779513082323 * rtb_Switch1;
 
-  // Switch: '<S16>/Switch' incorporates:
-  //   Constant: '<S16>/Constant'
+  // Switch: '<S17>/Switch' incorporates:
+  //   Constant: '<S17>/Constant'
 
-  if (!(rtb_SL > 50.0)) {
-    rtb_SL = 0.0;
+  if (!(rtb_Abs_l > 50.0)) {
+    rtb_Abs_l = 0.0;
   }
 
-  // End of Switch: '<S16>/Switch'
+  // End of Switch: '<S17>/Switch'
 
-  // Gain: '<S15>/Gain'
-  *rty_WheelOmegaFLrads = 0.084317032040472181 * rtb_SL;
+  // Gain: '<S16>/Gain'
+  *rty_WheelOmegaFLrads = 0.084317032040472181 * rtb_Abs_l;
+
+  // Gain: '<S16>/Gain4'
+  *rty_WheelLinearSpeedFLms = 0.2 * *rty_WheelOmegaFLrads;
 
   // Product: '<S22>/Product1' incorporates:
   //   Constant: '<S22>/Constant2'
 
-  rtb_SL = *rty_WheelOmegaFLrads * 0.2;
+  rtb_Abs_l = *rty_WheelOmegaFLrads * 0.2;
 
   // Sum: '<S22>/Subtract1'
-  rtb_SL -= *rty_LongitudinalCornerVelWFLm;
+  rtb_Abs_l -= *rty_LongitudinalCornerVelWFLm;
 
   // If: '<S22>/If2'
-  if (rtb_SL > 0.0) {
+  if (rtb_Abs_l > 0.0) {
     // Outputs for IfAction SubSystem: '<S22>/Accel. Calc' incorporates:
     //   ActionPort: '<S26>/Action Port'
 
     BasicVehicleMath_AccelCalc(*rty_LongitudinalCornerVelWFLm,
-      *rty_WheelOmegaFLrads, &rtb_SL);
+      *rty_WheelOmegaFLrads, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S22>/Accel. Calc'
-  } else if (rtb_SL < 0.0) {
+  } else if (rtb_Abs_l < 0.0) {
     // Outputs for IfAction SubSystem: '<S22>/Brake Calc' incorporates:
     //   ActionPort: '<S27>/Action Port'
 
     BasicVehicleMath_BrakeCalc(*rty_WheelOmegaFLrads,
-      *rty_LongitudinalCornerVelWFLm, &rtb_SL);
+      *rty_LongitudinalCornerVelWFLm, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S22>/Brake Calc'
   } else {
@@ -407,51 +421,54 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
     // SignalConversion generated from: '<S28>/in' incorporates:
     //   Constant: '<S22>/Constant1'
 
-    rtb_SL = 0.0;
+    rtb_Abs_l = 0.0;
 
     // End of Outputs for SubSystem: '<S22>/If Action Subsystem'
   }
 
   // End of If: '<S22>/If2'
 
-  // Switch: '<S15>/Switch'
-  *rty_SLFL = rtb_SL;
+  // Switch: '<S16>/Switch'
+  *rty_SLFL = rtb_Abs_l;
 
-  // Switch: '<S17>/Switch' incorporates:
-  //   Constant: '<S17>/Constant'
+  // Switch: '<S18>/Switch' incorporates:
+  //   Constant: '<S18>/Constant'
 
-  if (!(rtb_Switch_b > 50.0)) {
-    rtb_Switch_b = 0.0;
+  if (!(rtb_Switch_a > 50.0)) {
+    rtb_Switch_a = 0.0;
   }
 
-  // Gain: '<S15>/Gain1' incorporates:
-  //   Switch: '<S17>/Switch'
+  // Gain: '<S16>/Gain1' incorporates:
+  //   Switch: '<S18>/Switch'
 
-  *rty_WheelOmegaFRrads = 0.084317032040472181 * rtb_Switch_b;
+  *rty_WheelOmegaFRrads = 0.084317032040472181 * rtb_Switch_a;
+
+  // Gain: '<S16>/Gain5'
+  *rty_WheelLinearSpeedFRms = 0.2 * *rty_WheelOmegaFRrads;
 
   // Product: '<S23>/Product1' incorporates:
   //   Constant: '<S23>/Constant2'
 
-  rtb_SL = *rty_WheelOmegaFRrads * 0.2;
+  rtb_Abs_l = *rty_WheelOmegaFRrads * 0.2;
 
   // Sum: '<S23>/Subtract1'
-  rtb_SL -= *rty_LongitudinalCornerVelWFRm;
+  rtb_Abs_l -= *rty_LongitudinalCornerVelWFRm;
 
   // If: '<S23>/If2'
-  if (rtb_SL > 0.0) {
+  if (rtb_Abs_l > 0.0) {
     // Outputs for IfAction SubSystem: '<S23>/Accel. Calc' incorporates:
     //   ActionPort: '<S29>/Action Port'
 
     BasicVehicleMath_AccelCalc(*rty_LongitudinalCornerVelWFRm,
-      *rty_WheelOmegaFRrads, &rtb_SL);
+      *rty_WheelOmegaFRrads, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S23>/Accel. Calc'
-  } else if (rtb_SL < 0.0) {
+  } else if (rtb_Abs_l < 0.0) {
     // Outputs for IfAction SubSystem: '<S23>/Brake Calc' incorporates:
     //   ActionPort: '<S30>/Action Port'
 
     BasicVehicleMath_BrakeCalc(*rty_WheelOmegaFRrads,
-      *rty_LongitudinalCornerVelWFRm, &rtb_SL);
+      *rty_LongitudinalCornerVelWFRm, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S23>/Brake Calc'
   } else {
@@ -461,51 +478,54 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
     // SignalConversion generated from: '<S31>/in' incorporates:
     //   Constant: '<S23>/Constant1'
 
-    rtb_SL = 0.0;
+    rtb_Abs_l = 0.0;
 
     // End of Outputs for SubSystem: '<S23>/If Action Subsystem'
   }
 
   // End of If: '<S23>/If2'
 
-  // Switch: '<S15>/Switch1'
-  *rty_SLFR = rtb_SL;
+  // Switch: '<S16>/Switch1'
+  *rty_SLFR = rtb_Abs_l;
 
-  // Switch: '<S18>/Switch' incorporates:
-  //   Constant: '<S18>/Constant'
+  // Switch: '<S19>/Switch' incorporates:
+  //   Constant: '<S19>/Constant'
 
   if (!(rtb_Subtract > 50.0)) {
     rtb_Subtract = 0.0;
   }
 
-  // Gain: '<S15>/Gain2' incorporates:
-  //   Switch: '<S18>/Switch'
+  // Gain: '<S16>/Gain2' incorporates:
+  //   Switch: '<S19>/Switch'
 
   *rty_WheelOmegaRLrads = 0.084317032040472181 * rtb_Subtract;
+
+  // Gain: '<S16>/Gain6'
+  *rty_WheelLinearSpeedRLms = 0.2 * *rty_WheelOmegaRLrads;
 
   // Product: '<S24>/Product1' incorporates:
   //   Constant: '<S24>/Constant2'
 
-  rtb_Subtract = *rty_WheelOmegaRLrads * 0.2;
+  rtb_Abs_l = *rty_WheelOmegaRLrads * 0.2;
 
   // Sum: '<S24>/Subtract1'
-  rtb_Subtract -= *rty_LongitudinalCornerVelWRLm;
+  rtb_Abs_l -= *rty_LongitudinalCornerVelWRLm;
 
   // If: '<S24>/If2'
-  if (rtb_Subtract > 0.0) {
+  if (rtb_Abs_l > 0.0) {
     // Outputs for IfAction SubSystem: '<S24>/Accel. Calc' incorporates:
     //   ActionPort: '<S32>/Action Port'
 
     BasicVehicleMath_AccelCalc(*rty_LongitudinalCornerVelWRLm,
-      *rty_WheelOmegaRLrads, &rtb_SL);
+      *rty_WheelOmegaRLrads, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S24>/Accel. Calc'
-  } else if (rtb_Subtract < 0.0) {
+  } else if (rtb_Abs_l < 0.0) {
     // Outputs for IfAction SubSystem: '<S24>/Brake Calc' incorporates:
     //   ActionPort: '<S33>/Action Port'
 
     BasicVehicleMath_BrakeCalc(*rty_WheelOmegaRLrads,
-      *rty_LongitudinalCornerVelWRLm, &rtb_SL);
+      *rty_LongitudinalCornerVelWRLm, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S24>/Brake Calc'
   } else {
@@ -515,51 +535,45 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
     // SignalConversion generated from: '<S34>/in' incorporates:
     //   Constant: '<S24>/Constant1'
 
-    rtb_SL = 0.0;
+    rtb_Abs_l = 0.0;
 
     // End of Outputs for SubSystem: '<S24>/If Action Subsystem'
   }
 
   // End of If: '<S24>/If2'
 
-  // Switch: '<S15>/Switch2'
-  *rty_SLRL = rtb_SL;
+  // Switch: '<S16>/Switch2'
+  *rty_SLRL = rtb_Abs_l;
 
-  // Switch: '<S19>/Switch' incorporates:
-  //   Constant: '<S19>/Constant'
+  // Gain: '<S16>/Gain3'
+  *rty_WheelOmegaRRrads = 0.084317032040472181 * rtb_Switch_j;
 
-  if (!(rtb_Abs_l > 50.0)) {
-    rtb_Abs_l = 0.0;
-  }
-
-  // Gain: '<S15>/Gain3' incorporates:
-  //   Switch: '<S19>/Switch'
-
-  *rty_WheelOmegaRRrads = 0.084317032040472181 * rtb_Abs_l;
+  // Gain: '<S16>/Gain7'
+  *rty_WheelLinearSpeedRRms = 0.2 * *rty_WheelOmegaRRrads;
 
   // Product: '<S25>/Product1' incorporates:
   //   Constant: '<S25>/Constant2'
 
-  rtb_Abs_l = *rty_WheelOmegaRRrads * 0.2;
+  rtb_Switch_j = *rty_WheelOmegaRRrads * 0.2;
 
   // Sum: '<S25>/Subtract1'
-  rtb_Abs_l -= *rty_LongitudinalCornerVelWRRm;
+  rtb_Switch_j -= *rty_LongitudinalCornerVelWRRm;
 
   // If: '<S25>/If2'
-  if (rtb_Abs_l > 0.0) {
+  if (rtb_Switch_j > 0.0) {
     // Outputs for IfAction SubSystem: '<S25>/Accel. Calc' incorporates:
     //   ActionPort: '<S35>/Action Port'
 
     BasicVehicleMath_AccelCalc(*rty_LongitudinalCornerVelWRRm,
-      *rty_WheelOmegaRRrads, &rtb_SL);
+      *rty_WheelOmegaRRrads, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S25>/Accel. Calc'
-  } else if (rtb_Abs_l < 0.0) {
+  } else if (rtb_Switch_j < 0.0) {
     // Outputs for IfAction SubSystem: '<S25>/Brake Calc' incorporates:
     //   ActionPort: '<S36>/Action Port'
 
     BasicVehicleMath_BrakeCalc(*rty_WheelOmegaRRrads,
-      *rty_LongitudinalCornerVelWRRm, &rtb_SL);
+      *rty_LongitudinalCornerVelWRRm, &rtb_Abs_l);
 
     // End of Outputs for SubSystem: '<S25>/Brake Calc'
   } else {
@@ -569,15 +583,15 @@ void BasicVehicleMath::step(const real_T *rtu_Vx_Bms, const real_T *rtu_Vy_Bms,
     // SignalConversion generated from: '<S37>/in' incorporates:
     //   Constant: '<S25>/Constant1'
 
-    rtb_SL = 0.0;
+    rtb_Abs_l = 0.0;
 
     // End of Outputs for SubSystem: '<S25>/If Action Subsystem'
   }
 
   // End of If: '<S25>/If2'
 
-  // Switch: '<S15>/Switch3'
-  *rty_SLRR = rtb_SL;
+  // Switch: '<S16>/Switch3'
+  *rty_SLRR = rtb_Abs_l;
 
   // MATLAB Function: '<S20>/MATLAB Function'
   if (*rtu_InitialTorqueRequest > 0.0) {

@@ -3,13 +3,13 @@
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
 //
-// File: BasicVehicleMath_capi.cpp
+// File: TORQUE_BIAS_capi.cpp
 //
-// Code generated for Simulink model 'BasicVehicleMath'.
+// Code generated for Simulink model 'TORQUE_BIAS'.
 //
-// Model version                  : 1.22
+// Model version                  : 1.4
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 26 00:57:44 2024
+// C/C++ source code generated on : Fri Apr 26 00:58:12 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -18,7 +18,7 @@
 //
 #include "rtw_capi.h"
 #ifdef HOST_CAPI_BUILD
-#include "BasicVehicleMath_capi_host.h"
+#include "TORQUE_BIAS_capi_host.h"
 #define sizeof(s)                      ((size_t)(0xFFFF))
 #undef rt_offsetof
 #define rt_offsetof(s,el)              ((uint16_T)(0xFFFF))
@@ -26,9 +26,9 @@
 #define TARGET_STRING(s)               (s)
 #else                                  // HOST_CAPI_BUILD
 #include "builtin_typeid_types.h"
-#include "BasicVehicleMath.h"
-#include "BasicVehicleMath_capi.h"
-#include "BasicVehicleMath_private.h"
+#include "TORQUE_BIAS.h"
+#include "TORQUE_BIAS_capi.h"
+#include "TORQUE_BIAS_private.h"
 #ifdef LIGHT_WEIGHT_CAPI
 #define TARGET_CONST
 #define TARGET_STRING(s)               ((nullptr))
@@ -135,17 +135,17 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 934629361U,
-    4159346122U,
-    1120980881U,
-    546518637U },
+  { 1179117367U,
+    93926935U,
+    2126078639U,
+    4076704148U },
   (nullptr), 0,
   (boolean_T)0
 };
 
 // Function to get C API Model Mapping Static Info
 const rtwCAPI_ModelMappingStaticInfo*
-  BasicVehicleMath_GetCAPIStaticMap(void)
+  TORQUE_BIAS_GetCAPIStaticMap(void)
 {
   return &mmiStatic;
 }
@@ -153,28 +153,28 @@ const rtwCAPI_ModelMappingStaticInfo*
 // Cache pointers into DataMapInfo substructure of RTModel
 #ifndef HOST_CAPI_BUILD
 
-void BasicVehicleMath_InitializeDataMapInfo(BasicVehicleMath::
-  RT_MODEL_BasicVehicleMath_T *const BasicVehicleMath_M)
+void TORQUE_BIAS_InitializeDataMapInfo(TORQUE_BIAS::RT_MODEL_TORQUE_BIAS_T *
+  const TORQUE_BIAS_M)
 {
   // Set C-API version
-  rtwCAPI_SetVersion(BasicVehicleMath_M->DataMapInfo.mmi, 1);
+  rtwCAPI_SetVersion(TORQUE_BIAS_M->DataMapInfo.mmi, 1);
 
   // Cache static C-API data into the Real-time Model Data structure
-  rtwCAPI_SetStaticMap(BasicVehicleMath_M->DataMapInfo.mmi, &mmiStatic);
+  rtwCAPI_SetStaticMap(TORQUE_BIAS_M->DataMapInfo.mmi, &mmiStatic);
 
   // Cache static C-API logging data into the Real-time Model Data structure
-  rtwCAPI_SetLoggingStaticMap(BasicVehicleMath_M->DataMapInfo.mmi, (nullptr));
+  rtwCAPI_SetLoggingStaticMap(TORQUE_BIAS_M->DataMapInfo.mmi, (nullptr));
 
   // Set Instance specific path
-  rtwCAPI_SetPath(BasicVehicleMath_M->DataMapInfo.mmi, (nullptr));
-  rtwCAPI_SetFullPath(BasicVehicleMath_M->DataMapInfo.mmi, (nullptr));
+  rtwCAPI_SetPath(TORQUE_BIAS_M->DataMapInfo.mmi, (nullptr));
+  rtwCAPI_SetFullPath(TORQUE_BIAS_M->DataMapInfo.mmi, (nullptr));
 
   // Cache the instance C-API logging pointer
-  rtwCAPI_SetInstanceLoggingInfo(BasicVehicleMath_M->DataMapInfo.mmi, (nullptr));
+  rtwCAPI_SetInstanceLoggingInfo(TORQUE_BIAS_M->DataMapInfo.mmi, (nullptr));
 
   // Set reference to submodels
-  rtwCAPI_SetChildMMIArray(BasicVehicleMath_M->DataMapInfo.mmi, (nullptr));
-  rtwCAPI_SetChildMMIArrayLen(BasicVehicleMath_M->DataMapInfo.mmi, 0);
+  rtwCAPI_SetChildMMIArray(TORQUE_BIAS_M->DataMapInfo.mmi, (nullptr));
+  rtwCAPI_SetChildMMIArrayLen(TORQUE_BIAS_M->DataMapInfo.mmi, 0);
 }
 
 #else                                  // HOST_CAPI_BUILD
@@ -185,8 +185,8 @@ extern "C"
 
 #endif
 
-  void BasicVehicleMath_host_InitializeDataMapInfo
-    (BasicVehicleMath_host_DataMapInfo_T *dataMap, const char *path)
+  void TORQUE_BIAS_host_InitializeDataMapInfo(TORQUE_BIAS_host_DataMapInfo_T
+    *dataMap, const char *path)
   {
     // Set C-API version
     rtwCAPI_SetVersion(dataMap->mmi, 1);

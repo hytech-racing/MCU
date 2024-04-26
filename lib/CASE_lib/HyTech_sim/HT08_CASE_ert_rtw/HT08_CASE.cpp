@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.66
+// Model version                  : 1.70
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
+// C/C++ source code generated on : Fri Apr 26 01:22:02 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -20,6 +20,8 @@
 #include "rtwtypes.h"
 #include "HT08_CASE_capi.h"
 #include "HT08_CASE_private.h"
+#include "NOREGEN_5KPH.h"
+#include "TORQUE_BIAS.h"
 #include "POWER_LIMIT.h"
 #include "TRACTION_CONTROL.h"
 #include "BasicVehicleMath.h"
@@ -38,11 +40,13 @@ void HT08_CASE::step()
   //   Inport generated from: '<Root>/useDecoupledYawBrakes'
   //   Inport generated from: '<Root>/useDiscontinuousYawPIDBrakes'
   //   Inport generated from: '<Root>/useLaunch'
+  //   Inport generated from: '<Root>/useNoRegen5kph'
   //   Inport generated from: '<Root>/useNormalForce'
   //   Inport generated from: '<Root>/usePIDPowerLimit'
   //   Inport generated from: '<Root>/usePIDTV'
   //   Inport generated from: '<Root>/usePowerLimit'
   //   Inport generated from: '<Root>/useTCSLimitedYawPID'
+  //   Inport generated from: '<Root>/useTorqueBias'
   //   Inport generated from: '<Root>/useTractionControl'
   //   Outport generated from: '<Root>/Out Bus Element2'
 
@@ -182,6 +186,46 @@ void HT08_CASE::step()
     }
 
     // --------------- START Packing signal 3 ------------------
+    //   startBit                = 9
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      uint32_T packingValue = 0;
+
+      {
+        uint32_T result = (uint32_T) (HT08_CASE_U.useNoRegen5kph);
+
+        // no scaling required
+        packingValue = result;
+      }
+
+      {
+        uint8_T packedValue;
+        if (packingValue > (boolean_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (packingValue < (boolean_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (packingValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_boolea.Data[1] =
+              HT08_CASE_Y.controllerBus_controller_boolea.Data[1] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 1));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 4 ------------------
     //   startBit                = 2
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -221,7 +265,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 4 ------------------
+    // --------------- START Packing signal 5 ------------------
     //   startBit                = 3
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -261,7 +305,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 5 ------------------
+    // --------------- START Packing signal 6 ------------------
     //   startBit                = 1
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -301,7 +345,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 6 ------------------
+    // --------------- START Packing signal 7 ------------------
     //   startBit                = 4
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -341,7 +385,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 7 ------------------
+    // --------------- START Packing signal 8 ------------------
     //   startBit                = 5
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -381,7 +425,7 @@ void HT08_CASE::step()
       }
     }
 
-    // --------------- START Packing signal 8 ------------------
+    // --------------- START Packing signal 9 ------------------
     //   startBit                = 6
     //   length                  = 1
     //   desiredSignalByteLayout = LITTLEENDIAN
@@ -420,6 +464,46 @@ void HT08_CASE::step()
         }
       }
     }
+
+    // --------------- START Packing signal 10 ------------------
+    //   startBit                = 10
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      uint32_T packingValue = 0;
+
+      {
+        uint32_T result = (uint32_T) (HT08_CASE_U.useTorqueBias);
+
+        // no scaling required
+        packingValue = result;
+      }
+
+      {
+        uint8_T packedValue;
+        if (packingValue > (boolean_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (packingValue < (boolean_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (packingValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_boolea.Data[1] =
+              HT08_CASE_Y.controllerBus_controller_boolea.Data[1] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 2));
+          }
+        }
+      }
+    }
   }
 
   // ModelReference: '<Root>/Vehicle Math' incorporates:
@@ -437,7 +521,7 @@ void HT08_CASE::step()
   //   Inport generated from: '<Root>/Yaw PID Vel Threshold'
   //   Inport generated from: '<Root>/Yaw Rate [rad//s]'
 
-  Vehicle_MathMDLOBJ3.step(&HT08_CASE_U.Vx_B, &HT08_CASE_U.Vy_B,
+  Vehicle_MathMDLOBJ5.step(&HT08_CASE_U.Vx_B, &HT08_CASE_U.Vy_B,
     &HT08_CASE_U.YawRaterads, &HT08_CASE_U.MotorOmegaFLrpm,
     &HT08_CASE_U.MotorOmegaFRrpm, &HT08_CASE_U.MotorOmegaRLrpm,
     &HT08_CASE_U.MotorOmegaRRrpm, &HT08_CASE_U.SteeringWheelAngleDeg,
@@ -450,7 +534,22 @@ void HT08_CASE::step()
     &HT08_CASE_B.VehicleMath_o10, &HT08_CASE_B.SLFL, &HT08_CASE_B.SLFR,
     &HT08_CASE_B.SLRL, &HT08_CASE_B.SLRR, &HT08_CASE_B.WheelSteerAvgDeg,
     &rtb_VehicleMath_o16, &rtb_VehicleMath_o17, &rtb_VehicleMath_o18,
-    &rtb_VehicleMath_o19, &HT08_CASE_B.modeConstrainedTorqueRequest);
+    &rtb_VehicleMath_o19, &HT08_CASE_B.modeConstrainedTorqueRequest,
+    &HT08_CASE_B.VehicleMath_o21, &HT08_CASE_B.VehicleMath_o22,
+    &HT08_CASE_B.VehicleMath_o23, &HT08_CASE_B.VehicleMath_o24);
+
+  // ModelReference: '<Root>/Model1' incorporates:
+  //   Inport generated from: '<Root>/Absolute Torque Limit'
+  //   Inport generated from: '<Root>/Brake Torque Percent Front'
+  //   Inport generated from: '<Root>/Drive Torque Percent Front'
+  //   Inport generated from: '<Root>/useTorqueBias'
+
+  Model1MDLOBJ2.step(&HT08_CASE_U.useTorqueBias,
+                     &HT08_CASE_B.modeConstrainedTorqueRequest,
+                     &HT08_CASE_U.DriveTorquePercentFront,
+                     &HT08_CASE_U.BrakeTorquePercentFront,
+                     &HT08_CASE_U.AbsoluteTorqueLimit, &HT08_CASE_B.Model1_o1,
+                     &HT08_CASE_B.Model1_o2);
 
   // ModelReference: '<Root>/TCS' incorporates:
   //   Inport generated from: '<Root>/Launch Dead Zone'
@@ -464,20 +563,18 @@ void HT08_CASE::step()
   //   Inport generated from: '<Root>/useLaunch'
   //   Inport generated from: '<Root>/useTractionControl'
 
-  TCSMDLOBJ2.step(&HT08_CASE_U.TorqueAverageNm, &HT08_CASE_U.useTractionControl,
-                  &HT08_CASE_U.TCS_SLThreshold,
-                  &HT08_CASE_B.modeConstrainedTorqueRequest,
-                  &HT08_CASE_B.modeConstrainedTorqueRequest,
-                  &HT08_CASE_B.modeConstrainedTorqueRequest,
-                  &HT08_CASE_B.modeConstrainedTorqueRequest, &HT08_CASE_B.SLFL,
-                  &HT08_CASE_B.SLFR, &HT08_CASE_B.SLRL, &HT08_CASE_B.SLRR,
-                  &HT08_CASE_U.useLaunch, &HT08_CASE_U.LaunchSL,
-                  &HT08_CASE_U.LaunchDeadZone, &HT08_CASE_U.TCSPIDConfig[0],
-                  &HT08_CASE_U.Vx_B, &HT08_CASE_U.LaunchVelThreshold,
-                  &HT08_CASE_U.TCSVelThreshold, &HT08_CASE_B.TCS_o1,
-                  &HT08_CASE_B.TCS_o2, &HT08_CASE_B.TCS_o3, &HT08_CASE_B.TCS_o4,
-                  &HT08_CASE_B.TCS_o5, &HT08_CASE_B.TCS_o6, &HT08_CASE_B.TCS_o7,
-                  &HT08_CASE_B.TCS_o8, &HT08_CASE_B.TCS_o9[0]);
+  TCSMDLOBJ4.step(&HT08_CASE_U.TorqueAverageNm, &HT08_CASE_U.useTractionControl,
+                  &HT08_CASE_U.TCS_SLThreshold, &HT08_CASE_B.Model1_o1,
+                  &HT08_CASE_B.Model1_o1, &HT08_CASE_B.Model1_o2,
+                  &HT08_CASE_B.Model1_o2, &HT08_CASE_B.SLFL, &HT08_CASE_B.SLFR,
+                  &HT08_CASE_B.SLRL, &HT08_CASE_B.SLRR, &HT08_CASE_U.useLaunch,
+                  &HT08_CASE_U.LaunchSL, &HT08_CASE_U.LaunchDeadZone,
+                  &HT08_CASE_U.TCSPIDConfig[0], &HT08_CASE_U.Vx_B,
+                  &HT08_CASE_U.LaunchVelThreshold, &HT08_CASE_U.TCSVelThreshold,
+                  &HT08_CASE_B.TCS_o1, &HT08_CASE_B.TCS_o2, &HT08_CASE_B.TCS_o3,
+                  &HT08_CASE_B.TCS_o4, &HT08_CASE_B.TCS_o5, &HT08_CASE_B.TCS_o6,
+                  &HT08_CASE_B.TCS_o7, &HT08_CASE_B.TCS_o8, &HT08_CASE_B.TCS_o9
+                  [0]);
 
   // ModelReference: '<S4>/PID_TV' incorporates:
   //   Constant: '<S4>/Constant5'
@@ -499,7 +596,7 @@ void HT08_CASE::step()
   //   Inport generated from: '<Root>/usePIDTV'
   //   Inport generated from: '<Root>/useTCSLimitedYawPID'
 
-  PID_TVMDLOBJ5.step(&HT08_CASE_U.YawRaterads, &HT08_CASE_U.YawPIDConfig[1],
+  PID_TVMDLOBJ7.step(&HT08_CASE_U.YawRaterads, &HT08_CASE_U.YawPIDConfig[1],
                      &HT08_CASE_U.YawPIDConfig[2], &rtCP_Constant5_Value,
                      &HT08_CASE_U.YawPIDConfig[0], &HT08_CASE_B.TCS_o2,
                      &HT08_CASE_B.TCS_o4, &HT08_CASE_B.TCS_o1,
@@ -534,7 +631,7 @@ void HT08_CASE::step()
   //   Inport generated from: '<Root>/useNormalForce'
   //   Inport generated from: '<Root>/usePIDTV'
 
-  ModelMDLOBJ4.step(&HT08_CASE_U.useNormalForce, &HT08_CASE_U.FZFL,
+  ModelMDLOBJ6.step(&HT08_CASE_U.useNormalForce, &HT08_CASE_U.FZFL,
                     &HT08_CASE_U.FZFR, &HT08_CASE_U.FZRL, &HT08_CASE_U.FZRR,
                     &HT08_CASE_B.FLTORQUEPID, &HT08_CASE_B.FRTORQUEPID,
                     &HT08_CASE_B.RLTORQUEPID, &HT08_CASE_B.RRTORQUEPID,
@@ -1493,22 +1590,21 @@ void HT08_CASE::step()
   }
 
   // ModelReference: '<Root>/Power Limit' incorporates:
-  //   Inport generated from: '<Root>/Current Power [kW]'
+  //   Inport generated from: '<Root>/Absolute Torque Limit'
+  //   Inport generated from: '<Root>/Current Electrical Power [kW]'
+  //   Inport generated from: '<Root>/Mech Power Max [kW]'
   //   Inport generated from: '<Root>/usePIDPowerLimit'
   //   Inport generated from: '<Root>/usePowerLimit'
-  //   Outport generated from: '<Root>/Final Torque FL'
-  //   Outport generated from: '<Root>/Final Torque FR'
-  //   Outport generated from: '<Root>/Final Torque RL'
-  //   Outport generated from: '<Root>/Final Torque RR'
 
-  Power_LimitMDLOBJ1.step(&HT08_CASE_U.CurrentPowerkW,
+  Power_LimitMDLOBJ3.step(&HT08_CASE_U.CurrentElectricalPowerkW,
     &HT08_CASE_B.TorqueNormalFL, &HT08_CASE_B.TorqueNormalFR,
     &HT08_CASE_B.TorqueNormalRL, &HT08_CASE_B.TorqueNormalRR,
     &rtb_VehicleMath_o16, &rtb_VehicleMath_o17, &rtb_VehicleMath_o18,
     &rtb_VehicleMath_o19, &HT08_CASE_U.usePowerLimit,
-    &HT08_CASE_U.usePIDPowerLimit, &HT08_CASE_Y.FinalTorqueFL,
-    &HT08_CASE_Y.FinalTorqueFR, &HT08_CASE_Y.FinalTorqueRL,
-    &HT08_CASE_Y.FinalTorqueRR, &HT08_CASE_B.PowerLimit_o5,
+    &HT08_CASE_U.usePIDPowerLimit, &HT08_CASE_U.AbsoluteTorqueLimit,
+    &HT08_CASE_U.MechPowerMaxkW, &HT08_CASE_B.PowerLimTorqueFL,
+    &HT08_CASE_B.PowerLimTorqueFR, &HT08_CASE_B.PowerLimTorqueRL,
+    &HT08_CASE_B.PowerLimTorqueRR, &HT08_CASE_B.PowerLimit_o5,
     &HT08_CASE_B.PowerLimit_o6, &HT08_CASE_B.TorqueAdjustment,
     &HT08_CASE_B.PowerLimit_o8, &HT08_CASE_B.PowerLimit_o9,
     &HT08_CASE_B.PowerLimit_o10, &HT08_CASE_B.PowerLimit_o11);
@@ -1947,10 +2043,6 @@ void HT08_CASE::step()
   }
 
   // S-Function (scanpack): '<S1>/CAN Pack7' incorporates:
-  //   Outport generated from: '<Root>/Final Torque FL'
-  //   Outport generated from: '<Root>/Final Torque FR'
-  //   Outport generated from: '<Root>/Final Torque RL'
-  //   Outport generated from: '<Root>/Final Torque RR'
   //   Outport generated from: '<Root>/Out Bus Element9'
 
   // S-Function (scanpack): '<S1>/CAN Pack7'
@@ -1982,7 +2074,7 @@ void HT08_CASE::step()
       real_T outValue = 0;
 
       {
-        real_T result = HT08_CASE_Y.FinalTorqueFL;
+        real_T result = HT08_CASE_B.PowerLimTorqueFL;
 
         // no offset to apply
         result = result * (1 / 0.001);
@@ -2040,7 +2132,7 @@ void HT08_CASE::step()
       real_T outValue = 0;
 
       {
-        real_T result = HT08_CASE_Y.FinalTorqueFR;
+        real_T result = HT08_CASE_B.PowerLimTorqueFR;
 
         // no offset to apply
         result = result * (1 / 0.001);
@@ -2098,7 +2190,7 @@ void HT08_CASE::step()
       real_T outValue = 0;
 
       {
-        real_T result = HT08_CASE_Y.FinalTorqueRL;
+        real_T result = HT08_CASE_B.PowerLimTorqueRL;
 
         // no offset to apply
         result = result * (1 / 0.001);
@@ -2156,7 +2248,7 @@ void HT08_CASE::step()
       real_T outValue = 0;
 
       {
-        real_T result = HT08_CASE_Y.FinalTorqueRR;
+        real_T result = HT08_CASE_B.PowerLimTorqueRR;
 
         // no offset to apply
         result = result * (1 / 0.001);
@@ -3536,6 +3628,597 @@ void HT08_CASE::step()
     }
   }
 
+  // ModelReference: '<Root>/Model' incorporates:
+  //   Inport generated from: '<Root>/useNoRegen5kph'
+  //   Outport generated from: '<Root>/Final Torque FL'
+  //   Outport generated from: '<Root>/Final Torque FR'
+  //   Outport generated from: '<Root>/Final Torque RL'
+  //   Outport generated from: '<Root>/Final Torque RR'
+
+  ModelMDLOBJ1.step(&HT08_CASE_B.PowerLimTorqueFL, &HT08_CASE_B.PowerLimTorqueFR,
+                    &HT08_CASE_B.PowerLimTorqueRL, &HT08_CASE_B.PowerLimTorqueRR,
+                    &HT08_CASE_U.useNoRegen5kph, &HT08_CASE_B.VehicleMath_o21,
+                    &HT08_CASE_B.VehicleMath_o22, &HT08_CASE_B.VehicleMath_o23,
+                    &HT08_CASE_B.VehicleMath_o24,
+                    &HT08_CASE_B.modeConstrainedTorqueRequest,
+                    &HT08_CASE_Y.FinalTorqueFL, &HT08_CASE_Y.FinalTorqueFR,
+                    &HT08_CASE_Y.FinalTorqueRL, &HT08_CASE_Y.FinalTorqueRR,
+                    &HT08_CASE_B.Model_o5, &HT08_CASE_B.Model_o6,
+                    &HT08_CASE_B.Model_o7, &HT08_CASE_B.Model_o8);
+
+  // S-Function (scanpack): '<S1>/CAN Pack14' incorporates:
+  //   Outport generated from: '<Root>/Final Torque FL'
+  //   Outport generated from: '<Root>/Final Torque FR'
+  //   Outport generated from: '<Root>/Final Torque RL'
+  //   Outport generated from: '<Root>/Final Torque RR'
+  //   Outport generated from: '<Root>/Out Bus Element16'
+
+  // S-Function (scanpack): '<S1>/CAN Pack14'
+  HT08_CASE_Y.controllerBus_controller_regen_.ID = 1965U;
+  HT08_CASE_Y.controllerBus_controller_regen_.Length = 8U;
+  HT08_CASE_Y.controllerBus_controller_regen_.Extended = 0U;
+  HT08_CASE_Y.controllerBus_controller_regen_.Remote = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[0] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[1] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[2] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[3] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[4] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[5] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[6] = 0;
+  HT08_CASE_Y.controllerBus_controller_regen_.Data[7] = 0;
+
+  {
+    // --------------- START Packing signal 0 ------------------
+    //   startBit                = 0
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_Y.FinalTorqueFL;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[0] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[1] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[1] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 1 ------------------
+    //   startBit                = 16
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_Y.FinalTorqueFR;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[2] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[2] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[3] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[3] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 2 ------------------
+    //   startBit                = 32
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_Y.FinalTorqueRL;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[4] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[4] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[5] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[5] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 3 ------------------
+    //   startBit                = 48
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_Y.FinalTorqueRR;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[6] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[6] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_regen_.Data[7] =
+              HT08_CASE_Y.controllerBus_controller_regen_.Data[7] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+  }
+
+  // S-Function (scanpack): '<S1>/CAN Pack15' incorporates:
+  //   Outport generated from: '<Root>/Out Bus Element17'
+
+  // S-Function (scanpack): '<S1>/CAN Pack15'
+  HT08_CASE_Y.controllerBus_controller_rege_p.ID = 1966U;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Length = 8U;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Extended = 0U;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Remote = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[1] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[2] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[3] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[4] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[5] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[6] = 0;
+  HT08_CASE_Y.controllerBus_controller_rege_p.Data[7] = 0;
+
+  {
+    // --------------- START Packing signal 0 ------------------
+    //   startBit                = 0
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.Model_o5;
+
+        // no scaling required
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        uint8_T packedValue;
+        if (outValue > (real_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (outValue < (real_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (outValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] | (uint8_T)
+              ((uint8_T)(packedValue & (uint8_T)0x1U));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 1 ------------------
+    //   startBit                = 1
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.Model_o6;
+
+        // no scaling required
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        uint8_T packedValue;
+        if (outValue > (real_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (outValue < (real_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (outValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 1));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 2 ------------------
+    //   startBit                = 2
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.Model_o7;
+
+        // no scaling required
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        uint8_T packedValue;
+        if (outValue > (real_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (outValue < (real_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (outValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 2));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 3 ------------------
+    //   startBit                = 3
+    //   length                  = 1
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = UNSIGNED
+    //   factor                  = 1.0
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.Model_o8;
+
+        // no scaling required
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        uint8_T packedValue;
+        if (outValue > (real_T)(1)) {
+          packedValue = (uint8_T) 1;
+        } else if (outValue < (real_T)(0)) {
+          packedValue = (uint8_T) 0;
+        } else {
+          packedValue = (uint8_T) (outValue);
+        }
+
+        {
+          {
+            HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_rege_p.Data[0] | (uint8_T)
+              ((uint8_T)((uint8_T)(packedValue & (uint8_T)0x1U) << 3));
+          }
+        }
+      }
+    }
+  }
+
+  // S-Function (scanpack): '<S1>/CAN Pack16' incorporates:
+  //   Outport generated from: '<Root>/Out Bus Element18'
+
+  // S-Function (scanpack): '<S1>/CAN Pack16'
+  HT08_CASE_Y.controllerBus_controller_torque.ID = 1964U;
+  HT08_CASE_Y.controllerBus_controller_torque.Length = 8U;
+  HT08_CASE_Y.controllerBus_controller_torque.Extended = 0U;
+  HT08_CASE_Y.controllerBus_controller_torque.Remote = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[0] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[1] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[2] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[3] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[4] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[5] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[6] = 0;
+  HT08_CASE_Y.controllerBus_controller_torque.Data[7] = 0;
+
+  {
+    // --------------- START Packing signal 0 ------------------
+    //   startBit                = 0
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.Model1_o1;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_torque.Data[0] =
+              HT08_CASE_Y.controllerBus_controller_torque.Data[0] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_torque.Data[1] =
+              HT08_CASE_Y.controllerBus_controller_torque.Data[1] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 1 ------------------
+    //   startBit                = 16
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.001
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.Model1_o2;
+
+        // no offset to apply
+        result = result * (1 / 0.001);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_controller_torque.Data[2] =
+              HT08_CASE_Y.controllerBus_controller_torque.Data[2] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_controller_torque.Data[3] =
+              HT08_CASE_Y.controllerBus_controller_torque.Data[3] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+  }
+
   // S-Function (scanpack): '<S3>/CAN Pack2' incorporates:
   //   Outport generated from: '<Root>/Out Bus Element1'
 
@@ -4519,6 +5202,257 @@ void HT08_CASE::step()
       }
     }
   }
+
+  // S-Function (scanpack): '<S3>/CAN Pack6' incorporates:
+  //   Outport generated from: '<Root>/Bus Element Out3'
+
+  // S-Function (scanpack): '<S3>/CAN Pack6'
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.ID = 1963U;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Length = 8U;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Extended = 0U;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Remote = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[0] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[1] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[2] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[3] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[4] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[5] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[6] = 0;
+  HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[7] = 0;
+
+  {
+    // --------------- START Packing signal 0 ------------------
+    //   startBit                = 0
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.01
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.VehicleMath_o21;
+
+        // no offset to apply
+        result = result * (1 / 0.01);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[0] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[0] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[1] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[1] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 1 ------------------
+    //   startBit                = 16
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.01
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.VehicleMath_o22;
+
+        // no offset to apply
+        result = result * (1 / 0.01);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[2] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[2] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[3] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[3] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 2 ------------------
+    //   startBit                = 32
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.01
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.VehicleMath_o23;
+
+        // no offset to apply
+        result = result * (1 / 0.01);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[4] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[4] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[5] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[5] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+
+    // --------------- START Packing signal 3 ------------------
+    //   startBit                = 48
+    //   length                  = 16
+    //   desiredSignalByteLayout = LITTLEENDIAN
+    //   dataType                = SIGNED
+    //   factor                  = 0.01
+    //   offset                  = 0.0
+    //   minimum                 = 0.0
+    //   maximum                 = 0.0
+    //  -----------------------------------------------------------------------
+    {
+      real_T outValue = 0;
+
+      {
+        real_T result = HT08_CASE_B.VehicleMath_o24;
+
+        // no offset to apply
+        result = result * (1 / 0.01);
+
+        // round to closest integer value for integer CAN signal
+        outValue = round(result);
+      }
+
+      {
+        int16_T packedValue;
+        int32_T scaledValue;
+        if (outValue > 2147483647.0) {
+          scaledValue = 2147483647;
+        } else if (outValue < -2147483648.0) {
+          scaledValue = -2147483647 - 1;
+        } else {
+          scaledValue = (int32_T) outValue;
+        }
+
+        if (scaledValue > (int32_T) (32767)) {
+          packedValue = 32767;
+        } else if (scaledValue < (int32_T)((-(32767)-1))) {
+          packedValue = (-(32767)-1);
+        } else {
+          packedValue = (int16_T) (scaledValue);
+        }
+
+        {
+          uint16_T* tempValuePtr = (uint16_T*)&packedValue;
+          uint16_T tempValue = *tempValuePtr;
+
+          {
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[6] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[6] | (uint8_T)
+              ((uint16_T)(tempValue & (uint16_T)0xFFU));
+            HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[7] =
+              HT08_CASE_Y.controllerBus_vehm_wheel_lin_ve.Data[7] | (uint8_T)
+              ((uint16_T)((uint16_T)(tempValue & (uint16_T)0xFF00U) >> 8));
+          }
+        }
+      }
+    }
+  }
 }
 
 // Model initialize function
@@ -4529,53 +5463,69 @@ void HT08_CASE::initialize()
   // Initialize DataMapInfo substructure containing ModelMap for C API
   HT08_CASE_InitializeDataMapInfo((&HT08_CASE_M), &HT08_CASE_B);
 
+  // Model Initialize function for ModelReference Block: '<Root>/Model'
+
+  // Set error status pointer for ModelReference Block: '<Root>/Model'
+  ModelMDLOBJ1.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
+  ModelMDLOBJ1.initialize();
+  ModelMDLOBJ1.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
+    "HT08_CASE/Model",0,-1);
+
+  // Model Initialize function for ModelReference Block: '<Root>/Model1'
+
+  // Set error status pointer for ModelReference Block: '<Root>/Model1'
+  Model1MDLOBJ2.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
+  Model1MDLOBJ2.initialize();
+  Model1MDLOBJ2.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
+    "HT08_CASE/Model1",1,-1);
+
   // Model Initialize function for ModelReference Block: '<Root>/Power Limit'
 
   // Set error status pointer for ModelReference Block: '<Root>/Power Limit'
-  Power_LimitMDLOBJ1.setErrorStatusPointer(rtmGetErrorStatusPointer
+  Power_LimitMDLOBJ3.setErrorStatusPointer(rtmGetErrorStatusPointer
     ((&HT08_CASE_M)));
-  Power_LimitMDLOBJ1.initialize();
-  Power_LimitMDLOBJ1.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
-    "HT08_CASE/Power Limit",0,-1);
+  Power_LimitMDLOBJ3.initialize();
+  Power_LimitMDLOBJ3.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
+    "HT08_CASE/Power Limit",2,-1);
 
   // Model Initialize function for ModelReference Block: '<Root>/TCS'
 
   // Set error status pointer for ModelReference Block: '<Root>/TCS'
-  TCSMDLOBJ2.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
-  TCSMDLOBJ2.initialize();
-  TCSMDLOBJ2.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),"HT08_CASE/TCS",1,
+  TCSMDLOBJ4.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
+  TCSMDLOBJ4.initialize();
+  TCSMDLOBJ4.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),"HT08_CASE/TCS",3,
     -1);
 
   // Model Initialize function for ModelReference Block: '<Root>/Vehicle Math'
 
   // Set error status pointer for ModelReference Block: '<Root>/Vehicle Math'
-  Vehicle_MathMDLOBJ3.setErrorStatusPointer(rtmGetErrorStatusPointer
+  Vehicle_MathMDLOBJ5.setErrorStatusPointer(rtmGetErrorStatusPointer
     ((&HT08_CASE_M)));
-  Vehicle_MathMDLOBJ3.initialize();
-  Vehicle_MathMDLOBJ3.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
-    "HT08_CASE/Vehicle Math",2,-1);
+  Vehicle_MathMDLOBJ5.initialize();
+  Vehicle_MathMDLOBJ5.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
+    "HT08_CASE/Vehicle Math",4,-1);
 
   // Model Initialize function for ModelReference Block: '<S4>/Model'
 
   // Set error status pointer for ModelReference Block: '<S4>/Model'
-  ModelMDLOBJ4.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
-  ModelMDLOBJ4.initialize();
-  ModelMDLOBJ4.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
-    "HT08_CASE/Yaw and Normal Force TV/Model",3,-1);
+  ModelMDLOBJ6.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
+  ModelMDLOBJ6.initialize();
+  ModelMDLOBJ6.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
+    "HT08_CASE/Yaw and Nor mal Force TV/Model",5,-1);
 
   // Model Initialize function for ModelReference Block: '<S4>/PID_TV'
 
   // Set error status pointer for ModelReference Block: '<S4>/PID_TV'
-  PID_TVMDLOBJ5.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
-  PID_TVMDLOBJ5.initialize();
-  PID_TVMDLOBJ5.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
-    "HT08_CASE/Yaw and Normal Force TV/PID_TV",4,-1);
+  PID_TVMDLOBJ7.setErrorStatusPointer(rtmGetErrorStatusPointer((&HT08_CASE_M)));
+  PID_TVMDLOBJ7.initialize();
+  PID_TVMDLOBJ7.setupCAPIInfo(&((&HT08_CASE_M)->DataMapInfo.mmi),
+    "HT08_CASE/Yaw and Nor mal Force TV/PID_TV",6,-1);
 
   // SystemInitialize for ModelReference: '<Root>/TCS'
-  TCSMDLOBJ2.init(&HT08_CASE_B.TCS_o9[0]);
+  TCSMDLOBJ4.init(&HT08_CASE_B.TCS_o9[0]);
 
   // SystemInitialize for ModelReference: '<S4>/PID_TV'
-  PID_TVMDLOBJ5.init();
+  PID_TVMDLOBJ7.init();
 }
 
 // Model terminate function

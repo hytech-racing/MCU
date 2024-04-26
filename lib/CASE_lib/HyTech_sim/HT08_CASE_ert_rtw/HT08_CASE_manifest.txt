@@ -9,17 +9,21 @@ C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_s
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\HT08_CASE_ert_rtw\HT08_CASE_types.h
 C:\Program Files\MATLAB\R2023b\rtw\c\src\rtw_modelmap.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\BasicVehicleMath\BasicVehicleMath.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NORMAL_FORCE_TV\NORMAL_FORCE_TV.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\PID_TV\PID_TV.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\POWER_LIMIT\POWER_LIMIT.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TRACTION_CONTROL\TRACTION_CONTROL.h
 C:\Program Files\MATLAB\R2023b\rtw\c\src\rtw_capi.h
 C:\Program Files\MATLAB\R2023b\rtw\c\src\rtw_modelmap_logging.h
 C:\Program Files\MATLAB\R2023b\simulink\include\sysran_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\BasicVehicleMath\BasicVehicleMath_types.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NORMAL_FORCE_TV\NORMAL_FORCE_TV_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\PID_TV\PID_TV_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\POWER_LIMIT\POWER_LIMIT_types.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TRACTION_CONTROL\TRACTION_CONTROL_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\_sharedutils\builtin_typeid_types.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\_sharedutils\rtGetInf.h
@@ -38,6 +42,13 @@ C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_s
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\_sharedutils\interp1_fDh6ZCtI.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\_sharedutils\look1_binlxpw.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\_sharedutils\rt_atan2d_snf.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\CMakeLists.txt
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\buildInfo.mat
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH.cpp
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH_capi.cpp
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH_capi.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH_capi_host.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NOREGEN_5KPH\NOREGEN_5KPH_private.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NORMAL_FORCE_TV\CMakeLists.txt
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NORMAL_FORCE_TV\buildInfo.mat
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\NORMAL_FORCE_TV\NORMAL_FORCE_TV.cpp
@@ -59,6 +70,13 @@ C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_s
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\POWER_LIMIT\POWER_LIMIT_capi.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\POWER_LIMIT\POWER_LIMIT_capi_host.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\POWER_LIMIT\POWER_LIMIT_private.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\CMakeLists.txt
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\buildInfo.mat
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS.cpp
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS_capi.cpp
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS_capi.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS_capi_host.h
+C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TORQUE_BIAS\TORQUE_BIAS_private.h
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TRACTION_CONTROL\CMakeLists.txt
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TRACTION_CONTROL\buildInfo.mat
 C:\Users\lukec\OneDrive - Georgia Institute of Technology\HyTech\MATLAB\HyTech_sim\slprj\ert\TRACTION_CONTROL\TRACTION_CONTROL.cpp

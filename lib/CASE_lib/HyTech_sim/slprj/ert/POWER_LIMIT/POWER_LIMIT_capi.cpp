@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'POWER_LIMIT'.
 //
-// Model version                  : 1.40
+// Model version                  : 1.45
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sun Apr 21 22:13:19 2024
+// C/C++ source code generated on : Fri Apr 26 01:31:06 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -43,59 +43,33 @@ static rtwCAPI_Signals rtBlockSignals[]{
   // addrMapIndex, sysNum, blockPath,
   //  signalName, portNumber, dataTypeIndex, dimIndex, fxpIndex, sTimeIndex
 
-  { 0, 1, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT"),
+  { 0, 10, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1"),
     TARGET_STRING(""), 5, 0, 0, 0, 0 },
 
-  { 1, 1, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT"),
+  { 1, 10, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1"),
     TARGET_STRING(""), 6, 0, 0, 0, 0 },
 
-  { 2, 1, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT"),
+  { 2, 10, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1"),
     TARGET_STRING(""), 7, 0, 0, 0, 0 },
 
-  { 3, 1, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT"),
+  { 3, 10, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1"),
     TARGET_STRING(""), 8, 0, 0, 0, 0 },
 
-  { 4, 6, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT"),
-    TARGET_STRING(""), 5, 0, 0, 0, 0 },
+  { 4, 10, TARGET_STRING(
+    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/MATLAB Function"),
+    TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 5, 6, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT"),
-    TARGET_STRING(""), 6, 0, 0, 0, 0 },
+  { 5, 10, TARGET_STRING(
+    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/MATLAB Function"),
+    TARGET_STRING(""), 1, 0, 0, 0, 0 },
 
-  { 6, 6, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT"),
-    TARGET_STRING(""), 7, 0, 0, 0, 0 },
+  { 6, 10, TARGET_STRING(
+    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/MATLAB Function"),
+    TARGET_STRING(""), 2, 0, 0, 0, 0 },
 
-  { 7, 6, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT"),
-    TARGET_STRING(""), 8, 0, 0, 0, 0 },
-
-  { 8, 1, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 4, 0, 0, 0, 0 },
-
-  { 9, 1, TARGET_STRING("POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 5, 0, 0, 0, 0 },
-
-  { 10, 1, TARGET_STRING(
-    "POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 6, 0, 0, 0, 0 },
-
-  { 11, 1, TARGET_STRING(
-    "POWER_LIMIT/If Action Subsystem/If Action Subsystem/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 7, 0, 0, 0, 0 },
-
-  { 12, 6, TARGET_STRING(
-    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 4, 0, 0, 0, 0 },
-
-  { 13, 6, TARGET_STRING(
-    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 5, 0, 0, 0, 0 },
-
-  { 14, 6, TARGET_STRING(
-    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 6, 0, 0, 0, 0 },
-
-  { 15, 6, TARGET_STRING(
-    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/HT07 POWER LIMIT/MATLAB Function"),
-    TARGET_STRING(""), 7, 0, 0, 0, 0 },
+  { 7, 10, TARGET_STRING(
+    "POWER_LIMIT/If Action Subsystem/If Action Subsystem1/MATLAB Function"),
+    TARGET_STRING(""), 3, 0, 0, 0, 0 },
 
   {
     0, 0, (nullptr), (nullptr), 0, 0, 0, 0, 0
@@ -127,22 +101,14 @@ static rtwCAPI_ModelParameters rtModelParameters[]{
 static void POWER_LIMIT_InitializeDataAddr(void* dataAddr[], POWER_LIMIT::
   B_POWER_LIMIT_T *POWER_LIMIT_B)
 {
-  dataAddr[0] = (void*) (&POWER_LIMIT_B->cornerPower_FL_a);
-  dataAddr[1] = (void*) (&POWER_LIMIT_B->cornerPower_FR_c);
-  dataAddr[2] = (void*) (&POWER_LIMIT_B->cornerPower_RL_k);
-  dataAddr[3] = (void*) (&POWER_LIMIT_B->cornerPower_RR_p);
+  dataAddr[0] = (void*) (&POWER_LIMIT_B->cornerPower_FL);
+  dataAddr[1] = (void*) (&POWER_LIMIT_B->cornerPower_FR);
+  dataAddr[2] = (void*) (&POWER_LIMIT_B->cornerPower_RL);
+  dataAddr[3] = (void*) (&POWER_LIMIT_B->cornerPower_RR);
   dataAddr[4] = (void*) (&POWER_LIMIT_B->cornerPower_FL);
   dataAddr[5] = (void*) (&POWER_LIMIT_B->cornerPower_FR);
   dataAddr[6] = (void*) (&POWER_LIMIT_B->cornerPower_RL);
   dataAddr[7] = (void*) (&POWER_LIMIT_B->cornerPower_RR);
-  dataAddr[8] = (void*) (&POWER_LIMIT_B->cornerPower_FL_a);
-  dataAddr[9] = (void*) (&POWER_LIMIT_B->cornerPower_FR_c);
-  dataAddr[10] = (void*) (&POWER_LIMIT_B->cornerPower_RL_k);
-  dataAddr[11] = (void*) (&POWER_LIMIT_B->cornerPower_RR_p);
-  dataAddr[12] = (void*) (&POWER_LIMIT_B->cornerPower_FL);
-  dataAddr[13] = (void*) (&POWER_LIMIT_B->cornerPower_FR);
-  dataAddr[14] = (void*) (&POWER_LIMIT_B->cornerPower_RL);
-  dataAddr[15] = (void*) (&POWER_LIMIT_B->cornerPower_RR);
 }
 
 #endif
@@ -170,14 +136,6 @@ static void POWER_LIMIT_InitializeLoggingFunctions(RTWLoggingFcnPtr loggingPtrs[
   loggingPtrs[5] = (nullptr);
   loggingPtrs[6] = (nullptr);
   loggingPtrs[7] = (nullptr);
-  loggingPtrs[8] = (nullptr);
-  loggingPtrs[9] = (nullptr);
-  loggingPtrs[10] = (nullptr);
-  loggingPtrs[11] = (nullptr);
-  loggingPtrs[12] = (nullptr);
-  loggingPtrs[13] = (nullptr);
-  loggingPtrs[14] = (nullptr);
-  loggingPtrs[15] = (nullptr);
 }
 
 #endif
@@ -246,7 +204,7 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
   //           elementMap, sampleTimeMap, dimensionArray},
   //  TargetType: targetType
 
-  { rtBlockSignals, 16,
+  { rtBlockSignals, 8,
     (nullptr), 0,
     (nullptr), 0 },
 
@@ -259,10 +217,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 1088983092U,
-    1048038008U,
-    314402604U,
-    3763156456U },
+  { 1442836071U,
+    562345245U,
+    3685962108U,
+    1105555236U },
   (nullptr), 0,
   (boolean_T)0
 };

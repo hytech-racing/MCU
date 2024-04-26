@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.66
+// Model version                  : 1.70
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
+// C/C++ source code generated on : Fri Apr 26 01:22:02 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -22,10 +22,12 @@
 #include "rtwtypes.h"
 #include "HT08_CASE_types.h"
 #include "BasicVehicleMath.h"
+#include "TORQUE_BIAS.h"
 #include "TRACTION_CONTROL.h"
 #include "PID_TV.h"
 #include "NORMAL_FORCE_TV.h"
 #include "POWER_LIMIT.h"
+#include "NOREGEN_5KPH.h"
 #include "rtw_modelmap.h"
 
 // Macros for accessing real-time model data structure
@@ -76,6 +78,12 @@ class HT08_CASE final
     real_T SLRR;                       // '<Root>/Vehicle Math'
     real_T WheelSteerAvgDeg;           // '<Root>/Vehicle Math'
     real_T modeConstrainedTorqueRequest;// '<Root>/Vehicle Math'
+    real_T VehicleMath_o21;            // '<Root>/Vehicle Math'
+    real_T VehicleMath_o22;            // '<Root>/Vehicle Math'
+    real_T VehicleMath_o23;            // '<Root>/Vehicle Math'
+    real_T VehicleMath_o24;            // '<Root>/Vehicle Math'
+    real_T Model1_o1;                  // '<Root>/Model1'
+    real_T Model1_o2;                  // '<Root>/Model1'
     real_T TCS_o1;                     // '<Root>/TCS'
     real_T TCS_o2;                     // '<Root>/TCS'
     real_T TCS_o3;                     // '<Root>/TCS'
@@ -99,6 +107,10 @@ class HT08_CASE final
     real_T Normal_Percent_FR;          // '<S4>/Model'
     real_T Normal_Percent_RL;          // '<S4>/Model'
     real_T Normal_Percent_RR;          // '<S4>/Model'
+    real_T PowerLimTorqueFL;           // '<Root>/Power Limit'
+    real_T PowerLimTorqueFR;           // '<Root>/Power Limit'
+    real_T PowerLimTorqueRL;           // '<Root>/Power Limit'
+    real_T PowerLimTorqueRR;           // '<Root>/Power Limit'
     real_T PowerLimit_o5;              // '<Root>/Power Limit'
     real_T PowerLimit_o6;              // '<Root>/Power Limit'
     real_T TorqueAdjustment;           // '<Root>/Power Limit'
@@ -106,6 +118,10 @@ class HT08_CASE final
     real_T PowerLimit_o9;              // '<Root>/Power Limit'
     real_T PowerLimit_o10;             // '<Root>/Power Limit'
     real_T PowerLimit_o11;             // '<Root>/Power Limit'
+    real_T Model_o5;                   // '<Root>/Model'
+    real_T Model_o6;                   // '<Root>/Model'
+    real_T Model_o7;                   // '<Root>/Model'
+    real_T Model_o8;                   // '<Root>/Model'
   };
 
   // Block states (default storage) for system '<Root>'
@@ -124,12 +140,16 @@ class HT08_CASE final
     int_T CANPack11_ModeSignalID;      // '<S1>/CAN Pack11'
     int_T CANPack12_ModeSignalID;      // '<S1>/CAN Pack12'
     int_T CANPack13_ModeSignalID;      // '<S1>/CAN Pack13'
+    int_T CANPack14_ModeSignalID;      // '<S1>/CAN Pack14'
+    int_T CANPack15_ModeSignalID;      // '<S1>/CAN Pack15'
+    int_T CANPack16_ModeSignalID;      // '<S1>/CAN Pack16'
     int_T CANPack2_ModeSignalID_k;     // '<S3>/CAN Pack2'
     int_T CANPack_ModeSignalID_a;      // '<S3>/CAN Pack'
     int_T CANPack1_ModeSignalID_m;     // '<S3>/CAN Pack1'
     int_T CANPack3_ModeSignalID_m;     // '<S3>/CAN Pack3'
     int_T CANPack4_ModeSignalID_b;     // '<S3>/CAN Pack4'
     int_T CANPack5_ModeSignalID_p;     // '<S3>/CAN Pack5'
+    int_T CANPack6_ModeSignalID_h;     // '<S3>/CAN Pack6'
   };
 
   // External inputs (root inport signals with default storage)
@@ -142,7 +162,7 @@ class HT08_CASE final
     real_T FZFR;                       // '<Root>/FZ FR'
     real_T FZRL;                       // '<Root>/FZ RL'
     real_T FZRR;                       // '<Root>/FZ RR'
-    real_T CurrentPowerkW;             // '<Root>/Current Power [kW]'
+    real_T CurrentElectricalPowerkW;  // '<Root>/Current Electrical Power [kW]'
     real_T MotorOmegaFLrpm;            // '<Root>/Motor Omega FL [rpm]'
     real_T MotorOmegaFRrpm;            // '<Root>/Motor Omega FR [rpm]'
     real_T MotorOmegaRLrpm;            // '<Root>/Motor Omega RL [rpm]'
@@ -176,6 +196,11 @@ class HT08_CASE final
                                 // '<Root>/discontinuousBrakesPercentThreshold'
     real_T TorqueMode;                 // '<Root>/Torque Mode'
     real_T RegenLimit;                 // '<Root>/Regen Limit'
+    boolean_T useNoRegen5kph;          // '<Root>/useNoRegen5kph'
+    boolean_T useTorqueBias;           // '<Root>/useTorqueBias'
+    real_T DriveTorquePercentFront;    // '<Root>/Drive Torque Percent Front'
+    real_T BrakeTorquePercentFront;    // '<Root>/Brake Torque Percent Front'
+    real_T MechPowerMaxkW;             // '<Root>/Mech Power Max [kW]'
   };
 
   // External outputs (root outports fed by signals with default storage)
@@ -221,6 +246,14 @@ class HT08_CASE final
                             // '<Root>/controllerBus_controller_tcs_pid_output'
     CAN_MESSAGE_BUS controllerBus_controller_tcs_to;
                                 // '<Root>/controllerBus_controller_tcs_torque'
+    CAN_MESSAGE_BUS controllerBus_controller_regen_;
+                         // '<Root>/controllerBus_controller_regen_5kph_torque'
+    CAN_MESSAGE_BUS controllerBus_controller_rege_p;
+                         // '<Root>/controllerBus_controller_regen_5kph_status'
+    CAN_MESSAGE_BUS controllerBus_controller_torque;
+                               // '<Root>/controllerBus_controller_torque_bias'
+    CAN_MESSAGE_BUS controllerBus_vehm_wheel_lin_ve;
+                                   // '<Root>/controllerBus_vehm_wheel_lin_vel'
   };
 
   // Real-time Model Data Structure
@@ -234,10 +267,10 @@ class HT08_CASE final
 
     struct {
       rtwCAPI_ModelMappingInfo mmi;
-      void* dataAddress[46];
-      int32_T* vardimsAddress[46];
-      RTWLoggingFcnPtr loggingPtrs[46];
-      rtwCAPI_ModelMappingInfo* childMMI[5];
+      void* dataAddress[60];
+      int32_T* vardimsAddress[60];
+      RTWLoggingFcnPtr loggingPtrs[60];
+      rtwCAPI_ModelMappingInfo* childMMI[7];
     } DataMapInfo;
   };
 
@@ -297,20 +330,26 @@ class HT08_CASE final
   // Block states
   DW_HT08_CASE_T HT08_CASE_DW;
 
+  // model instance variable for '<Root>/Model'
+  NOREGEN_5KPH ModelMDLOBJ1;
+
+  // model instance variable for '<Root>/Model1'
+  TORQUE_BIAS Model1MDLOBJ2;
+
   // model instance variable for '<Root>/Power Limit'
-  POWER_LIMIT Power_LimitMDLOBJ1;
+  POWER_LIMIT Power_LimitMDLOBJ3;
 
   // model instance variable for '<Root>/TCS'
-  TRACTION_CONTROL TCSMDLOBJ2;
+  TRACTION_CONTROL TCSMDLOBJ4;
 
   // model instance variable for '<Root>/Vehicle Math'
-  BasicVehicleMath Vehicle_MathMDLOBJ3;
+  BasicVehicleMath Vehicle_MathMDLOBJ5;
 
   // model instance variable for '<S4>/Model'
-  NORMAL_FORCE_TV ModelMDLOBJ4;
+  NORMAL_FORCE_TV ModelMDLOBJ6;
 
   // model instance variable for '<S4>/PID_TV'
-  PID_TV PID_TVMDLOBJ5;
+  PID_TV PID_TVMDLOBJ7;
 
   // Real-Time Model
   RT_MODEL_HT08_CASE_T HT08_CASE_M;
@@ -341,7 +380,7 @@ class HT08_CASE final
 //  '<S1>'   : 'HT08_CASE/Control System CAN Msg'
 //  '<S2>'   : 'HT08_CASE/Final Attempted Torque Average'
 //  '<S3>'   : 'HT08_CASE/VEHM CAN Msg'
-//  '<S4>'   : 'HT08_CASE/Yaw and Normal Force TV'
+//  '<S4>'   : 'HT08_CASE/Yaw and Nor mal Force TV'
 
 #endif                                 // RTW_HEADER_HT08_CASE_h_
 

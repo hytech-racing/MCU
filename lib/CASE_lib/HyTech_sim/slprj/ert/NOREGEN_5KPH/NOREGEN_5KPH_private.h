@@ -3,24 +3,24 @@
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
 //
-// File: POWER_LIMIT_private.h
+// File: NOREGEN_5KPH_private.h
 //
-// Code generated for Simulink model 'POWER_LIMIT'.
+// Code generated for Simulink model 'NOREGEN_5KPH'.
 //
-// Model version                  : 1.45
+// Model version                  : 1.6
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Fri Apr 26 01:31:06 2024
+// C/C++ source code generated on : Fri Apr 26 00:57:52 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef RTW_HEADER_POWER_LIMIT_private_h_
-#define RTW_HEADER_POWER_LIMIT_private_h_
+#ifndef RTW_HEADER_NOREGEN_5KPH_private_h_
+#define RTW_HEADER_NOREGEN_5KPH_private_h_
 #include "rtwtypes.h"
 #include "builtin_typeid_types.h"
-#include "POWER_LIMIT_types.h"
+#include "NOREGEN_5KPH_types.h"
 
 // Macros for accessing real-time model data structure
 #ifndef rtmGetDataMapInfo
@@ -46,7 +46,7 @@
 #ifndef rtmSetErrorStatusPointer
 #define rtmSetErrorStatusPointer(rtm, val) ((rtm)->errorStatus = (val))
 #endif
-#endif                                 // RTW_HEADER_POWER_LIMIT_private_h_
+#endif                                 // RTW_HEADER_NOREGEN_5KPH_private_h_
 
 //
 // File trailer for generated code.

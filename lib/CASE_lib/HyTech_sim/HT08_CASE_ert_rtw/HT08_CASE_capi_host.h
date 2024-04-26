@@ -3,6 +3,8 @@
 #ifdef HOST_CAPI_BUILD
 #include "rtw_capi.h"
 #include "rtw_modelmap.h"
+#include "NOREGEN_5KPH_capi_host.h"
+#include "TORQUE_BIAS_capi_host.h"
 #include "POWER_LIMIT_capi_host.h"
 #include "TRACTION_CONTROL_capi_host.h"
 #include "BasicVehicleMath_capi_host.h"
@@ -11,12 +13,14 @@
 
 struct HT08_CASE_host_DataMapInfo_T {
   rtwCAPI_ModelMappingInfo mmi;
-  rtwCAPI_ModelMappingInfo *childMMI[5];
-  POWER_LIMIT_host_DataMapInfo_T child0;
-  TRACTION_CONTROL_host_DataMapInfo_T child1;
-  BasicVehicleMath_host_DataMapInfo_T child2;
-  NORMAL_FORCE_TV_host_DataMapInfo_T child3;
-  PID_TV_host_DataMapInfo_T child4;
+  rtwCAPI_ModelMappingInfo *childMMI[7];
+  NOREGEN_5KPH_host_DataMapInfo_T child0;
+  TORQUE_BIAS_host_DataMapInfo_T child1;
+  POWER_LIMIT_host_DataMapInfo_T child2;
+  TRACTION_CONTROL_host_DataMapInfo_T child3;
+  BasicVehicleMath_host_DataMapInfo_T child4;
+  NORMAL_FORCE_TV_host_DataMapInfo_T child5;
+  PID_TV_host_DataMapInfo_T child6;
 };
 
 #ifdef __cplusplus

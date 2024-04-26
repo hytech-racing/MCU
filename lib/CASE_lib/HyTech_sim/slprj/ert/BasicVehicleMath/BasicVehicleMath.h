@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'BasicVehicleMath'.
 //
-// Model version                  : 1.21
+// Model version                  : 1.22
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sun Apr 21 22:12:16 2024
+// C/C++ source code generated on : Fri Apr 26 00:57:44 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -99,7 +99,9 @@ class BasicVehicleMath final
             real_T *rty_SLRL, real_T *rty_SLRR, real_T *rty_WheelSteerAvgDeg,
             real_T *rty_WheelOmegaFLrads, real_T *rty_WheelOmegaFRrads, real_T
             *rty_WheelOmegaRLrads, real_T *rty_WheelOmegaRRrads, real_T
-            *rty_ModeConstrainedTorqueReques);
+            *rty_ModeConstrainedTorqueReques, real_T *rty_WheelLinearSpeedFLms,
+            real_T *rty_WheelLinearSpeedFRms, real_T *rty_WheelLinearSpeedRLms,
+            real_T *rty_WheelLinearSpeedRRms);
 
   // Constructor
   BasicVehicleMath();
@@ -128,14 +130,14 @@ class BasicVehicleMath final
 //  Block '<S23>/Scope' : Unused code path elimination
 //  Block '<S24>/Scope' : Unused code path elimination
 //  Block '<S25>/Scope' : Unused code path elimination
-//  Block '<S15>/Constant' : Unused code path elimination
-//  Block '<S15>/Constant1' : Unused code path elimination
-//  Block '<S15>/Constant2' : Unused code path elimination
-//  Block '<S15>/Constant3' : Unused code path elimination
-//  Block '<S15>/Constant4' : Unused code path elimination
-//  Block '<S15>/Constant5' : Unused code path elimination
-//  Block '<S15>/Constant6' : Unused code path elimination
-//  Block '<S15>/Constant7' : Unused code path elimination
+//  Block '<S16>/Constant' : Unused code path elimination
+//  Block '<S16>/Constant1' : Unused code path elimination
+//  Block '<S16>/Constant2' : Unused code path elimination
+//  Block '<S16>/Constant3' : Unused code path elimination
+//  Block '<S16>/Constant4' : Unused code path elimination
+//  Block '<S16>/Constant5' : Unused code path elimination
+//  Block '<S16>/Constant6' : Unused code path elimination
+//  Block '<S16>/Constant7' : Unused code path elimination
 
 
 //-
@@ -153,25 +155,25 @@ class BasicVehicleMath final
 //  Here is the system hierarchy for this model
 //
 //  '<Root>' : 'BasicVehicleMath'
-//  '<S1>'   : 'BasicVehicleMath/Body Slip'
-//  '<S2>'   : 'BasicVehicleMath/Degrees to Radians'
-//  '<S3>'   : 'BasicVehicleMath/Degrees to Radians1'
-//  '<S4>'   : 'BasicVehicleMath/Degrees to Radians2'
-//  '<S5>'   : 'BasicVehicleMath/Degrees to Radians3'
-//  '<S6>'   : 'BasicVehicleMath/Degrees to Radians4'
-//  '<S7>'   : 'BasicVehicleMath/Kinematic Yaw Rate'
-//  '<S8>'   : 'BasicVehicleMath/Longitudinal Corner Vel B --> W Transformation'
-//  '<S9>'   : 'BasicVehicleMath/Radians to Degrees'
-//  '<S10>'  : 'BasicVehicleMath/Radians to Degrees1'
-//  '<S11>'  : 'BasicVehicleMath/Radians to Degrees2'
-//  '<S12>'  : 'BasicVehicleMath/Radians to Degrees3'
-//  '<S13>'  : 'BasicVehicleMath/Radians to Degrees4'
-//  '<S14>'  : 'BasicVehicleMath/Slip Angle and Corner Velocity'
-//  '<S15>'  : 'BasicVehicleMath/Subsystem'
-//  '<S16>'  : 'BasicVehicleMath/Subsystem1'
-//  '<S17>'  : 'BasicVehicleMath/Subsystem2'
-//  '<S18>'  : 'BasicVehicleMath/Subsystem3'
-//  '<S19>'  : 'BasicVehicleMath/Subsystem4'
+//  '<S1>'   : 'BasicVehicleMath/>50 rad_s Constraint'
+//  '<S2>'   : 'BasicVehicleMath/Body Slip'
+//  '<S3>'   : 'BasicVehicleMath/Degrees to Radians'
+//  '<S4>'   : 'BasicVehicleMath/Degrees to Radians1'
+//  '<S5>'   : 'BasicVehicleMath/Degrees to Radians2'
+//  '<S6>'   : 'BasicVehicleMath/Degrees to Radians3'
+//  '<S7>'   : 'BasicVehicleMath/Degrees to Radians4'
+//  '<S8>'   : 'BasicVehicleMath/Kinematic Yaw Rate'
+//  '<S9>'   : 'BasicVehicleMath/Longitudinal Corner Vel B --> W Transformation'
+//  '<S10>'  : 'BasicVehicleMath/Radians to Degrees'
+//  '<S11>'  : 'BasicVehicleMath/Radians to Degrees1'
+//  '<S12>'  : 'BasicVehicleMath/Radians to Degrees2'
+//  '<S13>'  : 'BasicVehicleMath/Radians to Degrees3'
+//  '<S14>'  : 'BasicVehicleMath/Radians to Degrees4'
+//  '<S15>'  : 'BasicVehicleMath/Slip Angle and Corner Velocity'
+//  '<S16>'  : 'BasicVehicleMath/Subsystem'
+//  '<S17>'  : 'BasicVehicleMath/Subsystem1'
+//  '<S18>'  : 'BasicVehicleMath/Subsystem2'
+//  '<S19>'  : 'BasicVehicleMath/Subsystem3'
 //  '<S20>'  : 'BasicVehicleMath/Subsystem5'
 //  '<S21>'  : 'BasicVehicleMath/Slip Angle and Corner Velocity/MATLAB Function'
 //  '<S22>'  : 'BasicVehicleMath/Subsystem/Longitudinal Slip Calc FL'

@@ -42,6 +42,11 @@ struct CASEConfiguration
     float discontinuousBrakesPercentThreshold;
     float TorqueMode;
     float RegenLimit;
+    bool useNoRegen5kph;
+    bool useTorqueBias;
+    float DriveTorquePercentFront;
+    float BrakeTorquePercentFront;
+    float MechPowerMaxkW;
 
     float max_rpm;
     float max_regen_torque;
@@ -138,7 +143,7 @@ private:
     message_queue *msg_queue_;
     HT08_CASE case_;
 
-    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_, last_vehm_send_time_, controller_send_period_ms_;
+    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_, last_controller_pt3_send_time_, last_vehm_send_time_, controller_send_period_ms_;
 };
 
 #include "CASESystem.tpp"

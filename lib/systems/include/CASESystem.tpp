@@ -33,19 +33,25 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.FZRL = load_cell_vals.RL.conversion;
     in.FZRR = load_cell_vals.RR.conversion;
 
-    in.CurrentPowerkW = power_kw;
+    in.CurrentElectricalPowerkW = power_kw;
 
     // REAL
-    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
-    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
-    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
-    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
+    // in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
+    // in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
+    // in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
+    // in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
 
-    // FAKE
-    // in.MotorOmegaFLrpm = 566.27330024 * 6.3;
-    // in.MotorOmegaFRrpm = 566.27330024 * 6.3;
-    // in.MotorOmegaRRrpm = 566.27330024 * 6.3;
-    // in.MotorOmegaRLrpm = 566.27330024 * 6.3;
+    // FAKE, 566.273 rpm = 1 m/s
+    // in.MotorOmegaFLrpm = 566.27330024 * 1.36;
+    // in.MotorOmegaFRrpm = 566.27330024 * 1.36;
+    // in.MotorOmegaRRrpm = 566.27330024 * 1.36;
+    // in.MotorOmegaRLrpm = 566.27330024 * 1.36;
+
+    // FAKE max rpm
+    in.MotorOmegaFLrpm = 20000;
+    in.MotorOmegaFRrpm = 20000;
+    in.MotorOmegaRRrpm = 20000;
+    in.MotorOmegaRLrpm = 20000;
 
     in.usePIDTV = config_.usePIDTV;
     in.useNormalForce = config_.useNormalForce;
@@ -98,6 +104,16 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.RegenLimit = config_.RegenLimit;
 
+    in.useNoRegen5kph = config_.useNoRegen5kph;
+
+    in.useTorqueBias = config_.useTorqueBias;
+
+    in.DriveTorquePercentFront = config_.DriveTorquePercentFront;
+
+    in.BrakeTorquePercentFront = config_.BrakeTorquePercentFront;
+
+    in.MechPowerMaxkW = config_.MechPowerMaxkW;
+
     if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
         vn_active_start_time_ = tick.millis;
@@ -137,9 +153,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
 
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
@@ -147,6 +160,20 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
 
         last_controller_pt2_send_time_ = tick.millis;
+    }
+
+    if (((tick.millis - last_controller_pt2_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
+        ((tick.millis - last_controller_pt3_send_time_) > controller_send_period_ms_))
+    {
+
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_rege_p);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_torque);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
+
+        last_controller_pt3_send_time_ = tick.millis;
     }
 
     if (((tick.millis - last_controller_pt1_send_time_) >= vehicle_math_offset_ms_) &&
@@ -158,6 +185,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_steer_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_lin_ve);
         // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
         last_vehm_send_time_ = tick.millis;
     }

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'HT08_CASE'.
 //
-// Model version                  : 1.66
+// Model version                  : 1.70
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Sun Apr 21 22:20:01 2024
+// C/C++ source code generated on : Fri Apr 26 01:22:02 2024
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -43,142 +43,184 @@ static rtwCAPI_Signals rtBlockSignals[]{
   // addrMapIndex, sysNum, blockPath,
   //  signalName, portNumber, dataTypeIndex, dimIndex, fxpIndex, sTimeIndex
 
-  { 0, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+  { 0, 1, TARGET_STRING("HT08_CASE/Model"),
     TARGET_STRING(""), 4, 0, 0, 0, 0 },
 
-  { 1, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+  { 1, 1, TARGET_STRING("HT08_CASE/Model"),
     TARGET_STRING(""), 5, 0, 0, 0, 0 },
 
-  { 2, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+  { 2, 1, TARGET_STRING("HT08_CASE/Model"),
     TARGET_STRING(""), 6, 0, 0, 0, 0 },
 
-  { 3, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+  { 3, 1, TARGET_STRING("HT08_CASE/Model"),
     TARGET_STRING(""), 7, 0, 0, 0, 0 },
 
-  { 4, 1, TARGET_STRING("HT08_CASE/Power Limit"),
-    TARGET_STRING(""), 8, 0, 0, 0, 0 },
-
-  { 5, 1, TARGET_STRING("HT08_CASE/Power Limit"),
-    TARGET_STRING(""), 9, 0, 0, 0, 0 },
-
-  { 6, 1, TARGET_STRING("HT08_CASE/Power Limit"),
-    TARGET_STRING(""), 10, 0, 0, 0, 0 },
-
-  { 7, 1, TARGET_STRING("HT08_CASE/TCS"),
+  { 4, 1, TARGET_STRING("HT08_CASE/Model1"),
     TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 8, 1, TARGET_STRING("HT08_CASE/TCS"),
+  { 5, 1, TARGET_STRING("HT08_CASE/Model1"),
     TARGET_STRING(""), 1, 0, 0, 0, 0 },
 
-  { 9, 1, TARGET_STRING("HT08_CASE/TCS"),
-    TARGET_STRING(""), 2, 0, 0, 0, 0 },
+  { 6, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+    TARGET_STRING("Power Lim Torque FL"), 0, 0, 0, 0, 0 },
 
-  { 10, 1, TARGET_STRING("HT08_CASE/TCS"),
-    TARGET_STRING(""), 3, 0, 0, 0, 0 },
+  { 7, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+    TARGET_STRING("Power Lim Torque FR"), 1, 0, 0, 0, 0 },
 
-  { 11, 1, TARGET_STRING("HT08_CASE/TCS"),
+  { 8, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+    TARGET_STRING("Power Lim Torque RL"), 2, 0, 0, 0, 0 },
+
+  { 9, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+    TARGET_STRING("Power Lim Torque RR"), 3, 0, 0, 0, 0 },
+
+  { 10, 1, TARGET_STRING("HT08_CASE/Power Limit"),
     TARGET_STRING(""), 4, 0, 0, 0, 0 },
 
-  { 12, 1, TARGET_STRING("HT08_CASE/TCS"),
+  { 11, 1, TARGET_STRING("HT08_CASE/Power Limit"),
     TARGET_STRING(""), 5, 0, 0, 0, 0 },
 
-  { 13, 1, TARGET_STRING("HT08_CASE/TCS"),
+  { 12, 1, TARGET_STRING("HT08_CASE/Power Limit"),
     TARGET_STRING(""), 6, 0, 0, 0, 0 },
 
-  { 14, 1, TARGET_STRING("HT08_CASE/TCS"),
+  { 13, 1, TARGET_STRING("HT08_CASE/Power Limit"),
     TARGET_STRING(""), 7, 0, 0, 0, 0 },
 
-  { 15, 1, TARGET_STRING("HT08_CASE/TCS"),
-    TARGET_STRING(""), 8, 0, 1, 0, 0 },
+  { 14, 1, TARGET_STRING("HT08_CASE/Power Limit"),
+    TARGET_STRING(""), 8, 0, 0, 0, 0 },
 
-  { 16, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Beta [Deg]"), 0, 0, 0, 0, 0 },
-
-  { 17, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Alpha FL [Deg]"), 1, 0, 0, 0, 0 },
-
-  { 18, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Alpha FR [Deg]"), 2, 0, 0, 0, 0 },
-
-  { 19, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Alpha RL [Deg]"), 3, 0, 0, 0, 0 },
-
-  { 20, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Alpha RR [Deg]"), 4, 0, 0, 0, 0 },
-
-  { 21, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Long Corner Vel FL"), 5, 0, 0, 0, 0 },
-
-  { 22, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Long Corner Vel FR"), 6, 0, 0, 0, 0 },
-
-  { 23, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Long Corner Vel RL"), 7, 0, 0, 0, 0 },
-
-  { 24, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Long Corner Vel RR"), 8, 0, 0, 0, 0 },
-
-  { 25, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+  { 15, 1, TARGET_STRING("HT08_CASE/Power Limit"),
     TARGET_STRING(""), 9, 0, 0, 0, 0 },
 
-  { 26, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+  { 16, 1, TARGET_STRING("HT08_CASE/Power Limit"),
     TARGET_STRING(""), 10, 0, 0, 0, 0 },
 
-  { 27, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING(""), 11, 0, 0, 0, 0 },
+  { 17, 1, TARGET_STRING("HT08_CASE/TCS"),
+    TARGET_STRING(""), 0, 0, 0, 0, 0 },
 
-  { 28, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING(""), 12, 0, 0, 0, 0 },
+  { 18, 1, TARGET_STRING("HT08_CASE/TCS"),
+    TARGET_STRING(""), 1, 0, 0, 0, 0 },
 
-  { 29, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING(""), 13, 0, 0, 0, 0 },
+  { 19, 1, TARGET_STRING("HT08_CASE/TCS"),
+    TARGET_STRING(""), 2, 0, 0, 0, 0 },
 
-  { 30, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING("Wheel Steer Avg [Deg]"), 14, 0, 0, 0, 0 },
+  { 20, 1, TARGET_STRING("HT08_CASE/TCS"),
+    TARGET_STRING(""), 3, 0, 0, 0, 0 },
 
-  { 31, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
-    TARGET_STRING(""), 19, 0, 0, 0, 0 },
-
-  { 32, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal FL"), 0, 0, 0, 0, 0 },
-
-  { 33, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal FR"), 1, 0, 0, 0, 0 },
-
-  { 34, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal RL"), 2, 0, 0, 0, 0 },
-
-  { 35, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
-    TARGET_STRING("Torque Normal RR"), 3, 0, 0, 0, 0 },
-
-  { 36, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+  { 21, 1, TARGET_STRING("HT08_CASE/TCS"),
     TARGET_STRING(""), 4, 0, 0, 0, 0 },
 
-  { 37, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+  { 22, 1, TARGET_STRING("HT08_CASE/TCS"),
     TARGET_STRING(""), 5, 0, 0, 0, 0 },
 
-  { 38, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+  { 23, 1, TARGET_STRING("HT08_CASE/TCS"),
     TARGET_STRING(""), 6, 0, 0, 0, 0 },
 
-  { 39, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/Model"),
+  { 24, 1, TARGET_STRING("HT08_CASE/TCS"),
     TARGET_STRING(""), 7, 0, 0, 0, 0 },
 
-  { 40, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("FR TORQUE PID"), 0, 0, 0, 0, 0 },
+  { 25, 1, TARGET_STRING("HT08_CASE/TCS"),
+    TARGET_STRING(""), 8, 0, 1, 0, 0 },
 
-  { 41, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("RR TORQUE PID"), 1, 0, 0, 0, 0 },
+  { 26, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Beta [Deg]"), 0, 0, 0, 0, 0 },
 
-  { 42, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("FL TORQUE PID"), 2, 0, 0, 0, 0 },
+  { 27, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Alpha FL [Deg]"), 1, 0, 0, 0, 0 },
 
-  { 43, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
-    TARGET_STRING("RL TORQUE PID"), 3, 0, 0, 0, 0 },
+  { 28, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Alpha FR [Deg]"), 2, 0, 0, 0, 0 },
 
-  { 44, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+  { 29, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Alpha RL [Deg]"), 3, 0, 0, 0, 0 },
+
+  { 30, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Alpha RR [Deg]"), 4, 0, 0, 0, 0 },
+
+  { 31, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Long Corner Vel FL"), 5, 0, 0, 0, 0 },
+
+  { 32, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Long Corner Vel FR"), 6, 0, 0, 0, 0 },
+
+  { 33, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Long Corner Vel RL"), 7, 0, 0, 0, 0 },
+
+  { 34, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Long Corner Vel RR"), 8, 0, 0, 0, 0 },
+
+  { 35, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 9, 0, 0, 0, 0 },
+
+  { 36, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 10, 0, 0, 0, 0 },
+
+  { 37, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 11, 0, 0, 0, 0 },
+
+  { 38, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 12, 0, 0, 0, 0 },
+
+  { 39, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 13, 0, 0, 0, 0 },
+
+  { 40, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING("Wheel Steer Avg [Deg]"), 14, 0, 0, 0, 0 },
+
+  { 41, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 19, 0, 0, 0, 0 },
+
+  { 42, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 20, 0, 0, 0, 0 },
+
+  { 43, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 21, 0, 0, 0, 0 },
+
+  { 44, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 22, 0, 0, 0, 0 },
+
+  { 45, 1, TARGET_STRING("HT08_CASE/Vehicle Math"),
+    TARGET_STRING(""), 23, 0, 0, 0, 0 },
+
+  { 46, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING("Torque Normal FL"), 0, 0, 0, 0, 0 },
+
+  { 47, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING("Torque Normal FR"), 1, 0, 0, 0, 0 },
+
+  { 48, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING("Torque Normal RL"), 2, 0, 0, 0, 0 },
+
+  { 49, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING("Torque Normal RR"), 3, 0, 0, 0, 0 },
+
+  { 50, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
     TARGET_STRING(""), 4, 0, 0, 0, 0 },
 
-  { 45, 1, TARGET_STRING("HT08_CASE/Yaw and Normal Force TV/PID_TV"),
+  { 51, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING(""), 5, 0, 0, 0, 0 },
+
+  { 52, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING(""), 6, 0, 0, 0, 0 },
+
+  { 53, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/Model"),
+    TARGET_STRING(""), 7, 0, 0, 0, 0 },
+
+  { 54, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/PID_TV"),
+    TARGET_STRING("FR TORQUE PID"), 0, 0, 0, 0, 0 },
+
+  { 55, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/PID_TV"),
+    TARGET_STRING("RR TORQUE PID"), 1, 0, 0, 0, 0 },
+
+  { 56, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/PID_TV"),
+    TARGET_STRING("FL TORQUE PID"), 2, 0, 0, 0, 0 },
+
+  { 57, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/PID_TV"),
+    TARGET_STRING("RL TORQUE PID"), 3, 0, 0, 0, 0 },
+
+  { 58, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/PID_TV"),
+    TARGET_STRING(""), 4, 0, 0, 0, 0 },
+
+  { 59, 1, TARGET_STRING("HT08_CASE/Yaw and Nor mal Force TV/PID_TV"),
     TARGET_STRING(""), 5, 0, 0, 0, 0 },
 
   {
@@ -211,52 +253,66 @@ static rtwCAPI_ModelParameters rtModelParameters[]{
 static void HT08_CASE_InitializeDataAddr(void* dataAddr[], HT08_CASE::
   B_HT08_CASE_T *HT08_CASE_B)
 {
-  dataAddr[0] = (void*) (&HT08_CASE_B->PowerLimit_o5);
-  dataAddr[1] = (void*) (&HT08_CASE_B->PowerLimit_o6);
-  dataAddr[2] = (void*) (&HT08_CASE_B->TorqueAdjustment);
-  dataAddr[3] = (void*) (&HT08_CASE_B->PowerLimit_o8);
-  dataAddr[4] = (void*) (&HT08_CASE_B->PowerLimit_o9);
-  dataAddr[5] = (void*) (&HT08_CASE_B->PowerLimit_o10);
-  dataAddr[6] = (void*) (&HT08_CASE_B->PowerLimit_o11);
-  dataAddr[7] = (void*) (&HT08_CASE_B->TCS_o1);
-  dataAddr[8] = (void*) (&HT08_CASE_B->TCS_o2);
-  dataAddr[9] = (void*) (&HT08_CASE_B->TCS_o3);
-  dataAddr[10] = (void*) (&HT08_CASE_B->TCS_o4);
-  dataAddr[11] = (void*) (&HT08_CASE_B->TCS_o5);
-  dataAddr[12] = (void*) (&HT08_CASE_B->TCS_o6);
-  dataAddr[13] = (void*) (&HT08_CASE_B->TCS_o7);
-  dataAddr[14] = (void*) (&HT08_CASE_B->TCS_o8);
-  dataAddr[15] = (void*) (&HT08_CASE_B->TCS_o9[0]);
-  dataAddr[16] = (void*) (&HT08_CASE_B->BetaDeg);
-  dataAddr[17] = (void*) (&HT08_CASE_B->AlphaFLDeg);
-  dataAddr[18] = (void*) (&HT08_CASE_B->AlphaFRDeg);
-  dataAddr[19] = (void*) (&HT08_CASE_B->AlphaRLDeg);
-  dataAddr[20] = (void*) (&HT08_CASE_B->AlphaRRDeg);
-  dataAddr[21] = (void*) (&HT08_CASE_B->LongCornerVelFL);
-  dataAddr[22] = (void*) (&HT08_CASE_B->LongCornerVelFR);
-  dataAddr[23] = (void*) (&HT08_CASE_B->LongCornerVelRL);
-  dataAddr[24] = (void*) (&HT08_CASE_B->LongCornerVelRR);
-  dataAddr[25] = (void*) (&HT08_CASE_B->VehicleMath_o10);
-  dataAddr[26] = (void*) (&HT08_CASE_B->SLFL);
-  dataAddr[27] = (void*) (&HT08_CASE_B->SLFR);
-  dataAddr[28] = (void*) (&HT08_CASE_B->SLRL);
-  dataAddr[29] = (void*) (&HT08_CASE_B->SLRR);
-  dataAddr[30] = (void*) (&HT08_CASE_B->WheelSteerAvgDeg);
-  dataAddr[31] = (void*) (&HT08_CASE_B->modeConstrainedTorqueRequest);
-  dataAddr[32] = (void*) (&HT08_CASE_B->TorqueNormalFL);
-  dataAddr[33] = (void*) (&HT08_CASE_B->TorqueNormalFR);
-  dataAddr[34] = (void*) (&HT08_CASE_B->TorqueNormalRL);
-  dataAddr[35] = (void*) (&HT08_CASE_B->TorqueNormalRR);
-  dataAddr[36] = (void*) (&HT08_CASE_B->Normal_Percent_FL);
-  dataAddr[37] = (void*) (&HT08_CASE_B->Normal_Percent_FR);
-  dataAddr[38] = (void*) (&HT08_CASE_B->Normal_Percent_RL);
-  dataAddr[39] = (void*) (&HT08_CASE_B->Normal_Percent_RR);
-  dataAddr[40] = (void*) (&HT08_CASE_B->FRTORQUEPID);
-  dataAddr[41] = (void*) (&HT08_CASE_B->RRTORQUEPID);
-  dataAddr[42] = (void*) (&HT08_CASE_B->FLTORQUEPID);
-  dataAddr[43] = (void*) (&HT08_CASE_B->RLTORQUEPID);
-  dataAddr[44] = (void*) (&HT08_CASE_B->PID_TV_o5);
-  dataAddr[45] = (void*) (&HT08_CASE_B->PID_TV_o6);
+  dataAddr[0] = (void*) (&HT08_CASE_B->Model_o5);
+  dataAddr[1] = (void*) (&HT08_CASE_B->Model_o6);
+  dataAddr[2] = (void*) (&HT08_CASE_B->Model_o7);
+  dataAddr[3] = (void*) (&HT08_CASE_B->Model_o8);
+  dataAddr[4] = (void*) (&HT08_CASE_B->Model1_o1);
+  dataAddr[5] = (void*) (&HT08_CASE_B->Model1_o2);
+  dataAddr[6] = (void*) (&HT08_CASE_B->PowerLimTorqueFL);
+  dataAddr[7] = (void*) (&HT08_CASE_B->PowerLimTorqueFR);
+  dataAddr[8] = (void*) (&HT08_CASE_B->PowerLimTorqueRL);
+  dataAddr[9] = (void*) (&HT08_CASE_B->PowerLimTorqueRR);
+  dataAddr[10] = (void*) (&HT08_CASE_B->PowerLimit_o5);
+  dataAddr[11] = (void*) (&HT08_CASE_B->PowerLimit_o6);
+  dataAddr[12] = (void*) (&HT08_CASE_B->TorqueAdjustment);
+  dataAddr[13] = (void*) (&HT08_CASE_B->PowerLimit_o8);
+  dataAddr[14] = (void*) (&HT08_CASE_B->PowerLimit_o9);
+  dataAddr[15] = (void*) (&HT08_CASE_B->PowerLimit_o10);
+  dataAddr[16] = (void*) (&HT08_CASE_B->PowerLimit_o11);
+  dataAddr[17] = (void*) (&HT08_CASE_B->TCS_o1);
+  dataAddr[18] = (void*) (&HT08_CASE_B->TCS_o2);
+  dataAddr[19] = (void*) (&HT08_CASE_B->TCS_o3);
+  dataAddr[20] = (void*) (&HT08_CASE_B->TCS_o4);
+  dataAddr[21] = (void*) (&HT08_CASE_B->TCS_o5);
+  dataAddr[22] = (void*) (&HT08_CASE_B->TCS_o6);
+  dataAddr[23] = (void*) (&HT08_CASE_B->TCS_o7);
+  dataAddr[24] = (void*) (&HT08_CASE_B->TCS_o8);
+  dataAddr[25] = (void*) (&HT08_CASE_B->TCS_o9[0]);
+  dataAddr[26] = (void*) (&HT08_CASE_B->BetaDeg);
+  dataAddr[27] = (void*) (&HT08_CASE_B->AlphaFLDeg);
+  dataAddr[28] = (void*) (&HT08_CASE_B->AlphaFRDeg);
+  dataAddr[29] = (void*) (&HT08_CASE_B->AlphaRLDeg);
+  dataAddr[30] = (void*) (&HT08_CASE_B->AlphaRRDeg);
+  dataAddr[31] = (void*) (&HT08_CASE_B->LongCornerVelFL);
+  dataAddr[32] = (void*) (&HT08_CASE_B->LongCornerVelFR);
+  dataAddr[33] = (void*) (&HT08_CASE_B->LongCornerVelRL);
+  dataAddr[34] = (void*) (&HT08_CASE_B->LongCornerVelRR);
+  dataAddr[35] = (void*) (&HT08_CASE_B->VehicleMath_o10);
+  dataAddr[36] = (void*) (&HT08_CASE_B->SLFL);
+  dataAddr[37] = (void*) (&HT08_CASE_B->SLFR);
+  dataAddr[38] = (void*) (&HT08_CASE_B->SLRL);
+  dataAddr[39] = (void*) (&HT08_CASE_B->SLRR);
+  dataAddr[40] = (void*) (&HT08_CASE_B->WheelSteerAvgDeg);
+  dataAddr[41] = (void*) (&HT08_CASE_B->modeConstrainedTorqueRequest);
+  dataAddr[42] = (void*) (&HT08_CASE_B->VehicleMath_o21);
+  dataAddr[43] = (void*) (&HT08_CASE_B->VehicleMath_o22);
+  dataAddr[44] = (void*) (&HT08_CASE_B->VehicleMath_o23);
+  dataAddr[45] = (void*) (&HT08_CASE_B->VehicleMath_o24);
+  dataAddr[46] = (void*) (&HT08_CASE_B->TorqueNormalFL);
+  dataAddr[47] = (void*) (&HT08_CASE_B->TorqueNormalFR);
+  dataAddr[48] = (void*) (&HT08_CASE_B->TorqueNormalRL);
+  dataAddr[49] = (void*) (&HT08_CASE_B->TorqueNormalRR);
+  dataAddr[50] = (void*) (&HT08_CASE_B->Normal_Percent_FL);
+  dataAddr[51] = (void*) (&HT08_CASE_B->Normal_Percent_FR);
+  dataAddr[52] = (void*) (&HT08_CASE_B->Normal_Percent_RL);
+  dataAddr[53] = (void*) (&HT08_CASE_B->Normal_Percent_RR);
+  dataAddr[54] = (void*) (&HT08_CASE_B->FRTORQUEPID);
+  dataAddr[55] = (void*) (&HT08_CASE_B->RRTORQUEPID);
+  dataAddr[56] = (void*) (&HT08_CASE_B->FLTORQUEPID);
+  dataAddr[57] = (void*) (&HT08_CASE_B->RLTORQUEPID);
+  dataAddr[58] = (void*) (&HT08_CASE_B->PID_TV_o5);
+  dataAddr[59] = (void*) (&HT08_CASE_B->PID_TV_o6);
 }
 
 #endif
@@ -322,6 +378,20 @@ static void HT08_CASE_InitializeLoggingFunctions(RTWLoggingFcnPtr loggingPtrs[])
   loggingPtrs[43] = (nullptr);
   loggingPtrs[44] = (nullptr);
   loggingPtrs[45] = (nullptr);
+  loggingPtrs[46] = (nullptr);
+  loggingPtrs[47] = (nullptr);
+  loggingPtrs[48] = (nullptr);
+  loggingPtrs[49] = (nullptr);
+  loggingPtrs[50] = (nullptr);
+  loggingPtrs[51] = (nullptr);
+  loggingPtrs[52] = (nullptr);
+  loggingPtrs[53] = (nullptr);
+  loggingPtrs[54] = (nullptr);
+  loggingPtrs[55] = (nullptr);
+  loggingPtrs[56] = (nullptr);
+  loggingPtrs[57] = (nullptr);
+  loggingPtrs[58] = (nullptr);
+  loggingPtrs[59] = (nullptr);
 }
 
 #endif
@@ -394,7 +464,7 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
   //           elementMap, sampleTimeMap, dimensionArray},
   //  TargetType: targetType
 
-  { rtBlockSignals, 46,
+  { rtBlockSignals, 60,
     (nullptr), 0,
     (nullptr), 0 },
 
@@ -407,10 +477,10 @@ static rtwCAPI_ModelMappingStaticInfo mmiStatic{
     rtElementMap, rtSampleTimeMap, rtDimensionArray },
   "float",
 
-  { 3407668697U,
-    4011304782U,
-    2244932535U,
-    399722524U },
+  { 284213981U,
+    2247366598U,
+    3930860681U,
+    3049630293U },
   (nullptr), 0,
   (boolean_T)0
 };
@@ -462,7 +532,7 @@ void HT08_CASE_InitializeDataMapInfo(HT08_CASE::RT_MODEL_HT08_CASE_T *const
   // Set reference to submodels
   rtwCAPI_SetChildMMIArray(HT08_CASE_M->DataMapInfo.mmi,
     HT08_CASE_M->DataMapInfo.childMMI);
-  rtwCAPI_SetChildMMIArrayLen(HT08_CASE_M->DataMapInfo.mmi, 5);
+  rtwCAPI_SetChildMMIArrayLen(HT08_CASE_M->DataMapInfo.mmi, 7);
 }
 
 #else                                  // HOST_CAPI_BUILD
@@ -494,22 +564,28 @@ extern "C"
 
     // Set reference to submodels
     dataMap->childMMI[0] = &(dataMap->child0.mmi);
-    POWER_LIMIT_host_InitializeDataMapInfo(&(dataMap->child0),
-      "HT08_CASE/Power Limit");
+    NOREGEN_5KPH_host_InitializeDataMapInfo(&(dataMap->child0),
+      "HT08_CASE/Model");
     dataMap->childMMI[1] = &(dataMap->child1.mmi);
-    TRACTION_CONTROL_host_InitializeDataMapInfo(&(dataMap->child1),
-      "HT08_CASE/TCS");
+    TORQUE_BIAS_host_InitializeDataMapInfo(&(dataMap->child1),
+      "HT08_CASE/Model1");
     dataMap->childMMI[2] = &(dataMap->child2.mmi);
-    BasicVehicleMath_host_InitializeDataMapInfo(&(dataMap->child2),
-      "HT08_CASE/Vehicle Math");
+    POWER_LIMIT_host_InitializeDataMapInfo(&(dataMap->child2),
+      "HT08_CASE/Power Limit");
     dataMap->childMMI[3] = &(dataMap->child3.mmi);
-    NORMAL_FORCE_TV_host_InitializeDataMapInfo(&(dataMap->child3),
-      "HT08_CASE/Yaw and Normal Force TV/Model");
+    TRACTION_CONTROL_host_InitializeDataMapInfo(&(dataMap->child3),
+      "HT08_CASE/TCS");
     dataMap->childMMI[4] = &(dataMap->child4.mmi);
-    PID_TV_host_InitializeDataMapInfo(&(dataMap->child4),
-      "HT08_CASE/Yaw and Normal Force TV/PID_TV");
+    BasicVehicleMath_host_InitializeDataMapInfo(&(dataMap->child4),
+      "HT08_CASE/Vehicle Math");
+    dataMap->childMMI[5] = &(dataMap->child5.mmi);
+    NORMAL_FORCE_TV_host_InitializeDataMapInfo(&(dataMap->child5),
+      "HT08_CASE/Yaw and Nor mal Force TV/Model");
+    dataMap->childMMI[6] = &(dataMap->child6.mmi);
+    PID_TV_host_InitializeDataMapInfo(&(dataMap->child6),
+      "HT08_CASE/Yaw and Nor mal Force TV/PID_TV");
     rtwCAPI_SetChildMMIArray(dataMap->mmi, dataMap->childMMI);
-    rtwCAPI_SetChildMMIArrayLen(dataMap->mmi, 5);
+    rtwCAPI_SetChildMMIArrayLen(dataMap->mmi, 7);
   }
 
 #ifdef __cplusplus
