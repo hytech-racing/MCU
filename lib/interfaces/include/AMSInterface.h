@@ -51,8 +51,6 @@ public:
     /* Check if either lowest cell or total pack is below threshold*/
     bool pack_charge_is_critical(); 
 
-    void coulomb_counter();
-
     //SETTERS//    
     /* set software OK pin */
     void set_state_ok_high(bool ok_high);    
@@ -65,6 +63,11 @@ public:
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
 
+    /**
+     * Initializes the charge member variable from the voltage of the minimum cell using the voltage_lookup_table.
+     * 
+     * @return The charge, in coulombs, that the charge member variable is initialized to.
+    */
     float initialize_charge();
     float get_SoC_em();
     float get_SoC_acu();
@@ -79,6 +82,11 @@ public:
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
     /* read ACU current shunt messages */
     void read_current_shunt_CAN(const CAN_message_t &can_msg);
+
+    // Getters (for testing purposes)
+    BMS_VOLTAGES_t get_bms_voltages() {return bms_voltages_;}
+    EM_MEASUREMENT_t get_em_measurements() {return em_measurements_;}
+    ACU_SHUNT_MEASUREMENTS_t get_acu_shunt_measurements() {return acu_shunt_measurements_;}
 
 private:
     /* Private functions */
@@ -110,14 +118,14 @@ private:
     float calc_current;
     float shunt_voltage;
     float current;
-    float charge;
+    float charge; // Current charge in the accumulator. Stored in coulombs.
     float SoC;
     float voltage_lookup_table[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
-    3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3,701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
+    3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3.701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
     3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
     3.56, 3.56, 3.549, 3.549, 3.549, 3.549, 3.538, 3.538, 3.551, 3.546, 3.535, 3.535, 3.535, 3.53, 3.524, 3.524, 3.524, 3.513,
     3.513, 3.513, 3.503, 3.503, 3.492, 3.492, 3.492, 3.487, 3.481, 3.481, 3.476, 3.471, 3.46, 3.46, 3.449, 3.444, 3.428, 3.428,
-    3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 0};
+    3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 3, 0};
     elapsedMicros CC_integrator_timer = 0;
 };
 

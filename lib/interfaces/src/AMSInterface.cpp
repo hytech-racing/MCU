@@ -65,10 +65,13 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 
 float AMSInterface::initialize_charge() {
     int i = 0;
-    while (abs(HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - voltage_lookup_table[i]) <= abs(HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - voltage_lookup_table[i+1])) {
+    while (HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - voltage_lookup_table[i] < 0) {
         i++;
     }
-    charge = ((100 - i)/100) * MAX_PACK_CHARGE;
+    charge = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
+    // return HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+    // return bms_voltages_.low_voltage_ro;
+    return charge;
 }
 
 float AMSInterface::get_SoC_em() {
@@ -89,7 +92,7 @@ float AMSInterface::get_SoC_acu() {
 
 void AMSInterface::tick50() {
     get_SoC_em();
-    get_SoC_acu();
+    // get_SoC_acu();
 }
 
 //RETRIEVE CAN MESSAGES//

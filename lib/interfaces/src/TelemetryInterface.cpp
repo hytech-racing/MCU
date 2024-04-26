@@ -167,10 +167,10 @@ void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
     // TODO: change this to use actual torque values from inverter
     // Torque current just temporary for gearbox seal validation
     DRIVETRAIN_TORQUE_TELEM_t torque;
-    torque.fl_motor_torque = fl->get_torque_current();
-    torque.fr_motor_torque = fr->get_torque_current();
-    torque.rl_motor_torque = rl->get_torque_current();
-    torque.rr_motor_torque = rr->get_torque_current();
+    torque.fl_motor_torque_ro = fl->get_torque_current();
+    torque.fr_motor_torque_ro = fr->get_torque_current();
+    torque.rl_motor_torque_ro = rl->get_torque_current();
+    torque.rr_motor_torque_ro = rr->get_torque_current();
 
     enqueue_new_CAN<DRIVETRAIN_TORQUE_TELEM_t>(&torque, &Pack_DRIVETRAIN_TORQUE_TELEM_hytech);
 }
