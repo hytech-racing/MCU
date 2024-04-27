@@ -6,6 +6,9 @@ jobs:
   run_build_and_tests:
     runs-on: ubuntu-latest
     steps:
+    - uses: webfactory/ssh-agent@v0.9.0
+      with:
+          ssh-private-key: ${{ secrets.CASE_SSH_PRIVATE_KEY }}
     - name: Check out the repository
       uses: actions/checkout@v3
 
