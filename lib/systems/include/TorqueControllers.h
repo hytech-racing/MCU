@@ -51,12 +51,23 @@ const float launch_stop_accel_threshold = .5;
 
 const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
     .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
-    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}};
+    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}
+};
+
+struct TorqueControllerInput_s
+{
+    const SysTick_s &tick;
+    const PedalsSystemData_s &pedals;
+    const vector_nav &vn;
+    const SteeringSystemData_s &steering;
+    const LoadCellInterfaceOutput_s &lc;
+    const DrivetrainDynamicReport_s &drivetrain;
+    const float &torqueLimit;
+};
 
 struct TorqueControllerOutput_s
 {
     DrivetrainCommand_s command;
-    bool ready;
 };
 
 /* TC STRUCTS */
@@ -88,42 +99,72 @@ enum class LaunchStates_e
     LAUNCHING
 };
 
+enum class ControllerStates_e
+{
+    NOT_READY,
+    READY,
+    ACTIVE,
+    SLEEPING
+};
+
 /* TORQUE CONTROLLERS */
 
 /*
-    Base torque controller to allow access to internal torque controller members
+    Base torque controller class
 */
-class TorqueControllerBase
-{
-public:
-    /* returns the launch state for the purpose of lighting the dahsboard LED and unit testing. To be overridden in launch torque modes */
-    virtual LaunchStates_e get_launch_state() { return LaunchStates_e::NO_LAUNCH_MODE; }
-};
-
-template <TorqueController_e TorqueControllerType>
-class TorqueController : public TorqueControllerBase
+class TorqueController
 {
 protected:
 
+    ControllerStates_e state_ = ControllerStates_e::NOT_READY;
+    TorqueControllerOutput_s writeout_ = {.command = TC_COMMAND_NO_TORQUE};
+
 public:
+    // constructor is needed here for the use of maps in the mux
+    // if there is no constructor in the base class, it will complain
+    // that it cannot construct an object for the map if it doesn't exist
+    TorqueController() {}
+    /* writeout getter that returns a torque controller's drivetrain command*/
+    virtual TorqueControllerOutput_s writeout() const {return writeout_; }
+
+    /* getter that returns the current controller state */
+    ControllerStates_e get_state() const { return state_; }
+
+    /* returns the launch state for the purpose of lighting the dahsboard LED and unit testing. To be overridden in launch torque modes */
+    virtual LaunchStates_e get_launch_state() const { return LaunchStates_e::NO_LAUNCH_MODE; }
+
+    float get_torque_request(const PedalsSystemData_s &pedals, const float &torqueLimit)
+    {
+        float accelRequest = pedals.accelPercent - pedals.regenPercent;
+        float torqueRequest = 0.0;
+
+        if (accelRequest >= 0.0)
+        {
+            torqueRequest = accelRequest * torqueLimit;
+        } else {
+            torqueRequest = std::min(torqueLimit, MAX_REGEN_TORQUE) * accelRequest;
+        }
+
+        return torqueRequest;
+    }
+
+    virtual void tick(const TorqueControllerInput_s &in) { return; }
 };
 
-class TorqueControllerNone : public TorqueController<TC_NO_CONTROLLER>
+class TorqueControllerNone : public TorqueController
 {
 private:
 public:
-    TorqueControllerNone(TorqueControllerOutput_s &writeout)
+    TorqueControllerNone()
     {
-        writeout.command = TC_COMMAND_NO_TORQUE;
-        writeout.ready = true;
-    };
+        state_ = ControllerStates_e::READY;
+    }
 };
 
 /// @brief Simple torque controller that only considers pedal inputs and torque limit
-class TorqueControllerSimple : public TorqueController<TC_SAFE_MODE>
+class TorqueControllerSimple : public TorqueController
 {
 private:
-    TorqueControllerOutput_s &writeout_;
     float frontTorqueScale_ = 1.0;
     float rearTorqueScale_ = 1.0;
     float frontRegenTorqueScale_ = 1.0;
@@ -134,90 +175,76 @@ public:
     /// @param writeout the reference to the torque controller output being sent that contains the drivetrain command
     /// @param rearTorqueScale 0 to 2 scale on forward torque to rear wheels. 0 = FWD, 1 = Balanced, 2 = RWD
     /// @param regenTorqueScale same as rearTorqueScale but applies to regen torque split. 0 = All regen torque on the front, 1 = 50/50, 2 = all regen torque on the rear
-    TorqueControllerSimple(TorqueControllerOutput_s &writeout, float rearTorqueScale, float regenTorqueScale)
-        : writeout_(writeout),
-          frontTorqueScale_(2.0 - rearTorqueScale),
+    TorqueControllerSimple( float rearTorqueScale, float regenTorqueScale)
+        : frontTorqueScale_(2.0 - rearTorqueScale),
           rearTorqueScale_(rearTorqueScale),
           frontRegenTorqueScale_(2.0 - regenTorqueScale),
           rearRegenTorqueScale_(regenTorqueScale)
-    {
-        writeout_.command = TC_COMMAND_NO_TORQUE;
-        writeout_.ready = true;
-    }
-    TorqueControllerSimple(TorqueControllerOutput_s &writeout) : TorqueControllerSimple(writeout, 1.0, 1.0) {}
+          {
+            state_ = ControllerStates_e::READY;
+          }
 
-    void tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit);
+    TorqueControllerSimple() : TorqueControllerSimple(1.0, 1.0) {}
+
+    void tick(const TorqueControllerInput_s &in) override;
 };
 
-class TorqueControllerLoadCellVectoring : public TorqueController<TC_LOAD_CELL_VECTORING>
+class TorqueControllerLoadCellVectoring : public TorqueController
 {
 private:
-    TorqueControllerOutput_s &writeout_;
     float frontTorqueScale_ = 1.0;
     float rearTorqueScale_ = 1.0;
     float frontRegenTorqueScale_ = 1.0;
     float rearRegenTorqueScale_ = 1.0;
-    /*
-    FIR filter designed with
-    http://t-filter.appspot.com
+    // /*
+    // FIR filter designed with
+    // http://t-filter.appspot.com
 
-    sampling frequency: 100 Hz
+    // sampling frequency: 100 Hz
 
-    * 0 Hz - 10 Hz
-    gain = 1
-    desired ripple = 5 dB
-    actual ripple = 1.7659949026015025 dB
+    // * 0 Hz - 10 Hz
+    // gain = 1
+    // desired ripple = 5 dB
+    // actual ripple = 1.7659949026015025 dB
 
-    * 40 Hz - 50 Hz
-    gain = 0
-    desired attenuation = -40 dB
-    actual attenuation = -47.34009380570117 dB
-    */
-    const static int numFIRTaps_ = 5;
-    float FIRTaps_[numFIRTaps_] = {
-        0.07022690881526232,
-        0.27638313122745306,
-        0.408090001549378,
-        0.27638313122745306,
-        0.07022690881526232};
-    int FIRCircBufferHead = 0; // index of the latest sample in the raw buffer
-    float loadCellForcesRaw_[4][numFIRTaps_] = {};
-    float loadCellForcesFiltered_[4] = {};
-    // Some checks that can disable the controller
-    const int errorCountThreshold_ = 25;
-    int loadCellsErrorCounter_[4] = {};
-    bool FIRSaturated_ = false;
-    bool ready_ = false;
+    // * 40 Hz - 50 Hz
+    // gain = 0
+    // desired attenuation = -40 dB
+    // actual attenuation = -47.34009380570117 dB
+    // */
+    // const static int numFIRTaps_ = 5;
+    // float FIRTaps_[numFIRTaps_] = {
+    //     0.07022690881526232,
+    //     0.27638313122745306,
+    //     0.408090001549378,
+    //     0.27638313122745306,
+    //     0.07022690881526232};
+    // int FIRCircBufferHead = 0; // index of the latest sample in the raw buffer
+    // float loadCellForcesRaw_[4][numFIRTaps_] = {};
+    // float loadCellForcesFiltered_[4] = {};
+    // // Some checks that can disable the controller
+    // const int errorCountThreshold_ = 25;
+    // int loadCellsErrorCounter_[4] = {};
+    // bool FIRSaturated_ = false;
+    // bool ready_ = false;
 
 public:
     /// @brief load cell TC with tunable F/R torque balance. Accel torque balance can be tuned independently of regen torque balance
-    /// @param writeout the reference to the torque controller output being sent that contains the drivetrain command
     /// @param rearTorqueScale 0 to 2 scale on forward torque to rear wheels. 0 = FWD, 1 = Balanced, 2 = RWD
     /// @param regenTorqueScale same as rearTorqueScale but applies to regen torque split. 0 = All regen torque on the front, 1 = 50/50, 2 = all regen torque on the rear
-    TorqueControllerLoadCellVectoring(TorqueControllerOutput_s &writeout, float rearTorqueScale, float regenTorqueScale)
-        : writeout_(writeout),
-          frontTorqueScale_(2.0 - rearTorqueScale),
+    TorqueControllerLoadCellVectoring(float rearTorqueScale, float regenTorqueScale)
+        : frontTorqueScale_(2.0 - rearTorqueScale),
           rearTorqueScale_(rearTorqueScale),
           frontRegenTorqueScale_(2.0 - regenTorqueScale),
-          rearRegenTorqueScale_(regenTorqueScale)
-    {
-        writeout_.command = TC_COMMAND_NO_TORQUE;
-        writeout_.ready = false;
-    }
-    TorqueControllerLoadCellVectoring(TorqueControllerOutput_s &writeout) : TorqueControllerLoadCellVectoring(writeout, 1.0, 1.0) {}
+          rearRegenTorqueScale_(regenTorqueScale) {}
+    TorqueControllerLoadCellVectoring() : TorqueControllerLoadCellVectoring(1.0, 1.0) {}
 
-    void tick(
-        const SysTick_s &tick,
-        const PedalsSystemData_s &pedalsData,
-        float torqueLimit,
-        const LoadCellInterfaceOutput_s &loadCellData
-    );
+    void tick(const TorqueControllerInput_s &in) override;
 };
 
-class BaseLaunchController
+class BaseLaunchController : public TorqueController
 {
 protected:
-    TorqueControllerOutput_s &writeout_;
     uint32_t time_of_launch_;
     double initial_ecef_x_;
     double initial_ecef_y_;
@@ -227,23 +254,15 @@ protected:
     float launch_speed_target_ = 0.0;
     int16_t init_speed_target_ = 0.0;
 public:
-    BaseLaunchController(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
-        : writeout_(writeout),
-          init_speed_target_(initial_speed_target)
-    {
-        writeout.command = TC_COMMAND_NO_TORQUE;
-        writeout_.ready = true;
-    }
+    BaseLaunchController(int16_t initial_speed_target)
+        : init_speed_target_(initial_speed_target) {}
 
-    void tick(const SysTick_s &tick,
-              const PedalsSystemData_s &pedalsData,
-              const float wheel_rpms[],
-              const vector_nav *vn_data);
+    void tick(const TorqueControllerInput_s &in) override;
 
-    virtual void calc_launch_algo(const vector_nav *vn_data) = 0;
+    virtual void calc_launch_algo(const vector_nav &vn_data) = 0;
 };
 
-class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>, public BaseLaunchController
+class TorqueControllerSimpleLaunch : public BaseLaunchController
 {
 private:
     float launch_rate_target_;
@@ -256,18 +275,21 @@ public:
         @param launch_rate specified launch rate in m/s^2
         @param initial_speed_target the initial speed commanded to the wheels
     */
-    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout, float launch_rate, int16_t initial_speed_target)
-        : BaseLaunchController(writeout, initial_speed_target),
-          launch_rate_target_(launch_rate) {}
+    TorqueControllerSimpleLaunch(float launch_rate, int16_t initial_speed_target)
+        : BaseLaunchController(initial_speed_target),
+          launch_rate_target_(launch_rate)
+          {
+            state_ = ControllerStates_e::READY;
+          }
 
-    TorqueControllerSimpleLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSimpleLaunch(writeout, DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
+    TorqueControllerSimpleLaunch() : TorqueControllerSimpleLaunch(DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state_; }
+    LaunchStates_e get_launch_state() const override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
+    void calc_launch_algo(const vector_nav &vn_data) override;
 };
 
-class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>, public BaseLaunchController
+class TorqueControllerSlipLaunch : public BaseLaunchController
 {
 private:
     float slip_ratio_;
@@ -281,18 +303,18 @@ public:
         @param slip_ratio specified launch rate in m/s^2
         @param initial_speed_target the initial speed commanded to the wheels
     */
-    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout, float slip_ratio, int16_t initial_speed_target)
-        : BaseLaunchController(writeout, initial_speed_target),
+    TorqueControllerSlipLaunch(float slip_ratio, int16_t initial_speed_target)
+        : BaseLaunchController(initial_speed_target),
           slip_ratio_(slip_ratio) {}
 
-    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
+    TorqueControllerSlipLaunch() : TorqueControllerSlipLaunch(DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state_; }
+    LaunchStates_e get_launch_state() const override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
+    void calc_launch_algo(const vector_nav &vn_data) override;
 };
 
-class TorqueControllerLookupLaunch : public TorqueController<TC_LOOKUP_LAUNCH>, BaseLaunchController
+class TorqueControllerLookupLaunch : public BaseLaunchController
 {
 private:
     bool init_position = false;
@@ -306,27 +328,14 @@ public:
         @param slip_ratio specified launch rate in m/s^2
         @param initial_speed_target the initial speed commanded to the wheels
     */
-    TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
-        : BaseLaunchController(writeout, initial_speed_target) {}
+    TorqueControllerLookupLaunch(int16_t initial_speed_target)
+        : BaseLaunchController(initial_speed_target) {}
 
-    TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerLookupLaunch(writeout, DEFAULT_LAUNCH_SPEED_TARGET) {}
+    TorqueControllerLookupLaunch() : TorqueControllerLookupLaunch(DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state_; }
+    LaunchStates_e get_launch_state() const override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
-};
-
-class TorqueControllerCASEWrapper : public TorqueController<TC_CASE_SYSTEM>
-{
-public:
-    void tick(const TCCaseWrapperTick_s &intake);
-    TorqueControllerCASEWrapper(TorqueControllerOutput_s &writeout) : writeout_(writeout)
-    {
-        writeout_ = writeout;
-    }
-
-private:
-    TorqueControllerOutput_s &writeout_;
+    void calc_launch_algo(const vector_nav &vn_data) override;
 };
 
 #endif /* __TORQUECONTROLLERS_H__ */

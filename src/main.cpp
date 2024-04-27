@@ -370,7 +370,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             torque_controller_mux.getTorqueLimit(),
             ams_interface.get_filtered_min_cell_voltage(),
             telem_interface.get_glv_voltage(a1.get()),
-            static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
+            static_cast<int>(torque_controller_mux.activeController().get_launch_state()),
             dashboard.getDialMode());
 
         main_ecu.tick(

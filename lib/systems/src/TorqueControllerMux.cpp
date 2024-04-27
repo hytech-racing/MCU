@@ -13,15 +13,27 @@ void TorqueControllerMux::tick(
     const vector_nav &vn_data,
     const DrivetrainCommand_s &CASECommand)
 {
+
+    TorqueControllerInput_s input = 
+    {
+        .tick = tick,
+        .pedals = pedalsData,
+        .vn = vn_data,
+        .steering = steeringData,
+        .lc = loadCellData,
+        .drivetrain = drivetrainData,
+        .torqueLimit = torqueLimitMap_[torqueLimit_],
+    };
+
     // Tick all torque controllers
-    torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
-    torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadCellData);
-    torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
-    torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
-    tcCASEWrapper_.tick(
-        (TCCaseWrapperTick_s){
-            .command = CASECommand,
-            .steeringData = steeringData});
+    torqueControllerSimple_.tick(input);
+    torqueControllerLoadCellVectoring_.tick(input);
+    torqueControllerSimpleLaunch_.tick(input);
+    torqueControllerSlipLaunch_.tick(input);
+    // tcCASEWrapper_.tick(
+    //     (TCCaseWrapperTick_s){
+    //         .command = CASECommand,
+    //         .steeringData = steeringData});
 
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
@@ -59,7 +71,7 @@ void TorqueControllerMux::tick(
             for (int i = 0; i < NUM_MOTORS; i++)
             {
                 float torqueDelta = abs(
-                    controllerOutputs_[static_cast<int>(muxMode_)].command.torqueSetpoints[i] - controllerOutputs_[static_cast<int>(dialModeMap_[dashboardDialMode])].command.torqueSetpoints[i]);
+                    controllerMap_[muxMode_].writeout().command.torqueSetpoints[i] - controllerMap_[dialModeMap_[dashboardDialMode]].writeout().command.torqueSetpoints[i]);
 
                 if (torqueDelta > MAX_TORQUE_DELTA_FOR_MODE_CHANGE)
                 {
@@ -69,7 +81,7 @@ void TorqueControllerMux::tick(
             }
 
             // Check if targeted controller is ready to be selected
-            bool controllerNotReadyPreventsModeChange = (controllerOutputs_[static_cast<int>(dialModeMap_[dashboardDialMode])].ready == false);
+            bool controllerNotReadyPreventsModeChange = (controllerMap_[muxMode_].get_state() == ControllerStates_e::NOT_READY);
 
             if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
             {
@@ -81,12 +93,12 @@ void TorqueControllerMux::tick(
         // Check if the current controller is ready. If it has faulted, revert to safe mode
         // When the car goes below 5m/s, it will attempt to re-engage the faulted controller
         // It will stay in safe mode if the controller is still faulted
-        if (controllerOutputs_[static_cast<int>(muxMode_)].ready == false)
+        if (controllerMap_[muxMode_].get_state() == ControllerStates_e::NOT_READY)
         {
             muxMode_ = TorqueController_e::TC_SAFE_MODE;
         }
 
-        drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
+        drivetrainCommand_ = controllerMap_[muxMode_].writeout().command;
 
         // apply torque limit before power limit to not power limit
         applyRegenLimit(&drivetrainCommand_, &drivetrainData);
