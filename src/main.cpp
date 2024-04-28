@@ -140,7 +140,6 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
@@ -207,7 +206,9 @@ CASEConfiguration case_config = {
 // Max motor rpm
 // Max regen torque
 // Max torque
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, case_config);
+CASESystem case_system(&CAN3_txBuffer, 100, 70, case_config);
+
+TorqueControllerMux torque_controller_mux(&CAN3_txBuffer, case_config, 1.0, 0.4);
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -469,17 +470,17 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    DrivetrainCommand_s controller_output = case_system.evaluate(
-        current_system_tick,
-        vn_interface.get_vn_struct(),
-        steering_system.getSteeringSystemData(),
-        drivetrain.get_dynamic_data(),
-        load_cell_interface.getLoadCellForces().loadCellConversions, // should CASE use filtered load cells?
-        pedals_system.getPedalsSystemData(),
-        0,
-        fsm.get_state(),
-        dashboard.startButtonPressed(),
-        3);
+    // DrivetrainCommand_s controller_output = case_system.evaluate(
+    //     current_system_tick,
+    //     vn_interface.get_vn_struct(),
+    //     steering_system.getSteeringSystemData(),
+    //     drivetrain.get_dynamic_data(),
+    //     load_cell_interface.getLoadCellForces().loadCellConversions, // should CASE use filtered load cells?
+    //     pedals_system.getPedalsSystemData(),
+    //     0,
+    //     fsm.get_state(),
+    //     dashboard.startButtonPressed(),
+    //     3);
 
     torque_controller_mux.tick(
         current_system_tick,
@@ -489,6 +490,5 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
-        vn_interface.get_vn_struct(),
-        controller_output);
+        vn_interface.get_vn_struct());
 }

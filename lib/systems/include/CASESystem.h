@@ -2,11 +2,11 @@
 #define CASESYSTEM
 
 #include "HT08_CASE.h"
-#include "HytechCANInterface.h"
-#include "PedalsSystem.h"
-#include "DrivetrainSystem.h"
-#include "SteeringSystem.h"
-#include "MCUStateMachine.h"
+#include "TorqueControllers.h"
+#include "MessageQueueDefine.h"
+
+const unsigned long default_controller_send_period_ms = 100;
+const unsigned long default_vehicle_math_offset_ms = 70;
 
 struct CASEConfiguration
 {
@@ -56,8 +56,7 @@ struct CASEConfiguration
 /// @brief this class with both take in sensor inputs as well as handle calculations for various derived states of the car.
 //         this class will also handle output onto the CAN bus of data
 /// @tparam message_queue the msg queue that is being used with the underlying msging interfaces
-template <typename message_queue>
-class CASESystem
+class CASESystem : public TorqueController
 {
 public:
     /// @brief constructor for state estimator system.
@@ -65,7 +64,7 @@ public:
     /// @param send_period_ms the period in which messages will be put into the queue to be sent in milliseconds.
     /// @param vehicle_math_offset_ms the offset in ms from controller message sending that the vehicle math messages will be sent
     CASESystem(
-        message_queue *can_queue,
+        CANBufferType *can_queue,
         unsigned long controller_send_period_ms,
         unsigned long vehicle_math_offset_ms,
         CASEConfiguration config)
@@ -93,17 +92,7 @@ public:
     /// @param power_kw current electrical power in kilo-watts
     /// @param reset_integral bool of whether or not to reset integral term
     /// @return controller output
-    DrivetrainCommand_s evaluate(
-        const SysTick_s &tick,
-        const vector_nav &vn_data,
-        const SteeringSystemData_s &steering_data,
-        const DrivetrainDynamicReport_s &drivetrain_data,
-        const veh_vec<AnalogConversion_s> &load_cell_vals,
-        const PedalsSystemData_s &pedals_data,
-        float power_kw,
-        CAR_STATE fsm_state,
-        bool start_button_pressed,
-        uint8_t vn_status);
+    void tick(const TorqueControllerInput_s &in) override;
 
     void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d, float brake_p, float brake_i, float brake_d)
     {
@@ -119,13 +108,14 @@ public:
         config_.yaw_pid_brakes_i = brake_i;
         config_.yaw_pid_brakes_d = brake_d;
     }
-    float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
+
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
     void configure(const CASEConfiguration &config)
     {
         config_ = config;
     }
+    
     float get_rpm_setpoint(float final_torque)
     {
         if (final_torque > 0)
@@ -140,11 +130,10 @@ public:
 
 private:
     CASEConfiguration config_;
-    message_queue *msg_queue_;
+    CANBufferType *msg_queue_;
     HT08_CASE case_;
 
     unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_, last_controller_pt3_send_time_, last_vehm_send_time_, controller_send_period_ms_;
 };
 
-#include "CASESystem.tpp"
 #endif

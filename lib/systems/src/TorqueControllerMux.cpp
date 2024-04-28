@@ -10,8 +10,7 @@ void TorqueControllerMux::tick(
     const LoadCellInterfaceOutput_s &loadCellData,
     DialMode_e dashboardDialMode,
     bool dashboardTorqueModeButtonPressed,
-    const vector_nav &vn_data,
-    const DrivetrainCommand_s &CASECommand)
+    const vector_nav &vn_data)
 {
 
     TorqueControllerInput_s input = 
@@ -24,6 +23,8 @@ void TorqueControllerMux::tick(
         .drivetrain = drivetrainData,
         .torqueLimit = torqueLimitMap_[torqueLimit_],
     };
+
+
 
     // Tick all torque controllers
     torqueControllerSimple_.tick(input);

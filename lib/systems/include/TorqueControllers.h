@@ -11,6 +11,7 @@
 #include "VectornavInterface.h"
 #include "SteeringSystem.h"
 #include "LoadCellInterface.h"
+#include "HytechCANInterface.h"
 
 #include "accel_lookup.h"
 
@@ -141,7 +142,8 @@ public:
         if (accelRequest >= 0.0)
         {
             torqueRequest = accelRequest * torqueLimit;
-        } else {
+        } else
+        {
             torqueRequest = std::min(torqueLimit, MAX_REGEN_TORQUE) * accelRequest;
         }
 
