@@ -123,7 +123,7 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
     HT08_CASE::ExtY_HT08_CASE_T res = case_.getExternalOutputs();
 
     // send these out at the send period if the controller is active
-    if (this->is_active()){
+    if (active){
         if ((in.tick.millis - last_controller_pt1_send_time_) >= (controller_send_period_ms_))
         {
             enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
