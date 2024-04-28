@@ -100,6 +100,12 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case ID_BMS_VOLTAGES:
             interfaces.ams_interface->retrieve_voltage_CAN(recvd_msg);
             break;
+        case ID_EM_MEASUREMENT:
+            interfaces.ams_interface->retrieve_em_measurement_CAN(recvd_msg);
+            break;
+        case ID_ACU_SHUNT_MEASUREMENTS:
+            interfaces.ams_interface->retrieve_current_shunt_CAN(recvd_msg);
+            break;
 
             // MC status msgs
         case ID_MC1_STATUS:

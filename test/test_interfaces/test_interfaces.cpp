@@ -18,19 +18,23 @@ int runUnityTests(void)
     /* TEST DASHBOARD */
     // RUN_TEST(test_dashboard_unpacking_can_message);
     // RUN_TEST(test_dashboard_circular_buffer);
-    /* TEST AMS */
-    // RUN_TEST(test_AMS_heartbeat);
-    /* TEST WATCHDOG */
-    // RUN_TEST(test_watchdog_kick);
-    // testing can interface
+    
+    /* TEST CAN INTERFACE*/
     // RUN_TEST(test_can_interface_send)
     // RUN_TEST(test_can_interface_send_and_receive_raw)
+
     /* TEST TELEMETRY */
     // RUN_TEST(test_telemetry_update_CAN);
 
-    /* TEST COULOMB COUNTING */
+    /* TEST AMS */
+    RUN_TEST(test_AMS_heartbeat);
+    RUN_TEST(test_current_shunt_CAN_message);
+    RUN_TEST(test_bms_voltages_CAN_message);
+    RUN_TEST(test_em_measurements_CAN_message);
+
+    /* TEST Coulomb Counting */
+    RUN_TEST(test_initialize_charge);
     RUN_TEST(test_get_SoC_em);
-    RUN_TEST(test_get_SoC_acu);
 
     return UNITY_END();
 }

@@ -69,8 +69,9 @@ float AMSInterface::initialize_charge() {
         i++;
     }
     charge = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
-    // return HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
-    // return bms_voltages_.low_voltage_ro;
+    
+    CC_integrator_timer = 0;
+
     return charge;
 }
 
@@ -91,8 +92,11 @@ float AMSInterface::get_SoC_acu() {
 }
 
 void AMSInterface::tick50() {
+
     get_SoC_em();
     // get_SoC_acu();
+
+    CC_integrator_timer = 0; // must reset timer
 }
 
 //RETRIEVE CAN MESSAGES//
@@ -109,8 +113,11 @@ void AMSInterface::retrieve_voltage_CAN(CAN_message_t &can_msg) {
     Unpack_BMS_VOLTAGES_hytech(&bms_voltages_, can_msg.buf, can_msg.len);
 }
 
+void AMSInterface::retrieve_em_measurement_CAN(CAN_message_t &can_msg) {
+    Unpack_EM_MEASUREMENT_hytech(&em_measurements_, can_msg.buf, can_msg.len);
+}
 
-void AMSInterface::read_current_shunt_CAN(const CAN_message_t &can_msg) {
+void AMSInterface::retrieve_current_shunt_CAN(const CAN_message_t &can_msg) {
     Unpack_ACU_SHUNT_MEASUREMENTS_hytech(&acu_shunt_measurements_, can_msg.buf, can_msg.len);
 }
 

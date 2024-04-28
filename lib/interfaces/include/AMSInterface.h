@@ -74,19 +74,40 @@ public:
     void tick50();
 
     //RETRIEVE CAN MESSAGES//
-    /* read BMS status messages */
+    
+    /**
+     * Reads this CAN message into the bms_status_ member variable. This function uses the OLD CAN library.
+     */
     void retrieve_status_CAN(unsigned long curr_millis, CAN_message_t &recvd_msg);
-    /* read BMS temperature messages */
+    
+    /**
+     * Reads this CAN message into the bms_temperatures_ member variable. This function uses the OLD CAN library.
+     */
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
-    /* read BMS voltage messages */
+    
+    /**
+     * Reads this CAN message into the bms_voltages_ member variable. This function
+     * does NOT apply the fromS() functions on the data. This function uses the NEW CAN library.
+     */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
-    /* read ACU current shunt messages */
-    void read_current_shunt_CAN(const CAN_message_t &can_msg);
+    
+    /**
+     * Reads this CAN message into the em_measurements_ member variable. This function
+     * does NOT apply the fromS() functions on the data. This function uses the NEW CAN library.
+     */
+    void retrieve_em_measurement_CAN(CAN_message_t &can_msg);
+
+    /**
+     * Reads this CAN message into the acu_shunt_measurements_ member variable. This function
+     * does NOT apply the fromS() functions on the data. This function uses the NEW CAN library.
+     */
+    void retrieve_current_shunt_CAN(const CAN_message_t &can_msg);
 
     // Getters (for testing purposes)
     BMS_VOLTAGES_t get_bms_voltages() {return bms_voltages_;}
     EM_MEASUREMENT_t get_em_measurements() {return em_measurements_;}
     ACU_SHUNT_MEASUREMENTS_t get_acu_shunt_measurements() {return acu_shunt_measurements_;}
+    
 
 private:
     /* Private functions */
