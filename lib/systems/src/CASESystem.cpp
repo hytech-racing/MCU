@@ -116,10 +116,6 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
     case_.setExternalInputs(&case_in);
     if ((in.tick.millis - last_eval_time_) >= 1)
     {
-        if ((fsm_state == CAR_STATE::READY_TO_DRIVE) && (start_button_pressed))
-        {
-            case_in.YawPIDConfig[1] = 0.0f;
-        }
         case_.step();
         last_eval_time_ = in.tick.millis;
     }
