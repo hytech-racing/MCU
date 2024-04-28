@@ -116,8 +116,8 @@ enum class ControllerStates_e
 class TorqueController
 {
 protected:
-
-    ControllerStates_e state_ = ControllerStates_e::NOT_READY;
+    bool ready = false;
+    bool active = false;
     TorqueControllerOutput_s writeout_ = {.command = TC_COMMAND_NO_TORQUE};
 
 public:
@@ -126,10 +126,18 @@ public:
     // that it cannot construct an object for the map if it doesn't exist
     TorqueController() {}
     /* writeout getter that returns a torque controller's drivetrain command*/
-    virtual TorqueControllerOutput_s writeout() const {return writeout_; }
+    virtual TorqueControllerOutput_s writeout() const { return writeout_; }
 
-    /* getter that returns the current controller state */
-    ControllerStates_e get_state() const { return state_; }
+    /* getter that returns the controller's readiness */
+    bool is_ready() const { return ready; }
+    /* getter that returns the controller's activeness */
+    bool is_active() const { return active; }
+
+    /* set the controller as active */
+    void activate() {if (ready) active = true; }
+
+    /* set the controller as inactive */
+    void deactivate() { active = false; }
 
     /* returns the launch state for the purpose of lighting the dahsboard LED and unit testing. To be overridden in launch torque modes */
     virtual LaunchStates_e get_launch_state() const { return LaunchStates_e::NO_LAUNCH_MODE; }
@@ -159,7 +167,7 @@ private:
 public:
     TorqueControllerNone()
     {
-        state_ = ControllerStates_e::READY;
+        ready = true;
     }
 };
 
@@ -183,7 +191,7 @@ public:
           frontRegenTorqueScale_(2.0 - regenTorqueScale),
           rearRegenTorqueScale_(regenTorqueScale)
           {
-            state_ = ControllerStates_e::READY;
+            ready = true;
           }
 
     TorqueControllerSimple() : TorqueControllerSimple(1.0, 1.0) {}
@@ -281,7 +289,7 @@ public:
         : BaseLaunchController(initial_speed_target),
           launch_rate_target_(launch_rate)
           {
-            state_ = ControllerStates_e::READY;
+            ready = true;
           }
 
     TorqueControllerSimpleLaunch() : TorqueControllerSimpleLaunch(DEFAULT_LAUNCH_RATE, DEFAULT_LAUNCH_SPEED_TARGET) {}
@@ -309,7 +317,7 @@ public:
         : BaseLaunchController(initial_speed_target),
           slip_ratio_(slip_ratio)
           {
-            state_ = ControllerStates_e::READY;
+            ready = true;
           }
 
     TorqueControllerSlipLaunch() : TorqueControllerSlipLaunch(DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
@@ -336,7 +344,7 @@ public:
     TorqueControllerLookupLaunch(int16_t initial_speed_target)
         : BaseLaunchController(initial_speed_target)
         {
-            state_ = ControllerStates_e::READY;
+            ready = true;
         }
 
     TorqueControllerLookupLaunch() : TorqueControllerLookupLaunch(DEFAULT_LAUNCH_SPEED_TARGET) {}

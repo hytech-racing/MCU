@@ -48,9 +48,9 @@ void TorqueControllerLoadCellVectoring::tick(const TorqueControllerInput_s &in)
     if (in.tick.triggers.trigger100)
     {
 
-        state_ = in.lc.FIRSaturated ? ControllerStates_e::READY : ControllerStates_e::NOT_READY;
+        ready = in.lc.FIRSaturated;
 
-        if (state_ == ControllerStates_e::READY)
+        if (ready)
         {
             // Calculate total normal force
             float sumNormalForce = 0.0f;

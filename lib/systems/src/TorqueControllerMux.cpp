@@ -24,17 +24,20 @@ void TorqueControllerMux::tick(
         .torqueLimit = torqueLimitMap_[torqueLimit_],
     };
 
+    // Tick current torque controller
+    controllerMap_[muxMode_].tick(input);
 
 
     // Tick all torque controllers
-    torqueControllerSimple_.tick(input);
-    torqueControllerLoadCellVectoring_.tick(input);
-    torqueControllerSimpleLaunch_.tick(input);
-    torqueControllerSlipLaunch_.tick(input);
+    // torqueControllerSimple_.tick(input);
+    // torqueControllerLoadCellVectoring_.tick(input);
+    // torqueControllerSimpleLaunch_.tick(input);
+    // torqueControllerSlipLaunch_.tick(input);
     // tcCASEWrapper_.tick(
     //     (TCCaseWrapperTick_s){
     //         .command = CASECommand,
     //         .steeringData = steeringData});
+
 
     // Tick torque button logic at 50hz
     if (tick.triggers.trigger50)
@@ -82,21 +85,24 @@ void TorqueControllerMux::tick(
             }
 
             // Check if targeted controller is ready to be selected
-            bool controllerNotReadyPreventsModeChange = (controllerMap_[muxMode_].get_state() == ControllerStates_e::NOT_READY);
+            bool controllerNotReadyPreventsModeChange = (controllerMap_[muxMode_].is_ready() == false);
 
             if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
             {
+                controllerMap_[muxMode_].deactivate();
                 muxMode_ = dialModeMap_[dashboardDialMode];
                 cur_dial_mode_ = dashboardDialMode;
+                controllerMap_[muxMode_].activate();
             }
         }
 
         // Check if the current controller is ready. If it has faulted, revert to safe mode
         // When the car goes below 5m/s, it will attempt to re-engage the faulted controller
         // It will stay in safe mode if the controller is still faulted
-        if (controllerMap_[muxMode_].get_state() == ControllerStates_e::NOT_READY)
+        if (controllerMap_[muxMode_].is_ready() == false)
         {
             muxMode_ = TorqueController_e::TC_SAFE_MODE;
+            controllerMap_[muxMode_].deactivate();
         }
 
         drivetrainCommand_ = controllerMap_[muxMode_].writeout().command;
