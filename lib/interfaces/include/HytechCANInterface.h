@@ -28,7 +28,7 @@ struct CANInterfaces
     InverterInterface<circular_buffer> *front_right_inv;
     InverterInterface<circular_buffer> *rear_left_inv;
     InverterInterface<circular_buffer> *rear_right_inv;
-    VNInterface<circular_buffer> *vn_interface;
+    VNInterface *vn_interface;
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
     SABInterface *sab_interface;

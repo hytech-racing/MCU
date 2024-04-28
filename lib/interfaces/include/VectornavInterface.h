@@ -3,6 +3,7 @@
 #include "FlexCAN_T4.h"
 #include "hytech.h"
 #include "Utility.h"
+#include "MessageQueueDefine.h"
 
 struct vector_nav {
         float velocity_x;
@@ -23,22 +24,18 @@ struct vector_nav {
         xyz_vec<float> angular_rates; 
     };
 
-template <typename message_queue>
 class VNInterface
 {
 private:
     /* Watchdog last kicked time */
-    message_queue *msg_queue_;
+    CANBufferType *msg_queue_;
     uint32_t can_id_;
     vector_nav vn_data;
     
 public:
-    VNInterface(message_queue *msg_output_queue) {
+    VNInterface(CANBufferType *msg_output_queue) {
         msg_queue_ = msg_output_queue;
     };
-    /* Kick watchdog */
-    
-
     // retrieve methods
     void retrieve_velocity_CAN(CAN_message_t &recvd_msg);
     
@@ -56,5 +53,4 @@ public:
     
     uint32_t get_id() { return can_id_;};
 };
-#include "VectornavInterface.tpp"
 #endif /* __WATCHDOG_INTERFACE_H__ */

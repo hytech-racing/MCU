@@ -103,7 +103,7 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
-VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
+VNInterface vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
 WatchdogInterface wd_interface(32);
