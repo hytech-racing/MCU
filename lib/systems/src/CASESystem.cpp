@@ -7,7 +7,7 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
     // case_in. as defined in HT08_CASE.h
     case_in.SteeringWheelAngleDeg = in.steering.angle;
 
-    case_in.TorqueAverageNm = get_torque_request(in.pedals, in.torqueLimit)
+    case_in.TorqueAverageNm = get_torque_request(in.pedals, in.torqueLimit);
 
     case_in.YawRaterads = in.vn.angular_rates.z;
 
@@ -18,10 +18,10 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
     // case_in.Vx_B = 5;
 
     // can these use filtered values?
-    case_in.FZFL = in.lc.loadCellConversions.FL;
-    case_in.FZFR = in.lc.loadCellConversions.FR;
-    case_in.FZRL = in.lc.loadCellConversions.RL;
-    case_in.FZRR = in.lc.loadCellConversions.RR;
+    case_in.FZFL = in.lc.loadCellConversions.FL.conversion;
+    case_in.FZFR = in.lc.loadCellConversions.FR.conversion;
+    case_in.FZRL = in.lc.loadCellConversions.RL.conversion;
+    case_in.FZRR = in.lc.loadCellConversions.RR.conversion;
 
     case_in.CurrentElectricalPowerkW = MAX_POWER_LIMIT;
 
@@ -104,11 +104,11 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
 
     case_in.MechPowerMaxkW = config_.MechPowerMaxkW;
 
-    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
+    if ((vn_active_start_time_ == 0) && (in.vn.vn_status >= 2))
     {
         vn_active_start_time_ = in.tick.millis;
     }
-    else if (vn_status < 2)
+    else if (in.vn.vn_status < 2)
     {
         vn_active_start_time_ = 0;
     }
