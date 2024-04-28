@@ -307,7 +307,10 @@ public:
     */
     TorqueControllerSlipLaunch(float slip_ratio, int16_t initial_speed_target)
         : BaseLaunchController(initial_speed_target),
-          slip_ratio_(slip_ratio) {}
+          slip_ratio_(slip_ratio)
+          {
+            state_ = ControllerStates_e::READY;
+          }
 
     TorqueControllerSlipLaunch() : TorqueControllerSlipLaunch(DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
@@ -331,7 +334,10 @@ public:
         @param initial_speed_target the initial speed commanded to the wheels
     */
     TorqueControllerLookupLaunch(int16_t initial_speed_target)
-        : BaseLaunchController(initial_speed_target) {}
+        : BaseLaunchController(initial_speed_target)
+        {
+            state_ = ControllerStates_e::READY;
+        }
 
     TorqueControllerLookupLaunch() : TorqueControllerLookupLaunch(DEFAULT_LAUNCH_SPEED_TARGET) {}
 

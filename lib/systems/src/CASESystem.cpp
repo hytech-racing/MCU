@@ -176,17 +176,13 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
         last_vehm_send_time_ = in.tick.millis;
     }
 
-    DrivetrainCommand_s command;
+    writeout_.command.torqueSetpoints[0] = res.FinalTorqueFL;
+    writeout_.command.torqueSetpoints[1] = res.FinalTorqueFR;
+    writeout_.command.torqueSetpoints[2] = res.FinalTorqueRL;
+    writeout_.command.torqueSetpoints[3] = res.FinalTorqueRR;
 
-    command.torqueSetpoints[0] = res.FinalTorqueFL;
-    command.torqueSetpoints[1] = res.FinalTorqueFR;
-    command.torqueSetpoints[2] = res.FinalTorqueRL;
-    command.torqueSetpoints[3] = res.FinalTorqueRR;
-
-    command.speeds_rpm[0] = get_rpm_setpoint(res.FinalTorqueFL);
-    command.speeds_rpm[1] = get_rpm_setpoint(res.FinalTorqueFR);
-    command.speeds_rpm[2] = get_rpm_setpoint(res.FinalTorqueRL);
-    command.speeds_rpm[3] = get_rpm_setpoint(res.FinalTorqueRR);
-
-    return command;
+    writeout_.command.speeds_rpm[0] = get_rpm_setpoint(res.FinalTorqueFL);
+    writeout_.command.speeds_rpm[1] = get_rpm_setpoint(res.FinalTorqueFR);
+    writeout_.command.speeds_rpm[2] = get_rpm_setpoint(res.FinalTorqueRL);
+    writeout_.command.speeds_rpm[3] = get_rpm_setpoint(res.FinalTorqueRR);
 }
