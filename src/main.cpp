@@ -1,7 +1,7 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-
+#include "ParameterSystem.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -282,7 +282,6 @@ void setup()
     /*
         Init Systems
     */
-
     safety_system.init();
 
     // Drivetrain set all inverters disabled
