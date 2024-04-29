@@ -1,19 +1,15 @@
 var searchData=
 [
-  ['watchdog_5finput_0',['WATCHDOG_INPUT',['../MCU__rev15__defs_8h.html#a2e4da32aa1ef69980b1ee0afb899862f',1,'MCU_rev15_defs.h']]],
-  ['watchdog_5fkick_5finterval_1',['WATCHDOG_KICK_INTERVAL',['../mock__interfaces_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26',1,'WATCHDOG_KICK_INTERVAL():&#160;WatchdogInterface.h'],['../interfaces_2include_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26',1,'WATCHDOG_KICK_INTERVAL():&#160;WatchdogInterface.h']]],
-  ['wd_5finterface_2',['wd_interface',['../src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb',1,'main.cpp']]],
-  ['wheel_5fdiameter_3',['WHEEL_DIAMETER',['../PhysicalParameters_8h.html#a8f307256fa2a407634b97cf749a54a6c',1,'PhysicalParameters.h']]],
-  ['wheeldeltarad_4',['WheelDeltarad',['../structPID__TV_1_1ExtU__PID__TV__T.html#a4607ec454cff9946016ed535eaee3d01',1,'PID_TV::ExtU_PID_TV_T']]],
-  ['wheelomegaflrads_5',['WheelOmegaFLrads',['../structBasicVehicleMath_1_1ExtU__BasicVehicleMath__T.html#abcb27690fdd95235b5c57093fdb06c7c',1,'BasicVehicleMath::ExtU_BasicVehicleMath_T']]],
-  ['wheelomegafrrads_6',['WheelOmegaFRrads',['../structBasicVehicleMath_1_1ExtU__BasicVehicleMath__T.html#ae564a07506a2f0f1bfe4df6aad4460cb',1,'BasicVehicleMath::ExtU_BasicVehicleMath_T']]],
-  ['wheelomegarlrads_7',['WheelOmegaRLrads',['../structBasicVehicleMath_1_1ExtU__BasicVehicleMath__T.html#a927e6bf24886a7aaf1b64fec74ecae65',1,'BasicVehicleMath::ExtU_BasicVehicleMath_T']]],
-  ['wheelomegarrrads_8',['WheelOmegaRRrads',['../structBasicVehicleMath_1_1ExtU__BasicVehicleMath__T.html#a0e5083c5a1a9106deb53df32bc83f279',1,'BasicVehicleMath::ExtU_BasicVehicleMath_T']]],
-  ['wordh_9',['wordH',['../structLittleEndianIEEEDouble.html#af06d938c7ecc1561e5e51fba3b77aee6',1,'LittleEndianIEEEDouble::wordH()'],['../structBigEndianIEEEDouble.html#a5dfc5681dc38f1f1bef513b4ad2c2e8e',1,'BigEndianIEEEDouble::wordH()']]],
-  ['wordl_10',['wordL',['../structBigEndianIEEEDouble.html#a598739bee320c62ff8c61a9141bf4dec',1,'BigEndianIEEEDouble::wordL()'],['../structLittleEndianIEEEDouble.html#a606de4acde1005975e56e1e4ae9234f8',1,'LittleEndianIEEEDouble::wordL()'],['../structIEEESingle.html#ae160e710602f9048e9f3d85053f7b8ee',1,'IEEESingle::wordL()']]],
-  ['wordlength_11',['wordLength',['../structrtwCAPI__FixPtMap__tag.html#aa6435948d33255a7116f28baf24074d1',1,'rtwCAPI_FixPtMap_tag']]],
-  ['wordlreal_12',['wordLreal',['../structIEEESingle.html#afec10c9e3f9764d54e28adb3c551d62d',1,'IEEESingle']]],
-  ['wordluint_13',['wordLuint',['../structIEEESingle.html#ab54f13fd229e1ffea7f2ad57e97add6a',1,'IEEESingle']]],
-  ['words_14',['words',['../structBigEndianIEEEDouble.html#a448b3efe2004a5ba8fc4c0a3bf260c8e',1,'BigEndianIEEEDouble::words()'],['../structLittleEndianIEEEDouble.html#a2449a897ca7f11561f0711308fb152f7',1,'LittleEndianIEEEDouble::words()']]],
-  ['writeout_5f_15',['writeout_',['../classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61',1,'BaseLaunchController']]]
+  ['y_0',['y',['../structxyz__vec.html#ab6a4217356d901f1dbc07da4012a9acb',1,'xyz_vec::y()'],['../structxy__vec.html#a646d067e58ab704f6bb3ada165ad3f48',1,'xy_vec::y()']]],
+  ['yaw_1',['yaw',['../structvector__nav.html#a6cbd10e24d2aa62f23750a1700ffd2c9',1,'vector_nav']]],
+  ['yaw_5fpid_5fbrakes_5fd_2',['yaw_pid_brakes_d',['../structCASEConfiguration.html#a6606076d3c546c4eec985e247a3a1720',1,'CASEConfiguration']]],
+  ['yaw_5fpid_5fbrakes_5fi_3',['yaw_pid_brakes_i',['../structCASEConfiguration.html#a62a9aaf945b235be877110ef02c67398',1,'CASEConfiguration']]],
+  ['yaw_5fpid_5fbrakes_5fp_4',['yaw_pid_brakes_p',['../structCASEConfiguration.html#a9e8cf0a4da4a5e8281b852cd9e914533',1,'CASEConfiguration']]],
+  ['yaw_5fpid_5fd_5',['yaw_pid_d',['../structCASEConfiguration.html#af331aae45775708c482f3ba322c7d956',1,'CASEConfiguration']]],
+  ['yaw_5fpid_5fi_6',['yaw_pid_i',['../structCASEConfiguration.html#a3f8c08dd91754e4a6e0f778a121342ee',1,'CASEConfiguration']]],
+  ['yaw_5fpid_5fp_7',['yaw_pid_p',['../structCASEConfiguration.html#a81acf3fe8e2d21d32b37913e2bda63a7',1,'CASEConfiguration']]],
+  ['yawpidcoastthreshold_8',['yawPIDCoastThreshold',['../structCASEConfiguration.html#a26aa9d7fbb05891b9dd57fc6320c4c2d',1,'CASEConfiguration']]],
+  ['yawpiderrorthreshold_9',['yawPIDErrorThreshold',['../structCASEConfiguration.html#af5ffe6cb6e075c44752d258ebfc339da',1,'CASEConfiguration']]],
+  ['yawpidmaxdifferential_10',['yawPIDMaxDifferential',['../structCASEConfiguration.html#a0bf59c759ffadbc59f55d217746d748d',1,'CASEConfiguration']]],
+  ['yawpidvelthreshold_11',['yawPIDVelThreshold',['../structCASEConfiguration.html#ace47c9d42dd5e4e4d0b6dbe27aba5a3d',1,'CASEConfiguration']]]
 ];

@@ -111,8 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3af766df74ce9d0894f18ec2d281af29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9ae1ca23e95f2088affd664c4f02837"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aa9ae1ca23e95f2088affd664c4f02837">check_reset_condition</a> ()</td></tr>
 <tr class="separator:aa9ae1ca23e95f2088affd664c4f02837"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afae36a9955eb94f69cee9f89a3296992"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#afae36a9955eb94f69cee9f89a3296992">get_current_data</a> ()</td></tr>
-<tr class="separator:afae36a9955eb94f69cee9f89a3296992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa703f3d20b3a6f38b034e5d55d5a707a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">get_dynamic_data</a> ()</td></tr>
+<tr class="separator:aa703f3d20b3a6f38b034e5d55d5a707a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename InverterType&gt;<br />
@@ -198,8 +198,9 @@ template&lt;typename InverterType &gt; </div>
 <div class="line"><span class="lineno">   45</span>        last_disable_cmd_time_ = 0;</div>
 <div class="line"><span class="lineno">   46</span>        last_general_cmd_time_ = 0; <span class="comment">// ms</span></div>
 <div class="line"><span class="lineno">   47</span>        mcu_interface_ = mcu_interface;</div>
-<div class="line"><span class="lineno">   48</span>    }</div>
-<div class="ttc" id="astructinverters_html"><div class="ttname"><a href="structinverters.html">inverters</a></div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00119">main.cpp:120</a></div></div>
+<div class="line"><span class="lineno">   48</span>        dynamic_data_ = {};</div>
+<div class="line"><span class="lineno">   49</span>    }</div>
+<div class="ttc" id="astructinverters_html"><div class="ttname"><a href="structinverters.html">inverters</a></div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00122">main.cpp:123</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -357,8 +358,8 @@ template&lt;typename InverterType &gt; </div>
 
 </div>
 </div>
-<a id="afae36a9955eb94f69cee9f89a3296992" name="afae36a9955eb94f69cee9f89a3296992"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afae36a9955eb94f69cee9f89a3296992">&#9670;&#160;</a></span>get_current_data()</h2>
+<a id="aa703f3d20b3a6f38b034e5d55d5a707a" name="aa703f3d20b3a6f38b034e5d55d5a707a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa703f3d20b3a6f38b034e5d55d5a707a">&#9670;&#160;</a></span>get_dynamic_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +367,7 @@ template&lt;typename InverterType &gt; </div>
 template&lt;typename InverterType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::get_current_data </td>
+          <td class="memname"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::get_dynamic_data </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -479,12 +480,12 @@ template&lt;typename InverterType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00051">51</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>    {</div>
-<div class="line"><span class="lineno">   53</span>        <a class="code hl_function" href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">reset_drivetrain</a>();</div>
-<div class="line"><span class="lineno">   54</span>        hv_en_requested_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   55</span>        enable_requested_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   56</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00052">52</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>    {</div>
+<div class="line"><span class="lineno">   54</span>        <a class="code hl_function" href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">reset_drivetrain</a>();</div>
+<div class="line"><span class="lineno">   55</span>        hv_en_requested_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   56</span>        enable_requested_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   57</span>    }</div>
 <div class="ttc" id="aclassDrivetrainSystem_html_ae4798f5013796504e5b6f3721a38e659"><div class="ttname"><a href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">DrivetrainSystem::reset_drivetrain</a></div><div class="ttdeci">void reset_drivetrain()</div></div>
 </div><!-- fragment -->
 </div>

@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['sabinterface_2ecpp_0',['SABInterface.cpp',['../SABInterface_8cpp.html',1,'']]],
-  ['sabinterface_2eh_1',['SABInterface.h',['../SABInterface_8h.html',1,'']]],
-  ['safety_5fsystem_5ftest_2eh_2',['safety_system_test.h',['../safety__system__test_8h.html',1,'']]],
-  ['safetysystem_2ecpp_3',['SafetySystem.cpp',['../SafetySystem_8cpp.html',1,'']]],
-  ['safetysystem_2eh_4',['SafetySystem.h',['../SafetySystem_8h.html',1,'']]],
-  ['state_5fmachine_5ftest_2eh_5',['state_machine_test.h',['../state__machine__test_8h.html',1,'']]],
-  ['steeringencoderinterface_2eh_6',['SteeringEncoderInterface.h',['../SteeringEncoderInterface_8h.html',1,'']]],
-  ['steeringsystem_2ecpp_7',['SteeringSystem.cpp',['../SteeringSystem_8cpp.html',1,'']]],
-  ['steeringsystem_2eh_8',['SteeringSystem.h',['../SteeringSystem_8h.html',1,'']]],
-  ['sysran_5ftypes_2eh_9',['sysran_types.h',['../sysran__types_8h.html',1,'']]]
+  ['pedals_5fsystem_5ftest_2eh_0',['pedals_system_test.h',['../pedals__system__test_8h.html',1,'']]],
+  ['pedalssystem_2ecpp_1',['PedalsSystem.cpp',['../PedalsSystem_8cpp.html',1,'']]],
+  ['pedalssystem_2eh_2',['PedalsSystem.h',['../PedalsSystem_8h.html',1,'']]],
+  ['physicalparameters_2eh_3',['PhysicalParameters.h',['../PhysicalParameters_8h.html',1,'']]],
+  ['presentation_2emd_4',['presentation.md',['../presentation_8md.html',1,'']]]
 ];

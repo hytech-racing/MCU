@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;FlexCAN_T4.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="HytechCANInterface_8h_source.html">HytechCANInterface.h</a>&quot;</code><br />
+<code>#include &quot;HytechCANInterface.h&quot;</code><br />
 <code>#include &quot;InverterInterface.h&quot;</code><br />
 </div>
 <p><a href="test__can__interface_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -90,7 +90,7 @@ $(function() {
 Typedefs</h2></td></tr>
 <tr class="memitem:a44b11fbb973dc0855b34fc2b17d93e4e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#a44b11fbb973dc0855b34fc2b17d93e4e">CircularBufferType</a> = Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt;</td></tr>
 <tr class="separator:a44b11fbb973dc0855b34fc2b17d93e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58a4eff70e9cfbd03e4030cc20425fb4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#a58a4eff70e9cfbd03e4030cc20425fb4">InverterInterfaceType</a> = <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; <a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> &gt;</td></tr>
+<tr class="memitem:a58a4eff70e9cfbd03e4030cc20425fb4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#a58a4eff70e9cfbd03e4030cc20425fb4">InverterInterfaceType</a> = <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; <a class="el" href="src_2main_8cpp.html#a60df1508e35d730e094b78fbcc264053">CircularBufferType</a> &gt;</td></tr>
 <tr class="separator:a58a4eff70e9cfbd03e4030cc20425fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -112,9 +112,9 @@ Variables</h2></td></tr>
 <tr class="separator:a7b7e0c51c97a7d2837c3aef9953192f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cd4a36a9d0a3518ad60b4bfb316dc3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="test__can__interface_8cpp.html#a58a4eff70e9cfbd03e4030cc20425fb4">InverterInterfaceType</a> fl_inv &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a></td></tr>
 <tr class="separator:a5cd4a36a9d0a3518ad60b4bfb316dc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84410d7cf1ca10a4641d0e47b76535be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt; <a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#a84410d7cf1ca10a4641d0e47b76535be">CAN_interfaces</a> = {&amp;fl_inv, &amp;fr_inv, &amp;rl_inv, &amp;rr_inv, 0, 0, 0}</td></tr>
+<tr class="memitem:a84410d7cf1ca10a4641d0e47b76535be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt; <a class="el" href="src_2main_8cpp.html#a60df1508e35d730e094b78fbcc264053">CircularBufferType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#a84410d7cf1ca10a4641d0e47b76535be">CAN_interfaces</a> = {&amp;fl_inv, &amp;fr_inv, &amp;rl_inv, &amp;rr_inv, 0, 0, 0}</td></tr>
 <tr class="separator:a84410d7cf1ca10a4641d0e47b76535be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf61b4d310d61b32c94820ef821b9ce2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#adf61b4d310d61b32c94820ef821b9ce2">ran_test</a> = <a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></td></tr>
+<tr class="memitem:adf61b4d310d61b32c94820ef821b9ce2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__can__interface_8cpp.html#adf61b4d310d61b32c94820ef821b9ce2">ran_test</a> = false</td></tr>
 <tr class="separator:adf61b4d310d61b32c94820ef821b9ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -125,7 +125,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a> =  Circular_Buffer&lt;uint8_t, (uint32_t)16, sizeof(CAN_message_t)&gt;</td>
+          <td class="memname">using <a class="el" href="src_2main_8cpp.html#a60df1508e35d730e094b78fbcc264053">CircularBufferType</a> =  Circular_Buffer&lt;uint8_t, (uint32_t)16, sizeof(CAN_message_t)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -141,7 +141,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="test__can__interface_8cpp.html#a58a4eff70e9cfbd03e4030cc20425fb4">InverterInterfaceType</a> =  <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt;<a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a>&gt;</td>
+          <td class="memname">using <a class="el" href="test__can__interface_8cpp.html#a58a4eff70e9cfbd03e4030cc20425fb4">InverterInterfaceType</a> =  <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt;<a class="el" href="src_2main_8cpp.html#a60df1508e35d730e094b78fbcc264053">CircularBufferType</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -173,7 +173,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   24</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>.setMaxMB(16);</div>
 <div class="line"><span class="lineno">   25</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>.enableFIFO();</div>
 <div class="line"><span class="lineno">   26</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>.enableFIFOInterrupt();</div>
-<div class="line"><span class="lineno">   27</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>.onReceive(<a class="code hl_function" href="HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a>);</div>
+<div class="line"><span class="lineno">   27</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>.onReceive(<a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a>);</div>
 <div class="line"><span class="lineno">   28</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>.mailboxStatus();</div>
 <div class="line"><span class="lineno">   29</span> </div>
 <div class="line"><span class="lineno">   30</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.begin();</div>
@@ -182,11 +182,11 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   33</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.enableFIFO();</div>
 <div class="line"><span class="lineno">   34</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.enableFIFOInterrupt();</div>
 <div class="line"><span class="lineno">   35</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.enableMBInterrupts();</div>
-<div class="line"><span class="lineno">   36</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.onReceive(<a class="code hl_function" href="HytechCANInterface_8h.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a>);</div>
+<div class="line"><span class="lineno">   36</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.onReceive(<a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a>);</div>
 <div class="line"><span class="lineno">   37</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a>.mailboxStatus();</div>
 <div class="line"><span class="lineno">   38</span>}</div>
-<div class="ttc" id="aHytechCANInterface_8h_html_a0a0a6eb75d69645e467f0a54cc36e3b1"><div class="ttname"><a href="HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a></div><div class="ttdeci">void on_can2_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00019">HytechCANInterface.cpp:19</a></div></div>
-<div class="ttc" id="aHytechCANInterface_8h_html_ac94cbbb38b834761938aa1a627ba27a3"><div class="ttname"><a href="HytechCANInterface_8h.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a></div><div class="ttdeci">void on_can1_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00012">HytechCANInterface.cpp:12</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a0a0a6eb75d69645e467f0a54cc36e3b1"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a></div><div class="ttdeci">void on_can2_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00019">HytechCANInterface.cpp:19</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_ac94cbbb38b834761938aa1a627ba27a3"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a></div><div class="ttdeci">void on_can1_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00012">HytechCANInterface.cpp:12</a></div></div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a80f7147b842094be4c8020b80b266107"><div class="ttname"><a href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a></div><div class="ttdeci">FlexCAN_T4&lt; CAN2, RX_SIZE_256, TX_SIZE_16 &gt; TEST_CAN2</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00007">test_can_interface.cpp:7</a></div></div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a8e0689a02ecae34c01dd81419908ed5f"><div class="ttname"><a href="test__can__interface_8cpp.html#a8e0689a02ecae34c01dd81419908ed5f">TEST_CAN1</a></div><div class="ttdeci">FlexCAN_T4&lt; CAN1, RX_SIZE_256, TX_SIZE_16 &gt; TEST_CAN1</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00006">test_can_interface.cpp:6</a></div></div>
 </div><!-- fragment -->
@@ -222,16 +222,16 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   61</span>        delay(10);</div>
 <div class="line"><span class="lineno">   62</span>        Serial.println(<span class="stringliteral">&quot;======= TEST 1 =======&quot;</span>);</div>
 <div class="line"><span class="lineno">   63</span>        Serial.println(<span class="stringliteral">&quot;can1 rx buffer size: (should be 1)&quot;</span>);</div>
-<div class="line"><span class="lineno">   64</span>        Serial.println(<a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available());</div>
+<div class="line"><span class="lineno">   64</span>        Serial.println(<a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available());</div>
 <div class="line"><span class="lineno">   65</span>        Serial.println(<span class="stringliteral">&quot;======= TEST 2 =======&quot;</span>);</div>
 <div class="line"><span class="lineno">   66</span> </div>
 <div class="line"><span class="lineno">   67</span>        Serial.println(<span class="stringliteral">&quot;can1 received message equal to sent msg&quot;</span>);</div>
 <div class="line"><span class="lineno">   68</span>        delay(10);</div>
-<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available())</div>
+<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available())</div>
 <div class="line"><span class="lineno">   70</span>        {</div>
 <div class="line"><span class="lineno">   71</span>            CAN_message_t recvd_msg;</div>
 <div class="line"><span class="lineno">   72</span>            uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">   73</span>            <a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">   73</span>            <a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">   74</span>            memmove(&amp;recvd_msg, buf, <span class="keyword">sizeof</span>(recvd_msg));</div>
 <div class="line"><span class="lineno">   75</span> </div>
 <div class="line"><span class="lineno">   76</span>            Serial.println(<span class="stringliteral">&quot;\tid = prev: (should be 1)&quot;</span>);</div>
@@ -253,7 +253,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   92</span>        Serial.println(<span class="stringliteral">&quot;can2 tx buffer size: (should be 1)&quot;</span>);</div>
 <div class="line"><span class="lineno">   93</span> </div>
 <div class="line"><span class="lineno">   94</span>        Serial.println(<a class="code hl_variable" href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a>.available());</div>
-<div class="line"><span class="lineno">   95</span>        <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>);</div>
+<div class="line"><span class="lineno">   95</span>        <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>);</div>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>        Serial.println(<span class="stringliteral">&quot;can2 tx buffer size: (should be 0)&quot;</span>);</div>
 <div class="line"><span class="lineno">   98</span> </div>
@@ -261,23 +261,23 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  100</span>        Serial.println(<span class="stringliteral">&quot;sent on can2&quot;</span>);</div>
 <div class="line"><span class="lineno">  101</span>        delay(10);</div>
 <div class="line"><span class="lineno">  102</span>        Serial.println(<span class="stringliteral">&quot;can1 rx buffer size: (should be 1) &quot;</span>);</div>
-<div class="line"><span class="lineno">  103</span>        Serial.print(<a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available());</div>
+<div class="line"><span class="lineno">  103</span>        Serial.print(<a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available());</div>
 <div class="line"><span class="lineno">  104</span>        Serial.println();</div>
-<div class="line"><span class="lineno">  105</span>        <a class="code hl_function" href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a>(<a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>, <a class="code hl_variable" href="test__can__interface_8cpp.html#a84410d7cf1ca10a4641d0e47b76535be">CAN_interfaces</a>, 1000);</div>
+<div class="line"><span class="lineno">  105</span>        <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a>(<a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>, <a class="code hl_variable" href="test__can__interface_8cpp.html#a84410d7cf1ca10a4641d0e47b76535be">CAN_interfaces</a>, 1000);</div>
 <div class="line"><span class="lineno">  106</span> </div>
 <div class="line"><span class="lineno">  107</span>        Serial.println(<span class="stringliteral">&quot;sent on can2&quot;</span>);</div>
 <div class="line"><span class="lineno">  108</span>        Serial.println(<span class="stringliteral">&quot;can1 rx buffer size: (should be 0) &quot;</span>);</div>
-<div class="line"><span class="lineno">  109</span>        Serial.println(<a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available());</div>
+<div class="line"><span class="lineno">  109</span>        Serial.println(<a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.available());</div>
 <div class="line"><span class="lineno">  110</span> </div>
 <div class="line"><span class="lineno">  111</span>        Serial.println(<span class="stringliteral">&quot;======= TEST 4 =======&quot;</span>);</div>
 <div class="line"><span class="lineno">  112</span> </div>
 <div class="line"><span class="lineno">  113</span>        rl_inv.command_reset();</div>
-<div class="line"><span class="lineno">  114</span>        <a class="code hl_function" href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>);</div>
+<div class="line"><span class="lineno">  114</span>        <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a>, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a80f7147b842094be4c8020b80b266107">TEST_CAN2</a>);</div>
 <div class="line"><span class="lineno">  115</span> </div>
 <div class="line"><span class="lineno">  116</span>        delay(10);</div>
 <div class="line"><span class="lineno">  117</span>        CAN_message_t recvd_msg;</div>
 <div class="line"><span class="lineno">  118</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">  119</span>        <a class="code hl_variable" href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  119</span>        <a class="code hl_variable" href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a>.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
 <div class="line"><span class="lineno">  120</span>        memmove(&amp;recvd_msg, buf, <span class="keyword">sizeof</span>(recvd_msg));</div>
 <div class="line"><span class="lineno">  121</span>        <span class="keywordflow">if</span> (recvd_msg.id == ID_MC3_SETPOINTS_COMMAND)</div>
 <div class="line"><span class="lineno">  122</span>        {</div>
@@ -296,9 +296,9 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  135</span>        }</div>
 <div class="line"><span class="lineno">  136</span>    }</div>
 <div class="line"><span class="lineno">  137</span>}</div>
-<div class="ttc" id="aHytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00073">HytechCANInterface.h:73</a></div></div>
-<div class="ttc" id="aHytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8h_source.html#l00185">HytechCANInterface.h:185</a></div></div>
-<div class="ttc" id="aHytechCANInterface_8h_html_ac6e1127319d762b3edecd01ba64541a1"><div class="ttname"><a href="HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN1_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00003">HytechCANInterface.cpp:3</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00072">HytechCANInterface.h:72</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00184">HytechCANInterface.h:184</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_ac6e1127319d762b3edecd01ba64541a1"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN1_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00003">HytechCANInterface.cpp:3</a></div></div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a5cd4a36a9d0a3518ad60b4bfb316dc3f"><div class="ttname"><a href="test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f">CAN2_txBuffer</a></div><div class="ttdeci">InverterInterfaceType fl_inv &amp; CAN2_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00013">test_can_interface.cpp:13</a></div></div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00009">test_can_interface.cpp:9</a></div></div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a84410d7cf1ca10a4641d0e47b76535be"><div class="ttname"><a href="test__can__interface_8cpp.html#a84410d7cf1ca10a4641d0e47b76535be">CAN_interfaces</a></div><div class="ttdeci">CANInterfaces&lt; CircularBufferType &gt; CAN_interfaces</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00018">test_can_interface.cpp:18</a></div></div>
@@ -358,7 +358,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt;<a class="el" href="src_2main_8cpp.html#a08862e40d3e8058f87294bbbd8945807">CircularBufferType</a>&gt; CAN_interfaces = {&amp;fl_inv, &amp;fr_inv, &amp;rl_inv, &amp;rr_inv, 0, 0, 0}</td>
+          <td class="memname"><a class="el" href="structCANInterfaces.html">CANInterfaces</a>&lt;<a class="el" href="src_2main_8cpp.html#a60df1508e35d730e094b78fbcc264053">CircularBufferType</a>&gt; CAN_interfaces = {&amp;fl_inv, &amp;fr_inv, &amp;rl_inv, &amp;rr_inv, 0, 0, 0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -390,7 +390,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool ran_test = <a class="el" href="BasicVehicleMath__ert__rtw_2rtwtypes_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></td>
+          <td class="memname">bool ran_test = false</td>
         </tr>
       </table>
 </div><div class="memdoc">

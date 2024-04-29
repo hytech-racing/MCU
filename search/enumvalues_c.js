@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['tc_5fload_5fcell_5fvectoring_0',['TC_LOAD_CELL_VECTORING',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034',1,'TorqueControllers.h']]],
-  ['tc_5flookup_5flaunch_1',['TC_LOOKUP_LAUNCH',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1',1,'TorqueControllers.h']]],
-  ['tc_5fno_5fcontroller_2',['TC_NO_CONTROLLER',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed',1,'TorqueControllers.h']]],
-  ['tc_5fnum_5fcontrollers_3',['TC_NUM_CONTROLLERS',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98',1,'TorqueControllers.h']]],
-  ['tc_5fpid_5fvectoring_4',['TC_PID_VECTORING',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a095605b003ce21305f9ae3252a7d9ec0',1,'TorqueControllers.h']]],
+  ['tc_5fcase_5fsystem_0',['TC_CASE_SYSTEM',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51',1,'TorqueControllers.h']]],
+  ['tc_5fload_5fcell_5fvectoring_1',['TC_LOAD_CELL_VECTORING',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034',1,'TorqueControllers.h']]],
+  ['tc_5flookup_5flaunch_2',['TC_LOOKUP_LAUNCH',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1',1,'TorqueControllers.h']]],
+  ['tc_5fno_5fcontroller_3',['TC_NO_CONTROLLER',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed',1,'TorqueControllers.h']]],
+  ['tc_5fnum_5fcontrollers_4',['TC_NUM_CONTROLLERS',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98',1,'TorqueControllers.h']]],
   ['tc_5fsafe_5fmode_5',['TC_SAFE_MODE',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6',1,'TorqueControllers.h']]],
   ['tc_5fsimple_5flaunch_6',['TC_SIMPLE_LAUNCH',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3',1,'TorqueControllers.h']]],
   ['tc_5fslip_5flaunch_7',['TC_SLIP_LAUNCH',['../TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0',1,'TorqueControllers.h']]],

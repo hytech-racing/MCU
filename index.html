@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MCU: building testing and running</title>
+<title>MCU: using and updating CASE</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,10 +69,23 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">building testing and running </div></div>
+  <div class="headertitle"><div class="title">using and updating CASE </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a>This project uses <a href="https://docs.platformio.org/en/latest/">Platformio</a> for building, testing, checking and packaging.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> </p>
+<h3><a class="anchor" id="autotoc_md1"></a>
+DO THIS ONCE</h3>
+<p >you will need to add ssh key to your github account to allow platformio to pull in CASE as a library.</p>
+<p ><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">follow these instructions on how to do this.</a></p>
+<h3><a class="anchor" id="autotoc_md2"></a>
+UPDATING CASE</h3>
+<p >to update case, look for the latest tag at this repo: <a href="https://github.com/hytech-racing/CASE_lib/tags">https://github.com/hytech-racing/CASE_lib/tags</a></p>
+<p >and then in the <code>platformio.ini</code> file in this repository, change the number at this line:</p>
+<p ><code>git+ssh://git@github.com/hytech-racing/CASE_lib.git#v(INSERT NUMBER HERE)</code></p>
+<p >for example: <code>git+ssh://git@github.com/hytech-racing/CASE_lib.git#v34</code></p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+building testing and running</h1>
+<p >This project uses <a href="https://docs.platformio.org/en/latest/">Platformio</a> for building, testing, checking and packaging.</p>
 <p >There are two main options for using Platformio:</p><ol type="1">
 <li><a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation">as a VSCode extension</a></li>
 <li><a href="https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html">the platformio core CLI</a></li>
@@ -83,28 +96,28 @@ $(function() {
 <div class="caption">
 ide upload and build</div></div>
     <p >The main thing to understand is that there exists two "environments" that this project gets built in (<code>test_env</code>). One of them is for native running of tests and the other is for building for the teensy and deploying to the teensy (<code>teensy41</code>).</p>
-<h2><a class="anchor" id="autotoc_md1"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Building</h2>
 <p >To build the project for an environment, simply use platformio build check mark after switching to the specified <code>env</code></p>
 <p >To build using platformio core CLI simply run <code>pio run -e teensy41</code></p>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Testing</h2>
 <p ><img src="image-2.png" alt="" class="inline" title="testing through vscode"/>    </p>
 <p >Before your feature / code addition / branch can get put into the <code>master</code> branch you must ensure the unit tests run with your code and that your code compiles. The remote CI will check your work and ensure that your code compiles and that it passes the unit tests however to check locally simply switch to the <code>test_env</code> and run the unit tests. This can be done through the VSCode IDE extension through the <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#project-tasks">project tasks menu</a> and selecting under <code>test_env</code> &gt; <code>Advanced</code> &gt; <code>Test</code>.</p>
 <p >To test using platformio core CLI simply run <code>pio test -e test_env</code>.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Uploading</h2>
 <p >To upload to the teensy simply use the platformio upload arrow shown <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar">here at number 3</a>.</p>
-<h4><a class="anchor" id="autotoc_md4"></a>
+<h4><a class="anchor" id="autotoc_md7"></a>
 On Implementing and Importance of tests</h4>
 <p >Unit tests are a great way to ensure that new features and new code in general can integrate and work well with other code. It provides a framework to verify that your stuff works the way it should and lets you know when and how it doesnt.</p>
 <p >This project uses unit tests in the <code>test</code> folder to for both local testing and testing in the CI on github.</p>
 <p >The remote github CI testing currently only encompases system level testing and not the hardware dependent testing that is available locally for running.</p>
 <p >You can see results of previous test runs on commits here: <a href="https://github.com/hytech-racing/MCU/actions">https://github.com/hytech-racing/MCU/actions</a></p>
 <p >These MUST be maintained for functionality of the car.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 setup vscode</h2>
-<h4><a class="anchor" id="autotoc_md6"></a>
+<h4><a class="anchor" id="autotoc_md9"></a>
 with auto-completition and advanced navigation using compile commands</h4>
 <p >the <code>compile_commands.json</code> file is a file that gets generated in the build folder upon excution of the <a href="https://docs.platformio.org/en/latest/integration/compile_commands.html">compiledb platformio task</a> that sets up the include paths for vscode. <a href="https://clangd.llvm.org/design/compile-commands">more about compile_commands.json here</a>.</p>
 <p >If you enter the platformio terminal, you can generate compile commands with</p><ol type="1">
@@ -135,15 +148,23 @@ with auto-completition and advanced navigation using compile commands</h4>
 <div class="line">}</div>
 </div><!-- fragment --><p> then you can select this configuration to be used with <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">this c/c++ extension</a> in vscode for auto-completition and code navigation.</p>
 <p >to select the configuration, use the hotkey <code>ctrl+shift+p</code> to open the command prompt in vscode, and then type `C/C++: Select a Configuration` and then select your configuration for which you named above.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
+updating CASE (manual / old way)</h1>
+<ol type="1">
+<li>generate the .zip file in HyTech_sim by generating the code for CASE</li>
+<li>while in the HyTech_sim directory, there exists <code>process_lib.py</code>. use this by running: <div class="fragment"><div class="line">python3 process_lib.py HT08_CONTROL_SYSTEM.zip /path/to/MCU/lib/CASE_lib CASE_lib</div>
+</div><!-- fragment --> while ensuring that you fill in your path to MCU.</li>
+<li>profit</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Design Lore of the Code</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 outline</h2>
 <p >Levels represent the layer of abstraction they are on. The reason for keeping track of this is to minimize the layers of abstraction for ease of understanding while also creating logical structure and getting maximum benefit per abstraction.</p>
-<h4><a class="anchor" id="autotoc_md9"></a>
+<h4><a class="anchor" id="autotoc_md13"></a>
 state diagram legend</h4>
 <p ><code>+</code> = Public <code>-</code> = Private</p>
-<h3><a class="anchor" id="autotoc_md10"></a>
+<h3><a class="anchor" id="autotoc_md14"></a>
 level 1: state machine goals for interface design and implementation</h3>
 <ul>
 <li><b>Reason for abstraction</b>: allows for easy swapping and adding of different portable systems and better <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> from <a href="https://www.techtarget.com/whatis/definition/business-logic">business logic</a> of the car to the business logic of the system.</li>
@@ -186,7 +207,7 @@ level 1: state machine goals for interface design and implementation</h3>
 <div class="line">    </div>
 <div class="line"> </div>
 <div class="line">    car_state &quot;1&quot; *-- StateMachine : contains</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md15"></a>
 level 2 portable Systems: interfaces, logic and structure</h3>
 <ul>
 <li><b>Reason for abstraction</b>: these Systems allow us to have board portable pieces so that when newer iterations of boards are made, the same systems that the previous iteration handled can be kept while only the hardware specific code changes.</li>
@@ -222,7 +243,7 @@ level 2 portable Systems: interfaces, logic and structure</h3>
 <div class="line">        +torque_cmds get_torque_cmds(float desired_throttle)</div>
 <div class="line">        -void pull_from_table(float current_speed)</div>
 <div class="line">    }</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md12"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md16"></a>
 level 2 SPI / i2c data bus abstraction from hardware specific implementations</h3>
 <ul>
 <li><b>Reason for abstraction</b>: this allows us to create a specific type of system that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other systems.</li>
@@ -251,7 +272,7 @@ level 2 SPI / i2c data bus abstraction from hardware specific implementations</h
 <div class="line">    Sensor &lt;|-- LoadSensor : implements</div>
 <div class="line">    Sensor &lt;|-- SteeringSensor : implements</div>
 <div class="line">    Sensor &lt;|-- CurrentSensor : implements</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 state machine documentation</h2>
 <div class="fragment"><div class="line">stateDiagram-v2</div>
 <div class="line">    startup : STARTUP</div>
@@ -271,10 +292,10 @@ state machine documentation</h2>
 <div class="line">    rtd_s --&gt; rtd: buzzer done buzzing</div>
 <div class="line">    rtd --&gt; trac_sys_na: drivetrain voltage _not_ over threshold</div>
 <div class="line">    rtd --&gt; trac_sys_a: drivetrain error occured</div>
-</div><!-- fragment --> <h3><a class="anchor" id="autotoc_md14"></a>
+</div><!-- fragment --> <h3><a class="anchor" id="autotoc_md18"></a>
 running the tests</h3>
 <p >This repo uses platformio testing for CI unit testing. these tests can be run locally with <code>pio test -e test_env</code>. The CI checks to ensure that the code both compiles for the teensy and ensures that the tests are passing.</p>
-<h3><a class="anchor" id="autotoc_md15"></a>
+<h3><a class="anchor" id="autotoc_md19"></a>
 notes</h3>
 <p >new MCU code:</p><ul>
 <li>system definition: an abstract sub-system of the physical car or the code that requires logic to be evaluated by the MCU to determine what input to give it or logic required to handle output from.</li>
