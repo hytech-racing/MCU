@@ -225,11 +225,39 @@ TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activati
     EXPECT_TRUE(reset_pedals_system_implaus_time(pedals));
 
     // test with real data (accel = ~37%) accel pressed
-    float accel1 = 2583;
-    float accel2 = 1068;
-    float brake = 1510;
-    pedals.setParams({ACCEL1_PEDAL_MIN, ACCEL2_PEDAL_MIN, ACCEL1_PEDAL_MAX, ACCEL2_PEDAL_MAX, APPS_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, APPS_ACTIVATION_PERCENTAGE},
-                     {BRAKE1_PEDAL_MIN, BRAKE2_PEDAL_MIN, BRAKE1_PEDAL_MAX, BRAKE2_PEDAL_MAX, BRAKE_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, BRAKE_MECH_THRESH});
+    int accel1 = 2583;
+    int accel2 = 1068;
+    int brake = 1510;
+    pedals.setParams(
+        {
+            .min_pedal_1 = ACCEL1_PEDAL_MIN,
+            .min_pedal_2 = ACCEL2_PEDAL_MIN,
+            .max_pedal_1 = ACCEL1_PEDAL_MAX,
+            .max_pedal_2 = ACCEL2_PEDAL_MAX,
+            .min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN,
+            .min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN,
+            .max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX,
+            .max_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MAX,
+            .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+            .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+            .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+            .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+        },
+        {
+            .min_pedal_1 = BRAKE1_PEDAL_MIN,
+            .min_pedal_2 = BRAKE2_PEDAL_MIN,
+            .max_pedal_1 = BRAKE1_PEDAL_MAX,
+            .max_pedal_2 = BRAKE2_PEDAL_MAX,
+            .min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN,
+            .min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN,
+            .max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX,
+            .max_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MAX,
+            .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+            .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+            .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+            .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+        }
+    );
     float conv1 = get_pedal_conversion_val(ACCEL1_PEDAL_MIN, ACCEL1_PEDAL_MAX, accel1);
     float conv2 = get_pedal_conversion_val(ACCEL2_PEDAL_MIN, ACCEL2_PEDAL_MAX, accel2);
     float convb = get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, brake);

@@ -107,14 +107,11 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         simulated_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -131,14 +128,11 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         simulated_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // Now press the pedal again. Torque should be requested
@@ -147,14 +141,11 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         simulated_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -228,14 +219,11 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         simulated_fast_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -252,14 +240,11 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // Now press the pedal. Torque should be requested
@@ -268,14 +253,11 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         simulated_slow_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     resulting_torque_command = torque_controller_mux.getDrivetrainCommand();
@@ -444,14 +426,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // change mode to mode 3
@@ -460,14 +439,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // tick again to calculate state switch
@@ -476,14 +452,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     LaunchStates_e launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -496,14 +469,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_no_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -516,14 +486,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -536,14 +503,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -555,14 +519,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     DrivetrainCommand_s commanded = torque_controller_mux.getDrivetrainCommand();
@@ -575,14 +536,11 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_accel_and_brake_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -676,14 +634,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // change mode to mode 3
@@ -692,14 +647,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // tick again to calculate state switch
@@ -708,14 +660,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_slow_drivetrain_dynamics,
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     LaunchStates_e launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -728,14 +677,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     // tick TCMUX (10k us will hit 100hz)
@@ -744,14 +690,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -766,14 +709,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     launch_state = torque_controller_mux.activeController()->get_launch_state();
@@ -791,14 +731,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     commanded = torque_controller_mux.getDrivetrainCommand();
@@ -814,14 +751,11 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_barely_launch_drivetrain_dynamics,
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
-        (const AnalogConversion_s) {},
+        (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
         false,
         vn_data,
-        0.0
+        (const DrivetrainCommand_s) {}
     );
 
     commanded = torque_controller_mux.getDrivetrainCommand();
