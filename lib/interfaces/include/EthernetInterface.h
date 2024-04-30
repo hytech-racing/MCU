@@ -13,7 +13,7 @@ namespace EthParams
     const IPAddress default_netmask(255, 255, 255, 0);
     const IPAddress default_gateway(192, 168, 0, 1);
 
-    const default_buffer_size = 512;
+    const uint16_t default_buffer_size = 512;
 }
 
 void init_ethernet_device(IPAddress ip);

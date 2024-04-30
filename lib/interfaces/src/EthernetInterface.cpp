@@ -1,4 +1,4 @@
-// #include "EthernetInterface.h"
+#include "EthernetInterface.h"
 
 IPAddress ip_addr_;
 
