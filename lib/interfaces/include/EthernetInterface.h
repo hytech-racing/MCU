@@ -10,6 +10,11 @@ namespace EthParams
 {
     extern IPAddress ip_addr_;
 
+    const IPAddress default_MCU_ip(192, 168, 1, 30);
+    const IPAddress default_TCU_ip(192, 168, 1, 69);
+
+    const uint16_t default_protobuf_port = 2000;
+
     const IPAddress default_netmask(255, 255, 255, 0);
     const IPAddress default_gateway(192, 168, 0, 1);
 
@@ -32,10 +37,10 @@ public:
 
     void initialize_sockets()
     {
-        protobuf_socket.begin(pb_port);
+        protobuf_socket.begin(EthParams::default_protobuf_port);
     }
 
+    void send(uint8_t *buf, uint16_t len);
     void receive();
-    void send();
 };
 #endif
