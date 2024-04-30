@@ -1,4 +1,4 @@
-#include "EthernetInterface.h"
+// #include "EthernetInterface.h"
 
 void init_ethernet_device()
 {
