@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package ht_eth;
+
+message config
+{       
+    string id = 1;
+    oneof config_val {
+        bool bool_val = 2;
+        float float_val = 3;
+        int32 int_val = 4;
+    }
+}
+
+message CASE_output
+{       
+    float vehm_fl_slip = 1;
+    float vehm_fr_slip = 2;
+    float vehm_rl_slip = 3;
+    float vehm_rr_slip = 4;
+}
