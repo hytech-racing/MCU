@@ -29,10 +29,9 @@
 #include "PedalsSystem.h"
 #include "TorqueControllerMux.h"
 
-#include "CASESystem.h"
 // /* State machine */
 #include "MCUStateMachine.h"
-#include "HT08_CASE.h"
+// #include "HT08_CASE.h"
 
 /*
     PARAMETER STRUCTS
@@ -206,9 +205,8 @@ CASEConfiguration case_config = {
 // Max motor rpm
 // Max regen torque
 // Max torque
-CASESystem case_system(&CAN3_txBuffer, 100, 70, case_config);
 
-TorqueControllerMux torque_controller_mux(&CAN3_txBuffer, case_config, 1.0, 0.4);
+TorqueControllerMux torque_controller_mux(case_config, 1.0, 0.4);
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);

@@ -15,9 +15,6 @@
 
 #include "accel_lookup.h"
 
-#include "TorqueControllersData.h"
-#include "PID_TV.h"
-
 /* CONTROLLER CONSTANTS */
 
 const float MAX_POWER_LIMIT = 63000.0; // max mechanical power limit in KW

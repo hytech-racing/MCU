@@ -10,7 +10,7 @@ public:
     FakeMessageQueue() {}
 };
 
-void enqueue_matlab_msg(FakeMessageQueue *, const CAN_MESSAGE_BUS &msg)
+void enqueue_matlab_msg(const CAN_MESSAGE_BUS &msg)
 {
 }
 

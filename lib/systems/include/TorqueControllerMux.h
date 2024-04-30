@@ -11,8 +11,8 @@
 #include "DashboardInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+
 #include "CASESystem.h"
-#include "MessageQueueDefine.h"
 
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
@@ -67,13 +67,13 @@ private:
 
 public:
     /// @brief torque controller mux in which default instances of all torque controllers are created for use
-    TorqueControllerMux(CANBufferType *telem_can, CASEConfiguration case_config)
+    TorqueControllerMux(CASEConfiguration case_config)
     : torqueControllerNone_()
     , torqueControllerSimple_()
     , torqueControllerLoadCellVectoring_()
     , torqueControllerSimpleLaunch_()
     , torqueControllerSlipLaunch_()
-    , torqueControllerCASE_(telem_can, default_controller_send_period_ms, default_vehicle_math_offset_ms, case_config )
+    , torqueControllerCASE_(default_controller_send_period_ms, default_vehicle_math_offset_ms, case_config )
     {
         init_controller_map();
     }
@@ -82,13 +82,13 @@ public:
     /// @brief torque controller mux constructor that leaves all other TCs with defaults accept for simple TC
     /// @param simpleTCRearTorqueScale the scaling from 0 to 2 in which 2 is full rear torque allocation, 0 is full front, 1 = balanced
     /// @param simpleTCRegenTorqueScale scaling from 0 to 2 in which 0 is full rear regen and 2 is full front regen, 1 = balanced
-    TorqueControllerMux(CANBufferType *telem_can, CASEConfiguration case_config, float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
+    TorqueControllerMux(CASEConfiguration case_config, float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
     : torqueControllerNone_()
     , torqueControllerSimple_(simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
     , torqueControllerLoadCellVectoring_(1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_()
     , torqueControllerSlipLaunch_()
-    , torqueControllerCASE_(telem_can, default_controller_send_period_ms, default_vehicle_math_offset_ms, case_config )
+    , torqueControllerCASE_(default_controller_send_period_ms, default_vehicle_math_offset_ms, case_config )
     {
         init_controller_map();
     }

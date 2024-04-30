@@ -205,8 +205,7 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
 /// @tparam bufferType the message buffer template type onto which you are enquing a msg
 /// @param msg_queue the pointer to the msg queue that will contain the generic message
 /// @param structure the matlab generated CAN message type that will be sent
-template <typename bufferType>
-void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS & structure)
+void enqueue_matlab_msg(const CAN_MESSAGE_BUS &structure)
 {
     CAN_message_t can_msg = {};
     can_msg.id = structure.ID;
@@ -215,7 +214,7 @@ void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS & structure
     memmove( can_msg.buf, structure.Data, structure.Length );
     uint8_t buf[sizeof(CAN_message_t)] = {};
     memmove(buf, &can_msg, sizeof(CAN_message_t));
-    msg_queue->push_back(buf, sizeof(CAN_message_t));
+    CAN3_txBuffer.push_back(buf, sizeof(CAN_message_t));
 }
 
 

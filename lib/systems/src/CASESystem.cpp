@@ -126,11 +126,11 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
     if (active){
         if ((in.tick.millis - last_controller_pt1_send_time_) >= (controller_send_period_ms_))
         {
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
+            enqueue_matlab_msg(res.controllerBus_controller_boolea);
+            enqueue_matlab_msg(res.controllerBus_controller_normal);
+            enqueue_matlab_msg(res.controllerBus_controller_norm_p);
+            enqueue_matlab_msg(res.controllerBus_controller_pid_ya);
+            enqueue_matlab_msg(res.controllerBus_controller_pid__p);
 
             last_controller_pt1_send_time_ = in.tick.millis;
         }
@@ -139,11 +139,11 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
             ((in.tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
         {
 
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
+            enqueue_matlab_msg(res.controllerBus_controller_initia);
+            enqueue_matlab_msg(res.controllerBus_controller_tcs_pi);
+            enqueue_matlab_msg(res.controllerBus_controller_tcs__p);
+            enqueue_matlab_msg(res.controllerBus_controller_tcs_to);
+            enqueue_matlab_msg(res.controllerBus_controller_tcs_st);
 
             last_controller_pt2_send_time_ = in.tick.millis;
         }
@@ -152,12 +152,12 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
             ((in.tick.millis - last_controller_pt3_send_time_) > controller_send_period_ms_))
         {
 
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_rege_p);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_torque);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
+            enqueue_matlab_msg(res.controllerBus_controller_regen_);
+            enqueue_matlab_msg(res.controllerBus_controller_rege_p);
+            enqueue_matlab_msg(res.controllerBus_controller_torque);
+            enqueue_matlab_msg(res.controllerBus_controller_power_);
+            enqueue_matlab_msg(res.controllerBus_controller_powe_p);
+            enqueue_matlab_msg(res.controllerBus_controller_pow_pn);
 
             last_controller_pt3_send_time_ = in.tick.millis;
         }
@@ -165,14 +165,14 @@ void CASESystem::tick(const TorqueControllerInput_s &in)
         if (((in.tick.millis - last_controller_pt1_send_time_) >= vehicle_math_offset_ms_) &&
             ((in.tick.millis - last_vehm_send_time_) > controller_send_period_ms_))
         {
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_alpha_deg);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_sl);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_long_corner_);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_steer_);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
-            enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_lin_ve);
-            // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
+            enqueue_matlab_msg(res.controllerBus_vehm_alpha_deg);
+            enqueue_matlab_msg(res.controllerBus_vehm_sl);
+            enqueue_matlab_msg(res.controllerBus_vehm_long_corner_);
+            enqueue_matlab_msg(res.controllerBus_vehm_wheel_steer_);
+            enqueue_matlab_msg(res.controllerBus_vehm_kin_desired_);
+            enqueue_matlab_msg(res.controllerBus_vehm_beta_deg);
+            enqueue_matlab_msg(res.controllerBus_vehm_wheel_lin_ve);
+            // enqueue_matlab_msg(res.controllerBus_controller_tcs_co);
             last_vehm_send_time_ = in.tick.millis;
         }
     }
