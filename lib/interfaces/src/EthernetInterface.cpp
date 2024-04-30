@@ -2,10 +2,13 @@
 
 void init_ethernet_device()
 {
-    Ethernet.macAddress(mac_address);
+    // Ethernet.macAddress(mac_address);
 
-    if (!Ethernet.begin())
-    {
-        Serial.println("Failed to start Ethernet");
-    }
+    // if (!Ethernet.begin())
+    // {
+    //     Serial.println("Failed to start Ethernet");
+    // }
 }
+
+
+

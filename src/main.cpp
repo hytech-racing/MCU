@@ -237,7 +237,6 @@ void drivetrain_reset();
 
 void setup()
 {
-
     // initialize CAN communication
     init_all_CAN_devices();
 

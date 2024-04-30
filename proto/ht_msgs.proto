@@ -13,7 +13,7 @@ message config
 }
 
 message CASE_output
-{       
+{
     float vehm_fl_slip = 1;
     float vehm_fr_slip = 2;
     float vehm_rl_slip = 3;
