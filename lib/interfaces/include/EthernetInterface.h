@@ -33,7 +33,7 @@ private:
     qn::EthernetUDP protobuf_socket;
 
 public:
-    EthernetInterface(uint16_t buffer_size) {}
+    EthernetInterface() {}
 
     void initialize_sockets()
     {
