@@ -1,15 +1,23 @@
-#ifndef __ETHERNETINTERFACE_H__
-#define __ETHERNETINTERFACE_H__
+#ifndef ETHERNETINTERFACE
+#define ETHERNETINTERFACE
+#include <QNEthernet.h>
 
-#include <Arduino.h>
-#include "QNEthernet.h"
+#include "circular_buffer.h"
 
-using namespace qindesign::network;
 
-EthernetUDP udp;
 
-uint8_t mac_address[6];
+class EthernetInterface
+{
+public:
+    EthernetInterface() {};
+    void begin(int port);
+    /// @brief sends all udp packets in queue
+    void handle_sending();
+    /// @brief receives all udp packets
+    void handle_recvs();
 
-void init_ethernet_device();
+private:
+    EthernetUDP udp_ethernet_;
+}
 
 #endif

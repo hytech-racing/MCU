@@ -7,7 +7,8 @@
       "shared-interfaces-lib": "*",
       "shared-systems-lib": "*",
       "CASE_lib": "*",
-      "shared_data": "*"
+      "shared_data": "*",
+      "HT_params_lib": "*"
     },
     "frameworks": "*",
     "platforms": "*"
