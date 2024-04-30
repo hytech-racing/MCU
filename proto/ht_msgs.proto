@@ -3,13 +3,11 @@ syntax = "proto3";
 package ht_eth;
 
 message config
-{       
-    string id = 1;
-    oneof config_val {
-        bool bool_val = 2;
-        float float_val = 3;
-        int32 int_val = 4;
-    }
+{
+    float amk_max_rpm = 1;
+    float case_torque_max = 2;
+    float front_brake_bias = 3;
+    bool tcs_active = 4;
 }
 
 message CASE_output
