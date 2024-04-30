@@ -19,3 +19,11 @@ message CASE_output
     float vehm_rl_slip = 3;
     float vehm_rr_slip = 4;
 }
+
+message big_union
+{
+    oneof msg {
+        config config_msg = 1;
+        CASE_output CASE_output_msg = 2;
+    }
+}

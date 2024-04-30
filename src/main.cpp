@@ -294,7 +294,6 @@ void setup()
 
 void loop()
 {
-    // Serial.println("test");
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
