@@ -1,23 +1,22 @@
 #include "EthernetInterface.h"
 
+IPAddress ip_addr_;
+
 void init_ethernet_device(IPAddress ip)
 {
-    ip_addr = ip;
-
-    Ethernet.macAddress(mac_address);
-
-    if (!Ethernet.begin(mac_address, ip))
-    {
-        Serial.println("Failed to start Ethernet");
-    } else {connection_successful = true;}
+    ip_addr_ = ip;
+    qn::Ethernet.begin(ip, EthParams::default_netmask, EthParams::default_gateway);
 }
 
-bool UDPSocket::send(const uint8_t *data, int len)
+void EthernetInterface::send()
 {
-
+    int num = 3;
+    IPAddress ip_2(192, 168, 0, 24);
+    memcpy(ethernet_rx_buffer, &num, sizeof(num));
+    protobuf_socket.send(ip_2, pb_port, ethernet_rx_buffer, sizeof(ethernet_rx_buffer));
 }
 
-int UDPSocket::receive(uint8_t *data)
+void EthernetInterface::receive()
 {
-    
+
 }
