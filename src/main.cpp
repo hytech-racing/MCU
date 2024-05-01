@@ -6,6 +6,8 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
+#include "NativeEthernet.h"
+#include "NativeEthernetUDP.h"
 
 // /* Interfaces */
 #include "HytechCANInterface.h"
@@ -84,6 +86,8 @@ const PedalsParams brake_params = {
 /*
     DATA SOURCES
 */
+
+EthernetUDP protobuf_socket;
 
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
@@ -239,6 +243,14 @@ void setup()
 {
     // initialize CAN communication
     init_all_CAN_devices();
+
+    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    protobuf_socket.begin(EthParams::default_protobuf_port);
+
+    /* Do this to send message VVV */
+    // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
+    // protobuf_socket.write(buf, len);
+    // protobuf_socker.endPacket();
 
     SPI.begin();
     a1.init();
