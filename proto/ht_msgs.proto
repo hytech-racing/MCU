@@ -1,27 +1,18 @@
 syntax = "proto3";
 
-package ht_eth;
-
-message config
-{
-    float amk_max_rpm = 1;
-    float case_torque_max = 2;
-    float front_brake_bias = 3;
-    bool tcs_active = 4;
-}
-
-message CASE_output
+message CASE_msg
 {
     float vehm_fl_slip = 1;
-    float vehm_fr_slip = 2;
-    float vehm_rl_slip = 3;
-    float vehm_rr_slip = 4;
+}
+message config {
+    float CASE_TORQUE_MAX = 1;
+    float FRONT_BRAKE_BIAS = 2;
+    bool TCS_ACTIVE = 3;
 }
 
-message big_union
-{
-    oneof msg {
-        config config_msg = 1;
-        CASE_output CASE_output_msg = 2;
-    }
+message HT_ETH_Union {
+  oneof type_union {
+    CASE_msg case_msg_ = 1;
+    config config_ = 2;
+  }
 }

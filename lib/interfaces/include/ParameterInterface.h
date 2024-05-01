@@ -11,17 +11,17 @@ public:
     {
         config_ = {};
     }
-    void update_config(const ht_eth_config &config)
+    void update_config(const config &config)
     {
         config_ = config;
     }
-    const ht_eth_config &get_config()
+    const config &get_config()
     {
         return config_;
     }
 
 private:
-    ht_eth_config config_;
+    config config_;
 };
 
 #endif
