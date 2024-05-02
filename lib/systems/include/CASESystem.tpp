@@ -36,10 +36,10 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.CurrentElectricalPowerkW = power_kw;
 
     // REAL
-    // in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
-    // in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
-    // in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
-    // in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
+    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
+    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
+    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
+    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
 
     // FAKE, 566.273 rpm = 1 m/s
     // in.MotorOmegaFLrpm = 566.27330024 * 1.36;
@@ -48,10 +48,10 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     // in.MotorOmegaRLrpm = 566.27330024 * 1.36;
 
     // FAKE max rpm
-    in.MotorOmegaFLrpm = 20000;
-    in.MotorOmegaFRrpm = 20000;
-    in.MotorOmegaRRrpm = 20000;
-    in.MotorOmegaRLrpm = 20000;
+    // in.MotorOmegaFLrpm = 20000;
+    // in.MotorOmegaFRrpm = 20000;
+    // in.MotorOmegaRRrpm = 20000;
+    // in.MotorOmegaRLrpm = 20000;
 
     in.usePIDTV = config_.usePIDTV;
     in.useNormalForce = config_.useNormalForce;
