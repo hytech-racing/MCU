@@ -107,6 +107,8 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
+ParameterInterface param_interface;
+ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
@@ -235,6 +237,8 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
+void handle_ethernet_interface_comms();
+
 /*
     SETUP
 */
@@ -247,7 +251,7 @@ void setup()
     Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
     protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
     protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
-    
+
     /* Do this to send message VVV */
     // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
     // protobuf_socket.write(buf, len);
@@ -309,6 +313,8 @@ void loop()
 {
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
+    
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -328,6 +334,9 @@ void loop()
     }
     // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
+
+    // give the state of the car to the param interface
+    param_interface.update_car_state(fsm.get_state());
 
     // tick safety system
     safety_system.software_shutdown(curr_tick);
@@ -449,15 +458,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 {
     // tick pedals system
 
-    // Serial.println("accel1");
-    // Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
-    // Serial.println("accel2");
-    // Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
-    // Serial.println("brake1");
-    // Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
-    // Serial.println("brake2");
-    // Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
-
     pedals_system.tick(
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
@@ -501,4 +501,23 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
+}
+
+void handle_ethernet_interface_comms()
+{
+    // function that will handle receiving and distributing of all messages to all ethernet interfaces
+    // via the union message. this is a little bit cursed ngl.
+    // TODO un fuck this and make it more sane
+    handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
+
+    // this is just kinda here i know.
+    if (param_interface.params_need_sending())
+    {
+        auto config = param_interface.get_config();
+        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
+        {
+            // TODO this means that something bad has happend 
+        }
+        param_interface.reset_params_need_sending();
+    }
 }

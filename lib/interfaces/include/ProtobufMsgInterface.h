@@ -14,7 +14,6 @@
 struct ETHInterfaces
 {
     ParameterInterface* param_interface;
-    
 };
 
 using recv_function_t = void (*)(const uint8_t* buffer, size_t packet_size, ETHInterfaces& interfaces);
@@ -49,13 +48,12 @@ bool handle_ethernet_socket_send_pb(EthernetUDP* socket, const pb_struct& msg, c
     socket->write(buffer, message_length);
     socket->endPacket();
     return true;
-
 }
 
+// 
 void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInterfaces& interfaces)
 {
     pb_istream_t stream = pb_istream_from_buffer(buffer, packet_size);
-    // Serial.println("running the function");
     HT_ETH_Union msg = HT_ETH_Union_init_zero;
     if (pb_decode(&stream, HT_ETH_Union_fields, &msg))
     {

@@ -23,7 +23,6 @@ void test_ethernet()
         handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
         if(params.params_need_sending())
         {
-            
             auto config = params.get_config();
             if(!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields)){
             }
