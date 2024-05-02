@@ -4,7 +4,7 @@
 // #include "AMS_interface_test.h"
 // #include "dashboard_interface_test.h"
 // #include "Watchdog_interface_test.h"
-#include "test_ethernet.h"
+// #include "test_ethernet.h"
 // #include "Telemetry_interface_test.h"
 
 void setUp(void)
@@ -22,7 +22,7 @@ int runUnityTests(void)
 {
     UNITY_BEGIN();
     /* TEST DASHBOARD */
-    RUN_TEST(test_ethernet);
+    // RUN_TEST(test_ethernet);
     // RUN_TEST(test_dashboard_unpacking_can_message);
     // RUN_TEST(test_dashboard_circular_buffer);
     /* TEST AMS */

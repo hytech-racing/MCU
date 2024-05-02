@@ -86,7 +86,8 @@ const PedalsParams brake_params = {
     DATA SOURCES
 */
 
-EthernetUDP protobuf_socket;
+EthernetUDP protobuf_send_socket;
+EthernetUDP protobuf_recv_socket;
 
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
@@ -244,7 +245,8 @@ void setup()
     init_all_CAN_devices();
 
     Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    protobuf_socket.begin(EthParams::default_protobuf_port);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
     
     /* Do this to send message VVV */
     // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);

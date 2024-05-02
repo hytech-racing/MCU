@@ -1,7 +1,7 @@
 #ifndef PROTOBUFMSGINTERFACE
 #define PROTOBUFMSGINTERFACE
 
-#include "ht_msgs.pb.h"
+#include "ht_eth.pb.h"
 #include "pb_encode.h"
 #include "pb_decode.h"
 #include "pb_common.h"
@@ -14,6 +14,7 @@
 struct ETHInterfaces
 {
     ParameterInterface* param_interface;
+    
 };
 
 using recv_function_t = void (*)(const uint8_t* buffer, size_t packet_size, ETHInterfaces& interfaces);
@@ -33,6 +34,24 @@ void handle_ethernet_socket_receive(EthernetUDP* socket, recv_function_t recv_fu
     }
 }
 
+template <typename pb_struct>
+bool handle_ethernet_socket_send_pb(EthernetUDP* socket, const pb_struct& msg, const pb_msgdesc_t* msg_desc)
+{
+    socket->beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port);
+    
+    uint8_t buffer[EthParams::default_buffer_size];
+    pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
+    if (!pb_encode(&stream, msg_desc, &msg)) {
+        // You can handle error more explicitly by looking at stream.errmsg
+        return false;
+    }
+    auto message_length = stream.bytes_written;
+    socket->write(buffer, message_length);
+    socket->endPacket();
+    return true;
+
+}
+
 void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInterfaces& interfaces)
 {
     pb_istream_t stream = pb_istream_from_buffer(buffer, packet_size);
@@ -46,6 +65,9 @@ void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInte
         {
         case HT_ETH_Union_config__tag:
             interfaces.param_interface->update_config(msg.type_union.config_);
+            break;
+        case HT_ETH_Union_get_config__tag:
+            interfaces.param_interface->set_params_need_sending();
             break;
         default:
             break;
