@@ -155,7 +155,7 @@ CASEConfiguration case_config = {
     .yaw_pid_i = 0.25,
     .yaw_pid_d = 0.0,
     .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
-    .tcs_pid_p_upperBound_front = 55.0,
+    .tcs_pid_p_upperBound_front = 45.0,
     .tcs_pid_p_lowerBound_rear = 28.0,
     .tcs_pid_p_upperBound_rear = 35.0,
     .tcs_pid_i = 0.0,
@@ -184,7 +184,7 @@ CASEConfiguration case_config = {
     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
     .discontinuousBrakesPercentThreshold = 0.7,
     .TorqueMode = 21.42, // N-m
-    .RegenLimit = -10.0,          // N-m
+    .RegenLimit = -10.0, // N-m
     .useNoRegen5kph = true,
     .useTorqueBias = true,
     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
@@ -238,9 +238,9 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     /* Do this to send message VVV */
     // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
@@ -303,8 +303,8 @@ void loop()
 {
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
-    
-    handle_ethernet_interface_comms();
+
+    // handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -506,7 +506,7 @@ void handle_ethernet_interface_comms()
         auto config = param_interface.get_config();
         if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
         {
-            // TODO this means that something bad has happend 
+            // TODO this means that something bad has happend
         }
         param_interface.reset_params_need_sending();
     }
