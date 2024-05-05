@@ -20,9 +20,10 @@ var searchData=
   ['rpm_5fto_5fkilometers_5fper_5fhour_17',['RPM_TO_KILOMETERS_PER_HOUR',['../PhysicalParameters_8h.html#ab626262966d5bb2a71729aa68673f1ae',1,'PhysicalParameters.h']]],
   ['rpm_5fto_5fmeters_5fper_5fsecond_18',['RPM_TO_METERS_PER_SECOND',['../PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe',1,'PhysicalParameters.h']]],
   ['rpm_5fto_5frad_5fper_5fsecond_19',['RPM_TO_RAD_PER_SECOND',['../PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41',1,'PhysicalParameters.h']]],
-  ['rr_20',['rr',['../structinverters.html#a50cf4dd8729da63738e9f98800cbd236',1,'inverters']]],
-  ['rr_21',['RR',['../structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3',1,'veh_vec::RR()'],['../Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce',1,'RR():&#160;Utility.h']]],
-  ['rr_5ftorque_5fdelta_22',['rr_torque_delta',['../structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b',1,'PIDTVTorqueControllerData']]],
-  ['rrconversion_23',['RRConversion',['../structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a',1,'LoadCellInterfaceTick_s']]],
-  ['rrloadcell_24',['rrLoadCell',['../classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c',1,'SABInterface']]]
+  ['rr_20',['RR',['../structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3',1,'veh_vec']]],
+  ['rr_21',['rr',['../structinverters.html#a50cf4dd8729da63738e9f98800cbd236',1,'inverters']]],
+  ['rr_22',['RR',['../Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce',1,'Utility.h']]],
+  ['rr_5ftorque_5fdelta_23',['rr_torque_delta',['../structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b',1,'PIDTVTorqueControllerData']]],
+  ['rrconversion_24',['RRConversion',['../structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a',1,'LoadCellInterfaceTick_s']]],
+  ['rrloadcell_25',['rrLoadCell',['../classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c',1,'SABInterface']]]
 ];

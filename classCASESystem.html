@@ -83,12 +83,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a753f697ec888499a31de4e1f2ae4e5e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCASESystem.html#a753f697ec888499a31de4e1f2ae4e5e7">CASESystem</a> (message_queue *can_queue, unsigned long controller_send_period_ms, unsigned long vehicle_math_offset_ms, unsigned long lowest_controller_send_period_ms, <a class="el" href="structCASEConfiguration.html">CASEConfiguration</a> config)</td></tr>
-<tr class="memdesc:a753f697ec888499a31de4e1f2ae4e5e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for state estimator system.  <a href="classCASESystem.html#a753f697ec888499a31de4e1f2ae4e5e7">More...</a><br /></td></tr>
-<tr class="separator:a753f697ec888499a31de4e1f2ae4e5e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef7224ca2824fc42eb50eeb7360cd700"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCASESystem.html#aef7224ca2824fc42eb50eeb7360cd700">CASESystem</a> (message_queue *can_queue, unsigned long controller_send_period_ms, unsigned long vehicle_math_offset_ms, <a class="el" href="structCASEConfiguration.html">CASEConfiguration</a> config)</td></tr>
+<tr class="memdesc:aef7224ca2824fc42eb50eeb7360cd700"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for state estimator system.  <a href="classCASESystem.html#aef7224ca2824fc42eb50eeb7360cd700">More...</a><br /></td></tr>
+<tr class="separator:aef7224ca2824fc42eb50eeb7360cd700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06d4a6e3f9030dc0890b9bb5deb77662"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCASESystem.html#a06d4a6e3f9030dc0890b9bb5deb77662">evaluate</a> (const SysTick_s &amp;tick, const <a class="el" href="structvector__nav.html">vector_nav</a> &amp;vn_data, const <a class="el" href="structSteeringSystemData__s.html">SteeringSystemData_s</a> &amp;steering_data, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrain_data, const <a class="el" href="structveh__vec.html">veh_vec</a>&lt; <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &gt; &amp;load_cell_vals, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;pedals_data, float power_kw, <a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> fsm_state, bool start_button_pressed, uint8_t vn_status)</td></tr>
 <tr class="memdesc:a06d4a6e3f9030dc0890b9bb5deb77662"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that evaluates the CASE (controller and state estimation) system. updates the internal pstate_ and returns controller result  <a href="classCASESystem.html#a06d4a6e3f9030dc0890b9bb5deb77662">More...</a><br /></td></tr>
 <tr class="separator:a06d4a6e3f9030dc0890b9bb5deb77662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afffb714424e5e264f46e4017107f0a93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCASESystem.html#afffb714424e5e264f46e4017107f0a93">update_pid</a> (float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d, float brake_p, float brake_i, float brake_d)</td></tr>
+<tr class="separator:afffb714424e5e264f46e4017107f0a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3367bfcd1f4f12ac4e62b6cdc976dac0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCASESystem.html#a3367bfcd1f4f12ac4e62b6cdc976dac0">calculate_torque_request</a> (const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;pedals_data, float max_regen_torque, float max_rpm)</td></tr>
 <tr class="separator:a3367bfcd1f4f12ac4e62b6cdc976dac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad79f28dfc2ac84c086b03c085e7d0459"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCASESystem.html#ad79f28dfc2ac84c086b03c085e7d0459">configure</a> (const <a class="el" href="structCASEConfiguration.html">CASEConfiguration</a> &amp;config)</td></tr>
@@ -107,10 +109,10 @@ class CASESystem&lt; message_queue &gt;</div><p >this class with both take in se
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00070">70</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00060">60</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a753f697ec888499a31de4e1f2ae4e5e7" name="a753f697ec888499a31de4e1f2ae4e5e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a753f697ec888499a31de4e1f2ae4e5e7">&#9670;&#160;</a></span>CASESystem()</h2>
+<a id="aef7224ca2824fc42eb50eeb7360cd700" name="aef7224ca2824fc42eb50eeb7360cd700"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef7224ca2824fc42eb50eeb7360cd700">&#9670;&#160;</a></span>CASESystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,12 +143,6 @@ template&lt;typename message_queue &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>lowest_controller_send_period_ms</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="structCASEConfiguration.html">CASEConfiguration</a>&#160;</td>
           <td class="paramname"><em>config</em>&#160;</td>
         </tr>
@@ -173,22 +169,19 @@ template&lt;typename message_queue &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00077">77</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>    {</div>
-<div class="line"><span class="lineno">   84</span>        msg_queue_ = can_queue;</div>
-<div class="line"><span class="lineno">   85</span>        case_.initialize();</div>
-<div class="line"><span class="lineno">   86</span>        vn_active_start_time_ = 0;</div>
-<div class="line"><span class="lineno">   87</span>        config_ = config;</div>
-<div class="line"><span class="lineno">   88</span>        last_controller_pt1_send_time_ = 0;</div>
-<div class="line"><span class="lineno">   89</span>        last_controller_pt2_send_time_ = 0;</div>
-<div class="line"><span class="lineno">   90</span>        last_controller_pt3_send_time_ = 0;</div>
-<div class="line"><span class="lineno">   91</span>        last_lowest_priority_controller_send_time_ = 0;</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>        controller_send_period_ms_ = controller_send_period_ms;</div>
-<div class="line"><span class="lineno">   94</span>        last_vehm_send_time_ = 0;</div>
-<div class="line"><span class="lineno">   95</span>        vehicle_math_offset_ms_ = vehicle_math_offset_ms;</div>
-<div class="line"><span class="lineno">   96</span>        lowest_priority_controller_send_period_ms_ = lowest_controller_send_period_ms;</div>
-<div class="line"><span class="lineno">   97</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00067">67</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>    {</div>
+<div class="line"><span class="lineno">   73</span>        msg_queue_ = can_queue;</div>
+<div class="line"><span class="lineno">   74</span>        case_.initialize();</div>
+<div class="line"><span class="lineno">   75</span>        vn_active_start_time_ = 0;</div>
+<div class="line"><span class="lineno">   76</span>        config_ = config;</div>
+<div class="line"><span class="lineno">   77</span>        last_controller_pt1_send_time_ = 0;</div>
+<div class="line"><span class="lineno">   78</span>        last_controller_pt2_send_time_ = 0;</div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span>        controller_send_period_ms_ = controller_send_period_ms;</div>
+<div class="line"><span class="lineno">   81</span>        last_vehm_send_time_ = 0;</div>
+<div class="line"><span class="lineno">   82</span>        vehicle_math_offset_ms_ = vehicle_math_offset_ms;</div>
+<div class="line"><span class="lineno">   83</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -263,10 +256,10 @@ template&lt;typename message_queue &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00140">140</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  141</span>    {</div>
-<div class="line"><span class="lineno">  142</span>        config_ = config;</div>
-<div class="line"><span class="lineno">  143</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00125">125</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>    {</div>
+<div class="line"><span class="lineno">  127</span>        config_ = config;</div>
+<div class="line"><span class="lineno">  128</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -391,18 +384,120 @@ template&lt;typename message_queue &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00144">144</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  145</span>    {</div>
-<div class="line"><span class="lineno">  146</span>        <span class="keywordflow">if</span> (final_torque &gt; 0)</div>
-<div class="line"><span class="lineno">  147</span>        {</div>
-<div class="line"><span class="lineno">  148</span>            <span class="keywordflow">return</span> config_.<a class="code hl_variable" href="structCASEConfiguration.html#a1d0134c7e96cb0db738fc19176e2db5e">max_rpm</a>;</div>
-<div class="line"><span class="lineno">  149</span>        }</div>
-<div class="line"><span class="lineno">  150</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  151</span>        {</div>
-<div class="line"><span class="lineno">  152</span>            <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  153</span>        }</div>
-<div class="line"><span class="lineno">  154</span>    }</div>
-<div class="ttc" id="astructCASEConfiguration_html_a1d0134c7e96cb0db738fc19176e2db5e"><div class="ttname"><a href="structCASEConfiguration.html#a1d0134c7e96cb0db738fc19176e2db5e">CASEConfiguration::max_rpm</a></div><div class="ttdeci">float max_rpm</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00061">CASESystem.h:61</a></div></div>
+<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00129">129</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  130</span>    {</div>
+<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">if</span> (final_torque &gt; 0)</div>
+<div class="line"><span class="lineno">  132</span>        {</div>
+<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">return</span> config_.<a class="code hl_variable" href="structCASEConfiguration.html#a1d0134c7e96cb0db738fc19176e2db5e">max_rpm</a>;</div>
+<div class="line"><span class="lineno">  134</span>        }</div>
+<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  136</span>        {</div>
+<div class="line"><span class="lineno">  137</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  138</span>        }</div>
+<div class="line"><span class="lineno">  139</span>    }</div>
+<div class="ttc" id="astructCASEConfiguration_html_a1d0134c7e96cb0db738fc19176e2db5e"><div class="ttname"><a href="structCASEConfiguration.html#a1d0134c7e96cb0db738fc19176e2db5e">CASEConfiguration::max_rpm</a></div><div class="ttdeci">float max_rpm</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00051">CASESystem.h:51</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afffb714424e5e264f46e4017107f0a93" name="afffb714424e5e264f46e4017107f0a93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afffb714424e5e264f46e4017107f0a93">&#9670;&#160;</a></span>update_pid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCASESystem.html">CASESystem</a>&lt; message_queue &gt;::update_pid </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yaw_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yaw_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yaw_d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>tcs_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>tcs_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>tcs_d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>brake_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>brake_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>brake_d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="CASESystem_8h_source.html#l00108">108</a> of file <a class="el" href="CASESystem_8h_source.html">CASESystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>    {</div>
+<div class="line"><span class="lineno">  110</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a81acf3fe8e2d21d32b37913e2bda63a7">yaw_pid_p</a> = yaw_p;</div>
+<div class="line"><span class="lineno">  111</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a81acf3fe8e2d21d32b37913e2bda63a7">yaw_pid_p</a> = yaw_i;</div>
+<div class="line"><span class="lineno">  112</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a81acf3fe8e2d21d32b37913e2bda63a7">yaw_pid_p</a> = yaw_d;</div>
+<div class="line"><span class="lineno">  113</span> </div>
+<div class="line"><span class="lineno">  114</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a7627189c3e727714fd709e872491a9e2">tcs_pid_p</a> = tcs_p;</div>
+<div class="line"><span class="lineno">  115</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a440227cca254c09c34ae45846f719268">tcs_pid_i</a> = tcs_i;</div>
+<div class="line"><span class="lineno">  116</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a5b7d20e51958fcc1a80d000414edd787">tcs_pid_d</a> = tcs_d;</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a9e8cf0a4da4a5e8281b852cd9e914533">yaw_pid_brakes_p</a> = brake_p;</div>
+<div class="line"><span class="lineno">  119</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a62a9aaf945b235be877110ef02c67398">yaw_pid_brakes_i</a> = brake_i;</div>
+<div class="line"><span class="lineno">  120</span>        config_.<a class="code hl_variable" href="structCASEConfiguration.html#a6606076d3c546c4eec985e247a3a1720">yaw_pid_brakes_d</a> = brake_d;</div>
+<div class="line"><span class="lineno">  121</span>    }</div>
+<div class="ttc" id="astructCASEConfiguration_html_a440227cca254c09c34ae45846f719268"><div class="ttname"><a href="structCASEConfiguration.html#a440227cca254c09c34ae45846f719268">CASEConfiguration::tcs_pid_i</a></div><div class="ttdeci">float tcs_pid_i</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00018">CASESystem.h:18</a></div></div>
+<div class="ttc" id="astructCASEConfiguration_html_a5b7d20e51958fcc1a80d000414edd787"><div class="ttname"><a href="structCASEConfiguration.html#a5b7d20e51958fcc1a80d000414edd787">CASEConfiguration::tcs_pid_d</a></div><div class="ttdeci">float tcs_pid_d</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00019">CASESystem.h:19</a></div></div>
+<div class="ttc" id="astructCASEConfiguration_html_a62a9aaf945b235be877110ef02c67398"><div class="ttname"><a href="structCASEConfiguration.html#a62a9aaf945b235be877110ef02c67398">CASEConfiguration::yaw_pid_brakes_i</a></div><div class="ttdeci">float yaw_pid_brakes_i</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00039">CASESystem.h:39</a></div></div>
+<div class="ttc" id="astructCASEConfiguration_html_a6606076d3c546c4eec985e247a3a1720"><div class="ttname"><a href="structCASEConfiguration.html#a6606076d3c546c4eec985e247a3a1720">CASEConfiguration::yaw_pid_brakes_d</a></div><div class="ttdeci">float yaw_pid_brakes_d</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00040">CASESystem.h:40</a></div></div>
+<div class="ttc" id="astructCASEConfiguration_html_a7627189c3e727714fd709e872491a9e2"><div class="ttname"><a href="structCASEConfiguration.html#a7627189c3e727714fd709e872491a9e2">CASEConfiguration::tcs_pid_p</a></div><div class="ttdeci">float tcs_pid_p</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00017">CASESystem.h:17</a></div></div>
+<div class="ttc" id="astructCASEConfiguration_html_a81acf3fe8e2d21d32b37913e2bda63a7"><div class="ttname"><a href="structCASEConfiguration.html#a81acf3fe8e2d21d32b37913e2bda63a7">CASEConfiguration::yaw_pid_p</a></div><div class="ttdeci">float yaw_pid_p</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00014">CASESystem.h:14</a></div></div>
+<div class="ttc" id="astructCASEConfiguration_html_a9e8cf0a4da4a5e8281b852cd9e914533"><div class="ttname"><a href="structCASEConfiguration.html#a9e8cf0a4da4a5e8281b852cd9e914533">CASEConfiguration::yaw_pid_brakes_p</a></div><div class="ttdeci">float yaw_pid_brakes_p</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00038">CASESystem.h:38</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
