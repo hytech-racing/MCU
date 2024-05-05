@@ -71,5 +71,5 @@ TEST(CASESystemTesting, test_vn_start_time)
         .max_regen_torque = AMK_MAX_TORQUE,
         .max_torque = AMK_MAX_TORQUE,
     };
-    CASESystem case_system(&faked_msg_q, 100, 70, case_config);
+    CASESystem case_system(&faked_msg_q, 100, 70, 550, case_config);
 }
