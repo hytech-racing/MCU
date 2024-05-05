@@ -163,7 +163,7 @@ CASEConfiguration case_config = {
     .useLaunch = false,
     .usePIDTV = true,
     .useTCSLimitedYawPID = true,
-    .useNormalForce = false,
+    .useNormalForce = true,
     .useTractionControl = true,
     .usePowerLimit = true,
     .usePIDPowerLimit = false,
@@ -195,7 +195,7 @@ CASEConfiguration case_config = {
     .tcs_pid_upper_rpm_front = 5000.0, // RPM
     .tcs_pid_lower_rpm_rear = 0.0,     // RPM
     .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
-    .maxNormalLoadBrakeScalingFront = 1.25,
+    .maxNormalLoadBrakeScalingFront = 1.95,
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,
@@ -238,9 +238,9 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     /* Do this to send message VVV */
     // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
@@ -304,7 +304,7 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    // handle_ethernet_interface_comms();
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
