@@ -79,10 +79,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;unity.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="AMS__interface__test_8h_source.html">AMS_interface_test.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="dashboard__interface__test_8h_source.html">dashboard_interface_test.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Watchdog__interface__test_8h_source.html">Watchdog_interface_test.h</a>&quot;</code><br />
 </div>
 <p><a href="run__embedded__tests_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -115,8 +111,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00046">46</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00048">48</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -136,28 +132,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00020">20</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span>{</div>
-<div class="line"><span class="lineno">   22</span>    UNITY_BEGIN();</div>
-<div class="line"><span class="lineno">   23</span>    <span class="comment">/* TEST DASHBOARD */</span></div>
-<div class="line"><span class="lineno">   24</span>    RUN_TEST(<a class="code hl_function" href="dashboard__interface__test_8h.html#ad3f7d840021e46532f77deb399181a49">test_dashboard_unpacking_can_message</a>);</div>
-<div class="line"><span class="lineno">   25</span>    RUN_TEST(<a class="code hl_function" href="dashboard__interface__test_8h.html#a3481d586d9dcecb6c02dd5395069c7e1">test_dashboard_circular_buffer</a>);</div>
-<div class="line"><span class="lineno">   26</span>    <span class="comment">/* TEST AMS */</span></div>
-<div class="line"><span class="lineno">   27</span>    RUN_TEST(<a class="code hl_function" href="AMS__interface__test_8h.html#aff163c1d59bca2138b4c2817bb0c361c">test_AMS_heartbeat</a>);</div>
-<div class="line"><span class="lineno">   28</span>    <span class="comment">/* TEST WATCHDOG */</span></div>
-<div class="line"><span class="lineno">   29</span>    RUN_TEST(<a class="code hl_function" href="Watchdog__interface__test_8h.html#a734956bf048ecc6c2a5824d999a38629">test_watchdog_kick</a>);</div>
-<div class="line"><span class="lineno">   30</span>    <span class="comment">// testing can interface</span></div>
-<div class="line"><span class="lineno">   31</span>    <span class="comment">// RUN_TEST(test_can_interface_send)</span></div>
-<div class="line"><span class="lineno">   32</span>    <span class="comment">// RUN_TEST(test_can_interface_send_and_receive_raw)</span></div>
-<div class="line"><span class="lineno">   33</span>    <span class="comment">/* TEST TELEMETRY */</span></div>
-<div class="line"><span class="lineno">   34</span>    <span class="comment">// RUN_TEST(test_telemetry_update_CAN);</span></div>
-<div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">return</span> UNITY_END();</div>
-<div class="line"><span class="lineno">   37</span>}</div>
-<div class="ttc" id="aAMS__interface__test_8h_html_aff163c1d59bca2138b4c2817bb0c361c"><div class="ttname"><a href="AMS__interface__test_8h.html#aff163c1d59bca2138b4c2817bb0c361c">test_AMS_heartbeat</a></div><div class="ttdeci">void test_AMS_heartbeat()</div><div class="ttdef"><b>Definition:</b> <a href="AMS__interface__test_8h_source.html#l00037">AMS_interface_test.h:37</a></div></div>
-<div class="ttc" id="aWatchdog__interface__test_8h_html_a734956bf048ecc6c2a5824d999a38629"><div class="ttname"><a href="Watchdog__interface__test_8h.html#a734956bf048ecc6c2a5824d999a38629">test_watchdog_kick</a></div><div class="ttdeci">void test_watchdog_kick()</div><div class="ttdef"><b>Definition:</b> <a href="Watchdog__interface__test_8h_source.html#l00006">Watchdog_interface_test.h:6</a></div></div>
-<div class="ttc" id="adashboard__interface__test_8h_html_a3481d586d9dcecb6c02dd5395069c7e1"><div class="ttname"><a href="dashboard__interface__test_8h.html#a3481d586d9dcecb6c02dd5395069c7e1">test_dashboard_circular_buffer</a></div><div class="ttdeci">void test_dashboard_circular_buffer(void)</div><div class="ttdef"><b>Definition:</b> <a href="dashboard__interface__test_8h_source.html#l00063">dashboard_interface_test.h:63</a></div></div>
-<div class="ttc" id="adashboard__interface__test_8h_html_ad3f7d840021e46532f77deb399181a49"><div class="ttname"><a href="dashboard__interface__test_8h.html#ad3f7d840021e46532f77deb399181a49">test_dashboard_unpacking_can_message</a></div><div class="ttdeci">void test_dashboard_unpacking_can_message(void)</div><div class="ttdef"><b>Definition:</b> <a href="dashboard__interface__test_8h_source.html#l00023">dashboard_interface_test.h:23</a></div></div>
+<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00021">21</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   22</span>{</div>
+<div class="line"><span class="lineno">   23</span>    UNITY_BEGIN();</div>
+<div class="line"><span class="lineno">   24</span>    <span class="comment">/* TEST DASHBOARD */</span></div>
+<div class="line"><span class="lineno">   25</span>    <span class="comment">// RUN_TEST(test_ethernet);</span></div>
+<div class="line"><span class="lineno">   26</span>    <span class="comment">// RUN_TEST(test_dashboard_unpacking_can_message);</span></div>
+<div class="line"><span class="lineno">   27</span>    <span class="comment">// RUN_TEST(test_dashboard_circular_buffer);</span></div>
+<div class="line"><span class="lineno">   28</span>    <span class="comment">/* TEST AMS */</span></div>
+<div class="line"><span class="lineno">   29</span>    <span class="comment">// RUN_TEST(test_AMS_heartbeat);</span></div>
+<div class="line"><span class="lineno">   30</span>    <span class="comment">/* TEST WATCHDOG */</span></div>
+<div class="line"><span class="lineno">   31</span>    <span class="comment">// RUN_TEST(test_watchdog_kick);</span></div>
+<div class="line"><span class="lineno">   32</span>    <span class="comment">// testing can interface</span></div>
+<div class="line"><span class="lineno">   33</span>    <span class="comment">// RUN_TEST(test_can_interface_send)</span></div>
+<div class="line"><span class="lineno">   34</span>    <span class="comment">// RUN_TEST(test_can_interface_send_and_receive_raw)</span></div>
+<div class="line"><span class="lineno">   35</span>    <span class="comment">/* TEST TELEMETRY */</span></div>
+<div class="line"><span class="lineno">   36</span>    <span class="comment">// RUN_TEST(test_telemetry_update_CAN);</span></div>
+<div class="line"><span class="lineno">   37</span> </div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">return</span> UNITY_END();</div>
+<div class="line"><span class="lineno">   39</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -177,13 +170,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00039">39</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   40</span>{</div>
-<div class="line"><span class="lineno">   41</span>    delay(500);</div>
-<div class="line"><span class="lineno">   42</span> </div>
-<div class="line"><span class="lineno">   43</span>    <a class="code hl_function" href="run__embedded__tests_8cpp.html#ae1cd91cff7ca45ac6a8069a2540e4ed6">runUnityTests</a>();</div>
-<div class="line"><span class="lineno">   44</span>}</div>
-<div class="ttc" id="arun__embedded__tests_8cpp_html_ae1cd91cff7ca45ac6a8069a2540e4ed6"><div class="ttname"><a href="run__embedded__tests_8cpp.html#ae1cd91cff7ca45ac6a8069a2540e4ed6">runUnityTests</a></div><div class="ttdeci">int runUnityTests(void)</div><div class="ttdef"><b>Definition:</b> <a href="run__embedded__tests_8cpp_source.html#l00020">run_embedded_tests.cpp:20</a></div></div>
+<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00041">41</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>{</div>
+<div class="line"><span class="lineno">   43</span>    delay(200);</div>
+<div class="line"><span class="lineno">   44</span> </div>
+<div class="line"><span class="lineno">   45</span>    <a class="code hl_function" href="run__embedded__tests_8cpp.html#ae1cd91cff7ca45ac6a8069a2540e4ed6">runUnityTests</a>();</div>
+<div class="line"><span class="lineno">   46</span>}</div>
+<div class="ttc" id="arun__embedded__tests_8cpp_html_ae1cd91cff7ca45ac6a8069a2540e4ed6"><div class="ttname"><a href="run__embedded__tests_8cpp.html#ae1cd91cff7ca45ac6a8069a2540e4ed6">runUnityTests</a></div><div class="ttdeci">int runUnityTests(void)</div><div class="ttdef"><b>Definition:</b> <a href="run__embedded__tests_8cpp_source.html#l00021">run_embedded_tests.cpp:21</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -206,7 +199,9 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00010">10</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   11</span>{</div>
 <div class="line"><span class="lineno">   12</span>    <span class="comment">// init_can_interface();</span></div>
-<div class="line"><span class="lineno">   13</span>}</div>
+<div class="line"><span class="lineno">   13</span>    <a class="code hl_function" href="main__ethernet__test_8cpp.html#a7b681318f4ad1433b216f7f3c54f7e44">init_ethernet_device</a>();</div>
+<div class="line"><span class="lineno">   14</span>}</div>
+<div class="ttc" id="amain__ethernet__test_8cpp_html_a7b681318f4ad1433b216f7f3c54f7e44"><div class="ttname"><a href="main__ethernet__test_8cpp.html#a7b681318f4ad1433b216f7f3c54f7e44">init_ethernet_device</a></div><div class="ttdeci">void init_ethernet_device()</div><div class="ttdef"><b>Definition:</b> <a href="main__ethernet__test_8cpp_source.html#l00013">main_ethernet_test.cpp:13</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -226,10 +221,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00015">15</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   16</span>{</div>
-<div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>}</div>
+<p class="definition">Definition at line <a class="el" href="run__embedded__tests_8cpp_source.html#l00016">16</a> of file <a class="el" href="run__embedded__tests_8cpp_source.html">run_embedded_tests.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>{</div>
+<div class="line"><span class="lineno">   18</span> </div>
+<div class="line"><span class="lineno">   19</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
