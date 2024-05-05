@@ -1,11 +1,12 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-
+#include "ParameterInterface.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
+#include "NativeEthernet.h"
 
 // /* Interfaces */
 #include "HytechCANInterface.h"
@@ -85,6 +86,9 @@ const PedalsParams brake_params = {
     DATA SOURCES
 */
 
+EthernetUDP protobuf_send_socket;
+EthernetUDP protobuf_recv_socket;
+
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
@@ -103,6 +107,8 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
+ParameterInterface param_interface;
+ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
@@ -144,7 +150,7 @@ TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
-    .AbsoluteTorqueLimit = AMK_MAX_TORQUE, // N-m, Torque limit used for yaw pid torque split overflow
+    .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
     .yaw_pid_p = 1.369,
     .yaw_pid_i = 0.25,
     .yaw_pid_d = 0.0,
@@ -177,7 +183,7 @@ CASEConfiguration case_config = {
     .yaw_pid_brakes_d = 0.0,
     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
     .discontinuousBrakesPercentThreshold = 0.7,
-    .TorqueMode = AMK_MAX_TORQUE, // N-m
+    .TorqueMode = 21.42, // N-m
     .RegenLimit = -10.0,          // N-m
     .useNoRegen5kph = true,
     .useTorqueBias = true,
@@ -192,9 +198,9 @@ CASEConfiguration case_config = {
     .maxNormalLoadBrakeScalingFront = 1.25,
 
     // Following used for calculate_torque_request in CASESystem.tpp
-    .max_rpm = AMK_MAX_RPM,
-    .max_regen_torque = AMK_MAX_TORQUE,
-    .max_torque = AMK_MAX_TORQUE,
+    .max_rpm = 20000,
+    .max_regen_torque = 21.42,
+    .max_torque = 21.42,
 };
 
 CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
@@ -221,15 +227,25 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
+void handle_ethernet_interface_comms();
+
 /*
     SETUP
 */
 
 void setup()
 {
-
     // initialize CAN communication
     init_all_CAN_devices();
+
+    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+
+    /* Do this to send message VVV */
+    // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
+    // protobuf_socket.write(buf, len);
+    // protobuf_socker.endPacket();
 
     SPI.begin();
     a1.init();
@@ -272,7 +288,6 @@ void setup()
     /*
         Init Systems
     */
-
     safety_system.init();
 
     // Drivetrain set all inverters disabled
@@ -286,9 +301,10 @@ void setup()
 
 void loop()
 {
-    // Serial.println("test");
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
+    
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -308,6 +324,9 @@ void loop()
     }
     // tick state machine
     fsm.tick_state_machine(curr_tick.millis);
+
+    // give the state of the car to the param interface
+    param_interface.update_car_state(fsm.get_state());
 
     // tick safety system
     safety_system.software_shutdown(curr_tick);
@@ -429,15 +448,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 {
     // tick pedals system
 
-    // Serial.println("accel1");
-    // Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
-    // Serial.println("accel2");
-    // Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
-    // Serial.println("brake1");
-    // Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
-    // Serial.println("brake2");
-    // Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
-
     pedals_system.tick(
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
@@ -481,4 +491,23 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
+}
+
+void handle_ethernet_interface_comms()
+{
+    // function that will handle receiving and distributing of all messages to all ethernet interfaces
+    // via the union message. this is a little bit cursed ngl.
+    // TODO un fuck this and make it more sane
+    handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
+
+    // this is just kinda here i know.
+    if (param_interface.params_need_sending())
+    {
+        auto config = param_interface.get_config();
+        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
+        {
+            // TODO this means that something bad has happend 
+        }
+        param_interface.reset_params_need_sending();
+    }
 }
