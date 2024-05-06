@@ -5,8 +5,10 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "hytech.h"
+#include "MCU_rev15_defs.h"
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
+#include "AnalogSensorsInterface.h"
 
 const int DEFAULT_BMS_OK_READ         = 17;      // SHDN_D_READ
 const int DEFAULT_BMS_SENSE_PIN       = 16;      // BMS_OK_SENSE
@@ -37,8 +39,15 @@ struct MainECUHardwareReadPins
     int pin_inv_24V_en;
 };
 
+struct MainECUAnalogReadPins
+{
+    int therm_fl;
+    int therm_fr;
+};
+
 static const MainECUHardwareReadPins DEFAULT_PINS = {DEFAULT_BMS_OK_READ,DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ,
                                                      DEFAULT_BOTS_OK_READ, DEFAULT_BRB_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_ENABLE, DEFAULT_INVERTER_24V_ENABLE};
+static const MainECUAnalogReadPins DEFAULT_ANALOG_PINS = {THERM_FL, THERM_FR};
 
 class MCUInterface
 {
@@ -46,7 +55,10 @@ private:
     CANBufferType *msg_queue_;
 
     MainECUHardwareReadPins pins_;
+    MainECUAnalogReadPins analog_pins_;
 
+    AnalogChannel therm_motor_fl;
+    AnalogChannel therm_motor_fr;
     /* Outbound CAN message */
     MCU_STATUS_t mcu_status_;
 
@@ -74,14 +86,15 @@ public:
     // PLEASE replace these long lists of parameters with structs
     // and put initialization in constructor body instead of initializer list     -- happy?
     // my retinas are in pain
-    MCUInterface(CANBufferType *msg_output_queue, const MainECUHardwareReadPins &pins):
+    MCUInterface(CANBufferType *msg_output_queue, const MainECUHardwareReadPins &pins, const MainECUAnalogReadPins &analog_pins):
         // Member initialization list
         msg_queue_(msg_output_queue),
         pins_(pins){};
+        analog_pins_(analog_pins){};
 
     // Overloading constructor
     MCUInterface(CANBufferType *msg_output_queue):        
-        MCUInterface(msg_output_queue, DEFAULT_PINS)
+        MCUInterface(msg_output_queue, DEFAULT_PINS, DEFAULT_ANALOG_PINS)
     {};
 
     /* Initialize shutdown circuit input readings */
@@ -114,7 +127,7 @@ public:
     // Interfaces
     void update_mcu_status_CAN_ams(bool is_critical);
     void update_mcu_status_CAN_dashboard(bool is_active);
-
+    void update_mcu_thermistors();
     /* Enqueue MCU_status CAN  */
     void enqueue_CAN_mcu_status();
 

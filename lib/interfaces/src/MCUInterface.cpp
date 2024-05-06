@@ -182,6 +182,9 @@ void MCUInterface::update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals
     mcu_status_.no_brake_implausibility = !pedals.brakeImplausible;
     mcu_status_.no_accel_or_brake_implausibility = !(pedals.brakeAndAccelPressedImplausibility);
 }
+void MCUInterface::update_mcu_thermistors() {
+    
+}
 
 void MCUInterface::tick(int fsm_state,
                         bool inv_has_error,

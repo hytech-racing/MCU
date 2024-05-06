@@ -9,7 +9,8 @@ const int ADC2_CS = 33;
 const int ADC3_CS = 29;
 const int SOFTWARE_OK       = 8;
 const int WATCHDOG_INPUT    = 32;
-
+const int THERM_FL = 38;
+const int THERM_FR = 41;
 
 // ADC1 channel defs
 const int MCU15_ACCEL1_CHANNEL          = 2;
