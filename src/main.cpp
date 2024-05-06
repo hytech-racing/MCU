@@ -6,7 +6,9 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-#include "NativeEthernet.h"
+// #include "NativeEthernet.h"
+#include "QNEthernet.h"
+
 
 // /* Interfaces */
 #include "HytechCANInterface.h"
@@ -86,8 +88,8 @@ const PedalsParams brake_params = {
     DATA SOURCES
 */
 
-EthernetUDP protobuf_send_socket;
-EthernetUDP protobuf_recv_socket;
+qindesign::network::EthernetUDP protobuf_send_socket;
+qindesign::network::EthernetUDP protobuf_recv_socket;
 
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
@@ -238,7 +240,7 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    qindesign::network::Ethernet.begin(EthParams::default_MCU_ip, EthParams::default_netmask, EthParams::default_gateway);
     protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
     protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
@@ -460,8 +462,10 @@ void tick_all_systems(const SysTick_s &current_system_tick)
             .tick = current_system_tick,
             .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]});
 
-    // Serial.println("Steering angle");
+    
+
     // Serial.println(steering_system.getSteeringSystemData().angle);
+    // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
     // Serial.println("Steering status");
     // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
 

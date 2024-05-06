@@ -1,6 +1,7 @@
 #ifndef INTERFACEPARAMS
 #define INTERFACEPARAMS
-#include "NativeEthernet.h"
+// #include "NativeEthernet.h"
+#include "QNEthernet.h"
 
 namespace EthParams
 {
@@ -14,7 +15,7 @@ namespace EthParams
     const uint16_t default_protobuf_recv_port = 2000;
 
     const IPAddress default_netmask(255, 255, 255, 0);
-    const IPAddress default_gateway(192, 168, 0, 1);
+    const IPAddress default_gateway(192, 168, 1, 1);
 
     const uint16_t default_buffer_size = 512;
 }

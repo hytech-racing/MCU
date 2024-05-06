@@ -1,5 +1,6 @@
 #include "SteeringSystem.h"
 #include <cmath>
+#include "Arduino.h"
 
 void SteeringSystem::tick(const SteeringSystemTick_s &intake)
 {
@@ -9,9 +10,12 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
     if (intake.tick.triggers.trigger100)
     {
         // Poll upper steering sensor
+        
         primarySensor_->sample();
         primaryConversion_ = primarySensor_->convert();
-
+        Serial.println("primary sensor");
+        Serial.println(primaryConversion_.angle);
+        Serial.println(primaryConversion_.raw);
         // Both sensors are nominal and agree
         if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL)
