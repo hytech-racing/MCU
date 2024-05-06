@@ -2,13 +2,14 @@
 #define PARAMETERINTERFACE
 #include "MCUStateMachine.h"
 #include "ht_eth.pb.h"
+#include "default_config.h"
 
 // yes, i know this is a singleton. im prototyping rn.
 // TODO review if I can just give this a pointer to an ethernet port
 class ParameterInterface
 {
 public:
-    ParameterInterface(): current_car_state_(CAR_STATE::STARTUP), params_need_sending_(false), config_({}) {}
+    ParameterInterface(): current_car_state_(CAR_STATE::STARTUP), params_need_sending_(false), config_(DEFAULT_CONFIG) {}
     
     void update_car_state(const CAR_STATE& state)
     {

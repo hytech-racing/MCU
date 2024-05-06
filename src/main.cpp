@@ -481,6 +481,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         3);
 
+    case_system.update_config_from_param_interface(param_interface);
+
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_dynamic_data(),
@@ -491,6 +493,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
+
+    
 }
 
 void handle_ethernet_interface_comms()
