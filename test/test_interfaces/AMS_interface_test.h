@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <unity.h>
 #include "AMSInterface.h"
+#include "SysClock.h"
 #include "CAN_testing_utilities.h"
 
 void test_AMS_unpacking_BMS_status_message()
@@ -112,20 +113,24 @@ void test_AMS_filtered_readings()
 
 void test_AMS_heartbeat()
 {   
-
     //setting arbitrary pin 20
     AMSInterface ams_interface(20);
-    long startingMillis = millis();
-    ams_interface.init(startingMillis);
-    ams_interface.set_start_state();
-    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(startingMillis + 1000));
-    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(startingMillis + 2000));
 
-    startingMillis = millis();
-    ams_interface.set_heartbeat(startingMillis);
-    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(startingMillis + 100));
-    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(startingMillis + 1000));
-    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(startingMillis + 1999));
-    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(startingMillis + 2000));
-    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(startingMillis + 2010));
+    unsigned long starting_millis = millis();
+    SysTick_s starting_tick;
+    starting_tick.millis = starting_millis;
+
+    ams_interface.init(starting_tick);
+    ams_interface.set_start_state();
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(starting_millis + 1000));
+    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(starting_millis + 2000));
+
+    starting_millis = millis();
+    ams_interface.set_heartbeat(starting_millis);
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(starting_millis + 100));
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(starting_millis + 1000));
+    TEST_ASSERT_EQUAL(true, ams_interface.heartbeat_received(starting_millis + 1999));
+    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(starting_millis + 2000));
+    TEST_ASSERT_EQUAL(false, ams_interface.heartbeat_received(starting_millis + 2010));
+    
 }

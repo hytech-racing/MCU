@@ -1,11 +1,14 @@
 #include "AMSInterface.h"
+#include "SysClock.h"
 
-void AMSInterface::init(unsigned long curr_millis) {
+void AMSInterface::init(SysTick_s &initial_tick) {
     
     // Set pin mode
     pinMode(pin_software_ok_, OUTPUT);
 
-    set_heartbeat(curr_millis);
+    set_heartbeat(initial_tick.millis);
+
+    last_tick = initial_tick;
 
 }
 
@@ -69,34 +72,39 @@ float AMSInterface::initialize_charge() {
         i++;
     }
     charge = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
-    
-    CC_integrator_timer = 0;
+    SoC = (charge / MAX_PACK_CHARGE) * 100;
 
     return charge;
 }
 
-float AMSInterface::get_SoC_em() {
-    current = em_measurements_.em_current_ro;
-    charge -= (current * CC_integrator_timer) / 1000;
+float AMSInterface::get_SoC_em(SysTick_s &tick) {
+    unsigned long delta_time_micros = tick.micros - last_tick.micros;
+
+    current = HYTECH_em_current_ro_fromS(em_measurements_.em_current_ro);
+    charge -= (current * delta_time_micros) / 1000000; // 1 microsecond = 1e-6 sec
+    
     SoC = (charge / MAX_PACK_CHARGE) * 100;
     return SoC;
 }
 
-float AMSInterface::get_SoC_acu() {
+float AMSInterface::get_SoC_acu(SysTick_s &tick) {
+    unsigned long delta_time_micros = tick.micros - last_tick.micros;
+
     current = HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro);
     shunt_voltage = (current * (9.22 / 5.1)) - 3.3 - 0.03;
     calc_current = (shunt_voltage / 0.005);
-    charge -= (calc_current * CC_integrator_timer) / 1000;
+    charge -= (calc_current * delta_time_micros) / 1000000;
+
     SoC = (charge / MAX_PACK_CHARGE) * 100;
     return SoC;
 }
 
-void AMSInterface::tick50() {
+void AMSInterface::tick50(SysTick_s &tick) {
 
-    get_SoC_em();
-    // get_SoC_acu();
+    get_SoC_em(tick);
+    // get_SoC_acu(tick);
 
-    CC_integrator_timer = 0; // must reset timer
+    last_tick = tick;
 }
 
 //RETRIEVE CAN MESSAGES//

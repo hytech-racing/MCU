@@ -3,6 +3,7 @@
 
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
+#include "SysClock.h"
 #include "hytech.h"
 
 /* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
@@ -40,7 +41,7 @@ public:
         AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
 
     /* Initialize the heartbeat timer */
-    void init(unsigned long curr_millis);
+    void init(SysTick_s &initial_tick);
 
     /* Init software OK pin by setting high*/
     void set_start_state();
@@ -69,9 +70,47 @@ public:
      * @return The charge, in coulombs, that the charge member variable is initialized to.
     */
     float initialize_charge();
-    float get_SoC_em();
-    float get_SoC_acu();
-    void tick50();
+
+    /**
+     * Calculates SoC based on the energy meter CAN message. This method does two things--
+     * it sets the SoC variable to the new value AND returns that new value. This means that
+     * calling get_SoC_em() and storing the return value will always behave identically to
+     * calling get_SoC_em() and then calling get_SoC().
+     * 
+     * @param The current tick that the get_SoC_em function should use for integration.
+     * @post The SoC member variable contains the new charge.
+     * @return The new value of the SoC member variable.
+    */
+    float get_SoC_em(SysTick_s &tick);
+
+    /**
+     * Calculates SoC based on the ACU shunt current CAN message. This method does two things--
+     * it sets the SoC variable to the new value AND returns that new value. This means that
+     * calling get_SoC_acu() and storing the return value will always behave identically to
+     * calling get_SoC_acu() and then calling get_SoC().
+     * 
+     * @param The current tick that the get_SoC_acu function should use for integration.
+     * @post The SoC member variable contains the new charge.
+     * @return The new value of the SoC member variable.
+    */
+    float get_SoC_acu(SysTick_s &tick);
+
+    /**
+     * Retrieves the value of the SoC member variable. This function does NOT recalculate
+     * the SoC variable, it only returns the value that is stored.
+     * 
+     * @return the current value stored in the SoC member variable.
+    */
+    float get_SoC() {return SoC;}
+
+    /**
+     * This is AMSInterface's tick() function. Although this is called tick50, it should
+     * behave correctly regardless of the tick interval, since the functions calculate
+     * the elapsed time between the given tick and the stored last_tick.
+     * 
+     * @param tick The current system tick.
+    */
+    void tick50(SysTick_s &tick);
 
     //RETRIEVE CAN MESSAGES//
     
@@ -139,15 +178,31 @@ private:
     float calc_current;
     float shunt_voltage;
     float current;
-    float charge; // Current charge in the accumulator. Stored in coulombs.
+
+    /**
+     * The charge stored on the accumulator. Stored in coulombs, ranging from
+     * zero to MAX_PACK_CHARGE.
+    */
+    float charge;
+
+    /**
+     * Stores the current state of charge of the accumulator. SoC is stored as a
+     * percentage of MAX_PACK_CHARGE. In every location, this is calculated as
+     * SoC = (charge / MAX_PACK_CHARGE) * 100;
+    */
     float SoC;
+
     float voltage_lookup_table[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
     3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3.701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
     3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
     3.56, 3.56, 3.549, 3.549, 3.549, 3.549, 3.538, 3.538, 3.551, 3.546, 3.535, 3.535, 3.535, 3.53, 3.524, 3.524, 3.524, 3.513,
     3.513, 3.513, 3.503, 3.503, 3.492, 3.492, 3.492, 3.487, 3.481, 3.481, 3.476, 3.471, 3.46, 3.46, 3.449, 3.444, 3.428, 3.428,
     3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 3, 0};
-    elapsedMicros CC_integrator_timer = 0;
+    
+    /**
+     * Stores the last Sys_Tick_s struct from the last time the tick50() function is called.
+    */
+    SysTick_s last_tick;
 };
 
 #endif /* __AMSINTERFACE_H__ */

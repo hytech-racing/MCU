@@ -155,7 +155,7 @@ void setup()
 
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
 
     Serial.begin(115200);
