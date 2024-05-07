@@ -52,7 +52,9 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .analog_steering_channel = MCU15_STEERING_CHANNEL,
     .current_channel = MCU15_CUR_POS_SENSE_CHANNEL,
     .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
-    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL};
+    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL,
+    .therm_fl_channel = MCU15_THERM_FL_CHANNEL,
+    .therm_fr_channel = MCU15_THERM_FR_CHANNEL};
 
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
@@ -267,8 +269,8 @@ void setup()
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
 
-    mcu_adc.setAlphas(THERM_FL, 0.95);
-    mcu_adc.setAlphas(THERM_FR, 0.95);
+    mcu_adc.setAlphas(MCU15_THERM_FL, 0.95);
+    mcu_adc.setAlphas(MCU15_THERM_FR, 0.95);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -396,6 +398,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get(),
             a2.get(),
             a3.get(),
+            mcu_adc.get(),
             steering1.convert(),
             &inv.fl,
             &inv.fr,
