@@ -24,8 +24,8 @@ void handle_ethernet_socket_receive(EthernetUDP* socket, recv_function_t recv_fu
     int packet_size = socket->parsePacket();
     if(packet_size > 0)
     {
-        // Serial.println("packet size");
-        // Serial.println(packet_size);
+        Serial.println("packet size");
+        Serial.println(packet_size);
         uint8_t buffer[EthParams::default_buffer_size];
         size_t read_bytes = socket->read(buffer, sizeof(buffer));
         socket->read(buffer, UDP_TX_PACKET_MAX_SIZE);
@@ -57,7 +57,7 @@ void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInte
     HT_ETH_Union msg = HT_ETH_Union_init_zero;
     if (pb_decode(&stream, HT_ETH_Union_fields, &msg))
     {
-        // Serial.println("decoded!");
+        Serial.println("decoded!");
 
         switch (msg.which_type_union)
         {

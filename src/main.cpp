@@ -242,9 +242,9 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     /* Do this to send message VVV */
     // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
@@ -311,7 +311,7 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    handle_ethernet_interface_comms();
+    // handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -490,7 +490,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         3);
 
-    case_system.update_config_from_param_interface(param_interface);
+    // case_system.update_config_from_param_interface(param_interface);
 
     torque_controller_mux.tick(
         current_system_tick,
@@ -511,11 +511,13 @@ void handle_ethernet_interface_comms()
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
     // TODO un fuck this and make it more sane
+    // Serial.println("bruh");
     handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
 
     // this is just kinda here i know.
     if (param_interface.params_need_sending())
     {
+        // Serial.println("handling ethernet");
         auto config = param_interface.get_config();
         if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
         {
