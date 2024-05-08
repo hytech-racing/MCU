@@ -30,6 +30,14 @@ const int MCU15_FR_POTS_CHANNEL         = 1;
 const int MCU15_FL_LOADCELL_CHANNEL     = 2;
 const int MCU15_FR_LOADCELL_CHANNEL     = 2;
 
+//MCU teensy analog channels
+const int MCU15_TEENSY_ADC_CHANNELS = 2;
+const int MCU15_THERM_FL = 38;
+const int MCU15_THERM_FR = 41;
+const int MCU15_THERM_FL_CHANNEL = 0;
+const int MCU15_THERM_FR_CHANNEL = 1;
+
+const int DEFAULT_ANALOG_PINS[MCU15_TEENSY_ADC_CHANNELS] = {MCU15_THERM_FL, MCU15_THERM_FR};
 // Time intervals
 const unsigned long SETUP_PRESENT_ACTION_INTERVAL       = 1000;
 const unsigned long BUZZER_ON_INTERVAL                  = 2000;

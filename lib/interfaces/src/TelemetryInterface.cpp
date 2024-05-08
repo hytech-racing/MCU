@@ -1,5 +1,4 @@
 #include "TelemetryInterface.h"
-
 /* Update CAN messages */
 // Main loop
 // MCP3208 returns structure
@@ -58,6 +57,16 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
 
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
+void TelemetryInterface::update_front_thermistors_CAN_msg(const AnalogConversion_s &therm_fl,
+                                                          const AnalogConversion_s &therm_fr) {
+    
+    FRONT_THERMISTORS_t front_thermistors_;
+    front_thermistors_.thermistor_motor_fl = therm_fl.raw;
+    front_thermistors_.thermistor_motor_fr = therm_fr.raw;
+
+    enqueue_new_CAN<FRONT_THERMISTORS_t>(&front_thermistors_, &Pack_FRONT_THERMISTORS_hytech);
+}
+
 
 void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
 {
@@ -233,6 +242,7 @@ void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerDa
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const AnalogConversionPacket_s<4> &adc2,
                               const AnalogConversionPacket_s<4> &adc3,
+                              const AnalogConversionPacket_s<2> &mcu_adc,
                               const SteeringEncoderConversion_s &encoder,
                               InvInt_t* fl,
                               InvInt_t* fr,
@@ -279,5 +289,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                                    adc1.conversions[channels_.current_ref_channel]);
 
     enqeue_controller_CAN_msg(data);
+    update_front_thermistors_CAN_msg(mcu_adc.conversions[channels_.therm_fl_channel],
+                                    mcu_adc.conversions[channels_.therm_fr_channel]);
 
 }

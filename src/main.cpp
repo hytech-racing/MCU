@@ -9,7 +9,9 @@
 #include "NativeEthernet.h"
 
 // /* Interfaces */
+
 #include "HytechCANInterface.h"
+#include "Teensy_ADC.h"
 #include "MCP_ADC.h"
 #include "ORBIS_BR10.h"
 #include "MCUInterface.h"
@@ -51,7 +53,9 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .analog_steering_channel = MCU15_STEERING_CHANNEL,
     .current_channel = MCU15_CUR_POS_SENSE_CHANNEL,
     .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
-    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL};
+    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL,
+    .therm_fl_channel = MCU15_THERM_FL_CHANNEL,
+    .therm_fr_channel = MCU15_THERM_FR_CHANNEL};
 
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
@@ -101,7 +105,7 @@ using CircularBufferType = CANBufferType;
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
 MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS, 1000000); // 1M baud needed for 04s
 MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS, 1000000);
-
+Teensy_ADC<2> mcu_adc = Teensy_ADC<2>(DEFAULT_ANALOG_PINS);
 OrbisBR10 steering1(&Serial5);
 
 // /*
@@ -251,6 +255,7 @@ void setup()
     a1.init();
     a2.init();
     a3.init();
+    mcu_adc.init();
 
     a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_PEDAL_MAX - ACCEL1_PEDAL_MIN)));
     a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_PEDAL_MAX - ACCEL2_PEDAL_MIN)));
@@ -270,6 +275,8 @@ void setup()
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
 
+    mcu_adc.setAlphas(MCU15_THERM_FL, 0.95);
+    mcu_adc.setAlphas(MCU15_THERM_FR, 0.95);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -400,6 +407,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get(),
             a2.get(),
             a3.get(),
+            mcu_adc.get(),
             steering1.convert(),
             &inv.fl,
             &inv.fr,
@@ -428,6 +436,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         a1.tick();
         a2.tick();
         a3.tick();
+        mcu_adc.tick();
         load_cell_interface.tick(
             (LoadCellInterfaceTick_s){
                 .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
