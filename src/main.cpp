@@ -427,6 +427,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         a1.tick();
         a2.tick();
         a3.tick();
+        mcu_adc.tick();
         load_cell_interface.tick(
             (LoadCellInterfaceTick_s){
                 .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
