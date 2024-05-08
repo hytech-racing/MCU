@@ -172,7 +172,7 @@ CASEConfiguration case_config = {
     .usePowerLimit = true,
     .usePIDPowerLimit = false,
     .useDecoupledYawBrakes = true,
-    .useDiscontinuousYawPIDBrakes = false,
+    .useDiscontinuousYawPIDBrakes = true,
     .tcsSLThreshold = 0.3,
     .launchSL = 0.3,
     .launchDeadZone = 20.0,        // N-m
@@ -188,7 +188,7 @@ CASEConfiguration case_config = {
     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
     .discontinuousBrakesPercentThreshold = 0.7,
     .TorqueMode = 21.42, // N-m
-    .RegenLimit = -10.0, // N-m
+    .RegenLimit = -15.0, // N-m
     .useNoRegen5kph = true,
     .useTorqueBias = true,
     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
@@ -242,9 +242,9 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     /* Do this to send message VVV */
     // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
@@ -311,7 +311,7 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    // handle_ethernet_interface_comms();
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);

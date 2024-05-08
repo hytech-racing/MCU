@@ -23,10 +23,10 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.YawRaterads = vn_data.angular_rates.z;
 
     // REAL
-    in.Vx_B = vn_data.velocity_x;
+    // in.Vx_B = vn_data.velocity_x;
 
     // FAKE
-    // in.Vx_B = 5;
+    in.Vx_B = 5;
 
     in.FZFL = load_cell_vals.FL.conversion;
     in.FZFR = load_cell_vals.FR.conversion;
