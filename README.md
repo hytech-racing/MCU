@@ -349,10 +349,5 @@ flowchart LR
     nanopb --> MCU
     other_protos[other msgs.proto]
     other_protos --> h_proto
-
-    
-
-
-    
   
 ```

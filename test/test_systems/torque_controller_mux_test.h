@@ -47,7 +47,7 @@
 //             (const AnalogConversion_s) {},
 //             (const AnalogConversion_s) {},
 //             (const AnalogConversion_s) {},
-//             DialMode_e::MODE_1,
+//             ControllerMode_e::MODE_1,
 //             buttonTimeSeries[i]
 //         );
 //         // Test conditions
@@ -70,7 +70,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
     TorqueControllerMux torque_controller_mux = TorqueControllerMux();
     DrivetrainCommand_s resulting_torque_command;
 
-    vector_nav vn_data{};
+    vectornav vn_data{};
 
     DrivetrainDynamicReport_s simulated_drivetrain_dynamics = {
         .measuredInverterFLPackVoltage = 550,
@@ -108,7 +108,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -129,7 +129,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
          (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -142,7 +142,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -164,7 +164,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
     cur_tick = clock.tick(0);
     TorqueControllerMux torque_controller_mux = TorqueControllerMux();
     DrivetrainCommand_s resulting_torque_command;
-    vector_nav vn_data{};
+    vectornav vn_data{};
 
     DrivetrainDynamicReport_s simulated_slow_drivetrain_dynamics = {
         .measuredInverterFLPackVoltage = 550,
@@ -220,7 +220,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -241,7 +241,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -254,7 +254,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -347,7 +347,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
     TorqueControllerMux torque_controller_mux = TorqueControllerMux();
     DrivetrainCommand_s resulting_torque_command;
 
-    vector_nav vn_data{};
+    vectornav vn_data{};
 
     DrivetrainDynamicReport_s simulated_slow_drivetrain_dynamics = {
         .measuredInverterFLPackVoltage = 550,
@@ -427,7 +427,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -440,7 +440,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -453,7 +453,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -470,7 +470,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -487,7 +487,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -504,7 +504,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -520,7 +520,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -537,7 +537,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         simulated_accel_and_brake_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_3,
+        ControllerMode_e::MODE_3,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -555,7 +555,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
     TorqueControllerMux torque_controller_mux = TorqueControllerMux();
     DrivetrainCommand_s resulting_torque_command;
 
-    vector_nav vn_data{};
+    vectornav vn_data{};
 
     DrivetrainDynamicReport_s simulated_slow_drivetrain_dynamics = {
         .measuredInverterFLPackVoltage = 550,
@@ -635,7 +635,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_0,
+        ControllerMode_e::MODE_0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -648,7 +648,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -661,7 +661,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_no_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -678,7 +678,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -691,7 +691,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -710,7 +710,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -732,7 +732,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -752,7 +752,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         simulated_full_accel_press,
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
-        DialMode_e::MODE_4,
+        ControllerMode_e::MODE_4,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}

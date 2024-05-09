@@ -9,7 +9,7 @@
 #include "circular_buffer.h"
 #include "NativeEthernet.h"
 #include "MCU_rev15_defs.h"
-
+#include "InterfaceParams.h"
 
 struct ETHInterfaces
 {

@@ -8,9 +8,9 @@ void TorqueControllerMux::tick(
     const PedalsSystemData_s &pedalsData,
     const SteeringSystemData_s &steeringData,
     const LoadCellInterfaceOutput_s &loadCellData,
-    DialMode_e dashboardDialMode,
+    ControllerMode_e dashboardDialMode,
     bool dashboardTorqueModeButtonPressed,
-    const vector_nav &vn_data,
+    const vectornav &vn_data,
     const DrivetrainCommand_s &CASECommand)
 {
     // Tick all torque controllers

@@ -10,7 +10,8 @@
 #include "SteeringEncoderInterface.h"
 #include "hytech.h"
 #include "InverterInterface.h"
-#include "TorqueControllersData.h"
+// #include "TorqueControllersData.h"
+#include "SharedDataTypes.h"
 using InvInt_t = InverterInterface<CANBufferType>;
 
 const int FIXED_POINT_PRECISION = 10000;

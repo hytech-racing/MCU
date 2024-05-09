@@ -2,9 +2,7 @@
 #define __MCU15_H__
 
 #include "PedalsSystem.h"
-#ifndef TESTING_SYSTEMS
-#include "InterfaceParams.h"
-#endif
+
 
 
 // pindefs

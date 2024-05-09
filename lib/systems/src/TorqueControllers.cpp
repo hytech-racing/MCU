@@ -152,7 +152,7 @@ void BaseLaunchController::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
     const float wheel_rpms[],
-    const vector_nav* vn_data)
+    const vectornav* vn_data)
 {
 
     if (tick.triggers.trigger100){
@@ -256,7 +256,7 @@ void BaseLaunchController::tick(
     }
 }
 
-void TorqueControllerSimpleLaunch::calc_launch_algo(const vector_nav* vn_data) {
+void TorqueControllerSimpleLaunch::calc_launch_algo(const vectornav* vn_data) {
             /*
             Stolen launch algo from HT07. This ramps up the speed target over time.
             launch rate target is m/s^2 and is the target acceleration rate
@@ -270,7 +270,7 @@ void TorqueControllerSimpleLaunch::calc_launch_algo(const vector_nav* vn_data) {
             launch_speed_target_ = std::min((int)AMK_MAX_RPM, std::max(0, (int)launch_speed_target_));
 }
 
-void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
+void TorqueControllerSlipLaunch::calc_launch_algo(const vectornav* vn_data) {
     // accelerate at constant speed for a period of time to get body velocity up
     // may want to make this the ht07 launch algo
     
@@ -291,7 +291,7 @@ void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
     launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
 }
 
-void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
+void TorqueControllerLookupLaunch::calc_launch_algo(const vectornav* vn_data) {
 
     launch_speed_target_ = std::max((float)DEFAULT_LAUNCH_SPEED_TARGET, launch_speed_target_);
 

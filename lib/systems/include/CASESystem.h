@@ -109,7 +109,7 @@ public:
     /// @return controller output
     DrivetrainCommand_s evaluate(
         const SysTick_s &tick,
-        const vector_nav &vn_data,
+        const vectornav &vn_data,
         const SteeringSystemData_s &steering_data,
         const DrivetrainDynamicReport_s &drivetrain_data,
         const veh_vec<AnalogConversion_s> &load_cell_vals,

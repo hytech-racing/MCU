@@ -27,13 +27,13 @@ private:
     TorqueControllerCASEWrapper tcCASEWrapper_;
 
     // Use this to map the dial to TCMUX modes
-    std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
-        {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
-        {DialMode_e::MODE_2, TorqueController_e::TC_CASE_SYSTEM},
-        {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
-        {DialMode_e::MODE_4, TorqueController_e::TC_SLIP_LAUNCH},
-        {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
+    std::unordered_map<ControllerMode_e, TorqueController_e> dialModeMap_ = {
+        {ControllerMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
+        {ControllerMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
+        {ControllerMode_e::MODE_2, TorqueController_e::TC_CASE_SYSTEM},
+        {ControllerMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
+        {ControllerMode_e::MODE_4, TorqueController_e::TC_SLIP_LAUNCH},
+        {ControllerMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
         {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
@@ -42,7 +42,7 @@ private:
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
-    DialMode_e cur_dial_mode_ = DialMode_e::MODE_0;
+    ControllerMode_e cur_dial_mode_ = ControllerMode_e::MODE_0;
 
     TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
 
@@ -89,9 +89,9 @@ public:
         const PedalsSystemData_s &pedalsData,
         const SteeringSystemData_s &steeringData,
         const LoadCellInterfaceOutput_s &loadCellData,
-        DialMode_e dashboardDialMode,
+        ControllerMode_e dashboardDialMode,
         bool dashboardTorqueModeButtonPressed,
-        const vector_nav &vn_data, 
+        const vectornav &vn_data, 
         const DrivetrainCommand_s &CASECommand
     );
     const DrivetrainCommand_s &getDrivetrainCommand()
@@ -119,7 +119,7 @@ public:
 
 
 
-    const DialMode_e getDialMode()
+    const ControllerMode_e getDialMode()
     {
         return cur_dial_mode_;
     }

@@ -14,8 +14,7 @@
 
 #include "accel_lookup.h"
 
-#include "TorqueControllersData.h"
-
+#include "SharedDataTypes.h"
 
 /* CONTROLLER CONSTANTS */
 
@@ -49,15 +48,9 @@ const float launch_stop_accel_threshold = .5;
 
 /* DRIVETRAIN STRUCTS */
 
-const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
-    .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
-    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}};
 
-struct TorqueControllerOutput_s
-{
-    DrivetrainCommand_s command;
-    bool ready;
-};
+
+
 
 /* TC STRUCTS */
 struct TCCaseWrapperTick_s
@@ -238,9 +231,9 @@ public:
     void tick(const SysTick_s &tick,
               const PedalsSystemData_s &pedalsData,
               const float wheel_rpms[],
-              const vector_nav *vn_data);
+              const vectornav *vn_data);
 
-    virtual void calc_launch_algo(const vector_nav *vn_data) = 0;
+    virtual void calc_launch_algo(const vectornav *vn_data) = 0;
 };
 
 class TorqueControllerSimpleLaunch : public TorqueController<TC_SIMPLE_LAUNCH>, public BaseLaunchController
@@ -264,7 +257,7 @@ public:
 
     LaunchStates_e get_launch_state() override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
+    void calc_launch_algo(const vectornav *vn_data) override;
 };
 
 class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>, public BaseLaunchController
@@ -289,7 +282,7 @@ public:
 
     LaunchStates_e get_launch_state() override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
+    void calc_launch_algo(const vectornav *vn_data) override;
 };
 
 class TorqueControllerLookupLaunch : public TorqueController<TC_LOOKUP_LAUNCH>, BaseLaunchController
@@ -313,7 +306,7 @@ public:
 
     LaunchStates_e get_launch_state() override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
+    void calc_launch_algo(const vectornav *vn_data) override;
 };
 
 class TorqueControllerCASEWrapper : public TorqueController<TC_CASE_SYSTEM>
