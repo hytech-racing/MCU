@@ -131,7 +131,11 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.maxNormalLoadBrakeScalingFront = config_.maxNormalLoadBrakeScalingFront;
 
-    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
+    in.TCS_Saturation_Front = config_.tcs_saturation_front;
+
+    in.TCS_Saturation_Rear = config_.tcs_saturation_rear;
+
+        if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
         vn_active_start_time_ = tick.millis;
     }

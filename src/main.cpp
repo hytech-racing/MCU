@@ -202,6 +202,9 @@ CASEConfiguration case_config = {
     .tcs_pid_lower_rpm_rear = 0.0,     // RPM
     .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
     .maxNormalLoadBrakeScalingFront = 1.25,
+    .tcs_saturation_front = 20,
+    .tcs_saturation_rear = 20,
+
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,

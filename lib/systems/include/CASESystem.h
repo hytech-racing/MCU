@@ -58,6 +58,9 @@ struct CASEConfiguration
     float tcs_pid_lower_rpm_rear;
     float tcs_pid_upper_rpm_rear;
     float maxNormalLoadBrakeScalingFront;
+    float tcs_saturation_front;
+    float tcs_saturation_rear;
+
     float max_rpm;
     float max_regen_torque;
     float max_torque;
