@@ -216,6 +216,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_yaw_pi);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sa);
 
         last_lowest_priority_controller_send_time_ = tick.millis;
     }
