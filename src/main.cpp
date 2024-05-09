@@ -155,13 +155,15 @@ TorqueControllerMux torque_controller_mux(1.0, 0.4);
 CASEConfiguration case_config = {
     // Following used for generated code
     .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
-    .yaw_pid_p = 1.369,
+    .yaw_pid_p = 1.5,
     .yaw_pid_i = 0.25,
+    // .yaw_pid_p = 0.5, // SKIDPAD Testing
+    // .yaw_pid_i = 0.0, // SKIDPAD Testing
     .yaw_pid_d = 0.0,
     .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
     .tcs_pid_p_upperBound_front = 45.0,
-    .tcs_pid_p_lowerBound_rear = 28.0,
-    .tcs_pid_p_upperBound_rear = 35.0,
+    .tcs_pid_p_lowerBound_rear = 32.0,
+    .tcs_pid_p_upperBound_rear = 45.0,
     .tcs_pid_i = 0.0,
     .tcs_pid_d = 0.0,
     .useLaunch = false,
@@ -177,10 +179,10 @@ CASEConfiguration case_config = {
     .launchSL = 0.3,
     .launchDeadZone = 20.0,        // N-m
     .launchVelThreshold = 0.15,    // m/s
-    .tcsVelThreshold = 2.5,        // m/s
+    .tcsVelThreshold = 0.15,       // m/s
     .yawPIDMaxDifferential = 10.0, // N-m
     .yawPIDErrorThreshold = 0.1,   // rad/s
-    .yawPIDVelThreshold = 1.0,     // m/s
+    .yawPIDVelThreshold = 0.35,    // m/s
     .yawPIDCoastThreshold = 2.5,   // m/s
     .yaw_pid_brakes_p = 0.25,
     .yaw_pid_brakes_i = 0.0,
@@ -199,7 +201,7 @@ CASEConfiguration case_config = {
     .tcs_pid_upper_rpm_front = 5000.0, // RPM
     .tcs_pid_lower_rpm_rear = 0.0,     // RPM
     .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
-    .maxNormalLoadBrakeScalingFront = 1.95,
+    .maxNormalLoadBrakeScalingFront = 1.25,
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,
@@ -502,8 +504,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
-
-    
 }
 
 void handle_ethernet_interface_comms()

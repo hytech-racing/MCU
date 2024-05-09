@@ -21,12 +21,13 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
 
     in.YawRaterads = vn_data.angular_rates.z;
+    // in.YawRaterads = 2.5; // THIS IS FAKE TODO HACK
 
     // REAL
-    // in.Vx_B = vn_data.velocity_x;
+    in.Vx_B = vn_data.velocity_x;
 
     // FAKE
-    in.Vx_B = 5;
+    // in.Vx_B = 5;
 
     in.FZFL = load_cell_vals.FL.conversion;
     in.FZFR = load_cell_vals.FR.conversion;
@@ -160,7 +161,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
-
 
         last_controller_pt1_send_time_ = tick.millis;
     }

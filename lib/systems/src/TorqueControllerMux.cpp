@@ -71,11 +71,11 @@ void TorqueControllerMux::tick(
             // Check if targeted controller is ready to be selected
             bool controllerNotReadyPreventsModeChange = (controllerOutputs_[static_cast<int>(dialModeMap_[dashboardDialMode])].ready == false);
 
-            if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
-            {
-                muxMode_ = dialModeMap_[dashboardDialMode];
-                cur_dial_mode_ = dashboardDialMode;
-            }
+            // if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
+            // {
+            muxMode_ = dialModeMap_[dashboardDialMode];
+            cur_dial_mode_ = dashboardDialMode;
+            // }
         }
 
         // Check if the current controller is ready. If it has faulted, revert to safe mode
@@ -89,9 +89,9 @@ void TorqueControllerMux::tick(
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
 
         // apply torque limit before power limit to not power limit
-        applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        applyTorqueLimit(&drivetrainCommand_);
-        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        // applyRegenLimit(&drivetrainCommand_, &drivetrainData);
+        // applyTorqueLimit(&drivetrainCommand_);
+        // applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         applyPosSpeedLimit(&drivetrainCommand_);
     }
 }
@@ -110,13 +110,13 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const Dr
 
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        #ifdef ARDUINO_TEENSY41
+#ifdef ARDUINO_TEENSY41
         maxWheelSpeed = std::max(maxWheelSpeed, abs(drivetrain->measuredSpeeds[i]) * RPM_TO_KILOMETERS_PER_HOUR);
         allWheelsRegen &= (command->speeds_rpm[i] < abs(drivetrain->measuredSpeeds[i]) || command->speeds_rpm[i] == 0);
-        #else
+#else
         maxWheelSpeed = std::max(maxWheelSpeed, std::abs(drivetrain->measuredSpeeds[i]) * RPM_TO_KILOMETERS_PER_HOUR);
         allWheelsRegen &= (command->speeds_rpm[i] < std::abs(drivetrain->measuredSpeeds[i]) || command->speeds_rpm[i] == 0);
-        #endif
+#endif
     }
 
     // begin limiting regen at noRegenLimitKPH and completely limit regen at fullRegenLimitKPH
@@ -145,11 +145,11 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s *command, const Dr
     // calculate current mechanical power
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        // get the total magnitude of torque from all 4 wheels
-        #ifdef ARDUINO_TEENSY41 // screw arduino.h macros
+// get the total magnitude of torque from all 4 wheels
+#ifdef ARDUINO_TEENSY41 // screw arduino.h macros
         net_torque_mag += abs(command->torqueSetpoints[i]);
         net_power += abs(command->torqueSetpoints[i] * (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-        #else
+#else
         // sum up net torque
         net_torque_mag += std::abs(command->torqueSetpoints[i]);
         // calculate P = T*w for each wheel and sum together
@@ -171,15 +171,14 @@ void TorqueControllerMux::applyPowerLimit(DrivetrainCommand_s *command, const Dr
             // based on the torque percent and max power limit, get the max power each wheel can use
             float power_per_corner = (torque_percent * MAX_POWER_LIMIT);
 
-            // power / omega (motor rad/s) to get torque per wheel
-            #ifdef ARDUINO_TEENSY41
+// power / omega (motor rad/s) to get torque per wheel
+#ifdef ARDUINO_TEENSY41
             command->torqueSetpoints[i] = abs(power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-            #else
+#else
             command->torqueSetpoints[i] = std::abs(power_per_corner / (drivetrain->measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-            #endif
+#endif
             command->torqueSetpoints[i] = std::max(0.0f, std::min(command->torqueSetpoints[i], getMaxTorque()));
-
-        } 
+        }
     }
 }
 
