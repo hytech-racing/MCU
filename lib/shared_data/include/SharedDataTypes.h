@@ -107,7 +107,9 @@ struct TorqueControllerMuxStatus
 struct car_state
 {
     // data
+    SysTick_s systick;
     DrivetrainDynamicReport_s drivetrain_data;
+    // GPS data;
     PedalsSystemData_s pedals_data;
     vectornav vn_data;
 };

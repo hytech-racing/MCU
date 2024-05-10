@@ -15,7 +15,7 @@ DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::getDrivetrainCommand
     {
         TorqueControllerOutput_s proposed_output = controller_pointers_[static_cast<int>(requested_controller_type)]->evaluate(input_state);
         TorqueControllerMuxError error_state = can_switch_controller_(input_state.drivetrain_data, current_output.command, proposed_output.command);
-        std::cout << "error state " << static_cast<int>(error_state) <<std::endl;
+        // std::cout << "error state " << static_cast<int>(error_state) << std::endl;
         if (error_state == TorqueControllerMuxError::NO_ERROR)
         {
             current_status_.current_controller_mode_ = requested_controller_type;
@@ -23,7 +23,13 @@ DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::getDrivetrainCommand
         }
         current_status_.current_error = error_state;
     }
-
+    if (!mux_bypass_limits_[static_cast<int>(current_status_.current_controller_mode_)])
+    {
+        current_output.command = apply_regen_limit_(current_output.command, input_state.drivetrain_data);
+        current_output.command = apply_torque_limit_(current_output.command, torque_limit_map_[requested_torque_limit]);
+        current_output.command = apply_power_limit_(current_output.command, input_state.drivetrain_data, max_power_limit_, torque_limit_map_[requested_torque_limit]);
+        current_output.command = apply_positive_speed_limit_(current_output.command);
+    }
     return current_output.command;
 }
 
