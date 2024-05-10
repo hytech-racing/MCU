@@ -204,7 +204,10 @@ CASEConfiguration case_config = {
     .maxNormalLoadBrakeScalingFront = 1.25,
     .tcs_saturation_front = 20,
     .tcs_saturation_rear = 20,
-
+    .TCSGenLeftRightDiffLowerBound = 2,  // N-m
+    .TCSGenLeftRightDiffUpperBound = 20, // N-m
+    .TCSWheelSteerLowerBound = 2,        // Deg
+    .TCSWheelSteerUpperBound = 25,       // Deg
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,

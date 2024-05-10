@@ -135,7 +135,15 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.TCS_Saturation_Rear = config_.tcs_saturation_rear;
 
-        if ((vn_active_start_time_ == 0) && (vn_status >= 2))
+    in.TCSGenLeftRightDiffLowerBound = config_.TCSGenLeftRightDiffLowerBound;
+
+    in.TCSGenLeftRightDiffUpperBound = config_.TCSGenLeftRightDiffUpperBound;
+
+    in.TCSWheelSteerLowerBound = config_.TCSWheelSteerLowerBound;
+
+    in.TCSWheelSteerUpperBound = config_.TCSWheelSteerUpperBound;
+
+    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
         vn_active_start_time_ = tick.millis;
     }
@@ -217,6 +225,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_yaw_pi);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sa);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_di);
 
         last_lowest_priority_controller_send_time_ = tick.millis;
     }

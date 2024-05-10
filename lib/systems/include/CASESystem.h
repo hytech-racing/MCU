@@ -60,6 +60,10 @@ struct CASEConfiguration
     float maxNormalLoadBrakeScalingFront;
     float tcs_saturation_front;
     float tcs_saturation_rear;
+    float TCSGenLeftRightDiffLowerBound;
+    float TCSGenLeftRightDiffUpperBound;
+    float TCSWheelSteerLowerBound;
+    float TCSWheelSteerUpperBound;
 
     float max_rpm;
     float max_regen_torque;
