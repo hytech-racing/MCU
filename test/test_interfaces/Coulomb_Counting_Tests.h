@@ -4,11 +4,13 @@
 #include "AMSInterface.h"
 #include "SysClock.h"
 
+Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)> CAN_BUFFER;
+
 void test_initialize_charge()
 {
 
     // Declaring & instantiating new AMSInterface (to read from CAN message)
-    AMSInterface interface(8);
+    AMSInterface interface(&CAN_BUFFER, 8);
 
 
 
@@ -60,7 +62,7 @@ void test_calculate_SoC_em()
     starting_tick.micros = starting_micros;
 
     // Declaring & instantiating a new AMSInterface (to read from CAN messages and perform the SoC calculations)
-    AMSInterface interface(8);
+    AMSInterface interface(&CAN_BUFFER, 8);
     interface.init(starting_tick); // Sets heartbeat and puts "uninitialized" value into bms_voltages_
 
     interface.set_use_em_for_soc(true);
@@ -79,6 +81,7 @@ void test_calculate_SoC_em()
 
     // Call tick() once (with no delta t) so that initialize_charge() will be called
     interface.tick(starting_tick);
+
     // assert initial SoC is correct
     TEST_ASSERT_EQUAL_FLOAT(75.0, interface.get_SoC());
 
@@ -143,7 +146,7 @@ void test_calculate_SoC_acu()
     starting_tick.micros = starting_micros;
 
     // Declaring & instantiating a new AMSInterface (to read from CAN messages and perform the SoC calculations)
-    AMSInterface interface(8);
+    AMSInterface interface(&CAN_BUFFER, 8);
     interface.init(starting_tick); // Sets heartbeat and puts "uninitialized" value into bms_voltages_
 
     interface.set_use_em_for_soc(true);

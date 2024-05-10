@@ -1,6 +1,16 @@
 #include "AMSInterface.h"
 #include "SysClock.h"
 
+/* Send inverter CAN messages with new CAN library */
+template<typename U>
+void AMSInterface::enqueue_new_CAN(U* structure, uint32_t (* pack_function)(U*, uint8_t*, uint8_t*, uint8_t*)) {
+    CAN_message_t can_msg;
+    can_msg.id = pack_function(structure, can_msg.buf, &can_msg.len, (uint8_t*) &can_msg.flags.extended);
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &can_msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
+}
+
 void AMSInterface::init(SysTick_s &initial_tick) {
     
     // Set pin mode
@@ -87,7 +97,7 @@ float AMSInterface::initialize_charge() {
     return charge_;
 }
 
-void AMSInterface::calculate_SoC_em(SysTick_s &tick) {
+void AMSInterface::calculate_SoC_em(const SysTick_s &tick) {
     unsigned long delta_time_micros = tick.micros - last_tick_.micros;
     
     float current = HYTECH_em_current_ro_fromS(em_measurements_.em_current_ro); // Current in amps
@@ -98,7 +108,7 @@ void AMSInterface::calculate_SoC_em(SysTick_s &tick) {
     SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 }
 
-void AMSInterface::calculate_SoC_acu(SysTick_s &tick) {
+void AMSInterface::calculate_SoC_acu(const SysTick_s &tick) {
     unsigned long delta_time_micros = tick.micros - last_tick_.micros;
 
     // Converts analog read (from 0 to 4095) into some value (0.0 to 3.3)
@@ -114,7 +124,7 @@ void AMSInterface::calculate_SoC_acu(SysTick_s &tick) {
     SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 }
 
-void AMSInterface::tick(SysTick_s &tick) {
+void AMSInterface::tick(const SysTick_s &tick) {
 
     // If AMSInterface has a valid reading in bms_voltages_ and the charge is not
     // yet initialized, then call initialize_charge.
@@ -139,6 +149,13 @@ void AMSInterface::tick(SysTick_s &tick) {
             calculate_SoC_acu(tick);
         }
     }
+
+    // Send CAN message
+    // enqueue_state_of_charge_CAN();
+    STATE_OF_CHARGE_t soc_struct;
+    soc_struct.charge_percentage_ro = HYTECH_charge_percentage_ro_toS(SoC_);
+    soc_struct.charge_coulombs_ro = HYTECH_charge_coulombs_ro_toS(charge_);
+    enqueue_new_CAN<STATE_OF_CHARGE_t>(&soc_struct, Pack_STATE_OF_CHARGE_hytech);
 
     last_tick_ = tick;
 }

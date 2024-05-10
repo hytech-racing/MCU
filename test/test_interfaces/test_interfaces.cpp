@@ -5,6 +5,7 @@
 #include "dashboard_interface_test.h"
 #include "Watchdog_interface_test.h"
 #include "Coulomb_Counting_Tests.h"
+#include "MCU_rev15_defs.h"
 // #include "Telemetry_interface_test.h"
 
 void tearDown(void)
@@ -40,11 +41,18 @@ int runUnityTests(void)
     return UNITY_END();
 }
 
-void setup() 
-{
+void on_can_receive() {} // do nothing
+
+void setup() {
+
     delay(500);
 
+    Serial.begin(115200);
+
     runUnityTests();
+
 }
 
-void loop() {}
+void loop() {
+    
+}

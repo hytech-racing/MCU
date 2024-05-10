@@ -4,6 +4,10 @@
 #include "SysClock.h"
 #include "CAN_testing_utilities.h"
 
+/* Circular buffer for a CAN line to write to/read from. */
+Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
+    CAN3_txBuffer;
+    
 void test_AMS_unpacking_BMS_status_message()
 {
     /*
@@ -27,7 +31,7 @@ void test_current_shunt_CAN_message()
 {
 
     // Declaring & instantiating new AMSInterface (to read from CAN message)
-    AMSInterface interface(8);
+    AMSInterface interface(8, &CAN3_txBuffer);
 
 
     
@@ -50,7 +54,7 @@ void test_bms_voltages_CAN_message()
 {
 
     // Declaring & instantiating new AMSInterface (to read from CAN message)
-    AMSInterface interface(8);
+    AMSInterface interface(8, &CAN3_txBuffer);
 
 
     // ----------- CONSTANTS (FOR TESTING PURPOSES) ----------- //
@@ -88,7 +92,7 @@ void test_em_measurements_CAN_message()
 {
 
     // Declaring & instantiating new AMSInterface (to read from CAN message)
-    AMSInterface interface(8);
+    AMSInterface interface(8, &CAN3_txBuffer);
 
     CAN_message_t em_measurements_can = generate_can_msg_from_uint_32s(HYTECH_em_current_ro_toS(23.9f), HYTECH_em_voltage_ro_toS(530.5f), true);
 
@@ -114,7 +118,7 @@ void test_AMS_filtered_readings()
 void test_AMS_heartbeat()
 {   
     //setting arbitrary pin 20
-    AMSInterface ams_interface(20);
+    AMSInterface ams_interface(20, &CAN3_txBuffer);
 
     unsigned long starting_millis = millis();
     SysTick_s starting_tick;

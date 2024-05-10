@@ -5,6 +5,7 @@
 #include "HyTech_CAN.h"
 #include "SysClock.h"
 #include "hytech.h"
+#include "MessageQueueDefine.h"
 
 /* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
 const unsigned long HEARTBEAT_INTERVAL                      = 2000;   // milliseconds
@@ -29,20 +30,21 @@ public:
         @param sw_ok_pin The software ok pin number.
         This pin is connected to the shutdown line and will go low if the AMS times out
     */
-    AMSInterface(int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
+    AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
+        msg_queue_(msg_output_queue),
         pin_software_ok_(sw_ok_pin),
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
         cell_voltage_alpha(volt_alpha),
         use_em_for_soc_(true),
-        SoC_(-1.0f),
-        charge_(-1.0f),
+        SoC_(0.0f),
+        charge_(0.0f),
         has_initialized_charge_(false) {};
 
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
-    AMSInterface(int sw_ok_pin):
-        AMSInterface(sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
+    AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
+        AMSInterface(msg_output_queue, sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
 
     /* Initialize the heartbeat timer */
     void init(SysTick_s &initial_tick);
@@ -85,7 +87,7 @@ public:
      * @pre The last_tick_ member variable must be updated correctly.
      * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
     */
-    void calculate_SoC_em(SysTick_s &tick);
+    void calculate_SoC_em(const SysTick_s &tick);
 
     /**
      * Calculates SoC based on the ACU_SHUNT_MEASUREMENTS CAN message. Calling calculate_SoC_acu()
@@ -96,7 +98,7 @@ public:
      * @pre The last_tick_ member variable must be updated correctly.
      * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
     */
-    void calculate_SoC_acu(SysTick_s &tick);
+    void calculate_SoC_acu(const SysTick_s &tick);
 
     /**
      * Retrieves the value of the SoC member variable. This function does NOT recalculate
@@ -112,7 +114,7 @@ public:
      * 
      * @param tick The current system tick.
     */
-    void tick(SysTick_s &tick);
+    void tick(const SysTick_s &tick);
 
     //RETRIEVE CAN MESSAGES//
     
@@ -157,6 +159,15 @@ public:
     void set_use_em_for_soc(bool new_use_em_for_soc) {
         use_em_for_soc_ = new_use_em_for_soc;
     }
+
+    /**
+     * Puts the current value of SoC_ and charge_ onto msg_queue_.
+    */
+    void enqueue_state_of_charge_CAN();
+
+    /** Helper function to enqueue CAN messages using the new CAN library*/
+    template <typename U>
+    void enqueue_new_CAN(U *structure, uint32_t (*pack_function)(U *, uint8_t *, uint8_t *, uint8_t *));
 
     // Getters (for testing purposes)
     BMS_VOLTAGES_t get_bms_voltages() {return bms_voltages_;}
@@ -220,7 +231,7 @@ private:
     3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 3, 0};
     
     /**
-     * Stores the last Sys_Tick_s struct from the last time the tick50() function is called.
+     * Stores the last Sys_Tick_s struct from the last time the tick() function is called.
     */
     SysTick_s last_tick_;
 
@@ -228,6 +239,11 @@ private:
      * Stores whether or not this AMSInterface has initialized SoC_ or not.
     */
    bool has_initialized_charge_;
+
+   /**
+    * CAN line that this AMSInterface should write to. This should be the Telemetry CAN line.
+   */
+  CANBufferType *msg_queue_;
 
 };
 

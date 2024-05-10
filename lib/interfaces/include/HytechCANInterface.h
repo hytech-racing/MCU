@@ -103,7 +103,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case ID_EM_MEASUREMENT:
             interfaces.ams_interface->retrieve_em_measurement_CAN(recvd_msg);
             break;
-        case ID_ACU_SHUNT_MEASUREMENTS:
+        case ACU_SHUNT_MEASUREMENTS_CANID:
             interfaces.ams_interface->retrieve_current_shunt_CAN(recvd_msg);
             break;
 

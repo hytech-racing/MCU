@@ -54,7 +54,7 @@ OrbisBR10 steering1(&Serial5);
 // */
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
-AMSInterface ams_interface(8);
+AMSInterface ams_interface(&CAN3_txBuffer, 8);
 WatchdogInterface wd_interface(32);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_ACCEL2_CHANNEL, MCU15_BRAKE1_CHANNEL, MCU15_BRAKE2_CHANNEL,
