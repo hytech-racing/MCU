@@ -112,7 +112,7 @@ void test_calculate_SoC_em()
 
     // 50 amps of current * 0.02sec = 1 coulomb of charge.
     // Starting charge = 36449.75 coulombs. After this,
-    // charge should be at 36448.75, or 74.99742%
+    // charge should be at 36448.75, or 74.9974279%
     interface.tick(tick_two);
     TEST_ASSERT_EQUAL_FLOAT(74.9974279f, interface.get_SoC());
 
@@ -180,7 +180,7 @@ void test_calculate_SoC_acu()
 
     // 25 amps of current * 0.01sec = 0.25 coulombs of charge.
     // Starting charge = 75%, so 36450 coulombs. After this,
-    // charge should be at 36449.75, or 74.94855%
+    // charge should be at 36449.75, or 74.9994855%
     interface.tick(tick_one);
     TEST_ASSERT_EQUAL_FLOAT(74.9994855, interface.get_SoC());
 
@@ -196,9 +196,9 @@ void test_calculate_SoC_acu()
 
     // 50 amps of current * 0.02sec = 1 coulomb of charge.
     // Starting charge = 36449.75 coulombs. After this,
-    // charge should be at 36448.75, or 74.94855%
+    // charge should be at 36448.75, or 74.9974279f%
     interface.tick(tick_two);
-    // TEST_ASSERT_EQUAL_FLOAT(74.9974279f, interface.get_SoC());
+    TEST_ASSERT_EQUAL_FLOAT(74.9974279f, interface.get_SoC());
 
 
 
