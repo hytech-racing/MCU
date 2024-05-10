@@ -45,6 +45,7 @@ public:
         last_disable_cmd_time_ = 0;
         last_general_cmd_time_ = 0; // ms
         mcu_interface_ = mcu_interface;
+        dynamic_data_ = {};
     }
     void tick(const SysTick_s &tick);
 
@@ -72,7 +73,7 @@ public:
     void enable_drivetrain_reset();
     void check_reset_condition();
 
-    DrivetrainDynamicReport_s get_current_data();
+    DrivetrainDynamicReport_s get_dynamic_data();
 
 private:
     std::array<InverterType *, 4> inverters_;
@@ -105,6 +106,7 @@ private:
 
     unsigned long drivetrain_initialization_phase_start_time_;
     DrivetrainCommand_s current_drivetrain_command_;
+    DrivetrainDynamicReport_s dynamic_data_;
 };
 
 #include "DrivetrainSystem.tpp"

@@ -6,7 +6,6 @@
 #include "Watchdog_interface_test.h"
 #include "Coulomb_Counting_Tests.h"
 #include "MCU_rev15_defs.h"
-// #include "Telemetry_interface_test.h"
 
 void tearDown(void)
 {

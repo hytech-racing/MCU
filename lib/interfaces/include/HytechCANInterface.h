@@ -12,6 +12,8 @@
 #include "AMSInterface.h"
 #include "SABInterface.h"
 #include "VectornavInterface.h"
+#include "HT08_CASE_types.h"
+#include "MessageQueueDefine.h"
 /*
     struct holding interfaces processed by process_ring_buffer()
     FL = MC1
@@ -47,14 +49,11 @@ extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
 /* TX buffer for CAN1 */
-extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
-    CAN1_txBuffer;
+extern CANBufferType CAN1_txBuffer;
 /* TX buffer for CAN2 */
-extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
-    CAN2_txBuffer;
+extern CANBufferType CAN2_txBuffer;
 /* TX buffer for CAN3 */
-extern Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>
-    CAN3_txBuffer;
+extern CANBufferType CAN3_txBuffer;
 
 /* Receive callback function for CAN1 that pushes to circ. buffer */
 void on_can1_receive(const CAN_message_t &msg);
@@ -178,7 +177,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             interfaces.vn_interface->retrieve_vn_status_CAN(recvd_msg); // double check this
             break;
         case VN_ANGULAR_RATE_CANID:
-            interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
+            interfaces.vn_interface->receive_ang_rates_CAN(recvd_msg);
             break;
         }
     }
@@ -201,5 +200,29 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
         // delayMicroseconds(2500);
     }
 }
+
+// TODO should this be here? my reasoning right now for this being here is that right now this interface is 
+//      only being used on MCU and is also tied integrally into other interfaces however the existence of this
+//      function necessitates the CAN_MESSAGE_BUS type from generated simulink code which in theory we want to keep
+//      segregated to the CASESystem. what we probably want our own CAN message type that we can use in the shared
+//      data lib that is seperate from both. idk, not worth it for now just leaving this brain dump here.
+
+/// @brief message enque function for matlab generated CAN_MESSAGE_BUS type
+/// @tparam bufferType the message buffer template type onto which you are enquing a msg
+/// @param msg_queue the pointer to the msg queue that will contain the generic message
+/// @param structure the matlab generated CAN message type that will be sent
+template <typename bufferType>
+void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS & structure)
+{
+    CAN_message_t can_msg = {};
+    can_msg.id = structure.ID;
+    can_msg.len = structure.Length;
+    // TODO ensure memory safety of this, but this should be fine
+    memmove( can_msg.buf, structure.Data, structure.Length );
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &can_msg, sizeof(CAN_message_t));
+    msg_queue->push_back(buf, sizeof(CAN_message_t));
+}
+
 
 #endif /* HYTECHCANINTERFACE */

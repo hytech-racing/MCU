@@ -134,7 +134,7 @@ bool PedalsSystem::evaluate_pedal_implausibilities_(const AnalogConversion_s &pe
     bool pedal1_min_max_implaus = evaluate_min_max_pedal_implausibilities_(pedalData1, params.min_pedal_1, params.max_pedal_1, params.implausibility_margin);
     bool pedal2_min_max_implaus = evaluate_min_max_pedal_implausibilities_(pedalData2, params.min_pedal_2, params.max_pedal_2, params.implausibility_margin);
     bool sens_not_within_req_percent = (fabs(pedalData1.conversion - pedalData2.conversion) > max_percent_diff);
-    if (pedal2_min_max_implaus || pedal2_min_max_implaus)
+    if (pedal1_min_max_implaus || pedal2_min_max_implaus)
     {
         return true;
     }

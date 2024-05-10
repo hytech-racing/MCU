@@ -1,3 +1,21 @@
+## using and updating CASE
+
+#### DO THIS ONCE
+you will need to add ssh key to your github account to allow platformio to pull in CASE as a library. 
+
+[follow these instructions on how to do this.](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+#### UPDATING CASE
+
+to update case, look for the latest tag at this repo: https://github.com/hytech-racing/CASE_lib/tags
+
+and then in the `platformio.ini` file in this repository, change the number at this line:
+
+`git+ssh://git@github.com/hytech-racing/CASE_lib.git#v(INSERT NUMBER HERE)`
+
+for example: 
+    ```git+ssh://git@github.com/hytech-racing/CASE_lib.git#v34```
+
 ## building testing and running
 This project uses [Platformio](https://docs.platformio.org/en/latest/) for building, testing, checking and packaging. 
 
@@ -78,6 +96,16 @@ then you can select this configuration to be used with [this c/c++ extension](ht
 
 to select the configuration, use the hotkey `ctrl+shift+p` to open the command prompt in vscode, and then type \`C/C++: Select a Configuration\` and then select your configuration for which you named above.
 
+## updating CASE (manual / old way)
+
+1. generate the .zip file in HyTech_sim by generating the code for CASE
+2. while in the HyTech_sim directory, there exists `process_lib.py`. use this by running:
+```
+python3 process_lib.py HT08_CONTROL_SYSTEM.zip /path/to/MCU/lib/CASE_lib CASE_lib
+```
+while ensuring that you fill in your path to MCU.
+
+3. profit
 
 ## Design Lore of the Code
 ### outline

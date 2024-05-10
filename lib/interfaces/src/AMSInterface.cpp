@@ -51,13 +51,6 @@ void AMSInterface::set_heartbeat(unsigned long curr_millis) {
 }
 
 bool AMSInterface::heartbeat_received(unsigned long curr_millis) {
-    // if((curr_millis - last_heartbeat_time_) >= HEARTBEAT_INTERVAL){
-    //     Serial.println("ERROR");
-    //     Serial.println(curr_millis);
-    //     Serial.println(last_heartbeat_time_);
-    //     Serial.println(curr_millis - last_heartbeat_time_);
-    // }
-    
     return ((curr_millis - last_heartbeat_time_) < HEARTBEAT_INTERVAL);
 }
 

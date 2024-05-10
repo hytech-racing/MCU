@@ -63,8 +63,6 @@ const int BRAKE2_PEDAL_OOR_MIN = 90;
 const int BRAKE1_PEDAL_OOR_MAX = 4000;
 const int BRAKE2_PEDAL_OOR_MAX = 4000;
 
-
-
 const float DEFAULT_PEDAL_DEADZONE = 0.05f;
 const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.10f;
 
@@ -73,17 +71,25 @@ const float BRAKE_ACTIVATION_PERCENTAGE = 0.05f;
 const float BRAKE_MECH_THRESH = 0.40f;
 
 // Load Cell Defs to convert raw to lbs
-// lbs = (scale)*raw + offset
+// lbs = (raw + offset) * scale
 
-const float LOADCELL_FL_SCALE = 0.0553;
-const float LOADCELL_FL_OFFSET = 15.892 / LOADCELL_FL_SCALE;
+const float LOADCELL_FL_SCALE = 0.0554;
+const float LOADCELL_FL_OFFSET = 19.976 / LOADCELL_FL_SCALE;
 
-const float LOADCELL_FR_SCALE = 0.0512;
-const float LOADCELL_FR_OFFSET = 17.196 / LOADCELL_FR_SCALE;
+const float LOADCELL_FR_SCALE = 0.0514;
+const float LOADCELL_FR_OFFSET = 19.892 / LOADCELL_FR_SCALE;
 
-const float LOADCELL_RL_SCALE = 0.1147;
-const float LOADCELL_RL_OFFSET = 21.842 / LOADCELL_RL_SCALE;
+const float LOADCELL_RL_SCALE = 0.0595;
+const float LOADCELL_RL_OFFSET = 7.148 / LOADCELL_RL_SCALE;
 
-const float LOADCELL_RR_SCALE = 0.0588;
-const float LOADCELL_RR_OFFSET = 19.576 / LOADCELL_RR_SCALE;
+const float LOADCELL_RR_SCALE = 0.06;
+const float LOADCELL_RR_OFFSET = 23.761 / LOADCELL_RR_SCALE;
+
+// Steering parameters
+const float PRIMARY_STEERING_SENSE_OFFSET = -21.18; // units are degrees
+const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 812;
+const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3179;
+const int SECONDARY_STEERING_SENSE_CENTER = 1970;
+const float STEERING_RANGE_DEGREES = 256.05f;
+
 #endif /* __MCU15_H__ */

@@ -19,6 +19,7 @@
 #include "TelemetryInterface.h"
 #include "SABInterface.h"
 #include "VectornavInterface.h"
+#include "LoadCellInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -28,8 +29,10 @@
 #include "PedalsSystem.h"
 #include "TorqueControllerMux.h"
 
+#include "CASESystem.h"
 // /* State machine */
 #include "MCUStateMachine.h"
+#include "HT08_CASE.h"
 
 /*
     PARAMETER STRUCTS
@@ -47,8 +50,7 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .analog_steering_channel = MCU15_STEERING_CHANNEL,
     .current_channel = MCU15_CUR_POS_SENSE_CHANNEL,
     .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
-    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL
-};
+    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL};
 
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
@@ -62,8 +64,7 @@ const PedalsParams accel_params = {
     .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
-    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE
-};
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
 
 const PedalsParams brake_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
@@ -89,7 +90,8 @@ FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both a
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
 
 /* Set up CAN circular buffer */
-using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>;
+// using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>;
+using CircularBufferType = CANBufferType;
 
 /* Sensors */
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
@@ -113,6 +115,7 @@ SABInterface sab_interface(
     LOADCELL_RR_SCALE,  // RR Scale
     LOADCELL_RR_OFFSET  //  RR Offset
 );
+LoadCellInterface load_cell_interface;
 
 // /* Inverter Interface Type */
 using InvInt_t = InverterInterface<CircularBufferType>;
@@ -138,6 +141,73 @@ PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
+// TODO ensure that case uses max regen torque, right now its not
+CASEConfiguration case_config = {
+    // Following used for generated code
+    .AbsoluteTorqueLimit = AMK_MAX_TORQUE, // N-m
+    .yaw_pid_p = 1.33369,
+    .yaw_pid_i = 0.25,
+    .yaw_pid_d = 0.0,
+    .tcs_pid_p = 40.0,
+    .tcs_pid_i = 0.0,
+    .tcs_pid_d = 0.0,
+    .useLaunch = false,
+    .usePIDTV = true,
+    .useTCSLimitedYawPID = true,
+    .useNormalForce = false,
+    .useTractionControl = true,
+    .usePowerLimit = true,
+    .usePIDPowerLimit = false,
+    .useDecoupledYawBrakes = true,
+    .useDiscontinuousYawPIDBrakes = false,
+    .tcsSLThreshold = 0.2,
+    .launchSL = 0.2,
+    .launchDeadZone = 20,        // N-m
+    .launchVelThreshold = 0.75,  // m/s
+    .tcsVelThreshold = 2.5,      // m/s
+    .yawPIDMaxDifferential = 10, // N-m
+    .yawPIDErrorThreshold = 0.1, // rad/s
+    .yawPIDVelThreshold = 1,     // m/s
+    .yawPIDCoastThreshold = 2.5, // m/s
+    .yaw_pid_brakes_p = 0.25,
+    .yaw_pid_brakes_i = 0,
+    .yaw_pid_brakes_d = 0,
+    .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
+    .discontinuousBrakesPercentThreshold = 0.4,
+    .TorqueMode = AMK_MAX_TORQUE, // N-m
+    // .TorqueMode = 2,     // N-m
+    .RegenLimit = -10.0, // N-m
+    .useNoRegen5kph = true,
+    .useTorqueBias = true,
+    .DriveTorquePercentFront = 0.5,
+    .BrakeTorquePercentFront = 0.6,
+    .MechPowerMaxkW = 63, // kW
+
+    // Following used for calculate_torque_request in CASESystem.tpp
+    .max_rpm = AMK_MAX_RPM,
+    .max_regen_torque = AMK_MAX_TORQUE,
+    .max_torque = AMK_MAX_TORQUE,
+};
+// Torque limit used for yaw pid torque split overflow
+// Yaw PID P
+// Yaw PID I
+// Yaw PID D
+// TCS PID P
+// TCS PID I
+// TCS PID D
+// Use launch
+// Use PID TV
+// Use normal force TV
+// Use Traction Control (TCS)
+// Use power limit
+// Use PID power limit
+// TCS activation threshold
+// TCS launch SL target
+// TCS launch torque deadzone (N-m)
+// Max motor rpm
+// Max regen torque
+// Max torque
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, case_config);
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -184,13 +254,15 @@ void setup()
     a1.setChannelOffset(MCU15_ACCEL2_CHANNEL, -ACCEL2_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE1_CHANNEL, -BRAKE1_PEDAL_MIN);
     a1.setChannelOffset(MCU15_BRAKE2_CHANNEL, -BRAKE2_PEDAL_MIN);
+    a1.setChannelOffset(MCU15_STEERING_CHANNEL, -1 * SECONDARY_STEERING_SENSE_CENTER);
+    a1.setChannelScale(MCU15_STEERING_CHANNEL, STEERING_RANGE_DEGREES / ((float)SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND - (float)SECONDARY_STEERING_SENSE_LEFTMOST_BOUND));
+    a1.setChannelClamp(MCU15_STEERING_CHANNEL, -STEERING_RANGE_DEGREES / 0.5 * 1.15, STEERING_RANGE_DEGREES / 0.5 * 1.15); // 15% tolerance on each end of the steering sensor
 
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
 
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
-
 
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
@@ -203,9 +275,10 @@ void setup()
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
     ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
+    steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
     Serial.begin(115200);
-    
+
     /*
         Init Systems
     */
@@ -289,51 +362,57 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     TriggerBits_s t = current_system_tick.triggers;
     if (t.trigger10) // 10Hz
     {
-        // Serial.println("before buzzer");
-        dashboard.tick10(&main_ecu, int(fsm.get_state()), 
-                        buzzer.buzzer_is_on(), 
-                        drivetrain.drivetrain_error_occured(), 
-                        torque_controller_mux.getTorqueLimit(),
-                        ams_interface.get_filtered_min_cell_voltage(),
-                        telem_interface.get_glv_voltage(a1.get()),
-                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
-                        torque_controller_mux.getDialMode());
+        dashboard.tick10(
+            &main_ecu,
+            int(fsm.get_state()),
+            buzzer.buzzer_is_on(),
+            drivetrain.drivetrain_error_occured(),
+            torque_controller_mux.getTorqueLimit(),
+            ams_interface.get_filtered_min_cell_voltage(),
+            telem_interface.get_glv_voltage(a1.get()),
+            static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
+            dashboard.getDialMode());
 
-        main_ecu.tick(static_cast<int>(fsm.get_state()),
-                      drivetrain.drivetrain_error_occured(),
-                      safety_system.get_software_is_ok(),
-                      static_cast<int>(torque_controller_mux.getDriveMode()),
-                      static_cast<int>(torque_controller_mux.getTorqueLimit()),
-                      torque_controller_mux.getMaxTorque(),
-                      buzzer.buzzer_is_on(),
-                      pedals_system.getPedalsSystemData(),
-                      ams_interface.pack_charge_is_critical(),
-                      dashboard.launchControlButtonPressed());
+        main_ecu.tick(
+            static_cast<int>(fsm.get_state()),
+            drivetrain.drivetrain_error_occured(),
+            safety_system.get_software_is_ok(),
+            static_cast<int>(torque_controller_mux.getDriveMode()),
+            static_cast<int>(torque_controller_mux.getTorqueLimit()),
+            torque_controller_mux.getMaxTorque(),
+            buzzer.buzzer_is_on(),
+            pedals_system.getPedalsSystemData(),
+            ams_interface.pack_charge_is_critical(),
+            dashboard.launchControlButtonPressed());
+
+        PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
+
+        telem_interface.tick(
+            a1.get(),
+            a2.get(),
+            a3.get(),
+            steering1.convert(),
+            &inv.fl,
+            &inv.fr,
+            &inv.rl,
+            &inv.rr,
+            data2.accelImplausible,
+            data2.brakeImplausible,
+            data2.accelPercent,
+            data2.brakePercent,
+            a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+            a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+            a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+            a1.get().conversions[MCU15_BRAKE2_CHANNEL],
+            pedals_system.getMechBrakeActiveThreshold(),
+            {});
     }
+
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
-        PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-        telem_interface.tick(a1.get(),
-                             a2.get(),
-                             a3.get(),
-                             steering1.convert(),
-                             &inv.fl,
-                             &inv.fr,
-                             &inv.rl,
-                             &inv.rr,
-                             data2.accelImplausible,
-                             data2.brakeImplausible,
-                             data2.accelPercent,
-                             data2.brakePercent,
-                             a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-                             a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-                             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-                             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-                             pedals_system.getMechBrakeActiveThreshold(), torque_controller_mux.get_pidtv_data());
 
         ams_interface.tick(current_system_tick);
-
     }
 
     if (t.trigger100) // 100Hz
@@ -342,6 +421,12 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         a1.tick();
         a2.tick();
         a3.tick();
+        load_cell_interface.tick(
+            (LoadCellInterfaceTick_s){
+                .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
+                .FRConversion = a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
+                .RLConversion = sab_interface.rlLoadCell.convert(),
+                .RRConversion = sab_interface.rrLoadCell.convert()});
     }
     // // Untriggered
     main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
@@ -373,26 +458,39 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
     // tick steering system
     steering_system.tick(
-        current_system_tick,
-        a1.get().conversions[MCU15_STEERING_CHANNEL]);
+        (SteeringSystemTick_s){
+            .tick = current_system_tick,
+            .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]});
+
+    // Serial.println("Steering angle");
+    // Serial.println(steering_system.getSteeringSystemData().angle);
+    // Serial.println("Steering status");
+    // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
 
     // tick drivetrain system
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    // TODO is this correct?
-    auto wheel_angle_rad = DEG_TO_RAD * steering1.convert().angle;
+    DrivetrainCommand_s controller_output = case_system.evaluate(
+        current_system_tick,
+        vn_interface.get_vn_struct(),
+        steering_system.getSteeringSystemData(),
+        drivetrain.get_dynamic_data(),
+        load_cell_interface.getLoadCellForces().loadCellConversions, // should CASE use filtered load cells?
+        pedals_system.getPedalsSystemData(),
+        0,
+        fsm.get_state(),
+        dashboard.startButtonPressed(),
+        3);
+
     torque_controller_mux.tick(
         current_system_tick,
-        drivetrain.get_current_data(),
+        drivetrain.get_dynamic_data(),
         pedals_system.getPedalsSystemData(),
         steering_system.getSteeringSystemData(),
-        a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL], // FL load cell reading. TODO: fix index
-        a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL], // FR load cell reading. TODO: fix index
-        sab_interface.rlLoadCell.convert(),              // RL load cell reading. TODO: get data from rear load cells
-        sab_interface.rrLoadCell.convert(),              // RR load cell reading. TODO: get data from rear load cells
+        load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
-        wheel_angle_rad);
+        controller_output);
 }

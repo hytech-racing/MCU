@@ -15,9 +15,15 @@ const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 class AMSInterface
 {
 public:
-    AMSInterface(int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha){
-        // Set pin mode
+    AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
+    {
+        // do nothing
     };
+
+    /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
+    AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
+        AMSInterface(msg_output_queue, sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
+    
         /* Initialize interface pin mode */
     void init(unsigned long curr_millis) {set_heartbeat(curr_millis);}
 

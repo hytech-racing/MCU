@@ -38,8 +38,8 @@ public:
         cell_temp_alpha(temp_alpha),
         cell_voltage_alpha(volt_alpha),
         use_em_for_soc_(true),
-        SoC_(0.0f),
         charge_(0.0f),
+        SoC_(0.0f),
         has_initialized_charge_(false) {};
 
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
@@ -176,11 +176,21 @@ public:
     
 
 private:
-    /* Private functions */
-    // Check if lowest cell temperature is below threshold
-    bool is_below_pack_charge_critical_low_thresh();
-    // Check if total pack charge is above threshold
-    bool is_below_pack_charge_critical_total_thresh();
+
+    const float VOLTAGE_LOOKUP_TABLE[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
+    3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3.701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
+    3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
+    3.56, 3.56, 3.549, 3.549, 3.549, 3.549, 3.538, 3.538, 3.551, 3.546, 3.535, 3.535, 3.535, 3.53, 3.524, 3.524, 3.524, 3.513,
+    3.513, 3.513, 3.503, 3.503, 3.492, 3.492, 3.492, 3.487, 3.481, 3.481, 3.476, 3.471, 3.46, 3.46, 3.449, 3.444, 3.428, 3.428,
+    3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 3, 0};
+
+    /**
+     * CAN line that this AMSInterface should write to. This should be the Telemetry CAN line.
+    */
+    CANBufferType *msg_queue_;
+
+    /* software OK pin */
+    int pin_software_ok_;
 
     /* AMS CAN messages */
     BMS_status          bms_status_;
@@ -191,9 +201,6 @@ private:
 
     /* AMS last heartbeat time */
     unsigned long last_heartbeat_time_;
-
-    /* software OK pin */
-    int pin_software_ok_;
 
     /* IIR filter parameters */
     float bms_high_temp;
@@ -222,13 +229,6 @@ private:
      * SoC = (charge / MAX_PACK_CHARGE) * 100;
     */
     float SoC_;
-
-    const float VOLTAGE_LOOKUP_TABLE[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
-    3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3.701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
-    3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
-    3.56, 3.56, 3.549, 3.549, 3.549, 3.549, 3.538, 3.538, 3.551, 3.546, 3.535, 3.535, 3.535, 3.53, 3.524, 3.524, 3.524, 3.513,
-    3.513, 3.513, 3.503, 3.503, 3.492, 3.492, 3.492, 3.487, 3.481, 3.481, 3.476, 3.471, 3.46, 3.46, 3.449, 3.444, 3.428, 3.428,
-    3.417, 3.401, 3.39, 3.379, 3.363, 3.331, 3.299, 3.267, 3.213, 3.149, 3.041, 3, 3, 0};
     
     /**
      * Stores the last Sys_Tick_s struct from the last time the tick() function is called.
@@ -240,10 +240,11 @@ private:
     */
    bool has_initialized_charge_;
 
-   /**
-    * CAN line that this AMSInterface should write to. This should be the Telemetry CAN line.
-   */
-  CANBufferType *msg_queue_;
+
+    // Check if lowest cell temperature is below threshold
+    bool is_below_pack_charge_critical_low_thresh();
+    // Check if total pack charge is above threshold
+    bool is_below_pack_charge_critical_total_thresh();
 
 };
 
