@@ -32,6 +32,55 @@
 #include "MCUStateMachine.h"
 
 /*
+    PARAMETER STRUCTS
+*/
+
+const TelemetryInterfaceReadChannels telem_read_channels = {
+    .accel1_channel = MCU15_ACCEL1_CHANNEL,
+    .accel2_channel = MCU15_ACCEL2_CHANNEL,
+    .brake1_channel = MCU15_BRAKE1_CHANNEL,
+    .brake2_channel = MCU15_BRAKE2_CHANNEL,
+    .pots_fl_channel = MCU15_FL_POTS_CHANNEL,
+    .pots_fr_channel = MCU15_FR_POTS_CHANNEL,
+    .loadcell_fl_channel = MCU15_FL_LOADCELL_CHANNEL,
+    .loadcell_fr_channel = MCU15_FR_LOADCELL_CHANNEL,
+    .analog_steering_channel = MCU15_STEERING_CHANNEL,
+    .current_channel = MCU15_CUR_POS_SENSE_CHANNEL,
+    .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
+    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL
+};
+
+const PedalsParams accel_params = {
+    .min_pedal_1 = ACCEL1_PEDAL_MIN,
+    .min_pedal_2 = ACCEL2_PEDAL_MIN,
+    .max_pedal_1 = ACCEL1_PEDAL_MAX,
+    .max_pedal_2 = ACCEL2_PEDAL_MAX,
+    .min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MAX,
+    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE
+};
+
+const PedalsParams brake_params = {
+    .min_pedal_1 = BRAKE1_PEDAL_MIN,
+    .min_pedal_2 = BRAKE2_PEDAL_MIN,
+    .max_pedal_1 = BRAKE1_PEDAL_MAX,
+    .max_pedal_2 = BRAKE2_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
+
+/*
     DATA SOURCES
 */
 
@@ -57,9 +106,7 @@ DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(&CAN3_txBuffer, 8);
 WatchdogInterface wd_interface(32);
 MCUInterface main_ecu(&CAN3_txBuffer);
-TelemetryInterface telem_interface(&CAN3_txBuffer, {MCU15_ACCEL1_CHANNEL, MCU15_ACCEL2_CHANNEL, MCU15_BRAKE1_CHANNEL, MCU15_BRAKE2_CHANNEL,
-                                                    MCU15_FL_POTS_CHANNEL, MCU15_FR_POTS_CHANNEL, MCU15_FL_LOADCELL_CHANNEL, MCU15_FR_LOADCELL_CHANNEL,
-                                                    MCU15_STEERING_CHANNEL, MCU15_CUR_POS_SENSE_CHANNEL, MCU15_CUR_NEG_SENSE_CHANNEL, MCU15_GLV_SENSE_CHANNEL});
+TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
 SABInterface sab_interface(
     LOADCELL_RL_SCALE,  // RL Scale
     LOADCELL_RL_OFFSET, // RL Offset (Migos)
@@ -87,8 +134,7 @@ BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
 // SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
-PedalsSystem pedals_system({ACCEL1_PEDAL_MIN, ACCEL2_PEDAL_MIN, ACCEL1_PEDAL_MAX, ACCEL2_PEDAL_MAX, APPS_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, APPS_ACTIVATION_PERCENTAGE},
-                           {BRAKE1_PEDAL_MIN, BRAKE2_PEDAL_MIN, BRAKE1_PEDAL_MAX, BRAKE2_PEDAL_MAX, BRAKE_ACTIVATION_PERCENTAGE, DEFAULT_PEDAL_DEADZONE, DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN, BRAKE_MECH_THRESH});
+PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
@@ -250,11 +296,13 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                         torque_controller_mux.getTorqueLimit(),
                         ams_interface.get_filtered_min_cell_voltage(),
                         telem_interface.get_glv_voltage(a1.get()),
-                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()));
+                        static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
+                        torque_controller_mux.getDialMode());
 
         main_ecu.tick(static_cast<int>(fsm.get_state()),
                       drivetrain.drivetrain_error_occured(),
                       safety_system.get_software_is_ok(),
+                      static_cast<int>(torque_controller_mux.getDriveMode()),
                       static_cast<int>(torque_controller_mux.getTorqueLimit()),
                       torque_controller_mux.getMaxTorque(),
                       buzzer.buzzer_is_on(),
