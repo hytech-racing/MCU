@@ -19,10 +19,11 @@
 // TODOs
 // - [-] make the controllers inherit from the base controller class
 //      - [x] port TorqueControllerSimple
-//      - [ ] port TorqueControllerLoadCellVectoring
-//      - [ ] port BaseLaunchController
-//      - [ ] port TorqueControllerSimpleLaunch
-//      - [ ] port TorqueControllerLookupLaunch
+//      - [x] port TorqueControllerLoadCellVectoring
+//      - [x] port BaseLaunchController
+//      - [x] port TorqueControllerSimpleLaunch
+//      - [x] port slip launch
+//      - [x] port TorqueControllerLookupLaunch
 //      - [ ] port CASE 
 // - [ ] integrate into state machine
 //   - [ ] set the car_state from all sources
@@ -43,11 +44,7 @@ namespace TC_MUX_DEFAULT_PARAMS
 // namespace TC_MUX
 // {
 
-template<std::size_t num_controllers>
-struct check_tc_mux
-{
-    
-};
+
 template <std::size_t num_controllers>
 class TorqueControllerMuxv2
 {

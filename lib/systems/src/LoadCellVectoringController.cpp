@@ -4,7 +4,6 @@
 void TorqueControllerLoadCellVectoring::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
-    float torqueLimit,
     const LoadCellInterfaceOutput_s &loadCellData
 )
 {
@@ -96,5 +95,6 @@ void TorqueControllerLoadCellVectoring::tick(
 
 TorqueControllerOutput_s TorqueControllerLoadCellVectoring::evaluate(const car_state &state)
 {
-    tick(state.systick, state.)
+    tick(state.systick, state.pedals_data, state.loadcell_data);
+    return writeout_;
 }

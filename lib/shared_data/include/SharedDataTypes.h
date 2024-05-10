@@ -104,12 +104,14 @@ struct TorqueControllerMuxStatus
     ControllerMode_e current_controller_mode_;
     bool output_is_bypassing_limits;
 };
+
 struct car_state
 {
     // data
     SysTick_s systick;
+    SteeringSystemData_s steering_data;
     DrivetrainDynamicReport_s drivetrain_data;
-    // GPS data;
+    LoadCellInterfaceOutput_s loadcell_data;
     PedalsSystemData_s pedals_data;
     vectornav vn_data;
 };

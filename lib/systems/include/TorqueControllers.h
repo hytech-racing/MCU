@@ -32,12 +32,6 @@ const float AMK_MAX_RPM = 20000;
 const float AMK_MAX_TORQUE = 21.42;
 const float MAX_REGEN_TORQUE = 10.0;
 
-/* LAUNCH CONSTANTS */
-
-const float DEFAULT_LAUNCH_RATE = 11.76;
-const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
-
-const float DEFAULT_SLIP_RATIO = 0.2f;
 const float const_accel_time = 100; // time to use launch speed target in ms
 
 const float launch_ready_accel_threshold = .1;
@@ -71,14 +65,6 @@ enum TorqueController_e
     TC_LOOKUP_LAUNCH = 5,
     TC_CASE_SYSTEM = 6,
     TC_NUM_CONTROLLERS = 7,
-};
-
-enum class LaunchStates_e
-{
-    NO_LAUNCH_MODE,
-    LAUNCH_NOT_READY,
-    LAUNCH_READY,
-    LAUNCHING
 };
 
 /* TORQUE CONTROLLERS */
