@@ -28,10 +28,10 @@ public:
     void set_state_ok_high(bool ok_high) {};
     
     /* Monitor AMS state */
-    void set_heartbeat(unsigned long curr_millis) {last_heartbeat_time = curr_millis;}
+    void set_heartbeat(unsigned long curr_millis) {last_heartbeat_time_ = curr_millis;}
     bool heartbeat_received(unsigned long curr_millis)
     {
-        return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+        return ((curr_millis - last_heartbeat_time_) < HEARTBEAT_INTERVAL);
     }
     bool is_below_pack_charge_critical_low_thresh() {};
     bool is_below_pack_charge_critical_total_thresh();
@@ -46,7 +46,7 @@ private:
     /* AMS CAN messages */
     // Outbound
     /* AMS last heartbeat time */
-    unsigned long last_heartbeat_time;
+    unsigned long last_heartbeat_time_;
 };
 
 #endif /* __AMS_INTERFACE_H__ */

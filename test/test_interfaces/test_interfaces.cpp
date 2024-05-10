@@ -34,7 +34,8 @@ int runUnityTests(void)
 
     /* TEST Coulomb Counting */
     RUN_TEST(test_initialize_charge);
-    RUN_TEST(test_get_SoC_em);
+    RUN_TEST(test_calculate_SoC_em);
+    RUN_TEST(test_calculate_SoC_acu);
 
     return UNITY_END();
 }

@@ -34,7 +34,11 @@ public:
         filtered_max_cell_temp(init_temp),
         filtered_min_cell_voltage(init_volt),
         cell_temp_alpha(temp_alpha),
-        cell_voltage_alpha(volt_alpha) {};
+        cell_voltage_alpha(volt_alpha),
+        use_em_for_soc_(true),
+        SoC_(-1.0f),
+        charge_(-1.0f),
+        has_initialized_charge_(false) {};
 
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
     AMSInterface(int sw_ok_pin):
@@ -65,52 +69,50 @@ public:
     float get_filtered_min_cell_voltage();
 
     /**
-     * Initializes the charge member variable from the voltage of the minimum cell using the voltage_lookup_table.
+     * Initializes the charge member variable from the voltage of the minimum cell using the VOLTAGE_LOOKUP_TABLE.
      * 
+     * @pre The bms_voltages_ member variable MUST be initialized before this function can be called.
      * @return The charge, in coulombs, that the charge member variable is initialized to.
     */
     float initialize_charge();
 
     /**
-     * Calculates SoC based on the energy meter CAN message. This method does two things--
-     * it sets the SoC variable to the new value AND returns that new value. This means that
-     * calling get_SoC_em() and storing the return value will always behave identically to
-     * calling get_SoC_em() and then calling get_SoC().
+     * Calculates SoC based on the energy meter CAN message. Calling calculate_SoC_em()
+     * will update the SoC_ and charge_ member variables.
      * 
-     * @param The current tick that the get_SoC_em function should use for integration.
-     * @post The SoC member variable contains the new charge.
-     * @return The new value of the SoC member variable.
+     * @param The current tick that the calculate_SoC_em function should use for integration.
+     * 
+     * @pre The last_tick_ member variable must be updated correctly.
+     * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
     */
-    float get_SoC_em(SysTick_s &tick);
+    void calculate_SoC_em(SysTick_s &tick);
 
     /**
-     * Calculates SoC based on the ACU shunt current CAN message. This method does two things--
-     * it sets the SoC variable to the new value AND returns that new value. This means that
-     * calling get_SoC_acu() and storing the return value will always behave identically to
-     * calling get_SoC_acu() and then calling get_SoC().
+     * Calculates SoC based on the ACU_SHUNT_MEASUREMENTS CAN message. Calling calculate_SoC_acu()
+     * will update the SoC_ and charge_ member variables.
      * 
-     * @param The current tick that the get_SoC_acu function should use for integration.
-     * @post The SoC member variable contains the new charge.
-     * @return The new value of the SoC member variable.
+     * @param The current tick that the calculate_SoC_em function should use for integration.
+     * 
+     * @pre The last_tick_ member variable must be updated correctly.
+     * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
     */
-    float get_SoC_acu(SysTick_s &tick);
+    void calculate_SoC_acu(SysTick_s &tick);
 
     /**
      * Retrieves the value of the SoC member variable. This function does NOT recalculate
-     * the SoC variable, it only returns the value that is stored.
+     * the SoC_ variable, it only returns the value that is stored.
      * 
-     * @return the current value stored in the SoC member variable.
+     * @return the current value stored in the SoC_ member variable.
     */
-    float get_SoC() {return SoC;}
+    float get_SoC() {return SoC_;}
 
     /**
-     * This is AMSInterface's tick() function. Although this is called tick50, it should
-     * behave correctly regardless of the tick interval, since the functions calculate
-     * the elapsed time between the given tick and the stored last_tick.
+     * This is AMSInterface's tick() function. It behaves correctly regardless of the
+     * since the functions calculate the elapsed time between the given tick and the stored last_tick_.
      * 
      * @param tick The current system tick.
     */
-    void tick50(SysTick_s &tick);
+    void tick(SysTick_s &tick);
 
     //RETRIEVE CAN MESSAGES//
     
@@ -142,6 +144,20 @@ public:
      */
     void retrieve_current_shunt_CAN(const CAN_message_t &can_msg);
 
+    /**
+     * Retrieves the current state of the use_em_for_soc member variable.
+     * @return True if using EM, false if using ACU shunt measurements.
+     */
+    bool is_using_em_for_soc() {return use_em_for_soc_;}
+
+    /**
+     * Setter function for the use_em_for_soc_ member variable.
+     * @param new_use_em_for_soc The new value for the variable.
+     */
+    void set_use_em_for_soc(bool new_use_em_for_soc) {
+        use_em_for_soc_ = new_use_em_for_soc;
+    }
+
     // Getters (for testing purposes)
     BMS_VOLTAGES_t get_bms_voltages() {return bms_voltages_;}
     EM_MEASUREMENT_t get_em_measurements() {return em_measurements_;}
@@ -163,7 +179,7 @@ private:
     BMS_VOLTAGES_t                   bms_voltages_;
 
     /* AMS last heartbeat time */
-    unsigned long last_heartbeat_time;
+    unsigned long last_heartbeat_time_;
 
     /* software OK pin */
     int pin_software_ok_;
@@ -175,24 +191,28 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
-    float calc_current;
-    float shunt_voltage;
-    float current;
+
+    /**
+     * If set to TRUE, then SoC will use EM.
+     * If set to FALSE, then SoC will use ACU SHUNT.
+     * Set to TRUE in constructor by default.
+     */
+    bool use_em_for_soc_ = true;
 
     /**
      * The charge stored on the accumulator. Stored in coulombs, ranging from
      * zero to MAX_PACK_CHARGE.
     */
-    float charge;
+    float charge_;
 
     /**
      * Stores the current state of charge of the accumulator. SoC is stored as a
      * percentage of MAX_PACK_CHARGE. In every location, this is calculated as
      * SoC = (charge / MAX_PACK_CHARGE) * 100;
     */
-    float SoC;
+    float SoC_;
 
-    float voltage_lookup_table[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
+    const float VOLTAGE_LOOKUP_TABLE[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
     3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3.701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
     3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
     3.56, 3.56, 3.549, 3.549, 3.549, 3.549, 3.538, 3.538, 3.551, 3.546, 3.535, 3.535, 3.535, 3.53, 3.524, 3.524, 3.524, 3.513,
@@ -202,7 +222,13 @@ private:
     /**
      * Stores the last Sys_Tick_s struct from the last time the tick50() function is called.
     */
-    SysTick_s last_tick;
+    SysTick_s last_tick_;
+
+    /**
+     * Stores whether or not this AMSInterface has initialized SoC_ or not.
+    */
+   bool has_initialized_charge_;
+
 };
 
 #endif /* __AMSINTERFACE_H__ */

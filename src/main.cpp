@@ -283,6 +283,9 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                              a1.get().conversions[MCU15_BRAKE1_CHANNEL],
                              a1.get().conversions[MCU15_BRAKE2_CHANNEL],
                              pedals_system.getMechBrakeActiveThreshold(), torque_controller_mux.get_pidtv_data());
+
+        ams_interface.tick(current_system_tick);
+
     }
 
     if (t.trigger100) // 100Hz

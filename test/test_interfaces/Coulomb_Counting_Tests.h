@@ -49,10 +49,21 @@ void test_initialize_charge()
 
 }
 
-void test_get_SoC_em()
+void test_calculate_SoC_em()
 {
+
+    // Declaring initial conditions
+    unsigned long starting_millis = millis();
+    unsigned long starting_micros = micros();
+    SysTick_s starting_tick;
+    starting_tick.millis = starting_millis;
+    starting_tick.micros = starting_micros;
+
     // Declaring & instantiating a new AMSInterface (to read from CAN messages and perform the SoC calculations)
     AMSInterface interface(8);
+    interface.init(starting_tick); // Sets heartbeat and puts "uninitialized" value into bms_voltages_
+
+    interface.set_use_em_for_soc(true);
 
     CAN_message_t em_measurements_can, bms_voltages_can;
 
@@ -66,19 +77,8 @@ void test_get_SoC_em()
 
 
 
-    // Declaring initial conditions
-    unsigned long starting_millis = millis();
-    unsigned long starting_micros = micros();
-    SysTick_s starting_tick;
-    starting_tick.millis = starting_millis;
-    starting_tick.micros = starting_micros;
-
-
-
-    // call init() to set heartbeat
-    interface.init(starting_tick);
-    // call initialize_charge() to set starting SoC
-    interface.initialize_charge();
+    // Call tick() once (with no delta t) so that initialize_charge() will be called
+    interface.tick(starting_tick);
     // assert initial SoC is correct
     TEST_ASSERT_EQUAL_FLOAT(75.0, interface.get_SoC());
 
@@ -93,7 +93,7 @@ void test_get_SoC_em()
     // 25 amps of current * 0.01sec = 0.25 coulombs of charge.
     // Starting charge = 75%, so 36450 coulombs. After this,
     // charge should be at 36449.75, or 74.94855%
-    interface.tick50(tick_one);
+    interface.tick(tick_one);
     TEST_ASSERT_EQUAL_FLOAT(74.9994855, interface.get_SoC());
 
 
@@ -109,7 +109,7 @@ void test_get_SoC_em()
     // 50 amps of current * 0.02sec = 1 coulomb of charge.
     // Starting charge = 36449.75 coulombs. After this,
     // charge should be at 36448.75, or 74.94855%
-    interface.tick50(tick_two);
+    interface.tick(tick_two);
     TEST_ASSERT_EQUAL_FLOAT(74.9974279f, interface.get_SoC());
 
 
@@ -119,11 +119,95 @@ void test_get_SoC_em()
     em_measurements_can = generate_can_msg_from_uint_32s(HYTECH_em_current_ro_toS(50.0f), HYTECH_em_voltage_ro_toS(530.5f), true);
     interface.retrieve_em_measurement_CAN(em_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
 
-    for (int i = 0; i <= 10000000; i += 10000) {
+    for (int i = 0; i <= 10000000; i += 20000) {
         SysTick_s curr_tick;
         curr_tick.millis = starting_millis + 10 + 20 + i/1000;
         curr_tick.micros = starting_micros + 10000 + 20000 + i;
-        interface.tick50(curr_tick);
+        interface.tick(curr_tick);
+    }
+
+    // 50 amps of current * 10sec = 500 coulombs of charge
+    // Starting charge = 36448.75 coulombs. After this, charge
+    // should be 35948.75 coulombs, which is 73.9686%
+    TEST_ASSERT_EQUAL_FLOAT(73.9686f, interface.get_SoC());
+
+}
+
+void test_calculate_SoC_acu()
+{
+   // Declaring initial conditions
+    unsigned long starting_millis = millis();
+    unsigned long starting_micros = micros();
+    SysTick_s starting_tick;
+    starting_tick.millis = starting_millis;
+    starting_tick.micros = starting_micros;
+
+    // Declaring & instantiating a new AMSInterface (to read from CAN messages and perform the SoC calculations)
+    AMSInterface interface(8);
+    interface.init(starting_tick); // Sets heartbeat and puts "uninitialized" value into bms_voltages_
+
+    interface.set_use_em_for_soc(true);
+
+    CAN_message_t acu_measurements_can, bms_voltages_can;
+
+    // Declaring CAN frames and feeding them into the AMSInterface.
+    // Initializes BMS_VOLTAGES to have a min (of 3.7 volts, which is 0x9088U).
+    bms_voltages_can = generate_can_msg_from_uint_16s(0x9088U, 37000U, 0x9858U, 0xFFFFU, false);
+    interface.retrieve_voltage_CAN(bms_voltages_can);
+
+    // 2373 analog value corresponds to 25A
+    acu_measurements_can = generate_can_msg_from_uint_16s(2372, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, true);
+    interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
+
+
+
+    // Call tick() once (with no delta t) so that initialize_charge() will be called
+    interface.tick(starting_tick);
+    // assert initial SoC is correct
+    TEST_ASSERT_EQUAL_FLOAT(75.0, interface.get_SoC());
+
+
+    // Running actual test cases
+
+    // TEST CASE ONE - 10ms - 25amps
+    SysTick_s tick_one;
+    tick_one.millis = starting_millis + 10;
+    tick_one.micros = starting_micros + 10000;
+
+    // 25 amps of current * 0.01sec = 0.25 coulombs of charge.
+    // Starting charge = 75%, so 36450 coulombs. After this,
+    // charge should be at 36449.75, or 74.94855%
+    interface.tick(tick_one);
+    TEST_ASSERT_EQUAL_FLOAT(74.9994855, interface.get_SoC());
+
+
+
+    // TEST CASE TWO - 20ms - 50amps
+    SysTick_s tick_two;
+    tick_two.millis = starting_millis + 10 + 20;
+    tick_two.micros = starting_micros + 10000 + 20000;
+
+    acu_measurements_can = generate_can_msg_from_uint_16s(2458, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, true);
+    interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
+
+    // 50 amps of current * 0.02sec = 1 coulomb of charge.
+    // Starting charge = 36449.75 coulombs. After this,
+    // charge should be at 36448.75, or 74.94855%
+    interface.tick(tick_two);
+    TEST_ASSERT_EQUAL_FLOAT(74.9974279f, interface.get_SoC());
+
+
+
+    // TEST CASE THREE - 10 full seconds, in 20ms intervals, at 50 amps
+
+    acu_measurements_can = generate_can_msg_from_uint_16s(2457, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, true);
+    interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
+
+    for (int i = 0; i <= 10000000; i += 20000) {
+        SysTick_s curr_tick;
+        curr_tick.millis = starting_millis + 10 + 20 + i/1000;
+        curr_tick.micros = starting_micros + 10000 + 20000 + i;
+        interface.tick(curr_tick);
     }
 
     // 50 amps of current * 10sec = 500 coulombs of charge

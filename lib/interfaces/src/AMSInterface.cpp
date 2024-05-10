@@ -8,7 +8,17 @@ void AMSInterface::init(SysTick_s &initial_tick) {
 
     set_heartbeat(initial_tick.millis);
 
-    last_tick = initial_tick;
+    last_tick_ = initial_tick;
+
+    // Initializes the bms_voltages_ member variable to an invalid state. This will
+    // get overridden once retrieve_voltage_CAN() has been called at least once.
+    CAN_message_t can_msg;
+    uint16_t avg = 0x9999U, low = 0xFFFFU, high = 0x1111U, nan = 0x0000U;
+    memcpy(&can_msg.buf, &avg, sizeof(uint16_t));
+    memcpy(&can_msg.buf[2], &low, sizeof(uint16_t));
+    memcpy(&can_msg.buf[4], &high, sizeof(uint16_t));
+    memcpy(&can_msg.buf[6], &nan, sizeof(uint16_t));
+    retrieve_voltage_CAN(can_msg);
 
 }
 
@@ -27,18 +37,18 @@ void AMSInterface::set_state_ok_high(bool ok_high) {
 }
 
 void AMSInterface::set_heartbeat(unsigned long curr_millis) {
-    last_heartbeat_time = curr_millis;
+    last_heartbeat_time_ = curr_millis;
 }
 
 bool AMSInterface::heartbeat_received(unsigned long curr_millis) {
-    // if((curr_millis - last_heartbeat_time) >= HEARTBEAT_INTERVAL){
+    // if((curr_millis - last_heartbeat_time_) >= HEARTBEAT_INTERVAL){
     //     Serial.println("ERROR");
     //     Serial.println(curr_millis);
-    //     Serial.println(last_heartbeat_time);
-    //     Serial.println(curr_millis - last_heartbeat_time);
+    //     Serial.println(last_heartbeat_time_);
+    //     Serial.println(curr_millis - last_heartbeat_time_);
     // }
     
-    return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+    return ((curr_millis - last_heartbeat_time_) < HEARTBEAT_INTERVAL);
 }
 
 bool AMSInterface::is_below_pack_charge_critical_low_thresh() {
@@ -68,43 +78,69 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 
 float AMSInterface::initialize_charge() {
     int i = 0;
-    while (HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - voltage_lookup_table[i] < 0) {
+    while (HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - VOLTAGE_LOOKUP_TABLE[i] < 0) {
         i++;
     }
-    charge = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
-    SoC = (charge / MAX_PACK_CHARGE) * 100;
+    charge_ = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
+    SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 
-    return charge;
+    return charge_;
 }
 
-float AMSInterface::get_SoC_em(SysTick_s &tick) {
-    unsigned long delta_time_micros = tick.micros - last_tick.micros;
-
-    current = HYTECH_em_current_ro_fromS(em_measurements_.em_current_ro);
-    charge -= (current * delta_time_micros) / 1000000; // 1 microsecond = 1e-6 sec
+void AMSInterface::calculate_SoC_em(SysTick_s &tick) {
+    unsigned long delta_time_micros = tick.micros - last_tick_.micros;
     
-    SoC = (charge / MAX_PACK_CHARGE) * 100;
-    return SoC;
+    float current = HYTECH_em_current_ro_fromS(em_measurements_.em_current_ro); // Current in amps
+    
+    // coulombs = amps * microseconds * (1sec / 1000000 microsec)
+    charge_ -= (current * delta_time_micros) / 1000000;
+    
+    SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 }
 
-float AMSInterface::get_SoC_acu(SysTick_s &tick) {
-    unsigned long delta_time_micros = tick.micros - last_tick.micros;
+void AMSInterface::calculate_SoC_acu(SysTick_s &tick) {
+    unsigned long delta_time_micros = tick.micros - last_tick_.micros;
 
-    current = HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro);
-    shunt_voltage = (current * (9.22 / 5.1)) - 3.3 - 0.03;
-    calc_current = (shunt_voltage / 0.005);
-    charge -= (calc_current * delta_time_micros) / 1000000;
+    // Converts analog read (from 0 to 4095) into some value (0.0 to 3.3)
+    float current = HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro);
 
-    SoC = (charge / MAX_PACK_CHARGE) * 100;
-    return SoC;
+    // shunt_voltage ranges from -3.33 to 2.635
+    float shunt_voltage = (current * (9.22 / 5.1)) - 3.3 - 0.03;
+
+    // calc_current ranges from -666 to 527.176
+    float calc_current = (shunt_voltage / 0.005);
+    charge_ -= (calc_current * delta_time_micros) / 1000000;
+
+    SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 }
 
-void AMSInterface::tick50(SysTick_s &tick) {
+void AMSInterface::tick(SysTick_s &tick) {
 
-    get_SoC_em(tick);
-    // get_SoC_acu(tick);
+    // If AMSInterface has a valid reading in bms_voltages_ and the charge is not
+    // yet initialized, then call initialize_charge.
+    if (!has_initialized_charge_) {
 
-    last_tick = tick;
+        bool bms_voltages_is_invalid = bms_voltages_.low_voltage_ro == 0xFFFFU && bms_voltages_.high_voltage_ro == 0x1111U;
+
+        if (!bms_voltages_is_invalid) {
+            initialize_charge();
+            has_initialized_charge_ = true;
+        }
+
+    }
+
+    // Only calculate the updated SoC if charge has been properly initialized.
+    if (has_initialized_charge_) {
+        // Do not edit this block! If both calculate_SoC_em AND calculate_SoC_acu are run,
+        // then the charge will be subtracted from the SoC member variable twice.
+        if (use_em_for_soc_) {
+            calculate_SoC_em(tick);
+        } else {
+            calculate_SoC_acu(tick);
+        }
+    }
+
+    last_tick_ = tick;
 }
 
 //RETRIEVE CAN MESSAGES//
