@@ -71,6 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classDrivetrainSystem-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">DrivetrainSystem&lt; InverterType &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -113,6 +115,64 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa9ae1ca23e95f2088affd664c4f02837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa703f3d20b3a6f38b034e5d55d5a707a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">get_dynamic_data</a> ()</td></tr>
 <tr class="separator:aa703f3d20b3a6f38b034e5d55d5a707a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0562e259c9521c0755269d366fe39a92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a0562e259c9521c0755269d366fe39a92">enable_drivetrain_hv_</a> (unsigned long curr_time)</td></tr>
+<tr class="separator:a0562e259c9521c0755269d366fe39a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8fd088d21c3015ee66d9031a9fbe077"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#ad8fd088d21c3015ee66d9031a9fbe077">request_enable_</a> ()</td></tr>
+<tr class="separator:ad8fd088d21c3015ee66d9031a9fbe077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a860d084bf8b80c07cdd461171abd3b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a9a860d084bf8b80c07cdd461171abd3b">drivetrain_ready_</a> ()</td></tr>
+<tr class="separator:a9a860d084bf8b80c07cdd461171abd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53afc3a29acb931d7dc735df4e4b0cf0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a53afc3a29acb931d7dc735df4e4b0cf0">check_drivetrain_quit_dc_on_</a> ()</td></tr>
+<tr class="separator:a53afc3a29acb931d7dc735df4e4b0cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a999d889397257fb8f93b9e139ae14354"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a999d889397257fb8f93b9e139ae14354">drivetrain_enabled_</a> ()</td></tr>
+<tr class="separator:a999d889397257fb8f93b9e139ae14354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5a7717176bfeb3038e3f9f62a857a189"><td class="memItemLeft" align="right" valign="top">std::array&lt; InverterType *, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189">inverters_</a></td></tr>
+<tr class="separator:a5a7717176bfeb3038e3f9f62a857a189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a032b64ca93b60563efcf7d7e7bd98c8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMCUInterface.html">MCUInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a032b64ca93b60563efcf7d7e7bd98c8f">mcu_interface_</a></td></tr>
+<tr class="separator:a032b64ca93b60563efcf7d7e7bd98c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9711a6cf6a3409d31642ab71165c5798"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a9711a6cf6a3409d31642ab71165c5798">init_time_limit_ms_</a></td></tr>
+<tr class="separator:a9711a6cf6a3409d31642ab71165c5798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cdaf1edddbec16dd289f2e14e2e4738"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a4cdaf1edddbec16dd289f2e14e2e4738">min_hv_voltage_</a></td></tr>
+<tr class="separator:a4cdaf1edddbec16dd289f2e14e2e4738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273b9cb4bc4d54da9d7598e49c7a4e00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a273b9cb4bc4d54da9d7598e49c7a4e00">motor_pole_pairs_</a></td></tr>
+<tr class="separator:a273b9cb4bc4d54da9d7598e49c7a4e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b74637f4d83762bcb70d9aba5e20f4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a37b74637f4d83762bcb70d9aba5e20f4">lambda_magnetic_flux_wb_</a></td></tr>
+<tr class="separator:a37b74637f4d83762bcb70d9aba5e20f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ccb52959c582f0cc7c029d10cf35b0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#ad6ccb52959c582f0cc7c029d10cf35b0">L_d_inductance_H_</a></td></tr>
+<tr class="separator:ad6ccb52959c582f0cc7c029d10cf35b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade4d67cb73c4c8c449716903cfee7be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aade4d67cb73c4c8c449716903cfee7be">hv_en_requested_</a></td></tr>
+<tr class="separator:aade4d67cb73c4c8c449716903cfee7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8604672aaf6d3e71852831a5c9915b1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a8604672aaf6d3e71852831a5c9915b1e">enable_requested_</a></td></tr>
+<tr class="separator:a8604672aaf6d3e71852831a5c9915b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71fce82a9cc93c943a6405304f3c0eec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a71fce82a9cc93c943a6405304f3c0eec">reset_requested_</a></td></tr>
+<tr class="separator:a71fce82a9cc93c943a6405304f3c0eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77504dcc5c6031867bd884e74b93f02b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a77504dcc5c6031867bd884e74b93f02b">last_reset_pressed_time_</a></td></tr>
+<tr class="separator:a77504dcc5c6031867bd884e74b93f02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02b8f63b53de88f796a8bc991ff07e7"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aa02b8f63b53de88f796a8bc991ff07e7">reset_interval_</a></td></tr>
+<tr class="separator:aa02b8f63b53de88f796a8bc991ff07e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6ea7457c6228374ce0b8474ffea4f82"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aa6ea7457c6228374ce0b8474ffea4f82">curr_system_millis_</a></td></tr>
+<tr class="separator:aa6ea7457c6228374ce0b8474ffea4f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6c73f751ff935e5bd8dc792b28d0e7f"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#ad6c73f751ff935e5bd8dc792b28d0e7f">min_cmd_period_</a></td></tr>
+<tr class="separator:ad6c73f751ff935e5bd8dc792b28d0e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa837c72ee52dc80fe2aebb17f037a695"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#aa837c72ee52dc80fe2aebb17f037a695">last_no_torque_cmd_time_</a></td></tr>
+<tr class="separator:aa837c72ee52dc80fe2aebb17f037a695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a342d74c84da9f3766b2d8c24152db537"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a342d74c84da9f3766b2d8c24152db537">last_reset_cmd_time_</a></td></tr>
+<tr class="separator:a342d74c84da9f3766b2d8c24152db537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1afd6cd5956860a88da54ed876ebab21"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a1afd6cd5956860a88da54ed876ebab21">last_disable_cmd_time_</a></td></tr>
+<tr class="separator:a1afd6cd5956860a88da54ed876ebab21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55bea6b5a0ec8a39221c141f1ce20f96"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a55bea6b5a0ec8a39221c141f1ce20f96">last_general_cmd_time_</a></td></tr>
+<tr class="separator:a55bea6b5a0ec8a39221c141f1ce20f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c7c32447b5a8b2ddc65c07a83e43c2"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a22c7c32447b5a8b2ddc65c07a83e43c2">drivetrain_initialization_phase_start_time_</a></td></tr>
+<tr class="separator:a22c7c32447b5a8b2ddc65c07a83e43c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18a988bcc293a394d428c0142fb24af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#ad18a988bcc293a394d428c0142fb24af">current_drivetrain_command_</a></td></tr>
+<tr class="separator:ad18a988bcc293a394d428c0142fb24af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d008a3a0182fb277e939ea7a3c6342"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a31d008a3a0182fb277e939ea7a3c6342">dynamic_data_</a></td></tr>
+<tr class="separator:a31d008a3a0182fb277e939ea7a3c6342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename InverterType&gt;<br />
@@ -182,29 +242,74 @@ template&lt;typename InverterType &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00031">31</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span>        : inverters_(<a class="code hl_struct" href="structinverters.html">inverters</a>), init_time_limit_ms_(init_time_limit_ms), min_hv_voltage_(min_hv_voltage), min_cmd_period_(min_cmd_period_ms)</div>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>        : <a class="code hl_variable" href="classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189">inverters_</a>(<a class="code hl_struct" href="structinverters.html">inverters</a>), <a class="code hl_variable" href="classDrivetrainSystem.html#a9711a6cf6a3409d31642ab71165c5798">init_time_limit_ms_</a>(init_time_limit_ms), <a class="code hl_variable" href="classDrivetrainSystem.html#a4cdaf1edddbec16dd289f2e14e2e4738">min_hv_voltage_</a>(min_hv_voltage), <a class="code hl_variable" href="classDrivetrainSystem.html#ad6c73f751ff935e5bd8dc792b28d0e7f">min_cmd_period_</a>(min_cmd_period_ms)</div>
 <div class="line"><span class="lineno">   33</span>    {</div>
 <div class="line"><span class="lineno">   34</span>        <span class="comment">// values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf</span></div>
-<div class="line"><span class="lineno">   35</span>        motor_pole_pairs_ = 5;</div>
-<div class="line"><span class="lineno">   36</span>        lambda_magnetic_flux_wb_ = 1.0;</div>
-<div class="line"><span class="lineno">   37</span>        hv_en_requested_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   38</span>        enable_requested_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   39</span>        reset_requested_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   40</span>        last_reset_pressed_time_ = 0;</div>
-<div class="line"><span class="lineno">   41</span>        reset_interval_ = 5000;     <span class="comment">// ms</span></div>
-<div class="line"><span class="lineno">   42</span>        curr_system_millis_ = 0;</div>
-<div class="line"><span class="lineno">   43</span>        last_no_torque_cmd_time_ = 0;</div>
-<div class="line"><span class="lineno">   44</span>        last_reset_cmd_time_ = 0;</div>
-<div class="line"><span class="lineno">   45</span>        last_disable_cmd_time_ = 0;</div>
-<div class="line"><span class="lineno">   46</span>        last_general_cmd_time_ = 0; <span class="comment">// ms</span></div>
-<div class="line"><span class="lineno">   47</span>        mcu_interface_ = mcu_interface;</div>
-<div class="line"><span class="lineno">   48</span>        dynamic_data_ = {};</div>
+<div class="line"><span class="lineno">   35</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a273b9cb4bc4d54da9d7598e49c7a4e00">motor_pole_pairs_</a> = 5;</div>
+<div class="line"><span class="lineno">   36</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a37b74637f4d83762bcb70d9aba5e20f4">lambda_magnetic_flux_wb_</a> = 1.0;</div>
+<div class="line"><span class="lineno">   37</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#aade4d67cb73c4c8c449716903cfee7be">hv_en_requested_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   38</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a8604672aaf6d3e71852831a5c9915b1e">enable_requested_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   39</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a71fce82a9cc93c943a6405304f3c0eec">reset_requested_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   40</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a77504dcc5c6031867bd884e74b93f02b">last_reset_pressed_time_</a> = 0;</div>
+<div class="line"><span class="lineno">   41</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#aa02b8f63b53de88f796a8bc991ff07e7">reset_interval_</a> = 5000;     <span class="comment">// ms</span></div>
+<div class="line"><span class="lineno">   42</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#aa6ea7457c6228374ce0b8474ffea4f82">curr_system_millis_</a> = 0;</div>
+<div class="line"><span class="lineno">   43</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#aa837c72ee52dc80fe2aebb17f037a695">last_no_torque_cmd_time_</a> = 0;</div>
+<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a342d74c84da9f3766b2d8c24152db537">last_reset_cmd_time_</a> = 0;</div>
+<div class="line"><span class="lineno">   45</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a1afd6cd5956860a88da54ed876ebab21">last_disable_cmd_time_</a> = 0;</div>
+<div class="line"><span class="lineno">   46</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a55bea6b5a0ec8a39221c141f1ce20f96">last_general_cmd_time_</a> = 0; <span class="comment">// ms</span></div>
+<div class="line"><span class="lineno">   47</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a032b64ca93b60563efcf7d7e7bd98c8f">mcu_interface_</a> = mcu_interface;</div>
+<div class="line"><span class="lineno">   48</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a31d008a3a0182fb277e939ea7a3c6342">dynamic_data_</a> = {};</div>
 <div class="line"><span class="lineno">   49</span>    }</div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a032b64ca93b60563efcf7d7e7bd98c8f"><div class="ttname"><a href="classDrivetrainSystem.html#a032b64ca93b60563efcf7d7e7bd98c8f">DrivetrainSystem::mcu_interface_</a></div><div class="ttdeci">MCUInterface * mcu_interface_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00080">DrivetrainSystem.h:80</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a1afd6cd5956860a88da54ed876ebab21"><div class="ttname"><a href="classDrivetrainSystem.html#a1afd6cd5956860a88da54ed876ebab21">DrivetrainSystem::last_disable_cmd_time_</a></div><div class="ttdeci">unsigned long last_disable_cmd_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00105">DrivetrainSystem.h:105</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a273b9cb4bc4d54da9d7598e49c7a4e00"><div class="ttname"><a href="classDrivetrainSystem.html#a273b9cb4bc4d54da9d7598e49c7a4e00">DrivetrainSystem::motor_pole_pairs_</a></div><div class="ttdeci">int motor_pole_pairs_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00083">DrivetrainSystem.h:83</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a31d008a3a0182fb277e939ea7a3c6342"><div class="ttname"><a href="classDrivetrainSystem.html#a31d008a3a0182fb277e939ea7a3c6342">DrivetrainSystem::dynamic_data_</a></div><div class="ttdeci">DrivetrainDynamicReport_s dynamic_data_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00109">DrivetrainSystem.h:109</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a342d74c84da9f3766b2d8c24152db537"><div class="ttname"><a href="classDrivetrainSystem.html#a342d74c84da9f3766b2d8c24152db537">DrivetrainSystem::last_reset_cmd_time_</a></div><div class="ttdeci">unsigned long last_reset_cmd_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00105">DrivetrainSystem.h:105</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a37b74637f4d83762bcb70d9aba5e20f4"><div class="ttname"><a href="classDrivetrainSystem.html#a37b74637f4d83762bcb70d9aba5e20f4">DrivetrainSystem::lambda_magnetic_flux_wb_</a></div><div class="ttdeci">float lambda_magnetic_flux_wb_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00084">DrivetrainSystem.h:84</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a4cdaf1edddbec16dd289f2e14e2e4738"><div class="ttname"><a href="classDrivetrainSystem.html#a4cdaf1edddbec16dd289f2e14e2e4738">DrivetrainSystem::min_hv_voltage_</a></div><div class="ttdeci">uint16_t min_hv_voltage_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00082">DrivetrainSystem.h:82</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a55bea6b5a0ec8a39221c141f1ce20f96"><div class="ttname"><a href="classDrivetrainSystem.html#a55bea6b5a0ec8a39221c141f1ce20f96">DrivetrainSystem::last_general_cmd_time_</a></div><div class="ttdeci">unsigned long last_general_cmd_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00105">DrivetrainSystem.h:105</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a5a7717176bfeb3038e3f9f62a857a189"><div class="ttname"><a href="classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189">DrivetrainSystem::inverters_</a></div><div class="ttdeci">std::array&lt; InverterType *, 4 &gt; inverters_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00079">DrivetrainSystem.h:79</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a71fce82a9cc93c943a6405304f3c0eec"><div class="ttname"><a href="classDrivetrainSystem.html#a71fce82a9cc93c943a6405304f3c0eec">DrivetrainSystem::reset_requested_</a></div><div class="ttdeci">bool reset_requested_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00088">DrivetrainSystem.h:88</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a77504dcc5c6031867bd884e74b93f02b"><div class="ttname"><a href="classDrivetrainSystem.html#a77504dcc5c6031867bd884e74b93f02b">DrivetrainSystem::last_reset_pressed_time_</a></div><div class="ttdeci">unsigned long last_reset_pressed_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00089">DrivetrainSystem.h:89</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a8604672aaf6d3e71852831a5c9915b1e"><div class="ttname"><a href="classDrivetrainSystem.html#a8604672aaf6d3e71852831a5c9915b1e">DrivetrainSystem::enable_requested_</a></div><div class="ttdeci">bool enable_requested_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00086">DrivetrainSystem.h:86</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a9711a6cf6a3409d31642ab71165c5798"><div class="ttname"><a href="classDrivetrainSystem.html#a9711a6cf6a3409d31642ab71165c5798">DrivetrainSystem::init_time_limit_ms_</a></div><div class="ttdeci">int init_time_limit_ms_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00081">DrivetrainSystem.h:81</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_aa02b8f63b53de88f796a8bc991ff07e7"><div class="ttname"><a href="classDrivetrainSystem.html#aa02b8f63b53de88f796a8bc991ff07e7">DrivetrainSystem::reset_interval_</a></div><div class="ttdeci">unsigned long reset_interval_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00090">DrivetrainSystem.h:90</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_aa6ea7457c6228374ce0b8474ffea4f82"><div class="ttname"><a href="classDrivetrainSystem.html#aa6ea7457c6228374ce0b8474ffea4f82">DrivetrainSystem::curr_system_millis_</a></div><div class="ttdeci">unsigned long curr_system_millis_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00103">DrivetrainSystem.h:103</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_aa837c72ee52dc80fe2aebb17f037a695"><div class="ttname"><a href="classDrivetrainSystem.html#aa837c72ee52dc80fe2aebb17f037a695">DrivetrainSystem::last_no_torque_cmd_time_</a></div><div class="ttdeci">unsigned long last_no_torque_cmd_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00105">DrivetrainSystem.h:105</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_aade4d67cb73c4c8c449716903cfee7be"><div class="ttname"><a href="classDrivetrainSystem.html#aade4d67cb73c4c8c449716903cfee7be">DrivetrainSystem::hv_en_requested_</a></div><div class="ttdeci">bool hv_en_requested_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00086">DrivetrainSystem.h:86</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_ad6c73f751ff935e5bd8dc792b28d0e7f"><div class="ttname"><a href="classDrivetrainSystem.html#ad6c73f751ff935e5bd8dc792b28d0e7f">DrivetrainSystem::min_cmd_period_</a></div><div class="ttdeci">unsigned int min_cmd_period_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00104">DrivetrainSystem.h:104</a></div></div>
 <div class="ttc" id="astructinverters_html"><div class="ttname"><a href="structinverters.html">inverters</a></div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00122">main.cpp:123</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a53afc3a29acb931d7dc735df4e4b0cf0" name="a53afc3a29acb931d7dc735df4e4b0cf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53afc3a29acb931d7dc735df4e4b0cf0">&#9670;&#160;</a></span>check_drivetrain_quit_dc_on_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::check_drivetrain_quit_dc_on_ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa9ae1ca23e95f2088affd664c4f02837" name="aa9ae1ca23e95f2088affd664c4f02837"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9ae1ca23e95f2088affd664c4f02837">&#9670;&#160;</a></span>check_reset_condition()</h2>
 
@@ -320,6 +425,33 @@ template&lt;typename InverterType &gt; </div>
 
 </div>
 </div>
+<a id="a999d889397257fb8f93b9e139ae14354" name="a999d889397257fb8f93b9e139ae14354"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a999d889397257fb8f93b9e139ae14354">&#9670;&#160;</a></span>drivetrain_enabled_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::drivetrain_enabled_ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3eefd92d61b78ad1e3c314d455da6b5a" name="a3eefd92d61b78ad1e3c314d455da6b5a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3eefd92d61b78ad1e3c314d455da6b5a">&#9670;&#160;</a></span>drivetrain_error_occured()</h2>
 
@@ -336,6 +468,67 @@ template&lt;typename InverterType &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a860d084bf8b80c07cdd461171abd3b" name="a9a860d084bf8b80c07cdd461171abd3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a860d084bf8b80c07cdd461171abd3b">&#9670;&#160;</a></span>drivetrain_ready_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::drivetrain_ready_ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0562e259c9521c0755269d366fe39a92" name="a0562e259c9521c0755269d366fe39a92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0562e259c9521c0755269d366fe39a92">&#9670;&#160;</a></span>enable_drivetrain_hv_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::enable_drivetrain_hv_ </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>curr_time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">curr_time</td><td>current system tick time (millis()) that sets the init phase start time </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -436,6 +629,33 @@ template&lt;typename InverterType &gt; </div>
 
 </div>
 </div>
+<a id="ad8fd088d21c3015ee66d9031a9fbe077" name="ad8fd088d21c3015ee66d9031a9fbe077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8fd088d21c3015ee66d9031a9fbe077">&#9670;&#160;</a></span>request_enable_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::request_enable_ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae4798f5013796504e5b6f3721a38e659" name="ae4798f5013796504e5b6f3721a38e659"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae4798f5013796504e5b6f3721a38e659">&#9670;&#160;</a></span>reset_drivetrain()</h2>
 
@@ -483,8 +703,8 @@ template&lt;typename InverterType &gt; </div>
 <p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00052">52</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   53</span>    {</div>
 <div class="line"><span class="lineno">   54</span>        <a class="code hl_function" href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">reset_drivetrain</a>();</div>
-<div class="line"><span class="lineno">   55</span>        hv_en_requested_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   56</span>        enable_requested_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   55</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#aade4d67cb73c4c8c449716903cfee7be">hv_en_requested_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a8604672aaf6d3e71852831a5c9915b1e">enable_requested_</a> = <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">   57</span>    }</div>
 <div class="ttc" id="aclassDrivetrainSystem_html_ae4798f5013796504e5b6f3721a38e659"><div class="ttname"><a href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">DrivetrainSystem::reset_drivetrain</a></div><div class="ttdeci">void reset_drivetrain()</div></div>
 </div><!-- fragment -->
@@ -507,6 +727,553 @@ template&lt;typename InverterType &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa6ea7457c6228374ce0b8474ffea4f82" name="aa6ea7457c6228374ce0b8474ffea4f82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6ea7457c6228374ce0b8474ffea4f82">&#9670;&#160;</a></span>curr_system_millis_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::curr_system_millis_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00103">103</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="ad18a988bcc293a394d428c0142fb24af" name="ad18a988bcc293a394d428c0142fb24af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18a988bcc293a394d428c0142fb24af">&#9670;&#160;</a></span>current_drivetrain_command_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::current_drivetrain_command_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00108">108</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a22c7c32447b5a8b2ddc65c07a83e43c2" name="a22c7c32447b5a8b2ddc65c07a83e43c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22c7c32447b5a8b2ddc65c07a83e43c2">&#9670;&#160;</a></span>drivetrain_initialization_phase_start_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::drivetrain_initialization_phase_start_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00107">107</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a31d008a3a0182fb277e939ea7a3c6342" name="a31d008a3a0182fb277e939ea7a3c6342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d008a3a0182fb277e939ea7a3c6342">&#9670;&#160;</a></span>dynamic_data_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::dynamic_data_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00109">109</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a8604672aaf6d3e71852831a5c9915b1e" name="a8604672aaf6d3e71852831a5c9915b1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8604672aaf6d3e71852831a5c9915b1e">&#9670;&#160;</a></span>enable_requested_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::enable_requested_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00086">86</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="aade4d67cb73c4c8c449716903cfee7be" name="aade4d67cb73c4c8c449716903cfee7be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aade4d67cb73c4c8c449716903cfee7be">&#9670;&#160;</a></span>hv_en_requested_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::hv_en_requested_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00086">86</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a9711a6cf6a3409d31642ab71165c5798" name="a9711a6cf6a3409d31642ab71165c5798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9711a6cf6a3409d31642ab71165c5798">&#9670;&#160;</a></span>init_time_limit_ms_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::init_time_limit_ms_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00081">81</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a5a7717176bfeb3038e3f9f62a857a189" name="a5a7717176bfeb3038e3f9f62a857a189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a7717176bfeb3038e3f9f62a857a189">&#9670;&#160;</a></span>inverters_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt;InverterType *, 4&gt; <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::inverters_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00079">79</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="ad6ccb52959c582f0cc7c029d10cf35b0" name="ad6ccb52959c582f0cc7c029d10cf35b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ccb52959c582f0cc7c029d10cf35b0">&#9670;&#160;</a></span>L_d_inductance_H_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::L_d_inductance_H_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00084">84</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a37b74637f4d83762bcb70d9aba5e20f4" name="a37b74637f4d83762bcb70d9aba5e20f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37b74637f4d83762bcb70d9aba5e20f4">&#9670;&#160;</a></span>lambda_magnetic_flux_wb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::lambda_magnetic_flux_wb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00084">84</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a1afd6cd5956860a88da54ed876ebab21" name="a1afd6cd5956860a88da54ed876ebab21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1afd6cd5956860a88da54ed876ebab21">&#9670;&#160;</a></span>last_disable_cmd_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::last_disable_cmd_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00105">105</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a55bea6b5a0ec8a39221c141f1ce20f96" name="a55bea6b5a0ec8a39221c141f1ce20f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55bea6b5a0ec8a39221c141f1ce20f96">&#9670;&#160;</a></span>last_general_cmd_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::last_general_cmd_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00105">105</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="aa837c72ee52dc80fe2aebb17f037a695" name="aa837c72ee52dc80fe2aebb17f037a695"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa837c72ee52dc80fe2aebb17f037a695">&#9670;&#160;</a></span>last_no_torque_cmd_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::last_no_torque_cmd_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00105">105</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a342d74c84da9f3766b2d8c24152db537" name="a342d74c84da9f3766b2d8c24152db537"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a342d74c84da9f3766b2d8c24152db537">&#9670;&#160;</a></span>last_reset_cmd_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::last_reset_cmd_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00105">105</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a77504dcc5c6031867bd884e74b93f02b" name="a77504dcc5c6031867bd884e74b93f02b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77504dcc5c6031867bd884e74b93f02b">&#9670;&#160;</a></span>last_reset_pressed_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::last_reset_pressed_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00089">89</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a032b64ca93b60563efcf7d7e7bd98c8f" name="a032b64ca93b60563efcf7d7e7bd98c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a032b64ca93b60563efcf7d7e7bd98c8f">&#9670;&#160;</a></span>mcu_interface_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMCUInterface.html">MCUInterface</a>* <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::mcu_interface_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00080">80</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="ad6c73f751ff935e5bd8dc792b28d0e7f" name="ad6c73f751ff935e5bd8dc792b28d0e7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6c73f751ff935e5bd8dc792b28d0e7f">&#9670;&#160;</a></span>min_cmd_period_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::min_cmd_period_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00104">104</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a4cdaf1edddbec16dd289f2e14e2e4738" name="a4cdaf1edddbec16dd289f2e14e2e4738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cdaf1edddbec16dd289f2e14e2e4738">&#9670;&#160;</a></span>min_hv_voltage_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::min_hv_voltage_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00082">82</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a273b9cb4bc4d54da9d7598e49c7a4e00" name="a273b9cb4bc4d54da9d7598e49c7a4e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a273b9cb4bc4d54da9d7598e49c7a4e00">&#9670;&#160;</a></span>motor_pole_pairs_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::motor_pole_pairs_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00083">83</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="aa02b8f63b53de88f796a8bc991ff07e7" name="aa02b8f63b53de88f796a8bc991ff07e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa02b8f63b53de88f796a8bc991ff07e7">&#9670;&#160;</a></span>reset_interval_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::reset_interval_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00090">90</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a71fce82a9cc93c943a6405304f3c0eec" name="a71fce82a9cc93c943a6405304f3c0eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71fce82a9cc93c943a6405304f3c0eec">&#9670;&#160;</a></span>reset_requested_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::reset_requested_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00088">88</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
 
 </div>
 </div>

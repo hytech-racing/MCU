@@ -1,21 +1,5 @@
 var searchData=
 [
-  ['pack_5fcharge_5fcrit_5flowest_5fcell_5fthreshold_0',['PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD',['../interfaces_2include_2AMSInterface_8h.html#a4b552a9353fd19e0219e2767fd47c06a',1,'PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD():&#160;AMSInterface.h'],['../mock__interfaces_2AMSInterface_8h.html#a4b552a9353fd19e0219e2767fd47c06a',1,'PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD():&#160;AMSInterface.h']]],
-  ['pack_5fcharge_5fcrit_5ftotal_5fthreshold_1',['PACK_CHARGE_CRIT_TOTAL_THRESHOLD',['../mock__interfaces_2AMSInterface_8h.html#aae914912a039ddb5d7df39d1c45b8094',1,'PACK_CHARGE_CRIT_TOTAL_THRESHOLD():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#aae914912a039ddb5d7df39d1c45b8094',1,'PACK_CHARGE_CRIT_TOTAL_THRESHOLD():&#160;AMSInterface.h']]],
-  ['pedals_5fsystem_2',['pedals_system',['../src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c',1,'main.cpp']]],
-  ['pin_5fbms_5fok_5fread_3',['pin_bms_ok_read',['../structMainECUHardwareReadPins.html#a39bf77e0a2959344bdf427af613bcdbf',1,'MainECUHardwareReadPins']]],
-  ['pin_5fbots_5fok_5fread_4',['pin_bots_ok_read',['../structMainECUHardwareReadPins.html#a98f692eaa73b97379bcbb20e4d9f30e1',1,'MainECUHardwareReadPins']]],
-  ['pin_5fbrake_5flight_5fctrl_5',['pin_brake_light_ctrl',['../structMainECUHardwareReadPins.html#acb162c529b39e945c6a9815b1363a265',1,'MainECUHardwareReadPins']]],
-  ['pin_5fbrb_5fok_5fread_6',['pin_brb_ok_read',['../structMainECUHardwareReadPins.html#a29aa20e14535a3ed7d90580fa21d248a',1,'MainECUHardwareReadPins']]],
-  ['pin_5fbspd_5fok_5fread_7',['pin_bspd_ok_read',['../structMainECUHardwareReadPins.html#ad32fa156a89f30e0483942d05ed37fa6',1,'MainECUHardwareReadPins']]],
-  ['pin_5fimd_5fok_5fread_8',['pin_imd_ok_read',['../structMainECUHardwareReadPins.html#a7b8fadeef84caf620d8d575f2d97c346',1,'MainECUHardwareReadPins']]],
-  ['pin_5finv_5f24v_5fen_9',['pin_inv_24V_en',['../structMainECUHardwareReadPins.html#a3d833588f1b4cc7c503322d7e5a4363c',1,'MainECUHardwareReadPins']]],
-  ['pin_5finv_5fen_10',['pin_inv_en',['../structMainECUHardwareReadPins.html#a2ecb27938ff8dd38849c8040298a3c62',1,'MainECUHardwareReadPins']]],
-  ['pin_5fsoftware_5fok_5fread_11',['pin_software_ok_read',['../structMainECUHardwareReadPins.html#a3f8f95e45ee72df559ab27b396c5b67e',1,'MainECUHardwareReadPins']]],
-  ['pitch_12',['pitch',['../structvector__nav.html#a57231c33d5ce2ba67915ba9635ee0d29',1,'vector_nav']]],
-  ['pot3_13',['pot3',['../classSABInterface.html#ad21aae3a4490ec2c53d1c6aaf6ebd33a',1,'SABInterface']]],
-  ['pot4_14',['pot4',['../classSABInterface.html#a9aaaa7be5a62c9b815ce8ee5e8cd8b90',1,'SABInterface']]],
-  ['pots_5ffl_5fchannel_15',['pots_fl_channel',['../structTelemetryInterfaceReadChannels.html#adee0f86ba1f10da5ea98d2d9b21c07eb',1,'TelemetryInterfaceReadChannels']]],
-  ['pots_5ffr_5fchannel_16',['pots_fr_channel',['../structTelemetryInterfaceReadChannels.html#a3df0264071fbf24cde75f51d06ea5ef3',1,'TelemetryInterfaceReadChannels']]],
-  ['primary_5fsteering_5fsense_5foffset_17',['PRIMARY_STEERING_SENSE_OFFSET',['../MCU__rev15__defs_8h.html#ac5ec53485d25ca6b01fca69c174770f7',1,'MCU_rev15_defs.h']]]
+  ['num_5fmotors_0',['NUM_MOTORS',['../Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc',1,'Utility.h']]],
+  ['numfirtaps_5f_1',['numFIRTaps_',['../classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d',1,'LoadCellInterface::numFIRTaps_()'],['../classTorqueControllerLoadCellVectoring.html#a7dd7edaa1d7e678c4913220a33cd770f',1,'TorqueControllerLoadCellVectoring::numFIRTaps_()']]]
 ];

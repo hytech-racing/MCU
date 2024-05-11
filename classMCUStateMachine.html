@@ -71,6 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classMCUStateMachine-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MCUStateMachine&lt; DrivetrainSysType &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -89,6 +91,36 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3b419b1b3ffa46e9126a32e566fd201d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5429e2fd34f7d3c5f38ab6fcf53b7a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#ad5429e2fd34f7d3c5f38ab6fcf53b7a8">car_in_ready_to_drive</a> ()</td></tr>
 <tr class="separator:ad5429e2fd34f7d3c5f38ab6fcf53b7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a3731cf1012f8e7e6469d9767e79c2469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a3731cf1012f8e7e6469d9767e79c2469">set_state_</a> (<a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> new_state, unsigned long curr_time)</td></tr>
+<tr class="separator:a3731cf1012f8e7e6469d9767e79c2469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec5c4d8097304594b8a3e7df485050d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#aec5c4d8097304594b8a3e7df485050d2">handle_entry_logic_</a> (<a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> new_state, unsigned long curr_time)</td></tr>
+<tr class="memdesc:aec5c4d8097304594b8a3e7df485050d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">the function run upon the entry of the car into a new state  <a href="classMCUStateMachine.html#aec5c4d8097304594b8a3e7df485050d2">More...</a><br /></td></tr>
+<tr class="separator:aec5c4d8097304594b8a3e7df485050d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f273c2263886bcd2097b7bda77e8ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a29f273c2263886bcd2097b7bda77e8ef">handle_exit_logic_</a> (<a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> prev_state, unsigned long curr_time)</td></tr>
+<tr class="memdesc:a29f273c2263886bcd2097b7bda77e8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">function run upon the exit of a state  <a href="classMCUStateMachine.html#a29f273c2263886bcd2097b7bda77e8ef">More...</a><br /></td></tr>
+<tr class="separator:a29f273c2263886bcd2097b7bda77e8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a59390c340f239ddf22cfcb93fd53a315"><td class="memItemLeft" align="right" valign="top"><a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315">current_state_</a></td></tr>
+<tr class="separator:a59390c340f239ddf22cfcb93fd53a315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63fea5dd37d50fabedfda8f7d595f615"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBuzzerController.html">BuzzerController</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a63fea5dd37d50fabedfda8f7d595f615">buzzer_</a></td></tr>
+<tr class="memdesc:a63fea5dd37d50fabedfda8f7d595f615"><td class="mdescLeft">&#160;</td><td class="mdescRight">components within state machine  <a href="classMCUStateMachine.html#a63fea5dd37d50fabedfda8f7d595f615">More...</a><br /></td></tr>
+<tr class="separator:a63fea5dd37d50fabedfda8f7d595f615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d7b28dc3ef8e19b05a32e160ee9c97f"><td class="memItemLeft" align="right" valign="top">DrivetrainSysType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a8d7b28dc3ef8e19b05a32e160ee9c97f">drivetrain_</a></td></tr>
+<tr class="separator:a8d7b28dc3ef8e19b05a32e160ee9c97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ca8e951292f0d93fec3c396e492482"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPedalsSystem.html">PedalsSystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a09ca8e951292f0d93fec3c396e492482">pedals_</a></td></tr>
+<tr class="separator:a09ca8e951292f0d93fec3c396e492482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f8b78bd2df870cd3e70074623365c4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDashboardInterface.html">DashboardInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a6f8b78bd2df870cd3e70074623365c4d">dashboard_</a></td></tr>
+<tr class="memdesc:a6f8b78bd2df870cd3e70074623365c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">drivers within state machine  <a href="classMCUStateMachine.html#a6f8b78bd2df870cd3e70074623365c4d">More...</a><br /></td></tr>
+<tr class="separator:a6f8b78bd2df870cd3e70074623365c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d7985b7fd48004a4cdd07d449963931"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSafetySystem.html">SafetySystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a8d7985b7fd48004a4cdd07d449963931">safety_system_</a></td></tr>
+<tr class="separator:a8d7985b7fd48004a4cdd07d449963931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64f86e895ebbed42c91172a37ca159c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMCUStateMachine.html#a64f86e895ebbed42c91172a37ca159c3">controller_mux_</a></td></tr>
+<tr class="separator:a64f86e895ebbed42c91172a37ca159c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename DrivetrainSysType&gt;<br />
@@ -157,14 +189,21 @@ template&lt;typename DrivetrainSysType &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00031">31</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   37</span>    {</div>
-<div class="line"><span class="lineno">   38</span>        current_state_ = CAR_STATE::STARTUP;</div>
-<div class="line"><span class="lineno">   39</span>        buzzer_ = <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>;</div>
-<div class="line"><span class="lineno">   40</span>        drivetrain_ = <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>;</div>
-<div class="line"><span class="lineno">   41</span>        dashboard_ = dashboard;</div>
-<div class="line"><span class="lineno">   42</span>        pedals_ = pedals;</div>
-<div class="line"><span class="lineno">   43</span>        controller_mux_ = mux;</div>
-<div class="line"><span class="lineno">   44</span>        safety_system_ = safety_system;</div>
+<div class="line"><span class="lineno">   38</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315">current_state_</a> = CAR_STATE::STARTUP;</div>
+<div class="line"><span class="lineno">   39</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a63fea5dd37d50fabedfda8f7d595f615">buzzer_</a> = <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>;</div>
+<div class="line"><span class="lineno">   40</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a8d7b28dc3ef8e19b05a32e160ee9c97f">drivetrain_</a> = <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>;</div>
+<div class="line"><span class="lineno">   41</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a6f8b78bd2df870cd3e70074623365c4d">dashboard_</a> = dashboard;</div>
+<div class="line"><span class="lineno">   42</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a09ca8e951292f0d93fec3c396e492482">pedals_</a> = pedals;</div>
+<div class="line"><span class="lineno">   43</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a64f86e895ebbed42c91172a37ca159c3">controller_mux_</a> = mux;</div>
+<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="classMCUStateMachine.html#a8d7985b7fd48004a4cdd07d449963931">safety_system_</a> = safety_system;</div>
 <div class="line"><span class="lineno">   45</span>    }</div>
+<div class="ttc" id="aclassMCUStateMachine_html_a09ca8e951292f0d93fec3c396e492482"><div class="ttname"><a href="classMCUStateMachine.html#a09ca8e951292f0d93fec3c396e492482">MCUStateMachine::pedals_</a></div><div class="ttdeci">PedalsSystem * pedals_</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00069">MCUStateMachine.h:69</a></div></div>
+<div class="ttc" id="aclassMCUStateMachine_html_a59390c340f239ddf22cfcb93fd53a315"><div class="ttname"><a href="classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315">MCUStateMachine::current_state_</a></div><div class="ttdeci">CAR_STATE current_state_</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00064">MCUStateMachine.h:64</a></div></div>
+<div class="ttc" id="aclassMCUStateMachine_html_a63fea5dd37d50fabedfda8f7d595f615"><div class="ttname"><a href="classMCUStateMachine.html#a63fea5dd37d50fabedfda8f7d595f615">MCUStateMachine::buzzer_</a></div><div class="ttdeci">BuzzerController * buzzer_</div><div class="ttdoc">components within state machine</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00067">MCUStateMachine.h:67</a></div></div>
+<div class="ttc" id="aclassMCUStateMachine_html_a64f86e895ebbed42c91172a37ca159c3"><div class="ttname"><a href="classMCUStateMachine.html#a64f86e895ebbed42c91172a37ca159c3">MCUStateMachine::controller_mux_</a></div><div class="ttdeci">TorqueControllerMux * controller_mux_</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00075">MCUStateMachine.h:75</a></div></div>
+<div class="ttc" id="aclassMCUStateMachine_html_a6f8b78bd2df870cd3e70074623365c4d"><div class="ttname"><a href="classMCUStateMachine.html#a6f8b78bd2df870cd3e70074623365c4d">MCUStateMachine::dashboard_</a></div><div class="ttdeci">DashboardInterface * dashboard_</div><div class="ttdoc">drivers within state machine</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00072">MCUStateMachine.h:72</a></div></div>
+<div class="ttc" id="aclassMCUStateMachine_html_a8d7985b7fd48004a4cdd07d449963931"><div class="ttname"><a href="classMCUStateMachine.html#a8d7985b7fd48004a4cdd07d449963931">MCUStateMachine::safety_system_</a></div><div class="ttdeci">SafetySystem * safety_system_</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00074">MCUStateMachine.h:74</a></div></div>
+<div class="ttc" id="aclassMCUStateMachine_html_a8d7b28dc3ef8e19b05a32e160ee9c97f"><div class="ttname"><a href="classMCUStateMachine.html#a8d7b28dc3ef8e19b05a32e160ee9c97f">MCUStateMachine::drivetrain_</a></div><div class="ttdeci">DrivetrainSysType * drivetrain_</div><div class="ttdef"><b>Definition:</b> <a href="MCUStateMachine_8h_source.html#l00068">MCUStateMachine.h:68</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00142">main.cpp:142</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a9b1d074ed9dae4fd92f949d027378c2d"><div class="ttname"><a href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a></div><div class="ttdeci">BuzzerController buzzer(BUZZER_ON_INTERVAL)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00213">main.cpp:213</a></div></div>
 </div><!-- fragment -->
@@ -197,7 +236,7 @@ template&lt;typename DrivetrainSysType &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00052">52</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>{ <span class="keywordflow">return</span> current_state_ == CAR_STATE::READY_TO_DRIVE; };</div>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315">current_state_</a> == CAR_STATE::READY_TO_DRIVE; };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -227,8 +266,138 @@ template&lt;typename DrivetrainSysType &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00051">51</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>{ <span class="keywordflow">return</span> current_state_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315">current_state_</a>; }</div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="aec5c4d8097304594b8a3e7df485050d2" name="aec5c4d8097304594b8a3e7df485050d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec5c4d8097304594b8a3e7df485050d2">&#9670;&#160;</a></span>handle_entry_logic_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::handle_entry_logic_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a>&#160;</td>
+          <td class="paramname"><em>new_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>curr_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the function run upon the entry of the car into a new state </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_state</td><td>the state in which we are entering </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a29f273c2263886bcd2097b7bda77e8ef" name="a29f273c2263886bcd2097b7bda77e8ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29f273c2263886bcd2097b7bda77e8ef">&#9670;&#160;</a></span>handle_exit_logic_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::handle_exit_logic_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a>&#160;</td>
+          <td class="paramname"><em>prev_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>curr_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function run upon the exit of a state </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prev_state</td><td>the state in which we are leaving </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3731cf1012f8e7e6469d9767e79c2469" name="a3731cf1012f8e7e6469d9767e79c2469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3731cf1012f8e7e6469d9767e79c2469">&#9670;&#160;</a></span>set_state_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::set_state_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a>&#160;</td>
+          <td class="paramname"><em>new_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>curr_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a4776c4162d3311fb5ed9644e398ed55b" name="a4776c4162d3311fb5ed9644e398ed55b"></a>
@@ -256,6 +425,193 @@ template&lt;typename DrivetrainSysType &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a63fea5dd37d50fabedfda8f7d595f615" name="a63fea5dd37d50fabedfda8f7d595f615"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63fea5dd37d50fabedfda8f7d595f615">&#9670;&#160;</a></span>buzzer_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBuzzerController.html">BuzzerController</a>* <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::buzzer_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>components within state machine </p>
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00067">67</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+
+</div>
+</div>
+<a id="a64f86e895ebbed42c91172a37ca159c3" name="a64f86e895ebbed42c91172a37ca159c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64f86e895ebbed42c91172a37ca159c3">&#9670;&#160;</a></span>controller_mux_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>* <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::controller_mux_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00075">75</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+
+</div>
+</div>
+<a id="a59390c340f239ddf22cfcb93fd53a315" name="a59390c340f239ddf22cfcb93fd53a315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59390c340f239ddf22cfcb93fd53a315">&#9670;&#160;</a></span>current_state_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::current_state_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00064">64</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+
+</div>
+</div>
+<a id="a6f8b78bd2df870cd3e70074623365c4d" name="a6f8b78bd2df870cd3e70074623365c4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f8b78bd2df870cd3e70074623365c4d">&#9670;&#160;</a></span>dashboard_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classDashboardInterface.html">DashboardInterface</a>* <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::dashboard_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>drivers within state machine </p>
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00072">72</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+
+</div>
+</div>
+<a id="a8d7b28dc3ef8e19b05a32e160ee9c97f" name="a8d7b28dc3ef8e19b05a32e160ee9c97f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7b28dc3ef8e19b05a32e160ee9c97f">&#9670;&#160;</a></span>drivetrain_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DrivetrainSysType* <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::drivetrain_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00068">68</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+
+</div>
+</div>
+<a id="a09ca8e951292f0d93fec3c396e492482" name="a09ca8e951292f0d93fec3c396e492482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09ca8e951292f0d93fec3c396e492482">&#9670;&#160;</a></span>pedals_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPedalsSystem.html">PedalsSystem</a>* <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::pedals_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00069">69</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
+
+</div>
+</div>
+<a id="a8d7985b7fd48004a4cdd07d449963931" name="a8d7985b7fd48004a4cdd07d449963931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7985b7fd48004a4cdd07d449963931">&#9670;&#160;</a></span>safety_system_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename DrivetrainSysType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSafetySystem.html">SafetySystem</a>* <a class="el" href="classMCUStateMachine.html">MCUStateMachine</a>&lt; DrivetrainSysType &gt;::safety_system_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MCUStateMachine_8h_source.html#l00074">74</a> of file <a class="el" href="MCUStateMachine_8h_source.html">MCUStateMachine.h</a>.</p>
 
 </div>
 </div>

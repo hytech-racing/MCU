@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classSafetySystem-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">SafetySystem Class Reference</div></div>
 </div><!--header-->
@@ -88,6 +89,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a59f836473f96d541363f2a0be3865bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade5ab559e1b2fbb93f5319136d75be38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafetySystem.html#ade5ab559e1b2fbb93f5319136d75be38">get_software_is_ok</a> ()</td></tr>
 <tr class="separator:ade5ab559e1b2fbb93f5319136d75be38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aba7787a5ea370fe285cdc43c7549e927"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAMSInterface.html">AMSInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">ams_</a></td></tr>
+<tr class="separator:aba7787a5ea370fe285cdc43c7549e927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bca879af5f476fd3f4a3e93e3a8397f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classWatchdogInterface.html">WatchdogInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafetySystem.html#a1bca879af5f476fd3f4a3e93e3a8397f">wd_</a></td></tr>
+<tr class="separator:a1bca879af5f476fd3f4a3e93e3a8397f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb504aac97cdbd8d3faf7b5ae8f003e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">software_is_ok</a></td></tr>
+<tr class="separator:afb504aac97cdbd8d3faf7b5ae8f003e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -129,8 +139,10 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="SafetySystem_8h_source.html#l00011">11</a> of file <a class="el" href="SafetySystem_8h_source.html">SafetySystem.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   11</span>                                                          : </div>
-<div class="line"><span class="lineno">   12</span>        ams_(ams), </div>
-<div class="line"><span class="lineno">   13</span>        wd_(wd){};</div>
+<div class="line"><span class="lineno">   12</span>        <a class="code hl_variable" href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">ams_</a>(ams), </div>
+<div class="line"><span class="lineno">   13</span>        <a class="code hl_variable" href="classSafetySystem.html#a1bca879af5f476fd3f4a3e93e3a8397f">wd_</a>(wd){};</div>
+<div class="ttc" id="aclassSafetySystem_html_a1bca879af5f476fd3f4a3e93e3a8397f"><div class="ttname"><a href="classSafetySystem.html#a1bca879af5f476fd3f4a3e93e3a8397f">SafetySystem::wd_</a></div><div class="ttdeci">WatchdogInterface * wd_</div><div class="ttdef"><b>Definition:</b> <a href="SafetySystem_8h_source.html#l00029">SafetySystem.h:29</a></div></div>
+<div class="ttc" id="aclassSafetySystem_html_aba7787a5ea370fe285cdc43c7549e927"><div class="ttname"><a href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">SafetySystem::ams_</a></div><div class="ttdeci">AMSInterface * ams_</div><div class="ttdef"><b>Definition:</b> <a href="SafetySystem_8h_source.html#l00028">SafetySystem.h:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -152,8 +164,9 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="SafetySystem_8cpp_source.html#l00037">37</a> of file <a class="el" href="SafetySystem_8cpp_source.html">SafetySystem.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   37</span>                                      {</div>
-<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">return</span> software_is_ok;</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">software_is_ok</a>;</div>
 <div class="line"><span class="lineno">   39</span>}</div>
+<div class="ttc" id="aclassSafetySystem_html_afb504aac97cdbd8d3faf7b5ae8f003e8"><div class="ttname"><a href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">SafetySystem::software_is_ok</a></div><div class="ttdeci">bool software_is_ok</div><div class="ttdef"><b>Definition:</b> <a href="SafetySystem_8h_source.html#l00032">SafetySystem.h:32</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -175,10 +188,10 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="SafetySystem_8cpp_source.html#l00007">7</a> of file <a class="el" href="SafetySystem_8cpp_source.html">SafetySystem.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    7</span>                        {</div>
 <div class="line"><span class="lineno">    8</span>    <span class="comment">// Initialize interface output</span></div>
-<div class="line"><span class="lineno">    9</span>    ams_-&gt;<a class="code hl_function" href="classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c">set_start_state</a>();    </div>
-<div class="line"><span class="lineno">   10</span>    wd_-&gt;<a class="code hl_function" href="classWatchdogInterface.html#a3199f96fdab9350d72f8cb73388dc4cf">set_start_state</a>();</div>
+<div class="line"><span class="lineno">    9</span>    <a class="code hl_variable" href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">ams_</a>-&gt;<a class="code hl_function" href="classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c">set_start_state</a>();    </div>
+<div class="line"><span class="lineno">   10</span>    <a class="code hl_variable" href="classSafetySystem.html#a1bca879af5f476fd3f4a3e93e3a8397f">wd_</a>-&gt;<a class="code hl_function" href="classWatchdogInterface.html#a3199f96fdab9350d72f8cb73388dc4cf">set_start_state</a>();</div>
 <div class="line"><span class="lineno">   11</span>    <span class="comment">// Initial state is ok</span></div>
-<div class="line"><span class="lineno">   12</span>    software_is_ok = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   12</span>    <a class="code hl_variable" href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">software_is_ok</a> = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   13</span>}</div>
 <div class="ttc" id="aclassAMSInterface_html_ad353d459d4ec31cab48d94481d0c622c"><div class="ttname"><a href="classAMSInterface.html#ad353d459d4ec31cab48d94481d0c622c">AMSInterface::set_start_state</a></div><div class="ttdeci">void set_start_state()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00012">AMSInterface.cpp:12</a></div></div>
 <div class="ttc" id="aclassWatchdogInterface_html_a3199f96fdab9350d72f8cb73388dc4cf"><div class="ttname"><a href="classWatchdogInterface.html#a3199f96fdab9350d72f8cb73388dc4cf">WatchdogInterface::set_start_state</a></div><div class="ttdeci">void set_start_state()</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00014">WatchdogInterface.cpp:14</a></div></div>
@@ -203,28 +216,101 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="SafetySystem_8cpp_source.html#l00016">16</a> of file <a class="el" href="SafetySystem_8cpp_source.html">SafetySystem.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   16</span>                                                          {</div>
-<div class="line"><span class="lineno">   17</span>    software_is_ok = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   17</span>    <a class="code hl_variable" href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">software_is_ok</a> = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   18</span> </div>
 <div class="line"><span class="lineno">   19</span>    <span class="comment">// If AMS heartbeat is not received within reasonable interval</span></div>
 <div class="line"><span class="lineno">   20</span>    <span class="comment">// Set software is not ok</span></div>
-<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">if</span> (!ams_-&gt;<a class="code hl_function" href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">heartbeat_received</a>(tick.millis)) {</div>
+<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">ams_</a>-&gt;<a class="code hl_function" href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">heartbeat_received</a>(tick.millis)) {</div>
 <div class="line"><span class="lineno">   22</span>        <span class="comment">// Serial.println(&quot;heartbeat not received&quot;);</span></div>
-<div class="line"><span class="lineno">   23</span>        software_is_ok = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   23</span>        <a class="code hl_variable" href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">software_is_ok</a> = <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">   24</span>    }</div>
-<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">if</span> (software_is_ok) {</div>
-<div class="line"><span class="lineno">   26</span>        ams_-&gt;<a class="code hl_function" href="classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced">set_state_ok_high</a>(<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classSafetySystem.html#afb504aac97cdbd8d3faf7b5ae8f003e8">software_is_ok</a>) {</div>
+<div class="line"><span class="lineno">   26</span>        <a class="code hl_variable" href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">ams_</a>-&gt;<a class="code hl_function" href="classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced">set_state_ok_high</a>(<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">   27</span>    }</div>
 <div class="line"><span class="lineno">   28</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   29</span>        ams_-&gt;<a class="code hl_function" href="classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced">set_state_ok_high</a>(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927">ams_</a>-&gt;<a class="code hl_function" href="classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced">set_state_ok_high</a>(<span class="keyword">false</span>);</div>
 <div class="line"><span class="lineno">   30</span>    }</div>
 <div class="line"><span class="lineno">   31</span> </div>
 <div class="line"><span class="lineno">   32</span>    <span class="comment">// Kick watchdog every software cycle</span></div>
-<div class="line"><span class="lineno">   33</span>    wd_-&gt;<a class="code hl_function" href="classWatchdogInterface.html#a6199fb5598b025090847c5de996eac15">kick_watchdog</a>(tick.millis);</div>
+<div class="line"><span class="lineno">   33</span>    <a class="code hl_variable" href="classSafetySystem.html#a1bca879af5f476fd3f4a3e93e3a8397f">wd_</a>-&gt;<a class="code hl_function" href="classWatchdogInterface.html#a6199fb5598b025090847c5de996eac15">kick_watchdog</a>(tick.millis);</div>
 <div class="line"><span class="lineno">   34</span>}</div>
 <div class="ttc" id="aclassAMSInterface_html_a688f8b01c45d8f0f77e2d1353ea618de"><div class="ttname"><a href="classAMSInterface.html#a688f8b01c45d8f0f77e2d1353ea618de">AMSInterface::heartbeat_received</a></div><div class="ttdeci">bool heartbeat_received(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00030">AMSInterface.cpp:30</a></div></div>
 <div class="ttc" id="aclassAMSInterface_html_a908ea211fcfb1673d7ea8532da95aced"><div class="ttname"><a href="classAMSInterface.html#a908ea211fcfb1673d7ea8532da95aced">AMSInterface::set_state_ok_high</a></div><div class="ttdeci">void set_state_ok_high(bool ok_high)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00019">AMSInterface.cpp:19</a></div></div>
 <div class="ttc" id="aclassWatchdogInterface_html_a6199fb5598b025090847c5de996eac15"><div class="ttname"><a href="classWatchdogInterface.html#a6199fb5598b025090847c5de996eac15">WatchdogInterface::kick_watchdog</a></div><div class="ttdeci">void kick_watchdog(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00021">WatchdogInterface.cpp:21</a></div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aba7787a5ea370fe285cdc43c7549e927" name="aba7787a5ea370fe285cdc43c7549e927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba7787a5ea370fe285cdc43c7549e927">&#9670;&#160;</a></span>ams_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAMSInterface.html">AMSInterface</a>* SafetySystem::ams_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SafetySystem_8h_source.html#l00028">28</a> of file <a class="el" href="SafetySystem_8h_source.html">SafetySystem.h</a>.</p>
+
+</div>
+</div>
+<a id="afb504aac97cdbd8d3faf7b5ae8f003e8" name="afb504aac97cdbd8d3faf7b5ae8f003e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb504aac97cdbd8d3faf7b5ae8f003e8">&#9670;&#160;</a></span>software_is_ok</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SafetySystem::software_is_ok</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SafetySystem_8h_source.html#l00032">32</a> of file <a class="el" href="SafetySystem_8h_source.html">SafetySystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a1bca879af5f476fd3f4a3e93e3a8397f" name="a1bca879af5f476fd3f4a3e93e3a8397f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bca879af5f476fd3f4a3e93e3a8397f">&#9670;&#160;</a></span>wd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classWatchdogInterface.html">WatchdogInterface</a>* SafetySystem::wd_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SafetySystem_8h_source.html#l00029">29</a> of file <a class="el" href="SafetySystem_8h_source.html">SafetySystem.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

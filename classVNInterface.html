@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classVNInterface-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">VNInterface&lt; message_queue &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -112,6 +113,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a85f684af65c7120e2f7fac2381e23c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e8dd67c8c5b9e5767ec217ffd53a6cc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVNInterface.html#a8e8dd67c8c5b9e5767ec217ffd53a6cc">get_id</a> ()</td></tr>
 <tr class="separator:a8e8dd67c8c5b9e5767ec217ffd53a6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:abbd91691dff779b70bbfe333d415834c"><td class="memItemLeft" align="right" valign="top">message_queue *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVNInterface.html#abbd91691dff779b70bbfe333d415834c">msg_queue_</a></td></tr>
+<tr class="separator:abbd91691dff779b70bbfe333d415834c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2089a80dd4901ea7f63f1dbf1125431"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVNInterface.html#aa2089a80dd4901ea7f63f1dbf1125431">can_id_</a></td></tr>
+<tr class="separator:aa2089a80dd4901ea7f63f1dbf1125431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64659f9ac2b4899007a108dda186a29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvector__nav.html">vector_nav</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVNInterface.html#ab64659f9ac2b4899007a108dda186a29">vn_data</a></td></tr>
+<tr class="separator:ab64659f9ac2b4899007a108dda186a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename message_queue&gt;<br />
@@ -146,8 +156,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html#l00035">35</a> of file <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   35</span>                                                 {</div>
-<div class="line"><span class="lineno">   36</span>        msg_queue_ = msg_output_queue;</div>
+<div class="line"><span class="lineno">   36</span>        <a class="code hl_variable" href="classVNInterface.html#abbd91691dff779b70bbfe333d415834c">msg_queue_</a> = msg_output_queue;</div>
 <div class="line"><span class="lineno">   37</span>    };</div>
+<div class="ttc" id="aclassVNInterface_html_abbd91691dff779b70bbfe333d415834c"><div class="ttname"><a href="classVNInterface.html#abbd91691dff779b70bbfe333d415834c">VNInterface::msg_queue_</a></div><div class="ttdeci">message_queue * msg_queue_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2VectornavInterface_8h_source.html#l00030">VectornavInterface.h:30</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -179,7 +190,7 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="mock__interfaces_2VectornavInterface_8h_source.html#l00033">33</a> of file <a class="el" href="mock__interfaces_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   33</span>                                                 {</div>
-<div class="line"><span class="lineno">   34</span>        msg_queue_ = msg_output_queue;</div>
+<div class="line"><span class="lineno">   34</span>        <a class="code hl_variable" href="classVNInterface.html#abbd91691dff779b70bbfe333d415834c">msg_queue_</a> = msg_output_queue;</div>
 <div class="line"><span class="lineno">   35</span>    };</div>
 </div><!-- fragment -->
 </div>
@@ -211,7 +222,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html#l00056">56</a> of file <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   56</span>{ <span class="keywordflow">return</span> can_id_;};</div>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classVNInterface.html#aa2089a80dd4901ea7f63f1dbf1125431">can_id_</a>;};</div>
+<div class="ttc" id="aclassVNInterface_html_aa2089a80dd4901ea7f63f1dbf1125431"><div class="ttname"><a href="classVNInterface.html#aa2089a80dd4901ea7f63f1dbf1125431">VNInterface::can_id_</a></div><div class="ttdeci">uint32_t can_id_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2VectornavInterface_8h_source.html#l00031">VectornavInterface.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -241,7 +253,7 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="mock__interfaces_2VectornavInterface_8h_source.html#l00041">41</a> of file <a class="el" href="mock__interfaces_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>{ <span class="keywordflow">return</span> can_id_;};</div>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classVNInterface.html#aa2089a80dd4901ea7f63f1dbf1125431">can_id_</a>;};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -480,6 +492,85 @@ template&lt;typename message_queue &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa2089a80dd4901ea7f63f1dbf1125431" name="aa2089a80dd4901ea7f63f1dbf1125431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2089a80dd4901ea7f63f1dbf1125431">&#9670;&#160;</a></span>can_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="classVNInterface.html">VNInterface</a>&lt; message_queue &gt;::can_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html#l00031">31</a> of file <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="abbd91691dff779b70bbfe333d415834c" name="abbd91691dff779b70bbfe333d415834c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd91691dff779b70bbfe333d415834c">&#9670;&#160;</a></span>msg_queue_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">message_queue * <a class="el" href="classVNInterface.html">VNInterface</a>&lt; message_queue &gt;::msg_queue_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html#l00030">30</a> of file <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ab64659f9ac2b4899007a108dda186a29" name="ab64659f9ac2b4899007a108dda186a29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64659f9ac2b4899007a108dda186a29">&#9670;&#160;</a></span>vn_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structvector__nav.html">vector_nav</a> <a class="el" href="classVNInterface.html">VNInterface</a>&lt; message_queue &gt;::vn_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html#l00032">32</a> of file <a class="el" href="interfaces_2include_2VectornavInterface_8h_source.html">VectornavInterface.h</a>.</p>
 
 </div>
 </div>

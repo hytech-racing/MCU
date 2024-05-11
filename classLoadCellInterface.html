@@ -71,6 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classLoadCellInterface-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">LoadCellInterface Class Reference</div></div>
 </div><!--header-->
@@ -86,6 +88,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8f9422de01903b65ce269363e09ef5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f81f21773d2eec5053b345ebbbd4895"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLoadCellInterfaceOutput__s.html">LoadCellInterfaceOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">getLoadCellForces</a> ()</td></tr>
 <tr class="separator:a3f81f21773d2eec5053b345ebbbd4895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9656b63f25c6b2bdfdbfb9feedbf8b8f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a9656b63f25c6b2bdfdbfb9feedbf8b8f">FIRTaps_</a> [<a class="el" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>]</td></tr>
+<tr class="separator:a9656b63f25c6b2bdfdbfb9feedbf8b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90af9ed0ad9ad083d06f4d41e4e24b4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a> = 0</td></tr>
+<tr class="separator:a90af9ed0ad9ad083d06f4d41e4e24b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99333c972a6b7986c92445c863149b33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structveh__vec.html">veh_vec</a>&lt; <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">loadCellConversions_</a></td></tr>
+<tr class="separator:a99333c972a6b7986c92445c863149b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5292d4aa63f3000f4a8ce310ba3cf25d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structveh__vec.html">veh_vec</a>&lt; float[<a class="el" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a></td></tr>
+<tr class="separator:a5292d4aa63f3000f4a8ce310ba3cf25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e38b0915f26c821a3a5f0f58a84519"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structveh__vec.html">veh_vec</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a></td></tr>
+<tr class="separator:a31e38b0915f26c821a3a5f0f58a84519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4092f24cdc13e267939dbacd6c19bbe7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#a4092f24cdc13e267939dbacd6c19bbe7">FIRSaturated_</a> = false</td></tr>
+<tr class="separator:a4092f24cdc13e267939dbacd6c19bbe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ae1ac64759a39812e69438b7dfe7b264d"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a> = 5</td></tr>
+<tr class="separator:ae1ac64759a39812e69438b7dfe7b264d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -138,11 +160,14 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="LoadCellInterface_8cpp_source.html#l00035">35</a> of file <a class="el" href="LoadCellInterface_8cpp_source.html">LoadCellInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   36</span>{</div>
 <div class="line"><span class="lineno">   37</span>    <span class="keywordflow">return</span> (<a class="code hl_struct" href="structLoadCellInterfaceOutput__s.html">LoadCellInterfaceOutput_s</a>) {</div>
-<div class="line"><span class="lineno">   38</span>        .loadCellForcesFiltered = loadCellForcesFiltered_,</div>
-<div class="line"><span class="lineno">   39</span>        .loadCellConversions = loadCellConversions_,</div>
-<div class="line"><span class="lineno">   40</span>        .FIRSaturated = FIRSaturated_</div>
+<div class="line"><span class="lineno">   38</span>        .loadCellForcesFiltered = <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>,</div>
+<div class="line"><span class="lineno">   39</span>        .loadCellConversions = <a class="code hl_variable" href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">loadCellConversions_</a>,</div>
+<div class="line"><span class="lineno">   40</span>        .FIRSaturated = <a class="code hl_variable" href="classLoadCellInterface.html#a4092f24cdc13e267939dbacd6c19bbe7">FIRSaturated_</a></div>
 <div class="line"><span class="lineno">   41</span>    };</div>
 <div class="line"><span class="lineno">   42</span>}</div>
+<div class="ttc" id="aclassLoadCellInterface_html_a31e38b0915f26c821a3a5f0f58a84519"><div class="ttname"><a href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">LoadCellInterface::loadCellForcesFiltered_</a></div><div class="ttdeci">veh_vec&lt; float &gt; loadCellForcesFiltered_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00056">LoadCellInterface.h:56</a></div></div>
+<div class="ttc" id="aclassLoadCellInterface_html_a4092f24cdc13e267939dbacd6c19bbe7"><div class="ttname"><a href="classLoadCellInterface.html#a4092f24cdc13e267939dbacd6c19bbe7">LoadCellInterface::FIRSaturated_</a></div><div class="ttdeci">bool FIRSaturated_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00057">LoadCellInterface.h:57</a></div></div>
+<div class="ttc" id="aclassLoadCellInterface_html_a99333c972a6b7986c92445c863149b33"><div class="ttname"><a href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">LoadCellInterface::loadCellConversions_</a></div><div class="ttdeci">veh_vec&lt; AnalogConversion_s &gt; loadCellConversions_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00054">LoadCellInterface.h:54</a></div></div>
 <div class="ttc" id="astructLoadCellInterfaceOutput__s_html"><div class="ttname"><a href="structLoadCellInterfaceOutput__s.html">LoadCellInterfaceOutput_s</a></div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00018">LoadCellInterface.h:19</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -166,34 +191,38 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="LoadCellInterface_8cpp_source.html#l00003">3</a> of file <a class="el" href="LoadCellInterface_8cpp_source.html">LoadCellInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    4</span>{</div>
 <div class="line"><span class="lineno">    5</span>    <span class="comment">// filter runs at 100hz</span></div>
-<div class="line"><span class="lineno">    6</span>    loadCellConversions_.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a712a3e24aba2bd1a9701f27b15858d5e">FLConversion</a>;</div>
-<div class="line"><span class="lineno">    7</span>    loadCellConversions_.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24">FRConversion</a>;</div>
-<div class="line"><span class="lineno">    8</span>    loadCellConversions_.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#aab38d277dbc79af17f2f3af4d72c63fc">RLConversion</a>;</div>
-<div class="line"><span class="lineno">    9</span>    loadCellConversions_.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a">RRConversion</a>;</div>
+<div class="line"><span class="lineno">    6</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">loadCellConversions_</a>.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a712a3e24aba2bd1a9701f27b15858d5e">FLConversion</a>;</div>
+<div class="line"><span class="lineno">    7</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">loadCellConversions_</a>.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24">FRConversion</a>;</div>
+<div class="line"><span class="lineno">    8</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">loadCellConversions_</a>.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#aab38d277dbc79af17f2f3af4d72c63fc">RLConversion</a>;</div>
+<div class="line"><span class="lineno">    9</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a99333c972a6b7986c92445c863149b33">loadCellConversions_</a>.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a> = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a">RRConversion</a>;</div>
 <div class="line"><span class="lineno">   10</span> </div>
-<div class="line"><span class="lineno">   11</span>    loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a>[FIRCircBufferHead] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a712a3e24aba2bd1a9701f27b15858d5e">FLConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
-<div class="line"><span class="lineno">   12</span>    loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a>[FIRCircBufferHead] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24">FRConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
-<div class="line"><span class="lineno">   13</span>    loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a>[FIRCircBufferHead] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#aab38d277dbc79af17f2f3af4d72c63fc">RLConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
-<div class="line"><span class="lineno">   14</span>    loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a>[FIRCircBufferHead] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a">RRConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
+<div class="line"><span class="lineno">   11</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a>[<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a>] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a712a3e24aba2bd1a9701f27b15858d5e">FLConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
+<div class="line"><span class="lineno">   12</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a>[<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a>] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24">FRConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
+<div class="line"><span class="lineno">   13</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a>[<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a>] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#aab38d277dbc79af17f2f3af4d72c63fc">RLConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
+<div class="line"><span class="lineno">   14</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a>[<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a>] = intake.<a class="code hl_variable" href="structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a">RRConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>;</div>
 <div class="line"><span class="lineno">   15</span> </div>
-<div class="line"><span class="lineno">   16</span>    loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a> = 0.0f;</div>
-<div class="line"><span class="lineno">   17</span>    loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a> = 0.0f;</div>
-<div class="line"><span class="lineno">   18</span>    loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a> = 0.0f;</div>
-<div class="line"><span class="lineno">   19</span>    loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a> = 0.0f;</div>
+<div class="line"><span class="lineno">   16</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a> = 0.0f;</div>
+<div class="line"><span class="lineno">   17</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a> = 0.0f;</div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a> = 0.0f;</div>
+<div class="line"><span class="lineno">   19</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a> = 0.0f;</div>
 <div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> FIROffset = 0; FIROffset &lt; numFIRTaps_; FIROffset++)</div>
+<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> FIROffset = 0; FIROffset &lt; <a class="code hl_variable" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>; FIROffset++)</div>
 <div class="line"><span class="lineno">   22</span>    {</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordtype">int</span> index = (FIRCircBufferHead + FIROffset) % numFIRTaps_;</div>
-<div class="line"><span class="lineno">   24</span>        loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a> += loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a>[index] * FIRTaps_[FIROffset];</div>
-<div class="line"><span class="lineno">   25</span>        loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a> += loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a>[index] * FIRTaps_[FIROffset];</div>
-<div class="line"><span class="lineno">   26</span>        loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a> += loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a>[index] * FIRTaps_[FIROffset];</div>
-<div class="line"><span class="lineno">   27</span>        loadCellForcesFiltered_.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a> += loadCellForcesUnfiltered_.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a>[index] * FIRTaps_[FIROffset];</div>
+<div class="line"><span class="lineno">   23</span>        <span class="keywordtype">int</span> index = (<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a> + FIROffset) % <a class="code hl_variable" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>;</div>
+<div class="line"><span class="lineno">   24</span>        <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a> += <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a6c2a6889d9dd08e7708ff73eb807e9ea">FL</a>[index] * <a class="code hl_variable" href="classLoadCellInterface.html#a9656b63f25c6b2bdfdbfb9feedbf8b8f">FIRTaps_</a>[FIROffset];</div>
+<div class="line"><span class="lineno">   25</span>        <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a> += <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">FR</a>[index] * <a class="code hl_variable" href="classLoadCellInterface.html#a9656b63f25c6b2bdfdbfb9feedbf8b8f">FIRTaps_</a>[FIROffset];</div>
+<div class="line"><span class="lineno">   26</span>        <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a> += <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984">RL</a>[index] * <a class="code hl_variable" href="classLoadCellInterface.html#a9656b63f25c6b2bdfdbfb9feedbf8b8f">FIRTaps_</a>[FIROffset];</div>
+<div class="line"><span class="lineno">   27</span>        <a class="code hl_variable" href="classLoadCellInterface.html#a31e38b0915f26c821a3a5f0f58a84519">loadCellForcesFiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a> += <a class="code hl_variable" href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">loadCellForcesUnfiltered_</a>.<a class="code hl_variable" href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">RR</a>[index] * <a class="code hl_variable" href="classLoadCellInterface.html#a9656b63f25c6b2bdfdbfb9feedbf8b8f">FIRTaps_</a>[FIROffset];</div>
 <div class="line"><span class="lineno">   28</span>    }</div>
 <div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    FIRCircBufferHead = (FIRCircBufferHead + 1) % numFIRTaps_;</div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> (FIRCircBufferHead == numFIRTaps_ - 1)</div>
-<div class="line"><span class="lineno">   32</span>        FIRSaturated_ = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   30</span>    <a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a> = (<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a> + 1) % <a class="code hl_variable" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>;</div>
+<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">FIRCircBufferHead</a> == <a class="code hl_variable" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a> - 1)</div>
+<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="classLoadCellInterface.html#a4092f24cdc13e267939dbacd6c19bbe7">FIRSaturated_</a> = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   33</span>}</div>
+<div class="ttc" id="aclassLoadCellInterface_html_a5292d4aa63f3000f4a8ce310ba3cf25d"><div class="ttname"><a href="classLoadCellInterface.html#a5292d4aa63f3000f4a8ce310ba3cf25d">LoadCellInterface::loadCellForcesUnfiltered_</a></div><div class="ttdeci">veh_vec&lt; float[numFIRTaps_]&gt; loadCellForcesUnfiltered_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00055">LoadCellInterface.h:55</a></div></div>
+<div class="ttc" id="aclassLoadCellInterface_html_a90af9ed0ad9ad083d06f4d41e4e24b4a"><div class="ttname"><a href="classLoadCellInterface.html#a90af9ed0ad9ad083d06f4d41e4e24b4a">LoadCellInterface::FIRCircBufferHead</a></div><div class="ttdeci">int FIRCircBufferHead</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00053">LoadCellInterface.h:53</a></div></div>
+<div class="ttc" id="aclassLoadCellInterface_html_a9656b63f25c6b2bdfdbfb9feedbf8b8f"><div class="ttname"><a href="classLoadCellInterface.html#a9656b63f25c6b2bdfdbfb9feedbf8b8f">LoadCellInterface::FIRTaps_</a></div><div class="ttdeci">float FIRTaps_[numFIRTaps_]</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00045">LoadCellInterface.h:45</a></div></div>
+<div class="ttc" id="aclassLoadCellInterface_html_ae1ac64759a39812e69438b7dfe7b264d"><div class="ttname"><a href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">LoadCellInterface::numFIRTaps_</a></div><div class="ttdeci">static const int numFIRTaps_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00044">LoadCellInterface.h:44</a></div></div>
 <div class="ttc" id="astructAnalogConversion__s_html_a1873377ed9fcaa212ebe08ef2aa6b6af"><div class="ttname"><a href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">AnalogConversion_s::conversion</a></div><div class="ttdeci">float conversion</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00016">AnalogSensorsInterface.h:16</a></div></div>
 <div class="ttc" id="astructLoadCellInterfaceTick__s_html_a4cdd38cc38d6a36845523356f2dad16a"><div class="ttname"><a href="structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a">LoadCellInterfaceTick_s::RRConversion</a></div><div class="ttdeci">const AnalogConversion_s &amp; RRConversion</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00015">LoadCellInterface.h:15</a></div></div>
 <div class="ttc" id="astructLoadCellInterfaceTick__s_html_a68923c22a1cd58e9ee81946ee8eb4b24"><div class="ttname"><a href="structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24">LoadCellInterfaceTick_s::FRConversion</a></div><div class="ttdeci">const AnalogConversion_s &amp; FRConversion</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2LoadCellInterface_8h_source.html#l00013">LoadCellInterface.h:13</a></div></div>
@@ -204,6 +233,183 @@ Public Member Functions</h2></td></tr>
 <div class="ttc" id="astructveh__vec_html_aa3a75ad1f1d1d78c14ffff2b6fe55de3"><div class="ttname"><a href="structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3">veh_vec::RR</a></div><div class="ttdeci">T RR</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00020">Utility.h:20</a></div></div>
 <div class="ttc" id="astructveh__vec_html_afb22022daf1059305f77f28a0da1cf11"><div class="ttname"><a href="structveh__vec.html#afb22022daf1059305f77f28a0da1cf11">veh_vec::FR</a></div><div class="ttdeci">T FR</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00018">Utility.h:18</a></div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a90af9ed0ad9ad083d06f4d41e4e24b4a" name="a90af9ed0ad9ad083d06f4d41e4e24b4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90af9ed0ad9ad083d06f4d41e4e24b4a">&#9670;&#160;</a></span>FIRCircBufferHead</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LoadCellInterface::FIRCircBufferHead = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00053">53</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a4092f24cdc13e267939dbacd6c19bbe7" name="a4092f24cdc13e267939dbacd6c19bbe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4092f24cdc13e267939dbacd6c19bbe7">&#9670;&#160;</a></span>FIRSaturated_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LoadCellInterface::FIRSaturated_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00057">57</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a9656b63f25c6b2bdfdbfb9feedbf8b8f" name="a9656b63f25c6b2bdfdbfb9feedbf8b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9656b63f25c6b2bdfdbfb9feedbf8b8f">&#9670;&#160;</a></span>FIRTaps_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float LoadCellInterface::FIRTaps_[<a class="el" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= </div>
+<div class="line">    {</div>
+<div class="line">        0.07022690881526232,</div>
+<div class="line">        0.27638313122745306,</div>
+<div class="line">        0.408090001549378,</div>
+<div class="line">        0.27638313122745306,</div>
+<div class="line">        0.07022690881526232</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00045">45</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a99333c972a6b7986c92445c863149b33" name="a99333c972a6b7986c92445c863149b33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99333c972a6b7986c92445c863149b33">&#9670;&#160;</a></span>loadCellConversions_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structveh__vec.html">veh_vec</a>&lt;<a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a>&gt; LoadCellInterface::loadCellConversions_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00054">54</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a31e38b0915f26c821a3a5f0f58a84519" name="a31e38b0915f26c821a3a5f0f58a84519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31e38b0915f26c821a3a5f0f58a84519">&#9670;&#160;</a></span>loadCellForcesFiltered_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structveh__vec.html">veh_vec</a>&lt;float&gt; LoadCellInterface::loadCellForcesFiltered_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00056">56</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a5292d4aa63f3000f4a8ce310ba3cf25d" name="a5292d4aa63f3000f4a8ce310ba3cf25d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5292d4aa63f3000f4a8ce310ba3cf25d">&#9670;&#160;</a></span>loadCellForcesUnfiltered_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structveh__vec.html">veh_vec</a>&lt;float[<a class="el" href="classLoadCellInterface.html#ae1ac64759a39812e69438b7dfe7b264d">numFIRTaps_</a>]&gt; LoadCellInterface::loadCellForcesUnfiltered_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00055">55</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ae1ac64759a39812e69438b7dfe7b264d" name="ae1ac64759a39812e69438b7dfe7b264d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ac64759a39812e69438b7dfe7b264d">&#9670;&#160;</a></span>numFIRTaps_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int LoadCellInterface::numFIRTaps_ = 5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html#l00044">44</a> of file <a class="el" href="interfaces_2include_2LoadCellInterface_8h_source.html">LoadCellInterface.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

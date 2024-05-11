@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classBuzzerController-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">BuzzerController Class Reference</div></div>
 </div><!--header-->
@@ -90,6 +91,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a496b8cc572d56caf75a08a1767f26f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada5466ab34c97e68568486f505d1b6e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a> ()</td></tr>
 <tr class="separator:ada5466ab34c97e68568486f505d1b6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a084263378116f46a441dc061de7a2439"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#a084263378116f46a441dc061de7a2439">buzzer_period_</a></td></tr>
+<tr class="separator:a084263378116f46a441dc061de7a2439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ea15a6eea467cf841963add0d447db"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#ae8ea15a6eea467cf841963add0d447db">last_activation_time_</a></td></tr>
+<tr class="separator:ae8ea15a6eea467cf841963add0d447db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d13f14cd6ca8e680439078f36a8237e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a></td></tr>
+<tr class="separator:a4d13f14cd6ca8e680439078f36a8237e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5718983279435473042eb2be22f2289"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBuzzerController.html#ae5718983279435473042eb2be22f2289">dash_buzzer_was_on</a> = false</td></tr>
+<tr class="separator:ae5718983279435473042eb2be22f2289"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -121,8 +133,9 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00009">9</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    9</span>                                                    {</div>
-<div class="line"><span class="lineno">   10</span>        buzzer_period_ = duration_of_activation_ms;</div>
+<div class="line"><span class="lineno">   10</span>        <a class="code hl_variable" href="classBuzzerController.html#a084263378116f46a441dc061de7a2439">buzzer_period_</a> = duration_of_activation_ms;</div>
 <div class="line"><span class="lineno">   11</span>    }</div>
+<div class="ttc" id="aclassBuzzerController_html_a084263378116f46a441dc061de7a2439"><div class="ttname"><a href="classBuzzerController.html#a084263378116f46a441dc061de7a2439">BuzzerController::buzzer_period_</a></div><div class="ttdeci">unsigned long buzzer_period_</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00024">Buzzer.h:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -145,9 +158,11 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00008">8</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    9</span>{</div>
-<div class="line"><span class="lineno">   10</span>    last_activation_time_ = act_time;</div>
-<div class="line"><span class="lineno">   11</span>    buzzer_on_ = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   10</span>    <a class="code hl_variable" href="classBuzzerController.html#ae8ea15a6eea467cf841963add0d447db">last_activation_time_</a> = act_time;</div>
+<div class="line"><span class="lineno">   11</span>    <a class="code hl_variable" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a> = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   12</span>}</div>
+<div class="ttc" id="aclassBuzzerController_html_a4d13f14cd6ca8e680439078f36a8237e"><div class="ttname"><a href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">BuzzerController::buzzer_on_</a></div><div class="ttdeci">bool buzzer_on_</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00026">Buzzer.h:26</a></div></div>
+<div class="ttc" id="aclassBuzzerController_html_ae8ea15a6eea467cf841963add0d447db"><div class="ttname"><a href="classBuzzerController.html#ae8ea15a6eea467cf841963add0d447db">BuzzerController::last_activation_time_</a></div><div class="ttdeci">unsigned long last_activation_time_</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00025">Buzzer.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -176,10 +191,10 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00016">16</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   16</span>                        { </div>
-<div class="line"><span class="lineno">   17</span>        <span class="keywordflow">if</span>(buzzer_on_){</div>
+<div class="line"><span class="lineno">   17</span>        <span class="keywordflow">if</span>(<a class="code hl_variable" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a>){</div>
 <div class="line"><span class="lineno">   18</span>            <span class="comment">// Serial.println(&quot;buzzer should be on now&quot;);</span></div>
 <div class="line"><span class="lineno">   19</span>        }    </div>
-<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">return</span> buzzer_on_; </div>
+<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a>; </div>
 <div class="line"><span class="lineno">   21</span>    }</div>
 </div><!-- fragment -->
 </div>
@@ -201,9 +216,10 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Buzzer_8cpp_source.html#l00003">3</a> of file <a class="el" href="Buzzer_8cpp_source.html">Buzzer.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    4</span>{</div>
-<div class="line"><span class="lineno">    5</span>    buzzer_on_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">    6</span>    dash_buzzer_was_on = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">    5</span>    <a class="code hl_variable" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">    6</span>    <a class="code hl_variable" href="classBuzzerController.html#ae5718983279435473042eb2be22f2289">dash_buzzer_was_on</a> = <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">    7</span>}</div>
+<div class="ttc" id="aclassBuzzerController_html_ae5718983279435473042eb2be22f2289"><div class="ttname"><a href="classBuzzerController.html#ae5718983279435473042eb2be22f2289">BuzzerController::dash_buzzer_was_on</a></div><div class="ttdeci">bool dash_buzzer_was_on</div><div class="ttdef"><b>Definition:</b> <a href="Buzzer_8h_source.html#l00028">Buzzer.h:28</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -237,19 +253,116 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   16</span>                                                                       {</div>
 <div class="line"><span class="lineno">   17</span> </div>
 <div class="line"><span class="lineno">   18</span>    <span class="keywordflow">if</span> (dash_buzzer_on) {</div>
-<div class="line"><span class="lineno">   19</span>        dash_buzzer_was_on = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   19</span>        <a class="code hl_variable" href="classBuzzerController.html#ae5718983279435473042eb2be22f2289">dash_buzzer_was_on</a> = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">   20</span>    }</div>
 <div class="line"><span class="lineno">   21</span> </div>
-<div class="line"><span class="lineno">   22</span>    <span class="keywordtype">bool</span> buzzer_time_up = (curr_time - last_activation_time_) &gt;= buzzer_period_;</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordtype">bool</span> buzzer_time_up = (curr_time - <a class="code hl_variable" href="classBuzzerController.html#ae8ea15a6eea467cf841963add0d447db">last_activation_time_</a>) &gt;= <a class="code hl_variable" href="classBuzzerController.html#a084263378116f46a441dc061de7a2439">buzzer_period_</a>;</div>
 <div class="line"><span class="lineno">   23</span> </div>
 <div class="line"><span class="lineno">   24</span>    <span class="comment">//buzzer only turns off if the buzzer time is up and dash buzzer did turn on</span></div>
-<div class="line"><span class="lineno">   25</span>    buzzer_on_ = !(buzzer_time_up &amp;&amp; dash_buzzer_was_on);</div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_variable" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a> = !(buzzer_time_up &amp;&amp; <a class="code hl_variable" href="classBuzzerController.html#ae5718983279435473042eb2be22f2289">dash_buzzer_was_on</a>);</div>
 <div class="line"><span class="lineno">   26</span> </div>
 <div class="line"><span class="lineno">   27</span>    <span class="comment">// only returns true (done) when the buzzer is finished buzzing</span></div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">return</span> (!buzzer_on_ &amp;&amp; !dash_buzzer_on);</div>
+<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">return</span> (!<a class="code hl_variable" href="classBuzzerController.html#a4d13f14cd6ca8e680439078f36a8237e">buzzer_on_</a> &amp;&amp; !dash_buzzer_on);</div>
 <div class="line"><span class="lineno">   29</span>    </div>
 <div class="line"><span class="lineno">   30</span>}</div>
 </div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4d13f14cd6ca8e680439078f36a8237e" name="a4d13f14cd6ca8e680439078f36a8237e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d13f14cd6ca8e680439078f36a8237e">&#9670;&#160;</a></span>buzzer_on_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BuzzerController::buzzer_on_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00026">26</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+
+</div>
+</div>
+<a id="a084263378116f46a441dc061de7a2439" name="a084263378116f46a441dc061de7a2439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a084263378116f46a441dc061de7a2439">&#9670;&#160;</a></span>buzzer_period_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long BuzzerController::buzzer_period_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00024">24</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+
+</div>
+</div>
+<a id="ae5718983279435473042eb2be22f2289" name="ae5718983279435473042eb2be22f2289"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5718983279435473042eb2be22f2289">&#9670;&#160;</a></span>dash_buzzer_was_on</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BuzzerController::dash_buzzer_was_on = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00028">28</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+
+</div>
+</div>
+<a id="ae8ea15a6eea467cf841963add0d447db" name="ae8ea15a6eea467cf841963add0d447db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ea15a6eea467cf841963add0d447db">&#9670;&#160;</a></span>last_activation_time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long BuzzerController::last_activation_time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Buzzer_8h_source.html#l00025">25</a> of file <a class="el" href="Buzzer_8h_source.html">Buzzer.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

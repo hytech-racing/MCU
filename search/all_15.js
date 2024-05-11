@@ -1,14 +1,21 @@
 var searchData=
 [
-  ['waiting_5fready_5fto_5fdrive_5fsound_0',['WAITING_READY_TO_DRIVE_SOUND',['../MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1ca187e8dbb3b3e0f98e660243e8089d54f',1,'MCUStateMachine.h']]],
-  ['watchdog_5finput_1',['WATCHDOG_INPUT',['../MCU__rev15__defs_8h.html#a2e4da32aa1ef69980b1ee0afb899862f',1,'MCU_rev15_defs.h']]],
-  ['watchdog_5finterface_5ftest_2eh_2',['Watchdog_interface_test.h',['../Watchdog__interface__test_8h.html',1,'']]],
-  ['watchdog_5fkick_5finterval_3',['WATCHDOG_KICK_INTERVAL',['../interfaces_2include_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26',1,'WATCHDOG_KICK_INTERVAL():&#160;WatchdogInterface.h'],['../mock__interfaces_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26',1,'WATCHDOG_KICK_INTERVAL():&#160;WatchdogInterface.h']]],
-  ['watchdoginterface_4',['WatchdogInterface',['../classWatchdogInterface.html',1,'WatchdogInterface'],['../classWatchdogInterface.html#af72ba190ba5c29ce541799267bec971a',1,'WatchdogInterface::WatchdogInterface(int wd_input_pin)'],['../classWatchdogInterface.html#af72ba190ba5c29ce541799267bec971a',1,'WatchdogInterface::WatchdogInterface(int wd_input_pin)']]],
-  ['watchdoginterface_2ecpp_5',['WatchdogInterface.cpp',['../WatchdogInterface_8cpp.html',1,'']]],
-  ['watchdoginterface_2eh_6',['WatchdogInterface.h',['../interfaces_2include_2WatchdogInterface_8h.html',1,'(Global Namespace)'],['../mock__interfaces_2WatchdogInterface_8h.html',1,'(Global Namespace)']]],
-  ['wd_5finterface_7',['wd_interface',['../src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb',1,'main.cpp']]],
-  ['wheel_5fdiameter_8',['WHEEL_DIAMETER',['../PhysicalParameters_8h.html#a8f307256fa2a407634b97cf749a54a6c',1,'PhysicalParameters.h']]],
-  ['write_9',['write',['../classDashboardInterface.html#a72f1a5c0cc0b5227a05041003afa8765',1,'DashboardInterface']]],
-  ['writeout_5f_10',['writeout_',['../classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61',1,'BaseLaunchController']]]
+  ['vector_5fnav_0',['vector_nav',['../structvector__nav.html',1,'']]],
+  ['vectornavinterface_2eh_1',['VectornavInterface.h',['../interfaces_2include_2VectornavInterface_8h.html',1,'(Global Namespace)'],['../mock__interfaces_2VectornavInterface_8h.html',1,'(Global Namespace)']]],
+  ['veh_5fvec_2',['veh_vec',['../structveh__vec.html',1,'']]],
+  ['veh_5fvec_3c_20analogconversion_5fs_20_3e_3',['veh_vec&lt; AnalogConversion_s &gt;',['../structveh__vec.html',1,'']]],
+  ['veh_5fvec_3c_20float_20_3e_4',['veh_vec&lt; float &gt;',['../structveh__vec.html',1,'']]],
+  ['veh_5fvec_3c_20float_5bnumfirtaps_5f_5d_3e_5',['veh_vec&lt; float[numFIRTaps_]&gt;',['../structveh__vec.html',1,'']]],
+  ['vehicle_5fmath_5foffset_5fms_5f_6',['vehicle_math_offset_ms_',['../classCASESystem.html#a9958e6677e029354df7488e05c484ac7',1,'CASESystem']]],
+  ['vel_5fdist_5flookup_7',['vel_dist_lookup',['../accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca',1,'accel_lookup.h']]],
+  ['velocity_5fx_8',['velocity_x',['../structvector__nav.html#aae1d0320b2a6dafbd439483081ca736c',1,'vector_nav']]],
+  ['velocity_5fy_9',['velocity_y',['../structvector__nav.html#a6ea733e4de75f7fd892d9f10aeadf8c9',1,'vector_nav']]],
+  ['velocity_5fz_10',['velocity_z',['../structvector__nav.html#ae9ae7fbd64c06beab86498f682083f88',1,'vector_nav']]],
+  ['vn_5factive_5fstart_5ftime_5f_11',['vn_active_start_time_',['../classCASESystem.html#a16d82cc132ed930dbec67cff827d4364',1,'CASESystem']]],
+  ['vn_5fdata_12',['vn_data',['../classVNInterface.html#ab64659f9ac2b4899007a108dda186a29',1,'VNInterface']]],
+  ['vn_5finterface_13',['vn_interface',['../structCANInterfaces.html#a533f1756091e5af750d5d4a7af8b7fb2',1,'CANInterfaces']]],
+  ['vn_5fstatus_14',['vn_status',['../structvector__nav.html#a7efb0220eb0330aa7f48d84d03de65bb',1,'vector_nav']]],
+  ['vninterface_15',['VNInterface',['../classVNInterface.html#a5a822c2c19b5039408e70c18d925da56',1,'VNInterface::VNInterface(message_queue *msg_output_queue)'],['../classVNInterface.html#a5a822c2c19b5039408e70c18d925da56',1,'VNInterface::VNInterface(message_queue *msg_output_queue)'],['../classVNInterface.html',1,'VNInterface&lt; message_queue &gt;']]],
+  ['vninterface_3c_20circular_5fbuffer_20_3e_16',['VNInterface&lt; circular_buffer &gt;',['../classVNInterface.html',1,'']]],
+  ['voltage_5f_17',['voltage_',['../classInverterMock.html#af4be6e861940919af68a740562a1f87f',1,'InverterMock']]]
 ];

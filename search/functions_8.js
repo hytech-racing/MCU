@@ -10,6 +10,6 @@ var searchData=
   ['inverterinterface_7',['InverterInterface',['../classInverterInterface.html#ae2accd950363cbaa6f5f3aecaaa0a945',1,'InverterInterface']]],
   ['invertermock_8',['InverterMock',['../classInverterMock.html#a622b453ca0c341ac8f3064176ab28d87',1,'InverterMock']]],
   ['inverterresetbuttonpressed_9',['inverterResetButtonPressed',['../classDashboardInterface.html#a4ec0ff9c3d88f508f8c30a784e16caa1',1,'DashboardInterface']]],
-  ['is_5fbelow_5fpack_5fcharge_5fcritical_5flow_5fthresh_10',['is_below_pack_charge_critical_low_thresh',['../classAMSInterface.html#aa537971edb16590f21418d90d5765c86',1,'AMSInterface']]],
-  ['is_5fbelow_5fpack_5fcharge_5fcritical_5ftotal_5fthresh_11',['is_below_pack_charge_critical_total_thresh',['../classAMSInterface.html#a4601cbbd50aff3afde56abd3a0110619',1,'AMSInterface']]]
+  ['is_5fbelow_5fpack_5fcharge_5fcritical_5flow_5fthresh_10',['is_below_pack_charge_critical_low_thresh',['../classAMSInterface.html#aa537971edb16590f21418d90d5765c86',1,'AMSInterface::is_below_pack_charge_critical_low_thresh()'],['../classAMSInterface.html#aa537971edb16590f21418d90d5765c86',1,'AMSInterface::is_below_pack_charge_critical_low_thresh()']]],
+  ['is_5fbelow_5fpack_5fcharge_5fcritical_5ftotal_5fthresh_11',['is_below_pack_charge_critical_total_thresh',['../classAMSInterface.html#a4601cbbd50aff3afde56abd3a0110619',1,'AMSInterface::is_below_pack_charge_critical_total_thresh()'],['../classAMSInterface.html#a4601cbbd50aff3afde56abd3a0110619',1,'AMSInterface::is_below_pack_charge_critical_total_thresh()']]]
 ];

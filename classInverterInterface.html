@@ -71,6 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classInverterInterface-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">InverterInterface&lt; message_queue &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -136,6 +138,54 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a99498f404d473df849fa5524eb429a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9d82741b6d7ab88ebdaf18249fd3c60"><td class="memItemLeft" align="right" valign="top">MC_setpoints_command&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a> ()</td></tr>
 <tr class="separator:aa9d82741b6d7ab88ebdaf18249fd3c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ad885af6ccb45dd94c987d3d9595f013a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ad885af6ccb45dd94c987d3d9595f013a">write_cmd_msg_to_queue_</a> (MC_setpoints_command <a class="el" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)</td></tr>
+<tr class="separator:ad885af6ccb45dd94c987d3d9595f013a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a675fc9463ae849e73d94f0e6101871ad"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a675fc9463ae849e73d94f0e6101871ad">id110_val_</a></td></tr>
+<tr class="separator:a675fc9463ae849e73d94f0e6101871ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad54ebf844d85299679071e5a90216ec0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ad54ebf844d85299679071e5a90216ec0">torque_current_</a></td></tr>
+<tr class="separator:ad54ebf844d85299679071e5a90216ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e525ce92f3c84d13f4a2c808b2c927e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a4e525ce92f3c84d13f4a2c808b2c927e">magnetizing_current_</a></td></tr>
+<tr class="separator:a4e525ce92f3c84d13f4a2c808b2c927e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27fc86caf17e5b089934ddfc30e1922"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ab27fc86caf17e5b089934ddfc30e1922">actual_torque_nm_</a></td></tr>
+<tr class="separator:ab27fc86caf17e5b089934ddfc30e1922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7b74ac37f3022b62cc5012790cc8a00"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ad7b74ac37f3022b62cc5012790cc8a00">speed_</a></td></tr>
+<tr class="separator:ad7b74ac37f3022b62cc5012790cc8a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052c25340a8150804253078b3b3586a2"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a052c25340a8150804253078b3b3586a2">dc_bus_voltage_</a></td></tr>
+<tr class="separator:a052c25340a8150804253078b3b3586a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a235007b5e58c195ab1de79750cf275b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a235007b5e58c195ab1de79750cf275b0">system_ready_</a></td></tr>
+<tr class="separator:a235007b5e58c195ab1de79750cf275b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a852a87cc8a1924cd0cd6ada56ed21095"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a852a87cc8a1924cd0cd6ada56ed21095">error_</a></td></tr>
+<tr class="separator:a852a87cc8a1924cd0cd6ada56ed21095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc29a90884103e933154755296cb939"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#accc29a90884103e933154755296cb939">warning_</a></td></tr>
+<tr class="separator:accc29a90884103e933154755296cb939"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684a907accaf172db79f670e0be24848"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a684a907accaf172db79f670e0be24848">quit_dc_on_</a></td></tr>
+<tr class="separator:a684a907accaf172db79f670e0be24848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada89ac4872beef90596ea0197bf1d09a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ada89ac4872beef90596ea0197bf1d09a">dc_on_</a></td></tr>
+<tr class="separator:ada89ac4872beef90596ea0197bf1d09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ae7e92beddae680b55e555fee75d20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a50ae7e92beddae680b55e555fee75d20">quit_inverter_on_</a></td></tr>
+<tr class="separator:a50ae7e92beddae680b55e555fee75d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab76e1c03780a8e67eee05681cfa03e5a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ab76e1c03780a8e67eee05681cfa03e5a">inverter_on_</a></td></tr>
+<tr class="separator:ab76e1c03780a8e67eee05681cfa03e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53ca0e9ac70f6a1a76dc4655aced097"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ab53ca0e9ac70f6a1a76dc4655aced097">derating_on_</a></td></tr>
+<tr class="separator:ab53ca0e9ac70f6a1a76dc4655aced097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a9468faffb5a4ac74683dd7296754f5"><td class="memItemLeft" align="right" valign="top">MC_setpoints_command&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a7a9468faffb5a4ac74683dd7296754f5">curr_cmd_</a></td></tr>
+<tr class="separator:a7a9468faffb5a4ac74683dd7296754f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf303dcaa3710544b17815ffd68c0b7f"><td class="memItemLeft" align="right" valign="top">MC_temps&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#adf303dcaa3710544b17815ffd68c0b7f">mc_temps_</a></td></tr>
+<tr class="separator:adf303dcaa3710544b17815ffd68c0b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1783f7a44e0b99497c1f22eb2175b2b"><td class="memItemLeft" align="right" valign="top">message_queue *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#ac1783f7a44e0b99497c1f22eb2175b2b">msg_queue_</a></td></tr>
+<tr class="separator:ac1783f7a44e0b99497c1f22eb2175b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b308acd235fe5ff421ddea8467adc1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a08b308acd235fe5ff421ddea8467adc1">can_id_</a></td></tr>
+<tr class="separator:a08b308acd235fe5ff421ddea8467adc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa79d8a09b2dc185c91ef2ae5e313afe4"><td class="memItemLeft" align="right" valign="top">Metro&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#aa79d8a09b2dc185c91ef2ae5e313afe4">timer_can_</a> = Metro(20)</td></tr>
+<tr class="separator:aa79d8a09b2dc185c91ef2ae5e313afe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e277b0041ac7b08f4c29c12d45a5f8b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInverterInterface.html#a7e277b0041ac7b08f4c29c12d45a5f8b">diagnostic_number_</a></td></tr>
+<tr class="separator:a7e277b0041ac7b08f4c29c12d45a5f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename message_queue&gt;<br />
@@ -181,10 +231,13 @@ template&lt;typename message_queue &gt; </div>
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00027">27</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   28</span>    {</div>
 <div class="line"><span class="lineno">   29</span>        <span class="comment">// TODO fix me with correct value from config of inverter</span></div>
-<div class="line"><span class="lineno">   30</span>        id110_val_ = 1.0;</div>
-<div class="line"><span class="lineno">   31</span>        msg_queue_ = msg_output_queue;</div>
-<div class="line"><span class="lineno">   32</span>        can_id_ = can_id;</div>
+<div class="line"><span class="lineno">   30</span>        <a class="code hl_variable" href="classInverterInterface.html#a675fc9463ae849e73d94f0e6101871ad">id110_val_</a> = 1.0;</div>
+<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="classInverterInterface.html#ac1783f7a44e0b99497c1f22eb2175b2b">msg_queue_</a> = msg_output_queue;</div>
+<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="classInverterInterface.html#a08b308acd235fe5ff421ddea8467adc1">can_id_</a> = can_id;</div>
 <div class="line"><span class="lineno">   33</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_a08b308acd235fe5ff421ddea8467adc1"><div class="ttname"><a href="classInverterInterface.html#a08b308acd235fe5ff421ddea8467adc1">InverterInterface::can_id_</a></div><div class="ttdeci">uint32_t can_id_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00150">InverterInterface.h:150</a></div></div>
+<div class="ttc" id="aclassInverterInterface_html_a675fc9463ae849e73d94f0e6101871ad"><div class="ttname"><a href="classInverterInterface.html#a675fc9463ae849e73d94f0e6101871ad">InverterInterface::id110_val_</a></div><div class="ttdeci">float id110_val_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00130">InverterInterface.h:130</a></div></div>
+<div class="ttc" id="aclassInverterInterface_html_ac1783f7a44e0b99497c1f22eb2175b2b"><div class="ttname"><a href="classInverterInterface.html#ac1783f7a44e0b99497c1f22eb2175b2b">InverterInterface::msg_queue_</a></div><div class="ttdeci">message_queue * msg_queue_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00149">InverterInterface.h:149</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -273,8 +326,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00116">116</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  117</span>    {</div>
-<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">return</span> dc_bus_voltage_;</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a052c25340a8150804253078b3b3586a2">dc_bus_voltage_</a>;</div>
 <div class="line"><span class="lineno">  119</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_a052c25340a8150804253078b3b3586a2"><div class="ttname"><a href="classInverterInterface.html#a052c25340a8150804253078b3b3586a2">InverterInterface::dc_bus_voltage_</a></div><div class="ttdeci">uint16_t dc_bus_voltage_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00136">InverterInterface.h:136</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -323,7 +377,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00124">124</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  124</span>{ <span class="keywordflow">return</span> actual_torque_nm_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  124</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#ab27fc86caf17e5b089934ddfc30e1922">actual_torque_nm_</a>; }</div>
+<div class="ttc" id="aclassInverterInterface_html_ab27fc86caf17e5b089934ddfc30e1922"><div class="ttname"><a href="classInverterInterface.html#ab27fc86caf17e5b089934ddfc30e1922">InverterInterface::actual_torque_nm_</a></div><div class="ttdeci">float actual_torque_nm_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00132">InverterInterface.h:132</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -353,7 +408,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00127">127</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  127</span>{ <span class="keywordflow">return</span> curr_cmd_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a7a9468faffb5a4ac74683dd7296754f5">curr_cmd_</a>; }</div>
+<div class="ttc" id="aclassInverterInterface_html_a7a9468faffb5a4ac74683dd7296754f5"><div class="ttname"><a href="classInverterInterface.html#a7a9468faffb5a4ac74683dd7296754f5">InverterInterface::curr_cmd_</a></div><div class="ttdeci">MC_setpoints_command curr_cmd_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00147">InverterInterface.h:147</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -384,8 +440,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00089">89</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   90</span>    {</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> dc_on_;</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#ada89ac4872beef90596ea0197bf1d09a">dc_on_</a>;</div>
 <div class="line"><span class="lineno">   92</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_ada89ac4872beef90596ea0197bf1d09a"><div class="ttname"><a href="classInverterInterface.html#ada89ac4872beef90596ea0197bf1d09a">InverterInterface::dc_on_</a></div><div class="ttdeci">bool dc_on_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00143">InverterInterface.h:143</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -416,8 +473,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00110">110</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  111</span>    {</div>
-<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">return</span> derating_on_;</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#ab53ca0e9ac70f6a1a76dc4655aced097">derating_on_</a>;</div>
 <div class="line"><span class="lineno">  113</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_ab53ca0e9ac70f6a1a76dc4655aced097"><div class="ttname"><a href="classInverterInterface.html#ab53ca0e9ac70f6a1a76dc4655aced097">InverterInterface::derating_on_</a></div><div class="ttdeci">bool derating_on_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00146">InverterInterface.h:146</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -448,8 +506,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00068">68</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   69</span>    {</div>
-<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">return</span> error_;</div>
+<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a852a87cc8a1924cd0cd6ada56ed21095">error_</a>;</div>
 <div class="line"><span class="lineno">   71</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_a852a87cc8a1924cd0cd6ada56ed21095"><div class="ttname"><a href="classInverterInterface.html#a852a87cc8a1924cd0cd6ada56ed21095">InverterInterface::error_</a></div><div class="ttdeci">bool error_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00140">InverterInterface.h:140</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -498,7 +557,7 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00036">36</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   36</span>{ <span class="keywordflow">return</span> can_id_; };</div>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a08b308acd235fe5ff421ddea8467adc1">can_id_</a>; };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -529,8 +588,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00103">103</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  104</span>    {</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">return</span> inverter_on_;</div>
+<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#ab76e1c03780a8e67eee05681cfa03e5a">inverter_on_</a>;</div>
 <div class="line"><span class="lineno">  106</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_ab76e1c03780a8e67eee05681cfa03e5a"><div class="ttname"><a href="classInverterInterface.html#ab76e1c03780a8e67eee05681cfa03e5a">InverterInterface::inverter_on_</a></div><div class="ttdeci">bool inverter_on_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00145">InverterInterface.h:145</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -560,7 +620,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00123">123</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  123</span>{ <span class="keywordflow">return</span> magnetizing_current_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  123</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a4e525ce92f3c84d13f4a2c808b2c927e">magnetizing_current_</a>; }</div>
+<div class="ttc" id="aclassInverterInterface_html_a4e525ce92f3c84d13f4a2c808b2c927e"><div class="ttname"><a href="classInverterInterface.html#a4e525ce92f3c84d13f4a2c808b2c927e">InverterInterface::magnetizing_current_</a></div><div class="ttdeci">float magnetizing_current_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00131">InverterInterface.h:131</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -591,8 +652,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00082">82</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   83</span>    {</div>
-<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">return</span> quit_dc_on_;</div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a684a907accaf172db79f670e0be24848">quit_dc_on_</a>;</div>
 <div class="line"><span class="lineno">   85</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_a684a907accaf172db79f670e0be24848"><div class="ttname"><a href="classInverterInterface.html#a684a907accaf172db79f670e0be24848">InverterInterface::quit_dc_on_</a></div><div class="ttdeci">bool quit_dc_on_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00142">InverterInterface.h:142</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -623,8 +685,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00096">96</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   97</span>    {</div>
-<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">return</span> quit_inverter_on_;</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a50ae7e92beddae680b55e555fee75d20">quit_inverter_on_</a>;</div>
 <div class="line"><span class="lineno">   99</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_a50ae7e92beddae680b55e555fee75d20"><div class="ttname"><a href="classInverterInterface.html#a50ae7e92beddae680b55e555fee75d20">InverterInterface::quit_inverter_on_</a></div><div class="ttdeci">bool quit_inverter_on_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00144">InverterInterface.h:144</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -654,7 +717,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00121">121</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  121</span>{ <span class="keywordflow">return</span> speed_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#ad7b74ac37f3022b62cc5012790cc8a00">speed_</a>; }</div>
+<div class="ttc" id="aclassInverterInterface_html_ad7b74ac37f3022b62cc5012790cc8a00"><div class="ttname"><a href="classInverterInterface.html#ad7b74ac37f3022b62cc5012790cc8a00">InverterInterface::speed_</a></div><div class="ttdeci">int16_t speed_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00135">InverterInterface.h:135</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -684,7 +748,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00126">126</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  126</span>{ <span class="keywordflow">return</span> mc_temps_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#adf303dcaa3710544b17815ffd68c0b7f">mc_temps_</a>; }</div>
+<div class="ttc" id="aclassInverterInterface_html_adf303dcaa3710544b17815ffd68c0b7f"><div class="ttname"><a href="classInverterInterface.html#adf303dcaa3710544b17815ffd68c0b7f">InverterInterface::mc_temps_</a></div><div class="ttdeci">MC_temps mc_temps_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00148">InverterInterface.h:148</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -714,7 +779,8 @@ template&lt;typename message_queue &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00122">122</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  122</span>{ <span class="keywordflow">return</span> torque_current_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#ad54ebf844d85299679071e5a90216ec0">torque_current_</a>; }</div>
+<div class="ttc" id="aclassInverterInterface_html_ad54ebf844d85299679071e5a90216ec0"><div class="ttname"><a href="classInverterInterface.html#ad54ebf844d85299679071e5a90216ec0">InverterInterface::torque_current_</a></div><div class="ttdeci">float torque_current_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00131">InverterInterface.h:131</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -745,8 +811,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00075">75</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   76</span>    {</div>
-<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">return</span> warning_;</div>
+<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#accc29a90884103e933154755296cb939">warning_</a>;</div>
 <div class="line"><span class="lineno">   78</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_accc29a90884103e933154755296cb939"><div class="ttname"><a href="classInverterInterface.html#accc29a90884103e933154755296cb939">InverterInterface::warning_</a></div><div class="ttdeci">bool warning_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00141">InverterInterface.h:141</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -797,8 +864,9 @@ template&lt;typename message_queue &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00061">61</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   62</span>    {</div>
-<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> system_ready_;</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classInverterInterface.html#a235007b5e58c195ab1de79750cf275b0">system_ready_</a>;</div>
 <div class="line"><span class="lineno">   64</span>    }</div>
+<div class="ttc" id="aclassInverterInterface_html_a235007b5e58c195ab1de79750cf275b0"><div class="ttname"><a href="classInverterInterface.html#a235007b5e58c195ab1de79750cf275b0">InverterInterface::system_ready_</a></div><div class="ttdeci">bool system_ready_</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00139">InverterInterface.h:139</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -897,6 +965,555 @@ template&lt;typename message_queue &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad885af6ccb45dd94c987d3d9595f013a" name="ad885af6ccb45dd94c987d3d9595f013a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad885af6ccb45dd94c987d3d9595f013a">&#9670;&#160;</a></span>write_cmd_msg_to_queue_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::write_cmd_msg_to_queue_ </td>
+          <td>(</td>
+          <td class="paramtype">MC_setpoints_command&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab27fc86caf17e5b089934ddfc30e1922" name="ab27fc86caf17e5b089934ddfc30e1922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab27fc86caf17e5b089934ddfc30e1922">&#9670;&#160;</a></span>actual_torque_nm_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::actual_torque_nm_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00132">132</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a08b308acd235fe5ff421ddea8467adc1" name="a08b308acd235fe5ff421ddea8467adc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b308acd235fe5ff421ddea8467adc1">&#9670;&#160;</a></span>can_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::can_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00150">150</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a9468faffb5a4ac74683dd7296754f5" name="a7a9468faffb5a4ac74683dd7296754f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a9468faffb5a4ac74683dd7296754f5">&#9670;&#160;</a></span>curr_cmd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MC_setpoints_command <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::curr_cmd_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00147">147</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a052c25340a8150804253078b3b3586a2" name="a052c25340a8150804253078b3b3586a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a052c25340a8150804253078b3b3586a2">&#9670;&#160;</a></span>dc_bus_voltage_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::dc_bus_voltage_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00136">136</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ada89ac4872beef90596ea0197bf1d09a" name="ada89ac4872beef90596ea0197bf1d09a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada89ac4872beef90596ea0197bf1d09a">&#9670;&#160;</a></span>dc_on_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::dc_on_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00143">143</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ab53ca0e9ac70f6a1a76dc4655aced097" name="ab53ca0e9ac70f6a1a76dc4655aced097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab53ca0e9ac70f6a1a76dc4655aced097">&#9670;&#160;</a></span>derating_on_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::derating_on_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00146">146</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e277b0041ac7b08f4c29c12d45a5f8b" name="a7e277b0041ac7b08f4c29c12d45a5f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e277b0041ac7b08f4c29c12d45a5f8b">&#9670;&#160;</a></span>diagnostic_number_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::diagnostic_number_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00152">152</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a852a87cc8a1924cd0cd6ada56ed21095" name="a852a87cc8a1924cd0cd6ada56ed21095"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a852a87cc8a1924cd0cd6ada56ed21095">&#9670;&#160;</a></span>error_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::error_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00140">140</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a675fc9463ae849e73d94f0e6101871ad" name="a675fc9463ae849e73d94f0e6101871ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a675fc9463ae849e73d94f0e6101871ad">&#9670;&#160;</a></span>id110_val_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::id110_val_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00130">130</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ab76e1c03780a8e67eee05681cfa03e5a" name="ab76e1c03780a8e67eee05681cfa03e5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab76e1c03780a8e67eee05681cfa03e5a">&#9670;&#160;</a></span>inverter_on_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::inverter_on_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00145">145</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a4e525ce92f3c84d13f4a2c808b2c927e" name="a4e525ce92f3c84d13f4a2c808b2c927e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e525ce92f3c84d13f4a2c808b2c927e">&#9670;&#160;</a></span>magnetizing_current_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::magnetizing_current_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00131">131</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="adf303dcaa3710544b17815ffd68c0b7f" name="adf303dcaa3710544b17815ffd68c0b7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf303dcaa3710544b17815ffd68c0b7f">&#9670;&#160;</a></span>mc_temps_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MC_temps <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::mc_temps_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00148">148</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ac1783f7a44e0b99497c1f22eb2175b2b" name="ac1783f7a44e0b99497c1f22eb2175b2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1783f7a44e0b99497c1f22eb2175b2b">&#9670;&#160;</a></span>msg_queue_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">message_queue* <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::msg_queue_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00149">149</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a684a907accaf172db79f670e0be24848" name="a684a907accaf172db79f670e0be24848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a684a907accaf172db79f670e0be24848">&#9670;&#160;</a></span>quit_dc_on_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::quit_dc_on_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00142">142</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a50ae7e92beddae680b55e555fee75d20" name="a50ae7e92beddae680b55e555fee75d20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ae7e92beddae680b55e555fee75d20">&#9670;&#160;</a></span>quit_inverter_on_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::quit_inverter_on_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00144">144</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ad7b74ac37f3022b62cc5012790cc8a00" name="ad7b74ac37f3022b62cc5012790cc8a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7b74ac37f3022b62cc5012790cc8a00">&#9670;&#160;</a></span>speed_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::speed_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00135">135</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a235007b5e58c195ab1de79750cf275b0" name="a235007b5e58c195ab1de79750cf275b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a235007b5e58c195ab1de79750cf275b0">&#9670;&#160;</a></span>system_ready_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::system_ready_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00139">139</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="aa79d8a09b2dc185c91ef2ae5e313afe4" name="aa79d8a09b2dc185c91ef2ae5e313afe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa79d8a09b2dc185c91ef2ae5e313afe4">&#9670;&#160;</a></span>timer_can_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Metro <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::timer_can_ = Metro(20)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00151">151</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="ad54ebf844d85299679071e5a90216ec0" name="ad54ebf844d85299679071e5a90216ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad54ebf844d85299679071e5a90216ec0">&#9670;&#160;</a></span>torque_current_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::torque_current_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00131">131</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="accc29a90884103e933154755296cb939" name="accc29a90884103e933154755296cb939"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc29a90884103e933154755296cb939">&#9670;&#160;</a></span>warning_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename message_queue &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInverterInterface.html">InverterInterface</a>&lt; message_queue &gt;::warning_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00141">141</a> of file <a class="el" href="lib_2interfaces_2include_2InverterInterface_8h_source.html">InverterInterface.h</a>.</p>
 
 </div>
 </div>

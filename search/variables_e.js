@@ -1,29 +1,5 @@
 var searchData=
 [
-  ['rad_5fper_5fsecond_5fto_5frpm_0',['RAD_PER_SECOND_TO_RPM',['../PhysicalParameters_8h.html#af0f5fe159de325a36dc45ba05982601d',1,'PhysicalParameters.h']]],
-  ['ran_5ftest_1',['ran_test',['../test__can__interface_8cpp.html#adf61b4d310d61b32c94820ef821b9ce2',1,'test_can_interface.cpp']]],
-  ['raw_2',['raw',['../structSteeringEncoderConversion__s.html#adb1989d5aa88a00ddecebaf1249af187',1,'SteeringEncoderConversion_s::raw()'],['../structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f',1,'AnalogConversion_s::raw()']]],
-  ['ready_3',['ready',['../structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15',1,'TorqueControllerOutput_s']]],
-  ['rear_5fleft_5finv_4',['rear_left_inv',['../structCANInterfaces.html#acef786c342d45c17d0b0a92c94436aca',1,'CANInterfaces']]],
-  ['rear_5fright_5finv_5',['rear_right_inv',['../structCANInterfaces.html#ad4db12d89327d480c9b5506824ae6ca6',1,'CANInterfaces']]],
-  ['regenlimit_6',['RegenLimit',['../structCASEConfiguration.html#add18949d800c8a453fe24af05d129b0b',1,'CASEConfiguration']]],
-  ['regenpercent_7',['regenPercent',['../structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca',1,'PedalsSystemData_s']]],
-  ['request_5fenable_5fhv_5fcount_5f_8',['request_enable_hv_count_',['../classInverterMock.html#a025c6bd6763c2b8c03b587b3b2a9cad2',1,'InverterMock']]],
-  ['request_5fenable_5finverter_5fcount_5f_9',['request_enable_inverter_count_',['../classInverterMock.html#af3cff6446a34bf1cc2213f8c4e839c25',1,'InverterMock']]],
-  ['right_5fshifter_10',['right_shifter',['../structDashButtons__s.html#a5b37e5a5b3eb4ff8d30fbb96242c5e4b',1,'DashButtons_s']]],
-  ['rl_11',['rl',['../structinverters.html#a7d3b90d8cc3f46cfe61941cf359ee78a',1,'inverters']]],
-  ['rl_12',['RL',['../structveh__vec.html#a9125d94557d0adc494d7ecf685dcc984',1,'veh_vec::RL()'],['../Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27',1,'RL():&#160;Utility.h']]],
-  ['rl_5ftorque_5fdelta_13',['rl_torque_delta',['../structPIDTVTorqueControllerData.html#ab2176e8aa31c4ee9e996a62744d64e3b',1,'PIDTVTorqueControllerData']]],
-  ['rlconversion_14',['RLConversion',['../structLoadCellInterfaceTick__s.html#aab38d277dbc79af17f2f3af4d72c63fc',1,'LoadCellInterfaceTick_s']]],
-  ['rlloadcell_15',['rlLoadCell',['../classSABInterface.html#a2b01b724667b7f57cb5065b7e9339e2d',1,'SABInterface']]],
-  ['roll_16',['roll',['../structvector__nav.html#a22a713e245ebe1aa3d7d6bf7ab2853db',1,'vector_nav']]],
-  ['rpm_5fto_5fkilometers_5fper_5fhour_17',['RPM_TO_KILOMETERS_PER_HOUR',['../PhysicalParameters_8h.html#ab626262966d5bb2a71729aa68673f1ae',1,'PhysicalParameters.h']]],
-  ['rpm_5fto_5fmeters_5fper_5fsecond_18',['RPM_TO_METERS_PER_SECOND',['../PhysicalParameters_8h.html#a4f06b38f5382594cf48bdd40e6d018fe',1,'PhysicalParameters.h']]],
-  ['rpm_5fto_5frad_5fper_5fsecond_19',['RPM_TO_RAD_PER_SECOND',['../PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41',1,'PhysicalParameters.h']]],
-  ['rr_20',['RR',['../structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3',1,'veh_vec']]],
-  ['rr_21',['rr',['../structinverters.html#a50cf4dd8729da63738e9f98800cbd236',1,'inverters']]],
-  ['rr_22',['RR',['../Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce',1,'Utility.h']]],
-  ['rr_5ftorque_5fdelta_23',['rr_torque_delta',['../structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b',1,'PIDTVTorqueControllerData']]],
-  ['rrconversion_24',['RRConversion',['../structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a',1,'LoadCellInterfaceTick_s']]],
-  ['rrloadcell_25',['rrLoadCell',['../classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c',1,'SABInterface']]]
+  ['quit_5fdc_5fon_5f_0',['quit_dc_on_',['../classInverterInterface.html#a684a907accaf172db79f670e0be24848',1,'InverterInterface']]],
+  ['quit_5finverter_5fon_5f_1',['quit_inverter_on_',['../classInverterInterface.html#a50ae7e92beddae680b55e555fee75d20',1,'InverterInterface::quit_inverter_on_()'],['../classInverterMock.html#a826550e021439f8b8057e83499f4e7c1',1,'InverterMock::quit_inverter_on_()']]]
 ];

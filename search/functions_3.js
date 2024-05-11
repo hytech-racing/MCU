@@ -8,7 +8,9 @@ var searchData=
   ['disable_5finverters_5fpin_5',['disable_inverters_pin',['../classMCUInterface.html#ae20de0d669a80dbd674f5b7b025787e1',1,'MCUInterface::disable_inverters_pin()'],['../classMCUInterface.html#ae20de0d669a80dbd674f5b7b025787e1',1,'MCUInterface::disable_inverters_pin()']]],
   ['disable_5fno_5fpins_6',['disable_no_pins',['../classDrivetrainSystem.html#ac5a471fdad887052cb7cbc633879562c',1,'DrivetrainSystem::disable_no_pins()'],['../classDrivetrainMock.html#a5e98ecabe1c5ed26f4281e312c803e43',1,'DrivetrainMock::disable_no_pins()']]],
   ['done_7',['done',['../classBuzzerController.html#a496b8cc572d56caf75a08a1767f26f0c',1,'BuzzerController']]],
-  ['drivetrain_5ferror_5foccured_8',['drivetrain_error_occured',['../classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a',1,'DrivetrainSystem::drivetrain_error_occured()'],['../classDrivetrainMock.html#aeee183300baef99f9b773bda0d71f18a',1,'DrivetrainMock::drivetrain_error_occured()']]],
-  ['drivetrain_5freset_9',['drivetrain_reset',['../src_2main_8cpp.html#a433468e39ea3e8251555e9f46cf24923',1,'main.cpp']]],
-  ['drivetrainsystem_10',['DrivetrainSystem',['../classDrivetrainSystem.html#a1cd0fb1fbbf782563940cff6bd1e7919',1,'DrivetrainSystem']]]
+  ['drivetrain_5fenabled_5f_8',['drivetrain_enabled_',['../classDrivetrainSystem.html#a999d889397257fb8f93b9e139ae14354',1,'DrivetrainSystem']]],
+  ['drivetrain_5ferror_5foccured_9',['drivetrain_error_occured',['../classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a',1,'DrivetrainSystem::drivetrain_error_occured()'],['../classDrivetrainMock.html#aeee183300baef99f9b773bda0d71f18a',1,'DrivetrainMock::drivetrain_error_occured()']]],
+  ['drivetrain_5fready_5f_10',['drivetrain_ready_',['../classDrivetrainSystem.html#a9a860d084bf8b80c07cdd461171abd3b',1,'DrivetrainSystem']]],
+  ['drivetrain_5freset_11',['drivetrain_reset',['../src_2main_8cpp.html#a433468e39ea3e8251555e9f46cf24923',1,'main.cpp']]],
+  ['drivetrainsystem_12',['DrivetrainSystem',['../classDrivetrainSystem.html#a1cd0fb1fbbf782563940cff6bd1e7919',1,'DrivetrainSystem']]]
 ];
