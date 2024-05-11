@@ -12,12 +12,20 @@ const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 
+#define CANBufferType int // Placeholder define for the mock interface
+
 class AMSInterface
 {
 public:
-    AMSInterface(int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha){
-        // Set pin mode
+    AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha)
+    {
+        // do nothing
     };
+
+    /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
+    AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
+        AMSInterface(msg_output_queue, sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
+    
         /* Initialize interface pin mode */
     void init(unsigned long curr_millis) {set_heartbeat(curr_millis);}
 
@@ -28,10 +36,10 @@ public:
     void set_state_ok_high(bool ok_high) {};
     
     /* Monitor AMS state */
-    void set_heartbeat(unsigned long curr_millis) {last_heartbeat_time = curr_millis;}
+    void set_heartbeat(unsigned long curr_millis) {last_heartbeat_time_ = curr_millis;}
     bool heartbeat_received(unsigned long curr_millis)
     {
-        return ((curr_millis - last_heartbeat_time) < HEARTBEAT_INTERVAL);
+        return ((curr_millis - last_heartbeat_time_) < HEARTBEAT_INTERVAL);
     }
     bool is_below_pack_charge_critical_low_thresh() {};
     bool is_below_pack_charge_critical_total_thresh();
@@ -46,7 +54,7 @@ private:
     /* AMS CAN messages */
     // Outbound
     /* AMS last heartbeat time */
-    unsigned long last_heartbeat_time;
+    unsigned long last_heartbeat_time_;
 };
 
 #endif /* __AMS_INTERFACE_H__ */
