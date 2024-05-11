@@ -9,6 +9,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
 
     current_output = controller_pointers_[static_cast<int>(current_status_.current_controller_mode_)]->evaluate(input_state);
 
+    // std::cout << "output torques " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
     bool requesting_controller_change = requested_controller_type != current_status_.current_controller_mode_;
 
     if (requesting_controller_change)
@@ -26,10 +27,13 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
     if (!mux_bypass_limits_[static_cast<int>(current_status_.current_controller_mode_)])
     {
         current_output.command = apply_regen_limit_(current_output.command, input_state.drivetrain_data);
+        // std::cout << "output torques after regen limit " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
         current_output.command = apply_torque_limit_(current_output.command, torque_limit_map_[requested_torque_limit]);
         current_output.command = apply_power_limit_(current_output.command, input_state.drivetrain_data, max_power_limit_, torque_limit_map_[requested_torque_limit]);
         current_output.command = apply_positive_speed_limit_(current_output.command);
     }
+
+    // std::cout << "output torques before return " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
     return current_output.command;
 }
 
