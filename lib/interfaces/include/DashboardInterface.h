@@ -7,7 +7,6 @@
 #include "MCUInterface.h"
 #include "InverterInterface.h"
 #include "SharedDataTypes.h"
-#include "TorqueControllers.h"
 
 
 
@@ -51,6 +50,7 @@ struct DashButtons_s
     bool right_shifter;
 };
 
+
 /* Struct holding all data for the DashboardInterface (inputs and outputs) */
 struct DashComponentInterface_s
 {
@@ -58,6 +58,7 @@ struct DashComponentInterface_s
     // enum for dial position read by controller mux
     ControllerMode_e dial_mode;
     ControllerMode_e cur_dial_mode;
+    TorqueLimit_e torque_limit_mode;
     // Buttons struct for better naming
     DashButtons_s button;
     bool ssok; // safety system OK (IMD?) RENAME
@@ -85,7 +86,8 @@ private:
     CANBufferType *msg_queue_;
     /* The instantiated data struct used to access data by member functions */
     DashComponentInterface_s _data;
-
+    bool prev_button_pressed_state_;
+    update_torque_mode_(bool button_pressed);
 public:
     /*!
         Constructor for new DashboardInterface, All that it is inited with
@@ -95,6 +97,8 @@ public:
     */
     DashboardInterface(CANBufferType *msg_output_queue)
     {
+        torque_limit_mode_ = TorqueLimit_e::TCMUX_FULL_TORQUE;
+        prev_button_pressed_state_ = false;
         msg_queue_ = msg_output_queue;
     };
 
@@ -126,7 +130,7 @@ public:
         @return returns a ControllerMode_e enum with the current dial position
     */
     ControllerMode_e getDialMode();
-    
+    TorqueLimit_e getTorqueLimitMode();
     /* gets whether the safety system is ok (wtf is a safety system - rename this)*/
     bool safetySystemOK();
 

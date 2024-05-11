@@ -23,6 +23,8 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+#include "TorqueControllers.h"
+
 
 /* Systems */
 #include "SysClock.h"
@@ -30,6 +32,7 @@
 #include "SafetySystem.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
+// #include "TorqueControllerMux.h"
 #include "TorqueControllerMux.h"
 
 #include "CASESystem.h"
@@ -141,6 +144,8 @@ struct inverters
 //     SYSTEMS
 // */
 
+
+
 SysClock sys_clock;
 SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
@@ -150,7 +155,7 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(1.0, 0.4);
+TorqueControllerMux<> torque_controller_mux({},{});
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
@@ -211,6 +216,8 @@ CASEConfiguration case_config = {
 
 CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
 
+//// Controllers
+TorqueControllerCASEWrapper<CircularBufferType> CASE_wrapper(case_system);
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
@@ -323,6 +330,16 @@ void loop()
     tick_all_interfaces(curr_tick);
 
     // tick systems
+
+    // single source of truth for the state of the car.
+    // no systems or interfaces should write directly to this.
+    car_state car_state_inst{curr_tick,
+                             load_cell_interface.getLoadCellForces(),
+                             vn_interface.get_vn_struct(),
+                             steering_system.getSteeringSystemData(),
+                             drivetrain.get_dynamic_data(),
+                             pedals_system.getPedalsSystemData()};
+
     tick_all_systems(curr_tick);
 
     // inverter procedure before entering state machine
@@ -332,7 +349,8 @@ void loop()
         drivetrain.reset_drivetrain();
     }
     // tick state machine
-    fsm.tick_state_machine(curr_tick.millis);
+
+    fsm.tick_state_machine(curr_tick.millis, car_state_inst);
 
     // give the state of the car to the param interface
     param_interface.update_car_state(fsm.get_state());

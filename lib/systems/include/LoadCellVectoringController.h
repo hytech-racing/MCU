@@ -2,7 +2,7 @@
 #define LOADCELLVECTORINGCONTROLLER
 
 #include "BaseController.h"
-class TorqueControllerLoadCellVectoring : public Controller
+class TorqueControllerLoadCellVectoring : public virtual Controller
 {
 private:
     float frontTorqueScale_ = 1.0;
@@ -54,7 +54,7 @@ public:
           frontRegenTorqueScale_(2.0 - regenTorqueScale),
           rearRegenTorqueScale_(regenTorqueScale)
     {
-        writeout_.command = TC_COMMAND_NO_TORQUE;
+        writeout_.command = BaseControllerParams::TC_COMMAND_NO_TORQUE;
         writeout_.ready = false;
     }
     TorqueControllerLoadCellVectoring() : TorqueControllerLoadCellVectoring(1.0, 1.0) {}

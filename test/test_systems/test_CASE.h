@@ -20,7 +20,7 @@ TEST(CASESystemTesting, test_vn_start_time)
     CASEConfiguration case_config = {
 
         // Following used for generated code
-        .AbsoluteTorqueLimit = AMK_MAX_TORQUE, // N-m, Torque limit used for yaw pid torque split overflow
+        .AbsoluteTorqueLimit = PhysicalParameters::AMK_MAX_TORQUE, // N-m, Torque limit used for yaw pid torque split overflow
         .yaw_pid_p = 1.369,
         .yaw_pid_i = 0.25,
         .yaw_pid_d = 0.0,
@@ -53,7 +53,7 @@ TEST(CASESystemTesting, test_vn_start_time)
         .yaw_pid_brakes_d = 0.0,
         .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
         .discontinuousBrakesPercentThreshold = 0.4,
-        .TorqueMode = AMK_MAX_TORQUE, // N-m
+        .TorqueMode = PhysicalParameters::AMK_MAX_TORQUE, // N-m
         .RegenLimit = -10.0,          // N-m
         .useNoRegen5kph = true,
         .useTorqueBias = true,
@@ -67,9 +67,9 @@ TEST(CASESystemTesting, test_vn_start_time)
         .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
 
         // Following used for calculate_torque_request in CASESystem.tpp
-        .max_rpm = AMK_MAX_RPM,
-        .max_regen_torque = AMK_MAX_TORQUE,
-        .max_torque = AMK_MAX_TORQUE,
+        .max_rpm = PhysicalParameters::AMK_MAX_RPM,
+        .max_regen_torque = PhysicalParameters::AMK_MAX_TORQUE,
+        .max_torque = PhysicalParameters::AMK_MAX_TORQUE,
     };
     CASESystem case_system(&faked_msg_q, 100, 70, 550, case_config);
 }

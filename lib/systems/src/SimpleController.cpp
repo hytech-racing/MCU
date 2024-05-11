@@ -14,16 +14,16 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
         if (accelRequest >= 0.0)
         {
             // Positive torque request
-            torqueRequest = accelRequest * AMK_MAX_TORQUE;
+            torqueRequest = accelRequest * PhysicalParameters::AMK_MAX_TORQUE;
 
-            // writeout_.command.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
-            // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;pid_input_
-            // writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
-            // writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
-            writeout_.command.speeds_rpm[FL] = AMK_MAX_RPM;
-            writeout_.command.speeds_rpm[FR] = AMK_MAX_RPM;
-            writeout_.command.speeds_rpm[RL] = AMK_MAX_RPM;
-            writeout_.command.speeds_rpm[RR] = AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[FL] = accelRequest * PhysicalParameters::AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[FR] = accelRequest * PhysicalParameters::AMK_MAX_RPM;pid_input_
+            // writeout_.command.speeds_rpm[RL] = accelRequest * PhysicalParameters::AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[RR] = accelRequest * PhysicalParameters::AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[FL] = PhysicalParameters::AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[FR] = PhysicalParameters::AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[RL] = PhysicalParameters::AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[RR] = PhysicalParameters::AMK_MAX_RPM;
 
             writeout_.command.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
             writeout_.command.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
@@ -33,7 +33,7 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
         else
         {
             // Negative torque request
-            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+            torqueRequest = PhysicalParameters::MAX_REGEN_TORQUE * accelRequest * -1.0;
 
             writeout_.command.speeds_rpm[FL] = 0.0;
             writeout_.command.speeds_rpm[FR] = 0.0;

@@ -7,7 +7,7 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
     Unpack_DASHBOARD_STATE_hytech(&dash_state, can_msg.buf, can_msg.len);
 
     _data.dial_mode = static_cast<ControllerMode_e>(dash_state.dial_state);
-    
+
     _data.ssok = dash_state.ssok_above_threshold;
     _data.shutdown = dash_state.shutdown_h_above_threshold;
 
@@ -23,10 +23,23 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 
     _data.buzzer_state = dash_state.drive_buzzer;
 
+    update_torque_mode_(_data.button.torque_mode);
+}
+
+// TODO this should be part of the CAN message not in this interface.
+void DashboardInterface::update_torque_mode_(bool button_pressed)
+{
+    // detect high-to-low transition
+
+    if (prev_button_pressed_state_ == true && button_pressed == false)
+    {
+        _data.torque_limit_mode_ = static_cast<TorqueLimit_e>((static_cast<int>(_data.torque_limit_mode_) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
+    }
+    prev_button_pressed_state_ = button_pressed;
 }
 
 CAN_message_t DashboardInterface::write()
-{   
+{
 
     DASHBOARD_MCU_STATE_t dash_mcu_state;
     dash_mcu_state.drive_buzzer = _data.buzzer_cmd;
@@ -45,12 +58,12 @@ CAN_message_t DashboardInterface::write()
     dash_mcu_state.bots_led = _data.LED[static_cast<int>(DashLED_e::BOTS_LED)];
     dash_mcu_state.imd_led = _data.LED[static_cast<int>(DashLED_e::IMD_LED)];
     dash_mcu_state.ams_led = _data.LED[static_cast<int>(DashLED_e::AMS_LED)];
-    
+
     dash_mcu_state.glv_led = _data.LED[static_cast<int>(DashLED_e::GLV_LED)];
     dash_mcu_state.pack_charge_led = _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)];
-    
+
     CAN_message_t can_msg;
-    auto id = Pack_DASHBOARD_MCU_STATE_hytech(&dash_mcu_state, can_msg.buf, &can_msg.len, (uint8_t*) &can_msg.flags.extended);
+    auto id = Pack_DASHBOARD_MCU_STATE_hytech(&dash_mcu_state, can_msg.buf, &can_msg.len, (uint8_t *)&can_msg.flags.extended);
     can_msg.id = id;
     // this circular buffer implementation requires that you push your data in a array buffer
     // all this does is put the msg into a uint8_t buffer and pushes it onto the queue
@@ -59,20 +72,19 @@ CAN_message_t DashboardInterface::write()
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 
     return can_msg;
-
 }
 
-//figure out how to set enumed led colors or send (0,255 value)
+// figure out how to set enumed led colors or send (0,255 value)
 void DashboardInterface::setLED(DashLED_e led, LEDColors_e color)
 {
 
     _data.LED[static_cast<uint8_t>(led)] = static_cast<uint8_t>(color);
 }
 
-void DashboardInterface::tick10(MCUInterface* mcu, 
-                                int car_state, 
-                                bool buzzer, 
-                                bool drivetrain_error, 
+void DashboardInterface::tick10(MCUInterface *mcu,
+                                int car_state,
+                                bool buzzer,
+                                bool drivetrain_error,
                                 TorqueLimit_e torque,
                                 float min_cell_voltage,
                                 AnalogConversion_s glv_voltage,
@@ -80,8 +92,8 @@ void DashboardInterface::tick10(MCUInterface* mcu,
                                 ControllerMode_e dial_mode)
 {
 
+    // TODO unfuck this
     _data.cur_dial_mode = dial_mode;
-    
     soundBuzzer(buzzer);
 
     setLED(DashLED_e::AMS_LED, mcu->bms_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
@@ -91,7 +103,8 @@ void DashboardInterface::tick10(MCUInterface* mcu,
     setLED(DashLED_e::MC_ERROR_LED, !drivetrain_error ? LEDColors_e::ON : LEDColors_e::RED);
     setLED(DashLED_e::COCKPIT_BRB_LED, mcu->brb_ok_is_high() ? LEDColors_e::ON : LEDColors_e::RED);
 
-    switch(launch_state){
+    switch (launch_state)
+    {
     case 1:
         setLED(DashLED_e::LAUNCH_CONTROL_LED, LEDColors_e::RED);
         break;
@@ -106,7 +119,8 @@ void DashboardInterface::tick10(MCUInterface* mcu,
         break;
     }
 
-    switch(torque){
+    switch (torque)
+    {
     case TorqueLimit_e::TCMUX_LOW_TORQUE:
         setLED(DashLED_e::MODE_LED, LEDColors_e::OFF);
         break;
@@ -121,27 +135,26 @@ void DashboardInterface::tick10(MCUInterface* mcu,
         break;
     }
 
-    uint16_t scaled_cell_voltage = (uint16_t)map((uint32_t)(min_cell_voltage*1000), 3300, 4200, 0, 255);// scale voltage
-    _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)] = std::max(0, std::min((int)scaled_cell_voltage, 255));// clamp voltage
+    uint16_t scaled_cell_voltage = (uint16_t)map((uint32_t)(min_cell_voltage * 1000), 3300, 4200, 0, 255);          // scale voltage
+    _data.LED[static_cast<int>(DashLED_e::CRIT_CHARGE_LED)] = std::max(0, std::min((int)scaled_cell_voltage, 255)); // clamp voltage
     // _data.LED[DashLED_e::GLV_LED] = (uint8_t)map(glv_voltage.raw)
 
     write();
 }
 
-ControllerMode_e DashboardInterface::getDialMode() {return _data.dial_mode;}
+ControllerMode_e DashboardInterface::getDialMode() { return _data.dial_mode; }
+TorqueLimit_e DashboardInterface::getTorqueLimitMode() {return _data.torque_limit_mode; }
+bool DashboardInterface::startButtonPressed() { return _data.button.start; }
+bool DashboardInterface::specialButtonPressed() { return _data.button.mark; }
+bool DashboardInterface::torqueModeButtonPressed() { return _data.button.torque_mode; }
+bool DashboardInterface::inverterResetButtonPressed() { return _data.button.mc_cycle; }
+bool DashboardInterface::launchControlButtonPressed() { return _data.button.launch_ctrl; }
+bool DashboardInterface::nightModeButtonPressed() { return _data.button.led_dimmer; }
+bool DashboardInterface::leftShifterButtonPressed() { return _data.button.left_shifter; }
+bool DashboardInterface::rightShifterButtonPressed() { return _data.button.right_shifter; }
 
-bool DashboardInterface::startButtonPressed() {return _data.button.start;}
-bool DashboardInterface::specialButtonPressed() {return _data.button.mark;}
-bool DashboardInterface::torqueModeButtonPressed() {return _data.button.torque_mode;}
-bool DashboardInterface::inverterResetButtonPressed() {return _data.button.mc_cycle;}
-bool DashboardInterface::launchControlButtonPressed() {return _data.button.launch_ctrl;}
-bool DashboardInterface::nightModeButtonPressed() {return _data.button.led_dimmer;}
-bool DashboardInterface::leftShifterButtonPressed() {return _data.button.left_shifter;}
-bool DashboardInterface::rightShifterButtonPressed() {return _data.button.right_shifter;}
+bool DashboardInterface::safetySystemOK() { return _data.ssok; }
+bool DashboardInterface::shutdownHAboveThreshold() { return _data.shutdown; }
 
-bool DashboardInterface::safetySystemOK() {return _data.ssok;}
-bool DashboardInterface::shutdownHAboveThreshold() {return _data.shutdown;}
-
-void DashboardInterface::soundBuzzer(bool state) {_data.buzzer_cmd = state;}
-bool DashboardInterface::checkBuzzer() {return _data.buzzer_state;}
-
+void DashboardInterface::soundBuzzer(bool state) { _data.buzzer_cmd = state; }
+bool DashboardInterface::checkBuzzer() { return _data.buzzer_state; }

@@ -1,7 +1,7 @@
 
 #include "MCUStateMachine.h"
-template <typename DrivetrainSysType>
-void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long current_millis)
+template <typename DrivetrainSysType, typename TCMuxType>
+void MCUStateMachine<DrivetrainSysType, TCMuxType>::tick_state_machine(unsigned long current_millis, const car_state &current_car_state)
 {
     switch (get_state())
     {
@@ -39,7 +39,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.print(" ");
         // Serial.print(data.brakeAndAccelPressedImplausibility);
         // Serial.print(" ");
-        
+
         // Serial.println("accel, brake:");
         // Serial.print(data.accelPercent);
         // Serial.print(" ");
@@ -47,7 +47,6 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.print(" \n");
         // Serial.print(data.implausibilityExceededMaxDuration);
         // Serial.println();
-
 
         // if TS is above HV threshold, move to Tractive System Active
         drivetrain_->disable_no_pins();
@@ -128,7 +127,6 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     case CAR_STATE::READY_TO_DRIVE:
     {
         auto data = pedals_->getPedalsSystemData();
-        // auto test = controller_mux_->getDrivetrainCommand();
 
         if (!drivetrain_->hv_over_threshold_on_drivetrain())
         {
@@ -146,12 +144,12 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
 
         if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
-            drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
+
+            drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand(dashboard_->getDialMode(), dashboard_->getTorqueLimitMode(), current_car_state));
         }
-        else    
+        else
         {
             drivetrain_->command_drivetrain_no_torque();
-
         }
 
         break;
@@ -159,8 +157,8 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
     }
 }
 
-template <typename DrivetrainSysType>
-void MCUStateMachine<DrivetrainSysType>::set_state_(CAR_STATE new_state, unsigned long curr_time)
+template <typename DrivetrainSysType, typename TCMuxType>
+void MCUStateMachine<DrivetrainSysType, TCMuxType>::set_state_(CAR_STATE new_state, unsigned long curr_time)
 {
     // hal_println("running exit logic");
 
@@ -173,8 +171,8 @@ void MCUStateMachine<DrivetrainSysType>::set_state_(CAR_STATE new_state, unsigne
     handle_entry_logic_(new_state, curr_time);
 }
 
-template <typename DrivetrainSysType>
-void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time)
+template <typename DrivetrainSysType, typename TCMuxType>
+void MCUStateMachine<DrivetrainSysType, TCMuxType>::handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time)
 {
     switch (get_state())
     {
@@ -189,15 +187,15 @@ void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
         break;
     case CAR_STATE::READY_TO_DRIVE:
-    {   
+    {
         // deactivate buzzer and reset it to turn on again later
         buzzer_->deactivate();
         break;
     }
     }
 }
-template <typename DrivetrainSysType>
-void MCUStateMachine<DrivetrainSysType>::handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time)
+template <typename DrivetrainSysType, typename TCMuxType>
+void MCUStateMachine<DrivetrainSysType, TCMuxType>::handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time)
 {
     switch (new_state)
     {

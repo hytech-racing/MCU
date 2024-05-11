@@ -2,6 +2,25 @@
 #define TORQUECONTROLLERSDATA
 #include <stdint.h>
 #include "Utility.h"
+#include "SysClock.h"
+enum class AnalogSensorStatus_e
+{
+    ANALOG_SENSOR_GOOD = 0,
+    ANALOG_SENSOR_CLAMPED = 1,
+};
+
+struct AnalogConversion_s
+{
+    int raw;
+    float conversion;
+    AnalogSensorStatus_e status;
+};
+
+template <int N>
+struct AnalogConversionPacket_s
+{
+    AnalogConversion_s conversions[N];
+};
 
 struct PIDTVTorqueControllerData
 {
@@ -14,9 +33,9 @@ struct PIDTVTorqueControllerData
 };
 enum class TorqueLimit_e
 {
-    TCMUX_LOW_TORQUE = 0,
+    TCMUX_FULL_TORQUE = 0,
     TCMUX_MID_TORQUE = 1,
-    TCMUX_FULL_TORQUE = 2,
+    TCMUX_LOW_TORQUE = 2,
     TCMUX_NUM_TORQUE_LIMITS = 3,
 };
 
@@ -62,10 +81,6 @@ struct DrivetrainCommand_s
     float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
 };
 
-const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
-    .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
-    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}};
-
 struct TorqueControllerOutput_s
 {
     DrivetrainCommand_s command;
@@ -105,6 +120,46 @@ struct TorqueControllerMuxStatus
     bool output_is_bypassing_limits;
 };
 
+struct LoadCellInterfaceOutput_s
+{
+    veh_vec<float> loadCellForcesFiltered;
+    veh_vec<AnalogConversion_s> loadCellConversions;
+    bool FIRSaturated;
+};
+
+// Enums
+enum class SteeringSystemStatus_e
+{
+    STEERING_SYSTEM_NOMINAL = 0,
+    STEERING_SYSTEM_MARGINAL = 1,
+    STEERING_SYSTEM_DEGRADED = 2,
+    STEERING_SYSTEM_ERROR = 3,
+};
+
+struct SteeringSystemData_s
+{
+    float angle;
+    SteeringSystemStatus_e status;
+};
+
+// struct TriggerBits_s
+// {
+//     bool trigger1000 : 1;
+//     bool trigger500 : 1;
+//     bool trigger100 : 1;
+//     bool trigger50 : 1;
+//     bool trigger10 : 1;
+//     bool trigger5 : 1;
+//     bool trigger1 : 1;
+// };
+
+// struct SysTick_s
+// {
+//     unsigned long millis;
+//     unsigned long micros;
+//     TriggerBits_s triggers;
+// };
+
 struct car_state
 {
     // data
@@ -114,6 +169,22 @@ struct car_state
     LoadCellInterfaceOutput_s loadcell_data;
     PedalsSystemData_s pedals_data;
     vectornav vn_data;
+    car_state() = delete;
+    car_state(const SysTick_s &_systick,
+              const SteeringSystemData_s &_steering_data,
+              const DrivetrainDynamicReport_s &_drivetrain_data,
+              const LoadCellInterfaceOutput_s &_loadcell_data,
+              const PedalsSystemData_s &_pedals_data,
+              const vectornav &_vn_data)
+        : systick(_systick),
+          steering_data(_steering_data),
+          drivetrain_data(_drivetrain_data),
+          loadcell_data(_loadcell_data),
+          pedals_data(_pedals_data),
+          vn_data(_vn_data)
+    {
+        // constructor body (if needed)
+    }
 };
 
 #endif

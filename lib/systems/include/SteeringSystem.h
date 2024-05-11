@@ -4,6 +4,7 @@
 #include "SteeringEncoderInterface.h"
 #include "AnalogSensorsInterface.h"
 #include "SysClock.h"
+#include "SharedDataTypes.h"
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
 
@@ -12,14 +13,7 @@
 #define STEERING_DIVERGENCE_ERROR_THRESHOLD (14.0) // Steering sensors can disagree by 5 degrees before output is considered erroneous
 #define STEERING_DIVERGENCE_WARN_THRESHOLD (8.0) // Warning condition will be raised when steering sensors diverge 2.5 degrees
 
-// Enums
-enum class SteeringSystemStatus_e
-{
-    STEERING_SYSTEM_NOMINAL = 0,
-    STEERING_SYSTEM_MARGINAL = 1,
-    STEERING_SYSTEM_DEGRADED = 2,
-    STEERING_SYSTEM_ERROR = 3,
-};
+
 
 // Structs
 struct SteeringSystemTick_s
@@ -28,11 +22,6 @@ struct SteeringSystemTick_s
     const AnalogConversion_s &secondaryConversion;
 };
 
-struct SteeringSystemData_s
-{
-    float angle;
-    SteeringSystemStatus_e status;
-};
 
 class SteeringSystem
 {

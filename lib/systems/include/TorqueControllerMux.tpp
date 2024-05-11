@@ -1,9 +1,9 @@
-#include "TorqueControllerMuxV2.h"
+#include "TorqueControllerMux.h"
 
 template <std::size_t num_controllers>
-DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::getDrivetrainCommand(ControllerMode_e requested_controller_type,
-                                                                                 TorqueLimit_e requested_torque_limit,
-                                                                                 const car_state &input_state)
+DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(ControllerMode_e requested_controller_type,
+                                                                               TorqueLimit_e requested_torque_limit,
+                                                                               const car_state &input_state)
 {
     TorqueControllerOutput_s current_output;
 
@@ -34,9 +34,9 @@ DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::getDrivetrainCommand
 }
 
 template <std::size_t num_controllers>
-TorqueControllerMuxError TorqueControllerMuxv2<num_controllers>::can_switch_controller_(DrivetrainDynamicReport_s current_drivetrain_data,
-                                                                                        DrivetrainCommand_s previous_controller_command,
-                                                                                        DrivetrainCommand_s desired_controller_out)
+TorqueControllerMuxError TorqueControllerMux<num_controllers>::can_switch_controller_(DrivetrainDynamicReport_s current_drivetrain_data,
+                                                                                      DrivetrainCommand_s previous_controller_command,
+                                                                                      DrivetrainCommand_s desired_controller_out)
 {
     bool speedPreventsModeChange = false;
     // Check if torque delta permits mode change
@@ -60,7 +60,7 @@ TorqueControllerMuxError TorqueControllerMuxv2<num_controllers>::can_switch_cont
 
 /* Apply limit such that wheelspeed never goes negative */
 template <std::size_t num_controllers>
-DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_positive_speed_limit_(const DrivetrainCommand_s &command)
+DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_positive_speed_limit_(const DrivetrainCommand_s &command)
 {
     DrivetrainCommand_s out;
     out = command;
@@ -72,7 +72,7 @@ DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_positive_speed
 }
 
 template <std::size_t num_controllers>
-DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_torque_limit_(const DrivetrainCommand_s &command, float max_torque)
+DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_torque_limit_(const DrivetrainCommand_s &command, float max_torque)
 {
     DrivetrainCommand_s out = command;
     float avg_torque = 0;
@@ -104,7 +104,7 @@ DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_torque_limit_(
     preserve functionality of torque controllers
 */
 template <std::size_t num_controllers>
-DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_power_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain, float power_limit, float max_torque)
+DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_power_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain, float power_limit, float max_torque)
 {
     DrivetrainCommand_s out = command;
     float net_torque_mag = 0;
@@ -143,7 +143,7 @@ DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_power_limit_(c
 }
 
 template <std::size_t num_controllers>
-DrivetrainCommand_s TorqueControllerMuxv2<num_controllers>::apply_regen_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain_data)
+DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_regen_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain_data)
 {
     DrivetrainCommand_s out = command;
     const float noRegenLimitKPH = 10.0;

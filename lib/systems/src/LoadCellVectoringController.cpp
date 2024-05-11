@@ -57,12 +57,12 @@ void TorqueControllerLoadCellVectoring::tick(
             {
                 // Positive torque request
                 // NOTE: using "torquePool" here instead of torqueRequest for legibility
-                torquePool = accelRequest * AMK_MAX_TORQUE * 4;
+                torquePool = accelRequest * PhysicalParameters::AMK_MAX_TORQUE * 4;
 
-                writeout_.command.speeds_rpm[FL] = AMK_MAX_RPM;
-                writeout_.command.speeds_rpm[FR] = AMK_MAX_RPM;
-                writeout_.command.speeds_rpm[RL] = AMK_MAX_RPM;
-                writeout_.command.speeds_rpm[RR] = AMK_MAX_RPM;
+                writeout_.command.speeds_rpm[FL] = PhysicalParameters::AMK_MAX_RPM;
+                writeout_.command.speeds_rpm[FR] = PhysicalParameters::AMK_MAX_RPM;
+                writeout_.command.speeds_rpm[RL] = PhysicalParameters::AMK_MAX_RPM;
+                writeout_.command.speeds_rpm[RR] = PhysicalParameters::AMK_MAX_RPM;
 
                 writeout_.command.torqueSetpoints[FL] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce;
                 writeout_.command.torqueSetpoints[FR] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce;
@@ -73,7 +73,7 @@ void TorqueControllerLoadCellVectoring::tick(
             {
                 // Negative torque request
                 // No load cell vectoring on regen
-                torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+                torqueRequest = PhysicalParameters::MAX_REGEN_TORQUE * accelRequest * -1.0;
 
                 writeout_.command.speeds_rpm[FL] = 0.0;
                 writeout_.command.speeds_rpm[FR] = 0.0;
@@ -88,7 +88,7 @@ void TorqueControllerLoadCellVectoring::tick(
         }
         else
         {
-            writeout_.command = TC_COMMAND_NO_TORQUE;
+            writeout_.command = BaseControllerParams::TC_COMMAND_NO_TORQUE;
         }
     }
 }

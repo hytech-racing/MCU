@@ -4,16 +4,27 @@
 
 #include "CASESystem.h"
 
-class TorqueControllerCASEWrapper : 
+template <typename message_queue>
+class TorqueControllerCASEWrapper : public virtual Controller
 {
 public:
+    TorqueControllerCASEWrapper() = delete;
     
-    TorqueControllerCASEWrapper(const CASESystem& case_instance) :  case_instance_(case_instance)
+    TorqueControllerCASEWrapper(CASESystem<message_queue> *case_instance) : case_instance_(case_instance)
     {
     }
-    TorqueControllerOutput_s evaluate(const car_state &state) override;
+    TorqueControllerOutput_s evaluate(const car_state &state) override
+    {
+        DrivetrainCommand_s curr_cmd = case_instance_->get_current_drive_command();
+        TorqueControllerOutput_s out;
+        out.ready = true;
+        out.command = curr_cmd;
+        return out;
+    }
+
 private:
-    const CASESystem& case_instance_;
+    CASESystem<message_queue> *case_instance_;
+
 };
 
 #endif // __CASECONTROLLERWRAPPER_H__

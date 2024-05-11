@@ -228,6 +228,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     command.speeds_rpm[2] = get_rpm_setpoint(res.FinalTorqueRL);
     command.speeds_rpm[3] = get_rpm_setpoint(res.FinalTorqueRR);
 
+    current_command_ = command;
     return command;
 }
 
@@ -241,7 +242,7 @@ float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData
     if (accelRequest >= 0.0)
     {
         // Positive torque request
-        torqueRequest = accelRequest * AMK_MAX_TORQUE;
+        torqueRequest = accelRequest * max_regen_torque;
     }
     else
     {

@@ -1,5 +1,5 @@
 #include "BaseLaunchController.h"
-
+#include <stdlib.h>     /* abs */
 void BaseLaunchController::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
@@ -12,7 +12,7 @@ void BaseLaunchController::tick(
 
         current_millis_ = tick.millis;
 
-        int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
+        int16_t brake_torque_req = pedalsData.regenPercent * PhysicalParameters::MAX_REGEN_TORQUE;
 
         float max_speed = 0;
         for (int i = 0; i < 4; i++)
@@ -40,7 +40,7 @@ void BaseLaunchController::tick(
             launch_speed_target_ = 0;
             time_of_launch_ = tick.millis;
             // check speed is 0 and pedals not pressed
-            if ((pedalsData.accelPercent < launch_ready_accel_threshold) && (pedalsData.brakePercent < launch_ready_brake_threshold) && (max_speed < launch_ready_speed_threshold))
+            if ((pedalsData.accelPercent < BaseLaunchControllerParams::launch_ready_accel_threshold) && (pedalsData.brakePercent < BaseLaunchControllerParams::launch_ready_brake_threshold) && (max_speed < BaseLaunchControllerParams::launch_ready_speed_threshold))
             {
                 launch_state_ = LaunchStates_e::LAUNCH_READY;
             }
@@ -63,11 +63,11 @@ void BaseLaunchController::tick(
             time_of_launch_ = current_millis_;
 
             // check speed is 0 and brake not pressed
-            if ((pedalsData.brakePercent >= launch_ready_brake_threshold) || (max_speed >= launch_ready_speed_threshold))
+            if ((pedalsData.brakePercent >= BaseLaunchControllerParams::launch_ready_brake_threshold) || (max_speed >= BaseLaunchControllerParams::launch_ready_speed_threshold))
             {
                 launch_state_ = LaunchStates_e::LAUNCH_NOT_READY;
             }
-            else if (pedalsData.accelPercent >= launch_go_accel_threshold)
+            else if (pedalsData.accelPercent >= BaseLaunchControllerParams::launch_go_accel_threshold)
             {
 
                 initial_ecef_x_ = vn_data.ecef_coords[0];
@@ -82,7 +82,7 @@ void BaseLaunchController::tick(
         case LaunchStates_e::LAUNCHING:
         { // use brackets to ignore 'cross initialization' of secs_since_launch
             // check accel below launch threshold and brake above
-            if ((pedalsData.accelPercent <= launch_stop_accel_threshold) || (pedalsData.brakePercent >= launch_ready_brake_threshold))
+            if ((pedalsData.accelPercent <= BaseLaunchControllerParams::launch_stop_accel_threshold) || (pedalsData.brakePercent >= BaseLaunchControllerParams::launch_ready_brake_threshold))
             {
                 launch_state_ = LaunchStates_e::LAUNCH_NOT_READY;
             }
@@ -94,10 +94,10 @@ void BaseLaunchController::tick(
             writeout_.command.speeds_rpm[RL] = launch_speed_target_;
             writeout_.command.speeds_rpm[RR] = launch_speed_target_;
 
-            writeout_.command.torqueSetpoints[FL] = AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[FR] = AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[RL] = AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[RR] = AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[FL] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[FR] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[RL] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.torqueSetpoints[RR] = PhysicalParameters::AMK_MAX_TORQUE;
         }
         break;
         default:

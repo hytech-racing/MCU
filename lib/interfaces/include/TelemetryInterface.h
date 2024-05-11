@@ -147,7 +147,8 @@ public:
         const AnalogConversion_s &brake_1,
         const AnalogConversion_s &brake_2,
         float mech_brake_active_percent,
-        const PIDTVTorqueControllerData &data);
+        const PIDTVTorqueControllerData &data,
+        const TorqueControllerMuxError& current_mux_status);
 };
 
 #endif /* TELEMETRYINTERFACE */

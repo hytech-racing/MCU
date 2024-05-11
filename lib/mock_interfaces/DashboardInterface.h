@@ -2,14 +2,6 @@
 #define DASHBOARDINTERFACE
 
 #include "SharedDataTypes.h"
-/*
-    Enum for the car's torque limits
-    MOVE ME! - ideally into a TorqueControllerDefs.h file
-    to prevent circular dependencies
-*/
-
-
-
 
 /* Enum for defined LED colors. ON will be LED's default color on dashboard*/
 enum class LEDColors_e
@@ -43,6 +35,8 @@ private:
 public:
     bool buzzer = false;
     bool start_button_status_;
+    ControllerMode_e getDialMode() {return {};}
+    TorqueLimit_e getTorqueLimitMode() {return {};}
     bool startButtonPressed() { return  start_button_status_; };
     bool checkBuzzer(){ return buzzer; };
 };

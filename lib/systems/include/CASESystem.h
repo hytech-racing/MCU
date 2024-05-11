@@ -70,6 +70,7 @@ template <typename message_queue>
 class CASESystem
 {
 public:
+    CASESystem() = delete;
     /// @brief constructor for state estimator system.
     /// @param can_queue the pointer to the message queue that will have the CAN messages put onto it
     /// @param send_period_ms the period in which messages will be put into the queue to be sent in milliseconds.
@@ -133,6 +134,8 @@ public:
     //     config_.yaw_pid_brakes_i = brake_i;
     //     config_.yaw_pid_brakes_d = brake_d;
     // }
+
+    DrivetrainCommand_s get_current_drive_command() { return current_command_; }
 
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
@@ -204,6 +207,7 @@ public:
     }
 
 private:
+    DrivetrainCommand_s current_command_;
     CASEConfiguration config_;
     message_queue *msg_queue_;
     HT08_CASE case_;

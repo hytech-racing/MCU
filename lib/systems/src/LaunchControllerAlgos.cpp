@@ -2,6 +2,7 @@
 #include "SlipLaunchController.h"
 #include "SimpleLaunchController.h"
 
+
 void TorqueControllerSimpleLaunch::calc_launch_algo(const vectornav &vn_data)
 {
     /*
@@ -14,7 +15,7 @@ void TorqueControllerSimpleLaunch::calc_launch_algo(const vectornav &vn_data)
     float secs_since_launch = (float)(current_millis_ - time_of_launch_) / 1000.0;
     launch_speed_target_ = (int16_t)((float)secs_since_launch * launch_rate_target_ * METERS_PER_SECOND_TO_RPM);
     launch_speed_target_ += init_speed_target_;
-    launch_speed_target_ = std::min((int)AMK_MAX_RPM, std::max(0, (int)launch_speed_target_));
+    launch_speed_target_ = std::min((int)PhysicalParameters::AMK_MAX_RPM, std::max(0, (int)launch_speed_target_));
 }
 
 void TorqueControllerLookupLaunch::calc_launch_algo(const vectornav &vn_data)

@@ -6,11 +6,12 @@
 namespace SimpleLaunchControllerParams
 {
     const float DEFAULT_LAUNCH_RATE = 11.76;
-    const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
+    const int16_t DEFAULT_LAUNCH_SPEED_TARGET = BaseLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET;
 
 };
+namespace SLParams = SimpleLaunchControllerParams;
 
-class TorqueControllerSimpleLaunch : public BaseLaunchController
+class TorqueControllerSimpleLaunch : public virtual BaseLaunchController
 {
 private:
     float launch_rate_target_;
@@ -27,9 +28,8 @@ public:
         : BaseLaunchController(initial_speed_target),
           launch_rate_target_(launch_rate) {}
 
-    TorqueControllerSimpleLaunch() : TorqueControllerSimpleLaunch(SimpleLaunchControllerParams::DEFAULT_LAUNCH_RATE,  SimpleLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
-
-    LaunchStates_e get_launch_state() override { return launch_state_; }
+    
+    TorqueControllerSimpleLaunch() : TorqueControllerSimpleLaunch(SLParams::DEFAULT_LAUNCH_RATE, SLParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
 
     void calc_launch_algo(const vectornav &vn_data) override;
 };
