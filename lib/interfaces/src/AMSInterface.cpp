@@ -105,14 +105,14 @@ void AMSInterface::calculate_SoC_acu(const SysTick_s &tick) {
     unsigned long delta_time_micros = tick.micros - last_tick_.micros;
 
     // Converts analog read (from 0 to 4095) into some value (0.0 to 3.3)
-    float current = HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro);
+    // float current = HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro);
 
     // shunt_voltage ranges from -3.33 to 2.635
-    float shunt_voltage = (current * (9.22 / 5.1)) - 3.3 - 0.03;
+    // float shunt_voltage = (current * (9.22 / 5.1)) - 3.3 - 0.03;
 
     // calc_current ranges from -666 to 527.176
-    float calc_current = (shunt_voltage / 0.005);
-    charge_ -= (calc_current * delta_time_micros) / 1000000;
+    // float calc_current = (shunt_voltage / 0.005);
+    charge_ -= (HYTECH_current_shunt_read_ro_fromS(acu_shunt_measurements_.current_shunt_read_ro) * delta_time_micros) / 1000000;
 
     SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 }

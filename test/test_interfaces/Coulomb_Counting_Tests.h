@@ -160,7 +160,7 @@ void test_calculate_SoC_acu()
     interface.retrieve_voltage_CAN(bms_voltages_can);
 
     // 2372 analog value corresponds to 25A
-    acu_measurements_can = generate_can_msg_from_uint_16s(2372, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, true);
+    acu_measurements_can = generate_can_msg_from_uint_16s(2372, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, false);
     interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
 
 
@@ -191,7 +191,7 @@ void test_calculate_SoC_acu()
     tick_two.millis = starting_millis + 10 + 20;
     tick_two.micros = starting_micros + 10000 + 20000;
 
-    acu_measurements_can = generate_can_msg_from_uint_16s(2458, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, true);
+    acu_measurements_can = generate_can_msg_from_uint_16s(2458, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, false);
     interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
 
     // 50 amps of current * 0.02sec = 1 coulomb of charge.
@@ -204,7 +204,7 @@ void test_calculate_SoC_acu()
 
     // TEST CASE THREE - 10 full seconds, in 20ms intervals, at 50 amps
 
-    acu_measurements_can = generate_can_msg_from_uint_16s(2457, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, true);
+    acu_measurements_can = generate_can_msg_from_uint_16s(2457, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, false);
     interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
 
     for (int i = 0; i <= 10000000; i += 20000) {

@@ -35,7 +35,7 @@ void test_current_shunt_CAN_message()
 
     
     // Creating a new CAN message, feeding it into the interface, and then retrieving it
-    CAN_message_t acu_can_msg = generate_can_msg_from_uint_16s(0x0001U, 0x0002U, 0x0003U, 0x0000U, true);
+    CAN_message_t acu_can_msg = generate_can_msg_from_uint_16s(0x0001U, 0x0002U, 0x0003U, 0x0000U, false);
 
     interface.retrieve_current_shunt_CAN(acu_can_msg); // Reads CAN message into the acu_shunt_measurements_ member variable
     ACU_SHUNT_MEASUREMENTS_t received_shunt_measurements = interface.get_acu_shunt_measurements();
