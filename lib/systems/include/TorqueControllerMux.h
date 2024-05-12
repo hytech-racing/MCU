@@ -45,9 +45,9 @@
 
 namespace TC_MUX_DEFAULT_PARAMS
 {
-    const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
-    const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
-    const float MAX_POWER_LIMIT = 630000.0;
+    constexpr const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
+    constexpr const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
+    constexpr const float MAX_POWER_LIMIT = 63000.0;
 };
 
 

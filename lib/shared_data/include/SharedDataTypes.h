@@ -110,7 +110,8 @@ enum class TorqueControllerMuxError
 {
     NO_ERROR = 0,
     ERROR_SPEED_DIFF_TOO_HIGH = 1,
-    ERROR_TORQUE_DIFF_TOO_HIGH = 2
+    ERROR_TORQUE_DIFF_TOO_HIGH = 2,
+    ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS =3
 };
 
 struct TorqueControllerMuxStatus

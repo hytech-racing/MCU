@@ -1,5 +1,5 @@
 #include "BaseLaunchController.h"
-#include <stdlib.h>     /* abs */
+#include <stdlib.h> /* abs */
 void BaseLaunchController::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
@@ -98,14 +98,14 @@ void BaseLaunchController::tick(
             writeout_.command.torqueSetpoints[FR] = PhysicalParameters::AMK_MAX_TORQUE;
             writeout_.command.torqueSetpoints[RL] = PhysicalParameters::AMK_MAX_TORQUE;
             writeout_.command.torqueSetpoints[RR] = PhysicalParameters::AMK_MAX_TORQUE;
+
+            break;
         }
-        break;
         default:
             break;
         }
     }
 }
-
 
 TorqueControllerOutput_s BaseLaunchController::evaluate(const car_state &state)
 {
