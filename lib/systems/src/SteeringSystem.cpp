@@ -12,6 +12,11 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         primarySensor_->sample();
         primaryConversion_ = primarySensor_->convert();
 
+        // Filter both sensor angle readings
+        steeringFilters_[0].filtered_result(primaryConversion_.raw);
+        steeringFilters_[1].filtered_result(intake.secondaryConversion.raw);
+        
+
         // Both sensors are nominal and agree
         if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL)

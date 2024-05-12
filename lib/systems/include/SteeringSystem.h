@@ -3,6 +3,7 @@
 
 #include "SteeringEncoderInterface.h"
 #include "AnalogSensorsInterface.h"
+#include "Filter_IIR.h"
 #include "SysClock.h"
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
@@ -11,6 +12,7 @@
 // TODO: evalaute reasonable thresholds for agreement
 #define STEERING_DIVERGENCE_ERROR_THRESHOLD (14.0) // Steering sensors can disagree by 5 degrees before output is considered erroneous
 #define STEERING_DIVERGENCE_WARN_THRESHOLD (8.0) // Warning condition will be raised when steering sensors diverge 2.5 degrees
+#define NUM_SENSORS (2)
 
 // Enums
 enum class SteeringSystemStatus_e
@@ -40,10 +42,35 @@ private:
     SteeringEncoderInterface *primarySensor_;
     SteeringEncoderConversion_s primaryConversion_;
     SteeringSystemData_s steeringData_;
+
+    /**
+     * Utility digital IIR filters
+     * 0 : primary sensor filter
+     * 1 : secondary sensor filter
+     */
+    Filter_IIR<float> steeringFilters_[NUM_SENSORS];
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor)
     : primarySensor_(primarySensor)
     {}
+
+    SteeringSystem(SteeringEncoderInterface *primarySensor, float filterAlpha)
+    : primarySensor_(primarySensor)
+    {
+        for (int i = 0; i < NUM_SENSORS; i++)
+        {
+            steeringFilters_[i] = Filter_IIR<float>(filterAlpha);
+        }
+        
+    }
+
+    SteeringSystem(SteeringEncoderInterface *primarySensor, float filterAlphaPrimary, float filterAlphaSecondary)
+    : primarySensor_(primarySensor)
+    {
+        steeringFilters_[0] = Filter_IIR<float>(filterAlphaPrimary);
+        steeringFilters_[1] = Filter_IIR<float>(filterAlphaSecondary);
+        
+    }
 
     /// @brief Computes steering angle and status of the steering system.
     /// @param secondaryAngle The computed steering angle as reported by the secondary steering sensor.
