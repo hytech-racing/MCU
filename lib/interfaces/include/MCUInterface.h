@@ -7,7 +7,6 @@
 #include "hytech.h"
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
-#include "SharedDataTypes.h"
 
 const int DEFAULT_BMS_OK_READ         = 17;      // SHDN_D_READ
 const int DEFAULT_BMS_SENSE_PIN       = 16;      // BMS_OK_SENSE
