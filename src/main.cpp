@@ -6,8 +6,8 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-#include "NativeEthernet.h"
-
+// #include "NativeEthernet.h"
+#include <QNEthernet.h>
 // /* Interfaces */
 
 #include "HytechCANInterface.h"
@@ -89,9 +89,10 @@ const PedalsParams brake_params = {
 /*
     DATA SOURCES
 */
-
-EthernetUDP protobuf_send_socket;
-EthernetUDP protobuf_recv_socket;
+// using namespace qindesign::network;
+namespace qn = qindesign::network;
+qn::EthernetUDP protobuf_send_socket;
+qn::EthernetUDP protobuf_recv_socket;
 
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
@@ -250,14 +251,14 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    qn::Ethernet.begin(EthParams::default_MCU_ip, EthParams::default_netmask, EthParams::default_gateway);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
-    /* Do this to send message VVV */
-    // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
-    // protobuf_socket.write(buf, len);
-    // protobuf_socker.endPacket();
+    // /* Do this to send message VVV */
+    // // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
+    // // protobuf_socket.write(buf, len);
+    // // protobuf_socker.endPacket();
 
     SPI.begin();
     a1.init();
@@ -319,7 +320,7 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    // handle_ethernet_interface_comms();
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
