@@ -2,25 +2,7 @@
 #define VECTORNAVINTERFACE
 #include "FlexCAN_T4.h"
 #include "hytech.h"
-
-// struct vectornav {
-//         float velocity_x;
-//         float velocity_y; 
-//         float velocity_z; 
-//         float linear_accel_x;
-//         float linear_accel_y;
-//         float linear_accel_z;
-//         float uncompLinear_accel[3]; // 3D uncompensated linear acceleration
-//         float yaw;
-//         float pitch;
-//         float roll;
-//         double latitude;
-//         double longitude;
-//         double ecef_coords[3]; // x,y,z
-//         uint64_t gps_time; // gps time
-//         uint8_t vn_status; // status
-//         xyz_vec<float> angular_rates; 
-//     };
+#include "SharedDataTypes.h"
 
 template <typename message_queue>
 class VNInterface
