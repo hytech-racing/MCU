@@ -15,7 +15,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
     int req_controller_mode_index = static_cast<int>(requested_controller_type);
     int current_controller_mode_index = static_cast<int>(current_status_.current_controller_mode_);
 
-    if (req_controller_mode_index > ( controller_pointers_.size() - 1 ))
+    if ((std::size_t)req_controller_mode_index > ( controller_pointers_.size() - 1 ))
     {
         current_status_.current_error = TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS;
         return empty_command;
@@ -41,15 +41,19 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
     }
     if (!mux_bypass_limits_[current_controller_mode_index])
     {
-
+        current_status_.current_torque_limit_enum = requested_torque_limit;
         // std::cout << "output torques before regen limit " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
         current_output.command = apply_regen_limit_(current_output.command, input_state.drivetrain_data);
         // std::cout << "output torques after regen limit " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
         current_output.command = apply_torque_limit_(current_output.command, torque_limit_map_[requested_torque_limit]);
+        current_status_.current_torque_limit_value = torque_limit_map_[requested_torque_limit];
         current_output.command = apply_power_limit_(current_output.command, input_state.drivetrain_data, max_power_limit_, torque_limit_map_[requested_torque_limit]);
-
         // std::cout << "output torques after power limit " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
         current_output.command = apply_positive_speed_limit_(current_output.command);
+    }
+    else{
+        current_status_.current_torque_limit_enum = TorqueLimit_e::TCMUX_FULL_TORQUE;
+        current_status_.current_torque_limit_value= PhysicalParameters::AMK_MAX_TORQUE;
     }
 
     // std::cout << "output torques before return " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;

@@ -33,7 +33,7 @@ void DashboardInterface::update_torque_mode_(bool button_pressed)
 
     if (prev_button_pressed_state_ == true && button_pressed == false)
     {
-        _data.torque_limit_mode_ = static_cast<TorqueLimit_e>((static_cast<int>(_data.torque_limit_mode_) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
+        _data.torque_limit_mode = static_cast<TorqueLimit_e>((static_cast<int>(_data.torque_limit_mode) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
     }
     prev_button_pressed_state_ = button_pressed;
 }

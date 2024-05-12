@@ -107,7 +107,7 @@ public:
         static_assert(num_controllers > 0, "Must create TC mux with at least 1 controller");
 
     }
-
+    
     const TorqueControllerMuxStatus &get_tc_mux_status() { return current_status_; }
 
     /// @brief function that evaluates the mux, controllers and gets the current command

@@ -111,8 +111,6 @@ public:
         const AnalogConversion_s &current,
         const AnalogConversion_s &reference);
 
-    void enqeue_controller_CAN_msg(const PIDTVTorqueControllerData &data);
-
     /* Enqueue outbound telemetry CAN messages */
     // void enqueue_CAN_mcu_pedal_readings();
     // void enqueue_CAN_mcu_load_cells();
@@ -147,7 +145,6 @@ public:
         const AnalogConversion_s &brake_1,
         const AnalogConversion_s &brake_2,
         float mech_brake_active_percent,
-        const PIDTVTorqueControllerData &data,
         const TorqueControllerMuxError& current_mux_status);
 };
 

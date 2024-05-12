@@ -3,34 +3,8 @@
 #include <stdint.h>
 #include "Utility.h"
 #include "SysClock.h"
-enum class AnalogSensorStatus_e
-{
-    ANALOG_SENSOR_GOOD = 0,
-    ANALOG_SENSOR_CLAMPED = 1,
-};
+#include "SharedFirmwareTypes.h"
 
-struct AnalogConversion_s
-{
-    int raw;
-    float conversion;
-    AnalogSensorStatus_e status;
-};
-
-template <int N>
-struct AnalogConversionPacket_s
-{
-    AnalogConversion_s conversions[N];
-};
-
-struct PIDTVTorqueControllerData
-{
-    float controller_input;
-    float controller_output;
-    float fl_torque_delta;
-    float fr_torque_delta;
-    float rl_torque_delta;
-    float rr_torque_delta;
-};
 enum class TorqueLimit_e
 {
     TCMUX_FULL_TORQUE = 0,
@@ -118,6 +92,8 @@ struct TorqueControllerMuxStatus
 {
     TorqueControllerMuxError current_error;
     ControllerMode_e current_controller_mode_;
+    TorqueLimit_e current_torque_limit_enum;
+    float current_torque_limit_value;
     bool output_is_bypassing_limits;
 };
 

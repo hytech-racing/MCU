@@ -223,21 +223,6 @@ void TelemetryInterface::enqueue_new_CAN(U *structure, uint32_t (*pack_function)
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 
-void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerData &data)
-{
-    CONTROLLER_PID_TV_DATA_t msg;
-    msg.controller_input_ro = HYTECH_controller_input_ro_toS(data.controller_input);
-    msg.controller_output_ro = HYTECH_controller_output_ro_toS(data.controller_output);
-    enqueue_new_CAN<CONTROLLER_PID_TV_DATA_t>(&msg, &Pack_CONTROLLER_PID_TV_DATA_hytech);
-
-    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;
-    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.fl_torque_delta);
-    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.fr_torque_delta);
-    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.rl_torque_delta);
-    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.rr_torque_delta);
-
-    enqueue_new_CAN<CONTROLLER_PID_TV_DELTA_DATA_t>(&delta_msg, &Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);
-}
 
 /* Tick SysClock */
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
@@ -258,7 +243,6 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const AnalogConversion_s &brake_1,
                               const AnalogConversion_s &brake_2,
                               float mech_brake_active_percent,
-                              const PIDTVTorqueControllerData &data,
                               const TorqueControllerMuxError &current_mux_status)
 {
 
@@ -295,7 +279,6 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);
 
-    enqeue_controller_CAN_msg(data);
     update_front_thermistors_CAN_msg(mcu_adc.conversions[channels_.therm_fl_channel],
                                      mcu_adc.conversions[channels_.therm_fr_channel]);
 }

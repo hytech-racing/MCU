@@ -25,7 +25,6 @@
 #include "LoadCellInterface.h"
 #include "TorqueControllers.h"
 
-
 /* Systems */
 #include "SysClock.h"
 #include "Buzzer.h"
@@ -144,8 +143,6 @@ struct inverters
 //     SYSTEMS
 // */
 
-
-
 SysClock sys_clock;
 SteeringSystem steering_system(&steering1);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
@@ -155,7 +152,7 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux<> torque_controller_mux({},{});
+
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
@@ -214,12 +211,30 @@ CASEConfiguration case_config = {
     .max_torque = 21.42,
 };
 
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
-
 //// Controllers
-TorqueControllerCASEWrapper<CircularBufferType> CASE_wrapper(case_system);
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
+// mode 0
+TorqueControllerSimple tc_simple(1.0f, 1.0f);
+// mode 1
+TorqueControllerLoadCellVectoring tc_vec;
+// mode 2
+TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
+
+// mode 3
+TorqueControllerSimpleLaunch simple_launch;
+// mode 4
+TorqueControllerSlipLaunch slip_launch;
+const int number_of_controllers = 5;
+TorqueControllerMux<number_of_controllers>
+    torque_controller_mux({static_cast<Controller *>(&tc_simple),
+                           static_cast<Controller *>(&tc_vec),
+                           static_cast<Controller *>(&case_wrapper),
+                           static_cast<Controller *>(&simple_launch),
+                           static_cast<Controller *>(&slip_launch)},
+                          {false, false, true, false, false});
+
 /* Declare state machine */
-MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
+MCUStateMachine<DriveSys_t, TorqueControllerMux<number_of_controllers>> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
 // /*
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
@@ -333,12 +348,12 @@ void loop()
 
     // single source of truth for the state of the car.
     // no systems or interfaces should write directly to this.
-    car_state car_state_inst{curr_tick,
-                             load_cell_interface.getLoadCellForces(),
-                             vn_interface.get_vn_struct(),
+    car_state car_state_inst(curr_tick,
                              steering_system.getSteeringSystemData(),
                              drivetrain.get_dynamic_data(),
-                             pedals_system.getPedalsSystemData()};
+                             load_cell_interface.getLoadCellForces(),
+                             pedals_system.getPedalsSystemData(),
+                             vn_interface.get_vn_struct());
 
     tick_all_systems(curr_tick);
 
@@ -398,24 +413,35 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     TriggerBits_s t = current_system_tick.triggers;
     if (t.trigger10) // 10Hz
     {
-        dashboard.tick10(
-            &main_ecu,
-            int(fsm.get_state()),
-            buzzer.buzzer_is_on(),
-            drivetrain.drivetrain_error_occured(),
-            torque_controller_mux.getTorqueLimit(),
-            ams_interface.get_filtered_min_cell_voltage(),
-            telem_interface.get_glv_voltage(a1.get()),
-            static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
-            dashboard.getDialMode());
+        int slip_launch_state_int = static_cast<int>(slip_launch.get_launch_state());
+        int simple_launch_state_int = static_cast<int>(simple_launch.get_launch_state());
+        int combined_launch_state = 0;
+        if(slip_launch_state_int > 0){
+            combined_launch_state = slip_launch_state_int;
+        } else if(simple_launch_state_int > 0)
+        {
+            combined_launch_state = simple_launch_state_int;
+        } else {
+            combined_launch_state = 0;
+        }
+            dashboard.tick10(
+                &main_ecu,
+                int(fsm.get_state()),
+                buzzer.buzzer_is_on(),
+                drivetrain.drivetrain_error_occured(),
+                torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
+                ams_interface.get_filtered_min_cell_voltage(),
+                telem_interface.get_glv_voltage(a1.get()),
+                combined_launch_state,
+                dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
             drivetrain.drivetrain_error_occured(),
             safety_system.get_software_is_ok(),
-            static_cast<int>(torque_controller_mux.getDriveMode()),
-            static_cast<int>(torque_controller_mux.getTorqueLimit()),
-            torque_controller_mux.getMaxTorque(),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_torque_limit_enum),
+            torque_controller_mux.get_tc_mux_status().current_torque_limit_value,
             buzzer.buzzer_is_on(),
             pedals_system.getPedalsSystemData(),
             ams_interface.pack_charge_is_critical(),
@@ -442,7 +468,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            {});
+            torque_controller_mux.get_tc_mux_status().current_error);
     }
 
     if (t.trigger50) // 50Hz
@@ -511,17 +537,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         3);
 
     // case_system.update_config_from_param_interface(param_interface);
-
-    torque_controller_mux.tick(
-        current_system_tick,
-        drivetrain.get_dynamic_data(),
-        pedals_system.getPedalsSystemData(),
-        steering_system.getSteeringSystemData(),
-        load_cell_interface.getLoadCellForces(),
-        dashboard.getDialMode(),
-        dashboard.torqueModeButtonPressed(),
-        vn_interface.get_vn_struct(),
-        controller_output);
 }
 
 void handle_ethernet_interface_comms()

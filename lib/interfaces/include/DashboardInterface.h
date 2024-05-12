@@ -87,7 +87,7 @@ private:
     /* The instantiated data struct used to access data by member functions */
     DashComponentInterface_s _data;
     bool prev_button_pressed_state_;
-    update_torque_mode_(bool button_pressed);
+    void update_torque_mode_(bool button_pressed);
 public:
     /*!
         Constructor for new DashboardInterface, All that it is inited with
@@ -97,7 +97,7 @@ public:
     */
     DashboardInterface(CANBufferType *msg_output_queue)
     {
-        torque_limit_mode_ = TorqueLimit_e::TCMUX_FULL_TORQUE;
+        _data.torque_limit_mode = TorqueLimit_e::TCMUX_FULL_TORQUE;
         prev_button_pressed_state_ = false;
         msg_queue_ = msg_output_queue;
     };
