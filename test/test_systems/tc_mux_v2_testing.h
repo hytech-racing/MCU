@@ -8,7 +8,7 @@
 
 
 // TODO
-// - [ ] test to ensure that the size checking for desired modes works and failes properly
+// - [x] test to ensure that the size checking for desired modes works and failes properly
 template <typename quad_array_type>
 void set_four_outputs(quad_array_type &out, float val)
 {
@@ -48,7 +48,22 @@ TEST(TorqueControllerMuxTesting, test_construction)
     TorqueControllerMux<2> test({static_cast<Controller *>(&inst1), static_cast<Controller *>(&inst2)}, {false, false});
 }
 
-// TEST(TorqueControllerMuxTesting, test_)
+TEST(TorqueControllerMuxTesting, test_invalid_controller_request_error)
+{
+    TestControllerType inst1, inst2;
+    TorqueControllerMux<2> test({static_cast<Controller *>(&inst1), static_cast<Controller *>(&inst2)}, {false, false});
+    car_state state({}, {}, {}, {}, {}, {});
+    auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_2, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS);
+    for (int i =0; i< 4; i++)
+    {
+
+        ASSERT_EQ(res.speeds_rpm[i], 0.0);
+        ASSERT_EQ(res.torqueSetpoints[i], 0.0);
+    }
+}
+
 
 // ensure that swapping to a controller that has a higher desired output speed than previously
 // commanded that we dont switch

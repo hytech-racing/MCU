@@ -6,39 +6,40 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
                                                                                const car_state &input_state)
 {
 
-    DrivetrainCommand_s empty_command = {
-        .speeds_rpm = {0, 0, 0, 0},
-        .torqueSetpoints = {0, 0, 0, 0}};
+    DrivetrainCommand_s empty_command = BaseControllerParams::TC_COMMAND_NO_TORQUE;
 
     TorqueControllerOutput_s current_output = {
         .command = empty_command,
         .ready = true};
 
-    int controller_mode_index = static_cast<int>(current_status_.current_controller_mode_);
-    if (controller_mode_index > (controller_pointers_.size()))
+    int req_controller_mode_index = static_cast<int>(requested_controller_type);
+    int current_controller_mode_index = static_cast<int>(current_status_.current_controller_mode_);
+
+    if (req_controller_mode_index > ( controller_pointers_.size() - 1 ))
     {
         current_status_.current_error = TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS;
-        return current_output.command;
+        return empty_command;
     }
 
-    current_output = controller_pointers_[controller_mode_index]->evaluate(input_state);
+    current_output = controller_pointers_[current_controller_mode_index]->evaluate(input_state);
 
     // std::cout << "output torques " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
     bool requesting_controller_change = requested_controller_type != current_status_.current_controller_mode_;
 
     if (requesting_controller_change)
     {
-        TorqueControllerOutput_s proposed_output = controller_pointers_[static_cast<int>(requested_controller_type)]->evaluate(input_state);
+        TorqueControllerOutput_s proposed_output = controller_pointers_[req_controller_mode_index]->evaluate(input_state);
         TorqueControllerMuxError error_state = can_switch_controller_(input_state.drivetrain_data, current_output.command, proposed_output.command);
         // std::cout << "error state " << static_cast<int>(error_state) << std::endl;
         if (error_state == TorqueControllerMuxError::NO_ERROR)
         {
             current_status_.current_controller_mode_ = requested_controller_type;
+            current_controller_mode_index = req_controller_mode_index;
             current_output = proposed_output;
         }
         current_status_.current_error = error_state;
     }
-    if (!mux_bypass_limits_[controller_mode_index])
+    if (!mux_bypass_limits_[current_controller_mode_index])
     {
 
         // std::cout << "output torques before regen limit " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
