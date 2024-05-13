@@ -49,6 +49,8 @@ private:
      * 1 : secondary sensor filter
      */
     Filter_IIR<float> steeringFilters_[NUM_SENSORS];
+    float filteredAnglePrimary_;
+    float filteredAngleSecondary_;
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor)
     : primarySensor_(primarySensor)
