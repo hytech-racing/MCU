@@ -48,12 +48,12 @@ TEST(LaunchIntergationTesting, test_simple_launch_controller)
     SysClock clock = SysClock();
     SysTick_s cur_tick;
     cur_tick = clock.tick(0);
-    car_state still_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_no_accel_press, {});
-    car_state pedal_pressed_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_full_accel_press, {});
-    car_state no_launch_allowed_state(cur_tick, {}, simulated_no_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
-    car_state barely_launch_state(cur_tick, {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
-    car_state one_sec_passed_in_launch_state(clock.tick(1000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
-    car_state one_sec_passed_in_launch_state_w_error(clock.tick(1000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_accel_and_brake_press, {});
+    SharedCarState_s still_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_no_accel_press, {});
+    SharedCarState_s pedal_pressed_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s no_launch_allowed_state(cur_tick, {}, simulated_no_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s barely_launch_state(cur_tick, {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s one_sec_passed_in_launch_state(clock.tick(1000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s one_sec_passed_in_launch_state_w_error(clock.tick(1000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_accel_and_brake_press, {});
 
     // mode 0
     TorqueControllerSimple tc_simple(1.0f, 1.0f);
@@ -135,26 +135,26 @@ TEST(LaunchIntergationTesting, test_slip_launch_controller)
                                static_cast<Controller *>(&slip_launch)},
                               {false, false, true, false, false});
 
-    car_state still_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_no_accel_press, {});
-    car_state pedal_pressed_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_full_accel_press, {});
-    car_state no_launch_allowed_state(cur_tick, {}, simulated_no_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
-    car_state barely_launch_state(cur_tick, {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s still_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_no_accel_press, {});
+    SharedCarState_s pedal_pressed_state(cur_tick, {}, simulated_slow_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s no_launch_allowed_state(cur_tick, {}, simulated_no_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s barely_launch_state(cur_tick, {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
 
     auto res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, still_state);
     // getting to slip launch (mode 4)
     res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_4, TorqueLimit_e::TCMUX_FULL_TORQUE, still_state);
     ASSERT_EQ(slip_launch.get_launch_state(), LaunchStates_e::LAUNCH_READY);
 
-    car_state one_hundredth_sec_passed_in_launch_state(clock.tick(10000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s one_hundredth_sec_passed_in_launch_state(clock.tick(10000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
     res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_4, TorqueLimit_e::TCMUX_FULL_TORQUE, one_hundredth_sec_passed_in_launch_state);
 
-    car_state two_hundredth_sec_passed_in_launch_state(clock.tick(20000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s two_hundredth_sec_passed_in_launch_state(clock.tick(20000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
     res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_4, TorqueLimit_e::TCMUX_FULL_TORQUE, two_hundredth_sec_passed_in_launch_state);
 
     ASSERT_EQ(slip_launch.get_launch_state(), LaunchStates_e::LAUNCHING);
     ASSERT_EQ(res.speeds_rpm[0], BaseLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET);
 
-    car_state more_accel_time_since_launch(clock.tick( BaseLaunchControllerParams::const_accel_time * 1000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
+    SharedCarState_s more_accel_time_since_launch(clock.tick( BaseLaunchControllerParams::const_accel_time * 1000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, {});
     res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_4, TorqueLimit_e::TCMUX_FULL_TORQUE, more_accel_time_since_launch);
 
     ASSERT_EQ(slip_launch.get_launch_state(), LaunchStates_e::LAUNCHING);
@@ -162,7 +162,7 @@ TEST(LaunchIntergationTesting, test_slip_launch_controller)
 
     //     // if velocity is less than the default speed, it should still go at launch speed
     vn_data.velocity_x = 0; // m/s
-    car_state small_vn_vel(clock.tick(( BaseLaunchControllerParams::const_accel_time * 1000) + 1000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, vn_data);
+    SharedCarState_s small_vn_vel(clock.tick(( BaseLaunchControllerParams::const_accel_time * 1000) + 1000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, vn_data);
     res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_4, TorqueLimit_e::TCMUX_FULL_TORQUE, small_vn_vel);
     printf("lower vx_body: %.2f\n", (float)res.speeds_rpm[0] * RPM_TO_METERS_PER_SECOND);
     ASSERT_EQ(res.speeds_rpm[0], BaseLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET); // should still be at initial launch target
@@ -172,7 +172,7 @@ TEST(LaunchIntergationTesting, test_slip_launch_controller)
     //     // we should expect the next calculation to be approx. DEFAULT_SLIP_RATIO % higher than this
     vn_data.velocity_x = BaseLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET * RPM_TO_METERS_PER_SECOND; // m/s
 
-    car_state big_vn_vel(clock.tick(( BaseLaunchControllerParams::const_accel_time * 1000) + 2000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, vn_data);
+    SharedCarState_s big_vn_vel(clock.tick(( BaseLaunchControllerParams::const_accel_time * 1000) + 2000000), {}, simulated_barely_launch_drivetrain_dynamics, {}, simulated_full_accel_press, vn_data);
     res = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_4, TorqueLimit_e::TCMUX_FULL_TORQUE, big_vn_vel);
 
     ASSERT_EQ(slip_launch.get_launch_state(), LaunchStates_e::LAUNCHING);

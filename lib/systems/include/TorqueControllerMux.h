@@ -117,7 +117,7 @@ public:
     /// @return the current drivetrain command to be sent to the drivetrain
     DrivetrainCommand_s getDrivetrainCommand(ControllerMode_e requested_controller_type,
                                              TorqueLimit_e controller_command_torque_limit,
-                                             const car_state &input_state);
+                                             const SharedCarState_s &input_state);
 };
 // }
 #include "TorqueControllerMux.tpp"

@@ -15,7 +15,7 @@ private:
     float get_torque_request_(float torque_limit_nm, const PedalsSystemData_s &pedals_data) { return 0; };
 
 public:
-    virtual TorqueControllerOutput_s evaluate(const car_state &state) = 0;
+    virtual TorqueControllerOutput_s evaluate(const SharedCarState_s &state) = 0;
 };
 
 #endif

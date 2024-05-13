@@ -1,7 +1,7 @@
 
 #include "MCUStateMachine.h"
 template <typename DrivetrainSysType, typename TCMuxType>
-void MCUStateMachine<DrivetrainSysType, TCMuxType>::tick_state_machine(unsigned long current_millis, const car_state &current_car_state)
+void MCUStateMachine<DrivetrainSysType, TCMuxType>::tick_state_machine(unsigned long current_millis, const SharedCarState_s &current_car_state)
 {
     switch (get_state())
     {

@@ -119,25 +119,12 @@ struct SteeringSystemData_s
     SteeringSystemStatus_e status;
 };
 
-// struct TriggerBits_s
-// {
-//     bool trigger1000 : 1;
-//     bool trigger500 : 1;
-//     bool trigger100 : 1;
-//     bool trigger50 : 1;
-//     bool trigger10 : 1;
-//     bool trigger5 : 1;
-//     bool trigger1 : 1;
-// };
-
-// struct SysTick_s
-// {
-//     unsigned long millis;
-//     unsigned long micros;
-//     TriggerBits_s triggers;
-// };
-
-struct car_state
+/// @brief car state struct that contains state of everything about the car including
+//         things such as steering, drivetrain, current system time, vectornav / INS data,
+//         etc. an instance of this struct is created in main and updated there by all of the systems
+//         and interfaces and then shared between all of the systems and interfaces that need
+//         access to the state of the car.
+struct SharedCarState_s
 {
     // data
     SysTick_s systick;
@@ -146,8 +133,8 @@ struct car_state
     LoadCellInterfaceOutput_s loadcell_data;
     PedalsSystemData_s pedals_data;
     vectornav vn_data;
-    car_state() = delete;
-    car_state(const SysTick_s &_systick,
+    SharedCarState_s() = delete;
+    SharedCarState_s(const SysTick_s &_systick,
               const SteeringSystemData_s &_steering_data,
               const DrivetrainDynamicReport_s &_drivetrain_data,
               const LoadCellInterfaceOutput_s &_loadcell_data,

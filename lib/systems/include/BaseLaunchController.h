@@ -50,6 +50,6 @@ public:
               const vectornav &vn_data);
     LaunchStates_e get_launch_state() { return launch_state_; }
     virtual void calc_launch_algo(const vectornav &vn_data) = 0;
-    TorqueControllerOutput_s evaluate(const car_state &state) override;
+    TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 #endif // __BASELAUNCHCONTROLLER_H__

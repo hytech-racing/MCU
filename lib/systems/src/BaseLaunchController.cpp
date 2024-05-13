@@ -107,7 +107,7 @@ void BaseLaunchController::tick(
     }
 }
 
-TorqueControllerOutput_s BaseLaunchController::evaluate(const car_state &state)
+TorqueControllerOutput_s BaseLaunchController::evaluate(const SharedCarState_s &state)
 {
     tick(state.systick, state.pedals_data, state.drivetrain_data.measuredSpeeds, state.vn_data);
     return writeout_;

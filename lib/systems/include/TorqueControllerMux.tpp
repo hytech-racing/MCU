@@ -3,7 +3,7 @@
 template <std::size_t num_controllers>
 DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(ControllerMode_e requested_controller_type,
                                                                                TorqueLimit_e requested_torque_limit,
-                                                                               const car_state &input_state)
+                                                                               const SharedCarState_s &input_state)
 {
 
     DrivetrainCommand_s empty_command = BaseControllerParams::TC_COMMAND_NO_TORQUE;

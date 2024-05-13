@@ -30,7 +30,7 @@ public:
     }
 
     void tick(const PedalsSystemData_s &pedalsData);
-    TorqueControllerOutput_s evaluate(const car_state &state) override;
+    TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 
 #endif

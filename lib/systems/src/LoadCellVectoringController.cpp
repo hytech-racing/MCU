@@ -93,7 +93,7 @@ void TorqueControllerLoadCellVectoring::tick(
     }
 }
 
-TorqueControllerOutput_s TorqueControllerLoadCellVectoring::evaluate(const car_state &state)
+TorqueControllerOutput_s TorqueControllerLoadCellVectoring::evaluate(const SharedCarState_s &state)
 {
     tick(state.systick, state.pedals_data, state.loadcell_data);
     return writeout_;

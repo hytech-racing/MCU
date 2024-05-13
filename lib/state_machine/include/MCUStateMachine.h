@@ -48,7 +48,7 @@ public:
     /// @brief function to tick the state machine. 
     /// @param cm current millis from systick
     /// @param current_car_state current state of the car (not to be confused with the CAR_STATE enum which is the state machine state)
-    void tick_state_machine(unsigned long cm, const car_state &current_car_state);
+    void tick_state_machine(unsigned long cm, const SharedCarState_s &current_car_state);
 
     CAR_STATE get_state() { return current_state_; }
     bool car_in_ready_to_drive() { return current_state_ == CAR_STATE::READY_TO_DRIVE; };

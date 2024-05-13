@@ -10,7 +10,6 @@ class TestControllerType : public virtual Controller
 
 public:
     TorqueControllerOutput_s output;
-    TorqueControllerOutput_s evaluate(const car_state &state) override { return output; }
-    // void update_input_state(const car_state &state) override { }
+    TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override { return output; }
 };
 #endif // __FAKE_CONTROLLER_TYPE_H__

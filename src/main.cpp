@@ -348,7 +348,7 @@ void loop()
 
     // single source of truth for the state of the car.
     // no systems or interfaces should write directly to this.
-    car_state car_state_inst(curr_tick,
+    SharedCarState_s car_state_inst(curr_tick,
                              steering_system.getSteeringSystemData(),
                              drivetrain.get_dynamic_data(),
                              load_cell_interface.getLoadCellForces(),

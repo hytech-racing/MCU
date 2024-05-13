@@ -10,7 +10,7 @@ class FakeTCMux
 public:
     DrivetrainCommand_s getDrivetrainCommand(ControllerMode_e requested_controller_type,
                                              TorqueLimit_e requested_torque_limit,
-                                             const car_state &input_state) { return {}; }
+                                             const SharedCarState_s &input_state) { return {}; }
 };
 
 class DrivetrainMock
@@ -35,7 +35,7 @@ public:
     void disable_no_pins(){};
 };
 
-car_state dummy_state({}, {}, {}, {}, {}, {});
+SharedCarState_s dummy_state({}, {}, {}, {}, {}, {});
 
 void handle_startup(MCUStateMachine<DrivetrainMock, FakeTCMux> &state_machine, unsigned long sys_time, DrivetrainMock &drivetrain, PedalsSystem &pedals, DashboardInterface &dash_interface)
 {

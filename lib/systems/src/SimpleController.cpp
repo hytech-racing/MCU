@@ -40,7 +40,7 @@ void TorqueControllerSimple::tick(const PedalsSystemData_s &pedalsData)
     }
 }
 
-TorqueControllerOutput_s TorqueControllerSimple::evaluate(const car_state &state)
+TorqueControllerOutput_s TorqueControllerSimple::evaluate(const SharedCarState_s &state)
 {
     tick(state.pedals_data);
     return writeout_;
