@@ -98,7 +98,7 @@ const float LOADCELL_RR_SCALE = 0.06;
 const float LOADCELL_RR_OFFSET = 23.761 / LOADCELL_RR_SCALE;
 
 // Steering parameters
-const float PRIMARY_STEERING_SENSE_OFFSET = -21.18; // units are degrees
+const float PRIMARY_STEERING_SENSE_OFFSET = 0.0; // units are degrees
 const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 812;
 const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3179;
 const int SECONDARY_STEERING_SENSE_CENTER = 1970;

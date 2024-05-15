@@ -350,10 +350,13 @@ void loop()
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 
-
+    // Basic debug prints
     if (curr_tick.triggers.trigger5)
     {
-        Serial.println("uploaded");
+        Serial.print("Steering system reported angle (deg): ");
+        Serial.println(steering_system.getSteeringSystemData().angle);
+        
+        Serial.println();
     }
 }
 
