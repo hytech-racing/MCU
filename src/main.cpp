@@ -6,7 +6,7 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-#include "NativeEthernet.h"
+// #include "NativeEthernet.h"
 
 // /* Interfaces */
 
@@ -349,6 +349,12 @@ void loop()
     // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+
+
+    if (curr_tick.triggers.trigger5)
+    {
+        Serial.println("uploaded");
+    }
 }
 
 /*
