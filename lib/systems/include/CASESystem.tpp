@@ -3,7 +3,7 @@
 template <typename message_queue>
 DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     const SysTick_s &tick,
-    const vector_nav &vn_data,
+    const vectornav &vn_data,
     const SteeringSystemData_s &steering_data,
     const DrivetrainDynamicReport_s &drivetrain_data,
     const veh_vec<AnalogConversion_s> &load_cell_vals,
@@ -15,12 +15,13 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
 
-    // in. as defined in HT08_CASE.h
+    // in. as defined in HT08_CASE.h, ExtU_HT08_CASE_T
     in.SteeringWheelAngleDeg = steering_data.angle;
 
     in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
 
     in.YawRaterads = vn_data.angular_rates.z;
+    // in.YawRaterads = 2.5; // THIS IS FAKE TODO HACK
 
     // REAL
     in.Vx_B = vn_data.velocity_x;
@@ -36,22 +37,22 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.CurrentElectricalPowerkW = power_kw;
 
     // REAL
-    // in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
-    // in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
-    // in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
-    // in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
+    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
+    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
+    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
+    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
 
     // FAKE, 566.273 rpm = 1 m/s
-    // in.MotorOmegaFLrpm = 566.27330024 * 1.36;
-    // in.MotorOmegaFRrpm = 566.27330024 * 1.36;
+    // in.MotorOmegaFLrpm = 566.27330024 * 5;
+    // in.MotorOmegaFRrpm = 566.27330024 * 10;
     // in.MotorOmegaRRrpm = 566.27330024 * 1.36;
     // in.MotorOmegaRLrpm = 566.27330024 * 1.36;
 
     // FAKE max rpm
-    in.MotorOmegaFLrpm = 20000;
-    in.MotorOmegaFRrpm = 20000;
-    in.MotorOmegaRRrpm = 20000;
-    in.MotorOmegaRLrpm = 20000;
+    // in.MotorOmegaFLrpm = 20000;
+    // in.MotorOmegaFRrpm = 20000;
+    // in.MotorOmegaRRrpm = 20000;
+    // in.MotorOmegaRLrpm = 20000;
 
     in.usePIDTV = config_.usePIDTV;
     in.useNormalForce = config_.useNormalForce;
@@ -73,9 +74,16 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.LaunchSL = config_.launchSL;
     in.LaunchDeadZone = config_.launchDeadZone;
 
-    in.TCSPIDConfig[0] = config_.tcs_pid_p;
-    in.TCSPIDConfig[1] = config_.tcs_pid_i;
-    in.TCSPIDConfig[2] = config_.tcs_pid_d;
+    in.TCSPIDConfig[0] = config_.tcs_pid_p_lowerBound_front;
+    in.TCSPIDConfig[1] = config_.tcs_pid_p_upperBound_front;
+    in.TCSPIDConfig[2] = config_.tcs_pid_p_lowerBound_rear;
+    in.TCSPIDConfig[3] = config_.tcs_pid_p_upperBound_rear;
+    // in.TCSPIDConfig[2] = 0;
+    // in.TCSPIDConfig[3] = 0;
+    in.TCSPIDConfig[4] = config_.tcs_pid_i;
+    in.TCSPIDConfig[5] = config_.tcs_pid_d;
+    // in.TCSPIDConfig[4] = 50;
+    // in.TCSPIDConfig[5] = 50;
 
     in.LaunchVelThreshold = config_.launchVelThreshold;
     in.TCSVelThreshold = config_.tcsVelThreshold;
@@ -114,6 +122,15 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.MechPowerMaxkW = config_.MechPowerMaxkW;
 
+    in.launchLeftRightMaxDiff = config_.launchLeftRightMaxDiff;
+
+    in.TCS_PID_Motor_RPM_Schedule[0] = config_.tcs_pid_lower_rpm_front;
+    in.TCS_PID_Motor_RPM_Schedule[1] = config_.tcs_pid_upper_rpm_front;
+    in.TCS_PID_Motor_RPM_Schedule[2] = config_.tcs_pid_lower_rpm_rear;
+    in.TCS_PID_Motor_RPM_Schedule[3] = config_.tcs_pid_upper_rpm_rear;
+
+    in.maxNormalLoadBrakeScalingFront = config_.maxNormalLoadBrakeScalingFront;
+
     if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
         vn_active_start_time_ = tick.millis;
@@ -140,7 +157,6 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     if ((tick.millis - last_controller_pt1_send_time_) >= (controller_send_period_ms_))
     {
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
@@ -158,6 +174,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pn);
 
         last_controller_pt2_send_time_ = tick.millis;
     }
@@ -186,8 +203,17 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_lin_ve);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
+
         last_vehm_send_time_ = tick.millis;
+    }
+
+    if ((tick.millis - last_lowest_priority_controller_send_time_) >= (lowest_priority_controller_send_period_ms_))
+    {
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_yaw_pi);
+
+        last_lowest_priority_controller_send_time_ = tick.millis;
     }
 
     DrivetrainCommand_s command;
@@ -202,6 +228,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     command.speeds_rpm[2] = get_rpm_setpoint(res.FinalTorqueRL);
     command.speeds_rpm[3] = get_rpm_setpoint(res.FinalTorqueRR);
 
+    current_command_ = command;
     return command;
 }
 
@@ -215,7 +242,7 @@ float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData
     if (accelRequest >= 0.0)
     {
         // Positive torque request
-        torqueRequest = accelRequest * AMK_MAX_TORQUE;
+        torqueRequest = accelRequest * max_regen_torque;
     }
     else
     {

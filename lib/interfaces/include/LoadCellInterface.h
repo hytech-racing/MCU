@@ -4,6 +4,7 @@
 #include "Utility.h"
 #include "SysClock.h"
 #include "AnalogSensorsInterface.h"
+#include "SharedDataTypes.h"
 
 /* Structs */
 
@@ -15,12 +16,6 @@ struct LoadCellInterfaceTick_s
     const AnalogConversion_s &RRConversion;
 };
 
-struct LoadCellInterfaceOutput_s
-{
-    veh_vec<float> loadCellForcesFiltered;
-    veh_vec<AnalogConversion_s> loadCellConversions;
-    bool FIRSaturated;
-};
 
 class LoadCellInterface
 {

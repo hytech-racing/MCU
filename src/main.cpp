@@ -1,14 +1,17 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-
+#include "ParameterInterface.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
+#include "NativeEthernet.h"
 
 // /* Interfaces */
+
 #include "HytechCANInterface.h"
+#include "Teensy_ADC.h"
 #include "MCP_ADC.h"
 #include "ORBIS_BR10.h"
 #include "MCUInterface.h"
@@ -20,6 +23,7 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+#include "TorqueControllers.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -27,6 +31,7 @@
 #include "SafetySystem.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
+// #include "TorqueControllerMux.h"
 #include "TorqueControllerMux.h"
 
 #include "CASESystem.h"
@@ -34,6 +39,7 @@
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
+#include "PrintLogger.h"
 /*
     PARAMETER STRUCTS
 */
@@ -50,7 +56,9 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .analog_steering_channel = MCU15_STEERING_CHANNEL,
     .current_channel = MCU15_CUR_POS_SENSE_CHANNEL,
     .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
-    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL};
+    .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL,
+    .therm_fl_channel = MCU15_THERM_FL_CHANNEL,
+    .therm_fr_channel = MCU15_THERM_FR_CHANNEL};
 
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
@@ -85,6 +93,9 @@ const PedalsParams brake_params = {
     DATA SOURCES
 */
 
+EthernetUDP protobuf_send_socket;
+EthernetUDP protobuf_recv_socket;
+
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
 FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
@@ -97,12 +108,14 @@ using CircularBufferType = CANBufferType;
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
 MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS, 1000000); // 1M baud needed for 04s
 MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS, 1000000);
-
+Teensy_ADC<2> mcu_adc = Teensy_ADC<2>(DEFAULT_ANALOG_PINS);
 OrbisBR10 steering1(&Serial5);
 
 // /*
 //     INTERFACES
 // */
+ParameterInterface param_interface;
+ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(8);
@@ -140,77 +153,89 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(1.0, 0.4);
+
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
-    .AbsoluteTorqueLimit = AMK_MAX_TORQUE, // N-m
-    .yaw_pid_p = 1.33369,
+    .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
+    .yaw_pid_p = 1.5,
     .yaw_pid_i = 0.25,
+    // .yaw_pid_p = 0.5, // SKIDPAD Testing
+    // .yaw_pid_i = 0.0, // SKIDPAD Testing
     .yaw_pid_d = 0.0,
-    .tcs_pid_p = 40.0,
+    .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
+    .tcs_pid_p_upperBound_front = 45.0,
+    .tcs_pid_p_lowerBound_rear = 32.0,
+    .tcs_pid_p_upperBound_rear = 45.0,
     .tcs_pid_i = 0.0,
     .tcs_pid_d = 0.0,
     .useLaunch = false,
     .usePIDTV = true,
     .useTCSLimitedYawPID = true,
-    .useNormalForce = false,
+    .useNormalForce = true,
     .useTractionControl = true,
     .usePowerLimit = true,
     .usePIDPowerLimit = false,
     .useDecoupledYawBrakes = true,
-    .useDiscontinuousYawPIDBrakes = false,
-    .tcsSLThreshold = 0.2,
-    .launchSL = 0.2,
-    .launchDeadZone = 20,        // N-m
-    .launchVelThreshold = 0.75,  // m/s
-    .tcsVelThreshold = 2.5,      // m/s
-    .yawPIDMaxDifferential = 10, // N-m
-    .yawPIDErrorThreshold = 0.1, // rad/s
-    .yawPIDVelThreshold = 1,     // m/s
-    .yawPIDCoastThreshold = 2.5, // m/s
+    .useDiscontinuousYawPIDBrakes = true,
+    .tcsSLThreshold = 0.3,
+    .launchSL = 0.3,
+    .launchDeadZone = 20.0,        // N-m
+    .launchVelThreshold = 0.15,    // m/s
+    .tcsVelThreshold = 0.15,       // m/s
+    .yawPIDMaxDifferential = 10.0, // N-m
+    .yawPIDErrorThreshold = 0.1,   // rad/s
+    .yawPIDVelThreshold = 0.35,    // m/s
+    .yawPIDCoastThreshold = 2.5,   // m/s
     .yaw_pid_brakes_p = 0.25,
-    .yaw_pid_brakes_i = 0,
-    .yaw_pid_brakes_d = 0,
+    .yaw_pid_brakes_i = 0.0,
+    .yaw_pid_brakes_d = 0.0,
     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
-    .discontinuousBrakesPercentThreshold = 0.4,
-    .TorqueMode = AMK_MAX_TORQUE, // N-m
-    // .TorqueMode = 2,     // N-m
-    .RegenLimit = -10.0, // N-m
+    .discontinuousBrakesPercentThreshold = 0.7,
+    .TorqueMode = 21.42, // N-m
+    .RegenLimit = -15.0, // N-m
     .useNoRegen5kph = true,
     .useTorqueBias = true,
-    .DriveTorquePercentFront = 0.5,
-    .BrakeTorquePercentFront = 0.6,
-    .MechPowerMaxkW = 63, // kW
+    .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
+    .BrakeTorquePercentFront = 0.7,
+    .MechPowerMaxkW = 63.0,            // kW
+    .launchLeftRightMaxDiff = 2.0,     // N-m
+    .tcs_pid_lower_rpm_front = 0.0,    // RPM
+    .tcs_pid_upper_rpm_front = 5000.0, // RPM
+    .tcs_pid_lower_rpm_rear = 0.0,     // RPM
+    .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
+    .maxNormalLoadBrakeScalingFront = 1.25,
 
     // Following used for calculate_torque_request in CASESystem.tpp
-    .max_rpm = AMK_MAX_RPM,
-    .max_regen_torque = AMK_MAX_TORQUE,
-    .max_torque = AMK_MAX_TORQUE,
+    .max_rpm = 20000,
+    .max_regen_torque = 21.42,
+    .max_torque = 21.42,
 };
-// Torque limit used for yaw pid torque split overflow
-// Yaw PID P
-// Yaw PID I
-// Yaw PID D
-// TCS PID P
-// TCS PID I
-// TCS PID D
-// Use launch
-// Use PID TV
-// Use normal force TV
-// Use Traction Control (TCS)
-// Use power limit
-// Use PID power limit
-// TCS activation threshold
-// TCS launch SL target
-// TCS launch torque deadzone (N-m)
-// Max motor rpm
-// Max regen torque
-// Max torque
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, case_config);
+RateLimitedLogger logger;
+//// Controllers
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
+// mode 0
+TorqueControllerSimple tc_simple(1.0f, 1.0f);
+// mode 1
+TorqueControllerLoadCellVectoring tc_vec;
+// mode 2
+TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
+
+// mode 3
+TorqueControllerSimpleLaunch simple_launch;
+// mode 4
+TorqueControllerSlipLaunch slip_launch;
+const int number_of_controllers = 5;
+TorqueControllerMux<number_of_controllers>
+    torque_controller_mux({static_cast<Controller *>(&tc_simple),
+                           static_cast<Controller *>(&tc_vec),
+                           static_cast<Controller *>(&case_wrapper),
+                           static_cast<Controller *>(&simple_launch),
+                           static_cast<Controller *>(&slip_launch)},
+                          {false, false, true, false, false});
 
 /* Declare state machine */
-MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
+MCUStateMachine<DriveSys_t, TorqueControllerMux<number_of_controllers>> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
 // /*
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
@@ -231,20 +256,26 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
+void handle_ethernet_interface_comms();
+
 /*
     SETUP
 */
 
 void setup()
 {
-
     // initialize CAN communication
     init_all_CAN_devices();
+
+    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     SPI.begin();
     a1.init();
     a2.init();
     a3.init();
+    mcu_adc.init();
 
     a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_PEDAL_MAX - ACCEL1_PEDAL_MIN)));
     a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_PEDAL_MAX - ACCEL2_PEDAL_MIN)));
@@ -264,6 +295,8 @@ void setup()
     a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
     a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
 
+    mcu_adc.setAlphas(MCU15_THERM_FL, 0.95);
+    mcu_adc.setAlphas(MCU15_THERM_FR, 0.95);
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
@@ -282,7 +315,6 @@ void setup()
     /*
         Init Systems
     */
-
     safety_system.init();
 
     // Drivetrain set all inverters disabled
@@ -296,9 +328,10 @@ void setup()
 
 void loop()
 {
-    // Serial.println("test");
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
+
+    // handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -308,8 +341,19 @@ void loop()
     tick_all_interfaces(curr_tick);
 
     // tick systems
-    tick_all_systems(curr_tick);
 
+    // single source of truth for the state of the car.
+    // no systems or interfaces should write directly to this.
+    SharedCarState_s car_state_inst(curr_tick,
+                             steering_system.getSteeringSystemData(),
+                             drivetrain.get_dynamic_data(),
+                             load_cell_interface.getLoadCellForces(),
+                             pedals_system.getPedalsSystemData(),
+                             vn_interface.get_vn_struct());
+
+    tick_all_systems(curr_tick);
+    
+    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_), curr_tick.millis, 100);
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
@@ -317,7 +361,11 @@ void loop()
         drivetrain.reset_drivetrain();
     }
     // tick state machine
-    fsm.tick_state_machine(curr_tick.millis);
+
+    fsm.tick_state_machine(curr_tick.millis, car_state_inst);
+
+    // give the state of the car to the param interface
+    param_interface.update_car_state(fsm.get_state());
 
     // tick safety system
     safety_system.software_shutdown(curr_tick);
@@ -362,24 +410,35 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     TriggerBits_s t = current_system_tick.triggers;
     if (t.trigger10) // 10Hz
     {
-        dashboard.tick10(
-            &main_ecu,
-            int(fsm.get_state()),
-            buzzer.buzzer_is_on(),
-            drivetrain.drivetrain_error_occured(),
-            torque_controller_mux.getTorqueLimit(),
-            ams_interface.get_filtered_min_cell_voltage(),
-            telem_interface.get_glv_voltage(a1.get()),
-            static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
-            dashboard.getDialMode());
+        int slip_launch_state_int = static_cast<int>(slip_launch.get_launch_state());
+        int simple_launch_state_int = static_cast<int>(simple_launch.get_launch_state());
+        int combined_launch_state = 0;
+        if(slip_launch_state_int > 0){
+            combined_launch_state = slip_launch_state_int;
+        } else if(simple_launch_state_int > 0)
+        {
+            combined_launch_state = simple_launch_state_int;
+        } else {
+            combined_launch_state = 0;
+        }
+            dashboard.tick10(
+                &main_ecu,
+                int(fsm.get_state()),
+                buzzer.buzzer_is_on(),
+                drivetrain.drivetrain_error_occured(),
+                torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
+                ams_interface.get_filtered_min_cell_voltage(),
+                telem_interface.get_glv_voltage(a1.get()),
+                combined_launch_state,
+                dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
             drivetrain.drivetrain_error_occured(),
             safety_system.get_software_is_ok(),
-            static_cast<int>(torque_controller_mux.getDriveMode()),
-            static_cast<int>(torque_controller_mux.getTorqueLimit()),
-            torque_controller_mux.getMaxTorque(),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_torque_limit_enum),
+            torque_controller_mux.get_tc_mux_status().current_torque_limit_value,
             buzzer.buzzer_is_on(),
             pedals_system.getPedalsSystemData(),
             ams_interface.pack_charge_is_critical(),
@@ -391,6 +450,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get(),
             a2.get(),
             a3.get(),
+            mcu_adc.get(),
             steering1.convert(),
             &inv.fl,
             &inv.fr,
@@ -405,7 +465,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            {});
+            torque_controller_mux.get_tc_mux_status().current_error);
     }
 
     if (t.trigger50) // 50Hz
@@ -419,6 +479,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
         a1.tick();
         a2.tick();
         a3.tick();
+        mcu_adc.tick();
         load_cell_interface.tick(
             (LoadCellInterfaceTick_s){
                 .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
@@ -438,15 +499,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 void tick_all_systems(const SysTick_s &current_system_tick)
 {
     // tick pedals system
-
-    // Serial.println("accel1");
-    // Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
-    // Serial.println("accel2");
-    // Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
-    // Serial.println("brake1");
-    // Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
-    // Serial.println("brake2");
-    // Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
 
     pedals_system.tick(
         current_system_tick,
@@ -481,14 +533,26 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         3);
 
-    torque_controller_mux.tick(
-        current_system_tick,
-        drivetrain.get_dynamic_data(),
-        pedals_system.getPedalsSystemData(),
-        steering_system.getSteeringSystemData(),
-        load_cell_interface.getLoadCellForces(),
-        dashboard.getDialMode(),
-        dashboard.torqueModeButtonPressed(),
-        vn_interface.get_vn_struct(),
-        controller_output);
+    // case_system.update_config_from_param_interface(param_interface);
+}
+
+void handle_ethernet_interface_comms()
+{
+    // function that will handle receiving and distributing of all messages to all ethernet interfaces
+    // via the union message. this is a little bit cursed ngl.
+    // TODO un fuck this and make it more sane
+    // Serial.println("bruh");
+    handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
+
+    // this is just kinda here i know.
+    if (param_interface.params_need_sending())
+    {
+        // Serial.println("handling ethernet");
+        auto config = param_interface.get_config();
+        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
+        {
+            // TODO this means that something bad has happend
+        }
+        param_interface.reset_params_need_sending();
+    }
 }

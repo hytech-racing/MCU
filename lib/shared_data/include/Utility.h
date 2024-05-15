@@ -1,6 +1,6 @@
 #ifndef __UTILITY_H__
 #define __UTILITY_H__
-
+#include "PhysicalParameters.h"
 // Defines
 const int FL =          0;
 const int FR =          1;

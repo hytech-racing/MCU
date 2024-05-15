@@ -90,9 +90,9 @@ void VNInterface<message_queue>::receive_ang_rates_CAN(CAN_message_t & recvd_msg
  * @brief 
  * getter method for returning vn_data structure
  * @tparam message_queue 
- * @return vector_nav 
+ * @return vectornav 
  */
 template<typename message_queue>
-vector_nav VNInterface<message_queue>::get_vn_struct() {
+vectornav VNInterface<message_queue>::get_vn_struct() {
     return vn_data; 
 }

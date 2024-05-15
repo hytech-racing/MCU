@@ -6,36 +6,9 @@
 #include "hytech.h"
 #include "MCUInterface.h"
 #include "InverterInterface.h"
+#include "SharedDataTypes.h"
 
-#include "TorqueControllers.h"
 
-/*
-    Enum for the car's torque limits
-    MOVE ME! - ideally into a TorqueControllerDefs.h file
-    to prevent circular dependencies
-*/
-enum class TorqueLimit_e
-{
-    TCMUX_LOW_TORQUE = 0,
-    TCMUX_MID_TORQUE = 1,
-    TCMUX_FULL_TORQUE = 2,
-    TCMUX_NUM_TORQUE_LIMITS = 3,
-};
-
-/* Enum for the modes on the dial, corresponds directly to dial index pos. */
-enum class DialMode_e
-{   
-    /* No torque vectoring */
-    MODE_0,
-    /* Normal force torque vectoring */
-    MODE_1,
-    /* PID torque vectoring */
-    MODE_2,
-    /* Launch Ctrl */
-    MODE_3,
-    MODE_4,
-    MODE_5,
-};
 
 /* Enum for defined LED colors. ON will be LED's default color on dashboard*/
 enum class LEDColors_e
@@ -77,13 +50,15 @@ struct DashButtons_s
     bool right_shifter;
 };
 
+
 /* Struct holding all data for the DashboardInterface (inputs and outputs) */
 struct DashComponentInterface_s
 {
     /* READ DATA */
     // enum for dial position read by controller mux
-    DialMode_e dial_mode;
-    DialMode_e cur_dial_mode;
+    ControllerMode_e dial_mode;
+    ControllerMode_e cur_dial_mode;
+    TorqueLimit_e torque_limit_mode;
     // Buttons struct for better naming
     DashButtons_s button;
     bool ssok; // safety system OK (IMD?) RENAME
@@ -111,6 +86,8 @@ private:
     CANBufferType *msg_queue_;
     /* The instantiated data struct used to access data by member functions */
     DashComponentInterface_s _data;
+    bool prev_button_pressed_state_;
+    void update_torque_mode_(bool button_pressed);
 
 public:
     /*!
@@ -121,6 +98,8 @@ public:
     */
     DashboardInterface(CANBufferType *msg_output_queue)
     {
+        _data.torque_limit_mode = TorqueLimit_e::TCMUX_FULL_TORQUE;
+        prev_button_pressed_state_ = false;
         msg_queue_ = msg_output_queue;
     };
 
@@ -145,14 +124,14 @@ public:
                 float min_cell_voltage,
                 AnalogConversion_s glv_voltage,
                 int launch_state,
-                DialMode_e dial_mode);
+                ControllerMode_e dial_mode);
 
     /*!
         getter for the dashboard's current dial position (drive profile)
-        @return returns a DialMode_e enum with the current dial position
+        @return returns a ControllerMode_e enum with the current dial position
     */
-    DialMode_e getDialMode();
-    
+    ControllerMode_e getDialMode();
+    TorqueLimit_e getTorqueLimitMode();
     /* gets whether the safety system is ok (wtf is a safety system - rename this)*/
     bool safetySystemOK();
 

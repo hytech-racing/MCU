@@ -6,21 +6,8 @@
 #include "stdint.h"
 #include "SysClock.h"
 #include "MCUInterface.h"
+#include "SharedDataTypes.h"
 
-struct DrivetrainCommand_s
-{
-    float speeds_rpm[NUM_MOTORS];
-    float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
-};
-
-struct DrivetrainDynamicReport_s
-{
-    uint16_t measuredInverterFLPackVoltage;
-    float measuredSpeeds[NUM_MOTORS];
-    float measuredTorques[NUM_MOTORS];
-    float measuredTorqueCurrents[NUM_MOTORS];
-    float measuredMagnetizingCurrents[NUM_MOTORS];
-};
 
 template <typename InverterType>
 class DrivetrainSystem
