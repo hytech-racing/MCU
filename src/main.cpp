@@ -39,6 +39,7 @@
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
+#include "PrintLogger.h"
 /*
     PARAMETER STRUCTS
 */
@@ -210,7 +211,7 @@ CASEConfiguration case_config = {
     .max_regen_torque = 21.42,
     .max_torque = 21.42,
 };
-
+RateLimitedLogger logger;
 //// Controllers
 CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
 // mode 0
@@ -269,11 +270,6 @@ void setup()
     // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
     // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
     // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
-
-    /* Do this to send message VVV */
-    // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
-    // protobuf_socket.write(buf, len);
-    // protobuf_socker.endPacket();
 
     SPI.begin();
     a1.init();
@@ -356,7 +352,8 @@ void loop()
                              vn_interface.get_vn_struct());
 
     tick_all_systems(curr_tick);
-
+    
+    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_), curr_tick.millis, 100);
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())

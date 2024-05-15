@@ -144,7 +144,8 @@ void MCUStateMachine<DrivetrainSysType, TCMuxType>::tick_state_machine(unsigned 
 
         if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
         {
-
+            logger_.log_out("torque mode:", current_millis, 100);
+            logger_.log_out(static_cast<int>(dashboard_->getTorqueLimitMode()), current_millis, 100);
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand(dashboard_->getDialMode(), dashboard_->getTorqueLimitMode(), current_car_state));
         }
         else

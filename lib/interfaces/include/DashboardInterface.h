@@ -88,6 +88,7 @@ private:
     DashComponentInterface_s _data;
     bool prev_button_pressed_state_;
     void update_torque_mode_(bool button_pressed);
+
 public:
     /*!
         Constructor for new DashboardInterface, All that it is inited with

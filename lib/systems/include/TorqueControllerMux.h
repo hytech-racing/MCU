@@ -33,6 +33,9 @@
 // - [x] add 3 bit status to a telemetry message for the TC mux status to HT_CAN 
 // - [x] pass state of tc mux into telem interface and add the CAN signal
 // - [x] remove the old tc mux
+// - [ ] add back checking of the ready flag of the controllers and if the controller isnt ready it defaults
+//        - [ ] add test for this
+// - [ ] make folder for the controllers
 // - [ ] write integration tests for the real controllers
 //      - [x] test construction with real controllers
 //      - [ ] ensure that sane outputs occur on first tick of each controller

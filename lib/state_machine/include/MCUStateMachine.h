@@ -11,6 +11,7 @@
 #include "SafetySystem.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
+#include "PrintLogger.h"
 
 // #include "IMDInterface.h"
 
@@ -75,6 +76,7 @@ private:
     // IMDInterface *imd_;
     SafetySystem *safety_system_;
     TCMuxType *controller_mux_;
+    RateLimitedLogger logger_;
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */
