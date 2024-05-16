@@ -7,7 +7,7 @@
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
 // #include "NativeEthernet.h"
-
+#include <QNEthernet.h>
 // /* Interfaces */
 
 #include "HytechCANInterface.h"
@@ -89,9 +89,10 @@ const PedalsParams brake_params = {
 /*
     DATA SOURCES
 */
-
-EthernetUDP protobuf_send_socket;
-EthernetUDP protobuf_recv_socket;
+// using namespace qindesign::network;
+namespace qn = qindesign::network;
+qn::EthernetUDP protobuf_send_socket;
+qn::EthernetUDP protobuf_recv_socket;
 
 /* Two CAN lines on Main ECU rev15 */
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
@@ -152,70 +153,70 @@ using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
 TorqueControllerMux torque_controller_mux(1.0, 0.4);
 // TODO ensure that case uses max regen torque, right now its not
-CASEConfiguration case_config = {
-    // Following used for generated code
-    .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
-    .yaw_pid_p = 1.5,
-    .yaw_pid_i = 0.25,
-    // .yaw_pid_p = 0.5, // SKIDPAD Testing
-    // .yaw_pid_i = 0.0, // SKIDPAD Testing
-    .yaw_pid_d = 0.0,
-    .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
-    .tcs_pid_p_upperBound_front = 45.0,
-    .tcs_pid_p_lowerBound_rear = 32.0,
-    .tcs_pid_p_upperBound_rear = 45.0,
-    .tcs_pid_i = 0.0,
-    .tcs_pid_d = 0.0,
-    .useLaunch = false,
-    .usePIDTV = true,
-    .useTCSLimitedYawPID = true,
-    .useNormalForce = true,
-    .useTractionControl = true,
-    .usePowerLimit = true,
-    .usePIDPowerLimit = false,
-    .useDecoupledYawBrakes = true,
-    .useDiscontinuousYawPIDBrakes = true,
-    .tcsSLThreshold = 0.3,
-    .launchSL = 0.3,
-    .launchDeadZone = 20.0,        // N-m
-    .launchVelThreshold = 0.15,    // m/s
-    .tcsVelThreshold = 0.15,       // m/s
-    .yawPIDMaxDifferential = 10.0, // N-m
-    .yawPIDErrorThreshold = 0.1,   // rad/s
-    .yawPIDVelThreshold = 0.35,    // m/s
-    .yawPIDCoastThreshold = 2.5,   // m/s
-    .yaw_pid_brakes_p = 0.25,
-    .yaw_pid_brakes_i = 0.0,
-    .yaw_pid_brakes_d = 0.0,
-    .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
-    .discontinuousBrakesPercentThreshold = 0.7,
-    .TorqueMode = 21.42, // N-m
-    .RegenLimit = -15.0, // N-m
-    .useNoRegen5kph = true,
-    .useTorqueBias = true,
-    .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
-    .BrakeTorquePercentFront = 0.7,
-    .MechPowerMaxkW = 63.0,            // kW
-    .launchLeftRightMaxDiff = 2.0,     // N-m
-    .tcs_pid_lower_rpm_front = 0.0,    // RPM
-    .tcs_pid_upper_rpm_front = 5000.0, // RPM
-    .tcs_pid_lower_rpm_rear = 0.0,     // RPM
-    .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
-    .maxNormalLoadBrakeScalingFront = 1.25,
-    .tcs_saturation_front = 20,
-    .tcs_saturation_rear = 20,
-    .TCSGenLeftRightDiffLowerBound = 2,  // N-m
-    .TCSGenLeftRightDiffUpperBound = 20, // N-m
-    .TCSWheelSteerLowerBound = 2,        // Deg
-    .TCSWheelSteerUpperBound = 25,       // Deg
+// CASEConfiguration case_config = {
+//     // Following used for generated code
+//     .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
+//     .yaw_pid_p = 1.5,
+//     .yaw_pid_i = 0.25,
+//     // .yaw_pid_p = 0.5, // SKIDPAD Testing
+//     // .yaw_pid_i = 0.0, // SKIDPAD Testing
+//     .yaw_pid_d = 0.0,
+//     .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
+//     .tcs_pid_p_upperBound_front = 45.0,
+//     .tcs_pid_p_lowerBound_rear = 32.0,
+//     .tcs_pid_p_upperBound_rear = 45.0,
+//     .tcs_pid_i = 0.0,
+//     .tcs_pid_d = 0.0,
+//     .useLaunch = false,
+//     .usePIDTV = true,
+//     .useTCSLimitedYawPID = true,
+//     .useNormalForce = true,
+//     .useTractionControl = true,
+//     .usePowerLimit = true,
+//     .usePIDPowerLimit = false,
+//     .useDecoupledYawBrakes = true,
+//     .useDiscontinuousYawPIDBrakes = true,
+//     .tcsSLThreshold = 0.3,
+//     .launchSL = 0.3,
+//     .launchDeadZone = 20.0,        // N-m
+//     .launchVelThreshold = 0.15,    // m/s
+//     .tcsVelThreshold = 0.15,       // m/s
+//     .yawPIDMaxDifferential = 10.0, // N-m
+//     .yawPIDErrorThreshold = 0.1,   // rad/s
+//     .yawPIDVelThreshold = 0.35,    // m/s
+//     .yawPIDCoastThreshold = 2.5,   // m/s
+//     .yaw_pid_brakes_p = 0.25,
+//     .yaw_pid_brakes_i = 0.0,
+//     .yaw_pid_brakes_d = 0.0,
+//     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
+//     .discontinuousBrakesPercentThreshold = 0.7,
+//     .TorqueMode = 21.42, // N-m
+//     .RegenLimit = -15.0, // N-m
+//     .useNoRegen5kph = true,
+//     .useTorqueBias = true,
+//     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
+//     .BrakeTorquePercentFront = 0.7,
+//     .MechPowerMaxkW = 63.0,            // kW
+//     .launchLeftRightMaxDiff = 2.0,     // N-m
+//     .tcs_pid_lower_rpm_front = 0.0,    // RPM
+//     .tcs_pid_upper_rpm_front = 5000.0, // RPM
+//     .tcs_pid_lower_rpm_rear = 0.0,     // RPM
+//     .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
+//     .maxNormalLoadBrakeScalingFront = 1.25,
+//     .tcs_saturation_front = 20,
+//     .tcs_saturation_rear = 20,
+//     .TCSGenLeftRightDiffLowerBound = 2,  // N-m
+//     .TCSGenLeftRightDiffUpperBound = 20, // N-m
+//     .TCSWheelSteerLowerBound = 2,        // Deg
+//     .TCSWheelSteerUpperBound = 25,       // Deg
 
-    // Following used for calculate_torque_request in CASESystem.tpp
-    .max_rpm = 20000,
-    .max_regen_torque = 21.42,
-    .max_torque = 21.42,
-};
+//     // Following used for calculate_torque_request in CASESystem.tpp
+//     .max_rpm = 20000,
+//     .max_regen_torque = 21.42,
+//     .max_torque = 21.42,
+// };
 
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550);
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -250,15 +251,17 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    qn::Ethernet.begin(EthParams::default_MCU_ip, EthParams::default_netmask, EthParams::default_gateway);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
-    /* Do this to send message VVV */
-    // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
-    // protobuf_socket.write(buf, len);
-    // protobuf_socker.endPacket();
+    // /* Do this to send message VVV */
+    // // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
+    // // protobuf_socket.write(buf, len);
+    // // protobuf_socker.endPacket();
 
+
+    case_system.update_config_from_param_interface(param_interface);
     SPI.begin();
     a1.init();
     a2.init();
@@ -319,7 +322,7 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    // handle_ethernet_interface_comms();
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -353,10 +356,10 @@ void loop()
     // Basic debug prints
     if (curr_tick.triggers.trigger5)
     {
-        Serial.print("Steering system reported angle (deg): ");
-        Serial.println(steering_system.getSteeringSystemData().angle);
+        // Serial.print("Steering system reported angle (deg): ");
+        // Serial.println(steering_system.getSteeringSystemData().angle);
         
-        Serial.println();
+        // Serial.println();
     }
 }
 
@@ -507,7 +510,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         3);
 
-    // case_system.update_config_from_param_interface(param_interface);
+    case_system.update_config_from_param_interface(param_interface);
 
     torque_controller_mux.tick(
         current_system_tick,
@@ -526,13 +529,13 @@ void handle_ethernet_interface_comms()
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
     // TODO un fuck this and make it more sane
-    // Serial.println("bruh");
+    
     handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
 
     // this is just kinda here i know.
     if (param_interface.params_need_sending())
     {
-        // Serial.println("handling ethernet");
+        // Serial.println("handling ethernet");/
         auto config = param_interface.get_config();
         if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
         {

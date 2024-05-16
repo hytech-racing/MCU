@@ -85,13 +85,12 @@ public:
         message_queue *can_queue,
         unsigned long controller_send_period_ms,
         unsigned long vehicle_math_offset_ms,
-        unsigned long lowest_controller_send_period_ms,
-        CASEConfiguration config)
+        unsigned long lowest_controller_send_period_ms)
     {
         msg_queue_ = can_queue;
         case_.initialize();
         vn_active_start_time_ = 0;
-        config_ = config;
+        config_ = {};
         last_controller_pt1_send_time_ = 0;
         last_controller_pt2_send_time_ = 0;
         last_controller_pt3_send_time_ = 0;
@@ -194,6 +193,12 @@ public:
         config_.tcs_pid_lower_rpm_rear = cfg.tcs_pid_lower_rpm_rear;
         config_.tcs_pid_upper_rpm_rear = cfg.tcs_pid_upper_rpm_rear;
         config_.maxNormalLoadBrakeScalingFront = cfg.maxNormalLoadBrakeScalingFront;
+        config_.tcs_saturation_front = cfg.tcs_saturation_front;
+        config_.tcs_saturation_rear = cfg.tcs_saturation_rear;
+        config_.TCSGenLeftRightDiffLowerBound = cfg.TCSGenLeftRightDiffLowerBound;
+        config_.TCSGenLeftRightDiffUpperBound = cfg.TCSGenLeftRightDiffUpperBound;
+        config_.TCSWheelSteerLowerBound = cfg.TCSWheelSteerLowerBound;
+        config_.TCSWheelSteerUpperBound = cfg.TCSWheelSteerUpperBound;
         config_.max_rpm = cfg.max_rpm;
         config_.max_regen_torque = cfg.max_regen_torque;
         config_.max_torque = cfg.max_torque;
