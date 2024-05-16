@@ -88,11 +88,14 @@ void TorqueControllerMux::tick(
 
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
 
+        // if (muxMode_ != TorqueController_e::TC_CASE_SYSTEM)
+        // {
+        //     applyRegenLimit(&drivetrainCommand_, &drivetrainData);
+        //     applyTorqueLimit(&drivetrainCommand_);
+        //     applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        //     applyPosSpeedLimit(&drivetrainCommand_);
+        // }
         // apply torque limit before power limit to not power limit
-        // applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        // applyTorqueLimit(&drivetrainCommand_);
-        // applyPowerLimit(&drivetrainCommand_, &drivetrainData);
-        applyPosSpeedLimit(&drivetrainCommand_);
     }
 }
 
