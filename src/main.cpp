@@ -105,7 +105,7 @@ OrbisBR10 steering1(&Serial5);
 // */
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
-AMSInterface ams_interface(8);
+AMSInterface ams_interface(&CAN3_txBuffer, 8);
 WatchdogInterface wd_interface(32);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
@@ -273,7 +273,7 @@ void setup()
 
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -411,6 +411,8 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
+
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz

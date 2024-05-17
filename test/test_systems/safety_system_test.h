@@ -13,7 +13,7 @@ TEST(SafetySystemTest, test_software_shutdown) {
 
     SysTick_s curr_tick = sys_clock.tick(0);
 
-    AMSInterface ams_interface(0, 0, 0, 0, 0);
+    AMSInterface ams_interface(0, 0, 0, 0, 0, 0);
     WatchdogInterface wd_interface(0);
     SafetySystem safety_system(&ams_interface, &wd_interface);
 
