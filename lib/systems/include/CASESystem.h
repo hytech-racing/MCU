@@ -70,6 +70,19 @@ struct CASEConfiguration
     float TCS_NL_endBoundPerc_FrontAxle;
     float TCS_NL_startBoundPerc_RearAxle;
     float TCS_NL_endBoundPerc_RearAxle;
+    bool useNL_TCS_SlipSchedule;
+    float launchSL_startBound_Front;
+    float launchSL_endBound_Front;
+    float launchSL_startBound_Rear;
+    float launchSL_endBound_Rear;
+    float TCS_SL_startBound_Front;
+    float TCS_SL_endBound_Front;
+    float TCS_SL_startBound_Rear;
+    float TCS_SL_endBound_Rear;
+    float TCS_SL_NLPerc_startBound_Front;    
+    float TCS_SL_NLPerc_endBound_Front;
+    float TCS_SL_NLPerc_startBound_Rear;
+    float TCS_SL_NLPerc_endBound_Rear;
 
     float max_rpm;
     float max_regen_torque;
