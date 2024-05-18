@@ -12,6 +12,8 @@
 // TODO: evalaute reasonable thresholds for agreement
 #define STEERING_DIVERGENCE_ERROR_THRESHOLD (14.0) // Steering sensors can disagree by x degrees before output is considered erroneous
 #define STEERING_DIVERGENCE_WARN_THRESHOLD (8.0) // Warning condition will be raised when steering sensors diverge x degrees
+#define NUM_SENSORS 2
+#define DEFAULT_STEERING_ALPHA (0.0)
 
 // Enums
 enum class SteeringSystemStatus_e
@@ -52,18 +54,12 @@ private:
     float filteredAngleSecondary_;
 public:
     SteeringSystem(SteeringEncoderInterface *primarySensor)
-    : primarySensor_(primarySensor)
+    : SteeringSystem(primarySensor, DEFAULT_STEERING_ALPHA)
     {}
 
     SteeringSystem(SteeringEncoderInterface *primarySensor, float filterAlpha)
-    : primarySensor_(primarySensor)
-    {
-        for (int i = 0; i < NUM_SENSORS; i++)
-        {
-            steeringFilters_[i] = Filter_IIR<float>(filterAlpha);
-        }
-        
-    }
+    : SteeringSystem(primarySensor, filterAlpha, filterAlpha)
+    {}
 
     SteeringSystem(SteeringEncoderInterface *primarySensor, float filterAlphaPrimary, float filterAlphaSecondary)
     : primarySensor_(primarySensor)
