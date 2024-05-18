@@ -252,6 +252,7 @@ void setup()
     init_all_CAN_devices();
 
     qn::Ethernet.begin(EthParams::default_MCU_ip, EthParams::default_netmask, EthParams::default_gateway);
+    qn::Ethernet.setDHCPEnabled(false);
     protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
     protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
@@ -531,14 +532,17 @@ void handle_ethernet_interface_comms()
     // TODO un fuck this and make it more sane
     
     handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
-
-    // this is just kinda here i know.
+    
     if (param_interface.params_need_sending())
     {
-        // Serial.println("handling ethernet");/
+        // Serial.println("handling ethernet");
         auto config = param_interface.get_config();
-        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
+        HT_ETH_Union union_response = HT_ETH_Union_init_zero;
+        union_response.which_type_union = HT_ETH_Union_config__tag;
+        union_response.type_union.config_ = config;
+        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, union_response, HT_ETH_Union_fields))
         {
+            Serial.println("yo shit happened");
             // TODO this means that something bad has happend
         }
         param_interface.reset_params_need_sending();

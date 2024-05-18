@@ -44,11 +44,13 @@ bool handle_ethernet_socket_send_pb(qn::EthernetUDP* socket, const pb_struct& ms
     pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
     if (!pb_encode(&stream, msg_desc, &msg)) {
         // You can handle error more explicitly by looking at stream.errmsg
+        Serial.println("error couldnt encode");
         return false;
     }
     auto message_length = stream.bytes_written;
     socket->write(buffer, message_length);
     socket->endPacket();
+    
     return true;
 }
 
