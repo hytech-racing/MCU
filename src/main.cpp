@@ -6,7 +6,7 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-#include "NativeEthernet.h"
+// #include "NativeEthernet.h"
 
 // /* Interfaces */
 
@@ -157,8 +157,6 @@ CASEConfiguration case_config = {
     .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
     .yaw_pid_p = 1.5,
     .yaw_pid_i = 0.25,
-    // .yaw_pid_p = 0.5, // SKIDPAD Testing
-    // .yaw_pid_i = 0.0, // SKIDPAD Testing
     .yaw_pid_d = 0.0,
     .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
     .tcs_pid_p_upperBound_front = 45.0,
@@ -179,7 +177,7 @@ CASEConfiguration case_config = {
     .launchSL = 0.3,
     .launchDeadZone = 20.0,        // N-m
     .launchVelThreshold = 0.15,    // m/s
-    .tcsVelThreshold = 0.15,       // m/s
+    .tcsVelThreshold = 1.5,        // m/s
     .yawPIDMaxDifferential = 10.0, // N-m
     .yawPIDErrorThreshold = 0.1,   // rad/s
     .yawPIDVelThreshold = 0.35,    // m/s
@@ -208,6 +206,12 @@ CASEConfiguration case_config = {
     .TCSGenLeftRightDiffUpperBound = 20, // N-m
     .TCSWheelSteerLowerBound = 2,        // Deg
     .TCSWheelSteerUpperBound = 25,       // Deg
+    .useRPM_TCS_GainSchedule = false,    // If both are false, then P values defaults to lower bound per axle
+    .useNL_TCS_GainSchedule = true,
+    .TCS_NL_startBoundPerc_FrontAxle = 0.5,
+    .TCS_NL_endBoundPerc_FrontAxle = 0.4,
+    .TCS_NL_startBoundPerc_RearAxle = 0.5,
+    .TCS_NL_endBoundPerc_RearAxle = 0.6,
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,
@@ -349,6 +353,15 @@ void loop()
     // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+
+    // Basic debug prints
+    if (curr_tick.triggers.trigger5)
+    {
+        Serial.print("Steering system reported angle (deg): ");
+        Serial.println(steering_system.getSteeringSystemData().angle);
+
+        Serial.println();
+    }
 }
 
 /*

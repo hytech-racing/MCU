@@ -64,6 +64,12 @@ struct CASEConfiguration
     float TCSGenLeftRightDiffUpperBound;
     float TCSWheelSteerLowerBound;
     float TCSWheelSteerUpperBound;
+    bool useRPM_TCS_GainSchedule;
+    bool useNL_TCS_GainSchedule;
+    float TCS_NL_startBoundPerc_FrontAxle;
+    float TCS_NL_endBoundPerc_FrontAxle;
+    float TCS_NL_startBoundPerc_RearAxle;
+    float TCS_NL_endBoundPerc_RearAxle;
 
     float max_rpm;
     float max_regen_torque;

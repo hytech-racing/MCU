@@ -143,6 +143,15 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.TCSWheelSteerUpperBound = config_.TCSWheelSteerUpperBound;
 
+    in.useRPM_TCS_GainSchedule = config_.useRPM_TCS_GainSchedule;
+
+    in.useNL_TCS_GainSchedule = config_.useNL_TCS_GainSchedule;
+
+    in.TCS_PID_NL_Schedule[0] = config_.TCS_NL_startBoundPerc_FrontAxle;
+    in.TCS_PID_NL_Schedule[1] = config_.TCS_NL_endBoundPerc_FrontAxle;
+    in.TCS_PID_NL_Schedule[2] = config_.TCS_NL_startBoundPerc_RearAxle;
+    in.TCS_PID_NL_Schedule[3] = config_.TCS_NL_endBoundPerc_RearAxle;
+
     if ((vn_active_start_time_ == 0) && (vn_status >= 2))
     {
         vn_active_start_time_ = tick.millis;
@@ -226,6 +235,8 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_yaw_pi);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sa);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_di);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_rp);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_nl);
 
         last_lowest_priority_controller_send_time_ = tick.millis;
     }

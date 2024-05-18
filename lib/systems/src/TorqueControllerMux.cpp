@@ -88,10 +88,13 @@ void TorqueControllerMux::tick(
 
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
 
-        // apply torque limit before power limit to not power limit
-        // applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        // applyTorqueLimit(&drivetrainCommand_);
-        // applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        // Apply setpoints value limits
+        // Safety checks for CASE: CASE handles regen, torque, and power limit internally
+        applyRegenLimit(&drivetrainCommand_, &drivetrainData);
+        // Apply torque limit before power limit to not power limit
+        applyTorqueLimit(&drivetrainCommand_);
+        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
     }
 }
@@ -99,6 +102,12 @@ void TorqueControllerMux::tick(
 /*
     Apply limit to make sure that regenerative braking is not applied when
     wheelspeed is below 5kph on all wheels.
+
+    FSAE rules:
+        EV.3.3.3 The powertrain must not regenerate energy when vehicle speed is between 0 and 5 km/hr
+    Assumption:
+        Assuming there won't be a scenario where there are positive and negative setpoints simultaneously
+        AND vehicle speed is < 5km/h
 */
 void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const DrivetrainDynamicReport_s *drivetrain)
 {
@@ -217,7 +226,9 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s *command)
     }
 }
 
-/* Apply limit such that wheelspeed never goes negative */
+/**
+ *  Apply limit such that wheelspeed never goes negative
+ */
 void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s *command)
 {
     for (int i = 0; i < NUM_MOTORS; i++)
