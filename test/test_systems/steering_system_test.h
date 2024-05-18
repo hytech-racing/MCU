@@ -4,12 +4,12 @@
 #include <gmock/gmock.h>
 #include "SteeringSystem.h"
 
-#define PRIMARY_ALPHA   (0.6)
-#define SECONDARY_ALPHA (0.6)
-#define WARN_DISCREPANCY_OFFSET (0.5)
-#define ERR_DISCREPANCY_OFFSET (0.5)
-#define WARN_FILTER_LATENCY (6)
-#define ERR_FILTER_LATENCY (7)
+#define PRIMARY_ALPHA   (0.7)   // parameter used on car
+#define SECONDARY_ALPHA (0.7)
+#define WARN_DISCREPANCY_OFFSET (0.6)
+#define ERR_DISCREPANCY_OFFSET (0.6)
+#define WARN_FILTER_LATENCY (8)
+#define ERR_FILTER_LATENCY (9)
 
 TEST(SteeringSystemTesting, test_steering_nominal)
 {

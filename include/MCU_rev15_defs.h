@@ -103,5 +103,6 @@ const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 812;
 const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3179;
 const int SECONDARY_STEERING_SENSE_CENTER = 1970;
 const float STEERING_RANGE_DEGREES = 256.05f;
+const float STEERING_IIR_ALPHA = 0.7f;  // shaves off around 1 deg of max discrepancy
 
 #endif /* __MCU15_H__ */
