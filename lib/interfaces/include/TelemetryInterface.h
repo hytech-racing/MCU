@@ -112,6 +112,16 @@ public:
 
     void enqeue_controller_CAN_msg(const PIDTVTorqueControllerData &data);
 
+    void update_TCMux_status_CAN_msg(const TCMuxStatus_s &tcMuxStatus);
+
+    void update_steering_status_CAN_msg(
+        const float steering_system_angle,
+        const float filtered_angle_encoder,
+        const float filtered_angle_analog,
+        const uint8_t steering_system_status,
+        const uint8_t steering_encoder_status,
+        const uint8_t steering_analog_status);
+
     /* Enqueue outbound telemetry CAN messages */
     // void enqueue_CAN_mcu_pedal_readings();
     // void enqueue_CAN_mcu_load_cells();

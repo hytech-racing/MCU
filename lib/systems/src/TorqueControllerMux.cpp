@@ -73,8 +73,13 @@ void TorqueControllerMux::tick(
             // if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
             // {
             muxMode_ = dialModeMap_[dashboardDialMode];
-            cur_dial_mode_ = dashboardDialMode;
+            currDialMode_ = dashboardDialMode;
             // }
+
+            // Update TCMux status
+            tcMuxStatus_.speedPreventsModeChange = speedPreventsModeChange;
+            tcMuxStatus_.torqueDeltaPreventsModeChange = torqueDeltaPreventsModeChange;
+            tcMuxStatus_.controllerNotReadyPreventsModeChange = controllerNotReadyPreventsModeChange;
         }
 
         // Check if the current controller is ready. If it has faulted, revert to safe mode
@@ -85,7 +90,17 @@ void TorqueControllerMux::tick(
             muxMode_ = TorqueController_e::TC_SAFE_MODE;
         }
 
+        // Update TCMux status
+        tcMuxStatus_.steeringSystemError = steeringData.status == SteeringSystemStatus_e::STEERING_SYSTEM_ERROR;
+        tcMuxStatus_.modeIntended = static_cast<uint8_t>(dialModeMap_[dashboardDialMode]);
+        tcMuxStatus_.modeActual = static_cast<uint8_t>(getDriveMode());
+        tcMuxStatus_.dialMode = static_cast<uint8_t>(getDialMode());
+
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
+
+        // Update TCMux status
+        tcMuxStatus_.torqueMode = static_cast<uint8_t>(getTorqueLimit());
+        tcMuxStatus_.maxTorque = getMaxTorque();
 
         // Apply setpoints value limits
         // Safety checks for CASE: CASE handles regen, torque, and power limit internally
@@ -97,7 +112,7 @@ void TorqueControllerMux::tick(
         applyPosSpeedLimit(&drivetrainCommand_);
 
         // Update controller status report
-        updateTCMuxStatus();
+        reportTCMuxStatus();
     }
 }
 
@@ -239,7 +254,7 @@ void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s *command)
     }
 }
 
-void TorqueControllerMux::updateTCMuxStatus()
+void TorqueControllerMux::reportTCMuxStatus()
 {
-
+    telemHandle_->update_TCMux_status_CAN_msg(tcMuxStatus_);
 }

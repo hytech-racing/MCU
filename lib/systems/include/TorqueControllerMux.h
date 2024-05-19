@@ -43,7 +43,7 @@ private:
     };
 
     TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
-    DialMode_e cur_dial_mode_ = DialMode_e::MODE_0;
+    DialMode_e currDialMode_ = DialMode_e::MODE_0;
 
     TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
 
@@ -56,6 +56,8 @@ private:
         static_cast<TorqueControllerBase*>(&torqueControllerSlipLaunch_),
         static_cast<TorqueControllerBase*>(&tcCASEWrapper_)
     };
+
+    TCMuxStatus_s tcMuxStatus_;
 
     DrivetrainCommand_s drivetrainCommand_;
     TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
@@ -103,7 +105,7 @@ public:
         return drivetrainCommand_;
     };
     
-    const TorqueLimit_e &getTorqueLimit()
+    const TorqueLimit_e getTorqueLimit()
     {
         return torqueLimit_;
     };
@@ -125,7 +127,7 @@ public:
 
     const DialMode_e getDialMode()
     {
-        return cur_dial_mode_;
+        return currDialMode_;
     }
 
     const TorqueController_e getDriveMode()
@@ -144,7 +146,7 @@ public:
         }
     }
 
-    void updateTCMuxStatus();
+    void reportTCMuxStatus();
 };
 
 #endif /* __TORQUECTRLMUX_H__ */

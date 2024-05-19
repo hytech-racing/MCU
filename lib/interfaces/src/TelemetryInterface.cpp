@@ -237,6 +237,21 @@ void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerDa
     
 }
 
+void TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &tcMuxStatus)
+{
+
+}
+
+void TelemetryInterface::update_steering_status_CAN_msg(const float steering_system_angle,
+                                                        const float filtered_angle_encoder,
+                                                        const float filtered_angle_analog,
+                                                        const uint8_t steering_system_status,
+                                                        const uint8_t steering_encoder_status,
+                                                        const uint8_t steering_analog_status)
+{
+
+}
+
 
 /* Tick SysClock */
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
