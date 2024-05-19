@@ -11,6 +11,7 @@
 #include "DashboardInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+#include "TelemetryInterface.h"
 
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
@@ -60,28 +61,31 @@ private:
     TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
     bool torqueLimitButtonPressed_ = false;
     unsigned long torqueLimitButtonPressedTime_ = 0;
+    TelemetryInterface *telemHandle_;
 
 public:
     /// @brief torque controller mux in which default instances of all torque controllers are created for use
-    TorqueControllerMux()
+    TorqueControllerMux(TelemetryInterface *telemInterface)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
-    , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)]) {}
+    , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
+    , telemHandle_(telemInterface) {}
 
 
     /// @brief torque controller mux constructor that leaves all other TCs with defaults accept for simple TC
     /// @param simpleTCRearTorqueScale the scaling from 0 to 2 in which 2 is full rear torque allocation, 0 is full front, 1 = balanced
     /// @param simpleTCRegenTorqueScale scaling from 0 to 2 in which 0 is full rear regen and 2 is full front regen, 1 = balanced
-    TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale)
+    TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale, TelemetryInterface *telemInterface)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
-    , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)]) {}
+    , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
+    , telemHandle_(telemInterface) {}
 // Functions
     void tick(
         const SysTick_s &tick,
@@ -139,6 +143,8 @@ public:
             return static_cast<TorqueControllerBase*>(&torqueControllerNone_);
         }
     }
+
+    void updateTCMuxStatus();
 };
 
 #endif /* __TORQUECTRLMUX_H__ */

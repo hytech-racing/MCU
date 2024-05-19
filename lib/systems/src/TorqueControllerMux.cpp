@@ -27,8 +27,7 @@ void TorqueControllerMux::tick(
     if (tick.triggers.trigger50)
     {
         // detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms
-        if (
-            torqueLimitButtonPressed_ == true && dashboardTorqueModeButtonPressed == false && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS)
+        if (torqueLimitButtonPressed_ == true && dashboardTorqueModeButtonPressed == false && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS)
         {
             // WOW C++ is ass
             torqueLimit_ = static_cast<TorqueLimit_e>((static_cast<int>(torqueLimit_) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
@@ -96,6 +95,9 @@ void TorqueControllerMux::tick(
         applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
+
+        // Update controller status report
+        updateTCMuxStatus();
     }
 }
 
@@ -235,4 +237,9 @@ void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s *command)
     {
         command->speeds_rpm[i] = std::max(0.0f, command->speeds_rpm[i]);
     }
+}
+
+void TorqueControllerMux::updateTCMuxStatus()
+{
+
 }

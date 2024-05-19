@@ -1,5 +1,20 @@
-#ifndef TORQUECONTROLLERSDATA
-#define TORQUECONTROLLERSDATA
+#ifndef __TORQUE_CONTROLLERS_DATA__
+#define __TORQUE_CONTROLLERS_DATA__
+
+#include "DashboardInterface.h"
+#include "TorqueControllers.h"
+
+struct TCMuxStatus_s
+{
+    bool speedPreventsModeChange;
+    bool torqueDeltaPreventsModeChange;
+    bool controllerNotReadyPreventsModeChange;
+    uint8_t modeIntended;
+    uint8_t modeActual;
+    uint8_t dialMode;
+
+
+};
 
 struct PIDTVTorqueControllerData
 {
@@ -11,4 +26,4 @@ struct PIDTVTorqueControllerData
     float rr_torque_delta;
 };
 
-#endif
+#endif  /* __TORQUE_CONTROLLERS_DATA__ */
