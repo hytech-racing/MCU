@@ -439,7 +439,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get(),
             a2.get(),
             a3.get(),
-            mcu_adc.get(),
             steering1.convert(),
             &inv.fl,
             &inv.fr,

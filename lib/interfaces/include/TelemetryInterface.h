@@ -56,10 +56,6 @@ public:
 
     /* Update CAN messages (main loop) */
     // Interfaces
-    void update_front_thermistors_CAN_msg(
-        const AnalogConversion_s &therm_fl,
-        const AnalogConversion_s &therm_fr
-    );
     void update_pedal_readings_CAN_msg(
         float accel_percent,
         float brake_percent,
@@ -131,7 +127,6 @@ public:
         const AnalogConversionPacket_s<8> &adc1,
         const AnalogConversionPacket_s<4> &adc2,
         const AnalogConversionPacket_s<4> &adc3,
-        const AnalogConversionPacket_s<2> &mcu_adc,
         const SteeringEncoderConversion_s &encoder,
         InvInt_t *fl,
         InvInt_t *fr,
