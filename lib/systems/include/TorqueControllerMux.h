@@ -16,7 +16,7 @@
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
 
-/// @brief
+/// @brief multiplexer class for managing available torque controllers
 class TorqueControllerMux
 {
 private:
@@ -46,8 +46,8 @@ private:
     DialMode_e currDialMode_ = DialMode_e::MODE_0;
 
     TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
-
     
+    // Handle array for all torque controllers
     TorqueControllerBase* controllers[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)] = {
         static_cast<TorqueControllerBase*>(&torqueControllerNone_),
         static_cast<TorqueControllerBase*>(&torqueControllerSimple_),
@@ -57,6 +57,7 @@ private:
         static_cast<TorqueControllerBase*>(&tcCASEWrapper_)
     };
 
+    // Status tracking structure for visibility
     TCMuxStatus_s tcMuxStatus_;
 
     DrivetrainCommand_s drivetrainCommand_;
@@ -88,7 +89,9 @@ public:
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
     , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
     , telemHandle_(telemInterface) {}
-// Functions
+
+    // Functions
+    /// @brief tick controllers to calculate drivetrain command
     void tick(
         const SysTick_s &tick,
         const DrivetrainDynamicReport_s &drivetrainData,
@@ -100,6 +103,14 @@ public:
         const vector_nav &vn_data, 
         const DrivetrainCommand_s &CASECommand
     );
+
+    /// @brief apply corresponding limits on drivetrain command calculated by torque controller
+    void applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
+    void applyTorqueLimit(DrivetrainCommand_s* command);
+    void applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
+    void applyPosSpeedLimit(DrivetrainCommand_s* command);
+
+    /// @brief GETTERS
     const DrivetrainCommand_s &getDrivetrainCommand()
     {
         return drivetrainCommand_;
@@ -114,16 +125,6 @@ public:
     {
         return torqueLimitMap_[torqueLimit_];
     }
-
-    void applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
-
-    void applyTorqueLimit(DrivetrainCommand_s* command);
-
-    void applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
-
-    void applyPosSpeedLimit(DrivetrainCommand_s* command);
-
-
 
     const DialMode_e getDialMode()
     {
@@ -146,6 +147,7 @@ public:
         }
     }
 
+    /// @brief report TCMux status through Telemetry via CAN
     void reportTCMuxStatus();
 };
 

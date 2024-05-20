@@ -111,9 +111,15 @@ void TorqueControllerMux::tick(
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
 
-        // Update controller status report
+        
+    }
+
+    // Update controller status report
+    if (tick.triggers.trigger50)
+    {        
         reportTCMuxStatus();
     }
+    
 }
 
 /*
@@ -254,6 +260,18 @@ void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s *command)
     }
 }
 
+/**
+ * Report TCMux status via CAN
+ * - speedPreventsModeChange
+ * - torqueDeltaPreventsModeChange
+ * - controllerNotReadyPreventsModeChange
+ * - steeringSystemError
+ * - modeIntended
+ * - modeActual
+ * - dialMode
+ * - torqueMode
+ * - maxTorque
+*/
 void TorqueControllerMux::reportTCMuxStatus()
 {
     telemHandle_->update_TCMux_status_CAN_msg(tcMuxStatus_);
