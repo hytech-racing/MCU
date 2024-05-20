@@ -6,8 +6,8 @@
 
 #define PRIMARY_ALPHA   (0.7)   // parameter used on car
 #define SECONDARY_ALPHA (0.7)
-#define WARN_DISCREPANCY_OFFSET (0.6)
-#define ERR_DISCREPANCY_OFFSET (0.6)
+#define WARN_DIVERGENCE_OFFSET (0.6)
+#define ERR_DIVERGENCE_OFFSET (0.6)
 #define WARN_FILTER_LATENCY (8)
 #define ERR_FILTER_LATENCY (9)
 
@@ -19,6 +19,7 @@ TEST(SteeringSystemTesting, test_steering_nominal)
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
     SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
 
     // Sweep through a few angles where the sensors agree perfectly and check the system is nominal
@@ -51,6 +52,7 @@ TEST(SteeringSystemTesting, test_steering_primary_is_marginal)
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
     SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float angle = 0.0f;
 
@@ -79,6 +81,7 @@ TEST(SteeringSystemTesting, test_steering_secondary_is_marginal)
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
     SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float angle = 0.0f;
 
@@ -107,15 +110,23 @@ TEST(SteeringSystemTesting, test_steering_divergence_warning)
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
     SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float mockPrimaryFilteredAngle;
     float mockSecondaryFilteredAngle;
 
     float primaryAngle = 0.0f;
-    float secondaryAngle = primaryAngle + WARN_DISCREPANCY_OFFSET + STEERING_DIVERGENCE_WARN_THRESHOLD; // Edge discrepancy
+    // Pend divergence to sensor readings
+    // - IIR filter eq.: filtered_val = (1-alpha)*new_val + alpha*prev_val
+    // - when divergence set exactly to system threshold
+    //   - divergence magnitude gets shaved off, will not trigger above threshold
+    //   - pend offset to divergence to trip threshold
+    float secondaryAngle = primaryAngle + WARN_DIVERGENCE_OFFSET + STEERING_DIVERGENCE_WARN_THRESHOLD; // edge discrepancy
 
-    // Edge filter steps to align output
-    for (int i = 0; i < WARN_FILTER_LATENCY; i++)
+    // Latency due to filtering
+    // - required steps of filtering for divergence to rise up to threshold with offset pended
+    // - e.g. when alpha = 0.7, pending offset = 0.6, it takes a minimal of 8 steps of filtering to exceed warn threshold
+    for (int i = 0; i < WARN_FILTER_LATENCY; i++)   // edge filter steps to align output
     {
         mockPrimaryFilteredAngle = mockAngleFilters[0].filtered_result(primaryAngle);
         mockSecondaryFilteredAngle = mockAngleFilters[1].filtered_result(secondaryAngle);
@@ -147,14 +158,23 @@ TEST(SteeringSystemTesting, test_steering_divergence_error)
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
     SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float mockPrimaryFilteredAngle;
     float mockSecondaryFilteredAngle;
 
     float primaryAngle = 0.0f;
-    float secondaryAngle = primaryAngle + ERR_DISCREPANCY_OFFSET + STEERING_DIVERGENCE_ERROR_THRESHOLD;
+    // Pend divergence to sensor readings
+    // - IIR filter eq.: filtered_val = (1-alpha)*new_val + alpha*prev_val
+    // - when divergence set exactly to system threshold
+    //   - divergence magnitude gets shaved off, will not trigger above threshold
+    //   - pend offset to divergence to trip threshold
+    float secondaryAngle = primaryAngle + ERR_DIVERGENCE_OFFSET + STEERING_DIVERGENCE_ERROR_THRESHOLD;  // edge discrepancy
 
-    for (int i = 0; i < ERR_FILTER_LATENCY; i++)
+    // Latency due to filtering
+    // - required steps of filtering for divergence to rise up to threshold with offset pended
+    // - e.g. when alpha = 0.7, pending offset = 0.6, it takes a minimal of 9 steps of filtering to exceed error threshold
+    for (int i = 0; i < ERR_FILTER_LATENCY; i++)    // edge filter steps to align output
     {
         mockPrimaryFilteredAngle = mockAngleFilters[0].filtered_result(primaryAngle);
         mockSecondaryFilteredAngle = mockAngleFilters[1].filtered_result(secondaryAngle);
@@ -186,6 +206,7 @@ TEST(SteeringSystemTesting, test_steering_primary_is_missing)
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
     SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float angle = 100.0f;
 
