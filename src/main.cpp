@@ -11,6 +11,7 @@
 // /* Interfaces */
 
 #include "HytechCANInterface.h"
+#include "ThermistorInterface.h"
 #include "Teensy_ADC.h"
 #include "MCP_ADC.h"
 #include "ORBIS_BR10.h"
@@ -119,6 +120,7 @@ AMSInterface ams_interface(8);
 WatchdogInterface wd_interface(32);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
+ThermistorInterface front_thermistors_interface(&CAN3_txBuffer);
 SABInterface sab_interface(
     LOADCELL_RL_SCALE,  // RL Scale
     LOADCELL_RL_OFFSET, // RL Offset (Migos)
@@ -434,7 +436,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             dashboard.launchControlButtonPressed());
 
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-
+        front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL], mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
         telem_interface.tick(
             a1.get(),
             a2.get(),
