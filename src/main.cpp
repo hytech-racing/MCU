@@ -143,7 +143,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1, STEERING_IIR_ALPHA);
+SteeringSystem steering_system(&steering1, &telem_interface, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -151,7 +151,7 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(1.0, 0.4);
+TorqueControllerMux torque_controller_mux(SIMPLE_TC_REAR_TORQUE_SCALE, SIMPLE_TC_REGEN_TORQUE_SCALE, &telem_interface);
 // TODO ensure that case uses max regen torque, right now its not
 
 CASESystem<qn::EthernetUDP> case_system(&protobuf_send_socket, 100, AMK_MAX_RPM, 21.42);
