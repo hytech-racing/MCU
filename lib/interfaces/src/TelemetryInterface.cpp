@@ -198,10 +198,10 @@ void TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &tcMuxS
 {
     TCMUX_STATUS_REPORT_t msg;
 
-    msg.speed_above_thresh = tcMuxStatus.speedPreventsModeChange;
-    msg.torque_delta_above_thresh = tcMuxStatus.torqueDeltaPreventsModeChange;
-    msg.tc_not_ready = tcMuxStatus.controllerNotReadyPreventsModeChange;
-    msg.steering_system_has_err = tcMuxStatus.steeringSystemError;
+    msg.speed_above_thresh = (static_cast<uint8_t>(tcMuxStatus.speedPreventsModeChange)) & 0x01;
+    msg.torque_delta_above_thresh = (static_cast<uint8_t>(tcMuxStatus.torqueDeltaPreventsModeChange)) & 0x01;
+    msg.tc_not_ready = (static_cast<uint8_t>(tcMuxStatus.controllerNotReadyPreventsModeChange)) & 0x01;
+    msg.steering_system_has_err = (static_cast<uint8_t>(tcMuxStatus.steeringSystemError)) & 0x01;
     msg.mode_intended = tcMuxStatus.modeIntended;
     msg.mode_actual = tcMuxStatus.modeActual;
     msg.dash_dial_mode = tcMuxStatus.dialMode;
@@ -223,9 +223,9 @@ void TelemetryInterface::update_steering_status_CAN_msg(const float steering_sys
     msg.steering_system_angle_ro = HYTECH_steering_system_angle_ro_toS(steering_system_angle);
     msg.steering_encoder_angle_ro = HYTECH_steering_encoder_angle_ro_toS(filtered_angle_encoder);
     msg.steering_analog_angle_ro = HYTECH_steering_analog_angle_ro_toS(filtered_angle_analog);
-    msg.steering_system_status = steering_system_status;
-    msg.steering_encoder_status = steering_encoder_status;
-    msg.steering_analog_status = steering_analog_status;
+    msg.steering_system_status = steering_system_status & 0x03;
+    msg.steering_encoder_status = steering_encoder_status & 0x03;
+    msg.steering_analog_status = steering_analog_status & 0x01;
 
     enqueue_new_CAN<STEERING_SYSTEM_REPORT_t>(&msg, &Pack_STEERING_SYSTEM_REPORT_hytech);
 }
