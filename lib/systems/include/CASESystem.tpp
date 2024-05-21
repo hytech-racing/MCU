@@ -113,9 +113,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.discontinuousBrakesPercentThres = config_.discontinuousBrakesPercentThreshold;
 
-    float derateFactor = get_acc_derate_factor();
-
-    in.TorqueMode = derateFactor * config_.TorqueMode;
+    in.TorqueMode = config_.TorqueMode;
 
     in.RegenLimit = config_.RegenLimit;
 

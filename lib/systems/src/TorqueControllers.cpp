@@ -96,7 +96,6 @@ void TorqueControllerLoadCellVectoring::tick(
         if (ready_)
         {
             // Calculate total normal force
-            float derateFactor = get_acc_derate_factor();
             float sumNormalForce = 0.0f;
             for (int i = 0; i < 4; i++)
             {
@@ -120,10 +119,10 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = AMK_MAX_RPM;
                 writeout_.command.speeds_rpm[RR] = AMK_MAX_RPM;
 
-                writeout_.command.torqueSetpoints[FL] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce * derateFactor;
-                writeout_.command.torqueSetpoints[FR] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce * derateFactor;
-                writeout_.command.torqueSetpoints[RL] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[2] / sumNormalForce * derateFactor;
-                writeout_.command.torqueSetpoints[RR] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[3] / sumNormalForce * derateFactor;
+                writeout_.command.torqueSetpoints[FL] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce;
+                writeout_.command.torqueSetpoints[FR] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce;
+                writeout_.command.torqueSetpoints[RL] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[2] / sumNormalForce;
+                writeout_.command.torqueSetpoints[RR] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[3] / sumNormalForce;
             }
             else
             {
