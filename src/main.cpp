@@ -143,7 +143,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1);
+SteeringSystem steering_system(&steering1, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -297,10 +297,15 @@ void loop()
     // Basic debug prints
     if (curr_tick.triggers.trigger5)
     {
-        // Serial.print("Steering system reported angle (deg): ");
-        // Serial.println(steering_system.getSteeringSystemData().angle);
-        
-        // Serial.println();
+        Serial.print("Steering system reported angle (deg): ");
+        Serial.println(steering_system.getSteeringSystemData().angle);
+        Serial.print("Secondary sensor angle: ");
+        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print("Sensor divergence: ");
+        Serial.println(steering_system.getSteeringSystemData().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.println();
+
+        Serial.println();
     }
 }
 
