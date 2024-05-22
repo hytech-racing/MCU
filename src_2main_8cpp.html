@@ -269,26 +269,26 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00343">343</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  344</span>{</div>
-<div class="line"><span class="lineno">  345</span>    <span class="comment">// Inverter CAN line</span></div>
-<div class="line"><span class="lineno">  346</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.begin();</div>
-<div class="line"><span class="lineno">  347</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a>);</div>
-<div class="line"><span class="lineno">  348</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setMaxMB(16);</div>
-<div class="line"><span class="lineno">  349</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFO();</div>
-<div class="line"><span class="lineno">  350</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFOInterrupt();</div>
-<div class="line"><span class="lineno">  351</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.onReceive(<a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a>);</div>
-<div class="line"><span class="lineno">  352</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.mailboxStatus();</div>
-<div class="line"><span class="lineno">  353</span> </div>
-<div class="line"><span class="lineno">  354</span>    <span class="comment">// Telemetry CAN line</span></div>
-<div class="line"><span class="lineno">  355</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.begin();</div>
-<div class="line"><span class="lineno">  356</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a>);</div>
-<div class="line"><span class="lineno">  357</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setMaxMB(16);</div>
-<div class="line"><span class="lineno">  358</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFO();</div>
-<div class="line"><span class="lineno">  359</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFOInterrupt();</div>
-<div class="line"><span class="lineno">  360</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.onReceive(<a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a>);</div>
-<div class="line"><span class="lineno">  361</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.mailboxStatus();</div>
-<div class="line"><span class="lineno">  362</span>}</div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00352">352</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  353</span>{</div>
+<div class="line"><span class="lineno">  354</span>    <span class="comment">// Inverter CAN line</span></div>
+<div class="line"><span class="lineno">  355</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.begin();</div>
+<div class="line"><span class="lineno">  356</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a>);</div>
+<div class="line"><span class="lineno">  357</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.setMaxMB(16);</div>
+<div class="line"><span class="lineno">  358</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFO();</div>
+<div class="line"><span class="lineno">  359</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.enableFIFOInterrupt();</div>
+<div class="line"><span class="lineno">  360</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.onReceive(<a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a>);</div>
+<div class="line"><span class="lineno">  361</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3">INV_CAN</a>.mailboxStatus();</div>
+<div class="line"><span class="lineno">  362</span> </div>
+<div class="line"><span class="lineno">  363</span>    <span class="comment">// Telemetry CAN line</span></div>
+<div class="line"><span class="lineno">  364</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.begin();</div>
+<div class="line"><span class="lineno">  365</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setBaudRate(<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a>);</div>
+<div class="line"><span class="lineno">  366</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.setMaxMB(16);</div>
+<div class="line"><span class="lineno">  367</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFO();</div>
+<div class="line"><span class="lineno">  368</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.enableFIFOInterrupt();</div>
+<div class="line"><span class="lineno">  369</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.onReceive(<a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a>);</div>
+<div class="line"><span class="lineno">  370</span>    <a class="code hl_variable" href="src_2main_8cpp.html#acc3edd98677708079eb82bba82410c21">TELEM_CAN</a>.mailboxStatus();</div>
+<div class="line"><span class="lineno">  371</span>}</div>
 <div class="ttc" id="aMCU__rev15__defs_8h_html_a5d43b28eff85e18d6b40d4c458f9c8d3"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a5d43b28eff85e18d6b40d4c458f9c8d3">TELEM_CAN_BAUDRATE</a></div><div class="ttdeci">const unsigned long TELEM_CAN_BAUDRATE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00036">MCU_rev15_defs.h:36</a></div></div>
 <div class="ttc" id="aMCU__rev15__defs_8h_html_acf780f904fac84a7a0897fbdbe970795"><div class="ttname"><a href="MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795">INV_CAN_BAUDRATE</a></div><div class="ttdeci">const unsigned long INV_CAN_BAUDRATE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00035">MCU_rev15_defs.h:35</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a0a0a6eb75d69645e467f0a54cc36e3b1"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a0a0a6eb75d69645e467f0a54cc36e3b1">on_can2_receive</a></div><div class="ttdeci">void on_can2_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00019">HytechCANInterface.cpp:19</a></div></div>
@@ -347,13 +347,23 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  328</span> </div>
 <div class="line"><span class="lineno">  329</span>    <span class="keywordflow">if</span> (curr_tick.triggers.trigger5)</div>
 <div class="line"><span class="lineno">  330</span>    {</div>
-<div class="line"><span class="lineno">  331</span>        Serial.print(<span class="stringliteral">&quot;Steering system angle: &quot;</span>);</div>
+<div class="line"><span class="lineno">  331</span>        Serial.print(<span class="stringliteral">&quot;Steering system reported angle (deg): &quot;</span>);</div>
 <div class="line"><span class="lineno">  332</span>        Serial.println(steering_system.getSteeringSystemData().angle);</div>
-<div class="line"><span class="lineno">  333</span>        Serial.print(<span class="stringliteral">&quot;Steering system status: &quot;</span>);</div>
-<div class="line"><span class="lineno">  334</span>        Serial.println(<span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(steering_system.getSteeringSystemData().status));</div>
-<div class="line"><span class="lineno">  335</span>    }</div>
-<div class="line"><span class="lineno">  336</span>    </div>
-<div class="line"><span class="lineno">  337</span>}</div>
+<div class="line"><span class="lineno">  333</span>        Serial.print(<span class="stringliteral">&quot;Primary sensor angle: &quot;</span>);</div>
+<div class="line"><span class="lineno">  334</span>        Serial.println(<a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.convert().angle);</div>
+<div class="line"><span class="lineno">  335</span>        Serial.print(<span class="stringliteral">&quot;Secondary sensor angle: &quot;</span>);</div>
+<div class="line"><span class="lineno">  336</span>        Serial.print(<a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>].conversion);</div>
+<div class="line"><span class="lineno">  337</span>        Serial.print(<span class="stringliteral">&quot;  raw: &quot;</span>);</div>
+<div class="line"><span class="lineno">  338</span>        Serial.println(<a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>].raw);</div>
+<div class="line"><span class="lineno">  339</span>        Serial.print(<span class="stringliteral">&quot;Sensor divergence: &quot;</span>);</div>
+<div class="line"><span class="lineno">  340</span>        Serial.println(<a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.convert().angle - <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>].conversion);</div>
+<div class="line"><span class="lineno">  341</span>        Serial.println();</div>
+<div class="line"><span class="lineno">  342</span> </div>
+<div class="line"><span class="lineno">  343</span>        Serial.println();</div>
+<div class="line"><span class="lineno">  344</span>    }</div>
+<div class="line"><span class="lineno">  345</span>    </div>
+<div class="line"><span class="lineno">  346</span>}</div>
+<div class="ttc" id="aMCU__rev15__defs_8h_html_a1009f1898ab80c773745359d3262a879"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a></div><div class="ttdeci">const int MCU15_STEERING_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00020">MCU_rev15_defs.h:20</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a3eefd92d61b78ad1e3c314d455da6b5a"><div class="ttname"><a href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">DrivetrainSystem::drivetrain_error_occured</a></div><div class="ttdeci">bool drivetrain_error_occured()</div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_ae4798f5013796504e5b6f3721a38e659"><div class="ttname"><a href="classDrivetrainSystem.html#ae4798f5013796504e5b6f3721a38e659">DrivetrainSystem::reset_drivetrain</a></div><div class="ttdeci">void reset_drivetrain()</div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a0563e26e6ba2018e944623e568c0af93"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93">CAN2_txBuffer</a></div><div class="ttdeci">CANBufferType CAN2_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00014">test_can_interface.cpp:14</a></div></div>
@@ -361,11 +371,13 @@ Variables</h2></td></tr>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00072">HytechCANInterface.h:72</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00184">HytechCANInterface.h:184</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_ad97681e0953a0b25effdbce5aef0ce72"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN2_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00004">HytechCANInterface.cpp:4</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a5b7a1fda0811fe6090746162c97a38a0"><div class="ttname"><a href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a></div><div class="ttdeci">void tick_all_interfaces(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00368">main.cpp:368</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a0f351bbfcf80590ece6101bf1cfa1006"><div class="ttname"><a href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a></div><div class="ttdeci">SteeringSystem steering_system &amp; steering1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00135">main.cpp:135</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_a5b7a1fda0811fe6090746162c97a38a0"><div class="ttname"><a href="src_2main_8cpp.html#a5b7a1fda0811fe6090746162c97a38a0">tick_all_interfaces</a></div><div class="ttdeci">void tick_all_interfaces(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00377">main.cpp:377</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a60b1f8a5e4ac159bc3ca1710391a185f"><div class="ttname"><a href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a></div><div class="ttdeci">DriveSys_t drivetrain</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00142">main.cpp:142</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_aa2105bee21456d7572113b1e5b69ce5f"><div class="ttname"><a href="src_2main_8cpp.html#aa2105bee21456d7572113b1e5b69ce5f">CAN_receive_interfaces</a></div><div class="ttdeci">CANInterfaces&lt; CircularBufferType &gt; CAN_receive_interfaces</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00219">main.cpp:219</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_ab793fa34bb5167b766174b697c116b7b"><div class="ttname"><a href="src_2main_8cpp.html#ab793fa34bb5167b766174b697c116b7b">CAN3_txBuffer</a></div><div class="ttdeci">VNInterface&lt; CircularBufferType &gt; vn_interface &amp; CAN3_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00106">main.cpp:106</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_adb2a2450ba6cc5c27c30ad5f22eadbce"><div class="ttname"><a href="src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce">tick_all_systems</a></div><div class="ttdeci">void tick_all_systems(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00447">main.cpp:447</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_ac04fcfdfca6ce3ee5f3034ef9017c6bb"><div class="ttname"><a href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a></div><div class="ttdeci">MCP_ADC&lt; 8 &gt; a1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00097">main.cpp:97</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_adb2a2450ba6cc5c27c30ad5f22eadbce"><div class="ttname"><a href="src_2main_8cpp.html#adb2a2450ba6cc5c27c30ad5f22eadbce">tick_all_systems</a></div><div class="ttdeci">void tick_all_systems(const SysTick_s &amp;current_system_tick)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00456">main.cpp:456</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_ae7fc4cf3627b4a43f5a397270a5c351c"><div class="ttname"><a href="src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c">sys_clock</a></div><div class="ttdeci">SysClock sys_clock</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00134">main.cpp:134</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -445,7 +457,6 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  294</span>    <span class="comment">// Not strictly necessary at the moment, just don&#39;t forget</span></div>
 <div class="line"><span class="lineno">  295</span>}</div>
 <div class="ttc" id="aMCU__rev15__defs_8h_html_a0b479ef0a6e7555ce142622121018c98"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a></div><div class="ttdeci">const int MCU15_BRAKE1_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00017">MCU_rev15_defs.h:17</a></div></div>
-<div class="ttc" id="aMCU__rev15__defs_8h_html_a1009f1898ab80c773745359d3262a879"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a></div><div class="ttdeci">const int MCU15_STEERING_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00020">MCU_rev15_defs.h:20</a></div></div>
 <div class="ttc" id="aMCU__rev15__defs_8h_html_a1903bd6cc77925c88b11402680c663bc"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a1903bd6cc77925c88b11402680c663bc">LOADCELL_FL_SCALE</a></div><div class="ttdeci">const float LOADCELL_FL_SCALE</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00076">MCU_rev15_defs.h:76</a></div></div>
 <div class="ttc" id="aMCU__rev15__defs_8h_html_a25349e2f4f24ad9572c183b7715eeb3c"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a></div><div class="ttdeci">const int MCU15_ACCEL2_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00016">MCU_rev15_defs.h:16</a></div></div>
 <div class="ttc" id="aMCU__rev15__defs_8h_html_a27d3aa777afb94ba815f17c325eb5cd0"><div class="ttname"><a href="MCU__rev15__defs_8h.html#a27d3aa777afb94ba815f17c325eb5cd0">LOADCELL_FL_OFFSET</a></div><div class="ttdeci">const float LOADCELL_FL_OFFSET</div><div class="ttdef"><b>Definition:</b> <a href="MCU__rev15__defs_8h_source.html#l00077">MCU_rev15_defs.h:77</a></div></div>
@@ -471,12 +482,10 @@ Variables</h2></td></tr>
 <div class="ttc" id="aclassAMSInterface_html_ac64811ee77a13091f106238641c454a1"><div class="ttname"><a href="classAMSInterface.html#ac64811ee77a13091f106238641c454a1">AMSInterface::init</a></div><div class="ttdeci">void init(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00003">AMSInterface.cpp:3</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_ac0e7340c39f7b0561dbcfa9aebb4d27c"><div class="ttname"><a href="classDrivetrainSystem.html#ac0e7340c39f7b0561dbcfa9aebb4d27c">DrivetrainSystem::disable</a></div><div class="ttdeci">void disable()</div></div>
 <div class="ttc" id="aclassWatchdogInterface_html_a17741120f4067cd237a2c88f95bd3476"><div class="ttname"><a href="classWatchdogInterface.html#a17741120f4067cd237a2c88f95bd3476">WatchdogInterface::init</a></div><div class="ttdeci">void init(unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="WatchdogInterface_8cpp_source.html#l00004">WatchdogInterface.cpp:4</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a0f351bbfcf80590ece6101bf1cfa1006"><div class="ttname"><a href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a></div><div class="ttdeci">SteeringSystem steering_system &amp; steering1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00135">main.cpp:135</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a825565ee53fc1270eb766de1eb009cf2"><div class="ttname"><a href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a2</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00098">main.cpp:98</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_a85a5439b2aa488ed20a8c97afafc2760"><div class="ttname"><a href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a></div><div class="ttdeci">AMSInterface ams_interface(8)</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00138">main.cpp:138</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_ac04fcfdfca6ce3ee5f3034ef9017c6bb"><div class="ttname"><a href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a></div><div class="ttdeci">MCP_ADC&lt; 8 &gt; a1</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00097">main.cpp:97</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_ad301bd17a182b8613b3b265111e098cb"><div class="ttname"><a href="src_2main_8cpp.html#ad301bd17a182b8613b3b265111e098cb">wd_interface</a></div><div class="ttdeci">WatchdogInterface wd_interface(32)</div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_aeae3526f94cfea3b731d38786f35c277"><div class="ttname"><a href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a></div><div class="ttdeci">void init_all_CAN_devices()</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00343">main.cpp:343</a></div></div>
+<div class="ttc" id="asrc_2main_8cpp_html_aeae3526f94cfea3b731d38786f35c277"><div class="ttname"><a href="src_2main_8cpp.html#aeae3526f94cfea3b731d38786f35c277">init_all_CAN_devices</a></div><div class="ttdeci">void init_all_CAN_devices()</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00352">main.cpp:352</a></div></div>
 <div class="ttc" id="asrc_2main_8cpp_html_aed4c8f760d0c9893dcc21da660136846"><div class="ttname"><a href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a></div><div class="ttdeci">MCP_ADC&lt; 4 &gt; a3</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00099">main.cpp:99</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -497,80 +506,80 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00368">368</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  369</span>{</div>
-<div class="line"><span class="lineno">  370</span> </div>
-<div class="line"><span class="lineno">  371</span>    TriggerBits_s t = current_system_tick.triggers;</div>
-<div class="line"><span class="lineno">  372</span>    <span class="keywordflow">if</span> (t.trigger10) <span class="comment">// 10Hz</span></div>
-<div class="line"><span class="lineno">  373</span>    {</div>
-<div class="line"><span class="lineno">  374</span>        dashboard.tick10(</div>
-<div class="line"><span class="lineno">  375</span>            &amp;main_ecu,</div>
-<div class="line"><span class="lineno">  376</span>            <span class="keywordtype">int</span>(fsm.get_state()),</div>
-<div class="line"><span class="lineno">  377</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>(),</div>
-<div class="line"><span class="lineno">  378</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">drivetrain_error_occured</a>(),</div>
-<div class="line"><span class="lineno">  379</span>            <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">getTorqueLimit</a>(),</div>
-<div class="line"><span class="lineno">  380</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a320d6b622e5cbe5c91fc5376e4afd2ca">get_filtered_min_cell_voltage</a>(),</div>
-<div class="line"><span class="lineno">  381</span>            telem_interface.get_glv_voltage(<a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get()),</div>
-<div class="line"><span class="lineno">  382</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>()),</div>
-<div class="line"><span class="lineno">  383</span>            dashboard.getDialMode());</div>
-<div class="line"><span class="lineno">  384</span> </div>
-<div class="line"><span class="lineno">  385</span>        main_ecu.tick(</div>
-<div class="line"><span class="lineno">  386</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(fsm.get_state()),</div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00377">377</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  378</span>{</div>
+<div class="line"><span class="lineno">  379</span> </div>
+<div class="line"><span class="lineno">  380</span>    TriggerBits_s t = current_system_tick.triggers;</div>
+<div class="line"><span class="lineno">  381</span>    <span class="keywordflow">if</span> (t.trigger10) <span class="comment">// 10Hz</span></div>
+<div class="line"><span class="lineno">  382</span>    {</div>
+<div class="line"><span class="lineno">  383</span>        dashboard.tick10(</div>
+<div class="line"><span class="lineno">  384</span>            &amp;main_ecu,</div>
+<div class="line"><span class="lineno">  385</span>            <span class="keywordtype">int</span>(fsm.get_state()),</div>
+<div class="line"><span class="lineno">  386</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>(),</div>
 <div class="line"><span class="lineno">  387</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">drivetrain_error_occured</a>(),</div>
-<div class="line"><span class="lineno">  388</span>            safety_system.get_software_is_ok(),</div>
-<div class="line"><span class="lineno">  389</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#added00eeee93af38cba5ad3af7c6425c">getDriveMode</a>()),</div>
-<div class="line"><span class="lineno">  390</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">getTorqueLimit</a>()),</div>
-<div class="line"><span class="lineno">  391</span>            <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">getMaxTorque</a>(),</div>
-<div class="line"><span class="lineno">  392</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>(),</div>
-<div class="line"><span class="lineno">  393</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
-<div class="line"><span class="lineno">  394</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">pack_charge_is_critical</a>(),</div>
-<div class="line"><span class="lineno">  395</span>            dashboard.launchControlButtonPressed());</div>
-<div class="line"><span class="lineno">  396</span> </div>
-<div class="line"><span class="lineno">  397</span>        <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> data2 = <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21">getPedalsSystemDataCopy</a>();</div>
-<div class="line"><span class="lineno">  398</span> </div>
-<div class="line"><span class="lineno">  399</span>        telem_interface.tick(</div>
-<div class="line"><span class="lineno">  400</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get(),</div>
-<div class="line"><span class="lineno">  401</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.get(),</div>
-<div class="line"><span class="lineno">  402</span>            <a class="code hl_variable" href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.get(),</div>
-<div class="line"><span class="lineno">  403</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.convert(),</div>
-<div class="line"><span class="lineno">  404</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#ab371c7dd89cc1614464007c2b3250535">fl</a>,</div>
-<div class="line"><span class="lineno">  405</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#a9f76fc53b189f72fbd7dfce987175a9d">fr</a>,</div>
-<div class="line"><span class="lineno">  406</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#a7d3b90d8cc3f46cfe61941cf359ee78a">rl</a>,</div>
-<div class="line"><span class="lineno">  407</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#a50cf4dd8729da63738e9f98800cbd236">rr</a>,</div>
-<div class="line"><span class="lineno">  408</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a>,</div>
-<div class="line"><span class="lineno">  409</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">brakeImplausible</a>,</div>
-<div class="line"><span class="lineno">  410</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a>,</div>
-<div class="line"><span class="lineno">  411</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a>,</div>
-<div class="line"><span class="lineno">  412</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  413</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  414</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  415</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  416</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3">getMechBrakeActiveThreshold</a>(),</div>
-<div class="line"><span class="lineno">  417</span>            {});</div>
-<div class="line"><span class="lineno">  418</span>    }</div>
-<div class="line"><span class="lineno">  419</span> </div>
-<div class="line"><span class="lineno">  420</span>    <span class="keywordflow">if</span> (t.trigger50) <span class="comment">// 50Hz</span></div>
-<div class="line"><span class="lineno">  421</span>    {</div>
-<div class="line"><span class="lineno">  422</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.sample();</div>
-<div class="line"><span class="lineno">  423</span>    }</div>
-<div class="line"><span class="lineno">  424</span> </div>
-<div class="line"><span class="lineno">  425</span>    <span class="keywordflow">if</span> (t.trigger100) <span class="comment">// 100Hz</span></div>
-<div class="line"><span class="lineno">  426</span>    {</div>
-<div class="line"><span class="lineno">  427</span> </div>
-<div class="line"><span class="lineno">  428</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.tick();</div>
-<div class="line"><span class="lineno">  429</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.tick();</div>
-<div class="line"><span class="lineno">  430</span>        <a class="code hl_variable" href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.tick();</div>
-<div class="line"><span class="lineno">  431</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a011a3a009c30de82a59a32d3da5644e5">load_cell_interface</a>.<a class="code hl_function" href="classLoadCellInterface.html#a8f9422de01903b65ce269363e09ef5a0">tick</a>(</div>
-<div class="line"><span class="lineno">  432</span>            (<a class="code hl_struct" href="structLoadCellInterfaceTick__s.html">LoadCellInterfaceTick_s</a>){</div>
-<div class="line"><span class="lineno">  433</span>                .FLConversion = <a class="code hl_variable" href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#abc97188d24b0d85e2d17a367070674a3">MCU15_FL_LOADCELL_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  434</span>                .FRConversion = <a class="code hl_variable" href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#aa335db56afb6b950b2f14cb29b1d5a28">MCU15_FR_LOADCELL_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  435</span>                .RLConversion = <a class="code hl_variable" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>.<a class="code hl_variable" href="classSABInterface.html#a2b01b724667b7f57cb5065b7e9339e2d">rlLoadCell</a>.<a class="code hl_function" href="classAnalogChannel.html#a6d7b7c60899a5c4448c216a81a49b16e">convert</a>(),</div>
-<div class="line"><span class="lineno">  436</span>                .RRConversion = <a class="code hl_variable" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>.<a class="code hl_variable" href="classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c">rrLoadCell</a>.<a class="code hl_function" href="classAnalogChannel.html#a6d7b7c60899a5c4448c216a81a49b16e">convert</a>()});</div>
-<div class="line"><span class="lineno">  437</span>    }</div>
-<div class="line"><span class="lineno">  438</span>    <span class="comment">// // Untriggered</span></div>
-<div class="line"><span class="lineno">  439</span>    main_ecu.read_mcu_status(); <span class="comment">// should be executed at the same rate as state machine</span></div>
-<div class="line"><span class="lineno">  440</span>                                <span class="comment">// DO NOT call in main_ecu.tick()</span></div>
-<div class="line"><span class="lineno">  441</span>}</div>
+<div class="line"><span class="lineno">  388</span>            <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">getTorqueLimit</a>(),</div>
+<div class="line"><span class="lineno">  389</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#a320d6b622e5cbe5c91fc5376e4afd2ca">get_filtered_min_cell_voltage</a>(),</div>
+<div class="line"><span class="lineno">  390</span>            telem_interface.get_glv_voltage(<a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get()),</div>
+<div class="line"><span class="lineno">  391</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a297210cf2e01c3cec82da871a623b25d">activeController</a>()-&gt;<a class="code hl_function" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">get_launch_state</a>()),</div>
+<div class="line"><span class="lineno">  392</span>            dashboard.getDialMode());</div>
+<div class="line"><span class="lineno">  393</span> </div>
+<div class="line"><span class="lineno">  394</span>        main_ecu.tick(</div>
+<div class="line"><span class="lineno">  395</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(fsm.get_state()),</div>
+<div class="line"><span class="lineno">  396</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a">drivetrain_error_occured</a>(),</div>
+<div class="line"><span class="lineno">  397</span>            safety_system.get_software_is_ok(),</div>
+<div class="line"><span class="lineno">  398</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#added00eeee93af38cba5ad3af7c6425c">getDriveMode</a>()),</div>
+<div class="line"><span class="lineno">  399</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a61d50d187c266fa65a1c3709d0207962">getTorqueLimit</a>()),</div>
+<div class="line"><span class="lineno">  400</span>            <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">getMaxTorque</a>(),</div>
+<div class="line"><span class="lineno">  401</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a9b1d074ed9dae4fd92f949d027378c2d">buzzer</a>.<a class="code hl_function" href="classBuzzerController.html#ada5466ab34c97e68568486f505d1b6e3">buzzer_is_on</a>(),</div>
+<div class="line"><span class="lineno">  402</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
+<div class="line"><span class="lineno">  403</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760">ams_interface</a>.<a class="code hl_function" href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">pack_charge_is_critical</a>(),</div>
+<div class="line"><span class="lineno">  404</span>            dashboard.launchControlButtonPressed());</div>
+<div class="line"><span class="lineno">  405</span> </div>
+<div class="line"><span class="lineno">  406</span>        <a class="code hl_struct" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> data2 = <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21">getPedalsSystemDataCopy</a>();</div>
+<div class="line"><span class="lineno">  407</span> </div>
+<div class="line"><span class="lineno">  408</span>        telem_interface.tick(</div>
+<div class="line"><span class="lineno">  409</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get(),</div>
+<div class="line"><span class="lineno">  410</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.get(),</div>
+<div class="line"><span class="lineno">  411</span>            <a class="code hl_variable" href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.get(),</div>
+<div class="line"><span class="lineno">  412</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.convert(),</div>
+<div class="line"><span class="lineno">  413</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#ab371c7dd89cc1614464007c2b3250535">fl</a>,</div>
+<div class="line"><span class="lineno">  414</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#a9f76fc53b189f72fbd7dfce987175a9d">fr</a>,</div>
+<div class="line"><span class="lineno">  415</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#a7d3b90d8cc3f46cfe61941cf359ee78a">rl</a>,</div>
+<div class="line"><span class="lineno">  416</span>            &amp;<a class="code hl_variable" href="src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941">inv</a>.<a class="code hl_variable" href="structinverters.html#a50cf4dd8729da63738e9f98800cbd236">rr</a>,</div>
+<div class="line"><span class="lineno">  417</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#af714ca909b990948479a9193d2d1f5c3">accelImplausible</a>,</div>
+<div class="line"><span class="lineno">  418</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#afaca612a833a6fed9f726222d976c122">brakeImplausible</a>,</div>
+<div class="line"><span class="lineno">  419</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a>,</div>
+<div class="line"><span class="lineno">  420</span>            data2.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a>,</div>
+<div class="line"><span class="lineno">  421</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  422</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  423</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  424</span>            <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ab2d326124c667edba446393a437385ec">MCU15_BRAKE2_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  425</span>            <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3">getMechBrakeActiveThreshold</a>(),</div>
+<div class="line"><span class="lineno">  426</span>            {});</div>
+<div class="line"><span class="lineno">  427</span>    }</div>
+<div class="line"><span class="lineno">  428</span> </div>
+<div class="line"><span class="lineno">  429</span>    <span class="keywordflow">if</span> (t.trigger50) <span class="comment">// 50Hz</span></div>
+<div class="line"><span class="lineno">  430</span>    {</div>
+<div class="line"><span class="lineno">  431</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006">steering1</a>.sample();</div>
+<div class="line"><span class="lineno">  432</span>    }</div>
+<div class="line"><span class="lineno">  433</span> </div>
+<div class="line"><span class="lineno">  434</span>    <span class="keywordflow">if</span> (t.trigger100) <span class="comment">// 100Hz</span></div>
+<div class="line"><span class="lineno">  435</span>    {</div>
+<div class="line"><span class="lineno">  436</span> </div>
+<div class="line"><span class="lineno">  437</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.tick();</div>
+<div class="line"><span class="lineno">  438</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.tick();</div>
+<div class="line"><span class="lineno">  439</span>        <a class="code hl_variable" href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.tick();</div>
+<div class="line"><span class="lineno">  440</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a011a3a009c30de82a59a32d3da5644e5">load_cell_interface</a>.<a class="code hl_function" href="classLoadCellInterface.html#a8f9422de01903b65ce269363e09ef5a0">tick</a>(</div>
+<div class="line"><span class="lineno">  441</span>            (<a class="code hl_struct" href="structLoadCellInterfaceTick__s.html">LoadCellInterfaceTick_s</a>){</div>
+<div class="line"><span class="lineno">  442</span>                .FLConversion = <a class="code hl_variable" href="src_2main_8cpp.html#a825565ee53fc1270eb766de1eb009cf2">a2</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#abc97188d24b0d85e2d17a367070674a3">MCU15_FL_LOADCELL_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  443</span>                .FRConversion = <a class="code hl_variable" href="src_2main_8cpp.html#aed4c8f760d0c9893dcc21da660136846">a3</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#aa335db56afb6b950b2f14cb29b1d5a28">MCU15_FR_LOADCELL_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  444</span>                .RLConversion = <a class="code hl_variable" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>.<a class="code hl_variable" href="classSABInterface.html#a2b01b724667b7f57cb5065b7e9339e2d">rlLoadCell</a>.<a class="code hl_function" href="classAnalogChannel.html#a6d7b7c60899a5c4448c216a81a49b16e">convert</a>(),</div>
+<div class="line"><span class="lineno">  445</span>                .RRConversion = <a class="code hl_variable" href="src_2main_8cpp.html#a3c3974af74f493a86731119bf4aa6729">sab_interface</a>.<a class="code hl_variable" href="classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c">rrLoadCell</a>.<a class="code hl_function" href="classAnalogChannel.html#a6d7b7c60899a5c4448c216a81a49b16e">convert</a>()});</div>
+<div class="line"><span class="lineno">  446</span>    }</div>
+<div class="line"><span class="lineno">  447</span>    <span class="comment">// // Untriggered</span></div>
+<div class="line"><span class="lineno">  448</span>    main_ecu.read_mcu_status(); <span class="comment">// should be executed at the same rate as state machine</span></div>
+<div class="line"><span class="lineno">  449</span>                                <span class="comment">// DO NOT call in main_ecu.tick()</span></div>
+<div class="line"><span class="lineno">  450</span>}</div>
 <div class="ttc" id="aclassAMSInterface_html_a320d6b622e5cbe5c91fc5376e4afd2ca"><div class="ttname"><a href="classAMSInterface.html#a320d6b622e5cbe5c91fc5376e4afd2ca">AMSInterface::get_filtered_min_cell_voltage</a></div><div class="ttdeci">float get_filtered_min_cell_voltage()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00060">AMSInterface.cpp:60</a></div></div>
 <div class="ttc" id="aclassAMSInterface_html_aeb87faf300372a818af40cd81a738a2e"><div class="ttname"><a href="classAMSInterface.html#aeb87faf300372a818af40cd81a738a2e">AMSInterface::pack_charge_is_critical</a></div><div class="ttdeci">bool pack_charge_is_critical()</div><div class="ttdef"><b>Definition:</b> <a href="AMSInterface_8cpp_source.html#l00049">AMSInterface.cpp:49</a></div></div>
 <div class="ttc" id="aclassAnalogChannel_html_a6d7b7c60899a5c4448c216a81a49b16e"><div class="ttname"><a href="classAnalogChannel.html#a6d7b7c60899a5c4448c216a81a49b16e">AnalogChannel::convert</a></div><div class="ttdeci">AnalogConversion_s convert()</div><div class="ttdoc">Calculate sensor output and whether result is in sensor's defined bounds. DOES NOT SAMPLE.</div></div>
@@ -621,63 +630,63 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00447">447</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  448</span>{</div>
-<div class="line"><span class="lineno">  449</span>    <span class="comment">// tick pedals system</span></div>
-<div class="line"><span class="lineno">  450</span> </div>
-<div class="line"><span class="lineno">  451</span>    <span class="comment">// Serial.println(&quot;accel1&quot;);</span></div>
-<div class="line"><span class="lineno">  452</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);</span></div>
-<div class="line"><span class="lineno">  453</span>    <span class="comment">// Serial.println(&quot;accel2&quot;);</span></div>
-<div class="line"><span class="lineno">  454</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);</span></div>
-<div class="line"><span class="lineno">  455</span>    <span class="comment">// Serial.println(&quot;brake1&quot;);</span></div>
-<div class="line"><span class="lineno">  456</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);</span></div>
-<div class="line"><span class="lineno">  457</span>    <span class="comment">// Serial.println(&quot;brake2&quot;);</span></div>
-<div class="line"><span class="lineno">  458</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);</span></div>
+<p class="definition">Definition at line <a class="el" href="src_2main_8cpp_source.html#l00456">456</a> of file <a class="el" href="src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  457</span>{</div>
+<div class="line"><span class="lineno">  458</span>    <span class="comment">// tick pedals system</span></div>
 <div class="line"><span class="lineno">  459</span> </div>
-<div class="line"><span class="lineno">  460</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#acf55059b92a24a434ba9511e3ed308a3">tick</a>(</div>
-<div class="line"><span class="lineno">  461</span>        current_system_tick,</div>
-<div class="line"><span class="lineno">  462</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  463</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>],</div>
-<div class="line"><span class="lineno">  464</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>]);</div>
-<div class="line"><span class="lineno">  465</span> </div>
-<div class="line"><span class="lineno">  466</span>    <span class="comment">// tick steering system</span></div>
-<div class="line"><span class="lineno">  467</span>    steering_system.tick(</div>
-<div class="line"><span class="lineno">  468</span>        (<a class="code hl_struct" href="structSteeringSystemTick__s.html">SteeringSystemTick_s</a>){</div>
-<div class="line"><span class="lineno">  469</span>            .tick = current_system_tick,</div>
-<div class="line"><span class="lineno">  470</span>            .secondaryConversion = <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>]});</div>
-<div class="line"><span class="lineno">  471</span> </div>
-<div class="line"><span class="lineno">  472</span>    <span class="comment">// Serial.println(&quot;Steering angle&quot;);</span></div>
-<div class="line"><span class="lineno">  473</span>    <span class="comment">// Serial.println(steering_system.getSteeringSystemData().angle);</span></div>
-<div class="line"><span class="lineno">  474</span>    <span class="comment">// Serial.println(&quot;Steering status&quot;);</span></div>
-<div class="line"><span class="lineno">  475</span>    <span class="comment">// Serial.println(static_cast&lt;int&gt;(steering_system.getSteeringSystemData().status));</span></div>
-<div class="line"><span class="lineno">  476</span> </div>
-<div class="line"><span class="lineno">  477</span>    <span class="comment">// tick drivetrain system</span></div>
-<div class="line"><span class="lineno">  478</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">tick</a>(current_system_tick);</div>
-<div class="line"><span class="lineno">  479</span>    <span class="comment">// // tick torque controller mux</span></div>
+<div class="line"><span class="lineno">  460</span>    <span class="comment">// Serial.println(&quot;accel1&quot;);</span></div>
+<div class="line"><span class="lineno">  461</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);</span></div>
+<div class="line"><span class="lineno">  462</span>    <span class="comment">// Serial.println(&quot;accel2&quot;);</span></div>
+<div class="line"><span class="lineno">  463</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);</span></div>
+<div class="line"><span class="lineno">  464</span>    <span class="comment">// Serial.println(&quot;brake1&quot;);</span></div>
+<div class="line"><span class="lineno">  465</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);</span></div>
+<div class="line"><span class="lineno">  466</span>    <span class="comment">// Serial.println(&quot;brake2&quot;);</span></div>
+<div class="line"><span class="lineno">  467</span>    <span class="comment">// Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);</span></div>
+<div class="line"><span class="lineno">  468</span> </div>
+<div class="line"><span class="lineno">  469</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#acf55059b92a24a434ba9511e3ed308a3">tick</a>(</div>
+<div class="line"><span class="lineno">  470</span>        current_system_tick,</div>
+<div class="line"><span class="lineno">  471</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#ac2b037ba0558b48d9413de6402fdacc5">MCU15_ACCEL1_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  472</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a25349e2f4f24ad9572c183b7715eeb3c">MCU15_ACCEL2_CHANNEL</a>],</div>
+<div class="line"><span class="lineno">  473</span>        <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a0b479ef0a6e7555ce142622121018c98">MCU15_BRAKE1_CHANNEL</a>]);</div>
+<div class="line"><span class="lineno">  474</span> </div>
+<div class="line"><span class="lineno">  475</span>    <span class="comment">// tick steering system</span></div>
+<div class="line"><span class="lineno">  476</span>    steering_system.tick(</div>
+<div class="line"><span class="lineno">  477</span>        (<a class="code hl_struct" href="structSteeringSystemTick__s.html">SteeringSystemTick_s</a>){</div>
+<div class="line"><span class="lineno">  478</span>            .tick = current_system_tick,</div>
+<div class="line"><span class="lineno">  479</span>            .secondaryConversion = <a class="code hl_variable" href="src_2main_8cpp.html#ac04fcfdfca6ce3ee5f3034ef9017c6bb">a1</a>.get().conversions[<a class="code hl_variable" href="MCU__rev15__defs_8h.html#a1009f1898ab80c773745359d3262a879">MCU15_STEERING_CHANNEL</a>]});</div>
 <div class="line"><span class="lineno">  480</span> </div>
-<div class="line"><span class="lineno">  481</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> controller_output = case_system.evaluate(</div>
-<div class="line"><span class="lineno">  482</span>        current_system_tick,</div>
-<div class="line"><span class="lineno">  483</span>        vn_interface.get_vn_struct(),</div>
-<div class="line"><span class="lineno">  484</span>        steering_system.getSteeringSystemData(),</div>
-<div class="line"><span class="lineno">  485</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">get_dynamic_data</a>(),</div>
-<div class="line"><span class="lineno">  486</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a011a3a009c30de82a59a32d3da5644e5">load_cell_interface</a>.<a class="code hl_function" href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">getLoadCellForces</a>().<a class="code hl_variable" href="structLoadCellInterfaceOutput__s.html#ae3629e9462648e5a99f07d202b8ade5b">loadCellConversions</a>, <span class="comment">// should CASE use filtered load cells?</span></div>
-<div class="line"><span class="lineno">  487</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
-<div class="line"><span class="lineno">  488</span>        0,</div>
-<div class="line"><span class="lineno">  489</span>        fsm.get_state(),</div>
-<div class="line"><span class="lineno">  490</span>        dashboard.startButtonPressed(),</div>
-<div class="line"><span class="lineno">  491</span>        3);</div>
-<div class="line"><span class="lineno">  492</span> </div>
-<div class="line"><span class="lineno">  493</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#af4755d64afb3a381c1043a607de1d401">tick</a>(</div>
-<div class="line"><span class="lineno">  494</span>        current_system_tick,</div>
-<div class="line"><span class="lineno">  495</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">get_dynamic_data</a>(),</div>
+<div class="line"><span class="lineno">  481</span>    <span class="comment">// Serial.println(&quot;Steering angle&quot;);</span></div>
+<div class="line"><span class="lineno">  482</span>    <span class="comment">// Serial.println(steering_system.getSteeringSystemData().angle);</span></div>
+<div class="line"><span class="lineno">  483</span>    <span class="comment">// Serial.println(&quot;Steering status&quot;);</span></div>
+<div class="line"><span class="lineno">  484</span>    <span class="comment">// Serial.println(static_cast&lt;int&gt;(steering_system.getSteeringSystemData().status));</span></div>
+<div class="line"><span class="lineno">  485</span> </div>
+<div class="line"><span class="lineno">  486</span>    <span class="comment">// tick drivetrain system</span></div>
+<div class="line"><span class="lineno">  487</span>    <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">tick</a>(current_system_tick);</div>
+<div class="line"><span class="lineno">  488</span>    <span class="comment">// // tick torque controller mux</span></div>
+<div class="line"><span class="lineno">  489</span> </div>
+<div class="line"><span class="lineno">  490</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> controller_output = case_system.evaluate(</div>
+<div class="line"><span class="lineno">  491</span>        current_system_tick,</div>
+<div class="line"><span class="lineno">  492</span>        vn_interface.get_vn_struct(),</div>
+<div class="line"><span class="lineno">  493</span>        steering_system.getSteeringSystemData(),</div>
+<div class="line"><span class="lineno">  494</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">get_dynamic_data</a>(),</div>
+<div class="line"><span class="lineno">  495</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a011a3a009c30de82a59a32d3da5644e5">load_cell_interface</a>.<a class="code hl_function" href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">getLoadCellForces</a>().<a class="code hl_variable" href="structLoadCellInterfaceOutput__s.html#ae3629e9462648e5a99f07d202b8ade5b">loadCellConversions</a>, <span class="comment">// should CASE use filtered load cells?</span></div>
 <div class="line"><span class="lineno">  496</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
-<div class="line"><span class="lineno">  497</span>        steering_system.getSteeringSystemData(),</div>
-<div class="line"><span class="lineno">  498</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a011a3a009c30de82a59a32d3da5644e5">load_cell_interface</a>.<a class="code hl_function" href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">getLoadCellForces</a>(),</div>
-<div class="line"><span class="lineno">  499</span>        dashboard.getDialMode(),</div>
-<div class="line"><span class="lineno">  500</span>        dashboard.torqueModeButtonPressed(),</div>
-<div class="line"><span class="lineno">  501</span>        vn_interface.get_vn_struct(),</div>
-<div class="line"><span class="lineno">  502</span>        controller_output);</div>
-<div class="line"><span class="lineno">  503</span>}</div>
+<div class="line"><span class="lineno">  497</span>        0,</div>
+<div class="line"><span class="lineno">  498</span>        fsm.get_state(),</div>
+<div class="line"><span class="lineno">  499</span>        dashboard.startButtonPressed(),</div>
+<div class="line"><span class="lineno">  500</span>        3);</div>
+<div class="line"><span class="lineno">  501</span> </div>
+<div class="line"><span class="lineno">  502</span>    <a class="code hl_variable" href="src_2main_8cpp.html#af8f6043c059e465412c7d1b34bc39a2c">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#af4755d64afb3a381c1043a607de1d401">tick</a>(</div>
+<div class="line"><span class="lineno">  503</span>        current_system_tick,</div>
+<div class="line"><span class="lineno">  504</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>.<a class="code hl_function" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">get_dynamic_data</a>(),</div>
+<div class="line"><span class="lineno">  505</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a13f1491f00fd0a2558fe128e89c4b72c">pedals_system</a>.<a class="code hl_function" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">getPedalsSystemData</a>(),</div>
+<div class="line"><span class="lineno">  506</span>        steering_system.getSteeringSystemData(),</div>
+<div class="line"><span class="lineno">  507</span>        <a class="code hl_variable" href="src_2main_8cpp.html#a011a3a009c30de82a59a32d3da5644e5">load_cell_interface</a>.<a class="code hl_function" href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">getLoadCellForces</a>(),</div>
+<div class="line"><span class="lineno">  508</span>        dashboard.getDialMode(),</div>
+<div class="line"><span class="lineno">  509</span>        dashboard.torqueModeButtonPressed(),</div>
+<div class="line"><span class="lineno">  510</span>        vn_interface.get_vn_struct(),</div>
+<div class="line"><span class="lineno">  511</span>        controller_output);</div>
+<div class="line"><span class="lineno">  512</span>}</div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a5f70417c1da9a6f99e9b6ef42cffd075"><div class="ttname"><a href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">DrivetrainSystem::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick)</div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_aa703f3d20b3a6f38b034e5d55d5a707a"><div class="ttname"><a href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">DrivetrainSystem::get_dynamic_data</a></div><div class="ttdeci">DrivetrainDynamicReport_s get_dynamic_data()</div></div>
 <div class="ttc" id="aclassLoadCellInterface_html_a3f81f21773d2eec5053b345ebbbd4895"><div class="ttname"><a href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">LoadCellInterface::getLoadCellForces</a></div><div class="ttdeci">LoadCellInterfaceOutput_s getLoadCellForces()</div><div class="ttdef"><b>Definition:</b> <a href="LoadCellInterface_8cpp_source.html#l00035">LoadCellInterface.cpp:35</a></div></div>
