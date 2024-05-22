@@ -384,7 +384,6 @@ void loop()
 
         Serial.println();
     }
-    
 }
 
 /*
