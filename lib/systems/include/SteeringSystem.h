@@ -10,7 +10,7 @@
 
 // Definitions
 // TODO: evalaute reasonable thresholds for agreement
-#define STEERING_DIVERGENCE_ERROR_THRESHOLD (14.0) // Steering sensors can disagree by x degrees before output is considered erroneous
+#define STEERING_DIVERGENCE_ERROR_THRESHOLD (16.0) // Steering sensors can disagree by x degrees before output is considered erroneous
 #define STEERING_DIVERGENCE_WARN_THRESHOLD (8.0) // Warning condition will be raised when steering sensors diverge x degrees
 #define NUM_SENSORS 2
 #define DEFAULT_STEERING_ALPHA (0.0)
