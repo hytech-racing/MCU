@@ -158,7 +158,7 @@ CASEConfiguration case_config = {
     .yaw_pid_p = 1.5,
     .yaw_pid_i = 0.25,
     .yaw_pid_d = 0.0,
-    .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
+    .tcs_pid_p_lowerBound_front = 55.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
     .tcs_pid_p_upperBound_front = 45.0,
     .tcs_pid_p_lowerBound_rear = 32.0,
     .tcs_pid_p_upperBound_rear = 45.0,
@@ -173,8 +173,6 @@ CASEConfiguration case_config = {
     .usePIDPowerLimit = false,
     .useDecoupledYawBrakes = true,
     .useDiscontinuousYawPIDBrakes = true,
-    .tcsSLThreshold = 0.3,
-    .launchSL = 0.3,
     .launchDeadZone = 20.0,        // N-m
     .launchVelThreshold = 0.15,    // m/s
     .tcsVelThreshold = 1.5,        // m/s
@@ -212,6 +210,19 @@ CASEConfiguration case_config = {
     .TCS_NL_endBoundPerc_FrontAxle = 0.4,
     .TCS_NL_startBoundPerc_RearAxle = 0.5,
     .TCS_NL_endBoundPerc_RearAxle = 0.6,
+    .useNL_TCS_SlipSchedule = true,
+    .launchSL_startBound_Front = 0.25,
+    .launchSL_endBound_Front = 0.15,
+    .launchSL_startBound_Rear = 0.3,
+    .launchSL_endBound_Rear = 0.4,
+    .TCS_SL_startBound_Front = 0.25,
+    .TCS_SL_endBound_Front = 0.15,
+    .TCS_SL_startBound_Rear = 0.3,
+    .TCS_SL_endBound_Rear = 0.4,
+    .TCS_SL_NLPerc_startBound_Front = 0.5,
+    .TCS_SL_NLPerc_endBound_Front = 0.4,
+    .TCS_SL_NLPerc_startBound_Rear = 0.5,
+    .TCS_SL_NLPerc_endBound_Rear = 0.6,
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,
@@ -359,10 +370,16 @@ void loop()
     {
         Serial.print("Steering system reported angle (deg): ");
         Serial.println(steering_system.getSteeringSystemData().angle);
+        Serial.print("Steering system status: ");
+        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
+        Serial.print("Primary sensor angle: ");
+        Serial.println(steering1.convert().angle);
         Serial.print("Secondary sensor angle: ");
-        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print("  raw: ");
+        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
         Serial.print("Sensor divergence: ");
-        Serial.println(steering_system.getSteeringSystemData().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
         Serial.println();
 
         Serial.println();

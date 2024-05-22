@@ -99,10 +99,10 @@ const float LOADCELL_RR_OFFSET = 23.761 / LOADCELL_RR_SCALE;
 
 // Steering parameters
 const float PRIMARY_STEERING_SENSE_OFFSET = 0.0; // units are degrees
-const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 794;    // 812
-const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3075;  // 3179
-const int SECONDARY_STEERING_SENSE_CENTER = 1960;           // 1970
-const float STEERING_RANGE_DEGREES = 253.0f;                // 256.05f;
+const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 785;    // 794    // 812    // 130 deg
+const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3087;    // 3075    // 3179    // 134 deg
+const int SECONDARY_STEERING_SENSE_CENTER = 1945;    // 1960    // 1970
+const float STEERING_RANGE_DEGREES = 257.0f;    // 253.0f    // 256.05f   // 134+130-7(slop)
 const float STEERING_IIR_ALPHA = 0.7f;  // shaves off around 1 deg of max discrepancy
 
 // TC parameters
