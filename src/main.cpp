@@ -325,6 +325,15 @@ void loop()
     // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+
+    if (curr_tick.triggers.trigger5)
+    {
+        Serial.print("Steering system angle: ");
+        Serial.println(steering_system.getSteeringSystemData().angle);
+        Serial.print("Steering system status: ");
+        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
+    }
+    
 }
 
 /*
