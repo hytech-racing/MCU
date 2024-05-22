@@ -371,7 +371,7 @@ void loop()
         Serial.print("Steering system reported angle (deg): ");
         Serial.println(steering_system.getSteeringSystemData().angle);
         Serial.print("Steering system status: ");
-        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status))
+        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
         Serial.print("Primary sensor angle: ");
         Serial.println(steering1.convert().angle);
         Serial.print("Secondary sensor angle: ");
