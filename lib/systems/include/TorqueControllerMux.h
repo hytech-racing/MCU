@@ -61,7 +61,7 @@ private:
     TCMuxStatus_s tcMuxStatus_;
 
     DrivetrainCommand_s drivetrainCommand_;
-    TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_LOW_TORQUE;
+    TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_FULL_TORQUE;
     bool torqueLimitButtonPressed_ = false;
     unsigned long torqueLimitButtonPressedTime_ = 0;
     TelemetryInterface *telemHandle_;

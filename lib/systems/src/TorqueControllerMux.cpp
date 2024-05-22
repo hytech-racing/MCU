@@ -103,11 +103,15 @@ void TorqueControllerMux::tick(
         tcMuxStatus_.maxTorque = getMaxTorque();
 
         // Apply setpoints value limits
-        // Safety checks for CASE: CASE handles regen, torque, and power limit internally
-        applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        // Apply torque limit before power limit to not power limit
-        applyTorqueLimit(&drivetrainCommand_);
-        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        if (muxMode_ != TC_CASE_SYSTEM)
+        {
+            // Safety checks for CASE: CASE handles regen, torque, and power limit internally
+            applyRegenLimit(&drivetrainCommand_, &drivetrainData);
+            // Apply torque limit before power limit to not power limit
+            applyTorqueLimit(&drivetrainCommand_);
+            applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        }        
+        
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
 
