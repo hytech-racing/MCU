@@ -370,10 +370,14 @@ void loop()
     {
         Serial.print("Steering system reported angle (deg): ");
         Serial.println(steering_system.getSteeringSystemData().angle);
+        Serial.print("Primary sensor angle: ");
+        Serial.println(steering1.convert().angle);
         Serial.print("Secondary sensor angle: ");
-        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print("  raw: ");
+        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
         Serial.print("Sensor divergence: ");
-        Serial.println(steering_system.getSteeringSystemData().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
         Serial.println();
 
         Serial.println();
