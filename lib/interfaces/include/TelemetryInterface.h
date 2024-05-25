@@ -29,6 +29,8 @@ struct TelemetryInterfaceReadChannels
     int current_channel;
     int current_ref_channel;
     int glv_sense_channel;
+    int therm_fl_channel;
+    int therm_fr_channel;
 };
 
 class TelemetryInterface
@@ -54,6 +56,10 @@ public:
 
     /* Update CAN messages (main loop) */
     // Interfaces
+    void update_front_thermistors_CAN_msg(
+        const AnalogConversion_s &therm_fl,
+        const AnalogConversion_s &therm_fr
+    );
     void update_pedal_readings_CAN_msg(
         float accel_percent,
         float brake_percent,
@@ -125,6 +131,7 @@ public:
         const AnalogConversionPacket_s<8> &adc1,
         const AnalogConversionPacket_s<4> &adc2,
         const AnalogConversionPacket_s<4> &adc3,
+        const AnalogConversionPacket_s<2> &mcu_adc,
         const SteeringEncoderConversion_s &encoder,
         InvInt_t *fl,
         InvInt_t *fr,

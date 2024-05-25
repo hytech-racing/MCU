@@ -7,6 +7,8 @@
 #include "DrivetrainSystem.h"
 #include "SteeringSystem.h"
 #include "MCUStateMachine.h"
+#include "ProtobufMsgInterface.h"
+#include "ParameterInterface.h"
 
 struct CASEConfiguration
 {
@@ -14,7 +16,10 @@ struct CASEConfiguration
     float yaw_pid_p;
     float yaw_pid_i;
     float yaw_pid_d;
-    float tcs_pid_p;
+    float tcs_pid_p_lowerBound_front;
+    float tcs_pid_p_upperBound_front;
+    float tcs_pid_p_lowerBound_rear;
+    float tcs_pid_p_upperBound_rear;
     float tcs_pid_i;
     float tcs_pid_d;
     bool useLaunch;
@@ -47,6 +52,37 @@ struct CASEConfiguration
     float DriveTorquePercentFront;
     float BrakeTorquePercentFront;
     float MechPowerMaxkW;
+    float launchLeftRightMaxDiff;
+    float tcs_pid_lower_rpm_front;
+    float tcs_pid_upper_rpm_front;
+    float tcs_pid_lower_rpm_rear;
+    float tcs_pid_upper_rpm_rear;
+    float maxNormalLoadBrakeScalingFront;
+    float tcs_saturation_front;
+    float tcs_saturation_rear;
+    float TCSGenLeftRightDiffLowerBound;
+    float TCSGenLeftRightDiffUpperBound;
+    float TCSWheelSteerLowerBound;
+    float TCSWheelSteerUpperBound;
+    bool useRPM_TCS_GainSchedule;
+    bool useNL_TCS_GainSchedule;
+    float TCS_NL_startBoundPerc_FrontAxle;
+    float TCS_NL_endBoundPerc_FrontAxle;
+    float TCS_NL_startBoundPerc_RearAxle;
+    float TCS_NL_endBoundPerc_RearAxle;
+    bool useNL_TCS_SlipSchedule;
+    float launchSL_startBound_Front;
+    float launchSL_endBound_Front;
+    float launchSL_startBound_Rear;
+    float launchSL_endBound_Rear;
+    float TCS_SL_startBound_Front;
+    float TCS_SL_endBound_Front;
+    float TCS_SL_startBound_Rear;
+    float TCS_SL_endBound_Rear;
+    float TCS_SL_NLPerc_startBound_Front;    
+    float TCS_SL_NLPerc_endBound_Front;
+    float TCS_SL_NLPerc_startBound_Rear;
+    float TCS_SL_NLPerc_endBound_Rear;
 
     float max_rpm;
     float max_regen_torque;
@@ -68,6 +104,7 @@ public:
         message_queue *can_queue,
         unsigned long controller_send_period_ms,
         unsigned long vehicle_math_offset_ms,
+        unsigned long lowest_controller_send_period_ms,
         CASEConfiguration config)
     {
         msg_queue_ = can_queue;
@@ -76,10 +113,13 @@ public:
         config_ = config;
         last_controller_pt1_send_time_ = 0;
         last_controller_pt2_send_time_ = 0;
+        last_controller_pt3_send_time_ = 0;
+        last_lowest_priority_controller_send_time_ = 0;
 
         controller_send_period_ms_ = controller_send_period_ms;
         last_vehm_send_time_ = 0;
         vehicle_math_offset_ms_ = vehicle_math_offset_ms;
+        lowest_priority_controller_send_period_ms_ = lowest_controller_send_period_ms;
     }
 
     /// @brief function that evaluates the CASE (controller and state estimation) system. updates the internal pstate_ and returns controller result
@@ -105,26 +145,77 @@ public:
         bool start_button_pressed,
         uint8_t vn_status);
 
-    void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d, float brake_p, float brake_i, float brake_d)
-    {
-        config_.yaw_pid_p = yaw_p;
-        config_.yaw_pid_p = yaw_i;
-        config_.yaw_pid_p = yaw_d;
+    // void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d, float brake_p, float brake_i, float brake_d)
+    // {
+    //     config_.yaw_pid_p = yaw_p;
+    //     config_.yaw_pid_p = yaw_i;
+    //     config_.yaw_pid_p = yaw_d;
 
-        config_.tcs_pid_p = tcs_p;
-        config_.tcs_pid_i = tcs_i;
-        config_.tcs_pid_d = tcs_d;
+    //     config_.tcs_pid_p = tcs_p;
+    //     config_.tcs_pid_i = tcs_i;
+    //     config_.tcs_pid_d = tcs_d;
 
-        config_.yaw_pid_brakes_p = brake_p;
-        config_.yaw_pid_brakes_i = brake_i;
-        config_.yaw_pid_brakes_d = brake_d;
-    }
+    //     config_.yaw_pid_brakes_p = brake_p;
+    //     config_.yaw_pid_brakes_i = brake_i;
+    //     config_.yaw_pid_brakes_d = brake_d;
+    // }
+
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
-    void configure(const CASEConfiguration &config)
+
+    void update_config_from_param_interface(ParameterInterface &param_interface_ref)
     {
-        config_ = config;
+        config cfg = param_interface_ref.get_config();
+        config_.AbsoluteTorqueLimit = cfg.AbsoluteTorqueLimit;
+        config_.yaw_pid_p = cfg.yaw_pid_p;
+        config_.yaw_pid_i = cfg.yaw_pid_i;
+        config_.yaw_pid_d = cfg.yaw_pid_d;
+        config_.tcs_pid_p_lowerBound_front = cfg.tcs_pid_p_lowerBound_front;
+        config_.tcs_pid_p_upperBound_front = cfg.tcs_pid_p_upperBound_front;
+        config_.tcs_pid_p_lowerBound_rear = cfg.tcs_pid_p_lowerBound_rear;
+        config_.tcs_pid_p_upperBound_rear = cfg.tcs_pid_p_upperBound_rear;
+        config_.tcs_pid_i = cfg.tcs_pid_i;
+        config_.tcs_pid_d = cfg.tcs_pid_d;
+        config_.useLaunch = cfg.useLaunch;
+        config_.usePIDTV = cfg.usePIDTV;
+        config_.useTCSLimitedYawPID = cfg.useTCSLimitedYawPID;
+        config_.useNormalForce = cfg.useNormalForce;
+        config_.useTractionControl = cfg.useTractionControl;
+        config_.usePowerLimit = cfg.usePowerLimit;
+        config_.usePIDPowerLimit = cfg.usePIDPowerLimit;
+        config_.useDecoupledYawBrakes = cfg.useDecoupledYawBrakes;
+        config_.useDiscontinuousYawPIDBrakes = cfg.useDiscontinuousYawPIDBrakes;
+        config_.tcsSLThreshold = cfg.tcsSLThreshold;
+        config_.launchSL = cfg.launchSL;
+        config_.launchDeadZone = cfg.launchDeadZone;
+        config_.launchVelThreshold = cfg.launchVelThreshold;
+        config_.tcsVelThreshold = cfg.tcsVelThreshold;
+        config_.yawPIDMaxDifferential = cfg.yawPIDMaxDifferential;
+        config_.yawPIDErrorThreshold = cfg.yawPIDErrorThreshold;
+        config_.yawPIDVelThreshold = cfg.yawPIDVelThreshold;
+        config_.yawPIDCoastThreshold = cfg.yawPIDCoastThreshold;
+        config_.yaw_pid_brakes_p = cfg.yaw_pid_brakes_p;
+        config_.yaw_pid_brakes_i = cfg.yaw_pid_brakes_i;
+        config_.yaw_pid_brakes_d = cfg.yaw_pid_brakes_d;
+        config_.decoupledYawPIDBrakesMaxDIfference = cfg.decoupledYawPIDBrakesMaxDIfference;
+        config_.discontinuousBrakesPercentThreshold = cfg.discontinuousBrakesPercentThreshold;
+        config_.TorqueMode = cfg.TorqueMode;
+        config_.RegenLimit = cfg.RegenLimit;
+        config_.useNoRegen5kph = cfg.useNoRegen5kph;
+        config_.useTorqueBias = cfg.useTorqueBias;
+        config_.DriveTorquePercentFront = cfg.DriveTorquePercentFront;
+        config_.BrakeTorquePercentFront = cfg.BrakeTorquePercentFront;
+        config_.MechPowerMaxkW = cfg.MechPowerMaxkW;
+        config_.launchLeftRightMaxDiff = cfg.launchLeftRightMaxDiff;
+        config_.tcs_pid_lower_rpm_front = cfg.tcs_pid_lower_rpm_front;
+        config_.tcs_pid_upper_rpm_front = cfg.tcs_pid_upper_rpm_front;
+        config_.tcs_pid_lower_rpm_rear = cfg.tcs_pid_lower_rpm_rear;
+        config_.tcs_pid_upper_rpm_rear = cfg.tcs_pid_upper_rpm_rear;
+        config_.maxNormalLoadBrakeScalingFront = cfg.maxNormalLoadBrakeScalingFront;
+        config_.max_rpm = cfg.max_rpm;
+        config_.max_regen_torque = cfg.max_regen_torque;
+        config_.max_torque = cfg.max_torque;
     }
     float get_rpm_setpoint(float final_torque)
     {
@@ -143,7 +234,7 @@ private:
     message_queue *msg_queue_;
     HT08_CASE case_;
 
-    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_, last_controller_pt3_send_time_, last_vehm_send_time_, controller_send_period_ms_;
+    unsigned long vn_active_start_time_, last_eval_time_, vehicle_math_offset_ms_, last_controller_pt1_send_time_, last_controller_pt2_send_time_, last_controller_pt3_send_time_, last_vehm_send_time_, controller_send_period_ms_, lowest_priority_controller_send_period_ms_, last_lowest_priority_controller_send_time_;
 };
 
 #include "CASESystem.tpp"
