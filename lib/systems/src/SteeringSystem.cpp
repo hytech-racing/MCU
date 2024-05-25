@@ -12,19 +12,15 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         primarySensor_->sample();
         primaryConversion_ = primarySensor_->convert();
 
-        // Filter both sensor angle readings
-        filteredAnglePrimary_ = steeringFilters_[0].filtered_result(primaryConversion_.angle);
-        filteredAngleSecondary_ = steeringFilters_[1].filtered_result(intake.secondaryConversion.conversion);        
-
         // Both sensors are nominal and agree
         if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL)
             && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_GOOD)
-            && (std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_WARN_THRESHOLD)
+            && (std::abs(primaryConversion_.angle - intake.secondaryConversion.conversion) < STEERING_DIVERGENCE_WARN_THRESHOLD)
         )
         {
             steeringData_ = {
-                .angle = filteredAnglePrimary_,
+                .angle = primaryConversion_.angle,
                 .status = SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL
             };
         }
@@ -32,12 +28,12 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
         else if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_MARGINAL)
-            || ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL) && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED))
-            || ((std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) >= STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_ERROR_THRESHOLD))
+            || (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED)
+            || ((std::abs(primaryConversion_.angle - intake.secondaryConversion.conversion) >= STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryConversion_.angle - intake.secondaryConversion.conversion) < STEERING_DIVERGENCE_ERROR_THRESHOLD))
         )
         {
             steeringData_ = {
-                .angle = filteredAnglePrimary_,
+                .angle = primaryConversion_.angle,
                 .status = SteeringSystemStatus_e::STEERING_SYSTEM_MARGINAL
             };
         }
@@ -48,7 +44,7 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         )
         {
             steeringData_ = {
-                .angle = filteredAngleSecondary_,
+                .angle = intake.secondaryConversion.conversion,
                 .status = SteeringSystemStatus_e::STEERING_SYSTEM_DEGRADED
             };
         }
@@ -61,11 +57,5 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
                 .status = SteeringSystemStatus_e::STEERING_SYSTEM_ERROR
             };
         }
-
-        // For possible bottom sensor recalibration
-        // TODO: Remove me once done!
-        // Serial.print("Secondary sensor raw: ");
-        // Serial.println(intake.secondaryConversion.raw);
-        // Serial.println();
     }
 }
