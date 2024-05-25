@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['default_5falpha_0',['DEFAULT_ALPHA',['../Filter__IIR_8h.html#aba42e2577965afce5d4454243a5ed8b8',1,'Filter_IIR.h']]],
-  ['default_5fsteering_5falpha_1',['DEFAULT_STEERING_ALPHA',['../SteeringSystem_8h.html#a32532e548c1fac405db7a741bdfd2699',1,'SteeringSystem.h']]]
+  ['half_5faccelerator_5fpedal_5f1_0',['HALF_ACCELERATOR_PEDAL_1',['../driver__constants_8h.html#a6c2ec75026298a435d5ec8abde0c4d9e',1,'driver_constants.h']]],
+  ['half_5faccelerator_5fpedal_5f2_1',['HALF_ACCELERATOR_PEDAL_2',['../driver__constants_8h.html#a6b3117f29b4e0cf6007af174fbe64467',1,'driver_constants.h']]]
 ];

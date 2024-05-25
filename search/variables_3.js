@@ -1,7 +1,7 @@
 var searchData=
 [
   ['can1_5frxbuffer_0',['CAN1_rxBuffer',['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can1_5ftxbuffer_1',['CAN1_txBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can1_5ftxbuffer_1',['CAN1_txBuffer',['../HytechCANInterface_8cpp.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../interfaces_2include_2HytechCANInterface_8h.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
   ['can2_5frxbuffer_2',['CAN2_rxBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp']]],
   ['can2_5ftxbuffer_3',['CAN2_txBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#a0563e26e6ba2018e944623e568c0af93',1,'CAN2_txBuffer():&#160;test_can_interface.cpp'],['../HytechCANInterface_8cpp.html#aee02772efd58d30d9935a14dba4bcd34',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp'],['../test__can__interface_8cpp.html#a5cd4a36a9d0a3518ad60b4bfb316dc3f',1,'CAN2_txBuffer():&#160;test_can_interface.cpp']]],
   ['can3_5frxbuffer_4',['CAN3_rxBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7',1,'CAN3_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a29aa040358a501c30e482164867b44a7',1,'CAN3_rxBuffer():&#160;HytechCANInterface.cpp']]],
@@ -19,10 +19,10 @@ var searchData=
   ['cmd_5fgeneral_5fcount_5f_16',['cmd_general_count_',['../classInverterMock.html#abb6c3df944899fbd8e804f32f255ac4d',1,'InverterMock']]],
   ['cmd_5fno_5ft_5fcount_5f_17',['cmd_no_t_count_',['../classInverterMock.html#a72df2824d2763aef83a86bd69542a05e',1,'InverterMock']]],
   ['cmd_5freset_5fcount_5f_18',['cmd_reset_count_',['../classInverterMock.html#a6b3b37adaa7e518cbb5612616a23e373',1,'InverterMock']]],
-  ['command_19',['command',['../structTCCaseWrapperTick__s.html#ada899f9f058a7906de39470fe2ff54d7',1,'TCCaseWrapperTick_s::command()'],['../structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957',1,'TorqueControllerOutput_s::command()']]],
+  ['command_19',['command',['../structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957',1,'TorqueControllerOutput_s::command()'],['../structTCCaseWrapperTick__s.html#ada899f9f058a7906de39470fe2ff54d7',1,'TCCaseWrapperTick_s::command()']]],
   ['compilationdb_5finclude_5ftoolchain_20',['COMPILATIONDB_INCLUDE_TOOLCHAIN',['../namespaceextra__script.html#a707181d946ac1a67eab44ec6d8a053e5',1,'extra_script']]],
   ['compilationdb_5fpath_21',['COMPILATIONDB_PATH',['../namespaceextra__script.html#ad9519e93460a11fea43a49dc2a14da9e',1,'extra_script']]],
-  ['config_5f_22',['config_',['../classParameterInterface.html#a069f8cf30abedaa74c63eb64afa6b524',1,'ParameterInterface::config_()'],['../classCASESystem.html#a2f859cf730af98d7c88586d1d4200c0e',1,'CASESystem::config_()']]],
+  ['config_5f_22',['config_',['../classCASESystem.html#a2f859cf730af98d7c88586d1d4200c0e',1,'CASESystem']]],
   ['const_5faccel_5ftime_23',['const_accel_time',['../TorqueControllers_8h.html#ae354ab8317fa70c138b225cd3de7959c',1,'TorqueControllers.h']]],
   ['controller_5finput_24',['controller_input',['../structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24',1,'PIDTVTorqueControllerData']]],
   ['controller_5fmux_5f_25',['controller_mux_',['../classMCUStateMachine.html#a64f86e895ebbed42c91172a37ca159c3',1,'MCUStateMachine']]],
@@ -36,10 +36,9 @@ var searchData=
   ['cur_5fdial_5fmode_5f_33',['cur_dial_mode_',['../classTorqueControllerMux.html#ad3b6895fb346d5f2f86b19c259884fbf',1,'TorqueControllerMux']]],
   ['curr_5fcmd_5f_34',['curr_cmd_',['../classInverterInterface.html#a7a9468faffb5a4ac74683dd7296754f5',1,'InverterInterface']]],
   ['curr_5fsystem_5fmillis_5f_35',['curr_system_millis_',['../classDrivetrainSystem.html#aa6ea7457c6228374ce0b8474ffea4f82',1,'DrivetrainSystem']]],
-  ['current_5fcar_5fstate_5f_36',['current_car_state_',['../classParameterInterface.html#a749f510cb85eae49dae1e3eeca8257d8',1,'ParameterInterface']]],
-  ['current_5fchannel_37',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
-  ['current_5fdrivetrain_5fcommand_5f_38',['current_drivetrain_command_',['../classDrivetrainSystem.html#ad18a988bcc293a394d428c0142fb24af',1,'DrivetrainSystem']]],
-  ['current_5fmillis_5f_39',['current_millis_',['../classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72',1,'BaseLaunchController']]],
-  ['current_5fref_5fchannel_40',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]],
-  ['current_5fstate_5f_41',['current_state_',['../classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315',1,'MCUStateMachine']]]
+  ['current_5fchannel_36',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
+  ['current_5fdrivetrain_5fcommand_5f_37',['current_drivetrain_command_',['../classDrivetrainSystem.html#ad18a988bcc293a394d428c0142fb24af',1,'DrivetrainSystem']]],
+  ['current_5fmillis_5f_38',['current_millis_',['../classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72',1,'BaseLaunchController']]],
+  ['current_5fref_5fchannel_39',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]],
+  ['current_5fstate_5f_40',['current_state_',['../classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315',1,'MCUStateMachine']]]
 ];

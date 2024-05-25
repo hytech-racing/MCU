@@ -24,13 +24,12 @@ var searchData=
   ['adc1_5fcs_21',['ADC1_CS',['../MCU__rev15__defs_8h.html#a43aad289b69980ab76a0a00479faf77e',1,'MCU_rev15_defs.h']]],
   ['adc2_5fcs_22',['ADC2_CS',['../MCU__rev15__defs_8h.html#ab25ab6b42051dd04d6fa01e83b13e235',1,'MCU_rev15_defs.h']]],
   ['adc3_5fcs_23',['ADC3_CS',['../MCU__rev15__defs_8h.html#afef284a61dec31ceaf620f532c528f07',1,'MCU_rev15_defs.h']]],
-  ['alpha_24',['alpha',['../classFilter__IIR.html#ab1bb65cb5b107154fbbc15aa7624dce7',1,'Filter_IIR']]],
-  ['amk_5fmax_5frpm_25',['AMK_MAX_RPM',['../TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6',1,'TorqueControllers.h']]],
-  ['amk_5fmax_5ftorque_26',['AMK_MAX_TORQUE',['../TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8',1,'TorqueControllers.h']]],
-  ['ams_5f_27',['ams_',['../classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927',1,'SafetySystem']]],
-  ['ams_5finterface_28',['ams_interface',['../structCANInterfaces.html#a07b2512ce4dd8b21566334315e9026fa',1,'CANInterfaces::ams_interface()'],['../src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760',1,'ams_interface():&#160;main.cpp']]],
-  ['analog_5fsteering_5fchannel_29',['analog_steering_channel',['../structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89',1,'TelemetryInterfaceReadChannels']]],
-  ['angle_30',['angle',['../structSteeringSystemData__s.html#a2935bd230dc29a1fbc7c462c425cca79',1,'SteeringSystemData_s::angle()'],['../structSteeringEncoderConversion__s.html#ada5152e3d6306f8a36c2e571bb0e1714',1,'SteeringEncoderConversion_s::angle()']]],
-  ['angular_5frates_31',['angular_rates',['../structvector__nav.html#a37e901d5313d1c2ffe1079c2d11dc84c',1,'vector_nav']]],
-  ['apps_5factivation_5fpercentage_32',['APPS_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293',1,'MCU_rev15_defs.h']]]
+  ['amk_5fmax_5frpm_24',['AMK_MAX_RPM',['../TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6',1,'TorqueControllers.h']]],
+  ['amk_5fmax_5ftorque_25',['AMK_MAX_TORQUE',['../TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8',1,'TorqueControllers.h']]],
+  ['ams_5f_26',['ams_',['../classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927',1,'SafetySystem']]],
+  ['ams_5finterface_27',['ams_interface',['../structCANInterfaces.html#a07b2512ce4dd8b21566334315e9026fa',1,'CANInterfaces::ams_interface()'],['../src_2main_8cpp.html#a85a5439b2aa488ed20a8c97afafc2760',1,'ams_interface():&#160;main.cpp']]],
+  ['analog_5fsteering_5fchannel_28',['analog_steering_channel',['../structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89',1,'TelemetryInterfaceReadChannels']]],
+  ['angle_29',['angle',['../structSteeringSystemData__s.html#a2935bd230dc29a1fbc7c462c425cca79',1,'SteeringSystemData_s::angle()'],['../structSteeringEncoderConversion__s.html#ada5152e3d6306f8a36c2e571bb0e1714',1,'SteeringEncoderConversion_s::angle()']]],
+  ['angular_5frates_30',['angular_rates',['../structvector__nav.html#a37e901d5313d1c2ffe1079c2d11dc84c',1,'vector_nav']]],
+  ['apps_5factivation_5fpercentage_31',['APPS_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293',1,'MCU_rev15_defs.h']]]
 ];

@@ -26,14 +26,11 @@ var searchData=
   ['ssok_23',['ssok',['../structDashComponentInterface__s.html#a72893a2430439acef128e492913ff3b4',1,'DashComponentInterface_s']]],
   ['start_24',['start',['../structDashButtons__s.html#ae2fa4297ffd2056e4a596bfa174df416',1,'DashButtons_s']]],
   ['start_5fbutton_5fstatus_5f_25',['start_button_status_',['../classDashboardInterface.html#a073fc48d849bacc4b3503f9f32d0f36c',1,'DashboardInterface']]],
-  ['state_26',['state',['../main__ethernet__test_8cpp.html#a461cc819e8539fe8db7b118eea4e1b72',1,'main_ethernet_test.cpp']]],
-  ['status_27',['status',['../structSteeringEncoderConversion__s.html#ae44df9361a7c0f50986df62948feb228',1,'SteeringEncoderConversion_s::status()'],['../structSteeringSystemData__s.html#a678fdc945ef7a1e535cac2764aec9ac1',1,'SteeringSystemData_s::status()'],['../structAnalogConversion__s.html#a4c54058eab349a25c1adf18557c8e365',1,'AnalogConversion_s::status()']]],
-  ['steering1_28',['steering1',['../src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006',1,'main.cpp']]],
-  ['steering_5fiir_5falpha_29',['STEERING_IIR_ALPHA',['../MCU__rev15__defs_8h.html#a8fd1408ac8e0d76f7cadf20b4d00a62a',1,'MCU_rev15_defs.h']]],
-  ['steering_5frange_5fdegrees_30',['STEERING_RANGE_DEGREES',['../MCU__rev15__defs_8h.html#a72a28e9a8c14b115bc7359c8112f094f',1,'MCU_rev15_defs.h']]],
-  ['steeringdata_31',['steeringData',['../structTCCaseWrapperTick__s.html#a1144a23406d7525087de1b68c7eb784e',1,'TCCaseWrapperTick_s']]],
-  ['steeringdata_5f_32',['steeringData_',['../classSteeringSystem.html#afb88150a660a39215992583da037309f',1,'SteeringSystem']]],
-  ['steeringfilters_5f_33',['steeringFilters_',['../classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841',1,'SteeringSystem']]],
-  ['sys_5fclock_34',['sys_clock',['../src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c',1,'main.cpp']]],
-  ['system_5fready_5f_35',['system_ready_',['../classInverterMock.html#a23eb50a5bc193ece93a5fac315eb8b11',1,'InverterMock::system_ready_()'],['../classInverterInterface.html#a235007b5e58c195ab1de79750cf275b0',1,'InverterInterface::system_ready_()']]]
+  ['status_26',['status',['../structSteeringSystemData__s.html#a678fdc945ef7a1e535cac2764aec9ac1',1,'SteeringSystemData_s::status()'],['../structSteeringEncoderConversion__s.html#ae44df9361a7c0f50986df62948feb228',1,'SteeringEncoderConversion_s::status()'],['../structAnalogConversion__s.html#a4c54058eab349a25c1adf18557c8e365',1,'AnalogConversion_s::status()']]],
+  ['steering1_27',['steering1',['../src_2main_8cpp.html#a0f351bbfcf80590ece6101bf1cfa1006',1,'main.cpp']]],
+  ['steering_5frange_5fdegrees_28',['STEERING_RANGE_DEGREES',['../MCU__rev15__defs_8h.html#a72a28e9a8c14b115bc7359c8112f094f',1,'MCU_rev15_defs.h']]],
+  ['steeringdata_29',['steeringData',['../structTCCaseWrapperTick__s.html#a1144a23406d7525087de1b68c7eb784e',1,'TCCaseWrapperTick_s']]],
+  ['steeringdata_5f_30',['steeringData_',['../classSteeringSystem.html#afb88150a660a39215992583da037309f',1,'SteeringSystem']]],
+  ['sys_5fclock_31',['sys_clock',['../src_2main_8cpp.html#ae7fc4cf3627b4a43f5a397270a5c351c',1,'main.cpp']]],
+  ['system_5fready_5f_32',['system_ready_',['../classInverterMock.html#a23eb50a5bc193ece93a5fac315eb8b11',1,'InverterMock::system_ready_()'],['../classInverterInterface.html#a235007b5e58c195ab1de79750cf275b0',1,'InverterInterface::system_ready_()']]]
 ];
