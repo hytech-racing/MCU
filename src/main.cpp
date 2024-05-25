@@ -115,8 +115,8 @@ ParameterInterface param_interface;
 ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
-AMSInterface ams_interface(8);
-WatchdogInterface wd_interface(32);
+AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
+WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
 SABInterface sab_interface(
