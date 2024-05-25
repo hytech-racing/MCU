@@ -309,7 +309,7 @@ void setup()
 
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -472,6 +472,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz
