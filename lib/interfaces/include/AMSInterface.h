@@ -19,6 +19,7 @@ const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 const uint16_t MAX_PACK_CHARGE      = 48600;
+const unsigned long DEFAULT_INITIALIZATION_WAIT_INTERVAL = 5000;
 
 
 /// @brief this class is for interfacing with the AMS (accumulator management system) 
@@ -40,7 +41,9 @@ public:
         use_em_for_soc_(true),
         charge_(0.0f),
         SoC_(0.0f),
-        has_initialized_charge_(false) {};
+        has_initialized_charge_(false),
+        has_received_bms_voltage_(false),
+        initialization_startup_interval_(DEFAULT_INITIALIZATION_WAIT_INTERVAL) {};
 
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
     AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
@@ -239,6 +242,12 @@ private:
      * Stores whether or not this AMSInterface has initialized SoC_ or not.
     */
    bool has_initialized_charge_;
+
+   bool has_received_bms_voltage_;
+
+   unsigned long initialization_startup_interval_;
+
+   unsigned long timestamp_start_;
 
 
     // Check if lowest cell temperature is below threshold

@@ -20,6 +20,8 @@ void AMSInterface::init(SysTick_s &initial_tick) {
 
     last_tick_ = initial_tick;
 
+    timestamp_start_ = last_tick_.millis;
+
     // Initializes the bms_voltages_ member variable to an invalid state. This will
     // get overridden once retrieve_voltage_CAN() has been called at least once.
     bms_voltages_.low_voltage_ro = 0xFFFFU;
@@ -116,7 +118,7 @@ void AMSInterface::tick(const SysTick_s &tick) {
 
     // If AMSInterface has a valid reading in bms_voltages_ and the charge is not
     // yet initialized, then call initialize_charge.
-    if (!has_initialized_charge_) {
+    if ((!has_initialized_charge_) && (has_received_bms_voltage_) && ((tick.millis - timestamp_start_) > initialization_startup_interval_)) {
     
         bool bms_voltages_is_invalid = bms_voltages_.low_voltage_ro == 0xFFFFU && bms_voltages_.high_voltage_ro == 0x1111U;
 
@@ -160,6 +162,11 @@ void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
 
 void AMSInterface::retrieve_voltage_CAN(CAN_message_t &can_msg) {
     Unpack_BMS_VOLTAGES_hytech(&bms_voltages_, can_msg.buf, can_msg.len);
+    if (!has_received_bms_voltage_)
+    {
+        has_received_bms_voltage_ = true;
+    }
+    
 }
 
 void AMSInterface::retrieve_em_measurement_CAN(CAN_message_t &can_msg) {
