@@ -67,7 +67,8 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
     SysClock clock = SysClock();
     SysTick_s cur_tick;
     cur_tick = clock.tick(0);
-    TorqueControllerMux torque_controller_mux = TorqueControllerMux();
+    TelemetryInterface telem_interface;
+    TorqueControllerMux torque_controller_mux = TorqueControllerMux(&telem_interface);
     DrivetrainCommand_s resulting_torque_command;
 
     vector_nav vn_data{};
@@ -162,7 +163,8 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
     SysClock clock = SysClock();
     SysTick_s cur_tick;
     cur_tick = clock.tick(0);
-    TorqueControllerMux torque_controller_mux = TorqueControllerMux();
+    TelemetryInterface telem_interface;
+    TorqueControllerMux torque_controller_mux = TorqueControllerMux(&telem_interface);
     DrivetrainCommand_s resulting_torque_command;
     vector_nav vn_data{};
 
@@ -270,7 +272,8 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
 }
 
 TEST(TorqueControllerMuxTesting, test_power_limit) {
-    TorqueControllerMux mux = TorqueControllerMux();
+    TelemetryInterface telem_interface;
+    TorqueControllerMux mux = TorqueControllerMux(&telem_interface);
     DrivetrainCommand_s drive_command;
 
     DrivetrainDynamicReport_s edit;
@@ -304,7 +307,8 @@ TEST(TorqueControllerMuxTesting, test_power_limit) {
 }
 
 TEST(TorqueControllerMuxTesting, test_torque_limit) {
-    TorqueControllerMux mux = TorqueControllerMux();
+    TelemetryInterface telem_interface;
+    TorqueControllerMux mux = TorqueControllerMux(&telem_interface);
     DrivetrainCommand_s drive_command;
 
     for (int i = 0; i < 4; i++) {
@@ -344,7 +348,8 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
      SysClock clock = SysClock();
     SysTick_s cur_tick;
     cur_tick = clock.tick(0);
-    TorqueControllerMux torque_controller_mux = TorqueControllerMux();
+    TelemetryInterface telem_interface;
+    TorqueControllerMux torque_controller_mux = TorqueControllerMux(&telem_interface);
     DrivetrainCommand_s resulting_torque_command;
 
     vector_nav vn_data{};
@@ -552,7 +557,8 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
     SysClock clock = SysClock();
     SysTick_s cur_tick;
     cur_tick = clock.tick(0);
-    TorqueControllerMux torque_controller_mux = TorqueControllerMux();
+    TelemetryInterface telem_interface;
+    TorqueControllerMux torque_controller_mux = TorqueControllerMux(&telem_interface);
     DrivetrainCommand_s resulting_torque_command;
 
     vector_nav vn_data{};
