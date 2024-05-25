@@ -119,8 +119,8 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
 
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        ASSERT_LE(resulting_torque_command.torqueSetpoints[i], 0.0001);
-        ASSERT_LE(resulting_torque_command.speeds_rpm[i], 0.0001);
+        ASSERT_GT(resulting_torque_command.torqueSetpoints[i], 0.0001);
+        ASSERT_GT(resulting_torque_command.speeds_rpm[i], 0.0001);
     }
 
     // Release the pedal. The mode should change now
@@ -233,7 +233,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
     for (int i = 0; i < NUM_MOTORS; i++)
     {
         ASSERT_LE(resulting_torque_command.torqueSetpoints[i], 0.0001);
-        ASSERT_LE(resulting_torque_command.speeds_rpm[i], 0.0001);
+        ASSERT_EQ(resulting_torque_command.speeds_rpm[i], AMK_MAX_RPM);
     }
 
     // Tell TCMUX vehicle is stationary. Mode should change
@@ -333,10 +333,23 @@ TEST(TorqueControllerMuxTesting, test_torque_limit) {
 
     mux.applyTorqueLimit(&drive_command);
 
-    ASSERT_LT(drive_command.torqueSetpoints[0], 3.5f);
-    ASSERT_LT(drive_command.torqueSetpoints[1], 12.5f);
-    ASSERT_LT(drive_command.torqueSetpoints[2], 12.5f);
-    ASSERT_LT(drive_command.torqueSetpoints[3], 12.5f);
+    ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);
+    ASSERT_EQ(drive_command.torqueSetpoints[1], 20.0f);
+    ASSERT_EQ(drive_command.torqueSetpoints[2], 20.0f);
+    ASSERT_EQ(drive_command.torqueSetpoints[3], 20.0f);
+
+    for (int i = 0; i < 4; i++) {
+        drive_command.speeds_rpm[i] = 500.0f;
+        drive_command.torqueSetpoints[i] = 30.0f;
+    }
+    drive_command.torqueSetpoints[0] = 5;
+
+    mux.applyTorqueLimit(&drive_command);
+
+    ASSERT_LT(drive_command.torqueSetpoints[0], 4.6f);
+    ASSERT_LT(drive_command.torqueSetpoints[1], 27.1f);
+    ASSERT_LT(drive_command.torqueSetpoints[2], 27.1f);
+    ASSERT_LT(drive_command.torqueSetpoints[3], 27.1f);
 
     printf("torque 1: %.2f\n", drive_command.torqueSetpoints[0]);
     printf("torque 2: %.2f\n", drive_command.torqueSetpoints[1]);
