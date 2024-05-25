@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['steering_5fdivergence_5ferror_5fthreshold_0',['STEERING_DIVERGENCE_ERROR_THRESHOLD',['../SteeringSystem_8h.html#ae66f0edcc3684c88b8437e19177e7102',1,'SteeringSystem.h']]],
-  ['steering_5fdivergence_5fwarn_5fthreshold_1',['STEERING_DIVERGENCE_WARN_THRESHOLD',['../SteeringSystem_8h.html#affd0760d25d0ad9f2e7f6279dec8bc6d',1,'SteeringSystem.h']]]
+  ['err_5fdivergence_5foffset_0',['ERR_DIVERGENCE_OFFSET',['../steering__system__test_8h.html#af88f5500d67971c6ec49a10b3ecbb79e',1,'steering_system_test.h']]],
+  ['err_5ffilter_5flatency_1',['ERR_FILTER_LATENCY',['../steering__system__test_8h.html#adfbce458ec827c97469e0f4bfee8d44a',1,'steering_system_test.h']]]
 ];
