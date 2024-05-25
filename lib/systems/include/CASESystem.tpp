@@ -28,6 +28,8 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     // REAL
     in.Vx_B = vn_data.velocity_x;
 
+    in.TCSVelThreshold = config_.tcsVelThreshold;
+
     // FAKE
     // in.Vx_B = 5;
 
