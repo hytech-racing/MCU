@@ -28,7 +28,7 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
         else if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_MARGINAL)
-            || (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED)
+            || ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL) && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED))
             || ((std::abs(primaryConversion_.angle - intake.secondaryConversion.conversion) >= STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(primaryConversion_.angle - intake.secondaryConversion.conversion) < STEERING_DIVERGENCE_ERROR_THRESHOLD))
         )
         {
@@ -57,5 +57,11 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
                 .status = SteeringSystemStatus_e::STEERING_SYSTEM_ERROR
             };
         }
+
+        // For possible bottom sensor recalibration
+        // TODO: Remove me once done!
+        // Serial.print("Secondary sensor raw: ");
+        // Serial.println(intake.secondaryConversion.raw);
+        // Serial.println();
     }
 }
