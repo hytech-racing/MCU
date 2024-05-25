@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classSteeringEncoderInterface-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">SteeringEncoderInterface Class Reference</div></div>
 </div><!--header-->
@@ -80,22 +81,24 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acd4b18969340276517ab8e556be95154"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#acd4b18969340276517ab8e556be95154">sample</a> ()</td></tr>
-<tr class="memdesc:acd4b18969340276517ab8e556be95154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands the underlying steering sensor to sample and hold the result.  <a href="classSteeringEncoderInterface.html#acd4b18969340276517ab8e556be95154">More...</a><br /></td></tr>
-<tr class="separator:acd4b18969340276517ab8e556be95154"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af18a9badb9e7576168e6a5d0c1195099"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#af18a9badb9e7576168e6a5d0c1195099">convert</a> ()</td></tr>
-<tr class="memdesc:af18a9badb9e7576168e6a5d0c1195099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate steering angle and whether result is in sensor's defined bounds. DOES NOT SAMPLE.  <a href="classSteeringEncoderInterface.html#af18a9badb9e7576168e6a5d0c1195099">More...</a><br /></td></tr>
-<tr class="separator:af18a9badb9e7576168e6a5d0c1195099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21d80ffe4422366eb4dfd0f02b970244"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#a21d80ffe4422366eb4dfd0f02b970244">setOffset</a> (float newOffset)</td></tr>
-<tr class="memdesc:a21d80ffe4422366eb4dfd0f02b970244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the upper steering sensor's offset. 0 degrees should be centered.  <a href="classSteeringEncoderInterface.html#a21d80ffe4422366eb4dfd0f02b970244">More...</a><br /></td></tr>
-<tr class="separator:a21d80ffe4422366eb4dfd0f02b970244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a990486bc7927857a0e30b1a2f90c30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#a8a990486bc7927857a0e30b1a2f90c30">sample</a> ()</td></tr>
+<tr class="separator:a8a990486bc7927857a0e30b1a2f90c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5739a33c2153466dee50e41505e2ea83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#a5739a33c2153466dee50e41505e2ea83">convert</a> ()</td></tr>
+<tr class="separator:a5739a33c2153466dee50e41505e2ea83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc665d54e46a5270cf4c2aa38d3f77ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#adc665d54e46a5270cf4c2aa38d3f77ca">setOffset</a> (float newOffset)</td></tr>
+<tr class="separator:adc665d54e46a5270cf4c2aa38d3f77ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8abe4fa61b046ad9a048bf5a83f19c1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringEncoderInterface.html#a8abe4fa61b046ad9a048bf5a83f19c1b">mockConversion</a></td></tr>
+<tr class="separator:a8abe4fa61b046ad9a048bf5a83f19c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="SteeringEncoderInterface_8h_source.html#l00020">20</a> of file <a class="el" href="SteeringEncoderInterface_8h_source.html">SteeringEncoderInterface.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af18a9badb9e7576168e6a5d0c1195099" name="af18a9badb9e7576168e6a5d0c1195099"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af18a9badb9e7576168e6a5d0c1195099">&#9670;&#160;</a></span>convert()</h2>
+<a id="a5739a33c2153466dee50e41505e2ea83" name="a5739a33c2153466dee50e41505e2ea83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5739a33c2153466dee50e41505e2ea83">&#9670;&#160;</a></span>convert()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -104,7 +107,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> SteeringEncoderInterface::convert </td>
+          <td class="memname"><a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> SteeringEncoderInterface::convert </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -112,18 +115,21 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calculate steering angle and whether result is in sensor's defined bounds. DOES NOT SAMPLE. </p>
-<dl class="section return"><dt>Returns</dt><dd>Calculated steering angle in degrees, upperSteeringStatus_s </dd></dl>
-
+<p class="definition">Definition at line <a class="el" href="SteeringEncoderInterface_8h_source.html#l00030">30</a> of file <a class="el" href="SteeringEncoderInterface_8h_source.html">SteeringEncoderInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>    {</div>
+<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSteeringEncoderInterface.html#a8abe4fa61b046ad9a048bf5a83f19c1b">mockConversion</a>;</div>
+<div class="line"><span class="lineno">   33</span>    };</div>
+<div class="ttc" id="aclassSteeringEncoderInterface_html_a8abe4fa61b046ad9a048bf5a83f19c1b"><div class="ttname"><a href="classSteeringEncoderInterface.html#a8abe4fa61b046ad9a048bf5a83f19c1b">SteeringEncoderInterface::mockConversion</a></div><div class="ttdeci">SteeringEncoderConversion_s mockConversion</div><div class="ttdef"><b>Definition:</b> <a href="SteeringEncoderInterface_8h_source.html#l00024">SteeringEncoderInterface.h:24</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="acd4b18969340276517ab8e556be95154" name="acd4b18969340276517ab8e556be95154"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd4b18969340276517ab8e556be95154">&#9670;&#160;</a></span>sample()</h2>
+<a id="a8a990486bc7927857a0e30b1a2f90c30" name="a8a990486bc7927857a0e30b1a2f90c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a990486bc7927857a0e30b1a2f90c30">&#9670;&#160;</a></span>sample()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +138,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void SteeringEncoderInterface::sample </td>
+          <td class="memname">void SteeringEncoderInterface::sample </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -140,47 +146,50 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Commands the underlying steering sensor to sample and hold the result. </p>
-
+<p class="definition">Definition at line <a class="el" href="SteeringEncoderInterface_8h_source.html#l00026">26</a> of file <a class="el" href="SteeringEncoderInterface_8h_source.html">SteeringEncoderInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>    {</div>
+<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   29</span>    };</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a21d80ffe4422366eb4dfd0f02b970244" name="a21d80ffe4422366eb4dfd0f02b970244"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21d80ffe4422366eb4dfd0f02b970244">&#9670;&#160;</a></span>setOffset()</h2>
+<a id="adc665d54e46a5270cf4c2aa38d3f77ca" name="adc665d54e46a5270cf4c2aa38d3f77ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc665d54e46a5270cf4c2aa38d3f77ca">&#9670;&#160;</a></span>setOffset()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void SteeringEncoderInterface::setOffset </td>
+          <td class="memname">void SteeringEncoderInterface::setOffset </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>newOffset</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Set the upper steering sensor's offset. 0 degrees should be centered. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">newOffset</td><td><br  />
- </td></tr>
-  </table>
-  </dd>
-</dl>
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8abe4fa61b046ad9a048bf5a83f19c1b" name="a8abe4fa61b046ad9a048bf5a83f19c1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8abe4fa61b046ad9a048bf5a83f19c1b">&#9670;&#160;</a></span>mockConversion</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> SteeringEncoderInterface::mockConversion</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SteeringEncoderInterface_8h_source.html#l00024">24</a> of file <a class="el" href="SteeringEncoderInterface_8h_source.html">SteeringEncoderInterface.h</a>.</p>
 
 </div>
 </div>

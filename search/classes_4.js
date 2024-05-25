@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fakemessagequeue_0',['FakeMessageQueue',['../classFakeMessageQueue.html',1,'']]]
+  ['ethinterfaces_0',['ETHInterfaces',['../structETHInterfaces.html',1,'']]]
 ];
