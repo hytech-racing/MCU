@@ -36,8 +36,8 @@ void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_
     MCU_SUSPENSION_t sus;
     sus.load_cell_fl = lc_fl.raw;
     sus.load_cell_fr = lc_fr.raw;
-    sus.potentiometer_fl = pots_fr.raw;
-    sus.potentiometer_fr = pots_fl.raw;
+    sus.potentiometer_fl = pots_fl.raw;
+    sus.potentiometer_fr = pots_fr.raw;
 
     enqueue_new_CAN<MCU_SUSPENSION_t>(&sus, &Pack_MCU_SUSPENSION_hytech);
 }

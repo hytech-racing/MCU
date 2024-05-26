@@ -8,9 +8,9 @@
 
 
 // pindefs
-const int ADC1_CS = 34;
-const int ADC2_CS = 33;
-const int ADC3_CS = 29;
+const int ADC1_CS = 34;     // Main ECU
+const int ADC2_CS = 33;     // FL corner board
+const int ADC3_CS = 29;     // FR corner board
 const int SOFTWARE_OK       = 8;
 const int WATCHDOG_INPUT    = 32;
 
