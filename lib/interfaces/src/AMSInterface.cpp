@@ -76,5 +76,32 @@ void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
 void AMSInterface::retrieve_voltage_CAN(CAN_message_t &recvd_msg) {
     bms_voltages_.load(recvd_msg.buf);
 }
+void AMSInterface::calculate_acc_derate_factor() {
+    float voltage_lim_factor = 1.0;
+    float startDerateVoltage = 3.5;
+    float endDerateVoltage = 3.2;
+    float voltage_lim_max = 1;
+    float voltage_lim_min = 0.2;
+
+    float temp_lim_factor = 1.0;
+    float startDerateTemp = 50;
+    float stopDerateTemp = 58;
+    float temp_lim_max = 1;
+    float temp_lim_min = 0.2;
+
+    float filtered_min_cell_voltage = get_filtered_min_cell_voltage();
+    //float_map equivalient because new code is bad 
+    voltage_lim_factor = (filtered_min_cell_voltage - startDerateVoltage) * (voltage_lim_min - voltage_lim_max) / (endDerateVoltage - startDerateVoltage) + voltage_lim_max;
+    voltage_lim_factor = max(min(voltage_lim_max, voltage_lim_factor), voltage_lim_min);
+
+    temp_lim_factor = (filtered_max_cell_temp - startDerateTemp) * (temp_lim_min - temp_lim_max) / (stopDerateTemp - startDerateTemp) + temp_lim_max;
+    temp_lim_factor = max(min(temp_lim_factor, temp_lim_max), temp_lim_min);
+    
+    acc_derate_factor = min(temp_lim_factor,voltage_lim_factor);
+}
+
+float AMSInterface::get_acc_derate_factor() {
+    return acc_derate_factor;
+}
 
 

@@ -60,6 +60,8 @@ public:
     float get_filtered_max_cell_temp();
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
+    /*gets the derate factor for acc system*/
+    float get_acc_derate_factor();
 
     //RETRIEVE CAN MESSAGES//
     /* read BMS status messages */
@@ -68,6 +70,8 @@ public:
     void retrieve_temp_CAN(CAN_message_t &recvd_msg);
     /* read BMS voltage messages */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
+    /*Updates Acc_derate_factor*/
+    void calculate_acc_derate_factor();
 
 private:
     /* Private functions */
@@ -94,6 +98,7 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
+    float acc_derate_factor;
 };
 
 #endif /* __AMSINTERFACE_H__ */
