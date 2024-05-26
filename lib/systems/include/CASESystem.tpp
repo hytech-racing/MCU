@@ -69,7 +69,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     auto res = case_.getExternalOutputs();
 
-    handle_CAN_sending_(tick);
+    handle_CAN_sending_(tick, res);
 
     // send these out at the send period
     
@@ -109,71 +109,77 @@ float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData
 }
 
 template <typename message_queue>
-void CASESystem<message_queue>::handle_CAN_sending_(const SysTick_s &tick)
+void CASESystem<message_queue>::handle_CAN_sending_(const SysTick_s &tick, const HT08_CASE::ExtY_HT08_CASE_T& res)
 {
     if ((tick.millis - last_controller_pt1_send_time_) >= (controller_send_period_ms_))
     {
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sl);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_normal_torque);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_normal_dist);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_pid_yaw);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_power_lim);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_slip_targets);
 
         last_controller_pt1_send_time_ = tick.millis;
     }
 
+    // tcs controller 
     if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
         ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
 
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pn);
+        // enqueue_matlab_msg(message_queue_, res.controllerBus_controller_initia);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_pid_input);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_pid_output);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_torque);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_status);
+        // enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_pn);
 
         last_controller_pt2_send_time_ = tick.millis;
     }
 
+    // controller
     if (((tick.millis - last_controller_pt2_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
         ((tick.millis - last_controller_pt3_send_time_) > controller_send_period_ms_))
     {
 
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_rege_p);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_torque);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_regen_5kph_status);
+        // enqueue_matlab_msg(message_queue_, res.controllerBus_controller_power_lim_corner_pow);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_torque_setup);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_power_lim);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_power_lim_torque);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_power_lim_corner_pow);
 
         last_controller_pt3_send_time_ = tick.millis;
     }
-
+    // vehm
     if (((tick.millis - last_controller_pt1_send_time_) >= vehicle_math_offset_ms_) &&
         ((tick.millis - last_vehm_send_time_) > controller_send_period_ms_))
     {
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_alpha_deg);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_sl);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_long_corner_);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_steer_);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_lin_ve);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_alpha);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_sl);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_long_corner_vel);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_wheel_steer_avg_deg);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_kin_desired_yaw_rate_rad_s);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_beta);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_vehm_wheel_lin_vel);
 
         last_vehm_send_time_ = tick.millis;
     }
 
+
+    // configs
     if ((tick.millis - last_lowest_priority_controller_send_time_) >= (lowest_priority_controller_send_period_ms_))
     {
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_yaw_pi);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sa);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_di);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_rp);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_nl);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tc_pna);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_boolean);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_yaw_pid_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_saturation_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_differential_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_rpm_schedule_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_normal_load_schedule_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_config);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_config_cont);
+        enqueue_matlab_msg(message_queue_, res.controllerBus_controller_tcs_pid_config);
 
         last_lowest_priority_controller_send_time_ = tick.millis;
     }

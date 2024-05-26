@@ -100,7 +100,7 @@ public:
     }
 
 private:
-    void handle_CAN_sending_(const SysTick_s&);
+    void handle_CAN_sending_(const SysTick_s& tick, const HT08_CASE::ExtY_HT08_CASE_T& res);
     message_queue *message_queue_;
     HT08_CASE case_;
     float max_rpm_, max_regen_torque_;
