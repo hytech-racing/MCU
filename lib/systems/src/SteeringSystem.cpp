@@ -61,11 +61,36 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
                 .status = SteeringSystemStatus_e::STEERING_SYSTEM_ERROR
             };
         }
-
-        // For possible bottom sensor recalibration
-        // TODO: Remove me once done!
-        // Serial.print("Secondary sensor raw: ");
-        // Serial.println(intake.secondaryConversion.raw);
-        // Serial.println();
+        
     }
+
+    // Report at 50Hz
+    if (intake.tick.triggers.trigger50)
+    {
+        reportSteeringStatus(
+            steeringData_.angle,
+            filteredAnglePrimary_,
+            filteredAngleSecondary_,
+            static_cast<uint8_t>(steeringData_.status),
+            static_cast<uint8_t>(primaryConversion_.status),
+            static_cast<uint8_t>(intake.secondaryConversion.status));
+    }
+    
+
+}
+
+void SteeringSystem::reportSteeringStatus(const float angle,
+                                          const float filteredAngleEncoder,
+                                          const float filteredAngleAnalog,
+                                          const uint8_t systemStatus,
+                                          const uint8_t encoderStatus,
+                                          const uint8_t analogSensorStatus)
+{
+    telemHandle_->update_steering_status_CAN_msg(
+        angle,
+        filteredAngleEncoder,
+        filteredAngleAnalog,
+        systemStatus,
+        encoderStatus,
+        analogSensorStatus);
 }

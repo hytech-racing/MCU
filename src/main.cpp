@@ -116,8 +116,8 @@ ParameterInterface param_interface;
 ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
-AMSInterface ams_interface(8);
-WatchdogInterface wd_interface(32);
+AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
+WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
 ThermistorInterface front_thermistors_interface(&CAN3_txBuffer);
@@ -144,7 +144,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1, STEERING_IIR_ALPHA);
+SteeringSystem steering_system(&steering1, &telem_interface, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -152,7 +152,7 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(1.0, 0.4);
+TorqueControllerMux torque_controller_mux(SIMPLE_TC_REAR_TORQUE_SCALE, SIMPLE_TC_REGEN_TORQUE_SCALE, &telem_interface);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
@@ -311,7 +311,7 @@ void setup()
 
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -473,6 +473,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz

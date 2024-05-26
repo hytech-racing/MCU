@@ -62,6 +62,8 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.usePIDPowerLimit = config_.usePIDPowerLimit;
     in.useLaunch = config_.useLaunch;
 
+    in.TCSVelThreshold = config_.tcsVelThreshold;
+
     in.Vy_B = vn_data.velocity_y;
 
     in.YawPIDConfig[0] = config_.yaw_pid_p;
