@@ -143,7 +143,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1, &telem_interface, STEERING_IIR_ALPHA);
+SteeringSystem steering_system(&steering1, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -154,7 +154,7 @@ DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_e
 TorqueControllerMux torque_controller_mux(SIMPLE_TC_REAR_TORQUE_SCALE, SIMPLE_TC_REGEN_TORQUE_SCALE, &telem_interface);
 // TODO ensure that case uses max regen torque, right now its not
 
-CASESystem<qn::EthernetUDP> case_system(&protobuf_send_socket, 100, AMK_MAX_RPM, 21.42);
+CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, AMK_MAX_RPM, 21.42);
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -482,7 +482,7 @@ void handle_ethernet_interface_comms()
     {
         // Serial.println("handling ethernet");
 
-        auto config = param_interface.get_config();
+        auto config = param_interface.get_CASE_config(false);
         // Serial.println("updating case configs");
         
         HT_ETH_Union union_response = HT_ETH_Union_init_zero;

@@ -86,11 +86,11 @@ void SteeringSystem::reportSteeringStatus(const float angle,
                                           const uint8_t encoderStatus,
                                           const uint8_t analogSensorStatus)
 {
-    telemHandle_->update_steering_status_CAN_msg(
-        angle,
-        filteredAngleEncoder,
-        filteredAngleAnalog,
-        systemStatus,
-        encoderStatus,
-        analogSensorStatus);
+    // telemHandle_->update_steering_status_CAN_msg(
+    //     angle,
+    //     filteredAngleEncoder,
+    //     filteredAngleAnalog,
+    //     systemStatus,
+    //     encoderStatus,
+    //     analogSensorStatus);
 }

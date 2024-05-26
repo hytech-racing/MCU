@@ -66,7 +66,7 @@ void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInte
         switch (msg.which_type_union)
         {
         case HT_ETH_Union_config__tag:
-            interfaces.param_interface->update_config(msg.type_union.config_);
+            interfaces.param_interface->update_CASE_config(msg.type_union.config_);
             break;
         case HT_ETH_Union_get_config__tag:
             interfaces.param_interface->set_params_need_sending();

@@ -5,7 +5,7 @@
 #include "AnalogSensorsInterface.h"
 #include "Filter_IIR.h"
 #include "SysClock.h"
-#include "TelemetryInterface.h"
+// #include "TelemetryInterface.h"
 
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
@@ -55,19 +55,12 @@ private:
     float filteredAnglePrimary_;
     float filteredAngleSecondary_;
 
-    TelemetryInterface *telemHandle_;
+    // TelemetryInterface *telemHandle_;
 public:
-    SteeringSystem(SteeringEncoderInterface *primarySensor, TelemetryInterface *telemInterface)
-    : SteeringSystem(primarySensor, telemInterface, DEFAULT_STEERING_ALPHA)
-    {}
 
-    SteeringSystem(SteeringEncoderInterface *primarySensor, TelemetryInterface *telemInterface, float filterAlpha)
-    : SteeringSystem(primarySensor, telemInterface, filterAlpha, filterAlpha)
-    {}
-
-    SteeringSystem(SteeringEncoderInterface *primarySensor, TelemetryInterface *telemInterface, float filterAlphaPrimary, float filterAlphaSecondary)
+    SteeringSystem(SteeringEncoderInterface *primarySensor, float filterAlphaPrimary=DEFAULT_STEERING_ALPHA, float filterAlphaSecondary=DEFAULT_STEERING_ALPHA)
     : primarySensor_(primarySensor)
-    , telemHandle_(telemInterface)
+    // , telemHandle_(telemInterface)
     {
         steeringFilters_[0] = Filter_IIR<float>(filterAlphaPrimary);
         steeringFilters_[1] = Filter_IIR<float>(filterAlphaSecondary);
