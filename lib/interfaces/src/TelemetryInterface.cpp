@@ -31,8 +31,8 @@ void TelemetryInterface::update_pedal_readings_raw_CAN_msg(const AnalogConversio
 // MCP3204 returns structure
 void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_fl,
                                                    const AnalogConversion_s &lc_fr,
-                                                   const AnalogConversion_s &pots_fl,
-                                                   const AnalogConversion_s &pots_fr) {
+                                                   const AnalogConversion_s &pots_fr,
+                                                   const AnalogConversion_s &pots_fl) {
     MCU_SUSPENSION_t sus;
     sus.load_cell_fl = lc_fl.raw;
     sus.load_cell_fr = lc_fr.raw;
@@ -310,8 +310,8 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                                    adc1.conversions[channels_.current_ref_channel],
                                    get_glv_voltage(adc1));
     // Load cells
-    update_suspension_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
-                              adc3.conversions[channels_.loadcell_fr_channel],
+    update_suspension_CAN_msg(adc2.conversions[channels_.loadcell_fr_channel],
+                              adc3.conversions[channels_.loadcell_fl_channel],
                               adc2.conversions[channels_.pots_fl_channel],
                               adc3.conversions[channels_.pots_fr_channel]);
 
