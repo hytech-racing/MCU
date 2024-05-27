@@ -7,27 +7,18 @@
 #include "MessageQueueDefine.h"
 #include "AnalogSensorsInterface.h"
 #include "hytech.h"
+#include "Thermistor.h"
 
 
-const float DEFAULT_THERM_BETA = 3606.05;
-const uint16_t DEFAULT_ADC_SATUR = 4095;
-const float DEFAULT_ZERO_KELVIN = 273.15;
-const float DEFAULT_T0_CELCIUS = 25;
-const float DEFAULT_R_NOM = 10000;
-const float DEFAULT_R0 = 8350;
+const int NUM_FRONT_THERMISTORS = 2;
 
 class ThermistorInterface 
 {
 private:
-     float _beta;
-     uint16_t _adc_saturation;
-     float _zero_kelvin;
-     float _t0_celcius;
-     float _r_nom;
-     float _r0;
+    Thermistors<
      
-     float therm_fl;
-     float therm_fr;
+    float therm_fl;
+    float therm_fr;
 
      CANBufferType *_msg_queue;
 
