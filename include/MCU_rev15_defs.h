@@ -105,4 +105,8 @@ const int SECONDARY_STEERING_SENSE_CENTER = 1945;    // 1960    // 1970
 const float STEERING_RANGE_DEGREES = 257.0f;    // 253.0f    // 256.05f   // 134+130-7(slop)
 const float STEERING_IIR_ALPHA = 0.7f;  // shaves off around 1 deg of max discrepancy
 
+// TC parameters
+const float SIMPLE_TC_REAR_TORQUE_SCALE  = 1.0;
+const float SIMPLE_TC_REGEN_TORQUE_SCALE = 0.4;
+
 #endif /* __MCU15_H__ */

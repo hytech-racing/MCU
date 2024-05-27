@@ -61,8 +61,8 @@ void TelemetryInterface::update_front_thermistors_CAN_msg(const AnalogConversion
                                                           const AnalogConversion_s &therm_fr) {
     
     FRONT_THERMISTORS_t front_thermistors_;
-    front_thermistors_.thermistor_motor_fl = therm_fl.raw;
-    front_thermistors_.thermistor_motor_fr = therm_fr.raw;
+    front_thermistors_.thermistor_motor_fl_ro = HYTECH_thermistor_motor_fl_ro_toS(therm_fl.raw);
+    front_thermistors_.thermistor_motor_fr_ro = HYTECH_thermistor_motor_fr_ro_toS(therm_fr.raw);
 
     enqueue_new_CAN<FRONT_THERMISTORS_t>(&front_thermistors_, &Pack_FRONT_THERMISTORS_hytech);
 }
@@ -194,6 +194,42 @@ void TelemetryInterface::update_penthouse_accum_CAN_msg(const AnalogConversion_s
     enqueue_new_CAN<PENTHOUSE_ACCUM_MSG_t>(&message, &Pack_PENTHOUSE_ACCUM_MSG_hytech);
 }
 
+void TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &tcMuxStatus)
+{
+    TCMUX_STATUS_REPORT_t msg;
+
+    msg.speed_above_thresh = tcMuxStatus.speedPreventsModeChange;
+    msg.torque_delta_above_thresh = tcMuxStatus.torqueDeltaPreventsModeChange;
+    msg.tc_not_ready = tcMuxStatus.controllerNotReadyPreventsModeChange;
+    msg.steering_system_has_err = tcMuxStatus.steeringSystemError;
+    msg.mode_intended = tcMuxStatus.modeIntended;
+    msg.mode_actual = tcMuxStatus.modeActual;
+    msg.dash_dial_mode = tcMuxStatus.dialMode;
+    msg.torque_mode = tcMuxStatus.torqueMode;
+    msg.torque_limit_ro = HYTECH_torque_limit_ro_toS(tcMuxStatus.maxTorque);
+
+    enqueue_new_CAN<TCMUX_STATUS_REPORT_t>(&msg, &Pack_TCMUX_STATUS_REPORT_hytech);
+}
+
+void TelemetryInterface::update_steering_status_CAN_msg(const float steering_system_angle,
+                                                        const float filtered_angle_encoder,
+                                                        const float filtered_angle_analog,
+                                                        const uint8_t steering_system_status,
+                                                        const uint8_t steering_encoder_status,
+                                                        const uint8_t steering_analog_status)
+{
+    STEERING_SYSTEM_REPORT_t msg;
+
+    msg.steering_system_angle_ro = HYTECH_steering_system_angle_ro_toS(steering_system_angle);
+    msg.steering_encoder_angle_ro = HYTECH_steering_encoder_angle_ro_toS(filtered_angle_encoder);
+    msg.steering_analog_angle_ro = HYTECH_steering_analog_angle_ro_toS(filtered_angle_analog);
+    msg.steering_system_status = steering_system_status;
+    msg.steering_encoder_status = steering_encoder_status;
+    msg.steering_analog_status = steering_analog_status;
+
+    enqueue_new_CAN<STEERING_SYSTEM_REPORT_t>(&msg, &Pack_STEERING_SYSTEM_REPORT_hytech);
+}
+
 /* Send CAN messages */
 template<typename T>
 void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
@@ -236,7 +272,6 @@ void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerDa
 
     
 }
-
 
 /* Tick SysClock */
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
