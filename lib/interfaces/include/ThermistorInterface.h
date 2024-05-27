@@ -8,7 +8,11 @@
 #include "AnalogSensorsInterface.h"
 #include "hytech.h"
 #include "Thermistor.h"
-#include "MCU_rev15_defs.h"
+// #include "MCU_rev15_defs.h"
+
+const int MCU15_NUM_THERMISTORS = 2;
+const int MCU15_THERM_FL_CHANNEL = 0;
+const int MCU15_THERM_FR_CHANNEL = 1;
 
 class ThermistorInterface 
 {
