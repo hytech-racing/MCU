@@ -104,6 +104,8 @@ void TorqueControllerMux::tick(
         tcMuxStatus_.maxTorque = getMaxTorque();
 
         // Apply setpoints value limits
+        // Derating for endurance
+        applyDerate(&drivetrainCommand_, accDerateFactor);
         
         if (muxMode_ != TC_CASE_SYSTEM)
         {
@@ -113,8 +115,7 @@ void TorqueControllerMux::tick(
             applyTorqueLimit(&drivetrainCommand_);
             applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         }        
-        // Derating for endurance
-        applyDerate(&drivetrainCommand_, accDerateFactor);
+        
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
 
