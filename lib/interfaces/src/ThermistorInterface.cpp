@@ -8,9 +8,6 @@ ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue) : fron
     _msg_queue = msg_output_queue;
     
 }
-ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue)
-    : ThermistorInterface(msg_output_queue) {
-}
 
 
 
