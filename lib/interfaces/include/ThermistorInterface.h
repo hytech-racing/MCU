@@ -7,13 +7,14 @@
 #include "MessageQueueDefine.h"
 #include "AnalogSensorsInterface.h"
 #include "hytech.h"
-#include "Thermistor.h"
 #include "MCU_rev15_defs.h"
+#include "Thermistor.h"
+
 
 class ThermistorInterface 
 {
 private:
-    Thermistors<MCU15_NUM_THERMISTORS> front_thermistors;
+    Thermistors<2> front_thermistors;
      
     float therm_fl;
     float therm_fr;
@@ -24,8 +25,6 @@ private:
 
 public:
     ThermistorInterface(CANBufferType *msg_output_queue);
-    ThermistorInterface(CANBufferType *msg_output_queue, const float beta, const uint16_t adc_saturation, const float zero_kelvin, const float t0_celcius, const float r_nom, const float r0);
-    
     void update_front_thermistor_readings();
     
     template <typename U>
