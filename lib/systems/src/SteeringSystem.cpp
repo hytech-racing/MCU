@@ -17,11 +17,19 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         filteredAngleSecondary_ = steeringFilters_[1].filtered_result(intake.secondaryConversion.conversion);        
 
         // Both sensors are nominal and agree
+        #ifdef ARDUINO_TEENSY41
+        if (
+            (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL)
+            && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_GOOD)
+            && (abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_WARN_THRESHOLD)
+        )
+        #else
         if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL)
             && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_GOOD)
             && (std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_WARN_THRESHOLD)
         )
+        #endif
         {
             steeringData_ = {
                 .angle = filteredAnglePrimary_,
@@ -30,11 +38,19 @@ void SteeringSystem::tick(const SteeringSystemTick_s &intake)
         }
         // One or both sensors are marginal
         // Sensors disagree by STEERING_DIVERGENCE_WARN_THRESHOLD degrees and less than STEERING_DIVERGENCE_ERROR_THRESHOLD degrees
+        #ifdef ARDUINO_TEENSY41
         else if (
             (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_MARGINAL)
             || ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL) && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED))
-            || ((std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) >= STEERING_DIVERGENCE_WARN_THRESHOLD) && (std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_ERROR_THRESHOLD))
+            || ((abs(filteredAnglePrimary_ - filteredAngleSecondary_) >= STEERING_DIVERGENCE_WARN_THRESHOLD) && (abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_ERROR_THRESHOLD))
         )
+        #else
+        else if (
+            (primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_MARGINAL)
+            || ((primaryConversion_.status == SteeringEncoderStatus_e::STEERING_ENCODER_NOMINAL) && (intake.secondaryConversion.status == AnalogSensorStatus_e::ANALOG_SENSOR_CLAMPED))
+            || ((std::abs(filteredAnglePrimary_ - filteredAngleSecondary_) >= STEERING_DIVERGENCE_WARN_THRESHOLD) && (abs(filteredAnglePrimary_ - filteredAngleSecondary_) < STEERING_DIVERGENCE_ERROR_THRESHOLD))
+        )
+        #endif
         {
             steeringData_ = {
                 .angle = filteredAnglePrimary_,
