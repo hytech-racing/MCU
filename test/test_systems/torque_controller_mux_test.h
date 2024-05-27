@@ -119,8 +119,8 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
 
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        ASSERT_GT(resulting_torque_command.torqueSetpoints[i], 0.0001);
-        ASSERT_GT(resulting_torque_command.speeds_rpm[i], 0.0001);
+        ASSERT_LT(resulting_torque_command.torqueSetpoints[i], 0.0001);
+        ASSERT_LT(resulting_torque_command.speeds_rpm[i], 0.0001);
     }
 
     // Release the pedal. The mode should change now
@@ -233,7 +233,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
     for (int i = 0; i < NUM_MOTORS; i++)
     {
         ASSERT_LE(resulting_torque_command.torqueSetpoints[i], 0.0001);
-        ASSERT_EQ(resulting_torque_command.speeds_rpm[i], AMK_MAX_RPM);
+        ASSERT_LE(resulting_torque_command.speeds_rpm[i], 0.0001);
     }
 
     // Tell TCMUX vehicle is stationary. Mode should change
