@@ -70,11 +70,11 @@ void TorqueControllerMux::tick(
             // Check if targeted controller is ready to be selected
             bool controllerNotReadyPreventsModeChange = (controllerOutputs_[static_cast<int>(dialModeMap_[dashboardDialMode])].ready == false);
 
-            // if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
-            // {
-            muxMode_ = dialModeMap_[dashboardDialMode];
-            currDialMode_ = dashboardDialMode;
-            // }
+            if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
+            {
+                muxMode_ = dialModeMap_[dashboardDialMode];
+                currDialMode_ = dashboardDialMode;
+            }
 
             // Update TCMux status
             tcMuxStatus_.speedPreventsModeChange = speedPreventsModeChange;
