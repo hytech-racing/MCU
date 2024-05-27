@@ -8,14 +8,12 @@
 #include "AnalogSensorsInterface.h"
 #include "hytech.h"
 #include "Thermistor.h"
-
-
-const int NUM_FRONT_THERMISTORS = 2;
+#include "MCU_rev15_defs.h"
 
 class ThermistorInterface 
 {
 private:
-    Thermistors<
+    Thermistors<MCU15_NUM_THERMISTORS> front_thermistors;
      
     float therm_fl;
     float therm_fr;
@@ -28,8 +26,6 @@ public:
     ThermistorInterface(CANBufferType *msg_output_queue);
     ThermistorInterface(CANBufferType *msg_output_queue, const float beta, const uint16_t adc_saturation, const float zero_kelvin, const float t0_celcius, const float r_nom, const float r0);
     
-    void convert(const AnalogConversion_s &raw_therm_fl, const AnalogConversion_s &raw_therm_fr);
-
     void update_front_thermistor_readings();
     
     template <typename U>

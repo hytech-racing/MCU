@@ -32,6 +32,7 @@ const int MCU15_FR_LOADCELL_CHANNEL     = 2;
 
 //MCU teensy analog channels
 const int MCU15_TEENSY_ADC_CHANNELS = 2;
+const int MCU15_NUM_THERMISTORS = 2;
 const int MCU15_THERM_FL = 38;
 const int MCU15_THERM_FR = 41;
 const int MCU15_THERM_FL_CHANNEL = 0;

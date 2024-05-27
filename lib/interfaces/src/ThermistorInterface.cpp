@@ -3,33 +3,16 @@
 
 
 
-ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue, const float beta, const uint16_t adc_saturation, const float zero_kelvin, const float t0_celcius, const float r_nom, const float r0)
+ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue)
 {
     _msg_queue = msg_output_queue;
-    _beta = beta;
-    _adc_saturation = adc_saturation;
-    _zero_kelvin = zero_kelvin;
-    _t0_celcius = t0_celcius;
-    _r_nom = r_nom;
-    _r0 = r0;
+    
 }
 ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue)
-    : ThermistorInterface(msg_output_queue, DEFAULT_THERM_BETA, DEFAULT_ADC_SATUR, DEFAULT_ZERO_KELVIN, DEFAULT_T0_CELCIUS, DEFAULT_R_NOM, DEFAULT_R0) {
+    : ThermistorInterface(msg_output_queue) {
 }
 
 
-float ThermistorInterface::convert(int raw) 
-{
-    float _t0_kelvin = _t0_celcius + _zero_kelvin;
-    float resistance;
-    float temp_kelvin;
-    float temp_celcius;
-
-    resistance = _r0 * raw / (_adc_saturation - raw);
-    temp_kelvin = 1/ (1/_t0_kelvin + log(resistance/_r_nom)/_beta);
-    temp_celcius = temp_kelvin - _zero_kelvin;
-    return temp_celcius;
-}
 
 void ThermistorInterface::update_front_thermistor_readings() 
 {
@@ -53,7 +36,8 @@ void ThermistorInterface::enqueue_CAN_front_thermistors(U* structure, uint32_t (
 
 void ThermistorInterface::tick(const AnalogConversion_s &raw_therm_fl, const AnalogConversion_s &raw_therm_fr) 
 {
-    therm_fl = convert(raw_therm_fl.raw);
-    therm_fr = convert(raw_therm_fr.raw);
+
+    therm_fl = front_thermistors.get(MCU15_THERM_FL_CHANNEL).convert(raw_therm_fl.raw);
+    therm_fr = front_thermistors.get(MCU15_THERM_FR_CHANNEL).convert(raw_therm_fr.raw);
     update_front_thermistor_readings();
 }
