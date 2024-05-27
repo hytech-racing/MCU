@@ -9,7 +9,7 @@ void TorqueControllerMux::tick(
     const SteeringSystemData_s &steeringData,
     const LoadCellInterfaceOutput_s &loadCellData,
     DialMode_e dashboardDialMode,
-    float AccDerateFactor,
+    float accDerateFactor,
     bool dashboardTorqueModeButtonPressed,
     const vector_nav &vn_data,
     const DrivetrainCommand_s &CASECommand)
@@ -104,8 +104,7 @@ void TorqueControllerMux::tick(
         tcMuxStatus_.maxTorque = getMaxTorque();
 
         // Apply setpoints value limits
-        // Derating for endurance
-        applyDerate(&drivetrainCommand_, AccDerateFactor);
+        
         if (muxMode_ != TC_CASE_SYSTEM)
         {
             // Safety checks for CASE: CASE handles regen, torque, and power limit internally
@@ -114,7 +113,8 @@ void TorqueControllerMux::tick(
             applyTorqueLimit(&drivetrainCommand_);
             applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         }        
-        
+        // Derating for endurance
+        applyDerate(&drivetrainCommand_, accDerateFactor);
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
 
@@ -170,13 +170,16 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const Dr
         }
     }
 }
+
 /*
-    Apply a Derate Factor
+    Apply derating factor
+    - Endurance
 */
-void TorqueControllerMux::applyDerate(DrivetrainCommand_s *command, float AccDerateFactor) {
-        for (int i = 0; i < NUM_MOTORS; i++)
+void TorqueControllerMux::applyDerate(DrivetrainCommand_s *command, float accDerateFactor)
+{
+    for (int i = 0; i < NUM_MOTORS; i++)
     {
-        command->torqueSetpoints[i] *= AccDerateFactor;
+        command->torqueSetpoints[i] *= accDerateFactor;
     }
 }
 

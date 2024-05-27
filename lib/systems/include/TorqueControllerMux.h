@@ -110,7 +110,7 @@ public:
     void applyTorqueLimit(DrivetrainCommand_s* command);
     void applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
     void applyPosSpeedLimit(DrivetrainCommand_s* command);
-    void applyDerate(DrivetrainCommand_s* command, float AccDerateFactor);
+    void applyDerate(DrivetrainCommand_s* command, float accDerateFactor);
 
     /// @brief GETTERS
     const DrivetrainCommand_s &getDrivetrainCommand()
