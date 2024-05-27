@@ -8,6 +8,7 @@
 // #include "test_CASE.h"
 // #include "param_system_test.h"
 #include "steering_system_test.h"
+#include "etherbuf_test.h"
 
 int main(int argc, char **argv)
 {
