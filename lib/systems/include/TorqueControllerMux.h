@@ -90,6 +90,7 @@ public:
         const SteeringSystemData_s &steeringData,
         const LoadCellInterfaceOutput_s &loadCellData,
         DialMode_e dashboardDialMode,
+        float accDerateFactor,
         bool dashboardTorqueModeButtonPressed,
         const vector_nav &vn_data, 
         const DrivetrainCommand_s &CASECommand
@@ -117,6 +118,8 @@ public:
 
     void applyPosSpeedLimit(DrivetrainCommand_s* command);
 
+    void applyDerate(DrivetrainCommand_s* command, float AccDerateFactor);
+
 
 
     const DialMode_e getDialMode()
@@ -128,6 +131,7 @@ public:
     {
         return muxMode_;
     }
+    
 
     TorqueControllerBase* activeController()
     {

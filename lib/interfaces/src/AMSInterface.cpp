@@ -101,7 +101,9 @@ void AMSInterface::calculate_acc_derate_factor() {
 }
 
 float AMSInterface::get_acc_derate_factor() {
+    calculate_acc_derate_factor();
     return acc_derate_factor;
+
 }
 
 
