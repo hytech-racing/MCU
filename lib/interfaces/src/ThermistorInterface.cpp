@@ -3,7 +3,7 @@
 
 
 
-ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue)
+ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue) : front_thermistors()
 {
     _msg_queue = msg_output_queue;
     
