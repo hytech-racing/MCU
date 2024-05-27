@@ -50,10 +50,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
     // do sth with mcu_analog_readings_
     mcu_analog_readings_.set_steering_1(steer1.raw);
     mcu_analog_readings_.set_steering_2(steer2.raw);
-    mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);
-    // Serial.println("hall effect current: ");
-    // Serial.println(mcu_analog_readings_.get_hall_effect_current());
-    mcu_analog_readings_.set_glv_battery_voltage(glv.raw);
+    mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);  // this is wrong btw. should let analog channel do the math but not necessary atm
+    mcu_analog_readings_.set_glv_battery_voltage(glv.conversion * FIXED_POINT_PRECISION);
 
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
@@ -298,7 +296,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                                    adc1.conversions[channels_.analog_steering_channel],
                                    adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel],
-                                   get_glv_voltage(adc1));
+                                   adc1.conversions[channels_.glv_sense_channel]);
     // Load cells
     update_suspension_CAN_msg(adc2.conversions[channels_.loadcell_fl_channel],
                               adc3.conversions[channels_.loadcell_fr_channel],

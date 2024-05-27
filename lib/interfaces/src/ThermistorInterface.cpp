@@ -35,8 +35,8 @@ void ThermistorInterface::update_front_thermistor_readings()
 {
     FRONT_THERMISTORS_t front_thermistors_;
     //scale by 500 for easy packing
-    front_thermistors_.thermistor_motor_fl = therm_fl * 500;
-    front_thermistors_.thermistor_motor_fr = therm_fr * 500;
+    front_thermistors_.thermistor_motor_fl_ro = HYTECH_thermistor_motor_fl_ro_toS(therm_fl);
+    front_thermistors_.thermistor_motor_fr_ro = HYTECH_thermistor_motor_fr_ro_toS(therm_fr);
 
     enqueue_CAN_front_thermistors<FRONT_THERMISTORS_t>(&front_thermistors_, &Pack_FRONT_THERMISTORS_hytech);
 }

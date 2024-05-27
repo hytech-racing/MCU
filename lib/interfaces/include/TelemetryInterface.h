@@ -13,7 +13,7 @@
 #include "TorqueControllersData.h"
 using InvInt_t = InverterInterface<CANBufferType>;
 
-const int FIXED_POINT_PRECISION = 10000;
+const int FIXED_POINT_PRECISION = 1000;
 
 struct TelemetryInterfaceReadChannels
 {

@@ -383,7 +383,7 @@ void loop()
         Serial.print("Sensor divergence: ");
         Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
         Serial.println();
-
+        
         Serial.println();
     }
     
@@ -431,7 +431,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             drivetrain.drivetrain_error_occured(),
             torque_controller_mux.getTorqueLimit(),
             ams_interface.get_filtered_min_cell_voltage(),
-            telem_interface.get_glv_voltage(a1.get()),
+            a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
             static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
             dashboard.getDialMode());
 

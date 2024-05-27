@@ -26,8 +26,8 @@ private:
      float _r_nom;
      float _r0;
      
-     int16_t therm_fl;
-     int16_t therm_fr;
+     float therm_fl;
+     float therm_fr;
 
      CANBufferType *_msg_queue;
 
