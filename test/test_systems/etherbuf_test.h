@@ -1,14 +1,14 @@
 #include "etherbuf.h"
 
-HT_Etherbuf_CANWrapper lastReceived;
-HT_Etherbuf_em_measurement lastReceived2;
+HTE_can_tunnel lastReceived;
+HTE_em_measurement lastReceived2;
 
-void etherbufCANHandler(HT_Etherbuf_CANWrapper* CANWrapper)
+void etherbufCANHandler(HTE_can_tunnel* can_tunnel)
 {
-    lastReceived = *CANWrapper;
+    lastReceived = *can_tunnel;
 }
 
-void etherbufEMMeasurementHandler(HT_Etherbuf_em_measurement* EMWrapper)
+void etherbufEMMeasurementHandler(HTE_em_measurement* EMWrapper)
 {
     lastReceived2 = *EMWrapper;
 }
@@ -16,27 +16,27 @@ void etherbufEMMeasurementHandler(HT_Etherbuf_em_measurement* EMWrapper)
 TEST(EtherbufTesting, etherbuf_simple_serdes)
 {
     Etherbuf eb;
-    HT_Etherbuf_CANWrapper message;
+    HTE_can_tunnel message;
     const int sizeOfBuffer = 1000;
     char buffer[sizeOfBuffer] = {0};
-    eb.registerHandler_CANWrapper((void*)&etherbufCANHandler);
+    eb.registerHandler_can_tunnel((void*)&etherbufCANHandler);
     eb.registerHandler_em_measurement((void*)&etherbufEMMeasurementHandler);
 
     // pack 2 messages
     message.messages_count = 2;
     message.timestamp = 0;
-    message.messages[0] = (_HT_Etherbuf_CANWrapper_CANMessage)
+    message.messages[0] = (_HTE_can_tunnel_CANMessage)
     {
         .id = 0x10,
         .data = {0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8}
     };
-    message.messages[1] = (_HT_Etherbuf_CANWrapper_CANMessage)
+    message.messages[1] = (_HTE_can_tunnel_CANMessage)
     {
         .id = 0x20,
         .data = {0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x00}
     };
 
-    size_t bytes_written = eb.toEtherbuf_CANWrapper(buffer, sizeOfBuffer, message);
+    size_t bytes_written = eb.toEtherbuf_can_tunnel(buffer, sizeOfBuffer, message);
     // With ethernet you'd pass the size of the packet in place of `bytes_written`
     eb.handleIncomingMessage(buffer, bytes_written);
 
@@ -49,7 +49,7 @@ TEST(EtherbufTesting, etherbuf_simple_serdes)
     }
 
     // pack a message with a different ID
-    HT_Etherbuf_em_measurement message2;
+    HTE_em_measurement message2;
     message2.em_current = 1234;
     message2.em_voltage = 5000;
 
