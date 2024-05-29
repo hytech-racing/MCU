@@ -381,6 +381,15 @@ void loop()
         Serial.print("Sensor divergence: ");
         Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
         Serial.println();
+        Serial.print("Accel 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+        Serial.print("Accel 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+        Serial.print("Brake 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+        Serial.print("Brake 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+        Serial.println();
 
         Serial.println();
     }
