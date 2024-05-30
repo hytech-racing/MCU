@@ -110,6 +110,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -131,6 +132,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const SteeringSystemData_s) {},
          (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -144,6 +146,7 @@ TEST(TorqueControllerMuxTesting, test_torque_delta_prevents_mode_change)
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -223,6 +226,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -244,6 +248,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -257,6 +262,7 @@ TEST(TorqueControllerMuxTesting, test_speed_delta_prevents_mode_change)
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -446,6 +452,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -459,6 +466,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -472,6 +480,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -489,6 +498,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -506,6 +516,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -523,6 +534,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -539,6 +551,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -556,6 +569,7 @@ TEST(TorqueControllerMuxTesting, test_simple_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_3,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -655,6 +669,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_0,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -668,6 +683,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -681,6 +697,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -698,6 +715,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -711,6 +729,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -730,6 +749,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -752,6 +772,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
@@ -772,6 +793,7 @@ TEST(TorqueControllerMuxTesting, test_slip_launch_controller) {
         (const SteeringSystemData_s) {},
         (const LoadCellInterfaceOutput_s) {},
         DialMode_e::MODE_4,
+        1.0,
         false,
         vn_data,
         (const DrivetrainCommand_s) {}
