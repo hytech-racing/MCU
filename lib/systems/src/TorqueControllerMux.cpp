@@ -112,7 +112,11 @@ void TorqueControllerMux::tick(
             // Safety checks for CASE: CASE handles regen, torque, and power limit internally
             applyRegenLimit(&drivetrainCommand_, &drivetrainData);
             // Apply torque limit before power limit to not power limit
-            applyTorqueLimit(&drivetrainCommand_);
+            if ((muxMode_ != TC_SIMPLE_LAUNCH) && (muxMode_ != TC_SLIP_LAUNCH) && (muxMode_ != TC_LOOKUP_LAUNCH))
+            {
+                applyTorqueLimit(&drivetrainCommand_);
+            }            
+
             applyPowerLimit(&drivetrainCommand_, &drivetrainData);
         }        
         
@@ -266,6 +270,11 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s *command)
         {
             command->torqueSetpoints[i] /= scale;
         }
+    }
+
+    for (int i = 0; i < NUM_MOTORS; i++)
+    {
+        command->torqueSetpoints[i] = min(command->torqueSetpoints[i], max_torque);
     }
 }
 
