@@ -71,7 +71,7 @@ float AMSInterface::get_filtered_max_cell_temp() {
 }
 
 float AMSInterface::get_filtered_min_cell_voltage() {
-    bms_low_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) / 10000.0;
+    bms_low_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
     filtered_min_cell_voltage = filtered_min_cell_voltage * cell_temp_alpha + (1.0 - cell_voltage_alpha) * bms_low_voltage;
     return filtered_min_cell_voltage;
 }
