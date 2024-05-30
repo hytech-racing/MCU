@@ -383,7 +383,28 @@ void loop()
         Serial.print("Sensor divergence: ");
         Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
         Serial.println();
-        
+        Serial.println("Pedal outputs:");
+        Serial.print("Accel 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+        Serial.print("Accel 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+        Serial.print("Accel percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
+        Serial.print("Brake 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+        Serial.print("Brake 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+        Serial.print("Brake percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
+        Serial.println();
+        Serial.print("Derating factor: ");
+        Serial.println(ams_interface.get_acc_derate_factor());
+        Serial.print("Filtered min cell voltage: ");
+        Serial.println(ams_interface.get_filtered_min_cell_voltage());
+        Serial.print("Filtered max cell temp: ");
+        Serial.println(ams_interface.get_filtered_max_cell_temp());
+        Serial.println();
+
         Serial.println();
     }
     
@@ -507,7 +528,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
+        a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+        a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
     // tick steering system
     steering_system.tick(
@@ -545,6 +567,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
+        ams_interface.get_acc_derate_factor(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);

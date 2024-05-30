@@ -18,7 +18,8 @@ TEST(SteeringSystemTesting, test_steering_nominal)
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
 
@@ -51,7 +52,8 @@ TEST(SteeringSystemTesting, test_steering_primary_is_marginal)
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float angle = 0.0f;
@@ -80,7 +82,8 @@ TEST(SteeringSystemTesting, test_steering_secondary_is_marginal)
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float angle = 0.0f;
@@ -109,7 +112,8 @@ TEST(SteeringSystemTesting, test_steering_divergence_warning)
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float mockPrimaryFilteredAngle;
@@ -157,7 +161,8 @@ TEST(SteeringSystemTesting, test_steering_divergence_error)
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float mockPrimaryFilteredAngle;
@@ -205,7 +210,8 @@ TEST(SteeringSystemTesting, test_steering_primary_is_missing)
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     // Filter refernce values for evaluation
     Filter_IIR<float> mockAngleFilters[2] = {PRIMARY_ALPHA, SECONDARY_ALPHA};
     float angle = 100.0f;
@@ -234,7 +240,8 @@ TEST(SteeringSystemTesting, test_steering_primary_is_missing_and_secondary_is_ma
     SysClock sys_clock;
     SysTick_s sys_tick = sys_clock.tick(0);
     SteeringEncoderInterface primarySensor;
-    SteeringSystem steeringSystem(&primarySensor, PRIMARY_ALPHA, SECONDARY_ALPHA);
+    TelemetryInterface telem_interface;
+    SteeringSystem steeringSystem(&primarySensor, &telem_interface, PRIMARY_ALPHA, SECONDARY_ALPHA);
     float angle = 100.0f;
 
     primarySensor.mockConversion.angle = 0.0f;

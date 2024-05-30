@@ -72,6 +72,8 @@ public:
     float get_filtered_max_cell_temp();
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
+    /*gets the derate factor for acc system*/
+    float get_acc_derate_factor();
 
     /**
      * Initializes the charge member variable from the voltage of the minimum cell using the VOLTAGE_LOOKUP_TABLE.
@@ -136,6 +138,9 @@ public:
      * does NOT apply the fromS() functions on the data. This function uses the NEW CAN library.
      */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
+    
+    /*Updates Acc_derate_factor*/
+    void calculate_acc_derate_factor();
     
     /**
      * Reads this CAN message into the em_measurements_ member variable. This function
@@ -212,6 +217,8 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
+    
+    float acc_derate_factor;
 
     /**
      * If set to TRUE, then SoC will use EM.

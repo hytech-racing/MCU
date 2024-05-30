@@ -71,7 +71,7 @@ float AMSInterface::get_filtered_max_cell_temp() {
 }
 
 float AMSInterface::get_filtered_min_cell_voltage() {
-    bms_low_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) / 10000.0;
+    bms_low_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
     filtered_min_cell_voltage = filtered_min_cell_voltage * cell_temp_alpha + (1.0 - cell_voltage_alpha) * bms_low_voltage;
     return filtered_min_cell_voltage;
 }
@@ -175,6 +175,35 @@ void AMSInterface::retrieve_em_measurement_CAN(CAN_message_t &can_msg) {
 
 void AMSInterface::retrieve_current_shunt_CAN(const CAN_message_t &can_msg) {
     Unpack_ACU_SHUNT_MEASUREMENTS_hytech(&acu_shunt_measurements_, can_msg.buf, can_msg.len);
+}
+void AMSInterface::calculate_acc_derate_factor() {
+    float voltage_lim_factor = 1.0;
+    float startDerateVoltage = 3.5;
+    float endDerateVoltage = 3.2;
+    float voltage_lim_max = 1;
+    float voltage_lim_min = 0.2;
+
+    float temp_lim_factor = 1.0;
+    float startDerateTemp = 50;
+    float stopDerateTemp = 58;
+    float temp_lim_max = 1;
+    float temp_lim_min = 0.2;
+
+    float filtered_min_cell_voltage = get_filtered_min_cell_voltage();
+    //float_map equivalient because new code is bad 
+    voltage_lim_factor = (filtered_min_cell_voltage - startDerateVoltage) * (voltage_lim_min - voltage_lim_max) / (endDerateVoltage - startDerateVoltage) + voltage_lim_max;
+    voltage_lim_factor = max(min(voltage_lim_max, voltage_lim_factor), voltage_lim_min);
+
+    temp_lim_factor = (filtered_max_cell_temp - startDerateTemp) * (temp_lim_min - temp_lim_max) / (stopDerateTemp - startDerateTemp) + temp_lim_max;
+    temp_lim_factor = max(min(temp_lim_factor, temp_lim_max), temp_lim_min);
+    
+    acc_derate_factor = min(temp_lim_factor,voltage_lim_factor);
+}
+
+float AMSInterface::get_acc_derate_factor() {
+    calculate_acc_derate_factor();
+    return acc_derate_factor;
+
 }
 
 
