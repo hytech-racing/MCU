@@ -395,6 +395,13 @@ void loop()
         Serial.print("Brake percent: ");
         Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
         Serial.println();
+        Serial.print("Derating factor: ");
+        Serial.println(ams_interface.get_acc_derate_factor());
+        Serial.print("Filtered min cell voltage: ");
+        Serial.println(ams_interface.get_filtered_min_cell_voltage());
+        Serial.print("Filtered max cell temp: ");
+        Serial.println(ams_interface.get_filtered_max_cell_temp());
+        Serial.println();
 
         Serial.println();
     }
@@ -559,6 +566,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
+        ams_interface.get_acc_derate_factor(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
