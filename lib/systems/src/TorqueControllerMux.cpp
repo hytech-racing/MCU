@@ -105,7 +105,7 @@ void TorqueControllerMux::tick(
 
         // Apply setpoints value limits
         // Derating for endurance
-        applyDerate(&drivetrainCommand_, accDerateFactor);
+        
         
         if (muxMode_ != TC_CASE_SYSTEM)
         {
@@ -118,7 +118,9 @@ void TorqueControllerMux::tick(
             }            
 
             applyPowerLimit(&drivetrainCommand_, &drivetrainData);
-        }        
+        } else {
+            applyDerate(&drivetrainCommand_, accDerateFactor);
+        }
         
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
@@ -182,10 +184,16 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const Dr
 */
 void TorqueControllerMux::applyDerate(DrivetrainCommand_s *command, float accDerateFactor)
 {
-    for (int i = 0; i < NUM_MOTORS; i++)
-    {
-        command->torqueSetpoints[i] *= accDerateFactor;
-    }
+    if (command->speeds_rpm[0] != 0 &&
+        command->speeds_rpm[1] != 0 &&
+        command->speeds_rpm[2] != 0 &&
+        command->speeds_rpm[2] != 0) {
+        for (int i = 0; i < NUM_MOTORS; i++)
+            {
+                command->torqueSetpoints[i] *= accDerateFactor;
+            }
+        }
+
 }
 
 /*
