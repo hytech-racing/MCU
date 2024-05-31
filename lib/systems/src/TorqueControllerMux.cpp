@@ -282,7 +282,7 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s *command)
 
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        command->torqueSetpoints[i] = min(command->torqueSetpoints[i], max_torque);
+        command->torqueSetpoints[i] = std::min(command->torqueSetpoints[i], max_torque);
     }
 }
 
