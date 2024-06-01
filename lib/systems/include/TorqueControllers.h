@@ -34,7 +34,7 @@ const float MAX_REGEN_TORQUE = 10.0;
 
 /* LAUNCH CONSTANTS */
 
-const float DEFAULT_LAUNCH_RATE = 11.76;
+const float DEFAULT_LAUNCH_RATE = 1.4 * 9.8;
 const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
 
 const float DEFAULT_SLIP_RATIO = 0.2f;

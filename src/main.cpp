@@ -160,14 +160,14 @@ CASEConfiguration case_config = {
     .yaw_pid_p = 1.5,
     .yaw_pid_i = 0.25,
     .yaw_pid_d = 0.0,
-    .tcs_pid_p_lowerBound_front = 55.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
-    .tcs_pid_p_upperBound_front = 45.0,
-    .tcs_pid_p_lowerBound_rear = 32.0,
-    .tcs_pid_p_upperBound_rear = 45.0,
+    .tcs_pid_p_lowerBound_front = 80.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
+    .tcs_pid_p_upperBound_front = 60.0,
+    .tcs_pid_p_lowerBound_rear = 35.0,
+    .tcs_pid_p_upperBound_rear = 47.0,
     .tcs_pid_i = 0.0,
     .tcs_pid_d = 0.0,
-    .useLaunch = false,
-    .usePIDTV = true,
+    .useLaunch = true,
+    .usePIDTV = false,
     .useTCSLimitedYawPID = true,
     .useNormalForce = true,
     .useTractionControl = true,
@@ -206,8 +206,8 @@ CASEConfiguration case_config = {
     .TCSGenLeftRightDiffUpperBound = 20, // N-m
     .TCSWheelSteerLowerBound = 2,        // Deg
     .TCSWheelSteerUpperBound = 25,       // Deg
-    .useRPM_TCS_GainSchedule = false,    // If both are false, then P values defaults to lower bound per axle
-    .useNL_TCS_GainSchedule = true,
+    .useRPM_TCS_GainSchedule = true,    // If both are false, then P values defaults to lower bound per axle
+    .useNL_TCS_GainSchedule = false,
     .TCS_NL_startBoundPerc_FrontAxle = 0.5,
     .TCS_NL_endBoundPerc_FrontAxle = 0.4,
     .TCS_NL_startBoundPerc_RearAxle = 0.5,
@@ -567,7 +567,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
-        ams_interface.get_acc_derate_factor(),
+        1.0,    // ams_interface.get_acc_derate_factor(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
