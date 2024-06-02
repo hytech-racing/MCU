@@ -567,7 +567,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
-        1.0,    // ams_interface.get_acc_derate_factor(),
+        ams_interface.get_acc_derate_factor(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
