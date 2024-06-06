@@ -88,17 +88,17 @@ const float BRAKE_MECH_THRESH = 0.40f;
 // Load Cell Defs to convert raw to lbs
 // lbs = (raw + offset) * scale
 
-const float LOADCELL_FL_SCALE = 0.0554;
-const float LOADCELL_FL_OFFSET = 19.976 / LOADCELL_FL_SCALE;
+const float LOADCELL_FL_SCALE = 0.1053;
+const float LOADCELL_FL_OFFSET = 19.674 / LOADCELL_FL_SCALE;
 
-const float LOADCELL_FR_SCALE = 0.0514;
-const float LOADCELL_FR_OFFSET = 19.892 / LOADCELL_FR_SCALE;
+const float LOADCELL_FR_SCALE = 0.097;
+const float LOADCELL_FR_OFFSET = 21.183 / LOADCELL_FR_SCALE;
 
-const float LOADCELL_RL_SCALE = 0.0595;
-const float LOADCELL_RL_OFFSET = 7.148 / LOADCELL_RL_SCALE;
+const float LOADCELL_RL_SCALE = 0.1143;
+const float LOADCELL_RL_OFFSET = 15.93 / LOADCELL_RL_SCALE;
 
-const float LOADCELL_RR_SCALE = 0.06;
-const float LOADCELL_RR_OFFSET = 23.761 / LOADCELL_RR_SCALE;
+const float LOADCELL_RR_SCALE = 0.118;
+const float LOADCELL_RR_OFFSET = 25.721 / LOADCELL_RR_SCALE;
 
 // Steering parameters
 const float PRIMARY_STEERING_SENSE_OFFSET = 0.0; // units are degrees
