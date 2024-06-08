@@ -54,17 +54,17 @@ const unsigned long TELEM_CAN_BAUDRATE  = 500000;
 // All of these values are the PEDAL min/max
 // the sensor min/max that trip implaus are calculated
 // in the PedalsSystem constructor
-const int ACCEL1_PEDAL_MAX = 3240;  // 3330
-const int ACCEL2_PEDAL_MAX = 440;   // 388
+const int ACCEL1_PEDAL_MAX = 3409;  // 3330
+const int ACCEL2_PEDAL_MAX = 259;   // 388
 
-const int ACCEL1_PEDAL_MIN = 2124;
+const int ACCEL1_PEDAL_MIN = 2129;
 const int ACCEL2_PEDAL_MIN = 1517;
 
-const int BRAKE1_PEDAL_MAX = 1745;  // 2200;
-const int BRAKE2_PEDAL_MAX = 1935;  // 2200;
+const int BRAKE1_PEDAL_MAX = 1828;  // 2200;
+const int BRAKE2_PEDAL_MAX = 1857;  // 2200;
 
-const int BRAKE1_PEDAL_MIN = 1235;  // 785;    // 1230 to 1750
-const int BRAKE2_PEDAL_MIN = 2445;  // 785;    // 2450 to 1930
+const int BRAKE1_PEDAL_MIN = 1184;  // 785;    // 1230 to 1750
+const int BRAKE2_PEDAL_MIN = 2486;  // 785;    // 2450 to 1930
 
 const int ACCEL1_PEDAL_OOR_MIN = 90;
 const int ACCEL2_PEDAL_OOR_MIN = 90;
@@ -79,7 +79,7 @@ const int BRAKE1_PEDAL_OOR_MAX = 4000;
 const int BRAKE2_PEDAL_OOR_MAX = 4000;
 
 const float DEFAULT_PEDAL_DEADZONE = 0.05f;
-const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.10f;
+const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.12f;
 
 const float APPS_ACTIVATION_PERCENTAGE = 0.1f;
 const float BRAKE_ACTIVATION_PERCENTAGE = 0.05f;
@@ -102,10 +102,10 @@ const float LOADCELL_RR_OFFSET = 25.721 / LOADCELL_RR_SCALE;
 
 // Steering parameters
 const float PRIMARY_STEERING_SENSE_OFFSET = 0.0; // units are degrees
-const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 785;    // 794    // 812    // 130 deg
-const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3087;    // 3075    // 3179    // 134 deg
-const int SECONDARY_STEERING_SENSE_CENTER = 1945;    // 1960    // 1970
-const float STEERING_RANGE_DEGREES = 257.0f;    // 253.0f    // 256.05f   // 134+130-7(slop)
+const int SECONDARY_STEERING_SENSE_LEFTMOST_BOUND = 790;    // 785;    // 794    // 812    // 130 deg    // 128.95
+const int SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND = 3133;  // 3087;    // 3075    // 3179    // 134 deg    // 132.79
+const int SECONDARY_STEERING_SENSE_CENTER = 1985;   // 1945    // 1960    // 1970
+const float STEERING_RANGE_DEGREES = 254.74;    //257.0f    // 253.0f    // 256.05f   // 134+130-7(slop)
 const float STEERING_IIR_ALPHA = 0.7f;  // shaves off around 1 deg of max discrepancy
 
 // TC parameters
