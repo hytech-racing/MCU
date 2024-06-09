@@ -187,6 +187,8 @@ void handle_ethernet_interface_comms();
 void setup()
 {
     // initialize CAN communication
+
+    case_system.set_config(DEFAULT_CONFIG);
     init_all_CAN_devices();
 
     qn::Ethernet.begin(EthParams::default_MCU_ip, EthParams::default_netmask, EthParams::default_gateway);

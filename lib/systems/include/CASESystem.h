@@ -35,8 +35,7 @@ public:
         max_regen_torque_ = max_regen_torque;
         message_queue_ = msg_queue;
         case_.initialize();
-        auto case_config = create_case_config_from_config_msg(DEFAULT_CONFIG);
-        case_.set_InstP(case_config);
+        
         
         last_controller_pt1_send_time_ = 0;
         last_controller_pt2_send_time_ = 0;
@@ -73,6 +72,13 @@ public:
         uint8_t vn_status);
 
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
+
+
+    void set_config(const config &config)
+    {
+        auto case_config = create_case_config_from_config_msg(config);
+        case_.set_InstP(case_config);
+    }
 
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
