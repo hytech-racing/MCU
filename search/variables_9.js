@@ -11,10 +11,11 @@ var searchData=
   ['initial_5fecef_5fx_5f_8',['initial_ecef_x_',['../classBaseLaunchController.html#a056f848edac740e2a9f5d780503a6600',1,'BaseLaunchController']]],
   ['initial_5fecef_5fy_5f_9',['initial_ecef_y_',['../classBaseLaunchController.html#a7dcf05b00c434dbef3da6ffc3672a566',1,'BaseLaunchController']]],
   ['initial_5fecef_5fz_5f_10',['initial_ecef_z_',['../classBaseLaunchController.html#a134011bbdeb34dab981abb68164773e3',1,'BaseLaunchController']]],
-  ['inv_11',['inv',['../src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941',1,'main.cpp']]],
-  ['inv_5fcan_12',['INV_CAN',['../src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3',1,'main.cpp']]],
-  ['inv_5fcan_5fbaudrate_13',['INV_CAN_BAUDRATE',['../MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795',1,'MCU_rev15_defs.h']]],
-  ['inverter_5fenabling_5ftimeout_5finterval_14',['INVERTER_ENABLING_TIMEOUT_INTERVAL',['../MCU__rev15__defs_8h.html#af703dfb934c8b49dcd5462a8fa0593b8',1,'MCU_rev15_defs.h']]],
-  ['inverter_5fon_5f_15',['inverter_on_',['../classInverterInterface.html#ab76e1c03780a8e67eee05681cfa03e5a',1,'InverterInterface']]],
-  ['inverters_5f_16',['inverters_',['../classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189',1,'DrivetrainSystem']]]
+  ['initialization_5fstartup_5finterval_5f_11',['initialization_startup_interval_',['../classAMSInterface.html#ac57cb6f92fb61e693a1587a9431b7e24',1,'AMSInterface']]],
+  ['inv_12',['inv',['../src_2main_8cpp.html#a961330c3ee1bd948a9adbe3594dc1941',1,'main.cpp']]],
+  ['inv_5fcan_13',['INV_CAN',['../src_2main_8cpp.html#a4af6316bd58f478b3b084beb56f0f0f3',1,'main.cpp']]],
+  ['inv_5fcan_5fbaudrate_14',['INV_CAN_BAUDRATE',['../MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795',1,'MCU_rev15_defs.h']]],
+  ['inverter_5fenabling_5ftimeout_5finterval_15',['INVERTER_ENABLING_TIMEOUT_INTERVAL',['../MCU__rev15__defs_8h.html#af703dfb934c8b49dcd5462a8fa0593b8',1,'MCU_rev15_defs.h']]],
+  ['inverter_5fon_5f_16',['inverter_on_',['../classInverterInterface.html#ab76e1c03780a8e67eee05681cfa03e5a',1,'InverterInterface']]],
+  ['inverters_5f_17',['inverters_',['../classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189',1,'DrivetrainSystem']]]
 ];

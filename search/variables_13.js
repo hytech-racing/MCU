@@ -9,5 +9,6 @@ var searchData=
   ['vn_5fdata_6',['vn_data',['../classVNInterface.html#ab64659f9ac2b4899007a108dda186a29',1,'VNInterface']]],
   ['vn_5finterface_7',['vn_interface',['../structCANInterfaces.html#a533f1756091e5af750d5d4a7af8b7fb2',1,'CANInterfaces']]],
   ['vn_5fstatus_8',['vn_status',['../structvector__nav.html#a7efb0220eb0330aa7f48d84d03de65bb',1,'vector_nav']]],
-  ['voltage_5f_9',['voltage_',['../classInverterMock.html#af4be6e861940919af68a740562a1f87f',1,'InverterMock']]]
+  ['voltage_5f_9',['voltage_',['../classInverterMock.html#af4be6e861940919af68a740562a1f87f',1,'InverterMock']]],
+  ['voltage_5flookup_5ftable_10',['VOLTAGE_LOOKUP_TABLE',['../classAMSInterface.html#a91f6016b742f5140d481402cbfecdcbf',1,'AMSInterface']]]
 ];

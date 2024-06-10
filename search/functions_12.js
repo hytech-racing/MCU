@@ -8,7 +8,7 @@ var searchData=
   ['update_5fdrivetrain_5frpms_5fcan_5fmsg_5',['update_drivetrain_rpms_CAN_msg',['../classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010',1,'TelemetryInterface']]],
   ['update_5fdrivetrain_5fstatus_5ftelem_5fcan_5fmsg_6',['update_drivetrain_status_telem_CAN_msg',['../classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303',1,'TelemetryInterface']]],
   ['update_5fdrivetrain_5ftorque_5ftelem_5fcan_5fmsg_7',['update_drivetrain_torque_telem_CAN_msg',['../classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1',1,'TelemetryInterface']]],
-  ['update_5ffront_5fthermistors_5fcan_5fmsg_8',['update_front_thermistors_CAN_msg',['../classTelemetryInterface.html#af240fc1cf6e30da97f340308a9f43734',1,'TelemetryInterface']]],
+  ['update_5ffront_5fthermistor_5freadings_8',['update_front_thermistor_readings',['../classThermistorInterface.html#ac008fa29948e061808fda3b8df09a361',1,'ThermistorInterface']]],
   ['update_5fmcu_5fstatus_5fcan_9',['update_mcu_status_CAN',['../classMCUInterface.html#af54f460cc498ca21f56ae23327357f2c',1,'MCUInterface']]],
   ['update_5fmcu_5fstatus_5fcan_5fams_10',['update_mcu_status_CAN_ams',['../classMCUInterface.html#aa6711cf5b92fe6fc0bdd0a442c338f25',1,'MCUInterface']]],
   ['update_5fmcu_5fstatus_5fcan_5fbuzzer_11',['update_mcu_status_CAN_buzzer',['../classMCUInterface.html#aa1e2272f8ba79ff51617208f6cfe6171',1,'MCUInterface']]],
@@ -21,5 +21,7 @@ var searchData=
   ['update_5fpedal_5freadings_5fcan_5fmsg_18',['update_pedal_readings_CAN_msg',['../classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8',1,'TelemetryInterface']]],
   ['update_5fpedal_5freadings_5fraw_5fcan_5fmsg_19',['update_pedal_readings_raw_CAN_msg',['../classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123',1,'TelemetryInterface']]],
   ['update_5fpenthouse_5faccum_5fcan_5fmsg_20',['update_penthouse_accum_CAN_msg',['../classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e',1,'TelemetryInterface']]],
-  ['update_5fsuspension_5fcan_5fmsg_21',['update_suspension_CAN_msg',['../classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38',1,'TelemetryInterface']]]
+  ['update_5fsteering_5fstatus_5fcan_5fmsg_21',['update_steering_status_CAN_msg',['../classTelemetryInterface.html#a2c66564189f90630de7aa6d085380e8e',1,'TelemetryInterface::update_steering_status_CAN_msg(const float steering_system_angle, const float filtered_angle_encoder, const float filtered_angle_analog, const uint8_t steering_system_status, const uint8_t steering_encoder_status, const uint8_t steering_analog_status)'],['../classTelemetryInterface.html#a2c66564189f90630de7aa6d085380e8e',1,'TelemetryInterface::update_steering_status_CAN_msg(const float steering_system_angle, const float filtered_angle_encoder, const float filtered_angle_analog, const uint8_t steering_system_status, const uint8_t steering_encoder_status, const uint8_t steering_analog_status)']]],
+  ['update_5fsuspension_5fcan_5fmsg_22',['update_suspension_CAN_msg',['../classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38',1,'TelemetryInterface']]],
+  ['update_5ftcmux_5fstatus_5fcan_5fmsg_23',['update_TCMux_status_CAN_msg',['../classTelemetryInterface.html#af9816592da9b6152bd1373f31aa9a8c7',1,'TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &amp;tcMuxStatus)'],['../classTelemetryInterface.html#af9816592da9b6152bd1373f31aa9a8c7',1,'TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &amp;tcMuxStatus)']]]
 ];

@@ -5,7 +5,7 @@ var searchData=
   ['bms_5fok_5fhigh_2',['bms_ok_high',['../classMCUInterface.html#a6c5ca7480db91ef6599fa4a71f930a3b',1,'MCUInterface']]],
   ['bms_5fstatus_5f_3',['bms_status_',['../classAMSInterface.html#a995272c0e5c4929fc35d0301ea3722b6',1,'AMSInterface']]],
   ['bms_5ftemperatures_5f_4',['bms_temperatures_',['../classAMSInterface.html#a2d7c6a0bed8da45bbff2e72a4def57ad',1,'AMSInterface']]],
-  ['bms_5fvoltages_5f_5',['bms_voltages_',['../classAMSInterface.html#ae8f0783559866a3dc68145f3ce855bc4',1,'AMSInterface']]],
+  ['bms_5fvoltages_5f_5',['bms_voltages_',['../classAMSInterface.html#a1d1f904a53c5e8129dfd0b4788303332',1,'AMSInterface']]],
   ['brake1_5fchannel_6',['brake1_channel',['../structTelemetryInterfaceReadChannels.html#ad66c7ad29bd48c3b0bfcd92503385399',1,'TelemetryInterfaceReadChannels']]],
   ['brake1_5fpedal_5fmax_7',['BRAKE1_PEDAL_MAX',['../MCU__rev15__defs_8h.html#a3c7c2b4552c63854e5816570bee0dc32',1,'MCU_rev15_defs.h']]],
   ['brake1_5fpedal_5fmin_8',['BRAKE1_PEDAL_MIN',['../MCU__rev15__defs_8h.html#a4ce4d6dfa60a2141eb1874636cd446f3',1,'MCU_rev15_defs.h']]],

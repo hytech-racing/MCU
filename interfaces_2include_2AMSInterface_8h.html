@@ -81,6 +81,9 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;FlexCAN_T4.h&quot;</code><br />
 <code>#include &quot;HyTech_CAN.h&quot;</code><br />
+<code>#include &quot;SysClock.h&quot;</code><br />
+<code>#include &quot;hytech.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="MessageQueueDefine_8h_source.html">MessageQueueDefine.h</a>&quot;</code><br />
 </div>
 <p><a href="interfaces_2include_2AMSInterface_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -106,6 +109,10 @@ Variables</h2></td></tr>
 <tr class="separator:aad9c93b43a51e92cd51c641838407dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c778e9b4f30ea85c7e9d9ef1a0e657b"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaces_2include_2AMSInterface_8h.html#a1c778e9b4f30ea85c7e9d9ef1a0e657b">DEFAULT_VOLTAGE_ALPHA</a> = 0.8</td></tr>
 <tr class="separator:a1c778e9b4f30ea85c7e9d9ef1a0e657b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b7a1a2d472399d9a0bec1b773b49d8d"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaces_2include_2AMSInterface_8h.html#a7b7a1a2d472399d9a0bec1b773b49d8d">MAX_PACK_CHARGE</a> = 48600</td></tr>
+<tr class="separator:a7b7a1a2d472399d9a0bec1b773b49d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafafffb13dde86b5831482dc7b03a7ae"><td class="memItemLeft" align="right" valign="top">const unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaces_2include_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae">DEFAULT_INITIALIZATION_WAIT_INTERVAL</a> = 5000</td></tr>
+<tr class="separator:aafafffb13dde86b5831482dc7b03a7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a5d6e09b98e5878108b7cf4d1aea6022e" name="a5d6e09b98e5878108b7cf4d1aea6022e"></a>
@@ -120,7 +127,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00014">14</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00017">17</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>
@@ -136,7 +143,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00015">15</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00018">18</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="aafafffb13dde86b5831482dc7b03a7ae" name="aafafffb13dde86b5831482dc7b03a7ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafafffb13dde86b5831482dc7b03a7ae">&#9670;&#160;</a></span>DEFAULT_INITIALIZATION_WAIT_INTERVAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned long DEFAULT_INITIALIZATION_WAIT_INTERVAL = 5000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00022">22</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>
@@ -152,7 +175,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00016">16</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00019">19</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>
@@ -168,7 +191,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00017">17</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00020">20</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>
@@ -184,7 +207,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00008">8</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00011">11</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b7a1a2d472399d9a0bec1b773b49d8d" name="a7b7a1a2d472399d9a0bec1b773b49d8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7a1a2d472399d9a0bec1b773b49d8d">&#9670;&#160;</a></span>MAX_PACK_CHARGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t MAX_PACK_CHARGE = 48600</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00021">21</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>
@@ -200,7 +239,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00012">12</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00015">15</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>
@@ -216,7 +255,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00010">10</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html#l00013">13</a> of file <a class="el" href="interfaces_2include_2AMSInterface_8h_source.html">AMSInterface.h</a>.</p>
 
 </div>
 </div>

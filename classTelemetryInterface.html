@@ -77,7 +77,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -85,8 +85,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae8159473d0366d1f20678b70ef3d08df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1be5956893c7fb731bb3226459d5a62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#af1be5956893c7fb731bb3226459d5a62">get_glv_voltage</a> (const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 8 &gt; &amp;adc1)</td></tr>
 <tr class="separator:af1be5956893c7fb731bb3226459d5a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af240fc1cf6e30da97f340308a9f43734"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#af240fc1cf6e30da97f340308a9f43734">update_front_thermistors_CAN_msg</a> (const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;therm_fl, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;therm_fr)</td></tr>
-<tr class="separator:af240fc1cf6e30da97f340308a9f43734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a3473d76564d08c0a1a58950d3eecb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8">update_pedal_readings_CAN_msg</a> (float accel_percent, float brake_percent, float mech_brake_percent)</td></tr>
 <tr class="separator:a0a3473d76564d08c0a1a58950d3eecb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebc51c2164db78eb8aae02e625988123"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123">update_pedal_readings_raw_CAN_msg</a> (const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel_1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel_2, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake_1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake_2)</td></tr>
@@ -95,26 +93,38 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2fd4119dc4e74a79a848028c969a6d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9047b25e6b4ffa7c8b54b380b1d3f54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#ae9047b25e6b4ffa7c8b54b380b1d3f54">update_analog_readings_CAN_msg</a> (const <a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> &amp;steer1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;steer2, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;current, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;reference, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;glv)</td></tr>
 <tr class="separator:ae9047b25e6b4ffa7c8b54b380b1d3f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00f745f4a9e7cfccaf4a4d7fbbdb1010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010">update_drivetrain_rpms_CAN_msg</a> (<a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr)</td></tr>
+<tr class="memitem:a00f745f4a9e7cfccaf4a4d7fbbdb1010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010">update_drivetrain_rpms_CAN_msg</a> (<a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr)</td></tr>
 <tr class="separator:a00f745f4a9e7cfccaf4a4d7fbbdb1010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8d8e26ae782ad476f9cd3191e4c4a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#af8d8e26ae782ad476f9cd3191e4c4a1d">update_drivetrain_err_status_CAN_msg</a> (<a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr)</td></tr>
+<tr class="memitem:af8d8e26ae782ad476f9cd3191e4c4a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#af8d8e26ae782ad476f9cd3191e4c4a1d">update_drivetrain_err_status_CAN_msg</a> (<a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr)</td></tr>
 <tr class="separator:af8d8e26ae782ad476f9cd3191e4c4a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae520adae9005ec544534e700a4e50303"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303">update_drivetrain_status_telem_CAN_msg</a> (<a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr, bool accel_implaus, bool brake_implaus, float accel_per, float brake_per)</td></tr>
+<tr class="memitem:ae520adae9005ec544534e700a4e50303"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303">update_drivetrain_status_telem_CAN_msg</a> (<a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr, bool accel_implaus, bool brake_implaus, float accel_per, float brake_per)</td></tr>
 <tr class="separator:ae520adae9005ec544534e700a4e50303"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bdc633bbdc69426c5cae8145179e2b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1">update_drivetrain_torque_telem_CAN_msg</a> (<a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr)</td></tr>
+<tr class="memitem:a3bdc633bbdc69426c5cae8145179e2b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1">update_drivetrain_torque_telem_CAN_msg</a> (<a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr)</td></tr>
 <tr class="separator:a3bdc633bbdc69426c5cae8145179e2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75ca20d9a36aeadc99a8ed3fe57ea81e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e">update_penthouse_accum_CAN_msg</a> (const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;current, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;reference)</td></tr>
 <tr class="separator:a75ca20d9a36aeadc99a8ed3fe57ea81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a020d32aa0fcebea39483daf4ac03480e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a020d32aa0fcebea39483daf4ac03480e">enqeue_controller_CAN_msg</a> (const <a class="el" href="structPIDTVTorqueControllerData.html">PIDTVTorqueControllerData</a> &amp;data)</td></tr>
-<tr class="separator:a020d32aa0fcebea39483daf4ac03480e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9816592da9b6152bd1373f31aa9a8c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#af9816592da9b6152bd1373f31aa9a8c7">update_TCMux_status_CAN_msg</a> (const <a class="el" href="structTCMuxStatus__s.html">TCMuxStatus_s</a> &amp;tcMuxStatus)</td></tr>
+<tr class="separator:af9816592da9b6152bd1373f31aa9a8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c66564189f90630de7aa6d085380e8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a2c66564189f90630de7aa6d085380e8e">update_steering_status_CAN_msg</a> (const float steering_system_angle, const float filtered_angle_encoder, const float filtered_angle_analog, const uint8_t steering_system_status, const uint8_t steering_encoder_status, const uint8_t steering_analog_status)</td></tr>
+<tr class="separator:a2c66564189f90630de7aa6d085380e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ba7dc9e556498400cdce485d622c847"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a7ba7dc9e556498400cdce485d622c847"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a7ba7dc9e556498400cdce485d622c847">enqueue_CAN</a> (T can_msg, uint32_t id)</td></tr>
 <tr class="separator:a7ba7dc9e556498400cdce485d622c847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f52fd638951d6ee400c63b7d8dbfe9d"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
 <tr class="memitem:a4f52fd638951d6ee400c63b7d8dbfe9d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a4f52fd638951d6ee400c63b7d8dbfe9d">enqueue_new_CAN</a> (U *structure, uint32_t(*pack_function)(U *, uint8_t *, uint8_t *, uint8_t *))</td></tr>
 <tr class="separator:a4f52fd638951d6ee400c63b7d8dbfe9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b687757ba713fb5c649792c0f63a45b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a3b687757ba713fb5c649792c0f63a45b">tick</a> (const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 8 &gt; &amp;adc1, const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 4 &gt; &amp;adc2, const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 4 &gt; &amp;adc3, const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 2 &gt; &amp;<a class="el" href="src_2main_8cpp.html#a5dbf276a60db51356c4938b734860859">mcu_adc</a>, const <a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> &amp;encoder, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr, bool accel_implaus, bool brake_implaus, float accel_per, float brake_per, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel_1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel_2, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake_1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake_2, float mech_brake_active_percent, const <a class="el" href="structPIDTVTorqueControllerData.html">PIDTVTorqueControllerData</a> &amp;data)</td></tr>
-<tr class="separator:a3b687757ba713fb5c649792c0f63a45b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a020d32aa0fcebea39483daf4ac03480e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a020d32aa0fcebea39483daf4ac03480e">enqeue_controller_CAN_msg</a> (const <a class="el" href="structPIDTVTorqueControllerData.html">PIDTVTorqueControllerData</a> &amp;data)</td></tr>
+<tr class="separator:a020d32aa0fcebea39483daf4ac03480e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152d219ab01bac65cb20be17f0d30b68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a152d219ab01bac65cb20be17f0d30b68">tick</a> (const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 8 &gt; &amp;adc1, const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 4 &gt; &amp;adc2, const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 4 &gt; &amp;adc3, const <a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> &amp;encoder, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *fr, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rl, <a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *rr, bool accel_implaus, bool brake_implaus, float accel_per, float brake_per, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel_1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;accel_2, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake_1, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;brake_2, float mech_brake_active_percent, const <a class="el" href="structPIDTVTorqueControllerData.html">PIDTVTorqueControllerData</a> &amp;data)</td></tr>
+<tr class="separator:a152d219ab01bac65cb20be17f0d30b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bff06cf57d090f586a236703cc899ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a2bff06cf57d090f586a236703cc899ab">TelemetryInterface</a> ()</td></tr>
+<tr class="separator:a2bff06cf57d090f586a236703cc899ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375c034895b9bbcec5121c081af24ea3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a375c034895b9bbcec5121c081af24ea3">~TelemetryInterface</a> ()</td></tr>
+<tr class="separator:a375c034895b9bbcec5121c081af24ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9816592da9b6152bd1373f31aa9a8c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#af9816592da9b6152bd1373f31aa9a8c7">update_TCMux_status_CAN_msg</a> (const <a class="el" href="structTCMuxStatus__s.html">TCMuxStatus_s</a> &amp;tcMuxStatus)</td></tr>
+<tr class="separator:af9816592da9b6152bd1373f31aa9a8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c66564189f90630de7aa6d085380e8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTelemetryInterface.html#a2c66564189f90630de7aa6d085380e8e">update_steering_status_CAN_msg</a> (const float steering_system_angle, const float filtered_angle_encoder, const float filtered_angle_analog, const uint8_t steering_system_status, const uint8_t steering_encoder_status, const uint8_t steering_analog_status)</td></tr>
+<tr class="separator:a2c66564189f90630de7aa6d085380e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -127,10 +137,10 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8h_source.html#l00036">36</a> of file <a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html#l00036">36</a> of file <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae8159473d0366d1f20678b70ef3d08df" name="ae8159473d0366d1f20678b70ef3d08df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8159473d0366d1f20678b70ef3d08df">&#9670;&#160;</a></span>TelemetryInterface()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8159473d0366d1f20678b70ef3d08df">&#9670;&#160;</a></span>TelemetryInterface() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,11 +173,67 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8h_source.html#l00047">47</a> of file <a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html#l00047">47</a> of file <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                                                        : <a class="code hl_variable" href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">msg_queue_</a>(msg_output_queue),</div>
 <div class="line"><span class="lineno">   48</span>                                                                                                          <a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>(channels){};</div>
-<div class="ttc" id="aclassTelemetryInterface_html_a3b041ec65a20ef24386db6fe8f09bbbc"><div class="ttname"><a href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">TelemetryInterface::msg_queue_</a></div><div class="ttdeci">CANBufferType * msg_queue_</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00042">TelemetryInterface.h:42</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_a762e412a15fc421ea4a76bfd262a58fe"><div class="ttname"><a href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">TelemetryInterface::channels_</a></div><div class="ttdeci">TelemetryInterfaceReadChannels channels_</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00044">TelemetryInterface.h:44</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_a3b041ec65a20ef24386db6fe8f09bbbc"><div class="ttname"><a href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">TelemetryInterface::msg_queue_</a></div><div class="ttdeci">CANBufferType * msg_queue_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00042">TelemetryInterface.h:42</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_a762e412a15fc421ea4a76bfd262a58fe"><div class="ttname"><a href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">TelemetryInterface::channels_</a></div><div class="ttdeci">TelemetryInterfaceReadChannels channels_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00044">TelemetryInterface.h:44</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2bff06cf57d090f586a236703cc899ab" name="a2bff06cf57d090f586a236703cc899ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bff06cf57d090f586a236703cc899ab">&#9670;&#160;</a></span>TelemetryInterface() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TelemetryInterface::TelemetryInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html#l00013">13</a> of file <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   13</span>{};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a375c034895b9bbcec5121c081af24ea3" name="a375c034895b9bbcec5121c081af24ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a375c034895b9bbcec5121c081af24ea3">&#9670;&#160;</a></span>~TelemetryInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TelemetryInterface::~TelemetryInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html#l00014">14</a> of file <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>{};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -188,29 +254,29 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00222">222</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  223</span>{</div>
-<div class="line"><span class="lineno">  224</span>    CONTROLLER_PID_TV_DATA_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><span class="lineno">  225</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.controller_input_ro = HYTECH_controller_input_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24">controller_input</a>);</div>
-<div class="line"><span class="lineno">  226</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.controller_output_ro = HYTECH_controller_output_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#a005ba00c0d38fe79e5fa4ebf0150550b">controller_output</a>);</div>
-<div class="line"><span class="lineno">  227</span>    enqueue_new_CAN&lt;CONTROLLER_PID_TV_DATA_t&gt;(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, &amp;Pack_CONTROLLER_PID_TV_DATA_hytech);</div>
-<div class="line"><span class="lineno">  228</span> </div>
-<div class="line"><span class="lineno">  229</span>    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;</div>
-<div class="line"><span class="lineno">  230</span>    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#adfc64daca8dff87e746189286eeb14bc">fl_torque_delta</a>);</div>
-<div class="line"><span class="lineno">  231</span>    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25">fr_torque_delta</a>);</div>
-<div class="line"><span class="lineno">  232</span>    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#ab2176e8aa31c4ee9e996a62744d64e3b">rl_torque_delta</a>);</div>
-<div class="line"><span class="lineno">  233</span>    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b">rr_torque_delta</a>);</div>
-<div class="line"><span class="lineno">  234</span>    </div>
-<div class="line"><span class="lineno">  235</span>    enqueue_new_CAN&lt;CONTROLLER_PID_TV_DELTA_DATA_t&gt;(&amp;delta_msg, &amp;Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);</div>
-<div class="line"><span class="lineno">  236</span> </div>
-<div class="line"><span class="lineno">  237</span>    </div>
-<div class="line"><span class="lineno">  238</span>}</div>
-<div class="ttc" id="astructPIDTVTorqueControllerData_html_a005ba00c0d38fe79e5fa4ebf0150550b"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#a005ba00c0d38fe79e5fa4ebf0150550b">PIDTVTorqueControllerData::controller_output</a></div><div class="ttdeci">float controller_output</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllersData_8h_source.html#l00007">TorqueControllersData.h:7</a></div></div>
-<div class="ttc" id="astructPIDTVTorqueControllerData_html_a5bd64cc0d60cbcb2f5daa1f0b8f8ff25"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25">PIDTVTorqueControllerData::fr_torque_delta</a></div><div class="ttdeci">float fr_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllersData_8h_source.html#l00009">TorqueControllersData.h:9</a></div></div>
-<div class="ttc" id="astructPIDTVTorqueControllerData_html_a920ab4ecd12ed53a368c2fe0015aa81b"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b">PIDTVTorqueControllerData::rr_torque_delta</a></div><div class="ttdeci">float rr_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllersData_8h_source.html#l00011">TorqueControllersData.h:11</a></div></div>
-<div class="ttc" id="astructPIDTVTorqueControllerData_html_ab2176e8aa31c4ee9e996a62744d64e3b"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#ab2176e8aa31c4ee9e996a62744d64e3b">PIDTVTorqueControllerData::rl_torque_delta</a></div><div class="ttdeci">float rl_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllersData_8h_source.html#l00010">TorqueControllersData.h:10</a></div></div>
-<div class="ttc" id="astructPIDTVTorqueControllerData_html_adfc64daca8dff87e746189286eeb14bc"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#adfc64daca8dff87e746189286eeb14bc">PIDTVTorqueControllerData::fl_torque_delta</a></div><div class="ttdeci">float fl_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllersData_8h_source.html#l00008">TorqueControllersData.h:8</a></div></div>
-<div class="ttc" id="astructPIDTVTorqueControllerData_html_afefd74a3fd6bbbb1d5d71cf8be84bf24"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24">PIDTVTorqueControllerData::controller_input</a></div><div class="ttdeci">float controller_input</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllersData_8h_source.html#l00006">TorqueControllersData.h:6</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00247">247</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  248</span>{</div>
+<div class="line"><span class="lineno">  249</span>    CONTROLLER_PID_TV_DATA_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  250</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.controller_input_ro = HYTECH_controller_input_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24">controller_input</a>);</div>
+<div class="line"><span class="lineno">  251</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.controller_output_ro = HYTECH_controller_output_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#a005ba00c0d38fe79e5fa4ebf0150550b">controller_output</a>);</div>
+<div class="line"><span class="lineno">  252</span>    enqueue_new_CAN&lt;CONTROLLER_PID_TV_DATA_t&gt;(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, &amp;Pack_CONTROLLER_PID_TV_DATA_hytech);</div>
+<div class="line"><span class="lineno">  253</span> </div>
+<div class="line"><span class="lineno">  254</span>    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;</div>
+<div class="line"><span class="lineno">  255</span>    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#adfc64daca8dff87e746189286eeb14bc">fl_torque_delta</a>);</div>
+<div class="line"><span class="lineno">  256</span>    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25">fr_torque_delta</a>);</div>
+<div class="line"><span class="lineno">  257</span>    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#ab2176e8aa31c4ee9e996a62744d64e3b">rl_torque_delta</a>);</div>
+<div class="line"><span class="lineno">  258</span>    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.<a class="code hl_variable" href="structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b">rr_torque_delta</a>);</div>
+<div class="line"><span class="lineno">  259</span>    </div>
+<div class="line"><span class="lineno">  260</span>    enqueue_new_CAN&lt;CONTROLLER_PID_TV_DELTA_DATA_t&gt;(&amp;delta_msg, &amp;Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);</div>
+<div class="line"><span class="lineno">  261</span> </div>
+<div class="line"><span class="lineno">  262</span>    </div>
+<div class="line"><span class="lineno">  263</span>}</div>
+<div class="ttc" id="astructPIDTVTorqueControllerData_html_a005ba00c0d38fe79e5fa4ebf0150550b"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#a005ba00c0d38fe79e5fa4ebf0150550b">PIDTVTorqueControllerData::controller_output</a></div><div class="ttdeci">float controller_output</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00024">TorqueControllerData.h:24</a></div></div>
+<div class="ttc" id="astructPIDTVTorqueControllerData_html_a5bd64cc0d60cbcb2f5daa1f0b8f8ff25"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25">PIDTVTorqueControllerData::fr_torque_delta</a></div><div class="ttdeci">float fr_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00026">TorqueControllerData.h:26</a></div></div>
+<div class="ttc" id="astructPIDTVTorqueControllerData_html_a920ab4ecd12ed53a368c2fe0015aa81b"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b">PIDTVTorqueControllerData::rr_torque_delta</a></div><div class="ttdeci">float rr_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00028">TorqueControllerData.h:28</a></div></div>
+<div class="ttc" id="astructPIDTVTorqueControllerData_html_ab2176e8aa31c4ee9e996a62744d64e3b"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#ab2176e8aa31c4ee9e996a62744d64e3b">PIDTVTorqueControllerData::rl_torque_delta</a></div><div class="ttdeci">float rl_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00027">TorqueControllerData.h:27</a></div></div>
+<div class="ttc" id="astructPIDTVTorqueControllerData_html_adfc64daca8dff87e746189286eeb14bc"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#adfc64daca8dff87e746189286eeb14bc">PIDTVTorqueControllerData::fl_torque_delta</a></div><div class="ttdeci">float fl_torque_delta</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00025">TorqueControllerData.h:25</a></div></div>
+<div class="ttc" id="astructPIDTVTorqueControllerData_html_afefd74a3fd6bbbb1d5d71cf8be84bf24"><div class="ttname"><a href="structPIDTVTorqueControllerData.html#afefd74a3fd6bbbb1d5d71cf8be84bf24">PIDTVTorqueControllerData::controller_input</a></div><div class="ttdeci">float controller_input</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00023">TorqueControllerData.h:23</a></div></div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00009">test_can_interface.cpp:9</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -243,19 +309,19 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00199">199</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  199</span>                                                              {</div>
-<div class="line"><span class="lineno">  200</span>    </div>
-<div class="line"><span class="lineno">  201</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><span class="lineno">  202</span>    msg_class.write(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.buf);</div>
-<div class="line"><span class="lineno">  203</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.id = id;</div>
-<div class="line"><span class="lineno">  204</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.len = <span class="keyword">sizeof</span>(msg_class);</div>
-<div class="line"><span class="lineno">  205</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><span class="lineno">  206</span>    memmove(buf, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">  207</span> </div>
-<div class="line"><span class="lineno">  208</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">msg_queue_</a>-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">  209</span> </div>
-<div class="line"><span class="lineno">  210</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00224">224</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  224</span>                                                              {</div>
+<div class="line"><span class="lineno">  225</span>    </div>
+<div class="line"><span class="lineno">  226</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  227</span>    msg_class.write(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.buf);</div>
+<div class="line"><span class="lineno">  228</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.id = id;</div>
+<div class="line"><span class="lineno">  229</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.len = <span class="keyword">sizeof</span>(msg_class);</div>
+<div class="line"><span class="lineno">  230</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
+<div class="line"><span class="lineno">  231</span>    memmove(buf, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  232</span> </div>
+<div class="line"><span class="lineno">  233</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">msg_queue_</a>-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  234</span> </div>
+<div class="line"><span class="lineno">  235</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -287,14 +353,14 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00214">214</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  214</span>                                                                                                                   {</div>
-<div class="line"><span class="lineno">  215</span>    CAN_message_t can_msg;</div>
-<div class="line"><span class="lineno">  216</span>    can_msg.id = pack_function(structure, can_msg.buf, &amp;can_msg.len, (uint8_t*) &amp;can_msg.flags.extended);</div>
-<div class="line"><span class="lineno">  217</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)] = {};</div>
-<div class="line"><span class="lineno">  218</span>    memmove(buf, &amp;can_msg, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">  219</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">msg_queue_</a>-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">  220</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00239">239</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  239</span>                                                                                                                   {</div>
+<div class="line"><span class="lineno">  240</span>    CAN_message_t can_msg;</div>
+<div class="line"><span class="lineno">  241</span>    can_msg.id = pack_function(structure, can_msg.buf, &amp;can_msg.len, (uint8_t*) &amp;can_msg.flags.extended);</div>
+<div class="line"><span class="lineno">  242</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)] = {};</div>
+<div class="line"><span class="lineno">  243</span>    memmove(buf, &amp;can_msg, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  244</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc">msg_queue_</a>-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">  245</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -322,17 +388,17 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8h_source.html#l00052">52</a> of file <a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html#l00052">52</a> of file <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   53</span>    {</div>
 <div class="line"><span class="lineno">   54</span>        <span class="keywordflow">return</span> adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a6d256a278a06c2f13a045d27506fc7d7">glv_sense_channel</a>];</div>
 <div class="line"><span class="lineno">   55</span>    }</div>
 <div class="ttc" id="astructAnalogConversionPacket__s_html_a7a2c6b6d9576bd5f36f1ade0db8c3171"><div class="ttname"><a href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">AnalogConversionPacket_s::conversions</a></div><div class="ttdeci">AnalogConversion_s conversions[N]</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00023">AnalogSensorsInterface.h:23</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a6d256a278a06c2f13a045d27506fc7d7"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a6d256a278a06c2f13a045d27506fc7d7">TelemetryInterfaceReadChannels::glv_sense_channel</a></div><div class="ttdeci">int glv_sense_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00031">TelemetryInterface.h:31</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a6d256a278a06c2f13a045d27506fc7d7"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a6d256a278a06c2f13a045d27506fc7d7">TelemetryInterfaceReadChannels::glv_sense_channel</a></div><div class="ttdeci">int glv_sense_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00031">TelemetryInterface.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3b687757ba713fb5c649792c0f63a45b" name="a3b687757ba713fb5c649792c0f63a45b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b687757ba713fb5c649792c0f63a45b">&#9670;&#160;</a></span>tick()</h2>
+<a id="a152d219ab01bac65cb20be17f0d30b68" name="a152d219ab01bac65cb20be17f0d30b68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152d219ab01bac65cb20be17f0d30b68">&#9670;&#160;</a></span>tick()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -358,37 +424,31 @@ template&lt;typename U &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; 2 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>mcu_adc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const <a class="el" href="structSteeringEncoderConversion__s.html">SteeringEncoderConversion_s</a> &amp;&#160;</td>
           <td class="paramname"><em>encoder</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rr</em>, </td>
         </tr>
         <tr>
@@ -459,65 +519,58 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00242">242</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  260</span>                                                                     {</div>
-<div class="line"><span class="lineno">  261</span> </div>
-<div class="line"><span class="lineno">  262</span>    <span class="comment">// Pedals</span></div>
-<div class="line"><span class="lineno">  263</span>    <a class="code hl_function" href="classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8">update_pedal_readings_CAN_msg</a>(accel_per,</div>
-<div class="line"><span class="lineno">  264</span>                                  brake_per,</div>
-<div class="line"><span class="lineno">  265</span>                                  mech_brake_active_percent);</div>
-<div class="line"><span class="lineno">  266</span>                                  </div>
-<div class="line"><span class="lineno">  267</span>    <a class="code hl_function" href="classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123">update_pedal_readings_raw_CAN_msg</a>(accel_1,</div>
-<div class="line"><span class="lineno">  268</span>                                      accel_2,</div>
-<div class="line"><span class="lineno">  269</span>                                      brake_1,</div>
-<div class="line"><span class="lineno">  270</span>                                      brake_2); </div>
-<div class="line"><span class="lineno">  271</span>    <span class="comment">// Analog readings</span></div>
-<div class="line"><span class="lineno">  272</span>    <a class="code hl_function" href="classTelemetryInterface.html#ae9047b25e6b4ffa7c8b54b380b1d3f54">update_analog_readings_CAN_msg</a>(encoder,</div>
-<div class="line"><span class="lineno">  273</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89">analog_steering_channel</a>],</div>
-<div class="line"><span class="lineno">  274</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4">current_channel</a>],</div>
-<div class="line"><span class="lineno">  275</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d">current_ref_channel</a>],</div>
-<div class="line"><span class="lineno">  276</span>                                   <a class="code hl_function" href="classTelemetryInterface.html#af1be5956893c7fb731bb3226459d5a62">get_glv_voltage</a>(adc1));</div>
-<div class="line"><span class="lineno">  277</span>    <span class="comment">// Load cells</span></div>
-<div class="line"><span class="lineno">  278</span>    <a class="code hl_function" href="classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38">update_suspension_CAN_msg</a>(adc2.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#ad60decfd9057c0ac01052d18382e370e">loadcell_fl_channel</a>],</div>
-<div class="line"><span class="lineno">  279</span>                              adc3.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a44dced7d5de25512ee84f175f7b7c979">loadcell_fr_channel</a>],</div>
-<div class="line"><span class="lineno">  280</span>                              adc2.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#adee0f86ba1f10da5ea98d2d9b21c07eb">pots_fl_channel</a>],</div>
-<div class="line"><span class="lineno">  281</span>                              adc3.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a3df0264071fbf24cde75f51d06ea5ef3">pots_fr_channel</a>]);</div>
-<div class="line"><span class="lineno">  282</span> </div>
-<div class="line"><span class="lineno">  283</span>    <a class="code hl_function" href="classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010">update_drivetrain_rpms_CAN_msg</a>(fl, fr, rl, rr);</div>
-<div class="line"><span class="lineno">  284</span>    <a class="code hl_function" href="classTelemetryInterface.html#af8d8e26ae782ad476f9cd3191e4c4a1d">update_drivetrain_err_status_CAN_msg</a>(fl, fr, rl, rr);</div>
-<div class="line"><span class="lineno">  285</span>    <a class="code hl_function" href="classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303">update_drivetrain_status_telem_CAN_msg</a>(fl, fr, rl, rr, accel_implaus, brake_implaus, accel_per, brake_per);</div>
-<div class="line"><span class="lineno">  286</span>    <a class="code hl_function" href="classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1">update_drivetrain_torque_telem_CAN_msg</a>(fl, fr, rl, rr);</div>
-<div class="line"><span class="lineno">  287</span> </div>
-<div class="line"><span class="lineno">  288</span>    <a class="code hl_function" href="classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e">update_penthouse_accum_CAN_msg</a>(adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4">current_channel</a>],</div>
-<div class="line"><span class="lineno">  289</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d">current_ref_channel</a>]);</div>
-<div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>    <a class="code hl_function" href="classTelemetryInterface.html#a020d32aa0fcebea39483daf4ac03480e">enqeue_controller_CAN_msg</a>(data);</div>
-<div class="line"><span class="lineno">  292</span>    <a class="code hl_function" href="classTelemetryInterface.html#af240fc1cf6e30da97f340308a9f43734">update_front_thermistors_CAN_msg</a>(<a class="code hl_variable" href="src_2main_8cpp.html#a5dbf276a60db51356c4938b734860859">mcu_adc</a>.conversions[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a7dab9a3cd00f20cb4625010af61546b4">therm_fl_channel</a>],</div>
-<div class="line"><span class="lineno">  293</span>                                    <a class="code hl_variable" href="src_2main_8cpp.html#a5dbf276a60db51356c4938b734860859">mcu_adc</a>.conversions[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a0c776316d94b68b14921fa12548c71f5">therm_fr_channel</a>]);</div>
-<div class="line"><span class="lineno">  294</span> </div>
-<div class="line"><span class="lineno">  295</span>}</div>
-<div class="ttc" id="aclassTelemetryInterface_html_a00f745f4a9e7cfccaf4a4d7fbbdb1010"><div class="ttname"><a href="classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010">TelemetryInterface::update_drivetrain_rpms_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_rpms_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00071">TelemetryInterface.cpp:71</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_a020d32aa0fcebea39483daf4ac03480e"><div class="ttname"><a href="classTelemetryInterface.html#a020d32aa0fcebea39483daf4ac03480e">TelemetryInterface::enqeue_controller_CAN_msg</a></div><div class="ttdeci">void enqeue_controller_CAN_msg(const PIDTVTorqueControllerData &amp;data)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00222">TelemetryInterface.cpp:222</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00266">266</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  283</span>                                                                     {</div>
+<div class="line"><span class="lineno">  284</span> </div>
+<div class="line"><span class="lineno">  285</span>    <span class="comment">// Pedals</span></div>
+<div class="line"><span class="lineno">  286</span>    <a class="code hl_function" href="classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8">update_pedal_readings_CAN_msg</a>(accel_per,</div>
+<div class="line"><span class="lineno">  287</span>                                  brake_per,</div>
+<div class="line"><span class="lineno">  288</span>                                  mech_brake_active_percent);</div>
+<div class="line"><span class="lineno">  289</span>                                  </div>
+<div class="line"><span class="lineno">  290</span>    <a class="code hl_function" href="classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123">update_pedal_readings_raw_CAN_msg</a>(accel_1,</div>
+<div class="line"><span class="lineno">  291</span>                                      accel_2,</div>
+<div class="line"><span class="lineno">  292</span>                                      brake_1,</div>
+<div class="line"><span class="lineno">  293</span>                                      brake_2); </div>
+<div class="line"><span class="lineno">  294</span>    <span class="comment">// Analog readings</span></div>
+<div class="line"><span class="lineno">  295</span>    <a class="code hl_function" href="classTelemetryInterface.html#ae9047b25e6b4ffa7c8b54b380b1d3f54">update_analog_readings_CAN_msg</a>(encoder,</div>
+<div class="line"><span class="lineno">  296</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89">analog_steering_channel</a>],</div>
+<div class="line"><span class="lineno">  297</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4">current_channel</a>],</div>
+<div class="line"><span class="lineno">  298</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d">current_ref_channel</a>],</div>
+<div class="line"><span class="lineno">  299</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a6d256a278a06c2f13a045d27506fc7d7">glv_sense_channel</a>]);</div>
+<div class="line"><span class="lineno">  300</span>    <span class="comment">// Load cells</span></div>
+<div class="line"><span class="lineno">  301</span>    <a class="code hl_function" href="classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38">update_suspension_CAN_msg</a>(adc2.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#ad60decfd9057c0ac01052d18382e370e">loadcell_fl_channel</a>],</div>
+<div class="line"><span class="lineno">  302</span>                              adc3.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a44dced7d5de25512ee84f175f7b7c979">loadcell_fr_channel</a>],</div>
+<div class="line"><span class="lineno">  303</span>                              adc2.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#adee0f86ba1f10da5ea98d2d9b21c07eb">pots_fl_channel</a>],</div>
+<div class="line"><span class="lineno">  304</span>                              adc3.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#a3df0264071fbf24cde75f51d06ea5ef3">pots_fr_channel</a>]);</div>
+<div class="line"><span class="lineno">  305</span> </div>
+<div class="line"><span class="lineno">  306</span>    <a class="code hl_function" href="classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010">update_drivetrain_rpms_CAN_msg</a>(fl, fr, rl, rr);</div>
+<div class="line"><span class="lineno">  307</span>    <a class="code hl_function" href="classTelemetryInterface.html#af8d8e26ae782ad476f9cd3191e4c4a1d">update_drivetrain_err_status_CAN_msg</a>(fl, fr, rl, rr);</div>
+<div class="line"><span class="lineno">  308</span>    <a class="code hl_function" href="classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303">update_drivetrain_status_telem_CAN_msg</a>(fl, fr, rl, rr, accel_implaus, brake_implaus, accel_per, brake_per);</div>
+<div class="line"><span class="lineno">  309</span>    <a class="code hl_function" href="classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1">update_drivetrain_torque_telem_CAN_msg</a>(fl, fr, rl, rr);</div>
+<div class="line"><span class="lineno">  310</span> </div>
+<div class="line"><span class="lineno">  311</span>    <a class="code hl_function" href="classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e">update_penthouse_accum_CAN_msg</a>(adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4">current_channel</a>],</div>
+<div class="line"><span class="lineno">  312</span>                                   adc1.<a class="code hl_variable" href="structAnalogConversionPacket__s.html#a7a2c6b6d9576bd5f36f1ade0db8c3171">conversions</a>[<a class="code hl_variable" href="classTelemetryInterface.html#a762e412a15fc421ea4a76bfd262a58fe">channels_</a>.<a class="code hl_variable" href="structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d">current_ref_channel</a>]);</div>
+<div class="line"><span class="lineno">  313</span> </div>
+<div class="line"><span class="lineno">  314</span>    <a class="code hl_function" href="classTelemetryInterface.html#a020d32aa0fcebea39483daf4ac03480e">enqeue_controller_CAN_msg</a>(data);</div>
+<div class="line"><span class="lineno">  315</span> </div>
+<div class="line"><span class="lineno">  316</span>}</div>
+<div class="ttc" id="aclassTelemetryInterface_html_a00f745f4a9e7cfccaf4a4d7fbbdb1010"><div class="ttname"><a href="classTelemetryInterface.html#a00f745f4a9e7cfccaf4a4d7fbbdb1010">TelemetryInterface::update_drivetrain_rpms_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_rpms_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00060">TelemetryInterface.cpp:60</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_a020d32aa0fcebea39483daf4ac03480e"><div class="ttname"><a href="classTelemetryInterface.html#a020d32aa0fcebea39483daf4ac03480e">TelemetryInterface::enqeue_controller_CAN_msg</a></div><div class="ttdeci">void enqeue_controller_CAN_msg(const PIDTVTorqueControllerData &amp;data)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00247">TelemetryInterface.cpp:247</a></div></div>
 <div class="ttc" id="aclassTelemetryInterface_html_a0a3473d76564d08c0a1a58950d3eecb8"><div class="ttname"><a href="classTelemetryInterface.html#a0a3473d76564d08c0a1a58950d3eecb8">TelemetryInterface::update_pedal_readings_CAN_msg</a></div><div class="ttdeci">void update_pedal_readings_CAN_msg(float accel_percent, float brake_percent, float mech_brake_percent)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00005">TelemetryInterface.cpp:5</a></div></div>
 <div class="ttc" id="aclassTelemetryInterface_html_a2fd4119dc4e74a79a848028c969a6d38"><div class="ttname"><a href="classTelemetryInterface.html#a2fd4119dc4e74a79a848028c969a6d38">TelemetryInterface::update_suspension_CAN_msg</a></div><div class="ttdeci">void update_suspension_CAN_msg(const AnalogConversion_s &amp;lc_fl, const AnalogConversion_s &amp;lc_fr, const AnalogConversion_s &amp;pots_fl, const AnalogConversion_s &amp;pots_fr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00032">TelemetryInterface.cpp:32</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_a3bdc633bbdc69426c5cae8145179e2b1"><div class="ttname"><a href="classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1">TelemetryInterface::update_drivetrain_torque_telem_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_torque_telem_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00170">TelemetryInterface.cpp:170</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_a75ca20d9a36aeadc99a8ed3fe57ea81e"><div class="ttname"><a href="classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e">TelemetryInterface::update_penthouse_accum_CAN_msg</a></div><div class="ttdeci">void update_penthouse_accum_CAN_msg(const AnalogConversion_s &amp;current, const AnalogConversion_s &amp;reference)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00188">TelemetryInterface.cpp:188</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_ae520adae9005ec544534e700a4e50303"><div class="ttname"><a href="classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303">TelemetryInterface::update_drivetrain_status_telem_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_status_telem_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr, bool accel_implaus, bool brake_implaus, float accel_per, float brake_per)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00096">TelemetryInterface.cpp:96</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_a3bdc633bbdc69426c5cae8145179e2b1"><div class="ttname"><a href="classTelemetryInterface.html#a3bdc633bbdc69426c5cae8145179e2b1">TelemetryInterface::update_drivetrain_torque_telem_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_torque_telem_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00159">TelemetryInterface.cpp:159</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_a75ca20d9a36aeadc99a8ed3fe57ea81e"><div class="ttname"><a href="classTelemetryInterface.html#a75ca20d9a36aeadc99a8ed3fe57ea81e">TelemetryInterface::update_penthouse_accum_CAN_msg</a></div><div class="ttdeci">void update_penthouse_accum_CAN_msg(const AnalogConversion_s &amp;current, const AnalogConversion_s &amp;reference)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00177">TelemetryInterface.cpp:177</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_ae520adae9005ec544534e700a4e50303"><div class="ttname"><a href="classTelemetryInterface.html#ae520adae9005ec544534e700a4e50303">TelemetryInterface::update_drivetrain_status_telem_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_status_telem_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr, bool accel_implaus, bool brake_implaus, float accel_per, float brake_per)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00085">TelemetryInterface.cpp:85</a></div></div>
 <div class="ttc" id="aclassTelemetryInterface_html_ae9047b25e6b4ffa7c8b54b380b1d3f54"><div class="ttname"><a href="classTelemetryInterface.html#ae9047b25e6b4ffa7c8b54b380b1d3f54">TelemetryInterface::update_analog_readings_CAN_msg</a></div><div class="ttdeci">void update_analog_readings_CAN_msg(const SteeringEncoderConversion_s &amp;steer1, const AnalogConversion_s &amp;steer2, const AnalogConversion_s &amp;current, const AnalogConversion_s &amp;reference, const AnalogConversion_s &amp;glv)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00045">TelemetryInterface.cpp:45</a></div></div>
 <div class="ttc" id="aclassTelemetryInterface_html_aebc51c2164db78eb8aae02e625988123"><div class="ttname"><a href="classTelemetryInterface.html#aebc51c2164db78eb8aae02e625988123">TelemetryInterface::update_pedal_readings_raw_CAN_msg</a></div><div class="ttdeci">void update_pedal_readings_raw_CAN_msg(const AnalogConversion_s &amp;accel_1, const AnalogConversion_s &amp;accel_2, const AnalogConversion_s &amp;brake_1, const AnalogConversion_s &amp;brake_2)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00017">TelemetryInterface.cpp:17</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_af1be5956893c7fb731bb3226459d5a62"><div class="ttname"><a href="classTelemetryInterface.html#af1be5956893c7fb731bb3226459d5a62">TelemetryInterface::get_glv_voltage</a></div><div class="ttdeci">AnalogConversion_s get_glv_voltage(const AnalogConversionPacket_s&lt; 8 &gt; &amp;adc1)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00052">TelemetryInterface.h:52</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_af240fc1cf6e30da97f340308a9f43734"><div class="ttname"><a href="classTelemetryInterface.html#af240fc1cf6e30da97f340308a9f43734">TelemetryInterface::update_front_thermistors_CAN_msg</a></div><div class="ttdeci">void update_front_thermistors_CAN_msg(const AnalogConversion_s &amp;therm_fl, const AnalogConversion_s &amp;therm_fr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00060">TelemetryInterface.cpp:60</a></div></div>
-<div class="ttc" id="aclassTelemetryInterface_html_af8d8e26ae782ad476f9cd3191e4c4a1d"><div class="ttname"><a href="classTelemetryInterface.html#af8d8e26ae782ad476f9cd3191e4c4a1d">TelemetryInterface::update_drivetrain_err_status_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_err_status_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00082">TelemetryInterface.cpp:82</a></div></div>
-<div class="ttc" id="asrc_2main_8cpp_html_a5dbf276a60db51356c4938b734860859"><div class="ttname"><a href="src_2main_8cpp.html#a5dbf276a60db51356c4938b734860859">mcu_adc</a></div><div class="ttdeci">Teensy_ADC&lt; 2 &gt; mcu_adc</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00108">main.cpp:108</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a0c776316d94b68b14921fa12548c71f5"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a0c776316d94b68b14921fa12548c71f5">TelemetryInterfaceReadChannels::therm_fr_channel</a></div><div class="ttdeci">int therm_fr_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00033">TelemetryInterface.h:33</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a3df0264071fbf24cde75f51d06ea5ef3"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a3df0264071fbf24cde75f51d06ea5ef3">TelemetryInterfaceReadChannels::pots_fr_channel</a></div><div class="ttdeci">int pots_fr_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00025">TelemetryInterface.h:25</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a44dced7d5de25512ee84f175f7b7c979"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a44dced7d5de25512ee84f175f7b7c979">TelemetryInterfaceReadChannels::loadcell_fr_channel</a></div><div class="ttdeci">int loadcell_fr_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00027">TelemetryInterface.h:27</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a7dab9a3cd00f20cb4625010af61546b4"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a7dab9a3cd00f20cb4625010af61546b4">TelemetryInterfaceReadChannels::therm_fl_channel</a></div><div class="ttdeci">int therm_fl_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00032">TelemetryInterface.h:32</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a8fda4ad1ac9ac8a275e194f5606f3d89"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89">TelemetryInterfaceReadChannels::analog_steering_channel</a></div><div class="ttdeci">int analog_steering_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00028">TelemetryInterface.h:28</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_aa2038f0f3c6a37c59409860e3ea932e4"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4">TelemetryInterfaceReadChannels::current_channel</a></div><div class="ttdeci">int current_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00029">TelemetryInterface.h:29</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_acd9987af930709a36e92bd9be2d3f91d"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d">TelemetryInterfaceReadChannels::current_ref_channel</a></div><div class="ttdeci">int current_ref_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00030">TelemetryInterface.h:30</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_ad60decfd9057c0ac01052d18382e370e"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#ad60decfd9057c0ac01052d18382e370e">TelemetryInterfaceReadChannels::loadcell_fl_channel</a></div><div class="ttdeci">int loadcell_fl_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00026">TelemetryInterface.h:26</a></div></div>
-<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_adee0f86ba1f10da5ea98d2d9b21c07eb"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#adee0f86ba1f10da5ea98d2d9b21c07eb">TelemetryInterfaceReadChannels::pots_fl_channel</a></div><div class="ttdeci">int pots_fl_channel</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00024">TelemetryInterface.h:24</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_af8d8e26ae782ad476f9cd3191e4c4a1d"><div class="ttname"><a href="classTelemetryInterface.html#af8d8e26ae782ad476f9cd3191e4c4a1d">TelemetryInterface::update_drivetrain_err_status_CAN_msg</a></div><div class="ttdeci">void update_drivetrain_err_status_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00071">TelemetryInterface.cpp:71</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a3df0264071fbf24cde75f51d06ea5ef3"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a3df0264071fbf24cde75f51d06ea5ef3">TelemetryInterfaceReadChannels::pots_fr_channel</a></div><div class="ttdeci">int pots_fr_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00025">TelemetryInterface.h:25</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a44dced7d5de25512ee84f175f7b7c979"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a44dced7d5de25512ee84f175f7b7c979">TelemetryInterfaceReadChannels::loadcell_fr_channel</a></div><div class="ttdeci">int loadcell_fr_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00027">TelemetryInterface.h:27</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_a8fda4ad1ac9ac8a275e194f5606f3d89"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89">TelemetryInterfaceReadChannels::analog_steering_channel</a></div><div class="ttdeci">int analog_steering_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00028">TelemetryInterface.h:28</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_aa2038f0f3c6a37c59409860e3ea932e4"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4">TelemetryInterfaceReadChannels::current_channel</a></div><div class="ttdeci">int current_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00029">TelemetryInterface.h:29</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_acd9987af930709a36e92bd9be2d3f91d"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d">TelemetryInterfaceReadChannels::current_ref_channel</a></div><div class="ttdeci">int current_ref_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00030">TelemetryInterface.h:30</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_ad60decfd9057c0ac01052d18382e370e"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#ad60decfd9057c0ac01052d18382e370e">TelemetryInterfaceReadChannels::loadcell_fl_channel</a></div><div class="ttdeci">int loadcell_fl_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00026">TelemetryInterface.h:26</a></div></div>
+<div class="ttc" id="astructTelemetryInterfaceReadChannels_html_adee0f86ba1f10da5ea98d2d9b21c07eb"><div class="ttname"><a href="structTelemetryInterfaceReadChannels.html#adee0f86ba1f10da5ea98d2d9b21c07eb">TelemetryInterfaceReadChannels::pots_fl_channel</a></div><div class="ttdeci">int pots_fl_channel</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00024">TelemetryInterface.h:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -570,14 +623,14 @@ template&lt;typename U &gt; </div>
 <div class="line"><span class="lineno">   50</span>    <span class="comment">// do sth with mcu_analog_readings_</span></div>
 <div class="line"><span class="lineno">   51</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>.set_steering_1(steer1.<a class="code hl_variable" href="structSteeringEncoderConversion__s.html#adb1989d5aa88a00ddecebaf1249af187">raw</a>);</div>
 <div class="line"><span class="lineno">   52</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>.set_steering_2(steer2.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>);</div>
-<div class="line"><span class="lineno">   53</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>.set_hall_effect_current(current.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> - reference.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>);</div>
-<div class="line"><span class="lineno">   54</span>    <span class="comment">// Serial.println(&quot;hall effect current: &quot;);</span></div>
-<div class="line"><span class="lineno">   55</span>    <span class="comment">// Serial.println(mcu_analog_readings_.get_hall_effect_current());</span></div>
-<div class="line"><span class="lineno">   56</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>.set_glv_battery_voltage(glv.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>);</div>
-<div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span>    enqueue_CAN&lt;MCU_analog_readings&gt;(<a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>, ID_MCU_ANALOG_READINGS);</div>
-<div class="line"><span class="lineno">   59</span>}</div>
-<div class="ttc" id="aclassTelemetryInterface_html_a90e15953d2ecd88b2ec52b6d3ea874ef"><div class="ttname"><a href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">TelemetryInterface::mcu_analog_readings_</a></div><div class="ttdeci">MCU_analog_readings mcu_analog_readings_</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8h_source.html#l00040">TelemetryInterface.h:40</a></div></div>
+<div class="line"><span class="lineno">   53</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>.set_hall_effect_current(current.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a> - reference.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>);  <span class="comment">// this is wrong btw. should let analog channel do the math but not necessary atm</span></div>
+<div class="line"><span class="lineno">   54</span>    <a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>.set_glv_battery_voltage(glv.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a> * <a class="code hl_variable" href="interfaces_2include_2TelemetryInterface_8h.html#ae069efbbf221b03b1a1c93a9f3495ea3">FIXED_POINT_PRECISION</a>);</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   56</span>    enqueue_CAN&lt;MCU_analog_readings&gt;(<a class="code hl_variable" href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">mcu_analog_readings_</a>, ID_MCU_ANALOG_READINGS);</div>
+<div class="line"><span class="lineno">   57</span>}</div>
+<div class="ttc" id="aclassTelemetryInterface_html_a90e15953d2ecd88b2ec52b6d3ea874ef"><div class="ttname"><a href="classTelemetryInterface.html#a90e15953d2ecd88b2ec52b6d3ea874ef">TelemetryInterface::mcu_analog_readings_</a></div><div class="ttdeci">MCU_analog_readings mcu_analog_readings_</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00040">TelemetryInterface.h:40</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2TelemetryInterface_8h_html_ae069efbbf221b03b1a1c93a9f3495ea3"><div class="ttname"><a href="interfaces_2include_2TelemetryInterface_8h.html#ae069efbbf221b03b1a1c93a9f3495ea3">FIXED_POINT_PRECISION</a></div><div class="ttdeci">const int FIXED_POINT_PRECISION</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2TelemetryInterface_8h_source.html#l00016">TelemetryInterface.h:16</a></div></div>
+<div class="ttc" id="astructAnalogConversion__s_html_a1873377ed9fcaa212ebe08ef2aa6b6af"><div class="ttname"><a href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">AnalogConversion_s::conversion</a></div><div class="ttdeci">float conversion</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00016">AnalogSensorsInterface.h:16</a></div></div>
 <div class="ttc" id="astructAnalogConversion__s_html_afe17b102dcd5f3eaa00d3e9004c9e37f"><div class="ttname"><a href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">AnalogConversion_s::raw</a></div><div class="ttdeci">int raw</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00015">AnalogSensorsInterface.h:15</a></div></div>
 <div class="ttc" id="astructSteeringEncoderConversion__s_html_adb1989d5aa88a00ddecebaf1249af187"><div class="ttname"><a href="structSteeringEncoderConversion__s.html#adb1989d5aa88a00ddecebaf1249af187">SteeringEncoderConversion_s::raw</a></div><div class="ttdeci">int raw</div><div class="ttdef"><b>Definition:</b> <a href="SteeringEncoderInterface_8h_source.html#l00015">SteeringEncoderInterface.h:15</a></div></div>
 </div><!-- fragment -->
@@ -592,25 +645,25 @@ template&lt;typename U &gt; </div>
         <tr>
           <td class="memname">void TelemetryInterface::update_drivetrain_err_status_CAN_msg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rr</em>&#160;</td>
         </tr>
         <tr>
@@ -621,19 +674,19 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00082">82</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>{</div>
-<div class="line"><span class="lineno">   84</span> </div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (1) { <span class="comment">// We should only write error status if some error has occurred, but for now, this is just an if(1)</span></div>
-<div class="line"><span class="lineno">   86</span>        DRIVETRAIN_ERR_STATUS_TELEM_t errors;</div>
-<div class="line"><span class="lineno">   87</span>        errors.mc1_diagnostic_number = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
-<div class="line"><span class="lineno">   88</span>        errors.mc2_diagnostic_number = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
-<div class="line"><span class="lineno">   89</span>        errors.mc3_diagnostic_number = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
-<div class="line"><span class="lineno">   90</span>        errors.mc4_diagnostic_number = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
-<div class="line"><span class="lineno">   91</span>        enqueue_new_CAN&lt;DRIVETRAIN_ERR_STATUS_TELEM_t&gt;(&amp;errors, &amp;Pack_DRIVETRAIN_ERR_STATUS_TELEM_hytech);</div>
-<div class="line"><span class="lineno">   92</span>    }</div>
-<div class="line"><span class="lineno">   93</span>    </div>
-<div class="line"><span class="lineno">   94</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00071">71</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>{</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">if</span> (1) { <span class="comment">// We should only write error status if some error has occurred, but for now, this is just an if(1)</span></div>
+<div class="line"><span class="lineno">   75</span>        DRIVETRAIN_ERR_STATUS_TELEM_t errors;</div>
+<div class="line"><span class="lineno">   76</span>        errors.mc1_diagnostic_number = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
+<div class="line"><span class="lineno">   77</span>        errors.mc2_diagnostic_number = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
+<div class="line"><span class="lineno">   78</span>        errors.mc3_diagnostic_number = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
+<div class="line"><span class="lineno">   79</span>        errors.mc4_diagnostic_number = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">get_error_status</a>();</div>
+<div class="line"><span class="lineno">   80</span>        enqueue_new_CAN&lt;DRIVETRAIN_ERR_STATUS_TELEM_t&gt;(&amp;errors, &amp;Pack_DRIVETRAIN_ERR_STATUS_TELEM_hytech);</div>
+<div class="line"><span class="lineno">   81</span>    }</div>
+<div class="line"><span class="lineno">   82</span>    </div>
+<div class="line"><span class="lineno">   83</span>}</div>
 <div class="ttc" id="aclassInverterInterface_html_a68582bb3eea83e9f95c54110cc5a3f0c"><div class="ttname"><a href="classInverterInterface.html#a68582bb3eea83e9f95c54110cc5a3f0c">InverterInterface::get_error_status</a></div><div class="ttdeci">uint16_t get_error_status()</div></div>
 </div><!-- fragment -->
 </div>
@@ -647,25 +700,25 @@ template&lt;typename U &gt; </div>
         <tr>
           <td class="memname">void TelemetryInterface::update_drivetrain_rpms_CAN_msg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rr</em>&#160;</td>
         </tr>
         <tr>
@@ -676,16 +729,16 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00071">71</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   72</span>{</div>
-<div class="line"><span class="lineno">   73</span>    DRIVETRAIN_RPMS_TELEM_t rpms;</div>
-<div class="line"><span class="lineno">   74</span>    rpms.fl_motor_rpm = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
-<div class="line"><span class="lineno">   75</span>    rpms.fr_motor_rpm = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
-<div class="line"><span class="lineno">   76</span>    rpms.rl_motor_rpm = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
-<div class="line"><span class="lineno">   77</span>    rpms.rr_motor_rpm = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
-<div class="line"><span class="lineno">   78</span>    </div>
-<div class="line"><span class="lineno">   79</span>    enqueue_new_CAN&lt;DRIVETRAIN_RPMS_TELEM_t&gt;(&amp;rpms, &amp;Pack_DRIVETRAIN_RPMS_TELEM_hytech);</div>
-<div class="line"><span class="lineno">   80</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00060">60</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>{</div>
+<div class="line"><span class="lineno">   62</span>    DRIVETRAIN_RPMS_TELEM_t rpms;</div>
+<div class="line"><span class="lineno">   63</span>    rpms.fl_motor_rpm = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
+<div class="line"><span class="lineno">   64</span>    rpms.fr_motor_rpm = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
+<div class="line"><span class="lineno">   65</span>    rpms.rl_motor_rpm = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
+<div class="line"><span class="lineno">   66</span>    rpms.rr_motor_rpm = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">get_speed</a>();</div>
+<div class="line"><span class="lineno">   67</span>    </div>
+<div class="line"><span class="lineno">   68</span>    enqueue_new_CAN&lt;DRIVETRAIN_RPMS_TELEM_t&gt;(&amp;rpms, &amp;Pack_DRIVETRAIN_RPMS_TELEM_hytech);</div>
+<div class="line"><span class="lineno">   69</span>}</div>
 <div class="ttc" id="aclassInverterInterface_html_a4f22168794371e6609332877857ce076"><div class="ttname"><a href="classInverterInterface.html#a4f22168794371e6609332877857ce076">InverterInterface::get_speed</a></div><div class="ttdeci">int16_t get_speed()</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00121">InverterInterface.h:121</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -699,25 +752,25 @@ template&lt;typename U &gt; </div>
         <tr>
           <td class="memname">void TelemetryInterface::update_drivetrain_status_telem_CAN_msg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rr</em>, </td>
         </tr>
         <tr>
@@ -752,71 +805,71 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00096">96</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  105</span>{</div>
-<div class="line"><span class="lineno">  106</span>    DRIVETRAIN_STATUS_TELEM_t status;</div>
-<div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>    status.mc1_dc_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
-<div class="line"><span class="lineno">  109</span>    status.mc1_derating_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
-<div class="line"><span class="lineno">  110</span>    status.mc1_error = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
-<div class="line"><span class="lineno">  111</span>    status.mc1_inverter_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  112</span>    status.mc1_quit_dc = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
-<div class="line"><span class="lineno">  113</span>    status.mc1_quit_inverter_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  114</span>    status.mc1_system_ready = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
-<div class="line"><span class="lineno">  115</span>    status.mc1_warning = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
-<div class="line"><span class="lineno">  116</span> </div>
-<div class="line"><span class="lineno">  117</span>    status.mc2_dc_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
-<div class="line"><span class="lineno">  118</span>    status.mc2_derating_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
-<div class="line"><span class="lineno">  119</span>    status.mc2_error = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
-<div class="line"><span class="lineno">  120</span>    status.mc2_inverter_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  121</span>    status.mc2_quit_dc = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
-<div class="line"><span class="lineno">  122</span>    status.mc2_quit_inverter_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  123</span>    status.mc2_system_ready = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
-<div class="line"><span class="lineno">  124</span>    status.mc2_warning = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
-<div class="line"><span class="lineno">  125</span> </div>
-<div class="line"><span class="lineno">  126</span>    status.mc3_dc_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
-<div class="line"><span class="lineno">  127</span>    status.mc3_derating_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
-<div class="line"><span class="lineno">  128</span>    status.mc3_error = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
-<div class="line"><span class="lineno">  129</span>    status.mc3_inverter_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  130</span>    status.mc3_quit_dc = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
-<div class="line"><span class="lineno">  131</span>    status.mc3_quit_inverter_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  132</span>    status.mc3_system_ready = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
-<div class="line"><span class="lineno">  133</span>    status.mc3_warning = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
-<div class="line"><span class="lineno">  134</span> </div>
-<div class="line"><span class="lineno">  135</span>    status.mc4_dc_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
-<div class="line"><span class="lineno">  136</span>    status.mc4_derating_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
-<div class="line"><span class="lineno">  137</span>    status.mc4_error = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
-<div class="line"><span class="lineno">  138</span>    status.mc4_inverter_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  139</span>    status.mc4_quit_dc = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
-<div class="line"><span class="lineno">  140</span>    status.mc4_quit_inverter_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
-<div class="line"><span class="lineno">  141</span>    status.mc4_system_ready = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
-<div class="line"><span class="lineno">  142</span>    status.mc4_warning = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
-<div class="line"><span class="lineno">  143</span> </div>
-<div class="line"><span class="lineno">  144</span>    status.accel_implausible = accel_implaus;</div>
-<div class="line"><span class="lineno">  145</span>    status.brake_implausible = brake_implaus;</div>
-<div class="line"><span class="lineno">  146</span>    status.brake_percent = (uint8_t)(abs(brake_per) * 100);</div>
-<div class="line"><span class="lineno">  147</span>    status.accel_percent = (uint8_t)(abs(accel_per) * 100);</div>
-<div class="line"><span class="lineno">  148</span> </div>
-<div class="line"><span class="lineno">  149</span>    MC_temps mc1_temps = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
-<div class="line"><span class="lineno">  150</span>    MC_temps mc2_temps = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
-<div class="line"><span class="lineno">  151</span>    MC_temps mc3_temps = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
-<div class="line"><span class="lineno">  152</span>    MC_temps mc4_temps = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
-<div class="line"><span class="lineno">  153</span>    </div>
-<div class="line"><span class="lineno">  154</span>    MC_setpoints_command mc1_cmd = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
-<div class="line"><span class="lineno">  155</span>    MC_setpoints_command mc2_cmd = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
-<div class="line"><span class="lineno">  156</span>    MC_setpoints_command mc3_cmd = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
-<div class="line"><span class="lineno">  157</span>    MC_setpoints_command mc4_cmd = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
-<div class="line"><span class="lineno">  158</span> </div>
-<div class="line"><span class="lineno">  159</span>    enqueue_CAN&lt;MC_temps&gt;(mc1_temps, ID_MC1_TEMPS);</div>
-<div class="line"><span class="lineno">  160</span>    enqueue_CAN&lt;MC_temps&gt;(mc2_temps, ID_MC2_TEMPS);</div>
-<div class="line"><span class="lineno">  161</span>    enqueue_CAN&lt;MC_temps&gt;(mc3_temps, ID_MC3_TEMPS);</div>
-<div class="line"><span class="lineno">  162</span>    enqueue_CAN&lt;MC_temps&gt;(mc4_temps, ID_MC4_TEMPS);</div>
-<div class="line"><span class="lineno">  163</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc1_cmd, ID_MC1_SETPOINTS_COMMAND);</div>
-<div class="line"><span class="lineno">  164</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc2_cmd, ID_MC2_SETPOINTS_COMMAND);</div>
-<div class="line"><span class="lineno">  165</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc3_cmd, ID_MC3_SETPOINTS_COMMAND);</div>
-<div class="line"><span class="lineno">  166</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc4_cmd, ID_MC4_SETPOINTS_COMMAND);</div>
-<div class="line"><span class="lineno">  167</span>    enqueue_new_CAN&lt;DRIVETRAIN_STATUS_TELEM_t&gt;(&amp;status, &amp;Pack_DRIVETRAIN_STATUS_TELEM_hytech);</div>
-<div class="line"><span class="lineno">  168</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00085">85</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>{</div>
+<div class="line"><span class="lineno">   95</span>    DRIVETRAIN_STATUS_TELEM_t status;</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>    status.mc1_dc_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
+<div class="line"><span class="lineno">   98</span>    status.mc1_derating_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
+<div class="line"><span class="lineno">   99</span>    status.mc1_error = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
+<div class="line"><span class="lineno">  100</span>    status.mc1_inverter_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  101</span>    status.mc1_quit_dc = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
+<div class="line"><span class="lineno">  102</span>    status.mc1_quit_inverter_on = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  103</span>    status.mc1_system_ready = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
+<div class="line"><span class="lineno">  104</span>    status.mc1_warning = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
+<div class="line"><span class="lineno">  105</span> </div>
+<div class="line"><span class="lineno">  106</span>    status.mc2_dc_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
+<div class="line"><span class="lineno">  107</span>    status.mc2_derating_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
+<div class="line"><span class="lineno">  108</span>    status.mc2_error = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
+<div class="line"><span class="lineno">  109</span>    status.mc2_inverter_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  110</span>    status.mc2_quit_dc = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
+<div class="line"><span class="lineno">  111</span>    status.mc2_quit_inverter_on = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  112</span>    status.mc2_system_ready = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
+<div class="line"><span class="lineno">  113</span>    status.mc2_warning = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
+<div class="line"><span class="lineno">  114</span> </div>
+<div class="line"><span class="lineno">  115</span>    status.mc3_dc_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
+<div class="line"><span class="lineno">  116</span>    status.mc3_derating_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
+<div class="line"><span class="lineno">  117</span>    status.mc3_error = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
+<div class="line"><span class="lineno">  118</span>    status.mc3_inverter_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  119</span>    status.mc3_quit_dc = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
+<div class="line"><span class="lineno">  120</span>    status.mc3_quit_inverter_on = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  121</span>    status.mc3_system_ready = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
+<div class="line"><span class="lineno">  122</span>    status.mc3_warning = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>    status.mc4_dc_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">get_dc_on</a>();</div>
+<div class="line"><span class="lineno">  125</span>    status.mc4_derating_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">get_derating_on</a>();</div>
+<div class="line"><span class="lineno">  126</span>    status.mc4_error = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">get_error</a>();</div>
+<div class="line"><span class="lineno">  127</span>    status.mc4_inverter_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">get_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  128</span>    status.mc4_quit_dc = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">get_quit_dc_on</a>();</div>
+<div class="line"><span class="lineno">  129</span>    status.mc4_quit_inverter_on = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#ac9b28bf787b9af6068632bdeadf474bb">get_quit_inverter_on</a>();</div>
+<div class="line"><span class="lineno">  130</span>    status.mc4_system_ready = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a3560492e8bbbe96104ff7166d1b900b9">inverter_system_ready</a>();</div>
+<div class="line"><span class="lineno">  131</span>    status.mc4_warning = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">get_warning</a>();</div>
+<div class="line"><span class="lineno">  132</span> </div>
+<div class="line"><span class="lineno">  133</span>    status.accel_implausible = accel_implaus;</div>
+<div class="line"><span class="lineno">  134</span>    status.brake_implausible = brake_implaus;</div>
+<div class="line"><span class="lineno">  135</span>    status.brake_percent = (uint8_t)(abs(brake_per) * 100);</div>
+<div class="line"><span class="lineno">  136</span>    status.accel_percent = (uint8_t)(abs(accel_per) * 100);</div>
+<div class="line"><span class="lineno">  137</span> </div>
+<div class="line"><span class="lineno">  138</span>    MC_temps mc1_temps = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
+<div class="line"><span class="lineno">  139</span>    MC_temps mc2_temps = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
+<div class="line"><span class="lineno">  140</span>    MC_temps mc3_temps = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
+<div class="line"><span class="lineno">  141</span>    MC_temps mc4_temps = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">get_temps_msg</a>();</div>
+<div class="line"><span class="lineno">  142</span>    </div>
+<div class="line"><span class="lineno">  143</span>    MC_setpoints_command mc1_cmd = fl-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
+<div class="line"><span class="lineno">  144</span>    MC_setpoints_command mc2_cmd = fr-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
+<div class="line"><span class="lineno">  145</span>    MC_setpoints_command mc3_cmd = rl-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
+<div class="line"><span class="lineno">  146</span>    MC_setpoints_command mc4_cmd = rr-&gt;<a class="code hl_function" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">get_cmd_msg</a>();</div>
+<div class="line"><span class="lineno">  147</span> </div>
+<div class="line"><span class="lineno">  148</span>    enqueue_CAN&lt;MC_temps&gt;(mc1_temps, ID_MC1_TEMPS);</div>
+<div class="line"><span class="lineno">  149</span>    enqueue_CAN&lt;MC_temps&gt;(mc2_temps, ID_MC2_TEMPS);</div>
+<div class="line"><span class="lineno">  150</span>    enqueue_CAN&lt;MC_temps&gt;(mc3_temps, ID_MC3_TEMPS);</div>
+<div class="line"><span class="lineno">  151</span>    enqueue_CAN&lt;MC_temps&gt;(mc4_temps, ID_MC4_TEMPS);</div>
+<div class="line"><span class="lineno">  152</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc1_cmd, ID_MC1_SETPOINTS_COMMAND);</div>
+<div class="line"><span class="lineno">  153</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc2_cmd, ID_MC2_SETPOINTS_COMMAND);</div>
+<div class="line"><span class="lineno">  154</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc3_cmd, ID_MC3_SETPOINTS_COMMAND);</div>
+<div class="line"><span class="lineno">  155</span>    enqueue_CAN&lt;MC_setpoints_command&gt;(mc4_cmd, ID_MC4_SETPOINTS_COMMAND);</div>
+<div class="line"><span class="lineno">  156</span>    enqueue_new_CAN&lt;DRIVETRAIN_STATUS_TELEM_t&gt;(&amp;status, &amp;Pack_DRIVETRAIN_STATUS_TELEM_hytech);</div>
+<div class="line"><span class="lineno">  157</span>}</div>
 <div class="ttc" id="aclassInverterInterface_html_a0f27dd32b2d5aa6714b6083b921ead3b"><div class="ttname"><a href="classInverterInterface.html#a0f27dd32b2d5aa6714b6083b921ead3b">InverterInterface::get_error</a></div><div class="ttdeci">bool get_error()</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00068">InverterInterface.h:68</a></div></div>
 <div class="ttc" id="aclassInverterInterface_html_a2b41f49f03a051cc966216c6b4e95296"><div class="ttname"><a href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">InverterInterface::get_derating_on</a></div><div class="ttdeci">bool get_derating_on()</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00110">InverterInterface.h:110</a></div></div>
 <div class="ttc" id="aclassInverterInterface_html_a2ed5f5273a845272c5a499e873f55487"><div class="ttname"><a href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">InverterInterface::get_quit_dc_on</a></div><div class="ttdeci">bool get_quit_dc_on()</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00082">InverterInterface.h:82</a></div></div>
@@ -839,25 +892,25 @@ template&lt;typename U &gt; </div>
         <tr>
           <td class="memname">void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>fr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaces_2include_2TelemetryInterface_8h.html#af50ea82d768e984c7acd0abbbae66621">InvInt_t</a> *&#160;</td>
           <td class="paramname"><em>rr</em>&#160;</td>
         </tr>
         <tr>
@@ -868,57 +921,19 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00170">170</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  175</span>{</div>
-<div class="line"><span class="lineno">  176</span>    <span class="comment">// TODO: change this to use actual torque values from inverter</span></div>
-<div class="line"><span class="lineno">  177</span>    <span class="comment">// Torque current just temporary for gearbox seal validation</span></div>
-<div class="line"><span class="lineno">  178</span>    DRIVETRAIN_TORQUE_TELEM_t torque;</div>
-<div class="line"><span class="lineno">  179</span>    torque.fl_motor_torque_ro = HYTECH_fl_motor_torque_ro_toS(fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
-<div class="line"><span class="lineno">  180</span>    torque.fr_motor_torque_ro = HYTECH_fr_motor_torque_ro_toS(fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
-<div class="line"><span class="lineno">  181</span>    torque.rl_motor_torque_ro = HYTECH_rl_motor_torque_ro_toS(rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
-<div class="line"><span class="lineno">  182</span>    torque.rr_motor_torque_ro = HYTECH_rr_motor_torque_ro_toS(rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
-<div class="line"><span class="lineno">  183</span> </div>
-<div class="line"><span class="lineno">  184</span>    enqueue_new_CAN&lt;DRIVETRAIN_TORQUE_TELEM_t&gt;(&amp;torque, &amp;Pack_DRIVETRAIN_TORQUE_TELEM_hytech);</div>
-<div class="line"><span class="lineno">  185</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00159">159</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>{</div>
+<div class="line"><span class="lineno">  165</span>    <span class="comment">// TODO: change this to use actual torque values from inverter</span></div>
+<div class="line"><span class="lineno">  166</span>    <span class="comment">// Torque current just temporary for gearbox seal validation</span></div>
+<div class="line"><span class="lineno">  167</span>    DRIVETRAIN_TORQUE_TELEM_t torque;</div>
+<div class="line"><span class="lineno">  168</span>    torque.fl_motor_torque_ro = HYTECH_fl_motor_torque_ro_toS(fl-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
+<div class="line"><span class="lineno">  169</span>    torque.fr_motor_torque_ro = HYTECH_fr_motor_torque_ro_toS(fr-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
+<div class="line"><span class="lineno">  170</span>    torque.rl_motor_torque_ro = HYTECH_rl_motor_torque_ro_toS(rl-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
+<div class="line"><span class="lineno">  171</span>    torque.rr_motor_torque_ro = HYTECH_rr_motor_torque_ro_toS(rr-&gt;<a class="code hl_function" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">get_torque_current</a>());</div>
+<div class="line"><span class="lineno">  172</span> </div>
+<div class="line"><span class="lineno">  173</span>    enqueue_new_CAN&lt;DRIVETRAIN_TORQUE_TELEM_t&gt;(&amp;torque, &amp;Pack_DRIVETRAIN_TORQUE_TELEM_hytech);</div>
+<div class="line"><span class="lineno">  174</span>}</div>
 <div class="ttc" id="aclassInverterInterface_html_a6736f67dfb896d479fdc5ca91914bbf3"><div class="ttname"><a href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">InverterInterface::get_torque_current</a></div><div class="ttdeci">float get_torque_current()</div><div class="ttdef"><b>Definition:</b> <a href="lib_2interfaces_2include_2InverterInterface_8h_source.html#l00122">InverterInterface.h:122</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="af240fc1cf6e30da97f340308a9f43734" name="af240fc1cf6e30da97f340308a9f43734"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af240fc1cf6e30da97f340308a9f43734">&#9670;&#160;</a></span>update_front_thermistors_CAN_msg()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void TelemetryInterface::update_front_thermistors_CAN_msg </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;&#160;</td>
-          <td class="paramname"><em>therm_fl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;&#160;</td>
-          <td class="paramname"><em>therm_fr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00060">60</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                                                              {</div>
-<div class="line"><span class="lineno">   62</span>    </div>
-<div class="line"><span class="lineno">   63</span>    FRONT_THERMISTORS_t front_thermistors_;</div>
-<div class="line"><span class="lineno">   64</span>    front_thermistors_.thermistor_motor_fl = therm_fl.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
-<div class="line"><span class="lineno">   65</span>    front_thermistors_.thermistor_motor_fr = therm_fr.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
-<div class="line"><span class="lineno">   66</span> </div>
-<div class="line"><span class="lineno">   67</span>    enqueue_new_CAN&lt;FRONT_THERMISTORS_t&gt;(&amp;front_thermistors_, &amp;Pack_FRONT_THERMISTORS_hytech);</div>
-<div class="line"><span class="lineno">   68</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1047,14 +1062,143 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00188">188</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  189</span>{</div>
-<div class="line"><span class="lineno">  190</span>    PENTHOUSE_ACCUM_MSG_t message;</div>
-<div class="line"><span class="lineno">  191</span>    message.hall_curr_ref = reference.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
-<div class="line"><span class="lineno">  192</span>    message.hall_curr_signal = current.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
-<div class="line"><span class="lineno">  193</span> </div>
-<div class="line"><span class="lineno">  194</span>    enqueue_new_CAN&lt;PENTHOUSE_ACCUM_MSG_t&gt;(&amp;message, &amp;Pack_PENTHOUSE_ACCUM_MSG_hytech);</div>
-<div class="line"><span class="lineno">  195</span>}</div>
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00177">177</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  178</span>{</div>
+<div class="line"><span class="lineno">  179</span>    PENTHOUSE_ACCUM_MSG_t message;</div>
+<div class="line"><span class="lineno">  180</span>    message.hall_curr_ref = reference.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
+<div class="line"><span class="lineno">  181</span>    message.hall_curr_signal = current.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
+<div class="line"><span class="lineno">  182</span> </div>
+<div class="line"><span class="lineno">  183</span>    enqueue_new_CAN&lt;PENTHOUSE_ACCUM_MSG_t&gt;(&amp;message, &amp;Pack_PENTHOUSE_ACCUM_MSG_hytech);</div>
+<div class="line"><span class="lineno">  184</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2c66564189f90630de7aa6d085380e8e" name="a2c66564189f90630de7aa6d085380e8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c66564189f90630de7aa6d085380e8e">&#9670;&#160;</a></span>update_steering_status_CAN_msg() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TelemetryInterface::update_steering_status_CAN_msg </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>steering_system_angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>filtered_angle_encoder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>filtered_angle_analog</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>steering_system_status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>steering_encoder_status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>steering_analog_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00203">203</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  209</span>{</div>
+<div class="line"><span class="lineno">  210</span>    STEERING_SYSTEM_REPORT_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  211</span> </div>
+<div class="line"><span class="lineno">  212</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_system_angle_ro = HYTECH_steering_system_angle_ro_toS(steering_system_angle);</div>
+<div class="line"><span class="lineno">  213</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_encoder_angle_ro = HYTECH_steering_encoder_angle_ro_toS(filtered_angle_encoder);</div>
+<div class="line"><span class="lineno">  214</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_analog_angle_ro = HYTECH_steering_analog_angle_ro_toS(filtered_angle_analog);</div>
+<div class="line"><span class="lineno">  215</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_system_status = steering_system_status;</div>
+<div class="line"><span class="lineno">  216</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_encoder_status = steering_encoder_status;</div>
+<div class="line"><span class="lineno">  217</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_analog_status = steering_analog_status;</div>
+<div class="line"><span class="lineno">  218</span> </div>
+<div class="line"><span class="lineno">  219</span>    enqueue_new_CAN&lt;STEERING_SYSTEM_REPORT_t&gt;(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, &amp;Pack_STEERING_SYSTEM_REPORT_hytech);</div>
+<div class="line"><span class="lineno">  220</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2c66564189f90630de7aa6d085380e8e" name="a2c66564189f90630de7aa6d085380e8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c66564189f90630de7aa6d085380e8e">&#9670;&#160;</a></span>update_steering_status_CAN_msg() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TelemetryInterface::update_steering_status_CAN_msg </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>steering_system_angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>filtered_angle_encoder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>filtered_angle_analog</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>steering_system_status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>steering_encoder_status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>steering_analog_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html#l00020">20</a> of file <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>      {};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1101,11 +1245,84 @@ template&lt;typename U &gt; </div>
 <div class="line"><span class="lineno">   36</span>    MCU_SUSPENSION_t sus;</div>
 <div class="line"><span class="lineno">   37</span>    sus.load_cell_fl = lc_fl.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
 <div class="line"><span class="lineno">   38</span>    sus.load_cell_fr = lc_fr.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
-<div class="line"><span class="lineno">   39</span>    sus.potentiometer_fl = pots_fr.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
-<div class="line"><span class="lineno">   40</span>    sus.potentiometer_fr = pots_fl.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
+<div class="line"><span class="lineno">   39</span>    sus.potentiometer_fl = pots_fl.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
+<div class="line"><span class="lineno">   40</span>    sus.potentiometer_fr = pots_fr.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>;</div>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>    enqueue_new_CAN&lt;MCU_SUSPENSION_t&gt;(&amp;sus, &amp;Pack_MCU_SUSPENSION_hytech);</div>
 <div class="line"><span class="lineno">   43</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af9816592da9b6152bd1373f31aa9a8c7" name="af9816592da9b6152bd1373f31aa9a8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9816592da9b6152bd1373f31aa9a8c7">&#9670;&#160;</a></span>update_TCMux_status_CAN_msg() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TelemetryInterface::update_TCMux_status_CAN_msg </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structTCMuxStatus__s.html">TCMuxStatus_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>tcMuxStatus</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8cpp_source.html#l00186">186</a> of file <a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  187</span>{</div>
+<div class="line"><span class="lineno">  188</span>    TCMUX_STATUS_REPORT_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><span class="lineno">  189</span> </div>
+<div class="line"><span class="lineno">  190</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.speed_above_thresh = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#a2014dc5de501ceba07afa736e5ecb0a1">speedPreventsModeChange</a>;</div>
+<div class="line"><span class="lineno">  191</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.torque_delta_above_thresh = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#aed061a6a63694d7228a8a7fd4636e54c">torqueDeltaPreventsModeChange</a>;</div>
+<div class="line"><span class="lineno">  192</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.tc_not_ready = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#aed4ecde449a943ec6aace5e731de5f9c">controllerNotReadyPreventsModeChange</a>;</div>
+<div class="line"><span class="lineno">  193</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.steering_system_has_err = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#a87054e13d34b1e4222ad8cbf70224f9d">steeringSystemError</a>;</div>
+<div class="line"><span class="lineno">  194</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.mode_intended = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#a5b5bf20d2baf5145d3e7552f8cb90942">modeIntended</a>;</div>
+<div class="line"><span class="lineno">  195</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.mode_actual = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#ae87a905e27e451e587bf48767ba86e7a">modeActual</a>;</div>
+<div class="line"><span class="lineno">  196</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.dash_dial_mode = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#a243d6a5e93906bda3e512337671689c2">dialMode</a>;</div>
+<div class="line"><span class="lineno">  197</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.torque_mode = tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#a9e7cde2813481286c10630a167247d46">torqueMode</a>;</div>
+<div class="line"><span class="lineno">  198</span>    <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>.torque_limit_ro = HYTECH_torque_limit_ro_toS(tcMuxStatus.<a class="code hl_variable" href="structTCMuxStatus__s.html#a7e556162314594c775512e5c414372ab">maxTorque</a>);</div>
+<div class="line"><span class="lineno">  199</span> </div>
+<div class="line"><span class="lineno">  200</span>    enqueue_new_CAN&lt;TCMUX_STATUS_REPORT_t&gt;(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, &amp;Pack_TCMUX_STATUS_REPORT_hytech);</div>
+<div class="line"><span class="lineno">  201</span>}</div>
+<div class="ttc" id="astructTCMuxStatus__s_html_a2014dc5de501ceba07afa736e5ecb0a1"><div class="ttname"><a href="structTCMuxStatus__s.html#a2014dc5de501ceba07afa736e5ecb0a1">TCMuxStatus_s::speedPreventsModeChange</a></div><div class="ttdeci">bool speedPreventsModeChange</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00008">TorqueControllerData.h:8</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_a243d6a5e93906bda3e512337671689c2"><div class="ttname"><a href="structTCMuxStatus__s.html#a243d6a5e93906bda3e512337671689c2">TCMuxStatus_s::dialMode</a></div><div class="ttdeci">uint8_t dialMode</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00015">TorqueControllerData.h:15</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_a5b5bf20d2baf5145d3e7552f8cb90942"><div class="ttname"><a href="structTCMuxStatus__s.html#a5b5bf20d2baf5145d3e7552f8cb90942">TCMuxStatus_s::modeIntended</a></div><div class="ttdeci">uint8_t modeIntended</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00013">TorqueControllerData.h:13</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_a7e556162314594c775512e5c414372ab"><div class="ttname"><a href="structTCMuxStatus__s.html#a7e556162314594c775512e5c414372ab">TCMuxStatus_s::maxTorque</a></div><div class="ttdeci">float maxTorque</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00018">TorqueControllerData.h:18</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_a87054e13d34b1e4222ad8cbf70224f9d"><div class="ttname"><a href="structTCMuxStatus__s.html#a87054e13d34b1e4222ad8cbf70224f9d">TCMuxStatus_s::steeringSystemError</a></div><div class="ttdeci">bool steeringSystemError</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00011">TorqueControllerData.h:11</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_a9e7cde2813481286c10630a167247d46"><div class="ttname"><a href="structTCMuxStatus__s.html#a9e7cde2813481286c10630a167247d46">TCMuxStatus_s::torqueMode</a></div><div class="ttdeci">uint8_t torqueMode</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00017">TorqueControllerData.h:17</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_ae87a905e27e451e587bf48767ba86e7a"><div class="ttname"><a href="structTCMuxStatus__s.html#ae87a905e27e451e587bf48767ba86e7a">TCMuxStatus_s::modeActual</a></div><div class="ttdeci">uint8_t modeActual</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00014">TorqueControllerData.h:14</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_aed061a6a63694d7228a8a7fd4636e54c"><div class="ttname"><a href="structTCMuxStatus__s.html#aed061a6a63694d7228a8a7fd4636e54c">TCMuxStatus_s::torqueDeltaPreventsModeChange</a></div><div class="ttdeci">bool torqueDeltaPreventsModeChange</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00009">TorqueControllerData.h:9</a></div></div>
+<div class="ttc" id="astructTCMuxStatus__s_html_aed4ecde449a943ec6aace5e731de5f9c"><div class="ttname"><a href="structTCMuxStatus__s.html#aed4ecde449a943ec6aace5e731de5f9c">TCMuxStatus_s::controllerNotReadyPreventsModeChange</a></div><div class="ttdeci">bool controllerNotReadyPreventsModeChange</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerData_8h_source.html#l00010">TorqueControllerData.h:10</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af9816592da9b6152bd1373f31aa9a8c7" name="af9816592da9b6152bd1373f31aa9a8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9816592da9b6152bd1373f31aa9a8c7">&#9670;&#160;</a></span>update_TCMux_status_CAN_msg() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TelemetryInterface::update_TCMux_status_CAN_msg </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structTCMuxStatus__s.html">TCMuxStatus_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>tcMuxStatus</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html#l00016">16</a> of file <a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   18</span>      {};</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1130,7 +1347,7 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8h_source.html#l00044">44</a> of file <a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html#l00044">44</a> of file <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
 
 </div>
 </div>
@@ -1154,7 +1371,7 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8h_source.html#l00040">40</a> of file <a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html#l00040">40</a> of file <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
 
 </div>
 </div>
@@ -1178,12 +1395,13 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TelemetryInterface_8h_source.html#l00042">42</a> of file <a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html#l00042">42</a> of file <a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>lib/interfaces/include/<a class="el" href="TelemetryInterface_8h_source.html">TelemetryInterface.h</a></li>
+<li>lib/interfaces/include/<a class="el" href="interfaces_2include_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a></li>
+<li>lib/mock_interfaces/<a class="el" href="mock__interfaces_2TelemetryInterface_8h_source.html">TelemetryInterface.h</a></li>
 <li>lib/interfaces/src/<a class="el" href="TelemetryInterface_8cpp_source.html">TelemetryInterface.cpp</a></li>
 </ul>
 </div><!-- contents -->

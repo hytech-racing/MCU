@@ -7,7 +7,7 @@ var searchData=
   ['bms_5fok_5fis_5fhigh_4',['bms_ok_is_high',['../classMCUInterface.html#afb2dff221a9f0c91319af9d9189077e2',1,'MCUInterface']]],
   ['bms_5fstatus_5f_5',['bms_status_',['../classAMSInterface.html#a995272c0e5c4929fc35d0301ea3722b6',1,'AMSInterface']]],
   ['bms_5ftemperatures_5f_6',['bms_temperatures_',['../classAMSInterface.html#a2d7c6a0bed8da45bbff2e72a4def57ad',1,'AMSInterface']]],
-  ['bms_5fvoltages_5f_7',['bms_voltages_',['../classAMSInterface.html#ae8f0783559866a3dc68145f3ce855bc4',1,'AMSInterface']]],
+  ['bms_5fvoltages_5f_7',['bms_voltages_',['../classAMSInterface.html#a1d1f904a53c5e8129dfd0b4788303332',1,'AMSInterface']]],
   ['bots_5fled_8',['BOTS_LED',['../interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940ad168bed09ed59d17b2fa8750b280bd7f',1,'BOTS_LED():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940ad168bed09ed59d17b2fa8750b280bd7f',1,'BOTS_LED():&#160;DashboardInterface.h'],['../interfaces_2include_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940ad168bed09ed59d17b2fa8750b280bd7f',1,'BOTS_LED():&#160;DashboardInterface.h'],['../mock__interfaces_2DashboardInterface_8h.html#affd48e86f9b88870e9e62b0f7a58d940ad168bed09ed59d17b2fa8750b280bd7f',1,'BOTS_LED():&#160;DashboardInterface.h']]],
   ['brake1_5fchannel_9',['brake1_channel',['../structTelemetryInterfaceReadChannels.html#ad66c7ad29bd48c3b0bfcd92503385399',1,'TelemetryInterfaceReadChannels']]],
   ['brake1_5fpedal_5fmax_10',['BRAKE1_PEDAL_MAX',['../MCU__rev15__defs_8h.html#a3c7c2b4552c63854e5816570bee0dc32',1,'MCU_rev15_defs.h']]],

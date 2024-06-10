@@ -83,11 +83,11 @@ $(function() {
 <div class="textblock"><code>#include &lt;<a class="el" href="Utility_8h_source.html">Utility.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>&quot;</code><br />
 <code>#include &quot;DashboardInterface.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="PhysicalParameters_8h_source.html">PhysicalParameters.h</a>&quot;</code><br />
 <code>#include &quot;VectornavInterface.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>&quot;</code><br />
 <code>#include &quot;LoadCellInterface.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="accel__lookup_8h_source.html">accel_lookup.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="TorqueControllersData_8h_source.html">TorqueControllersData.h</a>&quot;</code><br />
@@ -154,7 +154,7 @@ Variables</h2></td></tr>
 <tr class="separator:a7ec80f409ae2327c088489fb3b0830b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a029c8f98807f0d9b74fc89ffd5a1099d"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a> = 10.0</td></tr>
 <tr class="separator:a029c8f98807f0d9b74fc89ffd5a1099d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6b5e150ee66661c885afe39c5471905"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllers_8h.html#ab6b5e150ee66661c885afe39c5471905">DEFAULT_LAUNCH_RATE</a> = 11.76</td></tr>
+<tr class="memitem:ab6b5e150ee66661c885afe39c5471905"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllers_8h.html#ab6b5e150ee66661c885afe39c5471905">DEFAULT_LAUNCH_RATE</a> = 1.4 * 9.8</td></tr>
 <tr class="separator:ab6b5e150ee66661c885afe39c5471905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06b87987a80cf43e298c6621606b008c"><td class="memItemLeft" align="right" valign="top">const int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllers_8h.html#a06b87987a80cf43e298c6621606b008c">DEFAULT_LAUNCH_SPEED_TARGET</a> = 1500</td></tr>
 <tr class="separator:a06b87987a80cf43e298c6621606b008c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,13 +202,13 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995" name="a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995"></a>LAUNCHING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00083">83</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>{</div>
-<div class="line"><span class="lineno">   85</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9">NO_LAUNCH_MODE</a>,</div>
-<div class="line"><span class="lineno">   86</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LAUNCH_NOT_READY</a>,</div>
-<div class="line"><span class="lineno">   87</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LAUNCH_READY</a>,</div>
-<div class="line"><span class="lineno">   88</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LAUNCHING</a></div>
-<div class="line"><span class="lineno">   89</span>};</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00082">82</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>{</div>
+<div class="line"><span class="lineno">   84</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9">NO_LAUNCH_MODE</a>,</div>
+<div class="line"><span class="lineno">   85</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LAUNCH_NOT_READY</a>,</div>
+<div class="line"><span class="lineno">   86</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LAUNCH_READY</a>,</div>
+<div class="line"><span class="lineno">   87</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LAUNCHING</a></div>
+<div class="line"><span class="lineno">   88</span>};</div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a></div><div class="ttdeci">@ LAUNCH_READY</div></div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a></div><div class="ttdeci">@ LAUNCHING</div></div>
 <div class="ttc" id="aTorqueControllers_8h_html_a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9"><div class="ttname"><a href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9">LaunchStates_e::NO_LAUNCH_MODE</a></div><div class="ttdeci">@ NO_LAUNCH_MODE</div></div>
@@ -238,25 +238,25 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98" name="ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98"></a>TC_NUM_CONTROLLERS&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00071">71</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   72</span>{</div>
-<div class="line"><span class="lineno">   73</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed">TC_NO_CONTROLLER</a> = 0,</div>
-<div class="line"><span class="lineno">   74</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6">TC_SAFE_MODE</a> = 1,</div>
-<div class="line"><span class="lineno">   75</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034">TC_LOAD_CELL_VECTORING</a> = 2,</div>
-<div class="line"><span class="lineno">   76</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3">TC_SIMPLE_LAUNCH</a> = 3,</div>
-<div class="line"><span class="lineno">   77</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0">TC_SLIP_LAUNCH</a> = 4,</div>
-<div class="line"><span class="lineno">   78</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1">TC_LOOKUP_LAUNCH</a> = 5,</div>
-<div class="line"><span class="lineno">   79</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51">TC_CASE_SYSTEM</a> = 6,</div>
-<div class="line"><span class="lineno">   80</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98">TC_NUM_CONTROLLERS</a> = 7,</div>
-<div class="line"><span class="lineno">   81</span>};</div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034">TC_LOAD_CELL_VECTORING</a></div><div class="ttdeci">@ TC_LOAD_CELL_VECTORING</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00075">TorqueControllers.h:75</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0">TC_SLIP_LAUNCH</a></div><div class="ttdeci">@ TC_SLIP_LAUNCH</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00077">TorqueControllers.h:77</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98">TC_NUM_CONTROLLERS</a></div><div class="ttdeci">@ TC_NUM_CONTROLLERS</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00080">TorqueControllers.h:80</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51">TC_CASE_SYSTEM</a></div><div class="ttdeci">@ TC_CASE_SYSTEM</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00079">TorqueControllers.h:79</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3">TC_SIMPLE_LAUNCH</a></div><div class="ttdeci">@ TC_SIMPLE_LAUNCH</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00076">TorqueControllers.h:76</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed">TC_NO_CONTROLLER</a></div><div class="ttdeci">@ TC_NO_CONTROLLER</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00073">TorqueControllers.h:73</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6">TC_SAFE_MODE</a></div><div class="ttdeci">@ TC_SAFE_MODE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00074">TorqueControllers.h:74</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1">TC_LOOKUP_LAUNCH</a></div><div class="ttdeci">@ TC_LOOKUP_LAUNCH</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00078">TorqueControllers.h:78</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00070">70</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>{</div>
+<div class="line"><span class="lineno">   72</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed">TC_NO_CONTROLLER</a> = 0,</div>
+<div class="line"><span class="lineno">   73</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6">TC_SAFE_MODE</a> = 1,</div>
+<div class="line"><span class="lineno">   74</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034">TC_LOAD_CELL_VECTORING</a> = 2,</div>
+<div class="line"><span class="lineno">   75</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3">TC_SIMPLE_LAUNCH</a> = 3,</div>
+<div class="line"><span class="lineno">   76</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0">TC_SLIP_LAUNCH</a> = 4,</div>
+<div class="line"><span class="lineno">   77</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1">TC_LOOKUP_LAUNCH</a> = 5,</div>
+<div class="line"><span class="lineno">   78</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51">TC_CASE_SYSTEM</a> = 6,</div>
+<div class="line"><span class="lineno">   79</span>    <a class="code hl_enumvalue" href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98">TC_NUM_CONTROLLERS</a> = 7,</div>
+<div class="line"><span class="lineno">   80</span>};</div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a03aaa7e551982980e43410d83a1cb034">TC_LOAD_CELL_VECTORING</a></div><div class="ttdeci">@ TC_LOAD_CELL_VECTORING</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00074">TorqueControllers.h:74</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a2873e33f47a9c3c4cdbb0e180710e2f0">TC_SLIP_LAUNCH</a></div><div class="ttdeci">@ TC_SLIP_LAUNCH</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00076">TorqueControllers.h:76</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a5fc5640333db129ca0509037dcf88d98">TC_NUM_CONTROLLERS</a></div><div class="ttdeci">@ TC_NUM_CONTROLLERS</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00079">TorqueControllers.h:79</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a68fcb47b90db7bf89b882eeeaa90bc51">TC_CASE_SYSTEM</a></div><div class="ttdeci">@ TC_CASE_SYSTEM</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00078">TorqueControllers.h:78</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a71887e0d63b7c1628d2a3577a2c0e1a3">TC_SIMPLE_LAUNCH</a></div><div class="ttdeci">@ TC_SIMPLE_LAUNCH</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00075">TorqueControllers.h:75</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a7e0d05d9b319d521b9c78a56ed9df4ed">TC_NO_CONTROLLER</a></div><div class="ttdeci">@ TC_NO_CONTROLLER</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00072">TorqueControllers.h:72</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27a81c5d8dd1c32b68769b7c278282a9ee6">TC_SAFE_MODE</a></div><div class="ttdeci">@ TC_SAFE_MODE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00073">TorqueControllers.h:73</a></div></div>
+<div class="ttc" id="aTorqueControllers_8h_html_ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1"><div class="ttname"><a href="TorqueControllers_8h.html#ac15f4e92be13790281124384b1b74b27ad9dc65af2c0cb0f489a27293e58dbdc1">TC_LOOKUP_LAUNCH</a></div><div class="ttdeci">@ TC_LOOKUP_LAUNCH</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00077">TorqueControllers.h:77</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -273,7 +273,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00026">26</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00025">25</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -289,7 +289,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00033">33</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00032">32</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -305,7 +305,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00042">42</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00041">41</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -316,12 +316,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const float DEFAULT_LAUNCH_RATE = 11.76</td>
+          <td class="memname">const float DEFAULT_LAUNCH_RATE = 1.4 * 9.8</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00038">38</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00037">37</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -337,7 +337,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00039">39</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00038">38</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -353,7 +353,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00041">41</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00040">40</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -369,7 +369,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00047">47</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00046">46</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00044">44</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00043">43</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -401,7 +401,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00045">45</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00044">44</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -417,7 +417,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00046">46</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00045">45</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00048">48</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00047">47</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -449,7 +449,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00022">22</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00021">21</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +465,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00034">34</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00033">33</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
@@ -484,7 +484,7 @@ Variables</h2></td></tr>
 <div class="line">    .speeds_rpm = {0.0, 0.0, 0.0, 0.0},</div>
 <div class="line">    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00052">52</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00051">51</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
 
 </div>
 </div>
