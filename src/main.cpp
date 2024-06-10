@@ -556,7 +556,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         0,
         fsm.get_state(),
         dashboard.startButtonPressed(),
-        3);
+        vn_interface.get_vn_struct().vn_status);
 
     // case_system.update_config_from_param_interface(param_interface);
 

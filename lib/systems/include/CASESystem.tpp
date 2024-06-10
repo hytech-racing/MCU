@@ -26,7 +26,22 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     // in.YawRaterads = 2.5;
 
     // REAL
-    in.Vx_B = vn_data.velocity_x;
+    // if ( (vn_status < 2) || (vn_data.velocity_x < 0) )
+    // {
+    //     if 
+    //     in.Vx_B = 0;
+    // } else {
+    //     in.Vx_B = vn_data.velocity_x;
+    // }
+
+    if (vn_data.velocity_x < 0)
+    {
+        in.Vx_B = 0;
+    } else {
+        in.Vx_B = vn_data.velocity_x;
+    }
+    
+    
 
     in.TCSVelThreshold = config_.tcsVelThreshold;
 
@@ -168,14 +183,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.useNL_TCS_SlipSchedule = config_.useNL_TCS_SlipSchedule;
 
-    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
-    {
-        vn_active_start_time_ = tick.millis;
-    }
-    else if (vn_status < 2)
-    {
-        vn_active_start_time_ = 0;
-    }
+    
 
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
