@@ -11,6 +11,7 @@
 // /* Interfaces */
 
 #include "HytechCANInterface.h"
+#include "ThermistorInterface.h"
 #include "Teensy_ADC.h"
 #include "MCP_ADC.h"
 #include "ORBIS_BR10.h"
@@ -115,10 +116,11 @@ ParameterInterface param_interface;
 ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
-AMSInterface ams_interface(8);
-WatchdogInterface wd_interface(32);
+AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
+WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
+ThermistorInterface front_thermistors_interface(&CAN3_txBuffer);
 SABInterface sab_interface(
     LOADCELL_RL_SCALE,  // RL Scale
     LOADCELL_RL_OFFSET, // RL Offset (Migos)
@@ -142,7 +144,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1, STEERING_IIR_ALPHA);
+SteeringSystem steering_system(&steering1, &telem_interface, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -150,7 +152,7 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(1.0, 0.4);
+TorqueControllerMux torque_controller_mux(SIMPLE_TC_REAR_TORQUE_SCALE, SIMPLE_TC_REGEN_TORQUE_SCALE, &telem_interface);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
@@ -159,9 +161,9 @@ CASEConfiguration case_config = {
     .yaw_pid_i = 0.25,
     .yaw_pid_d = 0.0,
     .tcs_pid_p_lowerBound_front = 55.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
-    .tcs_pid_p_upperBound_front = 45.0,
+    .tcs_pid_p_upperBound_front = 42.0,
     .tcs_pid_p_lowerBound_rear = 32.0,
-    .tcs_pid_p_upperBound_rear = 45.0,
+    .tcs_pid_p_upperBound_rear = 42.0,
     .tcs_pid_i = 0.0,
     .tcs_pid_d = 0.0,
     .useLaunch = false,
@@ -204,15 +206,15 @@ CASEConfiguration case_config = {
     .TCSGenLeftRightDiffUpperBound = 20, // N-m
     .TCSWheelSteerLowerBound = 2,        // Deg
     .TCSWheelSteerUpperBound = 25,       // Deg
-    .useRPM_TCS_GainSchedule = false,    // If both are false, then P values defaults to lower bound per axle
-    .useNL_TCS_GainSchedule = true,
+    .useRPM_TCS_GainSchedule = true,    // If both are false, then P values defaults to lower bound per axle
+    .useNL_TCS_GainSchedule = false,
     .TCS_NL_startBoundPerc_FrontAxle = 0.5,
     .TCS_NL_endBoundPerc_FrontAxle = 0.4,
     .TCS_NL_startBoundPerc_RearAxle = 0.5,
     .TCS_NL_endBoundPerc_RearAxle = 0.6,
     .useNL_TCS_SlipSchedule = true,
     .launchSL_startBound_Front = 0.25,
-    .launchSL_endBound_Front = 0.15,
+    .launchSL_endBound_Front = 0.25,
     .launchSL_startBound_Rear = 0.3,
     .launchSL_endBound_Rear = 0.4,
     .TCS_SL_startBound_Front = 0.25,
@@ -291,7 +293,7 @@ void setup()
     a1.setChannelOffset(MCU15_STEERING_CHANNEL, -1 * SECONDARY_STEERING_SENSE_CENTER);
     a1.setChannelScale(MCU15_STEERING_CHANNEL, STEERING_RANGE_DEGREES / ((float)SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND - (float)SECONDARY_STEERING_SENSE_LEFTMOST_BOUND));
     a1.setChannelClamp(MCU15_STEERING_CHANNEL, -STEERING_RANGE_DEGREES / 0.5 * 1.15, STEERING_RANGE_DEGREES / 0.5 * 1.15); // 15% tolerance on each end of the steering sensor
-
+    a1.setChannelScale(MCU15_GLV_SENSE_CHANNEL, GLV_SENSE_SCALE);
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
 
@@ -309,7 +311,7 @@ void setup()
 
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -381,6 +383,27 @@ void loop()
         Serial.print("Sensor divergence: ");
         Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
         Serial.println();
+        Serial.println("Pedal outputs:");
+        Serial.print("Accel 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+        Serial.print("Accel 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+        Serial.print("Accel percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
+        Serial.print("Brake 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+        Serial.print("Brake 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+        Serial.print("Brake percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
+        Serial.println();
+        Serial.print("Derating factor: ");
+        Serial.println(ams_interface.get_acc_derate_factor());
+        Serial.print("Filtered min cell voltage: ");
+        Serial.println(ams_interface.get_filtered_min_cell_voltage());
+        Serial.print("Filtered max cell temp: ");
+        Serial.println(ams_interface.get_filtered_max_cell_temp());
+        Serial.println();
 
         Serial.println();
     }
@@ -429,7 +452,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             drivetrain.drivetrain_error_occured(),
             torque_controller_mux.getTorqueLimit(),
             ams_interface.get_filtered_min_cell_voltage(),
-            telem_interface.get_glv_voltage(a1.get()),
+            a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
             static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
             dashboard.getDialMode());
 
@@ -446,12 +469,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             dashboard.launchControlButtonPressed());
 
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-
+        front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL], mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
         telem_interface.tick(
             a1.get(),
             a2.get(),
             a3.get(),
-            mcu_adc.get(),
             steering1.convert(),
             &inv.fl,
             &inv.fr,
@@ -472,6 +494,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz
@@ -505,7 +528,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
+        a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+        a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
     // tick steering system
     steering_system.tick(
@@ -532,7 +556,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         0,
         fsm.get_state(),
         dashboard.startButtonPressed(),
-        3);
+        vn_interface.get_vn_struct().vn_status);
 
     // case_system.update_config_from_param_interface(param_interface);
 
@@ -543,6 +567,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         steering_system.getSteeringSystemData(),
         load_cell_interface.getLoadCellForces(),
         dashboard.getDialMode(),
+        ams_interface.get_acc_derate_factor(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);

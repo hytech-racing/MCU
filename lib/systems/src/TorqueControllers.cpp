@@ -127,18 +127,24 @@ void TorqueControllerLoadCellVectoring::tick(
             else
             {
                 // Negative torque request
-                // No load cell vectoring on regen
-                torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+                
+                torquePool = MAX_REGEN_TORQUE * accelRequest * -4.0;
 
                 writeout_.command.speeds_rpm[FL] = 0.0;
                 writeout_.command.speeds_rpm[FR] = 0.0;
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
-                writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
-                writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
-                writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.torqueSetpoints[FL] = torquePool * frontRegenTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce;
+                writeout_.command.torqueSetpoints[FR] = torquePool * frontRegenTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce;
+                writeout_.command.torqueSetpoints[RL] = torquePool * rearRegenTorqueScale_ * loadCellForcesFiltered_[2] / sumNormalForce;
+                writeout_.command.torqueSetpoints[RR] = torquePool * rearRegenTorqueScale_ * loadCellForcesFiltered_[3] / sumNormalForce;
+
+                // No load cell vectoring on regen
+                // writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
+                // writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
+                // writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
+                // writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
             }
         }
         else

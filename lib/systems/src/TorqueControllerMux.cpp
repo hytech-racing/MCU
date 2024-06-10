@@ -9,6 +9,7 @@ void TorqueControllerMux::tick(
     const SteeringSystemData_s &steeringData,
     const LoadCellInterfaceOutput_s &loadCellData,
     DialMode_e dashboardDialMode,
+    float accDerateFactor,
     bool dashboardTorqueModeButtonPressed,
     const vector_nav &vn_data,
     const DrivetrainCommand_s &CASECommand)
@@ -27,8 +28,7 @@ void TorqueControllerMux::tick(
     if (tick.triggers.trigger50)
     {
         // detect high-to-low transition and lock out button presses for DEBOUNCE_MILLIS ms
-        if (
-            torqueLimitButtonPressed_ == true && dashboardTorqueModeButtonPressed == false && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS)
+        if (torqueLimitButtonPressed_ == true && dashboardTorqueModeButtonPressed == false && tick.millis - torqueLimitButtonPressedTime_ > DEBOUNCE_MILLIS)
         {
             // WOW C++ is ass
             torqueLimit_ = static_cast<TorqueLimit_e>((static_cast<int>(torqueLimit_) + 1) % (static_cast<int>(TorqueLimit_e::TCMUX_NUM_TORQUE_LIMITS)));
@@ -74,8 +74,13 @@ void TorqueControllerMux::tick(
             if (!(speedPreventsModeChange || torqueDeltaPreventsModeChange || controllerNotReadyPreventsModeChange))
             {
                 muxMode_ = dialModeMap_[dashboardDialMode];
-                cur_dial_mode_ = dashboardDialMode;
+                currDialMode_ = dashboardDialMode;
             }
+
+            // Update TCMux status
+            tcMuxStatus_.speedPreventsModeChange = speedPreventsModeChange;
+            tcMuxStatus_.torqueDeltaPreventsModeChange = torqueDeltaPreventsModeChange;
+            tcMuxStatus_.controllerNotReadyPreventsModeChange = controllerNotReadyPreventsModeChange;
         }
 
         // Check if the current controller is ready. If it has faulted, revert to safe mode
@@ -86,17 +91,49 @@ void TorqueControllerMux::tick(
             muxMode_ = TorqueController_e::TC_SAFE_MODE;
         }
 
+        // Update TCMux status
+        tcMuxStatus_.steeringSystemError = steeringData.status == SteeringSystemStatus_e::STEERING_SYSTEM_ERROR;
+        tcMuxStatus_.modeIntended = static_cast<uint8_t>(dialModeMap_[dashboardDialMode]);
+        tcMuxStatus_.modeActual = static_cast<uint8_t>(getDriveMode());
+        tcMuxStatus_.dialMode = static_cast<uint8_t>(getDialMode());
+
         drivetrainCommand_ = controllerOutputs_[static_cast<int>(muxMode_)].command;
 
+        // Update TCMux status
+        tcMuxStatus_.torqueMode = static_cast<uint8_t>(getTorqueLimit());
+        tcMuxStatus_.maxTorque = getMaxTorque();
+
         // Apply setpoints value limits
-        // Safety checks for CASE: CASE handles regen, torque, and power limit internally
-        applyRegenLimit(&drivetrainCommand_, &drivetrainData);
-        // Apply torque limit before power limit to not power limit
-        applyTorqueLimit(&drivetrainCommand_);
-        applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        // Derating for endurance
+        
+        
+        if (muxMode_ != TC_CASE_SYSTEM)
+        {
+            // Safety checks for CASE: CASE handles regen, torque, and power limit internally
+            applyRegenLimit(&drivetrainCommand_, &drivetrainData);
+            // Apply torque limit before power limit to not power limit
+            if ((muxMode_ != TC_SIMPLE_LAUNCH) && (muxMode_ != TC_SLIP_LAUNCH) && (muxMode_ != TC_LOOKUP_LAUNCH))
+            {
+                applyTorqueLimit(&drivetrainCommand_);
+            }            
+
+            applyPowerLimit(&drivetrainCommand_, &drivetrainData);
+        } else {
+            applyDerate(&drivetrainCommand_, accDerateFactor);
+        }
+        
         // Uniformly apply speed limit to all controller modes
         applyPosSpeedLimit(&drivetrainCommand_);
+
+        
     }
+
+    // Update controller status report
+    if (tick.triggers.trigger50)
+    {        
+        reportTCMuxStatus();
+    }
+    
 }
 
 /*
@@ -139,6 +176,24 @@ void TorqueControllerMux::applyRegenLimit(DrivetrainCommand_s *command, const Dr
             command->torqueSetpoints[i] *= torqueScaleDown;
         }
     }
+}
+
+/*
+    Apply derating factor
+    - Endurance
+*/
+void TorqueControllerMux::applyDerate(DrivetrainCommand_s *command, float accDerateFactor)
+{
+    if (command->speeds_rpm[0] != 0 &&
+        command->speeds_rpm[1] != 0 &&
+        command->speeds_rpm[2] != 0 &&
+        command->speeds_rpm[2] != 0) {
+        for (int i = 0; i < NUM_MOTORS; i++)
+            {
+                command->torqueSetpoints[i] *= accDerateFactor;
+            }
+        }
+
 }
 
 /*
@@ -224,6 +279,11 @@ void TorqueControllerMux::applyTorqueLimit(DrivetrainCommand_s *command)
             command->torqueSetpoints[i] /= scale;
         }
     }
+
+    for (int i = 0; i < NUM_MOTORS; i++)
+    {
+        command->torqueSetpoints[i] = std::min(command->torqueSetpoints[i], max_torque);
+    }
 }
 
 /**
@@ -235,4 +295,21 @@ void TorqueControllerMux::applyPosSpeedLimit(DrivetrainCommand_s *command)
     {
         command->speeds_rpm[i] = std::max(0.0f, command->speeds_rpm[i]);
     }
+}
+
+/**
+ * Report TCMux status via CAN
+ * - speedPreventsModeChange
+ * - torqueDeltaPreventsModeChange
+ * - controllerNotReadyPreventsModeChange
+ * - steeringSystemError
+ * - modeIntended
+ * - modeActual
+ * - dialMode
+ * - torqueMode
+ * - maxTorque
+*/
+void TorqueControllerMux::reportTCMuxStatus()
+{
+    telemHandle_->update_TCMux_status_CAN_msg(tcMuxStatus_);
 }

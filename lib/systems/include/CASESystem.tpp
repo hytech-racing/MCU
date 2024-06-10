@@ -26,7 +26,24 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     // in.YawRaterads = 2.5;
 
     // REAL
-    in.Vx_B = vn_data.velocity_x;
+    // if ( (vn_status < 2) || (vn_data.velocity_x < 0) )
+    // {
+    //     if 
+    //     in.Vx_B = 0;
+    // } else {
+    //     in.Vx_B = vn_data.velocity_x;
+    // }
+
+    if (vn_data.velocity_x < 0)
+    {
+        in.Vx_B = 0;
+    } else {
+        in.Vx_B = vn_data.velocity_x;
+    }
+    
+    
+
+    in.TCSVelThreshold = config_.tcsVelThreshold;
 
     // FAKE
     // in.Vx_B = 5;
@@ -61,6 +78,8 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.usePowerLimit = config_.usePowerLimit;
     in.usePIDPowerLimit = config_.usePIDPowerLimit;
     in.useLaunch = config_.useLaunch;
+
+    in.TCSVelThreshold = config_.tcsVelThreshold;
 
     in.Vy_B = vn_data.velocity_y;
 
@@ -164,14 +183,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.useNL_TCS_SlipSchedule = config_.useNL_TCS_SlipSchedule;
 
-    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
-    {
-        vn_active_start_time_ = tick.millis;
-    }
-    else if (vn_status < 2)
-    {
-        vn_active_start_time_ = 0;
-    }
+    
 
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
@@ -190,11 +202,12 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     if ((tick.millis - last_controller_pt1_send_time_) >= (controller_send_period_ms_))
     {
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sl);
 
         last_controller_pt1_send_time_ = tick.millis;
     }
@@ -202,11 +215,10 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
         ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
-
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pn);
 
@@ -217,12 +229,11 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         ((tick.millis - last_controller_pt3_send_time_) > controller_send_period_ms_))
     {
 
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sl);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_rege_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_torque);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
 
         last_controller_pt3_send_time_ = tick.millis;
     }
