@@ -60,11 +60,11 @@ const int ACCEL2_PEDAL_MAX = 259;   // 388
 const int ACCEL1_PEDAL_MIN = 2129;
 const int ACCEL2_PEDAL_MIN = 1517;
 
-const int BRAKE1_PEDAL_MAX = 1828;  // 2200;
-const int BRAKE2_PEDAL_MAX = 1857;  // 2200;
+const int BRAKE1_PEDAL_MAX = 1816;  // 2200;
+const int BRAKE2_PEDAL_MAX = 1775;  // 2200;
 
-const int BRAKE1_PEDAL_MIN = 1184;  // 785;    // 1230 to 1750
-const int BRAKE2_PEDAL_MIN = 2486;  // 785;    // 2450 to 1930
+const int BRAKE1_PEDAL_MIN = 1200;  // 785;    // 1230 to 1750
+const int BRAKE2_PEDAL_MIN = 2375;  // 785;    // 2450 to 1930
 
 const int ACCEL1_PEDAL_OOR_MIN = 90;
 const int ACCEL2_PEDAL_OOR_MIN = 90;
