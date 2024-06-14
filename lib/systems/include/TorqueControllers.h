@@ -18,7 +18,7 @@
 
 /* CONTROLLER CONSTANTS */
 
-const float MAX_POWER_LIMIT = 60000.0; // max mechanical power limit in KW
+const float MAX_POWER_LIMIT = 58200.0; // max mechanical power limit in KW
 
 /* MOTOR CONSTANTS */
 
@@ -34,7 +34,7 @@ const float MAX_REGEN_TORQUE = 10.0;
 
 /* LAUNCH CONSTANTS */
 
-const float DEFAULT_LAUNCH_RATE = 1.4 * 9.8;
+const float DEFAULT_LAUNCH_RATE = 1.5 * 9.8;
 const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
 
 const float DEFAULT_SLIP_RATIO = 0.2f;
