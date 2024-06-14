@@ -110,6 +110,7 @@ const float STEERING_IIR_ALPHA = 0.7f;  // shaves off around 1 deg of max discre
 
 // TC parameters
 const float SIMPLE_TC_REAR_TORQUE_SCALE  = 1.0;
-const float SIMPLE_TC_REGEN_TORQUE_SCALE = 0.4;
+// percent front wheels
+const float SIMPLE_TC_REGEN_TORQUE_SCALE = 0.6;
 
 #endif /* __MCU15_H__ */

@@ -137,8 +137,8 @@ public:
         : writeout_(writeout),
           frontTorqueScale_(2.0 - rearTorqueScale),
           rearTorqueScale_(rearTorqueScale),
-          frontRegenTorqueScale_(2.0 - regenTorqueScale),
-          rearRegenTorqueScale_(regenTorqueScale)
+          frontRegenTorqueScale_(regenTorqueScale),
+          rearRegenTorqueScale_(1.0 - regenTorqueScale)
     {
         writeout_.command = TC_COMMAND_NO_TORQUE;
         writeout_.ready = true;
@@ -197,8 +197,8 @@ public:
         : writeout_(writeout),
           frontTorqueScale_(2.0 - rearTorqueScale),
           rearTorqueScale_(rearTorqueScale),
-          frontRegenTorqueScale_(2.0 - regenTorqueScale),
-          rearRegenTorqueScale_(regenTorqueScale)
+          frontRegenTorqueScale_(regenTorqueScale),
+          rearRegenTorqueScale_(1.0 - regenTorqueScale)
     {
         writeout_.command = TC_COMMAND_NO_TORQUE;
         writeout_.ready = false;
