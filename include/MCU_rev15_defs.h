@@ -60,11 +60,11 @@ const int ACCEL2_PEDAL_MAX = 259;   // 388
 const int ACCEL1_PEDAL_MIN = 2129;
 const int ACCEL2_PEDAL_MIN = 1517;
 
-const int BRAKE1_PEDAL_MAX = 1816;  // 2200;
-const int BRAKE2_PEDAL_MAX = 1775;  // 2200;
+const int BRAKE1_PEDAL_MAX = 1945;  // 2200;
+const int BRAKE2_PEDAL_MAX = 1742;  // 2200;
 
-const int BRAKE1_PEDAL_MIN = 1200;  // 785;    // 1230 to 1750
-const int BRAKE2_PEDAL_MIN = 2375;  // 785;    // 2450 to 1930
+const int BRAKE1_PEDAL_MIN = 1230;  // 785;    // 1230 to 1750
+const int BRAKE2_PEDAL_MIN = 2437;  // 785;    // 2450 to 1930
 
 const int ACCEL1_PEDAL_OOR_MIN = 90;
 const int ACCEL2_PEDAL_OOR_MIN = 90;
@@ -83,7 +83,7 @@ const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.12f;
 
 const float APPS_ACTIVATION_PERCENTAGE = 0.1f;
 const float BRAKE_ACTIVATION_PERCENTAGE = 0.05f;
-const float BRAKE_MECH_THRESH = 0.40f;
+const float BRAKE_MECH_THRESH = 0.46f;
 
 // Load Cell Defs to convert raw to lbs
 // lbs = (raw + offset) * scale
