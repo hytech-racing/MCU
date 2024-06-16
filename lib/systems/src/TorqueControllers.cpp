@@ -39,16 +39,19 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
         {
             // Negative torque request
             torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+            float netTorqueRequest = torqueRequest * 4;
 
             writeout_.command.speeds_rpm[FL] = 0.0;
             writeout_.command.speeds_rpm[FR] = 0.0;
             writeout_.command.speeds_rpm[RL] = 0.0;
             writeout_.command.speeds_rpm[RR] = 0.0;
 
-            writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
-            writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
-            writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
-            writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
+
+
+            writeout_.command.torqueSetpoints[FL] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[FR] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RL] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RR] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
         }
     }
 }
@@ -135,10 +138,22 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torquePool * frontRegenTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce;
-                writeout_.command.torqueSetpoints[FR] = torquePool * frontRegenTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce;
-                writeout_.command.torqueSetpoints[RL] = torquePool * rearRegenTorqueScale_ * loadCellForcesFiltered_[2] / sumNormalForce;
-                writeout_.command.torqueSetpoints[RR] = torquePool * rearRegenTorqueScale_ * loadCellForcesFiltered_[3] / sumNormalForce;
+                float normalForcePercentFL = loadCellForcesFiltered_[0] / sumNormalForce;
+                float normalForcePercentFR = loadCellForcesFiltered_[1] / sumNormalForce;
+                float normalForcePercentRL = loadCellForcesFiltered_[2] / sumNormalForce;
+                float normalForcePercentRR = loadCellForcesFiltered_[3] / sumNormalForce;
+
+                if (normalForcePercentFL + normalForcePercentFR < .5 || normalForcePercentRL + normalForcePercentRR > .5) {
+                    normalForcePercentFL = .25;
+                    normalForcePercentFR = .25;
+                    normalForcePercentRL = .25;
+                    normalForcePercentRR = .25;
+                }
+
+                writeout_.command.torqueSetpoints[FL] = torquePool * frontRegenTorqueScale_ * normalForcePercentFL;
+                writeout_.command.torqueSetpoints[FR] = torquePool * frontRegenTorqueScale_ * normalForcePercentFR;
+                writeout_.command.torqueSetpoints[RL] = torquePool * rearRegenTorqueScale_ * normalForcePercentRL;
+                writeout_.command.torqueSetpoints[RR] = torquePool * rearRegenTorqueScale_ * normalForcePercentRR;
 
                 // No load cell vectoring on regen
                 // writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;

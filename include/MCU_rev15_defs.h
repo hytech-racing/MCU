@@ -60,11 +60,11 @@ const int ACCEL2_PEDAL_MAX = 259;   // 388
 const int ACCEL1_PEDAL_MIN = 2129;
 const int ACCEL2_PEDAL_MIN = 1517;
 
-const int BRAKE1_PEDAL_MAX = 1828;  // 2200;
-const int BRAKE2_PEDAL_MAX = 1857;  // 2200;
+const int BRAKE1_PEDAL_MAX = 1945;  // 2200;
+const int BRAKE2_PEDAL_MAX = 1742;  // 2200;
 
-const int BRAKE1_PEDAL_MIN = 1184;  // 785;    // 1230 to 1750
-const int BRAKE2_PEDAL_MIN = 2486;  // 785;    // 2450 to 1930
+const int BRAKE1_PEDAL_MIN = 1230;  // 785;    // 1230 to 1750
+const int BRAKE2_PEDAL_MIN = 2437;  // 785;    // 2450 to 1930
 
 const int ACCEL1_PEDAL_OOR_MIN = 90;
 const int ACCEL2_PEDAL_OOR_MIN = 90;
@@ -83,7 +83,7 @@ const float DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN = 0.12f;
 
 const float APPS_ACTIVATION_PERCENTAGE = 0.1f;
 const float BRAKE_ACTIVATION_PERCENTAGE = 0.05f;
-const float BRAKE_MECH_THRESH = 0.40f;
+const float BRAKE_MECH_THRESH = 0.46f;
 
 // Load Cell Defs to convert raw to lbs
 // lbs = (raw + offset) * scale
@@ -110,6 +110,7 @@ const float STEERING_IIR_ALPHA = 0.7f;  // shaves off around 1 deg of max discre
 
 // TC parameters
 const float SIMPLE_TC_REAR_TORQUE_SCALE  = 1.0;
-const float SIMPLE_TC_REGEN_TORQUE_SCALE = 0.4;
+// percent front wheels
+const float SIMPLE_TC_REGEN_TORQUE_SCALE = 0.6;
 
 #endif /* __MCU15_H__ */

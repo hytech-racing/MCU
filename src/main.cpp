@@ -58,6 +58,35 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .therm_fl_channel = MCU15_THERM_FL_CHANNEL,
     .therm_fr_channel = MCU15_THERM_FR_CHANNEL};
 
+const PedalsParams accel1_only_params = {
+    .min_pedal_1 = ACCEL1_PEDAL_MIN,
+    .min_pedal_2 = ACCEL1_PEDAL_MIN,
+    .max_pedal_1 = ACCEL1_PEDAL_MAX,
+    .max_pedal_2 = ACCEL1_PEDAL_MAX,
+    .min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = ACCEL1_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = ACCEL1_PEDAL_OOR_MAX,
+    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
+
+const PedalsParams accel2_only_params = {
+    .min_pedal_1 = ACCEL2_PEDAL_MIN,
+    .min_pedal_2 = ACCEL2_PEDAL_MIN,
+    .max_pedal_1 = ACCEL2_PEDAL_MAX,
+    .max_pedal_2 = ACCEL2_PEDAL_MAX,
+    .min_sensor_pedal_1 = ACCEL2_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = ACCEL2_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MAX,
+    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
+
+
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
     .min_pedal_2 = ACCEL2_PEDAL_MIN,
@@ -71,6 +100,37 @@ const PedalsParams accel_params = {
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
+
+
+const PedalsParams brake1_only_params = {
+    .min_pedal_1 = BRAKE1_PEDAL_MIN,
+    .min_pedal_2 = BRAKE1_PEDAL_MIN,
+    .max_pedal_1 = BRAKE1_PEDAL_MAX,
+    .max_pedal_2 = BRAKE1_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
+
+const PedalsParams brake2_only_params = {
+    .min_pedal_1 = BRAKE2_PEDAL_MIN,
+    .min_pedal_2 = BRAKE2_PEDAL_MIN,
+    .max_pedal_1 = BRAKE2_PEDAL_MAX,
+    .max_pedal_2 = BRAKE2_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
 
 const PedalsParams brake_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
@@ -157,8 +217,8 @@ TorqueControllerMux torque_controller_mux(SIMPLE_TC_REAR_TORQUE_SCALE, SIMPLE_TC
 CASEConfiguration case_config = {
     // Following used for generated code
     .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
-    .yaw_pid_p = 1.5,
-    .yaw_pid_i = 0.25,
+    .yaw_pid_p = 1.15,
+    .yaw_pid_i = 0.0,
     .yaw_pid_d = 0.0,
     .tcs_pid_p_lowerBound_front = 55.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
     .tcs_pid_p_upperBound_front = 42.0,
@@ -182,7 +242,7 @@ CASEConfiguration case_config = {
     .yawPIDErrorThreshold = 0.1,   // rad/s
     .yawPIDVelThreshold = 0.35,    // m/s
     .yawPIDCoastThreshold = 2.5,   // m/s
-    .yaw_pid_brakes_p = 0.25,
+    .yaw_pid_brakes_p = 0.1,
     .yaw_pid_brakes_i = 0.0,
     .yaw_pid_brakes_d = 0.0,
     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
@@ -192,14 +252,14 @@ CASEConfiguration case_config = {
     .useNoRegen5kph = true,
     .useTorqueBias = true,
     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
-    .BrakeTorquePercentFront = 0.7,
-    .MechPowerMaxkW = 63.0,            // kW
+    .BrakeTorquePercentFront = 0.6,
+    .MechPowerMaxkW =51.5,            // kW
     .launchLeftRightMaxDiff = 2.0,     // N-m
     .tcs_pid_lower_rpm_front = 0.0,    // RPM
     .tcs_pid_upper_rpm_front = 5000.0, // RPM
     .tcs_pid_lower_rpm_rear = 0.0,     // RPM
     .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
-    .maxNormalLoadBrakeScalingFront = 1.25,
+    .maxNormalLoadBrakeScalingFront = 1.15,
     .tcs_saturation_front = 20,
     .tcs_saturation_rear = 20,
     .TCSGenLeftRightDiffLowerBound = 2,  // N-m
@@ -530,6 +590,36 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
         a1.get().conversions[MCU15_BRAKE1_CHANNEL],
         a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+
+    // accel 1 only accel 2 dead, brake normal 
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+    // accel 2 only accel 1 dead, brake normal 
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+    // brake 1 only brake 2 dead, accel normal
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
+    // brake 2 only brake 1 dead, accel normal
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+
 
     // tick steering system
     steering_system.tick(
