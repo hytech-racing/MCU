@@ -19,6 +19,7 @@ const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 const uint16_t MAX_PACK_CHARGE      = 48600;
+const unsigned long DEFAULT_INITIALIZATION_WAIT_INTERVAL = 5000;
 
 
 /// @brief this class is for interfacing with the AMS (accumulator management system) 
@@ -40,7 +41,8 @@ public:
         use_em_for_soc_(true),
         charge_(0.0f),
         SoC_(0.0f),
-        has_initialized_charge_(false) {};
+        has_initialized_charge_(false),
+        has_received_bms_voltage_(false) {};
 
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
     AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
@@ -69,6 +71,54 @@ public:
     float get_filtered_max_cell_temp();
     /* IIR filter and return filtered min cell voltage */
     float get_filtered_min_cell_voltage();
+    /*gets the derate factor for acc system*/
+    float get_acc_derate_factor();
+
+    /**
+     * Initializes the charge member variable from the voltage of the minimum cell using the VOLTAGE_LOOKUP_TABLE.
+     * 
+     * @pre The bms_voltages_ member variable MUST be initialized before this function can be called.
+     * @return The charge, in coulombs, that the charge member variable is initialized to.
+    */
+    float initialize_charge();
+
+    /**
+     * Calculates SoC based on the energy meter CAN message. Calling calculate_SoC_em()
+     * will update the SoC_ and charge_ member variables.
+     * 
+     * @param The current tick that the calculate_SoC_em function should use for integration.
+     * 
+     * @pre The last_tick_ member variable must be updated correctly.
+     * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
+    */
+    void calculate_SoC_em(const SysTick_s &tick);
+
+    /**
+     * Calculates SoC based on the ACU_SHUNT_MEASUREMENTS CAN message. Calling calculate_SoC_acu()
+     * will update the SoC_ and charge_ member variables.
+     * 
+     * @param The current tick that the calculate_SoC_em function should use for integration.
+     * 
+     * @pre The last_tick_ member variable must be updated correctly.
+     * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
+    */
+    void calculate_SoC_acu(const SysTick_s &tick);
+
+    /**
+     * Retrieves the value of the SoC member variable. This function does NOT recalculate
+     * the SoC_ variable, it only returns the value that is stored.
+     * 
+     * @return the current value stored in the SoC_ member variable.
+    */
+    float get_SoC() {return SoC_;}
+
+    /**
+     * This is AMSInterface's tick() function. It behaves correctly regardless of the
+     * since the functions calculate the elapsed time between the given tick and the stored last_tick_.
+     * 
+     * @param tick The current system tick.
+    */
+    void tick(const SysTick_s &tick);
 
     /**
      * Initializes the charge member variable from the voltage of the minimum cell using the VOLTAGE_LOOKUP_TABLE.
@@ -133,6 +183,9 @@ public:
      * does NOT apply the fromS() functions on the data. This function uses the NEW CAN library.
      */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
+    
+    /*Updates Acc_derate_factor*/
+    void calculate_acc_derate_factor();
     
     /**
      * Reads this CAN message into the em_measurements_ member variable. This function
@@ -209,6 +262,8 @@ private:
     float filtered_min_cell_voltage;
     float cell_temp_alpha;
     float cell_voltage_alpha;
+    
+    float acc_derate_factor;
 
     /**
      * If set to TRUE, then SoC will use EM.
@@ -238,7 +293,18 @@ private:
     /**
      * Stores whether or not this AMSInterface has initialized SoC_ or not.
     */
-   bool has_initialized_charge_;
+    bool has_initialized_charge_;
+
+    /**
+     * Stores whether or not this AMSInterface has properly received a bms_voltage CAN
+     * message.
+    */
+    bool has_received_bms_voltage_;
+
+    /**
+     * Stores the time, in milliseconds, when this AMSInterface first received a bms voltages CAN message.
+    */
+    unsigned long timestamp_start_;
 
 
     // Check if lowest cell temperature is below threshold

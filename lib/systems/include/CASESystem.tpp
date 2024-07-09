@@ -15,15 +15,35 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 {
     HT08_CASE::ExtU_HT08_CASE_T in;
 
-    // in. as defined in HT08_CASE.h
+    // in. as defined in HT08_CASE.h, ExtU_HT08_CASE_T
     in.SteeringWheelAngleDeg = steering_data.angle;
 
     in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
 
     in.YawRaterads = vn_data.angular_rates.z;
 
+    // FAKE
+    // in.YawRaterads = 2.5;
+
     // REAL
-    in.Vx_B = vn_data.velocity_x;
+    // if ( (vn_status < 2) || (vn_data.velocity_x < 0) )
+    // {
+    //     if 
+    //     in.Vx_B = 0;
+    // } else {
+    //     in.Vx_B = vn_data.velocity_x;
+    // }
+
+    if (vn_data.velocity_x < 0)
+    {
+        in.Vx_B = 0;
+    } else {
+        in.Vx_B = vn_data.velocity_x;
+    }
+    
+    
+
+    in.TCSVelThreshold = config_.tcsVelThreshold;
 
     // FAKE
     // in.Vx_B = 5;
@@ -36,28 +56,30 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     in.CurrentElectricalPowerkW = power_kw;
 
     // REAL
-    // in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
-    // in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
-    // in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
-    // in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
+    in.MotorOmegaFLrpm = drivetrain_data.measuredSpeeds[0];
+    in.MotorOmegaFRrpm = drivetrain_data.measuredSpeeds[1];
+    in.MotorOmegaRLrpm = drivetrain_data.measuredSpeeds[2];
+    in.MotorOmegaRRrpm = drivetrain_data.measuredSpeeds[3];
 
     // FAKE, 566.273 rpm = 1 m/s
-    // in.MotorOmegaFLrpm = 566.27330024 * 1.36;
-    // in.MotorOmegaFRrpm = 566.27330024 * 1.36;
+    // in.MotorOmegaFLrpm = 566.27330024 * 5;
+    // in.MotorOmegaFRrpm = 566.27330024 * 10;
     // in.MotorOmegaRRrpm = 566.27330024 * 1.36;
     // in.MotorOmegaRLrpm = 566.27330024 * 1.36;
 
     // FAKE max rpm
-    in.MotorOmegaFLrpm = 20000;
-    in.MotorOmegaFRrpm = 20000;
-    in.MotorOmegaRRrpm = 20000;
-    in.MotorOmegaRLrpm = 20000;
+    // in.MotorOmegaFLrpm = 20000;
+    // in.MotorOmegaFRrpm = 20000;
+    // in.MotorOmegaRRrpm = 20000;
+    // in.MotorOmegaRLrpm = 20000;
 
     in.usePIDTV = config_.usePIDTV;
     in.useNormalForce = config_.useNormalForce;
     in.usePowerLimit = config_.usePowerLimit;
     in.usePIDPowerLimit = config_.usePIDPowerLimit;
     in.useLaunch = config_.useLaunch;
+
+    in.TCSVelThreshold = config_.tcsVelThreshold;
 
     in.Vy_B = vn_data.velocity_y;
 
@@ -69,16 +91,26 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.useTractionControl = config_.useTractionControl;
 
-    in.TCS_SLThreshold = config_.tcsSLThreshold;
-    in.LaunchSL = config_.launchSL;
+    in.TCS_SL_Targets[0] = config_.TCS_SL_startBound_Front;
+    in.TCS_SL_Targets[1] = config_.TCS_SL_endBound_Front;
+    in.TCS_SL_Targets[2] = config_.TCS_SL_startBound_Rear;
+    in.TCS_SL_Targets[3] = config_.TCS_SL_endBound_Rear;
+
+    in.launchSL_Targets[0] = config_.launchSL_startBound_Front;
+    in.launchSL_Targets[1] = config_.launchSL_endBound_Front;
+    in.launchSL_Targets[2] = config_.launchSL_startBound_Rear;
+    in.launchSL_Targets[3] = config_.launchSL_endBound_Rear;
+
     in.LaunchDeadZone = config_.launchDeadZone;
 
-    in.TCSPIDConfig[0] = config_.tcs_pid_p;
-    in.TCSPIDConfig[1] = config_.tcs_pid_i;
-    in.TCSPIDConfig[2] = config_.tcs_pid_d;
+    in.TCSPIDConfig[0] = config_.tcs_pid_p_lowerBound_front;
+    in.TCSPIDConfig[1] = config_.tcs_pid_p_upperBound_front;
+    in.TCSPIDConfig[2] = config_.tcs_pid_p_lowerBound_rear;
+    in.TCSPIDConfig[3] = config_.tcs_pid_p_upperBound_rear;
+    in.TCSPIDConfig[4] = config_.tcs_pid_i;
+    in.TCSPIDConfig[5] = config_.tcs_pid_d;
 
     in.LaunchVelThreshold = config_.launchVelThreshold;
-    in.TCSVelThreshold = config_.tcsVelThreshold;
 
     in.YawPIDErrorThreshold = config_.yawPIDErrorThreshold;
     in.YawPIDVelThreshold = config_.yawPIDVelThreshold;
@@ -114,14 +146,44 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.MechPowerMaxkW = config_.MechPowerMaxkW;
 
-    if ((vn_active_start_time_ == 0) && (vn_status >= 2))
-    {
-        vn_active_start_time_ = tick.millis;
-    }
-    else if (vn_status < 2)
-    {
-        vn_active_start_time_ = 0;
-    }
+    in.launchLeftRightMaxDiff = config_.launchLeftRightMaxDiff;
+
+    in.TCS_PID_Motor_RPM_Schedule[0] = config_.tcs_pid_lower_rpm_front;
+    in.TCS_PID_Motor_RPM_Schedule[1] = config_.tcs_pid_upper_rpm_front;
+    in.TCS_PID_Motor_RPM_Schedule[2] = config_.tcs_pid_lower_rpm_rear;
+    in.TCS_PID_Motor_RPM_Schedule[3] = config_.tcs_pid_upper_rpm_rear;
+
+    in.maxNormalLoadBrakeScalingFront = config_.maxNormalLoadBrakeScalingFront;
+
+    in.TCS_Saturation_Front = config_.tcs_saturation_front;
+
+    in.TCS_Saturation_Rear = config_.tcs_saturation_rear;
+
+    in.TCSGenLeftRightDiffLowerBound = config_.TCSGenLeftRightDiffLowerBound;
+
+    in.TCSGenLeftRightDiffUpperBound = config_.TCSGenLeftRightDiffUpperBound;
+
+    in.TCSWheelSteerLowerBound = config_.TCSWheelSteerLowerBound;
+
+    in.TCSWheelSteerUpperBound = config_.TCSWheelSteerUpperBound;
+
+    in.useRPM_TCS_GainSchedule = config_.useRPM_TCS_GainSchedule;
+
+    in.useNL_TCS_GainSchedule = config_.useNL_TCS_GainSchedule;
+
+    in.TCS_PID_NL_Schedule[0] = config_.TCS_NL_startBoundPerc_FrontAxle;
+    in.TCS_PID_NL_Schedule[1] = config_.TCS_NL_endBoundPerc_FrontAxle;
+    in.TCS_PID_NL_Schedule[2] = config_.TCS_NL_startBoundPerc_RearAxle;
+    in.TCS_PID_NL_Schedule[3] = config_.TCS_NL_endBoundPerc_RearAxle;
+
+    in.TCS_SL_Targets_NLSchedule[0] = config_.TCS_SL_NLPerc_startBound_Front;
+    in.TCS_SL_Targets_NLSchedule[1] = config_.TCS_SL_NLPerc_endBound_Front;
+    in.TCS_SL_Targets_NLSchedule[2] = config_.TCS_SL_NLPerc_startBound_Rear;
+    in.TCS_SL_Targets_NLSchedule[3] = config_.TCS_SL_NLPerc_endBound_Rear;
+
+    in.useNL_TCS_SlipSchedule = config_.useNL_TCS_SlipSchedule;
+
+    
 
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
@@ -140,10 +202,11 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     if ((tick.millis - last_controller_pt1_send_time_) >= (controller_send_period_ms_))
     {
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_norm_p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid__p);
 
         last_controller_pt1_send_time_ = tick.millis;
@@ -152,12 +215,12 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     if (((tick.millis - last_controller_pt1_send_time_) >= (vehicle_math_offset_ms_ / 3)) &&
         ((tick.millis - last_controller_pt2_send_time_) > controller_send_period_ms_))
     {
-
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_initia);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pid_ya);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_normal);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pi);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs__p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_to);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_st);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_pn);
 
         last_controller_pt2_send_time_ = tick.millis;
     }
@@ -166,12 +229,11 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         ((tick.millis - last_controller_pt3_send_time_) > controller_send_period_ms_))
     {
 
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_regen_);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sl);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_rege_p);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_torque);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_powe_p);
-        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_pow_pn);
 
         last_controller_pt3_send_time_ = tick.millis;
     }
@@ -186,8 +248,22 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_kin_desired_);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_beta_deg);
         enqueue_matlab_msg(msg_queue_, res.controllerBus_vehm_wheel_lin_ve);
-        // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
+
         last_vehm_send_time_ = tick.millis;
+    }
+
+    if ((tick.millis - last_lowest_priority_controller_send_time_) >= (lowest_priority_controller_send_period_ms_))
+    {
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_boolea);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_co);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_yaw_pi);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_sa);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_di);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_rp);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tcs_nl);
+        enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_tc_pna);
+
+        last_lowest_priority_controller_send_time_ = tick.millis;
     }
 
     DrivetrainCommand_s command;
