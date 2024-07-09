@@ -25,10 +25,10 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
             // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;pid_input_
             // writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
             // writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
-            writeout_.command.speeds_rpm[FL] = tc_rpm_;
-            writeout_.command.speeds_rpm[FR] = tc_rpm_;
-            writeout_.command.speeds_rpm[RL] = tc_rpm_;
-            writeout_.command.speeds_rpm[RR] = tc_rpm_;
+            writeout_.command.speeds_rpm[FL] = tcRPM_;
+            writeout_.command.speeds_rpm[FR] = tcRPM_;
+            writeout_.command.speeds_rpm[RL] = tcRPM_;
+            writeout_.command.speeds_rpm[RR] = tcRPM_;
 
             writeout_.command.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
             writeout_.command.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;

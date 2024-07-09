@@ -130,7 +130,7 @@ private:
     float rearTorqueScale_ = 1.0;
     float frontRegenTorqueScale_ = 1.0;
     float rearRegenTorqueScale_ = 1.0;
-    float tc_rpm_;
+    float tcRPM_;
 
 public:
     /// @brief simple TC with tunable F/R torque balance. Accel torque balance can be tuned independently of regen torque balance
@@ -143,7 +143,7 @@ public:
           rearTorqueScale_(rearTorqueScale),
           frontRegenTorqueScale_(regenTorqueScale),
           rearRegenTorqueScale_(1.0 - regenTorqueScale),
-          tc_rpm_(mps * METERS_PER_SECOND_TO_RPM)
+          tcRPM_(mps * METERS_PER_SECOND_TO_RPM)
     {
         writeout_.command = TC_COMMAND_NO_TORQUE;
         writeout_.ready = true;
@@ -154,7 +154,7 @@ public:
           rearTorqueScale_(rearTorqueScale),
           frontRegenTorqueScale_(regenTorqueScale),
           rearRegenTorqueScale_(1.0 - regenTorqueScale),
-          tc_rpm_(AMK_MAX_RPM)
+          tcRPM_(AMK_MAX_RPM)
     {
         writeout_.command = TC_COMMAND_NO_TORQUE;
         writeout_.ready = true;
