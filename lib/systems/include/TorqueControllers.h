@@ -76,7 +76,10 @@ enum TorqueController_e
     TC_SLIP_LAUNCH = 4,
     TC_LOOKUP_LAUNCH = 5,
     TC_CASE_SYSTEM = 6,
-    TC_NUM_CONTROLLERS = 7,
+    TC_SAFE_10MPS = 7,
+    TC_SAFE_15MPS = 8,
+    TC_SAFE_20MPS = 9,
+    TC_NUM_CONTROLLERS = 10,
 };
 
 enum class LaunchStates_e
