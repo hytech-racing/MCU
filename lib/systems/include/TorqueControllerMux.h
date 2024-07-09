@@ -22,6 +22,9 @@ class TorqueControllerMux
 private:
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
+    TorqueControllerSimple tcSimple_10mps_;
+    TorqueControllerSimple tcSimple_15mps_;
+    TorqueControllerSimple tcSimple_20mps_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
     TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
     TorqueControllerSlipLaunch torqueControllerSlipLaunch_;
@@ -51,6 +54,9 @@ private:
     TorqueControllerBase* controllers[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)] = {
         static_cast<TorqueControllerBase*>(&torqueControllerNone_),
         static_cast<TorqueControllerBase*>(&torqueControllerSimple_),
+        static_cast<TorqueControllerBase*>(&tcSimple_10mps_),
+        static_cast<TorqueControllerBase*>(&tcSimple_15mps_),
+        static_cast<TorqueControllerBase*>(&tcSimple_20mps_),
         static_cast<TorqueControllerBase*>(&torqueControllerLoadCellVectoring_),
         static_cast<TorqueControllerBase*>(&torqueControllerSimpleLaunch_),
         static_cast<TorqueControllerBase*>(&torqueControllerSlipLaunch_),
@@ -71,6 +77,9 @@ public:
     TorqueControllerMux(TelemetryInterface *telemInterface)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
+    , tcSimple_10mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], )
+    , tcSimple_15mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
+    , tcSimple_20mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])

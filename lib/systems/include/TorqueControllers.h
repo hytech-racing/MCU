@@ -22,13 +22,13 @@ const float MAX_POWER_LIMIT = 51500.0; // max mechanical power limit in KW
 
 /* MOTOR CONSTANTS */
 
-const float AMK_MAX_RPM = 20000;
+// const float AMK_MAX_RPM = 20000;
 // 10MPH LIMIT for lot testing lmao
 // const float AMK_MAX_RPM = (13.4 * METERS_PER_SECOND_TO_RPM); // 30mph
 // const float AMK_MAX_RPM = (4.47 * METERS_PER_SECOND_TO_RPM); // 10mph
 // const float AMK_MAX_RPM = (2.235 * METERS_PER_SECOND_TO_RPM); // 5mph
 // const float AMK_MAX_RPM = (.89 * METERS_PER_SECOND_TO_RPM); // 1mph
-// const float
+const float AMK_MAX_RPM = (10.0 * METERS_PER_SECOND_TO_RPM);
 const float AMK_MAX_TORQUE = 21.42;
 const float MAX_REGEN_TORQUE = 10.0;
 
@@ -127,18 +127,31 @@ private:
     float rearTorqueScale_ = 1.0;
     float frontRegenTorqueScale_ = 1.0;
     float rearRegenTorqueScale_ = 1.0;
+    float tc_rpm_;
 
 public:
     /// @brief simple TC with tunable F/R torque balance. Accel torque balance can be tuned independently of regen torque balance
     /// @param writeout the reference to the torque controller output being sent that contains the drivetrain command
     /// @param rearTorqueScale 0 to 2 scale on forward torque to rear wheels. 0 = FWD, 1 = Balanced, 2 = RWD
     /// @param regenTorqueScale same as rearTorqueScale but applies to regen torque split. 0 = All regen torque on the front, 1 = 50/50, 2 = all regen torque on the rear
+    TorqueControllerSimple(TorqueControllerOutput_s &writeout, float rearTorqueScale, float regenTorqueScale, float mps)
+        : writeout_(writeout),
+          frontTorqueScale_(2.0 - rearTorqueScale),
+          rearTorqueScale_(rearTorqueScale),
+          frontRegenTorqueScale_(regenTorqueScale),
+          rearRegenTorqueScale_(1.0 - regenTorqueScale),
+          tc_rpm_(mps * METERS_PER_SECOND_TO_RPM)
+    {
+        writeout_.command = TC_COMMAND_NO_TORQUE;
+        writeout_.ready = true;
+    }
     TorqueControllerSimple(TorqueControllerOutput_s &writeout, float rearTorqueScale, float regenTorqueScale)
         : writeout_(writeout),
           frontTorqueScale_(2.0 - rearTorqueScale),
           rearTorqueScale_(rearTorqueScale),
           frontRegenTorqueScale_(regenTorqueScale),
-          rearRegenTorqueScale_(1.0 - regenTorqueScale)
+          rearRegenTorqueScale_(1.0 - regenTorqueScale),
+          tc_rpm_(AMK_MAX_RPM)
     {
         writeout_.command = TC_COMMAND_NO_TORQUE;
         writeout_.ready = true;
