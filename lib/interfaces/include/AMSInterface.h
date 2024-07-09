@@ -120,52 +120,6 @@ public:
     */
     void tick(const SysTick_s &tick);
 
-    /**
-     * Initializes the charge member variable from the voltage of the minimum cell using the VOLTAGE_LOOKUP_TABLE.
-     * 
-     * @pre The bms_voltages_ member variable MUST be initialized before this function can be called.
-     * @return The charge, in coulombs, that the charge member variable is initialized to.
-    */
-    float initialize_charge();
-
-    /**
-     * Calculates SoC based on the energy meter CAN message. Calling calculate_SoC_em()
-     * will update the SoC_ and charge_ member variables.
-     * 
-     * @param The current tick that the calculate_SoC_em function should use for integration.
-     * 
-     * @pre The last_tick_ member variable must be updated correctly.
-     * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
-    */
-    void calculate_SoC_em(const SysTick_s &tick);
-
-    /**
-     * Calculates SoC based on the ACU_SHUNT_MEASUREMENTS CAN message. Calling calculate_SoC_acu()
-     * will update the SoC_ and charge_ member variables.
-     * 
-     * @param The current tick that the calculate_SoC_em function should use for integration.
-     * 
-     * @pre The last_tick_ member variable must be updated correctly.
-     * @post The charge_ field has the updated charge, and the SoC field contains an updated percentage.
-    */
-    void calculate_SoC_acu(const SysTick_s &tick);
-
-    /**
-     * Retrieves the value of the SoC member variable. This function does NOT recalculate
-     * the SoC_ variable, it only returns the value that is stored.
-     * 
-     * @return the current value stored in the SoC_ member variable.
-    */
-    float get_SoC() {return SoC_;}
-
-    /**
-     * This is AMSInterface's tick() function. It behaves correctly regardless of the
-     * since the functions calculate the elapsed time between the given tick and the stored last_tick_.
-     * 
-     * @param tick The current system tick.
-    */
-    void tick(const SysTick_s &tick);
-
     //RETRIEVE CAN MESSAGES//
     
     /**

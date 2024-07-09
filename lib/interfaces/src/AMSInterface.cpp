@@ -161,7 +161,7 @@ void AMSInterface::retrieve_voltage_CAN(CAN_message_t &can_msg) {
     if (!has_received_bms_voltage_)
     {
         has_received_bms_voltage_ = true;
-        timestamp_start = last_tick_.millis;
+        timestamp_start_ = last_tick_.millis;
     }
     
 }

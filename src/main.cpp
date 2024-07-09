@@ -554,10 +554,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
-<<<<<<< HEAD
-
-=======
->>>>>>> master
         ams_interface.tick(current_system_tick);
     }
 

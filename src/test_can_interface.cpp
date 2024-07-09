@@ -8,12 +8,12 @@ FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> TEST_CAN2; // Inverter CAN (now both a
 
 CAN_message_t msg;
 
-using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>;
+using CircularBufferType = CANBufferType;
 using InverterInterfaceType = InverterInterface<CircularBufferType>;
-InverterInterfaceType fl_inv(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
-InverterInterfaceType fr_inv(&CAN2_txBuffer, ID_MC2_SETPOINTS_COMMAND);
-InverterInterfaceType rl_inv(&CAN2_txBuffer, ID_MC3_SETPOINTS_COMMAND);
-InverterInterfaceType rr_inv(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
+InverterInterfaceType fl_inv = InverterInterfaceType(&CAN2_txBuffer, MC1_SETPOINTS_COMMAND_CANID);
+InverterInterfaceType fr_inv = InverterInterfaceType(&CAN2_txBuffer, MC2_SETPOINTS_COMMAND_CANID);
+InverterInterfaceType rl_inv = InverterInterfaceType(&CAN2_txBuffer, MC3_SETPOINTS_COMMAND_CANID);
+InverterInterfaceType rr_inv = InverterInterfaceType(&CAN2_txBuffer, MC4_SETPOINTS_COMMAND_CANID);
 
 CANInterfaces<CircularBufferType> CAN_interfaces = {&fl_inv, &fr_inv, &rl_inv, &rr_inv, 0, 0, 0};
 

@@ -12,7 +12,7 @@ const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
 
-#define CANBufferType int // Placeholder define for the mock interface
+// #define CANBufferType int // Placeholder define for the mock interface
 
 class AMSInterface
 {
