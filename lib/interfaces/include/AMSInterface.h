@@ -42,8 +42,7 @@ public:
         charge_(0.0f),
         SoC_(0.0f),
         has_initialized_charge_(false),
-        has_received_bms_voltage_(false),
-        bms_low_voltage_at_init_(0.0f) {};
+        has_received_bms_voltage_(false) {};
 
     /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
     AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
@@ -260,11 +259,6 @@ private:
      * Stores the time, in milliseconds, when this AMSInterface first received a bms voltages CAN message.
     */
     unsigned long timestamp_start_;
-
-    /**
-     * Stores the minimum cell voltage at initialization.
-    */
-    float bms_low_voltage_at_init_;
 
 
     // Check if lowest cell temperature is below threshold
