@@ -56,6 +56,159 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
     }
 }
 
+void TorqueControllerSimple_10mps::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
+{
+
+    // Calculate torque commands at 100hz
+    if (tick.triggers.trigger100)
+    {
+        // Both pedals are not pressed and no implausibility has been detected
+        // accelRequest goes between 1.0 and -1.0
+        float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
+        float torqueRequest;
+
+        if (accelRequest >= 0.0)
+        {
+            // Positive torque request
+            torqueRequest = accelRequest * AMK_MAX_TORQUE;
+
+            // writeout_.command.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;pid_input_
+            // writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[FL] = tc_rpm_;
+            writeout_.command.speeds_rpm[FR] = tc_rpm_;
+            writeout_.command.speeds_rpm[RL] = tc_rpm_;
+            writeout_.command.speeds_rpm[RR] = tc_rpm_;
+
+            writeout_.command.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
+            writeout_.command.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
+            writeout_.command.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
+            writeout_.command.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
+        }
+        else
+        {
+            // Negative torque request
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+            float netTorqueRequest = torqueRequest * 4;
+
+            writeout_.command.speeds_rpm[FL] = 0.0;
+            writeout_.command.speeds_rpm[FR] = 0.0;
+            writeout_.command.speeds_rpm[RL] = 0.0;
+            writeout_.command.speeds_rpm[RR] = 0.0;
+
+
+
+            writeout_.command.torqueSetpoints[FL] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[FR] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RL] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RR] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+        }
+    }
+}
+
+void TorqueControllerSimple_15mps::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
+{
+
+    // Calculate torque commands at 100hz
+    if (tick.triggers.trigger100)
+    {
+        // Both pedals are not pressed and no implausibility has been detected
+        // accelRequest goes between 1.0 and -1.0
+        float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
+        float torqueRequest;
+
+        if (accelRequest >= 0.0)
+        {
+            // Positive torque request
+            torqueRequest = accelRequest * AMK_MAX_TORQUE;
+
+            // writeout_.command.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;pid_input_
+            // writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[FL] = tc_rpm_;
+            writeout_.command.speeds_rpm[FR] = tc_rpm_;
+            writeout_.command.speeds_rpm[RL] = tc_rpm_;
+            writeout_.command.speeds_rpm[RR] = tc_rpm_;
+
+            writeout_.command.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
+            writeout_.command.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
+            writeout_.command.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
+            writeout_.command.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
+        }
+        else
+        {
+            // Negative torque request
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+            float netTorqueRequest = torqueRequest * 4;
+
+            writeout_.command.speeds_rpm[FL] = 0.0;
+            writeout_.command.speeds_rpm[FR] = 0.0;
+            writeout_.command.speeds_rpm[RL] = 0.0;
+            writeout_.command.speeds_rpm[RR] = 0.0;
+
+
+
+            writeout_.command.torqueSetpoints[FL] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[FR] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RL] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RR] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+        }
+    }
+}
+
+void TorqueControllerSimple_20mps::tick(const SysTick_s &tick, const PedalsSystemData_s &pedalsData, float torqueLimit)
+{
+
+    // Calculate torque commands at 100hz
+    if (tick.triggers.trigger100)
+    {
+        // Both pedals are not pressed and no implausibility has been detected
+        // accelRequest goes between 1.0 and -1.0
+        float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
+        float torqueRequest;
+
+        if (accelRequest >= 0.0)
+        {
+            // Positive torque request
+            torqueRequest = accelRequest * AMK_MAX_TORQUE;
+
+            // writeout_.command.speeds_rpm[FL] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[FR] = accelRequest * AMK_MAX_RPM;pid_input_
+            // writeout_.command.speeds_rpm[RL] = accelRequest * AMK_MAX_RPM;
+            // writeout_.command.speeds_rpm[RR] = accelRequest * AMK_MAX_RPM;
+            writeout_.command.speeds_rpm[FL] = tc_rpm_;
+            writeout_.command.speeds_rpm[FR] = tc_rpm_;
+            writeout_.command.speeds_rpm[RL] = tc_rpm_;
+            writeout_.command.speeds_rpm[RR] = tc_rpm_;
+
+            writeout_.command.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
+            writeout_.command.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
+            writeout_.command.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
+            writeout_.command.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
+        }
+        else
+        {
+            // Negative torque request
+            torqueRequest = MAX_REGEN_TORQUE * accelRequest * -1.0;
+            float netTorqueRequest = torqueRequest * 4;
+
+            writeout_.command.speeds_rpm[FL] = 0.0;
+            writeout_.command.speeds_rpm[FR] = 0.0;
+            writeout_.command.speeds_rpm[RL] = 0.0;
+            writeout_.command.speeds_rpm[RR] = 0.0;
+
+
+
+            writeout_.command.torqueSetpoints[FL] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[FR] = (netTorqueRequest * frontRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RL] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+            writeout_.command.torqueSetpoints[RR] = (netTorqueRequest * rearRegenTorqueScale_) / 2;
+        }
+    }
+}
+
 // TorqueControllerLoadCellVectoring
 
 void TorqueControllerLoadCellVectoring::tick(

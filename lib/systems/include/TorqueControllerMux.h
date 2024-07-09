@@ -22,9 +22,9 @@ class TorqueControllerMux
 private:
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
-    TorqueControllerSimple tcSimple_10mps_;
-    TorqueControllerSimple tcSimple_15mps_;
-    TorqueControllerSimple tcSimple_20mps_;
+    TorqueControllerSimple_10mps tcSimple_10mps_;
+    TorqueControllerSimple_15mps tcSimple_15mps_;
+    TorqueControllerSimple_20mps tcSimple_20mps_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
     TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
     TorqueControllerSlipLaunch torqueControllerSlipLaunch_;
@@ -33,9 +33,9 @@ private:
     // Use this to map the dial to TCMUX modes
     std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
         {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
-        {DialMode_e::MODE_2, TorqueController_e::TC_CASE_SYSTEM},
-        {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
+        {DialMode_e::MODE_1, TorqueController_e::TC_SAFE_10MPS},
+        {DialMode_e::MODE_2, TorqueController_e::TC_SAFE_15MPS},
+        {DialMode_e::MODE_3, TorqueController_e::TC_SAFE_20MPS},
         {DialMode_e::MODE_4, TorqueController_e::TC_SLIP_LAUNCH},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
@@ -77,9 +77,9 @@ public:
     TorqueControllerMux(TelemetryInterface *telemInterface)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
-    , tcSimple_10mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], 1.0, 1.0, 10.0)
-    , tcSimple_15mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], 1.0, 1.0, 15.0)
-    , tcSimple_20mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], 1.0, 1.0, 20.0)
+    , tcSimple_10mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_10MPS)], 1.0, 1.0, 10.0)
+    , tcSimple_15mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_15MPS)], 1.0, 1.0, 15.0)
+    , tcSimple_20mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_20MPS)], 1.0, 1.0, 20.0)
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
@@ -93,9 +93,9 @@ public:
     TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale, TelemetryInterface *telemInterface)
     : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
-    , tcSimple_10mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale, 10.0)
-    , tcSimple_15mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale, 15.0)
-    , tcSimple_20mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale, 20.0)
+    , tcSimple_10mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_10MPS)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale, 10.0)
+    , tcSimple_15mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_15MPS)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale, 15.0)
+    , tcSimple_20mps_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_20MPS)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale, 20.0)
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
     , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
