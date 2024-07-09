@@ -78,7 +78,10 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 
 float AMSInterface::initialize_charge() {
     int i = 0;
-    while (HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - VOLTAGE_LOOKUP_TABLE[i] < 0) {
+    float lowest_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+    bms_low_voltage_at_init_ = lowest_voltage;
+
+    while (lowest_voltage - VOLTAGE_LOOKUP_TABLE[i] < 0) {
         i++;
     }
     charge_ = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
@@ -140,6 +143,7 @@ void AMSInterface::tick(const SysTick_s &tick) {
     STATE_OF_CHARGE_t soc_struct;
     soc_struct.charge_percentage_ro = HYTECH_charge_percentage_ro_toS(SoC_);
     soc_struct.charge_coulombs_ro = HYTECH_charge_coulombs_ro_toS(charge_);
+    soc_struct.min_cell_voltage_at_initializati_ro = HYTECH_min_cell_voltage_at_initializati_ro_toS(bms_low_voltage_at_init_);
     enqueue_new_CAN<STATE_OF_CHARGE_t>(&soc_struct, Pack_STATE_OF_CHARGE_hytech);
 
     last_tick_ = tick;
