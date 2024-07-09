@@ -79,9 +79,13 @@ void test_calculate_SoC_em()
     interface.retrieve_em_measurement_CAN(em_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
 
 
+    // TEST CASE ZERO - 5000ms to allow initialization to happen
+    SysTick_s tick_zero;
+    tick_zero.millis = starting_millis + 5000;
+    tick_zero.micros = starting_micros + 1000000;
 
     // Call tick() once (with no delta t) so that initialize_charge() will be called
-    interface.tick(starting_tick);
+    interface.tick(tick_zero);
 
     // assert initial SoC is correct
     TEST_ASSERT_EQUAL_FLOAT(75.0, interface.get_SoC());
@@ -91,8 +95,8 @@ void test_calculate_SoC_em()
 
     // TEST CASE ONE - 10ms - 25amps
     SysTick_s tick_one;
-    tick_one.millis = starting_millis + 10;
-    tick_one.micros = starting_micros + 10000;
+    tick_one.millis = tick_zero.millis + 10;
+    tick_one.micros = tick_zero.micros + 10000;
 
     // 25 amps of current * 0.01sec = 0.25 coulombs of charge.
     // Starting charge = 75%, so 36450 coulombs. After this,
@@ -104,8 +108,8 @@ void test_calculate_SoC_em()
 
     // TEST CASE TWO - 20ms - 50amps
     SysTick_s tick_two;
-    tick_two.millis = starting_millis + 10 + 20;
-    tick_two.micros = starting_micros + 10000 + 20000;
+    tick_two.millis = tick_zero.millis + 10 + 20;
+    tick_two.micros = tick_zero.micros + 10000 + 20000;
 
     em_measurements_can = generate_can_msg_from_uint_32s(HYTECH_em_current_ro_toS(50.0f), HYTECH_em_voltage_ro_toS(530.5f), true);
     interface.retrieve_em_measurement_CAN(em_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
@@ -125,8 +129,8 @@ void test_calculate_SoC_em()
 
     for (int i = 0; i <= 10000000; i += 20000) {
         SysTick_s curr_tick;
-        curr_tick.millis = starting_millis + 10 + 20 + i/1000;
-        curr_tick.micros = starting_micros + 10000 + 20000 + i;
+        curr_tick.millis = tick_zero.millis + 10 + 20 + i/1000;
+        curr_tick.micros = tick_zero.micros + 10000 + 20000 + i;
         interface.tick(curr_tick);
     }
 
@@ -165,8 +169,13 @@ void test_calculate_SoC_acu()
 
 
 
+    // TEST CASE ZERO - 5000ms to allow initialization to happen
+    SysTick_s tick_zero;
+    tick_zero.millis = starting_millis + 5000;
+    tick_zero.micros = starting_micros + 1000000;
+
     // Call tick() once (with no delta t) so that initialize_charge() will be called
-    interface.tick(starting_tick);
+    interface.tick(tick_zero);
     // assert initial SoC is correct
     TEST_ASSERT_EQUAL_FLOAT(75.0, interface.get_SoC());
 
@@ -175,8 +184,8 @@ void test_calculate_SoC_acu()
 
     // TEST CASE ONE - 10ms - 25amps
     SysTick_s tick_one;
-    tick_one.millis = starting_millis + 10;
-    tick_one.micros = starting_micros + 10000;
+    tick_one.millis = tick_zero.millis + 10;
+    tick_one.micros = tick_zero.micros + 10000;
 
     // 25 amps of current * 0.01sec = 0.25 coulombs of charge.
     // Starting charge = 75%, so 36450 coulombs. After this,
@@ -188,8 +197,8 @@ void test_calculate_SoC_acu()
 
     // TEST CASE TWO - 20ms - 50amps
     SysTick_s tick_two;
-    tick_two.millis = starting_millis + 10 + 20;
-    tick_two.micros = starting_micros + 10000 + 20000;
+    tick_two.millis = tick_zero.millis + 10 + 20;
+    tick_two.micros = tick_zero.micros + 10000 + 20000;
 
     acu_measurements_can = generate_can_msg_from_uint_16s(2458, HYTECH_pack_filtered_read_ro_toS(0.0), HYTECH_ts_out_filtered_read_ro_toS(0.0), 0, false);
     interface.retrieve_current_shunt_CAN(acu_measurements_can); // Reads CAN message into the acu_shunt_measurements_ member variable
@@ -209,8 +218,8 @@ void test_calculate_SoC_acu()
 
     for (int i = 0; i <= 10000000; i += 20000) {
         SysTick_s curr_tick;
-        curr_tick.millis = starting_millis + 10 + 20 + i/1000;
-        curr_tick.micros = starting_micros + 10000 + 20000 + i;
+        curr_tick.millis = tick_zero.millis + 10 + 20 + i/1000;
+        curr_tick.micros = tick_zero.micros + 10000 + 20000 + i;
         interface.tick(curr_tick);
     }
 

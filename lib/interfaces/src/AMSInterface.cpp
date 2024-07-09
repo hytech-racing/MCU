@@ -116,14 +116,6 @@ void AMSInterface::calculate_SoC_acu(const SysTick_s &tick) {
 
 void AMSInterface::tick(const SysTick_s &tick) {
 
-    // If AMSInterface has a valid reading in bms_voltages_ and enough time has passed since init(), then initialize charge
-    if (!has_initialized_charge_ && ((tick.millis - timestamp_start_) > DEFAULT_INITIALIZATION_WAIT_INTERVAL)) {
-    
-        initialize_charge();
-        has_initialized_charge_ = true;
-
-    }
-
     // Only calculate the updated SoC if charge has been properly initialized.
     if (has_initialized_charge_) {
         // Do not edit this block! If both calculate_SoC_em AND calculate_SoC_acu are run,
@@ -133,6 +125,14 @@ void AMSInterface::tick(const SysTick_s &tick) {
         } else {
             calculate_SoC_acu(tick);
         }
+    }
+
+    // If AMSInterface has a valid reading in bms_voltages_ and enough time has passed since init(), then initialize charge
+    if (!has_initialized_charge_ && ((tick.millis - timestamp_start_) >= DEFAULT_INITIALIZATION_WAIT_INTERVAL)) {
+    
+        initialize_charge();
+        has_initialized_charge_ = true;
+
     }
 
     // Send CAN message
