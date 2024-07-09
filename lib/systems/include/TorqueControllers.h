@@ -22,13 +22,13 @@ const float MAX_POWER_LIMIT = 51500.0; // max mechanical power limit in KW
 
 /* MOTOR CONSTANTS */
 
-// const float AMK_MAX_RPM = 20000;
+const float AMK_MAX_RPM = 20000;
 // 10MPH LIMIT for lot testing lmao
 // const float AMK_MAX_RPM = (13.4 * METERS_PER_SECOND_TO_RPM); // 30mph
 // const float AMK_MAX_RPM = (4.47 * METERS_PER_SECOND_TO_RPM); // 10mph
 // const float AMK_MAX_RPM = (2.235 * METERS_PER_SECOND_TO_RPM); // 5mph
 // const float AMK_MAX_RPM = (.89 * METERS_PER_SECOND_TO_RPM); // 1mph
-const float AMK_MAX_RPM = (10.0 * METERS_PER_SECOND_TO_RPM);
+// const float AMK_MAX_RPM = (10.0 * METERS_PER_SECOND_TO_RPM);
 const float AMK_MAX_TORQUE = 21.42;
 const float MAX_REGEN_TORQUE = 10.0;
 
