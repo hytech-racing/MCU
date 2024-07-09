@@ -22,9 +22,9 @@ class TorqueControllerMux
 private:
     TorqueControllerNone torqueControllerNone_;
     TorqueControllerSimple torqueControllerSimple_;
-    TorqueControllerSimple_10mps tcSimple_10mps_;
-    TorqueControllerSimple_15mps tcSimple_15mps_;
-    TorqueControllerSimple_20mps tcSimple_20mps_;
+    TorqueControllerSimple tcSimple_10mps_;
+    TorqueControllerSimple tcSimple_15mps_;
+    TorqueControllerSimple tcSimple_20mps_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
     TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
     TorqueControllerSlipLaunch torqueControllerSlipLaunch_;
