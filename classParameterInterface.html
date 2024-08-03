@@ -83,7 +83,7 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1516411dc528809861f8fd3329246c4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#a1516411dc528809861f8fd3329246c4c">ParameterInterface</a> ()</td></tr>
 <tr class="separator:a1516411dc528809861f8fd3329246c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6879e55b1d8ca6c2fecf6b361eaa68e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#aa6879e55b1d8ca6c2fecf6b361eaa68e">update_car_state</a> (const <a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> &amp;<a class="el" href="main__ethernet__test_8cpp.html#a461cc819e8539fe8db7b118eea4e1b72">state</a>)</td></tr>
+<tr class="memitem:aa6879e55b1d8ca6c2fecf6b361eaa68e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#aa6879e55b1d8ca6c2fecf6b361eaa68e">update_car_state</a> (const <a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> &amp;state)</td></tr>
 <tr class="separator:aa6879e55b1d8ca6c2fecf6b361eaa68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63f6502ce0df301a08b990f7573b1dbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#a63f6502ce0df301a08b990f7573b1dbe">update_config</a> (const config &amp;config)</td></tr>
 <tr class="separator:a63f6502ce0df301a08b990f7573b1dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,7 +97,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a03e6afa0fa0bf2bba62ea96da2b469b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1516411dc528809861f8fd3329246c4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#a1516411dc528809861f8fd3329246c4c">ParameterInterface</a> ()</td></tr>
 <tr class="separator:a1516411dc528809861f8fd3329246c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6879e55b1d8ca6c2fecf6b361eaa68e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#aa6879e55b1d8ca6c2fecf6b361eaa68e">update_car_state</a> (const <a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> &amp;<a class="el" href="main__ethernet__test_8cpp.html#a461cc819e8539fe8db7b118eea4e1b72">state</a>)</td></tr>
+<tr class="memitem:aa6879e55b1d8ca6c2fecf6b361eaa68e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#aa6879e55b1d8ca6c2fecf6b361eaa68e">update_car_state</a> (const <a class="el" href="MCUStateMachine_8h.html#a58c047628eba86c757d8348e600d8a1c">CAR_STATE</a> &amp;state)</td></tr>
 <tr class="separator:aa6879e55b1d8ca6c2fecf6b361eaa68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63f6502ce0df301a08b990f7573b1dbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameterInterface.html#a63f6502ce0df301a08b990f7573b1dbe">update_config</a> (const config &amp;config)</td></tr>
 <tr class="separator:a63f6502ce0df301a08b990f7573b1dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -445,9 +445,8 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="interfaces_2include_2ParameterInterface_8h_source.html#l00014">14</a> of file <a class="el" href="interfaces_2include_2ParameterInterface_8h_source.html">ParameterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span>    {</div>
-<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="classParameterInterface.html#a749f510cb85eae49dae1e3eeca8257d8">current_car_state_</a> = <a class="code hl_variable" href="main__ethernet__test_8cpp.html#a461cc819e8539fe8db7b118eea4e1b72">state</a>;</div>
+<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="classParameterInterface.html#a749f510cb85eae49dae1e3eeca8257d8">current_car_state_</a> = state;</div>
 <div class="line"><span class="lineno">   17</span>    }</div>
-<div class="ttc" id="amain__ethernet__test_8cpp_html_a461cc819e8539fe8db7b118eea4e1b72"><div class="ttname"><a href="main__ethernet__test_8cpp.html#a461cc819e8539fe8db7b118eea4e1b72">state</a></div><div class="ttdeci">CAR_STATE state</div><div class="ttdef"><b>Definition:</b> <a href="main__ethernet__test_8cpp_source.html#l00009">main_ethernet_test.cpp:9</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -477,7 +476,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="mock__interfaces_2ParameterInterface_8h_source.html#l00014">14</a> of file <a class="el" href="mock__interfaces_2ParameterInterface_8h_source.html">ParameterInterface.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   15</span>    {</div>
-<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="classParameterInterface.html#a749f510cb85eae49dae1e3eeca8257d8">current_car_state_</a> = <a class="code hl_variable" href="main__ethernet__test_8cpp.html#a461cc819e8539fe8db7b118eea4e1b72">state</a>;</div>
+<div class="line"><span class="lineno">   16</span>        <a class="code hl_variable" href="classParameterInterface.html#a749f510cb85eae49dae1e3eeca8257d8">current_car_state_</a> = state;</div>
 <div class="line"><span class="lineno">   17</span>    }</div>
 </div><!-- fragment -->
 </div>

@@ -13,7 +13,7 @@ var searchData=
   ['enqueue_5fcan_5fmcu_5fstatus_10',['enqueue_CAN_mcu_status',['../classMCUInterface.html#a86947a4d11e78c6600ffa3a91e9d0b4b',1,'MCUInterface']]],
   ['enqueue_5fmatlab_5fmsg_11',['enqueue_matlab_msg',['../interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669',1,'enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS &amp;structure):&#160;HytechCANInterface.h'],['../test__CASE_8h.html#a59c32ab08c0f0737f90f451923a95413',1,'enqueue_matlab_msg(FakeMessageQueue *, const CAN_MESSAGE_BUS &amp;msg):&#160;test_CASE.h']]],
   ['enqueue_5fnew_5fcan_12',['enqueue_new_CAN',['../classAMSInterface.html#a5d23e4c4cf0e8dffcda1559722202bd4',1,'AMSInterface::enqueue_new_CAN()'],['../classTelemetryInterface.html#a4f52fd638951d6ee400c63b7d8dbfe9d',1,'TelemetryInterface::enqueue_new_CAN()']]],
-  ['enqueue_5fstate_5fof_5fcharge_5fcan_13',['enqueue_state_of_charge_CAN',['../classAMSInterface.html#a0e6095da4a2c4b69a7cbfa6d7198174e',1,'AMSInterface']]],
+  ['enqueue_5fstate_5fof_5fcharge_5fcan_13',['enqueue_state_of_charge_CAN',['../classAMSInterface.html#a0e6095da4a2c4b69a7cbfa6d7198174e',1,'AMSInterface::enqueue_state_of_charge_CAN()'],['../classAMSInterface.html#a0e6095da4a2c4b69a7cbfa6d7198174e',1,'AMSInterface::enqueue_state_of_charge_CAN()']]],
   ['err_5fdivergence_5foffset_14',['ERR_DIVERGENCE_OFFSET',['../steering__system__test_8h.html#af88f5500d67971c6ec49a10b3ecbb79e',1,'steering_system_test.h']]],
   ['err_5ffilter_5flatency_15',['ERR_FILTER_LATENCY',['../steering__system__test_8h.html#adfbce458ec827c97469e0f4bfee8d44a',1,'steering_system_test.h']]],
   ['error_16',['error',['../classInverterMock.html#ac378b9f4ab67466bc89d9217aaac9ce6',1,'InverterMock']]],

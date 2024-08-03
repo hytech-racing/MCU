@@ -1,7 +1,7 @@
 var searchData=
 [
   ['dash_5fbuzzer_5fwas_5fon_0',['dash_buzzer_was_on',['../classBuzzerController.html#ae5718983279435473042eb2be22f2289',1,'BuzzerController']]],
-  ['dash_5fcan_5fbuffer_1',['dash_CAN_buffer',['../dashboard__interface__test_8h.html#a72e5991d811922ac44f03e3d4d802a09',1,'dashboard_interface_test.h']]],
+  ['dash_5fcan_5fbuffer_1',['dash_CAN_buffer',['../dashboard__interface__test_8h.html#acda970ff9d56a52f76b0ed69f2522c01',1,'dashboard_interface_test.h']]],
   ['dash_5finterface_2',['dash_interface',['../structCANInterfaces.html#a25309022d4407344f870fddd1630e272',1,'CANInterfaces']]],
   ['dashboard_5f_3',['dashboard_',['../classMCUStateMachine.html#a6f8b78bd2df870cd3e70074623365c4d',1,'MCUStateMachine']]],
   ['data_4',['data',['../classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca',1,'AnalogMultiSensor']]],
@@ -24,7 +24,7 @@ var searchData=
   ['default_5fimd_5fsense_5fpin_21',['DEFAULT_IMD_SENSE_PIN',['../interfaces_2include_2MCUInterface_8h.html#a3072e24872b59119c5412a37e0053a41',1,'MCUInterface.h']]],
   ['default_5finit_5ftemp_22',['DEFAULT_INIT_TEMP',['../mock__interfaces_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e',1,'DEFAULT_INIT_TEMP():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e',1,'DEFAULT_INIT_TEMP():&#160;AMSInterface.h']]],
   ['default_5finit_5fvoltage_23',['DEFAULT_INIT_VOLTAGE',['../interfaces_2include_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235',1,'DEFAULT_INIT_VOLTAGE():&#160;AMSInterface.h'],['../mock__interfaces_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235',1,'DEFAULT_INIT_VOLTAGE():&#160;AMSInterface.h']]],
-  ['default_5finitialization_5fwait_5finterval_24',['DEFAULT_INITIALIZATION_WAIT_INTERVAL',['../interfaces_2include_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae',1,'AMSInterface.h']]],
+  ['default_5finitialization_5fwait_5finterval_24',['DEFAULT_INITIALIZATION_WAIT_INTERVAL',['../interfaces_2include_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae',1,'DEFAULT_INITIALIZATION_WAIT_INTERVAL():&#160;AMSInterface.h'],['../mock__interfaces_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae',1,'DEFAULT_INITIALIZATION_WAIT_INTERVAL():&#160;AMSInterface.h']]],
   ['default_5finverter_5f24v_5fenable_25',['DEFAULT_INVERTER_24V_ENABLE',['../interfaces_2include_2MCUInterface_8h.html#a456a7a828023a5eeb8ff4c28ee811293',1,'MCUInterface.h']]],
   ['default_5finverter_5fenable_26',['DEFAULT_INVERTER_ENABLE',['../interfaces_2include_2MCUInterface_8h.html#a05b0e84892283ddab58f3eac405c6635',1,'MCUInterface.h']]],
   ['default_5flaunch_5frate_27',['DEFAULT_LAUNCH_RATE',['../TorqueControllers_8h.html#ab6b5e150ee66661c885afe39c5471905',1,'TorqueControllers.h']]],

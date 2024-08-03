@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['half_5faccelerator_5fpedal_5f1_0',['HALF_ACCELERATOR_PEDAL_1',['../driver__constants_8h.html#a6c2ec75026298a435d5ec8abde0c4d9e',1,'driver_constants.h']]],
-  ['half_5faccelerator_5fpedal_5f2_1',['HALF_ACCELERATOR_PEDAL_2',['../driver__constants_8h.html#a6b3117f29b4e0cf6007af174fbe64467',1,'driver_constants.h']]]
+  ['err_5fdivergence_5foffset_0',['ERR_DIVERGENCE_OFFSET',['../steering__system__test_8h.html#af88f5500d67971c6ec49a10b3ecbb79e',1,'steering_system_test.h']]],
+  ['err_5ffilter_5flatency_1',['ERR_FILTER_LATENCY',['../steering__system__test_8h.html#adfbce458ec827c97469e0f4bfee8d44a',1,'steering_system_test.h']]]
 ];

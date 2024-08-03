@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['primary_5falpha_0',['PRIMARY_ALPHA',['../steering__system__test_8h.html#a312451895e52c3f1054a169157872c10',1,'steering_system_test.h']]]
+  ['num_5fsensors_0',['NUM_SENSORS',['../SteeringSystem_8h.html#add02d1c189e3b727b722638327642a8b',1,'SteeringSystem.h']]]
 ];

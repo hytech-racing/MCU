@@ -18,5 +18,5 @@ var searchData=
   ['vninterface_15',['VNInterface',['../classVNInterface.html#a5a822c2c19b5039408e70c18d925da56',1,'VNInterface::VNInterface(message_queue *msg_output_queue)'],['../classVNInterface.html#a5a822c2c19b5039408e70c18d925da56',1,'VNInterface::VNInterface(message_queue *msg_output_queue)'],['../classVNInterface.html',1,'VNInterface&lt; message_queue &gt;']]],
   ['vninterface_3c_20circular_5fbuffer_20_3e_16',['VNInterface&lt; circular_buffer &gt;',['../classVNInterface.html',1,'']]],
   ['voltage_5f_17',['voltage_',['../classInverterMock.html#af4be6e861940919af68a740562a1f87f',1,'InverterMock']]],
-  ['voltage_5flookup_5ftable_18',['VOLTAGE_LOOKUP_TABLE',['../classAMSInterface.html#a91f6016b742f5140d481402cbfecdcbf',1,'AMSInterface']]]
+  ['voltage_5flookup_5ftable_18',['VOLTAGE_LOOKUP_TABLE',['../classAMSInterface.html#ade24b908baf656ad85794392032ceb2d',1,'AMSInterface']]]
 ];

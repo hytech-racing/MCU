@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['casesystem_2eh_0',['CASESystem.h',['../CASESystem_8h.html',1,'']]]
+  ['can_5ftesting_5futilities_2eh_0',['CAN_testing_utilities.h',['../CAN__testing__utilities_8h.html',1,'']]],
+  ['casesystem_2eh_1',['CASESystem.h',['../CASESystem_8h.html',1,'']]],
+  ['coulomb_5fcounting_5ftests_2eh_2',['Coulomb_Counting_Tests.h',['../Coulomb__Counting__Tests_8h.html',1,'']]]
 ];

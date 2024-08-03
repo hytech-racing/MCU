@@ -2,12 +2,12 @@ var searchData=
 [
   ['magnetizing_5fcurrent_5f_0',['magnetizing_current_',['../classInverterInterface.html#a4e525ce92f3c84d13f4a2c808b2c927e',1,'InverterInterface']]],
   ['mark_1',['mark',['../structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926',1,'DashButtons_s']]],
-  ['max_5fpack_5fcharge_2',['MAX_PACK_CHARGE',['../interfaces_2include_2AMSInterface_8h.html#a7b7a1a2d472399d9a0bec1b773b49d8d',1,'AMSInterface.h']]],
+  ['max_5fpack_5fcharge_2',['MAX_PACK_CHARGE',['../mock__interfaces_2AMSInterface_8h.html#a433fef879ffc4bc3a5753d7dd5385689',1,'MAX_PACK_CHARGE():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#a7b7a1a2d472399d9a0bec1b773b49d8d',1,'MAX_PACK_CHARGE():&#160;AMSInterface.h']]],
   ['max_5fpedal_5f1_3',['max_pedal_1',['../structPedalsParams.html#ac10c4cab837dc563897fad327a0e9449',1,'PedalsParams']]],
   ['max_5fpedal_5f2_4',['max_pedal_2',['../structPedalsParams.html#afd571f2b4e08ec205efffa3a3e9014b3',1,'PedalsParams']]],
   ['max_5fpower_5flimit_5',['MAX_POWER_LIMIT',['../TorqueControllers_8h.html#a7d09c3c504518e5450a627fcf7c57506',1,'TorqueControllers.h']]],
-  ['max_5fregen_5ftorque_6',['max_regen_torque',['../structCASEConfiguration.html#acbe1d6a9013ec8debe8f0b706fd2d6a6',1,'CASEConfiguration']]],
-  ['max_5fregen_5ftorque_7',['MAX_REGEN_TORQUE',['../TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d',1,'TorqueControllers.h']]],
+  ['max_5fregen_5ftorque_6',['MAX_REGEN_TORQUE',['../TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d',1,'TorqueControllers.h']]],
+  ['max_5fregen_5ftorque_7',['max_regen_torque',['../structCASEConfiguration.html#acbe1d6a9013ec8debe8f0b706fd2d6a6',1,'CASEConfiguration']]],
   ['max_5frpm_8',['max_rpm',['../structCASEConfiguration.html#a1d0134c7e96cb0db738fc19176e2db5e',1,'CASEConfiguration']]],
   ['max_5fsensor_5fpedal_5f1_9',['max_sensor_pedal_1',['../structPedalsParams.html#a21d0305785d9f28b620a04a8345b371d',1,'PedalsParams']]],
   ['max_5fsensor_5fpedal_5f2_10',['max_sensor_pedal_2',['../structPedalsParams.html#acf31a05cd5a9209431d869bea9f7f495',1,'PedalsParams']]],
@@ -62,6 +62,6 @@ var searchData=
   ['modeintended_59',['modeIntended',['../structTCMuxStatus__s.html#a5b5bf20d2baf5145d3e7552f8cb90942',1,'TCMuxStatus_s']]],
   ['motor_5fpole_5fpairs_5f_60',['motor_pole_pairs_',['../classDrivetrainSystem.html#a273b9cb4bc4d54da9d7598e49c7a4e00',1,'DrivetrainSystem']]],
   ['msg_61',['msg',['../test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1',1,'test_can_interface.cpp']]],
-  ['msg_5fqueue_5f_62',['msg_queue_',['../classCASESystem.html#ad918cb11fdd197d924cf9000eea3792a',1,'CASESystem::msg_queue_()'],['../classVNInterface.html#abbd91691dff779b70bbfe333d415834c',1,'VNInterface::msg_queue_()'],['../classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc',1,'TelemetryInterface::msg_queue_()'],['../classMCUInterface.html#aa20d3a143f89007da6c4842ea4eb9988',1,'MCUInterface::msg_queue_()'],['../classInverterInterface.html#ac1783f7a44e0b99497c1f22eb2175b2b',1,'InverterInterface::msg_queue_()'],['../classDashboardInterface.html#aac8ce2b25a4617815ffd7b2df881caa8',1,'DashboardInterface::msg_queue_()'],['../classAMSInterface.html#acfc8acce93e487631a4be4745e8e0132',1,'AMSInterface::msg_queue_()']]],
+  ['msg_5fqueue_5f_62',['msg_queue_',['../classCASESystem.html#ad918cb11fdd197d924cf9000eea3792a',1,'CASESystem::msg_queue_()'],['../classAMSInterface.html#a909c16b0b8c72e3536ba66fd7c9a1bee',1,'AMSInterface::msg_queue_()'],['../classVNInterface.html#abbd91691dff779b70bbfe333d415834c',1,'VNInterface::msg_queue_()'],['../classTelemetryInterface.html#a3b041ec65a20ef24386db6fe8f09bbbc',1,'TelemetryInterface::msg_queue_()'],['../classMCUInterface.html#aa20d3a143f89007da6c4842ea4eb9988',1,'MCUInterface::msg_queue_()'],['../classInverterInterface.html#ac1783f7a44e0b99497c1f22eb2175b2b',1,'InverterInterface::msg_queue_()'],['../classDashboardInterface.html#aac8ce2b25a4617815ffd7b2df881caa8',1,'DashboardInterface::msg_queue_()'],['../classAMSInterface.html#acfc8acce93e487631a4be4745e8e0132',1,'AMSInterface::msg_queue_()']]],
   ['muxmode_5f_63',['muxMode_',['../classTorqueControllerMux.html#a3a03aaae1a2d0f91c23fa2ecfe9a75c5',1,'TorqueControllerMux']]]
 ];

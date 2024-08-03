@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['err_5fdivergence_5foffset_0',['ERR_DIVERGENCE_OFFSET',['../steering__system__test_8h.html#af88f5500d67971c6ec49a10b3ecbb79e',1,'steering_system_test.h']]],
-  ['err_5ffilter_5flatency_1',['ERR_FILTER_LATENCY',['../steering__system__test_8h.html#adfbce458ec827c97469e0f4bfee8d44a',1,'steering_system_test.h']]]
+  ['default_5falpha_0',['DEFAULT_ALPHA',['../Filter__IIR_8h.html#aba42e2577965afce5d4454243a5ed8b8',1,'Filter_IIR.h']]],
+  ['default_5fsteering_5falpha_1',['DEFAULT_STEERING_ALPHA',['../SteeringSystem_8h.html#a32532e548c1fac405db7a741bdfd2699',1,'SteeringSystem.h']]]
 ];

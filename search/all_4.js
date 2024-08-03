@@ -1,7 +1,7 @@
 var searchData=
 [
   ['dash_5fbuzzer_5fwas_5fon_0',['dash_buzzer_was_on',['../classBuzzerController.html#ae5718983279435473042eb2be22f2289',1,'BuzzerController']]],
-  ['dash_5fcan_5fbuffer_1',['dash_CAN_buffer',['../dashboard__interface__test_8h.html#a72e5991d811922ac44f03e3d4d802a09',1,'dashboard_interface_test.h']]],
+  ['dash_5fcan_5fbuffer_1',['dash_CAN_buffer',['../dashboard__interface__test_8h.html#acda970ff9d56a52f76b0ed69f2522c01',1,'dashboard_interface_test.h']]],
   ['dash_5finterface_2',['dash_interface',['../structCANInterfaces.html#a25309022d4407344f870fddd1630e272',1,'CANInterfaces']]],
   ['dashboard_5f_3',['dashboard_',['../classMCUStateMachine.html#a6f8b78bd2df870cd3e70074623365c4d',1,'MCUStateMachine']]],
   ['dashboard_5finterface_5ftest_2eh_4',['dashboard_interface_test.h',['../dashboard__interface__test_8h.html',1,'']]],
@@ -35,8 +35,8 @@ var searchData=
   ['default_5fimd_5fok_5fread_32',['DEFAULT_IMD_OK_READ',['../interfaces_2include_2MCUInterface_8h.html#a407305e8beb65a2df78d98cb502a2555',1,'MCUInterface.h']]],
   ['default_5fimd_5fsense_5fpin_33',['DEFAULT_IMD_SENSE_PIN',['../interfaces_2include_2MCUInterface_8h.html#a3072e24872b59119c5412a37e0053a41',1,'MCUInterface.h']]],
   ['default_5finit_5ftemp_34',['DEFAULT_INIT_TEMP',['../mock__interfaces_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e',1,'DEFAULT_INIT_TEMP():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#a5d6e09b98e5878108b7cf4d1aea6022e',1,'DEFAULT_INIT_TEMP():&#160;AMSInterface.h']]],
-  ['default_5finit_5fvoltage_35',['DEFAULT_INIT_VOLTAGE',['../interfaces_2include_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235',1,'DEFAULT_INIT_VOLTAGE():&#160;AMSInterface.h'],['../mock__interfaces_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235',1,'DEFAULT_INIT_VOLTAGE():&#160;AMSInterface.h']]],
-  ['default_5finitialization_5fwait_5finterval_36',['DEFAULT_INITIALIZATION_WAIT_INTERVAL',['../interfaces_2include_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae',1,'AMSInterface.h']]],
+  ['default_5finit_5fvoltage_35',['DEFAULT_INIT_VOLTAGE',['../mock__interfaces_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235',1,'DEFAULT_INIT_VOLTAGE():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#a3e84cff12cd053ea3224bcdc1e7e4235',1,'DEFAULT_INIT_VOLTAGE():&#160;AMSInterface.h']]],
+  ['default_5finitialization_5fwait_5finterval_36',['DEFAULT_INITIALIZATION_WAIT_INTERVAL',['../mock__interfaces_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae',1,'DEFAULT_INITIALIZATION_WAIT_INTERVAL():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#aafafffb13dde86b5831482dc7b03a7ae',1,'DEFAULT_INITIALIZATION_WAIT_INTERVAL():&#160;AMSInterface.h']]],
   ['default_5finverter_5f24v_5fenable_37',['DEFAULT_INVERTER_24V_ENABLE',['../interfaces_2include_2MCUInterface_8h.html#a456a7a828023a5eeb8ff4c28ee811293',1,'MCUInterface.h']]],
   ['default_5finverter_5fenable_38',['DEFAULT_INVERTER_ENABLE',['../interfaces_2include_2MCUInterface_8h.html#a05b0e84892283ddab58f3eac405c6635',1,'MCUInterface.h']]],
   ['default_5flaunch_5frate_39',['DEFAULT_LAUNCH_RATE',['../TorqueControllers_8h.html#ab6b5e150ee66661c885afe39c5471905',1,'TorqueControllers.h']]],
@@ -72,7 +72,7 @@ var searchData=
   ['drivetrain_5f_69',['drivetrain_',['../classMCUStateMachine.html#a8d7b28dc3ef8e19b05a32e160ee9c97f',1,'MCUStateMachine']]],
   ['drivetrain_5fenabled_5f_70',['drivetrain_enabled_',['../classDrivetrainSystem.html#a999d889397257fb8f93b9e139ae14354',1,'DrivetrainSystem']]],
   ['drivetrain_5ferror_5f_71',['drivetrain_error_',['../classDrivetrainMock.html#a05f11d150b3a3db607d4867f3bc60d1c',1,'DrivetrainMock']]],
-  ['drivetrain_5ferror_5foccured_72',['drivetrain_error_occured',['../classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a',1,'DrivetrainSystem::drivetrain_error_occured()'],['../classDrivetrainMock.html#aeee183300baef99f9b773bda0d71f18a',1,'DrivetrainMock::drivetrain_error_occured()']]],
+  ['drivetrain_5ferror_5foccured_72',['drivetrain_error_occured',['../classDrivetrainMock.html#aeee183300baef99f9b773bda0d71f18a',1,'DrivetrainMock::drivetrain_error_occured()'],['../classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a',1,'DrivetrainSystem::drivetrain_error_occured()']]],
   ['drivetrain_5finited_5f_73',['drivetrain_inited_',['../classDrivetrainMock.html#a11eaf5c9275727dca38f7a01e0f71b83',1,'DrivetrainMock']]],
   ['drivetrain_5finitialization_5fphase_5fstart_5ftime_5f_74',['drivetrain_initialization_phase_start_time_',['../classDrivetrainSystem.html#a22c7c32447b5a8b2ddc65c07a83e43c2',1,'DrivetrainSystem']]],
   ['drivetrain_5fready_5f_75',['drivetrain_ready_',['../classDrivetrainSystem.html#a9a860d084bf8b80c07cdd461171abd3b',1,'DrivetrainSystem']]],

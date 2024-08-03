@@ -61,7 +61,7 @@ var searchData=
   ['torquelimitbuttonpressed_5f_58',['torqueLimitButtonPressed_',['../classTorqueControllerMux.html#a0be6dc6192fd3b9d531429c8758593dd',1,'TorqueControllerMux']]],
   ['torquelimitbuttonpressedtime_5f_59',['torqueLimitButtonPressedTime_',['../classTorqueControllerMux.html#a099f64c7980cb6370ba91cedca4b638b',1,'TorqueControllerMux']]],
   ['torquelimitmap_5f_60',['torqueLimitMap_',['../classTorqueControllerMux.html#a96864fcfa9de29f3492554ce41cacec6',1,'TorqueControllerMux']]],
-  ['torquemode_61',['torqueMode',['../structTCMuxStatus__s.html#a9e7cde2813481286c10630a167247d46',1,'TCMuxStatus_s']]],
-  ['torquemode_62',['TorqueMode',['../structCASEConfiguration.html#ab520e05af2589db1ad17a3ba083de211',1,'CASEConfiguration']]],
+  ['torquemode_61',['TorqueMode',['../structCASEConfiguration.html#ab520e05af2589db1ad17a3ba083de211',1,'CASEConfiguration']]],
+  ['torquemode_62',['torqueMode',['../structTCMuxStatus__s.html#a9e7cde2813481286c10630a167247d46',1,'TCMuxStatus_s']]],
   ['torquesetpoints_63',['torqueSetpoints',['../structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6',1,'DrivetrainCommand_s']]]
 ];
