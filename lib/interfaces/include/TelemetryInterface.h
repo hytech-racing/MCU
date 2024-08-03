@@ -14,7 +14,7 @@
 #include "SharedDataTypes.h"
 using InvInt_t = InverterInterface<CANBufferType>;
 
-const int FIXED_POINT_PRECISION = 10000;
+const int FIXED_POINT_PRECISION = 1000;
 
 struct TelemetryInterfaceReadChannels
 {
@@ -48,7 +48,7 @@ public:
     TelemetryInterface(CANBufferType *msg_output_queue, const TelemetryInterfaceReadChannels &channels) : msg_queue_(msg_output_queue),
                                                                                                           channels_(channels){};
 
-    /* GETTERS for basic conversions that don't have a home*/
+    /* GETTERS for basic conversions that don't have a home */
 
     AnalogConversion_s get_glv_voltage(const AnalogConversionPacket_s<8> &adc1)
     {
@@ -57,21 +57,15 @@ public:
 
     /* Update CAN messages (main loop) */
     // Interfaces
-    void update_front_thermistors_CAN_msg(
-        const AnalogConversion_s &therm_fl,
-        const AnalogConversion_s &therm_fr
-    );
     void update_pedal_readings_CAN_msg(
         float accel_percent,
         float brake_percent,
-        float mech_brake_percent
-    );
+        float mech_brake_percent);
     void update_pedal_readings_raw_CAN_msg(
         const AnalogConversion_s &accel_1,
         const AnalogConversion_s &accel_2,
         const AnalogConversion_s &brake_1,
-        const AnalogConversion_s &brake_2
-    );
+        const AnalogConversion_s &brake_2);
     void update_suspension_CAN_msg(
         const AnalogConversion_s &lc_fl,
         const AnalogConversion_s &lc_fr,
@@ -111,15 +105,15 @@ public:
         const AnalogConversion_s &current,
         const AnalogConversion_s &reference);
 
-    /* Enqueue outbound telemetry CAN messages */
-    // void enqueue_CAN_mcu_pedal_readings();
-    // void enqueue_CAN_mcu_load_cells();
-    // void enqueue_CAN_mcu_front_potentiometers();
-    // void enqueue_CAN_mcu_rear_potentiometers();
-    // void enqueue_CAN_mcu_analog_readings();
-
-    template <typename T>
-    void enqueue_CAN(T can_msg, uint32_t id);
+    void update_steering_status_CAN_msg(const float steering_system_angle,
+                                        const float filtered_angle_encoder,
+                                        const float filtered_angle_analog,
+                                        const uint8_t steering_system_status,
+                                        const uint8_t steering_encoder_status,
+                                        const uint8_t steering_analog_status);
+        /* Enqueue outbound telemetry CAN messages */
+        template <typename T>
+        void enqueue_CAN(T can_msg, uint32_t id);
 
     template <typename U>
     void enqueue_new_CAN(U *structure, uint32_t (*pack_function)(U *, uint8_t *, uint8_t *, uint8_t *));
@@ -130,7 +124,6 @@ public:
         const AnalogConversionPacket_s<8> &adc1,
         const AnalogConversionPacket_s<4> &adc2,
         const AnalogConversionPacket_s<4> &adc3,
-        const AnalogConversionPacket_s<2> &mcu_adc,
         const SteeringEncoderConversion_s &encoder,
         InvInt_t *fl,
         InvInt_t *fr,
@@ -145,7 +138,7 @@ public:
         const AnalogConversion_s &brake_1,
         const AnalogConversion_s &brake_2,
         float mech_brake_active_percent,
-        const TorqueControllerMuxError& current_mux_status);
+        const TorqueControllerMuxError &current_mux_status);
 };
 
 #endif /* TELEMETRYINTERFACE */

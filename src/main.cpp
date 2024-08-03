@@ -6,11 +6,12 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-#include "NativeEthernet.h"
+// #include "NativeEthernet.h"
 
 // /* Interfaces */
 
 #include "HytechCANInterface.h"
+#include "ThermistorInterface.h"
 #include "Teensy_ADC.h"
 #include "MCP_ADC.h"
 #include "ORBIS_BR10.h"
@@ -60,6 +61,35 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .therm_fl_channel = MCU15_THERM_FL_CHANNEL,
     .therm_fr_channel = MCU15_THERM_FR_CHANNEL};
 
+const PedalsParams accel1_only_params = {
+    .min_pedal_1 = ACCEL1_PEDAL_MIN,
+    .min_pedal_2 = ACCEL1_PEDAL_MIN,
+    .max_pedal_1 = ACCEL1_PEDAL_MAX,
+    .max_pedal_2 = ACCEL1_PEDAL_MAX,
+    .min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = ACCEL1_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = ACCEL1_PEDAL_OOR_MAX,
+    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
+
+const PedalsParams accel2_only_params = {
+    .min_pedal_1 = ACCEL2_PEDAL_MIN,
+    .min_pedal_2 = ACCEL2_PEDAL_MIN,
+    .max_pedal_1 = ACCEL2_PEDAL_MAX,
+    .max_pedal_2 = ACCEL2_PEDAL_MAX,
+    .min_sensor_pedal_1 = ACCEL2_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = ACCEL2_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MAX,
+    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
+
+
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
     .min_pedal_2 = ACCEL2_PEDAL_MIN,
@@ -73,6 +103,37 @@ const PedalsParams accel_params = {
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
+
+
+const PedalsParams brake1_only_params = {
+    .min_pedal_1 = BRAKE1_PEDAL_MIN,
+    .min_pedal_2 = BRAKE1_PEDAL_MIN,
+    .max_pedal_1 = BRAKE1_PEDAL_MAX,
+    .max_pedal_2 = BRAKE1_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
+
+const PedalsParams brake2_only_params = {
+    .min_pedal_1 = BRAKE2_PEDAL_MIN,
+    .min_pedal_2 = BRAKE2_PEDAL_MIN,
+    .max_pedal_1 = BRAKE2_PEDAL_MAX,
+    .max_pedal_2 = BRAKE2_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
 
 const PedalsParams brake_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
@@ -118,10 +179,11 @@ ParameterInterface param_interface;
 ETHInterfaces ethernet_interfaces = {&param_interface};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
-AMSInterface ams_interface(8);
-WatchdogInterface wd_interface(32);
+AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
+WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
+ThermistorInterface front_thermistors_interface(&CAN3_txBuffer);
 SABInterface sab_interface(
     LOADCELL_RL_SCALE,  // RL Scale
     LOADCELL_RL_OFFSET, // RL Offset (Migos)
@@ -145,7 +207,7 @@ struct inverters
 // */
 
 SysClock sys_clock;
-SteeringSystem steering_system(&steering1);
+SteeringSystem steering_system(&steering1, &telem_interface, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
 
 SafetySystem safety_system(&ams_interface, &wd_interface);
@@ -153,20 +215,17 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
     .AbsoluteTorqueLimit = 21.42, // N-m, Torque limit used for yaw pid torque split overflow
-    .yaw_pid_p = 1.5,
-    .yaw_pid_i = 0.25,
-    // .yaw_pid_p = 0.5, // SKIDPAD Testing
-    // .yaw_pid_i = 0.0, // SKIDPAD Testing
+    .yaw_pid_p = 1.15,
+    .yaw_pid_i = 0.0,
     .yaw_pid_d = 0.0,
-    .tcs_pid_p_lowerBound_front = 35.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
-    .tcs_pid_p_upperBound_front = 45.0,
+    .tcs_pid_p_lowerBound_front = 55.0, // if tcs_pid_p_lowerBound_front > tcs_pid_p_upperBound_front, inverse relationship, no error
+    .tcs_pid_p_upperBound_front = 42.0,
     .tcs_pid_p_lowerBound_rear = 32.0,
-    .tcs_pid_p_upperBound_rear = 45.0,
+    .tcs_pid_p_upperBound_rear = 42.0,
     .tcs_pid_i = 0.0,
     .tcs_pid_d = 0.0,
     .useLaunch = false,
@@ -178,16 +237,14 @@ CASEConfiguration case_config = {
     .usePIDPowerLimit = false,
     .useDecoupledYawBrakes = true,
     .useDiscontinuousYawPIDBrakes = true,
-    .tcsSLThreshold = 0.3,
-    .launchSL = 0.3,
     .launchDeadZone = 20.0,        // N-m
     .launchVelThreshold = 0.15,    // m/s
-    .tcsVelThreshold = 0.15,       // m/s
+    .tcsVelThreshold = 1.5,        // m/s
     .yawPIDMaxDifferential = 10.0, // N-m
     .yawPIDErrorThreshold = 0.1,   // rad/s
     .yawPIDVelThreshold = 0.35,    // m/s
     .yawPIDCoastThreshold = 2.5,   // m/s
-    .yaw_pid_brakes_p = 0.25,
+    .yaw_pid_brakes_p = 0.1,
     .yaw_pid_brakes_i = 0.0,
     .yaw_pid_brakes_d = 0.0,
     .decoupledYawPIDBrakesMaxDIfference = 2, // N-m
@@ -197,14 +254,39 @@ CASEConfiguration case_config = {
     .useNoRegen5kph = true,
     .useTorqueBias = true,
     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
-    .BrakeTorquePercentFront = 0.7,
-    .MechPowerMaxkW = 63.0,            // kW
+    .BrakeTorquePercentFront = 0.6,
+    .MechPowerMaxkW =51.5,            // kW
     .launchLeftRightMaxDiff = 2.0,     // N-m
     .tcs_pid_lower_rpm_front = 0.0,    // RPM
     .tcs_pid_upper_rpm_front = 5000.0, // RPM
     .tcs_pid_lower_rpm_rear = 0.0,     // RPM
     .tcs_pid_upper_rpm_rear = 5000.0,  // RPM
-    .maxNormalLoadBrakeScalingFront = 1.25,
+    .maxNormalLoadBrakeScalingFront = 1.15,
+    .tcs_saturation_front = 20,
+    .tcs_saturation_rear = 20,
+    .TCSGenLeftRightDiffLowerBound = 2,  // N-m
+    .TCSGenLeftRightDiffUpperBound = 20, // N-m
+    .TCSWheelSteerLowerBound = 2,        // Deg
+    .TCSWheelSteerUpperBound = 25,       // Deg
+    .useRPM_TCS_GainSchedule = true,    // If both are false, then P values defaults to lower bound per axle
+    .useNL_TCS_GainSchedule = false,
+    .TCS_NL_startBoundPerc_FrontAxle = 0.5,
+    .TCS_NL_endBoundPerc_FrontAxle = 0.4,
+    .TCS_NL_startBoundPerc_RearAxle = 0.5,
+    .TCS_NL_endBoundPerc_RearAxle = 0.6,
+    .useNL_TCS_SlipSchedule = true,
+    .launchSL_startBound_Front = 0.25,
+    .launchSL_endBound_Front = 0.25,
+    .launchSL_startBound_Rear = 0.3,
+    .launchSL_endBound_Rear = 0.4,
+    .TCS_SL_startBound_Front = 0.25,
+    .TCS_SL_endBound_Front = 0.15,
+    .TCS_SL_startBound_Rear = 0.3,
+    .TCS_SL_endBound_Rear = 0.4,
+    .TCS_SL_NLPerc_startBound_Front = 0.5,
+    .TCS_SL_NLPerc_endBound_Front = 0.4,
+    .TCS_SL_NLPerc_startBound_Rear = 0.5,
+    .TCS_SL_NLPerc_endBound_Rear = 0.6,
 
     // Following used for calculate_torque_request in CASESystem.tpp
     .max_rpm = 20000,
@@ -288,7 +370,7 @@ void setup()
     a1.setChannelOffset(MCU15_STEERING_CHANNEL, -1 * SECONDARY_STEERING_SENSE_CENTER);
     a1.setChannelScale(MCU15_STEERING_CHANNEL, STEERING_RANGE_DEGREES / ((float)SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND - (float)SECONDARY_STEERING_SENSE_LEFTMOST_BOUND));
     a1.setChannelClamp(MCU15_STEERING_CHANNEL, -STEERING_RANGE_DEGREES / 0.5 * 1.15, STEERING_RANGE_DEGREES / 0.5 * 1.15); // 15% tolerance on each end of the steering sensor
-
+    a1.setChannelScale(MCU15_GLV_SENSE_CHANNEL, GLV_SENSE_SCALE);
     a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
     a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
 
@@ -306,7 +388,7 @@ void setup()
 
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick.millis); // initialize last heartbeat time
+    ams_interface.init(curr_tick);        // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -373,6 +455,48 @@ void loop()
     // send CAN
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
+
+    // Basic debug prints
+    if (curr_tick.triggers.trigger5)
+    {
+        Serial.print("Steering system reported angle (deg): ");
+        Serial.println(steering_system.getSteeringSystemData().angle);
+        Serial.print("Steering system status: ");
+        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
+        Serial.print("Primary sensor angle: ");
+        Serial.println(steering1.convert().angle);
+        Serial.print("Secondary sensor angle: ");
+        Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print("  raw: ");
+        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
+        Serial.print("Sensor divergence: ");
+        Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.println();
+        Serial.println("Pedal outputs:");
+        Serial.print("Accel 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+        Serial.print("Accel 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+        Serial.print("Accel percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
+        Serial.print("Brake 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+        Serial.print("Brake 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+        Serial.print("Brake percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
+        Serial.println();
+        Serial.print("Derating factor: ");
+        Serial.println(ams_interface.get_acc_derate_factor());
+        Serial.print("Filtered min cell voltage: ");
+        Serial.println(ams_interface.get_filtered_min_cell_voltage());
+        Serial.print("Filtered max cell temp: ");
+        Serial.println(ams_interface.get_filtered_max_cell_temp());
+        Serial.println();
+
+        Serial.println();
+    }
+    
 }
 
 /*
@@ -410,27 +534,16 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     TriggerBits_s t = current_system_tick.triggers;
     if (t.trigger10) // 10Hz
     {
-        int slip_launch_state_int = static_cast<int>(slip_launch.get_launch_state());
-        int simple_launch_state_int = static_cast<int>(simple_launch.get_launch_state());
-        int combined_launch_state = 0;
-        if(slip_launch_state_int > 0){
-            combined_launch_state = slip_launch_state_int;
-        } else if(simple_launch_state_int > 0)
-        {
-            combined_launch_state = simple_launch_state_int;
-        } else {
-            combined_launch_state = 0;
-        }
-            dashboard.tick10(
-                &main_ecu,
-                int(fsm.get_state()),
-                buzzer.buzzer_is_on(),
-                drivetrain.drivetrain_error_occured(),
-                torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
-                ams_interface.get_filtered_min_cell_voltage(),
-                telem_interface.get_glv_voltage(a1.get()),
-                combined_launch_state,
-                dashboard.getDialMode());
+        dashboard.tick10(
+            &main_ecu,
+            int(fsm.get_state()),
+            buzzer.buzzer_is_on(),
+            drivetrain.drivetrain_error_occured(),
+            torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
+            ams_interface.get_filtered_min_cell_voltage(),
+            a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
+            dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
@@ -445,12 +558,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             dashboard.launchControlButtonPressed());
 
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-
+        front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL], mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
         telem_interface.tick(
             a1.get(),
             a2.get(),
             a3.get(),
-            mcu_adc.get(),
             steering1.convert(),
             &inv.fl,
             &inv.fr,
@@ -471,6 +583,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz
@@ -504,7 +617,38 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         current_system_tick,
         a1.get().conversions[MCU15_ACCEL1_CHANNEL],
         a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-        a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
+        a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+        a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+
+    // accel 1 only accel 2 dead, brake normal 
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+    // accel 2 only accel 1 dead, brake normal 
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+    // brake 1 only brake 2 dead, accel normal
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
+    // brake 2 only brake 1 dead, accel normal
+    // pedals_system.tick(
+    //     current_system_tick,
+    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
+    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL],
+    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
+
 
     // tick steering system
     steering_system.tick(
@@ -531,7 +675,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         0,
         fsm.get_state(),
         dashboard.startButtonPressed(),
-        3);
+        vn_interface.get_vn_struct().vn_status);
 
     // case_system.update_config_from_param_interface(param_interface);
 }
