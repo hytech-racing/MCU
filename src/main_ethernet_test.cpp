@@ -6,8 +6,7 @@
 
 EthernetUDP protobuf_send_socket;
 EthernetUDP protobuf_recv_socket;
-CAR_STATE state = CAR_STATE::STARTUP;
-ParameterInterface params(state);
+ParameterInterface params = ParameterInterface();
 ETHInterfaces ethernet_interfaces = {&params};
 
 void init_ethernet_device()

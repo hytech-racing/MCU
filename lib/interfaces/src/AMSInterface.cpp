@@ -20,7 +20,7 @@ void AMSInterface::init(SysTick_s &initial_tick) {
 
     last_tick_ = initial_tick;
 
-    timestamp_start_ = last_tick_.millis;
+    timestamp_start_ = -1; //starts at -1
 
     // Initializes the bms_voltages_ member variable to an invalid state. This will
     // get overridden once retrieve_voltage_CAN() has been called at least once.
@@ -78,7 +78,9 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 
 float AMSInterface::initialize_charge() {
     int i = 0;
-    while (HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro) - VOLTAGE_LOOKUP_TABLE[i] < 0) {
+    float lowest_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+
+    while (lowest_voltage - VOLTAGE_LOOKUP_TABLE[i] < 0) {
         i++;
     }
     charge_ = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
@@ -116,19 +118,6 @@ void AMSInterface::calculate_SoC_acu(const SysTick_s &tick) {
 
 void AMSInterface::tick(const SysTick_s &tick) {
 
-    // If AMSInterface has a valid reading in bms_voltages_ and the charge is not
-    // yet initialized, then call initialize_charge.
-    if ((!has_initialized_charge_) && (has_received_bms_voltage_) && ((tick.millis - timestamp_start_) > initialization_startup_interval_)) {
-    
-        bool bms_voltages_is_invalid = bms_voltages_.low_voltage_ro == 0xFFFFU && bms_voltages_.high_voltage_ro == 0x1111U;
-
-        if (!bms_voltages_is_invalid) {
-            initialize_charge();
-            has_initialized_charge_ = true;
-        }
-
-    }
-
     // Only calculate the updated SoC if charge has been properly initialized.
     if (has_initialized_charge_) {
         // Do not edit this block! If both calculate_SoC_em AND calculate_SoC_acu are run,
@@ -140,11 +129,20 @@ void AMSInterface::tick(const SysTick_s &tick) {
         }
     }
 
+    // If AMSInterface has a valid reading in bms_voltages_ and enough time has passed since init(), then initialize charge
+    if (!has_initialized_charge_ && ((tick.millis - timestamp_start_) >= DEFAULT_INITIALIZATION_WAIT_INTERVAL)) {
+    
+        initialize_charge();
+        has_initialized_charge_ = true;
+
+    }
+
     // Send CAN message
     // enqueue_state_of_charge_CAN();
     STATE_OF_CHARGE_t soc_struct;
     soc_struct.charge_percentage_ro = HYTECH_charge_percentage_ro_toS(SoC_);
     soc_struct.charge_coulombs_ro = HYTECH_charge_coulombs_ro_toS(charge_);
+    soc_struct.min_cell_voltage_est_ro = HYTECH_min_cell_voltage_est_ro_toS(VOLTAGE_LOOKUP_TABLE[100 - (int) SoC_]);
     enqueue_new_CAN<STATE_OF_CHARGE_t>(&soc_struct, Pack_STATE_OF_CHARGE_hytech);
 
     last_tick_ = tick;
@@ -162,9 +160,11 @@ void AMSInterface::retrieve_temp_CAN(CAN_message_t &recvd_msg) {
 
 void AMSInterface::retrieve_voltage_CAN(CAN_message_t &can_msg) {
     Unpack_BMS_VOLTAGES_hytech(&bms_voltages_, can_msg.buf, can_msg.len);
+
     if (!has_received_bms_voltage_)
     {
         has_received_bms_voltage_ = true;
+        timestamp_start_ = last_tick_.millis;
     }
     
 }
@@ -176,6 +176,7 @@ void AMSInterface::retrieve_em_measurement_CAN(CAN_message_t &can_msg) {
 void AMSInterface::retrieve_current_shunt_CAN(const CAN_message_t &can_msg) {
     Unpack_ACU_SHUNT_MEASUREMENTS_hytech(&acu_shunt_measurements_, can_msg.buf, can_msg.len);
 }
+
 void AMSInterface::calculate_acc_derate_factor() {
     float voltage_lim_factor = 1.0;
     float startDerateVoltage = 3.5;
@@ -203,7 +204,6 @@ void AMSInterface::calculate_acc_derate_factor() {
 float AMSInterface::get_acc_derate_factor() {
     calculate_acc_derate_factor();
     return acc_derate_factor;
-
 }
 
 
