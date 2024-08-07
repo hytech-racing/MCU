@@ -1,10 +1,7 @@
 #include "TelemetryInterface.h"
-/* Update CAN messages */
-// Main loop
-// MCP3208 returns structure
-void TelemetryInterface::update_pedal_readings_CAN_msg(float accel_percent,
-                                                       float brake_percent,
-                                                       float mech_brake_percent) {
+
+void TelemetryInterface::update_pedal_readings_CAN_msg(float accel_percent, float brake_percent, float mech_brake_percent)
+{
 
     MCU_PEDAL_READINGS_t pedal_readings;
 
@@ -13,11 +10,15 @@ void TelemetryInterface::update_pedal_readings_CAN_msg(float accel_percent,
     pedal_readings.mechanical_brake_percent_float_ro = HYTECH_mechanical_brake_percent_float_ro_toS(mech_brake_percent*100);
 
     enqueue_new_CAN<MCU_PEDAL_READINGS_t>(&pedal_readings, &Pack_MCU_PEDAL_READINGS_hytech);
+
 }
+
 void TelemetryInterface::update_pedal_readings_raw_CAN_msg(const AnalogConversion_s &accel_1,
                                                            const AnalogConversion_s &accel_2,
                                                            const AnalogConversion_s &brake_1,
-                                                           const AnalogConversion_s &brake_2) {
+                                                           const AnalogConversion_s &brake_2)
+{
+
     MCU_PEDAL_RAW_t pedal_read;
 
     pedal_read.accel_1_raw = accel_1.raw;
@@ -28,11 +29,13 @@ void TelemetryInterface::update_pedal_readings_raw_CAN_msg(const AnalogConversio
     enqueue_new_CAN<MCU_PEDAL_RAW_t>(&pedal_read, &Pack_MCU_PEDAL_RAW_hytech);
 
 }
-// MCP3204 returns structure
+
 void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_fl,
                                                    const AnalogConversion_s &lc_fr,
                                                    const AnalogConversion_s &pots_fl,
-                                                   const AnalogConversion_s &pots_fr) {
+                                                   const AnalogConversion_s &pots_fr)
+{
+
     MCU_SUSPENSION_t sus;
     sus.load_cell_fl = lc_fl.raw;
     sus.load_cell_fr = lc_fr.raw;
@@ -40,18 +43,19 @@ void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_
     sus.potentiometer_fr = pots_fr.raw;
 
     enqueue_new_CAN<MCU_SUSPENSION_t>(&sus, &Pack_MCU_SUSPENSION_hytech);
+
 }
-// SteeringDual and MCP3208 return structures
+
 void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderConversion_s &steer1,
                                                         const AnalogConversion_s &steer2,
                                                         const AnalogConversion_s &current,
                                                         const AnalogConversion_s &reference,
-                                                        const AnalogConversion_s &glv) {
-    // do sth with mcu_analog_readings_
+                                                        const AnalogConversion_s &glv)
+{
     mcu_analog_readings_.set_steering_1(steer1.raw);
     mcu_analog_readings_.set_steering_2(steer2.raw);
     mcu_analog_readings_.set_hall_effect_current(current.raw - reference.raw);  // this is wrong btw. should let analog channel do the math but not necessary atm
-    mcu_analog_readings_.set_glv_battery_voltage(glv.conversion * FIXED_POINT_PRECISION);
+    mcu_analog_readings_.set_glv_battery_voltage(glv.conversion * GLV_BATTERY_VOLTAGE_FIXED_POINT_PRECISION);
 
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
@@ -82,8 +86,7 @@ void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvI
     
 }
 
-void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
-                                                                InvInt_t* fl,
+void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(InvInt_t* fl,
                                                                 InvInt_t* fr,
                                                                 InvInt_t* rl,
                                                                 InvInt_t* rr,
@@ -156,8 +159,7 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
     enqueue_new_CAN<DRIVETRAIN_STATUS_TELEM_t>(&status, &Pack_DRIVETRAIN_STATUS_TELEM_hytech);
 }
 
-void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
-                                                                InvInt_t* fl,
+void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(InvInt_t* fl,
                                                                 InvInt_t* fr,
                                                                 InvInt_t* rl,
                                                                 InvInt_t* rr)
@@ -173,7 +175,6 @@ void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
     enqueue_new_CAN<DRIVETRAIN_TORQUE_TELEM_t>(&torque, &Pack_DRIVETRAIN_TORQUE_TELEM_hytech);
 }
 
-// Pack_PENTHOUSE_ACCUM_MSG_hytech
 void TelemetryInterface::update_penthouse_accum_CAN_msg(const AnalogConversion_s &current, const AnalogConversion_s &reference)
 {
     PENTHOUSE_ACCUM_MSG_t message;
@@ -219,9 +220,28 @@ void TelemetryInterface::update_steering_status_CAN_msg(const float steering_sys
     enqueue_new_CAN<STEERING_SYSTEM_REPORT_t>(&msg, &Pack_STEERING_SYSTEM_REPORT_hytech);
 }
 
-/* Send CAN messages */
+void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerData& data)
+{
+    
+    CONTROLLER_PID_TV_DATA_t msg;
+    msg.controller_input_ro = HYTECH_controller_input_ro_toS(data.controller_input);
+    msg.controller_output_ro = HYTECH_controller_output_ro_toS(data.controller_output);
+
+    enqueue_new_CAN<CONTROLLER_PID_TV_DATA_t>(&msg, &Pack_CONTROLLER_PID_TV_DATA_hytech);
+
+    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;
+    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.fl_torque_delta);
+    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.fr_torque_delta);
+    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.rl_torque_delta);
+    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.rr_torque_delta);
+    
+    enqueue_new_CAN<CONTROLLER_PID_TV_DELTA_DATA_t>(&delta_msg, &Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);
+
+}
+
 template<typename T>
-void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
+void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id)
+{
     
     CAN_message_t msg;
     msg_class.write(msg.buf);
@@ -242,24 +262,6 @@ void TelemetryInterface::enqueue_new_CAN(U* structure, uint32_t (* pack_function
     uint8_t buf[sizeof(CAN_message_t)] = {};
     memmove(buf, &can_msg, sizeof(CAN_message_t));
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-}
-
-void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerData& data)
-{
-    CONTROLLER_PID_TV_DATA_t msg;
-    msg.controller_input_ro = HYTECH_controller_input_ro_toS(data.controller_input);
-    msg.controller_output_ro = HYTECH_controller_output_ro_toS(data.controller_output);
-    enqueue_new_CAN<CONTROLLER_PID_TV_DATA_t>(&msg, &Pack_CONTROLLER_PID_TV_DATA_hytech);
-
-    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;
-    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.fl_torque_delta);
-    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.fr_torque_delta);
-    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.rl_torque_delta);
-    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.rr_torque_delta);
-    
-    enqueue_new_CAN<CONTROLLER_PID_TV_DELTA_DATA_t>(&delta_msg, &Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);
-
-    
 }
 
 /* Tick SysClock */

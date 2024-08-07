@@ -1,20 +1,17 @@
-/* Include files */
-/* System Includes*/
+/* -------------------- INCLUDE STATEENTS -------------------- */
+
+/* System Includes */
 #include <Arduino.h>
-#include "ParameterInterface.h"
-/* Libraries */
-#include "FlexCAN_T4.h"
-#include "HyTech_CAN.h"
+
+/* Libraries */ 
+#include "FlexCAN_T4.h"           // from FlexCAN_T4 library
+#include "HyTech_CAN.h"           // from hytech_can library (deprecated, use can_lib library instead)
 #include "MCU_rev15_defs.h"
 // #include "NativeEthernet.h"
 
-// /* Interfaces */
-
-#include "HytechCANInterface.h"
+/* Interfaces */
+#include "HytechCANInterface.h"   
 #include "ThermistorInterface.h"
-#include "Teensy_ADC.h"
-#include "MCP_ADC.h"
-#include "ORBIS_BR10.h"
 #include "MCUInterface.h"
 #include "AMSInterface.h"
 #include "WatchdogInterface.h"
@@ -24,24 +21,34 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+#include "ParameterInterface.h"
+#include "Teensy_ADC.h"           // from shared-interfaces-lib
+#include "MCP_ADC.h"              // from shared-interfaces-lib
+#include "ORBIS_BR10.h"           // from shared-interfaces-lib (steering sensor)
 
 /* Systems */
-#include "SysClock.h"
+#include "SysClock.h"             // from shared-systems-lib
 #include "Buzzer.h"
 #include "SafetySystem.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
 #include "TorqueControllerMux.h"
-
 #include "CASESystem.h"
-// /* State machine */
+
+/* State machine */
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
-/*
-    PARAMETER STRUCTS
-*/
 
+
+
+
+/* -------------------- PARAMETER STRUCTS -------------------- */
+
+/**
+ * Constant definition for the ADC channels based on MCU_rev15_defs.h. See
+ * TelemetryInterface.h for TelemtryInterfaceReadChannels struct documentation.
+ */
 const TelemetryInterfaceReadChannels telem_read_channels = {
     .accel1_channel = MCU15_ACCEL1_CHANNEL,
     .accel2_channel = MCU15_ACCEL2_CHANNEL,
@@ -56,8 +63,33 @@ const TelemetryInterfaceReadChannels telem_read_channels = {
     .current_ref_channel = MCU15_CUR_NEG_SENSE_CHANNEL,
     .glv_sense_channel = MCU15_GLV_SENSE_CHANNEL,
     .therm_fl_channel = MCU15_THERM_FL_CHANNEL,
-    .therm_fr_channel = MCU15_THERM_FR_CHANNEL};
+    .therm_fr_channel = MCU15_THERM_FR_CHANNEL
+};
 
+/**
+ * Acceleration pedal parameters using both accel sensors. See PedalsSystem.h
+ * for PedalsParams struct definition.
+ */
+const PedalsParams accel_params = {
+    .min_pedal_1 = ACCEL1_PEDAL_MIN,
+    .min_pedal_2 = ACCEL2_PEDAL_MIN,
+    .max_pedal_1 = ACCEL1_PEDAL_MAX,
+    .max_pedal_2 = ACCEL2_PEDAL_MAX,
+    .min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MAX,
+    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE
+};
+
+/**
+ * Acceleration pedal parameters using only the first accel sensor. Do not use
+ * unless you have a compelling reason to do so, since this does NOT comply with
+ * rules for APPS implausibilities (T.4.2)
+ */
 const PedalsParams accel1_only_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
     .min_pedal_2 = ACCEL1_PEDAL_MIN,
@@ -72,6 +104,11 @@ const PedalsParams accel1_only_params = {
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
 
+/**
+ * Acceleration pedal parameters using only the second accel sensor. Do not use
+ * unless you have a compelling reason to do so, since this does NOT comply with
+ * rules for APPS implausibilities (T.4.2)
+ */
 const PedalsParams accel2_only_params = {
     .min_pedal_1 = ACCEL2_PEDAL_MIN,
     .min_pedal_2 = ACCEL2_PEDAL_MIN,
@@ -84,54 +121,13 @@ const PedalsParams accel2_only_params = {
     .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
-    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
-
-
-const PedalsParams accel_params = {
-    .min_pedal_1 = ACCEL1_PEDAL_MIN,
-    .min_pedal_2 = ACCEL2_PEDAL_MIN,
-    .max_pedal_1 = ACCEL1_PEDAL_MAX,
-    .max_pedal_2 = ACCEL2_PEDAL_MAX,
-    .min_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MIN,
-    .min_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MIN,
-    .max_sensor_pedal_1 = ACCEL1_PEDAL_OOR_MAX,
-    .max_sensor_pedal_2 = ACCEL2_PEDAL_OOR_MAX,
-    .activation_percentage = APPS_ACTIVATION_PERCENTAGE,
-    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
-    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
-    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
-
-
-const PedalsParams brake1_only_params = {
-    .min_pedal_1 = BRAKE1_PEDAL_MIN,
-    .min_pedal_2 = BRAKE1_PEDAL_MIN,
-    .max_pedal_1 = BRAKE1_PEDAL_MAX,
-    .max_pedal_2 = BRAKE1_PEDAL_MAX,
-    .min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN,
-    .min_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MIN,
-    .max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX,
-    .max_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MAX,
-    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
-    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
-    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
-    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+    .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE
 };
 
-const PedalsParams brake2_only_params = {
-    .min_pedal_1 = BRAKE2_PEDAL_MIN,
-    .min_pedal_2 = BRAKE2_PEDAL_MIN,
-    .max_pedal_1 = BRAKE2_PEDAL_MAX,
-    .max_pedal_2 = BRAKE2_PEDAL_MAX,
-    .min_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MIN,
-    .min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN,
-    .max_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MAX,
-    .max_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MAX,
-    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
-    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
-    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
-    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
-};
-
+/**
+ * Brake pedal parameters using both sensors. See PedalsSystem.h for PedalsParams.h
+ * definition and brake_params usage.
+ */
 const PedalsParams brake_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
     .min_pedal_2 = BRAKE2_PEDAL_MIN,
@@ -147,9 +143,51 @@ const PedalsParams brake_params = {
     .mechanical_activation_percentage = BRAKE_MECH_THRESH,
 };
 
-/*
-    DATA SOURCES
-*/
+/**
+ * Brake pedal parameters using only brake1 sensor. Contrary to the APPS, this is allowed
+ * by rules, since only one brake pedal sensor is required (T.4.3). However, we prefer to
+ * use both brake sensors unless we have a compelling reason not to.
+ */
+const PedalsParams brake1_only_params = {
+    .min_pedal_1 = BRAKE1_PEDAL_MIN,
+    .min_pedal_2 = BRAKE1_PEDAL_MIN,
+    .max_pedal_1 = BRAKE1_PEDAL_MAX,
+    .max_pedal_2 = BRAKE1_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE1_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE1_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
+
+/**
+ * Brake pedal parameters using only brake2 sensor. Contrary to the APPS, this is allowed
+ * by rules, since only one brake pedal sensor is required (T.4.3). However, we prefer to
+ * use both brake sensors unless we have a compelling reason not to.
+ */
+const PedalsParams brake2_only_params = {
+    .min_pedal_1 = BRAKE2_PEDAL_MIN,
+    .min_pedal_2 = BRAKE2_PEDAL_MIN,
+    .max_pedal_1 = BRAKE2_PEDAL_MAX,
+    .max_pedal_2 = BRAKE2_PEDAL_MAX,
+    .min_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MIN,
+    .min_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MIN,
+    .max_sensor_pedal_1 = BRAKE2_PEDAL_OOR_MAX,
+    .max_sensor_pedal_2 = BRAKE2_PEDAL_OOR_MAX,
+    .activation_percentage = BRAKE_ACTIVATION_PERCENTAGE,
+    .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
+    .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
+    .mechanical_activation_percentage = BRAKE_MECH_THRESH,
+};
+
+
+
+
+
+/* -------------------- DATA SOURCES -------------------- */
 
 EthernetUDP protobuf_send_socket;
 EthernetUDP protobuf_recv_socket;
@@ -189,8 +227,6 @@ SABInterface sab_interface(
 );
 LoadCellInterface load_cell_interface;
 
-// /* Inverter Interface Type */
-using InvInt_t = InverterInterface<CircularBufferType>;
 struct inverters
 {
     InvInt_t fl = InvInt_t(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
