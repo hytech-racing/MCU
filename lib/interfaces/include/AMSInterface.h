@@ -1,78 +1,105 @@
 #ifndef __AMSINTERFACE_H__
 #define __AMSINTERFACE_H__
 
+/* Library Include s*/
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "SysClock.h"
 #include "hytech.h"
+
+/* System Includes */
 #include "MessageQueueDefine.h"
 
-/* Heartbeat Interval is the allowable amount of time between BMS status messages before car delatches */
+/**
+ * Heartbeat Interval is the allowable amount of time, in milliseconds,between
+ * BMS status messages before car delatches.
+ */
 const unsigned long HEARTBEAT_INTERVAL                      = 2000;   // milliseconds
-/* The total pcc threshold is the lowest allowable voltage of the entire pack (in Volts)*/
+
+/**
+ * The total PCC threshold is the lowest allowable voltage of the entire pack (in Volts)
+ */
 const unsigned long PACK_CHARGE_CRIT_TOTAL_THRESHOLD        = 420;
-/* The lowest pcc threshold is the lowest allowable single cell voltage (in 100 microvolts)*/
+
+/**
+ * The lowest pcc threshold is the lowest allowable single cell voltage (in 100 microvolts)
+ */
 const unsigned long PACK_CHARGE_CRIT_LOWEST_CELL_THRESHOLD  = 35000; //equivalent to 3.5V
 
-const float DEFAULT_INIT_TEMP       = 40.0;
-const float DEFAULT_INIT_VOLTAGE    = 3.5;
+/**
+ * Other constant definitions (units as marked)
+ */
+const float DEFAULT_INIT_TEMP       = 40.0;                      // degrees Celsius
+const float DEFAULT_INIT_VOLTAGE    = 3.5;                       // Volts
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
-const uint16_t MAX_PACK_CHARGE      = 48600;
-const unsigned long DEFAULT_INITIALIZATION_WAIT_INTERVAL = 5000;
+const uint16_t MAX_PACK_CHARGE      = 48600;                     // Coulombs
+const unsigned long DEFAULT_INITIALIZATION_WAIT_INTERVAL = 5000; // milliseconds
 
 
-/// @brief this class is for interfacing with the AMS (accumulator management system) 
+
+/**
+ * Interface for our Accumulator Management System. Through the AMSInterface, we
+ * receive the CAN messages from the AMS, check for a heartbeat, and calculate State
+ * of Charge.
+ */
 class AMSInterface
 {
 public:
-    /*!
-        Constructor for the AMS Interface
-        @param sw_ok_pin The software ok pin number.
-        This pin is connected to the shutdown line and will go low if the AMS times out
+    /**
+     * Constructor for the AMS Interface
+     * @param sw_ok_pin The software ok pin number. This pin is connected to the shutdown
+     *                  line. The AMSInterface will set it low if it times out.
     */
     AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin, float init_temp, float init_volt, float temp_alpha, float volt_alpha):        
         msg_queue_(msg_output_queue),
         pin_software_ok_(sw_ok_pin),
-        filtered_max_cell_temp(init_temp),
-        filtered_min_cell_voltage(init_volt),
-        cell_temp_alpha(temp_alpha),
-        cell_voltage_alpha(volt_alpha),
+        filtered_max_cell_temp_(init_temp),
+        filtered_min_cell_voltage_(init_volt),
+        cell_temp_alpha_(temp_alpha),
+        cell_voltage_alpha_(volt_alpha),
         use_em_for_soc_(true),
         charge_(0.0f),
         SoC_(0.0f),
         has_initialized_charge_(false),
         has_received_bms_voltage_(false) {};
 
-    /* Overloaded constructor that only takes in software OK pin and uses default voltages and temp*/
+    /**
+     * Overloaded constructor that only takes in software OK pin and uses default voltages and temp.
+     */
     AMSInterface(CANBufferType *msg_output_queue, int sw_ok_pin):
         AMSInterface(msg_output_queue, sw_ok_pin, DEFAULT_INIT_TEMP, DEFAULT_INIT_VOLTAGE, DEFAULT_TEMP_ALPHA, DEFAULT_VOLTAGE_ALPHA) {};
 
-    /* Initialize the heartbeat timer */
+
+
+    /* -------------------- Initialization and heartbeat functions -------------------- */  
+
+    /**
+     * Initialize the heartbeat timer, last_tick_, and output pin.
+     */
     void init(SysTick_s &initial_tick);
 
-    /* Init software OK pin by setting high*/
-    void set_start_state();
+    /**
+     * Initialize software OK pin by setting high
+     */
+    void set_start_state() {digitalWrite(pin_software_ok_, HIGH);}
 
-    /* Check if the last heartbeat arrived within allowable interval */
+    /**
+     * Check if the last heartbeat arrived within allowable interval.
+     * @param curr_millis The current timestamp, in milliseconds.
+     * @return True if curr_millis - last_heartbeat_time_ is within the allowed interval, false otherwise.
+     */
     bool heartbeat_received(unsigned long curr_millis);
 
-    /* Check if either lowest cell or total pack is below threshold*/
-    bool pack_charge_is_critical(); 
+    /**
+     * Check if either the lowest cell or total pack is below threshold.
+     * @return True if either the lowest cell is below its threshold or the total pack is below its threshold. False otherwise.
+     */
+    bool pack_charge_is_critical();
 
-    //SETTERS//    
-    /* set software OK pin */
-    void set_state_ok_high(bool ok_high);    
-    /* set the last heartbeat to the current millis time */
-    void set_heartbeat(unsigned long curr_millis);
 
-    //GETTERS//
-    /* IIR filter and return filtered max cell temperature */
-    float get_filtered_max_cell_temp();
-    /* IIR filter and return filtered min cell voltage */
-    float get_filtered_min_cell_voltage();
-    /*gets the derate factor for acc system*/
-    float get_acc_derate_factor();
+
+    /* -------------------- State of Charge (SoC) functions -------------------- */
 
     /**
      * Initializes the charge member variable from the voltage of the minimum cell using the VOLTAGE_LOOKUP_TABLE.
@@ -104,6 +131,36 @@ public:
     */
     void calculate_SoC_acu(const SysTick_s &tick);
 
+
+
+    /* -------------------- SETTERS -------------------- */  
+    void set_state_ok_high(bool ok_high);    
+    void set_heartbeat(unsigned long curr_millis);
+    void set_use_em_for_soc(bool new_use_em_for_soc) {use_em_for_soc_ = new_use_em_for_soc;}
+
+
+
+    /* -------------------- GETTERS -------------------- */  
+
+    /**
+     * Applies IIR filter and return filtered max cell temperature.
+     * @return The filtered max cell temperature.
+     */
+    float get_filtered_max_cell_temp();
+
+    /**
+     * Applies IIR filter and return filtered min cell voltage.
+     * @return THe filtered min cell voltage.
+     */
+    float get_filtered_min_cell_voltage();
+
+    /**
+     * Recalculates the derate factor of the acceleration system,
+     * sets the acc_derate_factor_ member variable to the new value,
+     * and returns the result.
+     */
+    float get_acc_derate_factor();
+
     /**
      * Retrieves the value of the SoC member variable. This function does NOT recalculate
      * the SoC_ variable, it only returns the value that is stored.
@@ -113,6 +170,31 @@ public:
     float get_SoC() {return SoC_;}
 
     /**
+     * Retrieves the current state of the use_em_for_soc member variable.
+     * @return True if using EM, false if using ACU shunt measurements.
+     */
+    bool is_using_em_for_soc() {return use_em_for_soc_;}
+
+    /**
+     * Returns the current value in the bms_voltages_ member variable
+     */
+    BMS_VOLTAGES_t get_bms_voltages() {return bms_voltages_;}
+
+    /**
+     * Returns the current value in the em_measurements_ member variable
+     */
+    EM_MEASUREMENT_t get_em_measurements() {return em_measurements_;}
+
+    /**
+     * Returns the current value in the acu_shunt_measurements_ member variable
+     */
+    ACU_SHUNT_MEASUREMENTS_t get_acu_shunt_measurements() {return acu_shunt_measurements_;}
+
+
+
+    /* -------------------- Tick Function -------------------- */  
+
+    /**
      * This is AMSInterface's tick() function. It behaves correctly regardless of the
      * since the functions calculate the elapsed time between the given tick and the stored last_tick_.
      * 
@@ -120,7 +202,9 @@ public:
     */
     void tick(const SysTick_s &tick);
 
-    //RETRIEVE CAN MESSAGES//
+    
+
+    /* -------------------- Retrieving CAN messages -------------------- */  
     
     /**
      * Reads this CAN message into the bms_status_ member variable. This function uses the OLD CAN library.
@@ -138,9 +222,6 @@ public:
      */
     void retrieve_voltage_CAN(CAN_message_t &recvd_msg);
     
-    /*Updates Acc_derate_factor*/
-    void calculate_acc_derate_factor();
-    
     /**
      * Reads this CAN message into the em_measurements_ member variable. This function
      * does NOT apply the fromS() functions on the data. This function uses the NEW CAN library.
@@ -153,34 +234,28 @@ public:
      */
     void retrieve_current_shunt_CAN(const CAN_message_t &can_msg);
 
-    /**
-     * Retrieves the current state of the use_em_for_soc member variable.
-     * @return True if using EM, false if using ACU shunt measurements.
-     */
-    bool is_using_em_for_soc() {return use_em_for_soc_;}
+
+
+    /* ----------- Misc Functions ----------- */
 
     /**
-     * Setter function for the use_em_for_soc_ member variable.
-     * @param new_use_em_for_soc The new value for the variable.
+     * Recalculates the derate factor and writes it to the acc_derate_factor member variable.
      */
-    void set_use_em_for_soc(bool new_use_em_for_soc) {
-        use_em_for_soc_ = new_use_em_for_soc;
-    }
+    void calculate_acc_derate_factor();
 
     /**
      * Puts the current value of SoC_ and charge_ onto msg_queue_.
-    */
+     */
     void enqueue_state_of_charge_CAN();
 
-    /** Helper function to enqueue CAN messages using the new CAN library*/
+    /**
+     * Helper function to enqueue CAN messages using the new CAN library. Copied
+     * from TelemetryInterface.
+     */
     template <typename U>
     void enqueue_new_CAN(U *structure, uint32_t (*pack_function)(U *, uint8_t *, uint8_t *, uint8_t *));
-
-    // Getters (for testing purposes)
-    BMS_VOLTAGES_t get_bms_voltages() {return bms_voltages_;}
-    EM_MEASUREMENT_t get_em_measurements() {return em_measurements_;}
-    ACU_SHUNT_MEASUREMENTS_t get_acu_shunt_measurements() {return acu_shunt_measurements_;}
     
+
 
 private:
 
@@ -196,27 +271,39 @@ private:
     */
     CANBufferType *msg_queue_;
 
-    /* software OK pin */
+    /**
+     * Software OK pin. If the AMSInterface does not receive BMS status within the required
+     * heartbeat interval, then it will pull this pin low.
+     */
     int pin_software_ok_;
 
-    /* AMS CAN messages */
+    /**
+     * AMS CAN messages.
+     */
     BMS_status          bms_status_;
     BMS_temperatures    bms_temperatures_;
     ACU_SHUNT_MEASUREMENTS_t         acu_shunt_measurements_;
     EM_MEASUREMENT_t                 em_measurements_;
     BMS_VOLTAGES_t                   bms_voltages_;
 
-    /* AMS last heartbeat time */
+    /**
+     * The last heartbeat time of this AMSInterface, in milliseconds.
+     */
     unsigned long last_heartbeat_time_;
 
-    /* IIR filter parameters */
-    float bms_high_temp;
-    float bms_low_voltage;
-    float filtered_max_cell_temp;
-    float filtered_min_cell_voltage;
-    float cell_temp_alpha;
-    float cell_voltage_alpha;
+    /**
+     * IIR filter parameters. Used when calculating max cell temp and min cell voltage.
+     */
+    float bms_high_temp_;
+    float bms_low_voltage_;
+    float filtered_max_cell_temp_;
+    float filtered_min_cell_voltage_;
+    float cell_temp_alpha_;
+    float cell_voltage_alpha_;
     
+    /**
+     * Acceleration derating factor. Used in CASE.
+     */
     float acc_derate_factor;
 
     /**
@@ -261,9 +348,16 @@ private:
     unsigned long timestamp_start_;
 
 
-    // Check if lowest cell temperature is below threshold
+    /**
+     * Check if lowest cell temperature is below threshold.
+     * @return True if overall pack charge is below critical threshold. False otherwise.
+     */
     bool is_below_pack_charge_critical_low_thresh();
-    // Check if total pack charge is above threshold
+
+    /**
+     * Checks if the total pack charge is above the critical threshold.
+     * @return True if above threshold. False otherwise.
+     */
     bool is_below_pack_charge_critical_total_thresh();
 
 };
