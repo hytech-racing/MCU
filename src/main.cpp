@@ -192,41 +192,63 @@ const PedalsParams brake2_only_params = {
 EthernetUDP protobuf_send_socket;
 EthernetUDP protobuf_recv_socket;
 
-/* Two CAN lines on Main ECU rev15 */
-FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;   // Inverter CAN (now both are on same line)
-FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN; // telemetry CAN (basically everything except inverters)
+/**
+ * The Inverter CAN line (contains only the four Inverters).
+ */
+FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> INV_CAN;
 
-/* Set up CAN circular buffer */
-// using CircularBufferType = Circular_Buffer<uint8_t, (uint32_t)32, sizeof(CAN_message_t)>;
-using CircularBufferType = CANBufferType;
+/**
+ * The Telemetry CAN line (contains almost everything except the inverters). The Telemetry CAN line
+ * gets updated by the TelemetryInterface.
+ */
+FlexCAN_T4<CAN3, RX_SIZE_256, TX_SIZE_16> TELEM_CAN;
 
-/* Sensors */
+/**
+ * The main 8-input ADC on the MCU that handles pedals data, hall effect current, and analog steering.
+ */
 MCP_ADC<8> a1 = MCP_ADC<8>(ADC1_CS);
-MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS, 1000000); // 1M baud needed for 04s
-MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS, 1000000);
+
+/**
+ * The 4-bit ADC on the front left corner board that handles FL suspention potentiometer and load cell data.
+ * On the MCU, this is an LTC6820 that receives the corner board ADC data over isoSPI.
+ */
+MCP_ADC<4> a2 = MCP_ADC<4>(ADC2_CS, 1000000); // 1M baud needed for MCP3204s
+
+/**
+ * The 4-bit ADC on the front right corner board that handles FR suspention potentiometer and load cell data.
+ * On the MCU, this is an LTC6820 that receives the corner board ADC data over isoSPI.
+ */
+MCP_ADC<4> a3 = MCP_ADC<4>(ADC3_CS, 1000000); // 1M baud needed for MCP3204s
+
+/**
+ * The Teensy ADC interface from shared-interfaces-lib. See TeensyADC.h for documentation.
+ */
 Teensy_ADC<2> mcu_adc = Teensy_ADC<2>(DEFAULT_ANALOG_PINS);
+
+/**
+ * The OrbisBR10 steering sensor interface from shared-interfaces-lib. On the MCU, this is an RS422 that
+ * communicates over serial with the OrbisBR10 itself. The main Teensy has two pins (steering TX and RX)
+ * to communicate through the RS422.
+ */
 OrbisBR10 steering1(&Serial5);
 
-// /*
-//     INTERFACES
-// */
+
+
+
+
+/* -------------------- INTERFACES -------------------- */
+
 ParameterInterface param_interface;
 ETHInterfaces ethernet_interfaces = {&param_interface};
-VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
+VNInterface<CANBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
 WatchdogInterface wd_interface(WATCHDOG_INPUT);
 MCUInterface main_ecu(&CAN3_txBuffer);
 TelemetryInterface telem_interface(&CAN3_txBuffer, telem_read_channels);
 ThermistorInterface front_thermistors_interface(&CAN3_txBuffer);
-SABInterface sab_interface(
-    LOADCELL_RL_SCALE,  // RL Scale
-    LOADCELL_RL_OFFSET, // RL Offset (Migos)
-    LOADCELL_RR_SCALE,  // RR Scale
-    LOADCELL_RR_OFFSET  //  RR Offset
-);
+SABInterface sab_interface(LOADCELL_RL_SCALE, LOADCELL_RL_OFFSET, LOADCELL_RR_SCALE, LOADCELL_RR_OFFSET);
 LoadCellInterface load_cell_interface;
-
 struct inverters
 {
     InvInt_t fl = InvInt_t(&CAN2_txBuffer, ID_MC1_SETPOINTS_COMMAND);
@@ -235,16 +257,16 @@ struct inverters
     InvInt_t rr = InvInt_t(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
 } inv;
 
-// /*
-//     SYSTEMS
-// */
+
+
+
+
+/* -------------------- SYSTEMS -------------------- */
 
 SysClock sys_clock;
 SteeringSystem steering_system(&steering1, &telem_interface, STEERING_IIR_ALPHA);
 BuzzerController buzzer(BUZZER_ON_INTERVAL);
-
 SafetySystem safety_system(&ams_interface, &wd_interface);
-// SafetySystem safety_system(&ams_interface, &wd_interface, &dashboard);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
@@ -328,41 +350,72 @@ CASEConfiguration case_config = {
     .max_torque = 21.42,
 };
 
-CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
+CASESystem<CANBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
 
-/* Declare state machine */
+/**
+ * Main MCU state machine that handles entering various states (READY_TO_DRIVE, etc).
+ */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
-// /*
-//     GROUPING STRUCTS (To limit parameter count in utilizing functions)
-// */
 
-CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
 
-/*
-    FUNCTION DEFINITIONS
-*/
 
-/* Initialize CAN communication */
+
+/* -------------------- GROUPING STRUCTS (To limit parameter count in utilizing functions) -------------------- */
+CANInterfaces<CANBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
+
+
+
+
+
+/* -------------------- FUNCTION HEADERS -------------------- */
+
+/**
+ * Initialize CAN communication on the Inverter CAN and Telemetry CAN lines,
+ * setting the proper pins/baud rates/etc.
+ */
 void init_all_CAN_devices();
-/* Tick interfaces */
-void tick_all_interfaces(const SysTick_s &current_system_tick);
-/* Tick all systems */
-void tick_all_systems(const SysTick_s &current_system_tick);
-/* Reset inverters */
-void drivetrain_reset();
 
+/**
+ * Calls the tick() function of each interface at the appropriate rate, based on
+ * the current_system_tick. This function should ensure that no tick() function
+ * is being triggered more often than intended.
+ * @param current_system_tick The current SysTick_s object. SysTick_s comes from
+ *                            SysClock.h in the shared-systems-lib.
+ */
+void tick_all_interfaces(const SysTick_s &current_system_tick);
+
+/**
+ * Calls the tick() function of each system at the appropriate rate, based on the
+ * current_system_tick. Contrary to tick_all_interfaces, this function will call
+ * each system's tick() function every loop, and it is the responsibility of the
+ * system's tick() function to only trigger when necessary.
+ * @param current_system_tick The current SysTick_s object. SysTick_s comes from
+ *                            SysClock.h in the shared-systems-lib.
+ */
+void tick_all_systems(const SysTick_s &current_system_tick);
+
+/**
+ * Work in progress by BEN.
+ * TODO: Update documentation once Ethernet work is complete.
+ */
 void handle_ethernet_interface_comms();
 
-/*
-    SETUP
-*/
 
+
+
+
+/* -------------------- SETUP FUNCTION -------------------- */
 void setup()
 {
-    // initialize CAN communication
+
+    // ---------- Begin SerialMonitor ----------
+    Serial.begin(115200);
+
+    // ---------- initialize CAN communication ----------
     init_all_CAN_devices();
 
+    // ---------- Initialize Ethernet communication ----------
     // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
     // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
     // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
@@ -372,12 +425,14 @@ void setup()
     // protobuf_socket.write(buf, len);
     // protobuf_socker.endPacket();
 
+    // ---------- Initialize SPI communication ----------
     SPI.begin();
     a1.init();
     a2.init();
     a3.init();
     mcu_adc.init();
 
+    // ---------- Initialize offsets/scales for each ADC channel ----------
     a1.setChannelScale(MCU15_ACCEL1_CHANNEL, (1.0 / (float)(ACCEL1_PEDAL_MAX - ACCEL1_PEDAL_MIN)));
     a1.setChannelScale(MCU15_ACCEL2_CHANNEL, (1.0 / (float)(ACCEL2_PEDAL_MAX - ACCEL2_PEDAL_MIN)));
     a1.setChannelScale(MCU15_BRAKE1_CHANNEL, (1.0 / (float)(BRAKE1_PEDAL_MAX - BRAKE1_PEDAL_MIN)));
@@ -390,80 +445,78 @@ void setup()
     a1.setChannelScale(MCU15_STEERING_CHANNEL, STEERING_RANGE_DEGREES / ((float)SECONDARY_STEERING_SENSE_RIGHTMOST_BOUND - (float)SECONDARY_STEERING_SENSE_LEFTMOST_BOUND));
     a1.setChannelClamp(MCU15_STEERING_CHANNEL, -STEERING_RANGE_DEGREES / 0.5 * 1.15, STEERING_RANGE_DEGREES / 0.5 * 1.15); // 15% tolerance on each end of the steering sensor
     a1.setChannelScale(MCU15_GLV_SENSE_CHANNEL, GLV_SENSE_SCALE);
-    a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE /*Todo*/);
-    a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE /*Todo*/);
 
-    a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET /*Todo*/);
-    a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET /*Todo*/);
+    a2.setChannelScale(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_SCALE);
+    a2.setChannelOffset(MCU15_FL_LOADCELL_CHANNEL, LOADCELL_FL_OFFSET);
+
+    a3.setChannelScale(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_SCALE);
+    a3.setChannelOffset(MCU15_FR_LOADCELL_CHANNEL, LOADCELL_FR_OFFSET);
 
     mcu_adc.setAlphas(MCU15_THERM_FL, 0.95);
     mcu_adc.setAlphas(MCU15_THERM_FR, 0.95);
-    // get latest tick from sys clock
+
+    // ---------- Get latest tick from SysClock ----------
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    /*
-        Init Interfaces
-    */
-
+    // ---------- Call the init() function on each interface ----------
     main_ecu.init();                      // initial shutdown circuit readings,
     wd_interface.init(curr_tick.millis);  // initialize wd kick time
     ams_interface.init(curr_tick);        // initialize last heartbeat time
+
+    // TODO: Consolidate this into one function. main.cpp should ONLY need to
+    //       call the init() function for each interface. Calling a second
+    //       function should not be required.
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
-    Serial.begin(115200);
-
-    /*
-        Init Systems
-    */
+    // ---------- Call the init() function on each system ----------
     safety_system.init();
+    drivetrain.disable();
 
-    // Drivetrain set all inverters disabled
-    drivetrain.disable(); // write inv_en and inv_24V_en low: writing high in previous code though, should double check
-    // would an error list be good for debugging? i.e. which inverter has error
-
-    // ControllerMux set max torque to 20 NM, torque mode to whatever makes most sense
-    // Preventing drivers from forgetting to toggle torque mode and end up self-derating at comp
-    // Not strictly necessary at the moment, just don't forget
 }
 
+
+
+
+
+/* -------------------- LOOP FUNCTION -------------------- */
 void loop()
 {
-    // get latest tick from sys clock
+    // ---------- Get latest tick from sys clock ----------
     SysTick_s curr_tick = sys_clock.tick(micros());
 
     // handle_ethernet_interface_comms();
 
-    // process received CAN messages
-    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
-    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
+    // ---------- Process received CAN messages ----------
+    process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis); // Inverter CAN
+    process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis); // Telemetry CAN
 
-    // tick interfaces
+    // ---------- Tick interfaces ----------
     tick_all_interfaces(curr_tick);
 
-    // tick systems
+    // ---------- Tick systems ----------
     tick_all_systems(curr_tick);
 
-    // inverter procedure before entering state machine
-    // reset inverters
+    // ---------- Inverter procedure before entering state machine ----------
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
     {
         drivetrain.reset_drivetrain();
     }
-    // tick state machine
+
+    // ---------- Tick state machine ----------
     fsm.tick_state_machine(curr_tick.millis);
 
-    // give the state of the car to the param interface
+    // ---------- Give the state of the car to the param interface ----------
     param_interface.update_car_state(fsm.get_state());
 
-    // tick safety system
+    // ---------- Tick safety system ----------
     safety_system.software_shutdown(curr_tick);
 
-    // send CAN
+    // ---------- Send all CAN messages ----------
     send_all_CAN_msgs(CAN2_txBuffer, &INV_CAN);
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 
-    // Basic debug prints
+    // ---------- Debug prints (5Hz) ----------
     if (curr_tick.triggers.trigger5)
     {
         Serial.print("Steering system reported angle (deg): ");
@@ -506,10 +559,11 @@ void loop()
     
 }
 
-/*
-    Initialize CAN comm.
-*/
 
+
+
+
+/* -------------------- FUNCTION IMPLEMENTATIONS (see function headers for documentation) -------------------- */
 void init_all_CAN_devices()
 {
     // Inverter CAN line
@@ -531,14 +585,11 @@ void init_all_CAN_devices()
     TELEM_CAN.mailboxStatus();
 }
 
-/*
-    TICK INTERFACES
-*/
-
 void tick_all_interfaces(const SysTick_s &current_system_tick)
 {
 
     TriggerBits_s t = current_system_tick.triggers;
+
     if (t.trigger10) // 10Hz
     {
         dashboard.tick10(
@@ -564,8 +615,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             ams_interface.pack_charge_is_critical(),
             dashboard.launchControlButtonPressed());
 
-        PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
-        front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL], mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
+        front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL],
+                                         mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
+
+        PedalsSystemData_s pedals_system_data_copy = pedals_system.getPedalsSystemDataCopy();
         telem_interface.tick(
             a1.get(),
             a2.get(),
@@ -575,16 +628,17 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             &inv.fr,
             &inv.rl,
             &inv.rr,
-            data2.accelImplausible,
-            data2.brakeImplausible,
-            data2.accelPercent,
-            data2.brakePercent,
+            pedals_system_data_copy.accelImplausible,
+            pedals_system_data_copy.brakeImplausible,
+            pedals_system_data_copy.accelPercent,
+            pedals_system_data_copy.brakePercent,
             a1.get().conversions[MCU15_ACCEL1_CHANNEL],
             a1.get().conversions[MCU15_ACCEL2_CHANNEL],
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
             {});
+
     }
 
     if (t.trigger50) // 50Hz
@@ -595,30 +649,28 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
     if (t.trigger100) // 100Hz
     {
-
         a1.tick();
         a2.tick();
         a3.tick();
         mcu_adc.tick();
         load_cell_interface.tick(
-            (LoadCellInterfaceTick_s){
+            (LoadCellInterfaceTick_s)
+            {
                 .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
                 .FRConversion = a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
                 .RLConversion = sab_interface.rlLoadCell.convert(),
-                .RRConversion = sab_interface.rrLoadCell.convert()});
+                .RRConversion = sab_interface.rrLoadCell.convert()
+            }
+        );
+
     }
-    // // Untriggered
-    main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
+
+    main_ecu.read_mcu_status(); // Should be executed at the same rate as state machine.
                                 // DO NOT call in main_ecu.tick()
 }
 
-// /*
-//     TICK SYSTEMS
-// */
-
 void tick_all_systems(const SysTick_s &current_system_tick)
 {
-    // tick pedals system
 
     pedals_system.tick(
         current_system_tick,
@@ -627,50 +679,12 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_BRAKE1_CHANNEL],
         a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
-    // accel 1 only accel 2 dead, brake normal 
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // accel 2 only accel 1 dead, brake normal 
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // brake 1 only brake 2 dead, accel normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
-    // brake 2 only brake 1 dead, accel normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-
-
-    // tick steering system
     steering_system.tick(
         (SteeringSystemTick_s){
             .tick = current_system_tick,
             .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]});
 
-    // Serial.println("Steering angle");
-    // Serial.println(steering_system.getSteeringSystemData().angle);
-    // Serial.println("Steering status");
-    // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
-
-    // tick drivetrain system
     drivetrain.tick(current_system_tick);
-    // // tick torque controller mux
 
     DrivetrainCommand_s controller_output = case_system.evaluate(
         current_system_tick,
@@ -684,8 +698,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         vn_interface.get_vn_struct().vn_status);
 
-    // case_system.update_config_from_param_interface(param_interface);
-
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_dynamic_data(),
@@ -697,6 +709,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output);
+
 }
 
 void handle_ethernet_interface_comms()
@@ -718,4 +731,5 @@ void handle_ethernet_interface_comms()
         }
         param_interface.reset_params_need_sending();
     }
+
 }
