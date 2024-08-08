@@ -22,6 +22,10 @@ struct vector_nav {
         xyz_vec<float> angular_rates; 
     };
 
+/**
+ * Interface for the VectorNAV. The VectorNAV is our GPS/IMU and it gives
+ * extremely precise position and orientation data for the car.
+ */
 template <typename message_queue>
 class VNInterface
 {
@@ -35,8 +39,6 @@ public:
     VNInterface(message_queue *msg_output_queue) {
         msg_queue_ = msg_output_queue;
     };
-    /* Kick watchdog */
-    
 
     // retrieve methods
     void retrieve_velocity_CAN(CAN_message_t &recvd_msg);

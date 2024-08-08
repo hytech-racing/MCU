@@ -57,7 +57,10 @@ struct TelemetryInterfaceReadChannels
 };
 
 /**
- * Class for the TelemetryInterface.
+ * Class for the TelemetryInterface. The TelemetryInterface is responsible for
+ * enqueuing new CAN messages onto the Telemetry CAN line. Most new messages
+ * are sent in the tick() function, but some triggered manually by various
+ * systems.
  */
 class TelemetryInterface
 {

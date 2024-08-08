@@ -205,9 +205,9 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
     }
 }
 
-/*
-    Sends out all CAN messages on the specified buffer
-*/
+/**
+ * Sends out all CAN messages on the specified buffer
+ */
 template <typename bufferType>
 void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
 {

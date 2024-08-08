@@ -56,7 +56,7 @@ public:
     void command_reset() { 
         cmd_reset_count_++;
         error_ = false; };
-    void handle_command(const InverterCommand &cmd)
+    void command_inverter(const InverterCommand &cmd)
     {
         cmd_general_count_++;
         torque_setpoint_nm_ = cmd.torque_setpoint_nm;
