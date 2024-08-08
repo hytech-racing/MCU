@@ -1,26 +1,29 @@
 #ifndef HYTECHCANINTERFACE
 #define HYTECHCANINTERFACE
 
+/* Library Includes */
 #include <tuple>
 #include "FlexCAN_T4.h"
-
 #include "hytech.h"
 #include "HyTech_CAN.h"
+#include "HT08_CASE_types.h"
 
+/* Interface Includes */
 #include "InverterInterface.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
 #include "SABInterface.h"
 #include "VectornavInterface.h"
-#include "HT08_CASE_types.h"
+
+/* System Includes */
 #include "MessageQueueDefine.h"
-/*
-    struct holding interfaces processed by process_ring_buffer()
-    FL = MC1
-    FR = MC2
-    RL = MC3
-    RR = MC4
-*/
+
+/**
+ * Struct holding the various interfaces that can receive CAN messages. Each individual
+ * interface is responsible for "receiving" the appropriate CAN frames. The CANInterface
+ * reads all incoming CAN frames, determines which interface needs to handle each frame,
+ * and passes the frame to the interface.
+ */
 template <typename circular_buffer>
 struct CANInterfaces
 {
@@ -34,48 +37,68 @@ struct CANInterfaces
     SABInterface *sab_interface;
 };
 
-// the goal with the can interface is that there exists a receive call that appends to a circular buffer
-// the processing of the receive queue happens on every iteration of the loop
-// in the processing of the receive call, all of the messages received get passed to their interfaces to be unpacked
-
-/* RX buffer for CAN1 */
+/**
+ * RX buffer for CAN1 (NOT USED)
+ */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN1_rxBuffer;
-/* RX buffer for CAN2 */
+
+/**
+ * RX buffer for CAN2 (Inverter CAN)
+ */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN2_rxBuffer;
-/* RX buffer for CAN3 */
+
+/**
+ * RX buffer for CAN3 (Telemetry CAN)
+ */
 extern Circular_Buffer<uint8_t, (uint32_t)16, sizeof(CAN_message_t)>
     CAN3_rxBuffer;
 
-/* TX buffer for CAN1 */
+/**
+ * TX buffer for CAN1 (NOT USED)
+ */
 extern CANBufferType CAN1_txBuffer;
-/* TX buffer for CAN2 */
+
+/**
+ * TX buffer for CAN2 (Inverter CAN)
+ */
 extern CANBufferType CAN2_txBuffer;
-/* TX buffer for CAN3 */
+
+/**
+ * TX buffer for CAN3 (Telemetry CAN)
+ */
 extern CANBufferType CAN3_txBuffer;
 
-/* Receive callback function for CAN1 that pushes to circ. buffer */
+/**
+ * Receive callback function for CAN1 that pushes to circular buffer. Once the data is saved
+ * in the buffer, the process_ring_buffer() function can read the data and pass it along to
+ * the appropriate interface.
+ */
 void on_can1_receive(const CAN_message_t &msg);
-/* Receive callback function for CAN2 that pushes to circ. buffer */
+
+/**
+ * Receive callback function for CAN2 that pushes to circular buffer. Once the data is saved
+ * in the buffer, the process_ring_buffer() function can read the data and pass it along to
+ * the appropriate interface.
+ */
 void on_can2_receive(const CAN_message_t &msg);
-/* Receive callback function for CAN3 that pushes to circ. buffer */
+
+/**
+ * Receive callback function for CAN3 that pushes to circular buffer. Once the data is saved
+ * in the buffer, the process_ring_buffer() function can read the data and pass it along to
+ * the appropriate interface.
+ */
 void on_can3_receive(const CAN_message_t &msg);
 
-// reads from receive buffer updating the current message frame from a specific receive buffer
-// TODO ensure that all of the repeated interfaces are at the correct IDs
-/*
- Reads from the specified receive buffer and passes through messages to
- the callback associated with the CAN message ID.
-*/
+/**
+ * Reads from the specified receive buffer and passes through messages to the callback
+ * associated with the CAN message ID.
+ */
 template <typename BufferType, typename InterfaceType>
 void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces, unsigned long curr_millis)
 {
-    // TODO switch to using the global CAN receive function from the generated CAN library
-    // if(rx_buffer.size() > 0){
 
-    // Serial.println(rx_buffer.size());
-    // }
     while (rx_buffer.available())
     {
         CAN_message_t recvd_msg;
@@ -120,7 +143,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             interfaces.rear_right_inv->receive_status_msg(recvd_msg);
             break;
 
-            // MC temp msgs
+        // MC temp msgs
         case ID_MC1_TEMPS:
             interfaces.front_left_inv->receive_temp_msg(recvd_msg);
             break;
@@ -134,7 +157,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             interfaces.rear_right_inv->receive_temp_msg(recvd_msg);
             break;
 
-            // MC energy msgs
+        // MC energy msgs
         case ID_MC1_ENERGY:
             interfaces.front_left_inv->receive_energy_msg(recvd_msg);
             break;
@@ -148,12 +171,12 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             interfaces.rear_right_inv->receive_energy_msg(recvd_msg);
             break;
 
-            // SAB msgs
+        // SAB msgs
         case SAB_SUSPENSION_CANID:
             interfaces.sab_interface->retrieve_pots_and_load_cells_CAN(recvd_msg);
             break;
 
-            // vector nav msgs
+        // vector nav msgs
         case VN_VEL_CANID:
             interfaces.vn_interface->retrieve_velocity_CAN(recvd_msg);
             break;
@@ -166,7 +189,6 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case VN_YPR_CANID:
             interfaces.vn_interface->retrieve_ypr_CAN(recvd_msg);
             break;
-
         case VN_LAT_LON_CANID:
             interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
             break;
@@ -207,10 +229,12 @@ void send_all_CAN_msgs(bufferType &buffer, FlexCAN_T4_Base *can_interface)
 //      segregated to the CASESystem. what we probably want our own CAN message type that we can use in the shared
 //      data lib that is seperate from both. idk, not worth it for now just leaving this brain dump here.
 
-/// @brief message enque function for matlab generated CAN_MESSAGE_BUS type
-/// @tparam bufferType the message buffer template type onto which you are enquing a msg
-/// @param msg_queue the pointer to the msg queue that will contain the generic message
-/// @param structure the matlab generated CAN message type that will be sent
+/**
+ * Message enque function for matlab generated CAN_MESSAGE_BUS type.
+ * @tparam bufferType the message buffer template type onto which you are enquing a message.
+ * @param msg_queue the pointer to the msg queue that will contain the generic message.
+ * @param structure the matlab generated CAN message type that will be sent.
+ */
 template <typename bufferType>
 void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS & structure)
 {
