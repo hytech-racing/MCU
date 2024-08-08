@@ -1,7 +1,7 @@
 #ifndef __AMSINTERFACE_H__
 #define __AMSINTERFACE_H__
 
-/* Library Include s*/
+/* Library Includes */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "SysClock.h"

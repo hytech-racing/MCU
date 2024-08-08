@@ -592,7 +592,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
     if (t.trigger10) // 10Hz
     {
-        dashboard.tick10(
+        dashboard.tick(
             &main_ecu,
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
