@@ -94,8 +94,39 @@ float AMSInterface::initialize_charge() {
 
     // Step 6: Return the current charge, according to the specifications.
 
-    return 0; // TODO: Return the real value
+        float bms_low = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro); //get lowest voltage
     
+    //binary search to find closest
+    int left = 0;
+    int right = sizeof(VOLTAGE_LOOKUP_TABLE)/sizeof(VOLTAGE_LOOKUP_TABLE[0]) - 1;
+    bool found = false;
+    int mid = 0;
+
+    while (left <= right && !found) {
+        mid = (left + right) / 2;
+        if (VOLTAGE_LOOKUP_TABLE[mid] == bms_low) {
+            found = true;
+        } else if (VOLTAGE_LOOKUP_TABLE[mid] < bms_low) {
+            right = mid - 1;
+        }
+        else {
+            left = mid + 1;
+        }
+    } 
+
+    //check if need to round down
+    if (VOLTAGE_LOOKUP_TABLE[mid] > bms_low) {
+        mid += 1;
+    }
+
+    //get percentage, table is in reverse order
+    float charge_percent = 100.0 - mid;
+
+    //set charge and SoC
+    charge_ = (charge_percent / 100.0) * MAX_PACK_CHARGE;
+    SoC_ = charge_percent;
+
+    return charge_; 
 }
 
 void AMSInterface::calculate_SoC_em(const SysTick_s &tick) {
