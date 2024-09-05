@@ -18,6 +18,23 @@ struct veh_vec
     T FR;
     T RL;
     T RR;
+
+    void construct(T FL, T FR, T RL, T RR)
+    {
+        FL = FL;
+        FR = FR;
+        RL = RL;
+        RR = RR;
+    }
+    
+    /// @brief copy values to array in FL, FR, RL, RR order 
+    void copy_to_arr(T(&arr_out)[4])
+    {
+        arr_out[0]=FL;
+        arr_out[1]=FR;
+        arr_out[2]=RL;
+        arr_out[3]=RR;
+    }
 };
 
 template <typename T>

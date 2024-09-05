@@ -24,6 +24,7 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+#include "DrivebrainInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -301,7 +302,8 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 // */
 
-CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
+DrivebrainInterface db_interface(&CAN3_txBuffer);
+CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface, &db_interface};
 
 /*
     FUNCTION DEFINITIONS

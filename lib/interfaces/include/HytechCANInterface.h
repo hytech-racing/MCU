@@ -14,6 +14,7 @@
 #include "VectornavInterface.h"
 #include "HT08_CASE_types.h"
 #include "MessageQueueDefine.h"
+#include "DrivebrainInterface.h"
 /*
     struct holding interfaces processed by process_ring_buffer()
     FL = MC1
@@ -32,6 +33,7 @@ struct CANInterfaces
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
     SABInterface *sab_interface;
+    DrivebrainInterface *db_interface;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
