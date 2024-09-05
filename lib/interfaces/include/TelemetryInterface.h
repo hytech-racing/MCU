@@ -108,6 +108,12 @@ public:
         InvInt_t *rl,
         InvInt_t *rr
     );
+    void update_drivetrain_torque_filter_out_telem_CAN_msg(
+        InvInt_t *fl,
+        InvInt_t *fr,
+        InvInt_t *rl,
+        InvInt_t *rr
+    );
     void update_penthouse_accum_CAN_msg(
         const AnalogConversion_s &current,
         const AnalogConversion_s &reference

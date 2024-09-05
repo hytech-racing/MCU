@@ -165,12 +165,29 @@ void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
     // TODO: change this to use actual torque values from inverter
     // Torque current just temporary for gearbox seal validation
     DRIVETRAIN_TORQUE_TELEM_t torque;
-    torque.fl_motor_torque_ro = HYTECH_fl_motor_torque_ro_toS(fl->get_torque_current());
-    torque.fr_motor_torque_ro = HYTECH_fr_motor_torque_ro_toS(fr->get_torque_current());
-    torque.rl_motor_torque_ro = HYTECH_rl_motor_torque_ro_toS(rl->get_torque_current());
-    torque.rr_motor_torque_ro = HYTECH_rr_motor_torque_ro_toS(rr->get_torque_current());
+    torque.fl_motor_torque = fl->get_torque_current();
+    torque.fr_motor_torque = fr->get_torque_current();
+    torque.rl_motor_torque = rl->get_torque_current();
+    torque.rr_motor_torque = rr->get_torque_current();
 
     enqueue_new_CAN<DRIVETRAIN_TORQUE_TELEM_t>(&torque, &Pack_DRIVETRAIN_TORQUE_TELEM_hytech);
+}
+
+void TelemetryInterface::update_drivetrain_torque_filter_out_telem_CAN_msg(
+                                                                InvInt_t* fl,
+                                                                InvInt_t* fr,
+                                                                InvInt_t* rl,
+                                                                InvInt_t* rr)
+{
+    // TODO: change this to use actual torque values from inverter
+    // Torque current just temporary for gearbox seal validation
+    DRIVETRAIN_FILTER_OUT_TORQUE_TEL_t torque;
+    torque.fl_motor_torque = fl->get_mag_current();
+    torque.fr_motor_torque = fr->get_mag_current();
+    torque.rl_motor_torque = rl->get_mag_current();
+    torque.rr_motor_torque = rr->get_mag_current();
+
+    enqueue_new_CAN<DRIVETRAIN_FILTER_OUT_TORQUE_TEL_t>(&torque, &Pack_DRIVETRAIN_FILTER_OUT_TORQUE_TEL_hytech);
 }
 
 // Pack_PENTHOUSE_ACCUM_MSG_hytech
@@ -307,6 +324,7 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
     update_drivetrain_err_status_CAN_msg(fl, fr, rl, rr);
     update_drivetrain_status_telem_CAN_msg(fl, fr, rl, rr, accel_implaus, brake_implaus, accel_per, brake_per);
     update_drivetrain_torque_telem_CAN_msg(fl, fr, rl, rr);
+    update_drivetrain_torque_filter_out_telem_CAN_msg(fl, fr, rl, rr);
 
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);

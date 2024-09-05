@@ -133,7 +133,8 @@ void InverterInterface<message_queue>::receive_status_msg(CAN_message_t &msg)
     // to get scalar for this.
     // torque_current_ = ((float)mc_status.get_torque_current() * id110_val_) / 16384.0;           // iq
     torque_current_ = mc_status.get_torque_current();
-    magnetizing_current_ = ((float)mc_status.get_magnetizing_current() * id110_val_) / 16384.0; // id
+    magnetizing_current_ = mc_status.get_magnetizing_current(); // id
+
 
     // TODO enable this on the inverters
     // actual torque in Nm is from the signal we can add in from here:

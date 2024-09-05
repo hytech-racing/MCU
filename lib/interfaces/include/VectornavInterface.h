@@ -45,10 +45,10 @@ public:
     void retrieve_uncompLinear_accel_CAN(CAN_message_t &recvd_msg);
     void retrieve_ypr_CAN(CAN_message_t &recvd_msg);
     void retrieve_lat_lon_CAN(CAN_message_t &recvd_msg);
-    void retrieve_gps_time_CAN(CAN_message_t &recvd_msg);
+    // void retrieve_gps_time_CAN(CAN_message_t &recvd_msg);
     void retrieve_vn_status_CAN(CAN_message_t &recvd_msg);
     void retrieve_vn_ecef_pos_xy_CAN(CAN_message_t &recvd_msg);
-    void retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg);
+    // void retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg);
     void receive_ang_rates_CAN(CAN_message_t &recvd_msg);
     // getters
     vector_nav get_vn_struct();

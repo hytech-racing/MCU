@@ -428,45 +428,45 @@ void loop()
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 
     // Basic debug prints
-    if (curr_tick.triggers.trigger5)
-    {
-        Serial.print("Steering system reported angle (deg): ");
-        Serial.println(steering_system.getSteeringSystemData().angle);
-        Serial.print("Steering system status: ");
-        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
-        Serial.print("Primary sensor angle: ");
-        Serial.println(steering1.convert().angle);
-        Serial.print("Secondary sensor angle: ");
-        Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
-        Serial.print("  raw: ");
-        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
-        Serial.print("Sensor divergence: ");
-        Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
-        Serial.println();
-        Serial.println("Pedal outputs:");
-        Serial.print("Accel 1 raw: ");
-        Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
-        Serial.print("Accel 2 raw: ");
-        Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
-        Serial.print("Accel percent: ");
-        Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
-        Serial.print("Brake 1 raw: ");
-        Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
-        Serial.print("Brake 2 raw: ");
-        Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
-        Serial.print("Brake percent: ");
-        Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
-        Serial.println();
-        Serial.print("Derating factor: ");
-        Serial.println(ams_interface.get_acc_derate_factor());
-        Serial.print("Filtered min cell voltage: ");
-        Serial.println(ams_interface.get_filtered_min_cell_voltage());
-        Serial.print("Filtered max cell temp: ");
-        Serial.println(ams_interface.get_filtered_max_cell_temp());
-        Serial.println();
+    // if (curr_tick.triggers.trigger5)
+    // {
+    //     Serial.print("Steering system reported angle (deg): ");
+    //     Serial.println(steering_system.getSteeringSystemData().angle);
+    //     Serial.print("Steering system status: ");
+    //     Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
+    //     Serial.print("Primary sensor angle: ");
+    //     Serial.println(steering1.convert().angle);
+    //     Serial.print("Secondary sensor angle: ");
+    //     Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+    //     Serial.print("  raw: ");
+    //     Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
+    //     Serial.print("Sensor divergence: ");
+    //     Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+    //     Serial.println();
+    //     Serial.println("Pedal outputs:");
+    //     Serial.print("Accel 1 raw: ");
+    //     Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+    //     Serial.print("Accel 2 raw: ");
+    //     Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+    //     Serial.print("Accel percent: ");
+    //     Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
+    //     Serial.print("Brake 1 raw: ");
+    //     Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+    //     Serial.print("Brake 2 raw: ");
+    //     Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+    //     Serial.print("Brake percent: ");
+    //     Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
+    //     Serial.println();
+    //     Serial.print("Derating factor: ");
+    //     Serial.println(ams_interface.get_acc_derate_factor());
+    //     Serial.print("Filtered min cell voltage: ");
+    //     Serial.println(ams_interface.get_filtered_min_cell_voltage());
+    //     Serial.print("Filtered max cell temp: ");
+    //     Serial.println(ams_interface.get_filtered_max_cell_temp());
+    //     Serial.println();
 
-        Serial.println();
-    }
+    //     Serial.println();
+    // }
     
 }
 
