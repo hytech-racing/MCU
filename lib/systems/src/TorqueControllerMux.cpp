@@ -110,7 +110,7 @@ void TorqueControllerMux::tick(
         // Apply setpoints value limits
         // Derating for endurance
         
-        if (muxMode_ != TorqueController_e::TC_CASE_SYSTEM)
+        if ( (muxMode_ != TorqueController_e::TC_CASE_SYSTEM) && (muxMode_ != TorqueController_e::TC_DRIVEBRAIN) )
         {
             // Safety checks for CASE: CASE handles regen, torque, and power limit internally
             applyRegenLimit(&drivetrainCommand_, &drivetrainData);
