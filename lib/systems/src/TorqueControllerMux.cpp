@@ -1,6 +1,7 @@
 #include "TorqueControllerMux.h"
 #include "Utility.h"
 #include "PhysicalParameters.h"
+#include "DrivebrainController.h"
 
 void TorqueControllerMux::tick(
     const SysTick_s &tick,
@@ -12,13 +13,16 @@ void TorqueControllerMux::tick(
     float accDerateFactor,
     bool dashboardTorqueModeButtonPressed,
     const vector_nav &vn_data,
-    const DrivetrainCommand_s &CASECommand)
+    const DrivetrainCommand_s &CASECommand,
+    DrivebrainData db_input)
 {
     // Tick all torque controllers
     torqueControllerSimple_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_]);
     torqueControllerLoadCellVectoring_.tick(tick, pedalsData, torqueLimitMap_[torqueLimit_], loadCellData);
     torqueControllerSimpleLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
-    torqueControllerSlipLaunch_.tick(tick, pedalsData, drivetrainData.measuredSpeeds, &vn_data);
+
+    bool drivebrain_in_control = (muxMode_ == TorqueController_e::TC_DRIVEBRAIN);
+    _dbController.tick(tick, db_input, drivebrain_in_control);
     tcCASEWrapper_.tick(
         (TCCaseWrapperTick_s){
             .command = CASECommand,
@@ -106,13 +110,12 @@ void TorqueControllerMux::tick(
         // Apply setpoints value limits
         // Derating for endurance
         
-        
-        if (muxMode_ != TC_CASE_SYSTEM)
+        if (muxMode_ != TorqueController_e::TC_CASE_SYSTEM)
         {
             // Safety checks for CASE: CASE handles regen, torque, and power limit internally
             applyRegenLimit(&drivetrainCommand_, &drivetrainData);
             // Apply torque limit before power limit to not power limit
-            if ((muxMode_ != TC_SIMPLE_LAUNCH) && (muxMode_ != TC_SLIP_LAUNCH) && (muxMode_ != TC_LOOKUP_LAUNCH))
+            if ((muxMode_ != TC_SIMPLE_LAUNCH))
             {
                 applyTorqueLimit(&drivetrainCommand_);
             }            

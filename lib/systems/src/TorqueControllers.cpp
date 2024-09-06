@@ -291,53 +291,53 @@ void TorqueControllerSimpleLaunch::calc_launch_algo(const vector_nav* vn_data) {
             launch_speed_target_ = std::min((int)AMK_MAX_RPM, std::max(0, (int)launch_speed_target_));
 }
 
-void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
-    // accelerate at constant speed for a period of time to get body velocity up
-    // may want to make this the ht07 launch algo
+// void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
+//     // accelerate at constant speed for a period of time to get body velocity up
+//     // may want to make this the ht07 launch algo
     
-    // makes sure that the car launches at the target launch speed
-    launch_speed_target_ = std::max(launch_speed_target_, (float)DEFAULT_LAUNCH_SPEED_TARGET);
+//     // makes sure that the car launches at the target launch speed
+//     launch_speed_target_ = std::max(launch_speed_target_, (float)DEFAULT_LAUNCH_SPEED_TARGET);
 
-    /*
-    New slip-ratio based launch algorithm by Luke Chen. The basic idea
-    is to always be pushing the car a certain 'slip_ratio_' faster than
-    the car is currently going, theoretically always keeping the car in slip
-    */
-    // m/s
-    float new_speed_target = (1 + slip_ratio_) * (vn_data->velocity_x);
-    // rpm
-    new_speed_target *= METERS_PER_SECOND_TO_RPM;
-    // makes sure the car target speed never goes lower than prev. target
-    // allows for the vn to 'spool' up and us to get reliable vx data
-    launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
-}
+//     /*
+//     New slip-ratio based launch algorithm by Luke Chen. The basic idea
+//     is to always be pushing the car a certain 'slip_ratio_' faster than
+//     the car is currently going, theoretically always keeping the car in slip
+//     */
+//     // m/s
+//     float new_speed_target = (1 + slip_ratio_) * (vn_data->velocity_x);
+//     // rpm
+//     new_speed_target *= METERS_PER_SECOND_TO_RPM;
+//     // makes sure the car target speed never goes lower than prev. target
+//     // allows for the vn to 'spool' up and us to get reliable vx data
+//     launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
+// }
 
-void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
+// void TorqueControllerLookupLaunch::calc_launch_algo(const vector_nav* vn_data) {
 
-    launch_speed_target_ = std::max((float)DEFAULT_LAUNCH_SPEED_TARGET, launch_speed_target_);
+//     launch_speed_target_ = std::max((float)DEFAULT_LAUNCH_SPEED_TARGET, launch_speed_target_);
 
-    double dx = vn_data->ecef_coords[0] - initial_ecef_x_;
-    double dy = vn_data->ecef_coords[1] - initial_ecef_y_;
-    double dz = vn_data->ecef_coords[2] - initial_ecef_z_;
+//     double dx = vn_data->ecef_coords[0] - initial_ecef_x_;
+//     double dy = vn_data->ecef_coords[1] - initial_ecef_y_;
+//     double dz = vn_data->ecef_coords[2] - initial_ecef_z_;
 
-    double distance = sqrt((dx*dx) + (dy*dy) + (dz*dz));
+//     double distance = sqrt((dx*dx) + (dy*dy) + (dz*dz));
 
-    /*
-    Distance-lookup launch algorithm. Takes in the vel_dist_lookup
-    generated from Luke's matlab/symlink to set speed targets based
-    on distance travelled from the start point.
-    This can also and may be better to replace with an integration
-    of body velocity.
-    */
+//     /*
+//     Distance-lookup launch algorithm. Takes in the vel_dist_lookup
+//     generated from Luke's matlab/symlink to set speed targets based
+//     on distance travelled from the start point.
+//     This can also and may be better to replace with an integration
+//     of body velocity.
+//     */
 
-    uint32_t idx = (uint32_t)(distance * 10); // multiply by 10 to be used as index for meters in steps of 1/10
-    idx = std::min(idx, (uint32_t)(sizeof(vel_dist_lookup) / sizeof(float)));
-    float mps_target = vel_dist_lookup[idx];
+//     uint32_t idx = (uint32_t)(distance * 10); // multiply by 10 to be used as index for meters in steps of 1/10
+//     idx = std::min(idx, (uint32_t)(sizeof(vel_dist_lookup) / sizeof(float)));
+//     float mps_target = vel_dist_lookup[idx];
 
-    float new_speed_target = mps_target * METERS_PER_SECOND_TO_RPM;
-    launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
+//     float new_speed_target = mps_target * METERS_PER_SECOND_TO_RPM;
+//     launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
 
-}
+// }
 
 void TorqueControllerCASEWrapper::tick(const TCCaseWrapperTick_s &intake)
 {

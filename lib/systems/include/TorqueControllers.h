@@ -73,11 +73,9 @@ enum TorqueController_e
     TC_SAFE_MODE = 1,
     TC_LOAD_CELL_VECTORING = 2,
     TC_SIMPLE_LAUNCH = 3,
-    TC_SLIP_LAUNCH = 4,
-    TC_LOOKUP_LAUNCH = 5,
-    TC_CASE_SYSTEM = 6,
-    TC_DRIVEBRAIN= 7,
-    TC_NUM_CONTROLLERS = 8,
+    TC_CASE_SYSTEM = 4,
+    TC_DRIVEBRAIN= 5,
+    TC_NUM_CONTROLLERS = 6,
 };
 
 enum class LaunchStates_e
@@ -267,54 +265,54 @@ public:
     void calc_launch_algo(const vector_nav *vn_data) override;
 };
 
-class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>, public BaseLaunchController
-{
-private:
-    float slip_ratio_;
+// class TorqueControllerSlipLaunch : public TorqueController<TC_SLIP_LAUNCH>, public BaseLaunchController
+// {
+// private:
+//     float slip_ratio_;
 
-public:
-    /*!
-        SLIP LAUNCH CONTROLLER
-        This launch controller is based off of a specified slip constant. It will at all times attempt
-        to keep the wheelspeed at this certain higher percent of the body velocity of the car to keep it
-        in constant slip
-        @param slip_ratio specified launch rate in m/s^2
-        @param initial_speed_target the initial speed commanded to the wheels
-    */
-    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout, float slip_ratio, int16_t initial_speed_target)
-        : BaseLaunchController(writeout, initial_speed_target),
-          slip_ratio_(slip_ratio) {}
+// public:
+//     /*!
+//         SLIP LAUNCH CONTROLLER
+//         This launch controller is based off of a specified slip constant. It will at all times attempt
+//         to keep the wheelspeed at this certain higher percent of the body velocity of the car to keep it
+//         in constant slip
+//         @param slip_ratio specified launch rate in m/s^2
+//         @param initial_speed_target the initial speed commanded to the wheels
+//     */
+//     TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout, float slip_ratio, int16_t initial_speed_target)
+//         : BaseLaunchController(writeout, initial_speed_target),
+//           slip_ratio_(slip_ratio) {}
 
-    TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
+//     TorqueControllerSlipLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerSlipLaunch(writeout, DEFAULT_SLIP_RATIO, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state_; }
+//     LaunchStates_e get_launch_state() override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
-};
+//     void calc_launch_algo(const vector_nav *vn_data) override;
+// };
 
-class TorqueControllerLookupLaunch : public TorqueController<TC_LOOKUP_LAUNCH>, BaseLaunchController
-{
-private:
-    bool init_position = false;
+// class TorqueControllerLookupLaunch : public TorqueController<TC_LOOKUP_LAUNCH>, BaseLaunchController
+// {
+// private:
+//     bool init_position = false;
 
-public:
-    /*!
-        Lookup Launch Controller
-        This launch controller is based off of a matlab and symlink generated lookup table.
-        This has been converted to a C array with some basic python code using the array index
-        as the input for the controller
-        @param slip_ratio specified launch rate in m/s^2
-        @param initial_speed_target the initial speed commanded to the wheels
-    */
-    TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
-        : BaseLaunchController(writeout, initial_speed_target) {}
+// public:
+//     /*!
+//         Lookup Launch Controller
+//         This launch controller is based off of a matlab and symlink generated lookup table.
+//         This has been converted to a C array with some basic python code using the array index
+//         as the input for the controller
+//         @param slip_ratio specified launch rate in m/s^2
+//         @param initial_speed_target the initial speed commanded to the wheels
+//     */
+//     TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout, int16_t initial_speed_target)
+//         : BaseLaunchController(writeout, initial_speed_target) {}
 
-    TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerLookupLaunch(writeout, DEFAULT_LAUNCH_SPEED_TARGET) {}
+//     TorqueControllerLookupLaunch(TorqueControllerOutput_s &writeout) : TorqueControllerLookupLaunch(writeout, DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    LaunchStates_e get_launch_state() override { return launch_state_; }
+//     LaunchStates_e get_launch_state() override { return launch_state_; }
 
-    void calc_launch_algo(const vector_nav *vn_data) override;
-};
+//     void calc_launch_algo(const vector_nav *vn_data) override;
+// };
 
 class TorqueControllerCASEWrapper : public TorqueController<TC_CASE_SYSTEM>
 {
