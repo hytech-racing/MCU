@@ -12,6 +12,7 @@
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
 #include "TelemetryInterface.h"
+#include "DrivebrainController.h"
 
 const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
 const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
@@ -24,8 +25,9 @@ private:
     TorqueControllerSimple torqueControllerSimple_;
     TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
     TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
-    TorqueControllerSlipLaunch torqueControllerSlipLaunch_;
+    DrivebrainController _dbController;
     TorqueControllerCASEWrapper tcCASEWrapper_;
+
 
     // Use this to map the dial to TCMUX modes
     std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
@@ -33,7 +35,7 @@ private:
         {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
         {DialMode_e::MODE_2, TorqueController_e::TC_CASE_SYSTEM},
         {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
-        {DialMode_e::MODE_4, TorqueController_e::TC_SLIP_LAUNCH},
+        {DialMode_e::MODE_4, TorqueController_e::TC_DRIVEBRAIN},
         {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
     };
     std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
@@ -53,7 +55,7 @@ private:
         static_cast<TorqueControllerBase*>(&torqueControllerSimple_),
         static_cast<TorqueControllerBase*>(&torqueControllerLoadCellVectoring_),
         static_cast<TorqueControllerBase*>(&torqueControllerSimpleLaunch_),
-        static_cast<TorqueControllerBase*>(&torqueControllerSlipLaunch_),
+        static_cast<TorqueControllerBase*>(&_dbController),
         static_cast<TorqueControllerBase*>(&tcCASEWrapper_)
     };
 
@@ -73,7 +75,7 @@ public:
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
-    , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
+    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 30, 10)
     , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
     , telemHandle_(telemInterface) {}
 
@@ -86,7 +88,7 @@ public:
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
-    , torqueControllerSlipLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SLIP_LAUNCH)])
+    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 30, 10)
     , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
     , telemHandle_(telemInterface) {}
 
@@ -102,7 +104,8 @@ public:
         float accDerateFactor,
         bool dashboardTorqueModeButtonPressed,
         const vector_nav &vn_data, 
-        const DrivetrainCommand_s &CASECommand
+        const DrivetrainCommand_s &CASECommand,
+        DrivebrainData db_input
     );
 
     /// @brief apply corresponding limits on drivetrain command calculated by torque controller
