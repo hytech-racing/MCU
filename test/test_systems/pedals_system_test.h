@@ -273,12 +273,15 @@ TEST(PedalsSystemTesting, test_accel_and_brake_pressed_at_same_time_and_activati
 TEST(PedalsSystemTesting, test_implausibility_duration)
 {
     AnalogConversion_s test_accel1_val = {2583, 0.37, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_accel2_val = {1068, 0.37, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_brake_val = {1510, get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, 1510), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_accel2_val = {1068, 1.00, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_brake_val = {1510, get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, BRAKE1_PEDAL_MAX), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
     PedalsSystem pedals(get_real_accel_pedal_params(), get_real_brake_pedal_params());
 
     auto data = pedals.evaluate_pedals(test_accel1_val, test_accel1_val, test_brake_val, test_brake_val, 1000);
+
+    std::cout << data.accelPressed <<std::endl;
+    std::cout << data.brakePressed <<std::endl;
     EXPECT_TRUE(data.brakeAndAccelPressedImplausibility);
     EXPECT_TRUE(data.brakePressed);
     EXPECT_FALSE(data.implausibilityExceededMaxDuration);
@@ -301,16 +304,19 @@ TEST(PedalsSystemTesting, implausibility_latching_until_accel_released_double_br
 {
     AnalogConversion_s test_accel1_val = {2583, 0.37, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_accel2_val = {1068, 0.37, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_brake_val = {1510, get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, 1510), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_brake1_val = {((BRAKE1_PEDAL_MAX - BRAKE1_PEDAL_MIN) /2), get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, ((BRAKE1_PEDAL_MAX- BRAKE1_PEDAL_MIN) /2)), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_brake2_val = {((BRAKE1_PEDAL_MAX - BRAKE1_PEDAL_MIN) /2), get_pedal_conversion_val(BRAKE2_PEDAL_MIN, BRAKE2_PEDAL_MAX, ((BRAKE2_PEDAL_MAX- BRAKE2_PEDAL_MIN) /2)), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
     PedalsSystem pedals(get_real_accel_pedal_params(), get_real_brake_pedal_params());
 
     // should stay im
-    EXPECT_TRUE(get_result_of_double_brake_test(pedals, test_accel1_val, test_accel2_val, test_brake_val, test_brake_val));
+    EXPECT_TRUE(get_result_of_double_brake_test(pedals, test_accel1_val, test_accel2_val, test_brake1_val, test_brake2_val));
 
-    test_brake_val.raw = 870;
-    test_brake_val.conversion = 0.0;
-    auto data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1600);
+    test_brake1_val.raw = BRAKE1_PEDAL_MIN;
+    test_brake1_val.conversion = 0.0;
+    test_brake2_val.raw = BRAKE2_PEDAL_MIN;
+    test_brake2_val.conversion = 0.0;
+    auto data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake1_val, test_brake2_val, 1600);
     // this should still be implause since accel is still pressed
     EXPECT_TRUE(data.implausibilityExceededMaxDuration);
 
@@ -319,9 +325,10 @@ TEST(PedalsSystemTesting, implausibility_latching_until_accel_released_double_br
     test_accel2_val.raw = ACCEL2_PEDAL_MIN;
     test_accel1_val.conversion = 0.0;
     test_accel2_val.conversion = 0.0;
-    data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, test_brake_val, 1650);
+    data = pedals.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake1_val, test_brake2_val, 1650);
 
-    EXPECT_FALSE(data.implausibilityExceededMaxDuration);
+    std::cout << data.accelImplausible << " " << data.brakeImplausible << " "<<std::endl;
+    EXPECT_FALSE(data.implausibilityExceededMaxDuration); 
 }
 
 TEST(PedalsSystemTesting, implausibility_latching_until_accel_released_single_brake)
@@ -331,14 +338,14 @@ TEST(PedalsSystemTesting, implausibility_latching_until_accel_released_single_br
     ////////////////////
     AnalogConversion_s test_accel1_val = {2583, 0.37, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
     AnalogConversion_s test_accel2_val = {1068, 0.37, AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
-    AnalogConversion_s test_brake_val = {1510, get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, 1510), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
+    AnalogConversion_s test_brake_val = {((BRAKE1_PEDAL_MAX - BRAKE1_PEDAL_MIN) /2), get_pedal_conversion_val(BRAKE1_PEDAL_MIN, BRAKE1_PEDAL_MAX, ((BRAKE1_PEDAL_MAX - BRAKE1_PEDAL_MIN) /2)), AnalogSensorStatus_e::ANALOG_SENSOR_GOOD};
 
     PedalsSystem pedals2(get_real_accel_pedal_params(), get_real_brake_pedal_params());
 
     // first we fail
     EXPECT_TRUE(get_result_of_single_brake_test(pedals2, test_accel1_val, test_accel2_val, test_brake_val));
 
-    test_brake_val.raw = 870;
+    test_brake_val.raw = BRAKE1_PEDAL_MIN;
     test_brake_val.conversion = 0.0;
     auto data2 = pedals2.evaluate_pedals(test_accel1_val, test_accel2_val, test_brake_val, 1600);
     // this should still be implause since accel is still pressed
