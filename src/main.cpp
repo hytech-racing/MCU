@@ -662,7 +662,8 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         ams_interface.get_acc_derate_factor(),
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
-        controller_output);
+        controller_output,
+        db_interface.get_latest_db_data());
 }
 
 void handle_ethernet_interface_comms()
