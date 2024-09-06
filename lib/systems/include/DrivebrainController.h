@@ -5,7 +5,7 @@
 #include "TorqueControllers.h"
 #include "DrivebrainData.h"
 
-// TODO - [ ] need to validate that the times that are apparent in the drivebrain data
+// TODO - [x] need to validate that the times that are apparent in the drivebrain data
 //            and ensure that they are within tolerence to current sys-tick
 
 // TODO - [ ] if the drivebrain controller is currently the active controller, 

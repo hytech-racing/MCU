@@ -7,17 +7,16 @@ void DrivebrainController::tick(const SysTick_s &sys_tick, DrivebrainData db_inp
     bool speed_setpoint_too_latent = (::abs((int)(sys_tick.millis - db_input.last_speed_setpoint_receive_time_millis)) > (int)_params.allowed_latency);
     bool torque_setpoint_too_latent = (::abs((int)(sys_tick.millis - db_input.last_torque_lim_receive_time_millis)) > (int)_params.allowed_latency);
     bool msg_jitter_too_high = (::abs((int)(db_input.last_speed_setpoint_receive_time_millis - db_input.last_torque_lim_receive_time_millis)) > (int)_params.allowed_jitter);
-    
-    bool timing_failure = (speed_setpoint_too_latent || torque_setpoint_too_latent || msg_jitter_too_high); 
-    
+
+    bool timing_failure = (speed_setpoint_too_latent || torque_setpoint_too_latent || msg_jitter_too_high);
+
     // only in the case that this is the active controller do we want to clear our timing failure
-    if((!is_active_controller) && (!timing_failure) )
+    if ((!is_active_controller) && (!timing_failure))
     {
         // timing failure should be false here
-        _timing_failure = timing_failure;
+        _timing_failure = false;
     }
-
-    if (!timing_failure)
+    if (!timing_failure && (!_timing_failure))
     {
         _writeout.ready = true;
         _last_sent_speed_setpoint_millis = db_input.last_speed_setpoint_receive_time_millis;
