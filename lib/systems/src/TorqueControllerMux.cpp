@@ -90,9 +90,9 @@ void TorqueControllerMux::tick(
         // Check if the current controller is ready. If it has faulted, revert to safe mode
         // When the car goes below 5m/s, it will attempt to re-engage the faulted controller
         // It will stay in safe mode if the controller is still faulted
-        if (controllerOutputs_[static_cast<int>(muxMode_)].ready == false)
+        if (!controllerOutputs_[static_cast<int>(muxMode_)].ready)
         {
-            muxMode_ = TorqueController_e::TC_SAFE_MODE;
+            muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
         }
 
         // Update TCMux status

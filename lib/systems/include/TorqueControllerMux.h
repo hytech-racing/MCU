@@ -75,7 +75,7 @@ public:
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
-    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 30, 10)
+    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 100, 10)
     , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
     , telemHandle_(telemInterface) {}
 
@@ -88,7 +88,7 @@ public:
     , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
     , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
     , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
-    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 30, 10)
+    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 200, 120)
     , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
     , telemHandle_(telemInterface) {}
 

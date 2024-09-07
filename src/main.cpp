@@ -551,12 +551,12 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
             {});
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
-        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz
@@ -651,7 +651,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         vn_interface.get_vn_struct().vn_status);
 
     // case_system.update_config_from_param_interface(param_interface);
-
+    auto test = db_interface.get_latest_db_data();
     torque_controller_mux.tick(
         current_system_tick,
         drivetrain.get_dynamic_data(),
@@ -663,7 +663,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.torqueModeButtonPressed(),
         vn_interface.get_vn_struct(),
         controller_output,
-        db_interface.get_latest_db_data());
+        test);
 }
 
 void handle_ethernet_interface_comms()

@@ -8,6 +8,7 @@ class DrivebrainInterface
     public:
         DrivebrainInterface(CANBufferType * msg_output_queue)
         {
+            
             _msg_queue = msg_output_queue;
             _current_drivebrain_data.last_speed_setpoint_receive_time_millis= -1;
             _current_drivebrain_data.last_torque_lim_receive_time_millis= -1;
