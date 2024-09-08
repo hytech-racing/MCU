@@ -1,12 +1,20 @@
 #ifndef __LOADCELLINTERFACE_H__
 #define __LOADCELLINTERFACE_H__
 
+/* System Includes */
 #include "Utility.h"
+
+/* Library Includes */
 #include "SysClock.h"
 #include "AnalogSensorsInterface.h"
 
+
+
 /* Structs */
 
+/**
+ * One load cell tick containing an AnalogConversion struct for each of the four load cells.
+ */
 struct LoadCellInterfaceTick_s
 {
     const AnalogConversion_s &FLConversion;
@@ -15,6 +23,10 @@ struct LoadCellInterfaceTick_s
     const AnalogConversion_s &RRConversion;
 };
 
+/**
+ * A struct that the LoadCellInterface will output, including the forces themselves, the analog conversions,
+ * a boolean representing whether or not the FIR filter is saturated.
+ */
 struct LoadCellInterfaceOutput_s
 {
     veh_vec<float> loadCellForcesFiltered;
@@ -22,9 +34,14 @@ struct LoadCellInterfaceOutput_s
     bool FIRSaturated;
 };
 
+/**
+ * An interface for the LoadCells. This class holds the data for a FIR filter, applies it to the given inputs, and can
+ * return the filtered load cells.
+ */
 class LoadCellInterface
 {
 private:
+
     /*
     FIR filter designed with
     http://t-filter.appspot.com
@@ -41,7 +58,7 @@ private:
     desired attenuation = -40 dB
     actual attenuation = -47.34009380570117 dB
     */
-   const static int numFIRTaps_ = 5;
+    const static int numFIRTaps_ = 5;
     float FIRTaps_[numFIRTaps_] = 
     {
         0.07022690881526232,
@@ -50,15 +67,54 @@ private:
         0.27638313122745306,
         0.07022690881526232
     };
-    int FIRCircBufferHead = 0; // index of the latest sample in the raw buffer
+
+    /**
+     * Index of the latest sample in the raw buffer. Since this is a circular buffer, this indicates
+     * the last index where a new value was written.
+     */
+    int FIRCircBufferHead = 0;
+
+    /**
+     * A "vehicle vector" containing all of the newest load cell analog conversions.
+     */
     veh_vec<AnalogConversion_s> loadCellConversions_;
+
+    /**
+     * A "vehicle vector" containing the last five load cell readings on each wheel.
+     */
     veh_vec<float[numFIRTaps_]> loadCellForcesUnfiltered_;
+
+    /**
+     * The filtered output of the FIR filter.
+     */
     veh_vec<float> loadCellForcesFiltered_;
+
+    /**
+     * Flag containing whether or not the FIR filter is saturated.
+     */
     bool FIRSaturated_ = false;
+
+
+
 public:
+
+    /**
+     * Generic constructor to create a new LoadCellInterface.
+     */
     LoadCellInterface() {}
+
+    /**
+     * Exteral tick() function to pass in a new LoadCellInterfaceTick struct into the LoadCellInterface.
+     * When this tick() function completes, the loadCellConversions_, loadCellForcesUnfiltered_,
+     * loadCellForcesFiltered_, and FIRSaturated_ fields will be updated.
+     */
     void tick(const LoadCellInterfaceTick_s &intake);
+
+    /**
+     * Returns a new LoadCellinterfaceOutput struct that contains the current state of this LoadCellInterface.
+     */
     LoadCellInterfaceOutput_s getLoadCellForces();
+
 };
 
 #endif
