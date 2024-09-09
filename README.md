@@ -1,6 +1,6 @@
 ## CASE Library Usage and Updates
 
-> ![IMPORTANT]
+> [!IMPORTANT]
 > DO THIS ONCE
 > Before you begin, you need to add an SSH key to your GitHub account to allow PlatformIO to pull the CASE library. Follow these instructions to set up your SSH key: [GitHub SSH Key Setup](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 
@@ -62,7 +62,7 @@ To upload to the Teensy, use the upload feature (arrow icon) in the PlatformIO t
 
 ### Importance of Unit Tests
 
-> ![WARNING]
+> [!WARNING]
 > Unit tests MUST be maintained for functionality of the car.
 
 Unit tests ensure the stability of new features and code changes by verifying integration with the existing codebase. The unit tests for this project are located in the `test` folder and are run both locally and in the GitHub CI environment.
