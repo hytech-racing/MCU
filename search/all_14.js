@@ -40,6 +40,5 @@ var searchData=
   ['usetcslimitedyawpid_37',['useTCSLimitedYawPID',['../structCASEConfiguration.html#af09fae8969d76baa9f063935b11986c5',1,'CASEConfiguration']]],
   ['usetorquebias_38',['useTorqueBias',['../structCASEConfiguration.html#a481c6e88d8938a18f19b056462f48d76',1,'CASEConfiguration']]],
   ['usetractioncontrol_39',['useTractionControl',['../structCASEConfiguration.html#a996b338aa10627747f84f341434e7b07',1,'CASEConfiguration']]],
-  ['using_20and_20updating_20case_40',['using and updating CASE',['../index.html',1,'']]],
-  ['utility_2eh_41',['Utility.h',['../Utility_8h.html',1,'']]]
+  ['utility_2eh_40',['Utility.h',['../Utility_8h.html',1,'']]]
 ];
