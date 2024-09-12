@@ -1,12 +1,18 @@
 #ifndef __LOADCELLINTERFACE_H__
 #define __LOADCELLINTERFACE_H__
 
+/* Library */
 #include "Utility.h"
 #include "SysClock.h"
+
+/* Interface */
 #include "AnalogSensorsInterface.h"
 
-/* Structs */
-
+/**
+ * Struct holding conversions for each wheel's load cell data. 
+ * AnalogConversion_s struct holds raw and converted values and whether the result was clamped.
+ * Load cell data is converted from raw -> lbs 
+ */
 struct LoadCellInterfaceTick_s
 {
     const AnalogConversion_s &FLConversion;
@@ -15,6 +21,9 @@ struct LoadCellInterfaceTick_s
     const AnalogConversion_s &RRConversion;
 };
 
+/**
+ * Struct containing converted and filtered load cell data
+ */
 struct LoadCellInterfaceOutput_s
 {
     veh_vec<float> loadCellForcesFiltered;
@@ -22,6 +31,12 @@ struct LoadCellInterfaceOutput_s
     bool FIRSaturated;
 };
 
+
+/**
+ * The LoadCellInterface filters load cell signals to be used in the TorqueControllers system.
+ * Applies FIR filter and determines if signal is saturated
+ * [why specifically do we use a FIR filter?]
+ */
 class LoadCellInterface
 {
 private:
@@ -56,8 +71,19 @@ private:
     veh_vec<float> loadCellForcesFiltered_;
     bool FIRSaturated_ = false;
 public:
+    /**
+     * Default constructor
+     */
     LoadCellInterface() {}
+
+    /**
+     * Updates load cell force vectors after receiving new data
+     */
     void tick(const LoadCellInterfaceTick_s &intake);
+
+    /**
+     * Getter for load cell output data
+     */
     LoadCellInterfaceOutput_s getLoadCellForces();
 };
 
