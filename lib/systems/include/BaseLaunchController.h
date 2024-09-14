@@ -34,7 +34,7 @@ protected:
     LaunchStates_e launch_state_ = LaunchStates_e::LAUNCH_NOT_READY;
     uint32_t current_millis_;
     float launch_speed_target_ = 0.0;
-    int16_t init_speed_target_ = 0.0;
+    int16_t init_speed_target_ = 0;
 
 public:
     BaseLaunchController(int16_t initial_speed_target)
