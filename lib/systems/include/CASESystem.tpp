@@ -18,7 +18,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     // in. as defined in HT08_CASE.h, ExtU_HT08_CASE_T
     in.SteeringWheelAngleDeg = steering_data.angle;
 
-    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_regen_torque, config_.max_rpm);
+    in.TorqueAverageNm = calculate_torque_request(pedals_data, config_.max_torque, config_.max_regen_torque, config_.max_rpm);
 
     in.YawRaterads = vn_data.angular_rates.z;
 
@@ -283,7 +283,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 }
 
 template <typename message_queue>
-float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm)
+float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_torque, float max_regen_torque, float max_rpm)
 {
     // accelRequest goes between 1.0 and -1.0
     float accelRequest = pedals_data.accelPercent - pedals_data.regenPercent;
