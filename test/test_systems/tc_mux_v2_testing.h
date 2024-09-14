@@ -267,4 +267,17 @@ TEST(TorqueControllerMuxTesting, test_torque_limit)
     printf("torque 3: %.2f\n", drive_command.torqueSetpoints[2]);
     printf("torque 4: %.2f\n", drive_command.torqueSetpoints[3]);
 }
+
+TEST(TorqueControllerMuxTesting, test_null_pointer_error_state)
+{
+    TorqueControllerMux<1> test({nullptr}, {true});
+    SharedCarState_s state({}, {}, {}, {}, {}, {});
+    auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, state);
+    for (int i = 0; i < 4; i++)
+    {
+        ASSERT_EQ(res.torqueSetpoints[i], 0.0f);
+        ASSERT_EQ(res.speeds_rpm[i], 0.0f);
+    }
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER);
+}
 #endif // __TC_MUX_V2_TESTING_H__
