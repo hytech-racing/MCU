@@ -53,11 +53,6 @@ namespace TC_MUX_DEFAULT_PARAMS
     constexpr const float MAX_POWER_LIMIT = 63000.0;
 };
 
-
-// namespace TC_MUX
-// {
-
-
 template <std::size_t num_controllers>
 class TorqueControllerMux
 {
@@ -123,5 +118,9 @@ public:
                                              const SharedCarState_s &input_state);
 };
 // }
+
+const int number_of_controllers = 5;
+using TCMuxType = TorqueControllerMux<number_of_controllers>;
+
 #include "TorqueControllerMux.tpp"
 #endif // __TorqueControllerMux_H__

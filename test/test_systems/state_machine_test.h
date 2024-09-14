@@ -5,14 +5,11 @@
 #include "MCUStateMachine.h"
 #include "fake_controller_type.h"
 
-class FakeTCMux
-{
-public:
-    DrivetrainCommand_s getDrivetrainCommand(ControllerMode_e requested_controller_type,
-                                             TorqueLimit_e requested_torque_limit,
-                                             const SharedCarState_s &input_state) { return {}; }
-};
 
+class DumbController : public Controller 
+{
+    TorqueControllerOutput_s evaluate(const SharedCarState_s & state) {return {};}
+};
 class DrivetrainMock
 {
 public:
@@ -36,8 +33,9 @@ public:
 };
 
 SharedCarState_s dummy_state({}, {}, {}, {}, {}, {});
+DumbController c;
 
-void handle_startup(MCUStateMachine<DrivetrainMock, FakeTCMux> &state_machine, unsigned long sys_time, DrivetrainMock &drivetrain, PedalsSystem &pedals, DashboardInterface &dash_interface)
+void handle_startup(MCUStateMachine<DrivetrainMock> &state_machine, unsigned long sys_time, DrivetrainMock &drivetrain, PedalsSystem &pedals, DashboardInterface &dash_interface)
 {
     // ticking without hv over threshold testing and ensuring the tractive system not active still
     auto sys_time2 = sys_time;
@@ -75,9 +73,9 @@ TEST(MCUStateMachineTesting, test_state_machine_init_tick)
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
     unsigned long sys_time = 1000;
     EXPECT_EQ(state_machine.get_state(), CAR_STATE::STARTUP);
     state_machine.tick_state_machine(sys_time, dummy_state);
@@ -92,9 +90,9 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_activation)
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
     
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
     unsigned long sys_time = 1000;
 
     // ticking without hv over threshold testing and ensuring the tractive system not active still
@@ -128,9 +126,9 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
     
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     // ticking without hv over threshold testing and ensuring the tractive system not active still
     state_machine.tick_state_machine(sys_time, dummy_state);
@@ -174,9 +172,9 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert)
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
 
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     unsigned long sys_time = 1000;
     handle_startup(state_machine, sys_time, drivetrain, pedals, dash_interface);
@@ -207,10 +205,10 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert_leaving)
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
 
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     unsigned long sys_time = 1000;
 
@@ -241,10 +239,10 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_acti
     drivetrain.drivetrain_error_ = false;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
 
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     unsigned long sys_time = 1000;
 
@@ -287,10 +285,10 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_not_
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
 
-    FakeTCMux tc_mux;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
 
     SafetySystem ss(&ams, 0);
-    MCUStateMachine<DrivetrainMock, FakeTCMux> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
+    MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
     unsigned long sys_time = 1000;
 

@@ -306,9 +306,7 @@ TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
 TorqueControllerSimpleLaunch simple_launch;
 // mode 4
 TorqueControllerSlipLaunch slip_launch;
-const int number_of_controllers = 5;
-TorqueControllerMux<number_of_controllers>
-    torque_controller_mux({static_cast<Controller *>(&tc_simple),
+TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
                            static_cast<Controller *>(&tc_vec),
                            static_cast<Controller *>(&case_wrapper),
                            static_cast<Controller *>(&simple_launch),
@@ -316,7 +314,7 @@ TorqueControllerMux<number_of_controllers>
                           {false, false, true, false, false});
 
 /* Declare state machine */
-MCUStateMachine<DriveSys_t, TorqueControllerMux<number_of_controllers>> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
+MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
 
 // /*
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)

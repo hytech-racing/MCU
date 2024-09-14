@@ -23,7 +23,7 @@ enum class CAR_STATE
     READY_TO_DRIVE = 5
 };
 
-template <typename DrivetrainSysType, typename TCMuxType>
+template <typename DrivetrainSysType>
 class MCUStateMachine
 {
 public:

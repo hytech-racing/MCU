@@ -1,7 +1,7 @@
 
 #include "MCUStateMachine.h"
-template <typename DrivetrainSysType, typename TCMuxType>
-void MCUStateMachine<DrivetrainSysType, TCMuxType>::tick_state_machine(unsigned long current_millis, const SharedCarState_s &current_car_state)
+template <typename DrivetrainSysType>
+void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long current_millis, const SharedCarState_s &current_car_state)
 {
     switch (get_state())
     {
@@ -158,8 +158,8 @@ void MCUStateMachine<DrivetrainSysType, TCMuxType>::tick_state_machine(unsigned 
     }
 }
 
-template <typename DrivetrainSysType, typename TCMuxType>
-void MCUStateMachine<DrivetrainSysType, TCMuxType>::set_state_(CAR_STATE new_state, unsigned long curr_time)
+template <typename DrivetrainSysType>
+void MCUStateMachine<DrivetrainSysType>::set_state_(CAR_STATE new_state, unsigned long curr_time)
 {
     // hal_println("running exit logic");
 
@@ -172,8 +172,8 @@ void MCUStateMachine<DrivetrainSysType, TCMuxType>::set_state_(CAR_STATE new_sta
     handle_entry_logic_(new_state, curr_time);
 }
 
-template <typename DrivetrainSysType, typename TCMuxType>
-void MCUStateMachine<DrivetrainSysType, TCMuxType>::handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time)
+template <typename DrivetrainSysType>
+void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state, unsigned long curr_time)
 {
     switch (get_state())
     {
@@ -195,8 +195,8 @@ void MCUStateMachine<DrivetrainSysType, TCMuxType>::handle_exit_logic_(CAR_STATE
     }
     }
 }
-template <typename DrivetrainSysType, typename TCMuxType>
-void MCUStateMachine<DrivetrainSysType, TCMuxType>::handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time)
+template <typename DrivetrainSysType>
+void MCUStateMachine<DrivetrainSysType>::handle_entry_logic_(CAR_STATE new_state, unsigned long curr_time)
 {
     switch (new_state)
     {
