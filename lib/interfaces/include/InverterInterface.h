@@ -35,6 +35,8 @@ public:
     // getter for MC id
     uint32_t get_id() { return can_id_; };
 
+// CAN message receive interface functions
+public:
     /* read energy messages handler from HytechCANInterface */
     void receive_energy_msg(CAN_message_t &msg);
     /* read status messages handler from HytechCANInterface */
@@ -42,6 +44,8 @@ public:
     /* read temp messages handler from HytechCANInterface */
     void receive_temp_msg(CAN_message_t &msg);
 
+// "set" / "command" functions
+public:
     /* send MC disable message */
     void disable();
     /* send MC enable HV message */
@@ -56,6 +60,9 @@ public:
     /* send MC command reset message*/
     void command_reset();
 
+// TODO: make one getter for a struct containing the status of the inverters instead
+// getters for statuses
+public:
     /* Returns the value stored in system_ready_, which is
        read from the MC in receive_status_msg() */
     bool inverter_system_ready()
@@ -126,12 +133,16 @@ public:
     MC_temps get_temps_msg() { return mc_temps_; }
     MC_setpoints_command get_cmd_msg() { return curr_cmd_; }
 
+// private member functions
+private:
+    void write_cmd_msg_to_queue_(MC_setpoints_command msg);
+
+
 private:
     float id110_val_;                            // for scaling to proper iq and id vals
     float torque_current_, magnetizing_current_; // iq and id in A respectively
     float actual_torque_nm_;
     /* write setpoints message to the CAN buffer */
-    void write_cmd_msg_to_queue_(MC_setpoints_command msg);
     int16_t speed_;
     uint16_t dc_bus_voltage_;
 

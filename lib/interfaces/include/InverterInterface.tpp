@@ -45,6 +45,7 @@ void InverterInterface<message_queue>::request_enable_inverter()
     // Serial.println("requesting enabling inverter");
     write_cmd_msg_to_queue_(mc_setpoints_command);
 }
+
 template <typename message_queue>
 void InverterInterface<message_queue>::disable()
 {
