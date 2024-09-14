@@ -60,7 +60,7 @@ struct TorqueControllerOutput_s
     DrivetrainCommand_s command;
     bool ready;
 };
-struct vectornav
+struct VectornavData_s
 {
     float velocity_x;
     float velocity_y;
@@ -132,14 +132,14 @@ struct SharedCarState_s
     DrivetrainDynamicReport_s drivetrain_data;
     LoadCellInterfaceOutput_s loadcell_data;
     PedalsSystemData_s pedals_data;
-    vectornav vn_data;
+    VectornavData_s vn_data;
     SharedCarState_s() = delete;
     SharedCarState_s(const SysTick_s &_systick,
               const SteeringSystemData_s &_steering_data,
               const DrivetrainDynamicReport_s &_drivetrain_data,
               const LoadCellInterfaceOutput_s &_loadcell_data,
               const PedalsSystemData_s &_pedals_data,
-              const vectornav &_vn_data)
+              const VectornavData_s &_vn_data)
         : systick(_systick),
           steering_data(_steering_data),
           drivetrain_data(_drivetrain_data),

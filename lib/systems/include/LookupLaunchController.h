@@ -25,7 +25,7 @@ public:
 
     TorqueControllerLookupLaunch() : TorqueControllerLookupLaunch(LookupLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    void calc_launch_algo(const vectornav &vn_data) override;
+    void calc_launch_algo(const VectornavData_s &vn_data) override;
 };
 
 

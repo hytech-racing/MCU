@@ -112,7 +112,7 @@ TEST(LaunchIntergationTesting, test_slip_launch_controller)
     SysTick_s cur_tick;
     cur_tick = clock.tick(0);
 
-    vectornav vn_data{};
+    VectornavData_s vn_data{};
     // mode 0
     TorqueControllerSimple tc_simple(1.0f, 1.0f);
     // mode 1

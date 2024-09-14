@@ -3,7 +3,7 @@
 template <typename message_queue>
 DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     const SysTick_s &tick,
-    const vectornav &vn_data,
+    const VectornavData_s &vn_data,
     const SteeringSystemData_s &steering_data,
     const DrivetrainDynamicReport_s &drivetrain_data,
     const veh_vec<AnalogConversion_s> &load_cell_vals,

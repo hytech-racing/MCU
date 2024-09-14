@@ -4,7 +4,7 @@ void BaseLaunchController::tick(
     const SysTick_s &tick,
     const PedalsSystemData_s &pedalsData,
     const float wheel_rpms[],
-    const vectornav &vn_data)
+    const VectornavData_s &vn_data)
 {
 
     if (tick.triggers.trigger100)

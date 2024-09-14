@@ -31,6 +31,6 @@ public:
     
     TorqueControllerSimpleLaunch() : TorqueControllerSimpleLaunch(SLParams::DEFAULT_LAUNCH_RATE, SLParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    void calc_launch_algo(const vectornav &vn_data) override;
+    void calc_launch_algo(const VectornavData_s &vn_data) override;
 };
 #endif // __SIMPLELAUNCHCONTROLLER_H__

@@ -27,6 +27,6 @@ public:
 
     TorqueControllerSlipLaunch() : TorqueControllerSlipLaunch(SlipLaunchControllerParams::DEFAULT_SLIP_RATIO, SlipLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
 
-    void calc_launch_algo(const vectornav &vn_data) override;
+    void calc_launch_algo(const VectornavData_s &vn_data) override;
 };
 #endif // __SLIPLAUNCHCONTROLLER_H__

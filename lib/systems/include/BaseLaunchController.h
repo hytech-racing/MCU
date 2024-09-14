@@ -47,9 +47,9 @@ public:
     void tick(const SysTick_s &tick,
               const PedalsSystemData_s &pedalsData,
               const float wheel_rpms[],
-              const vectornav &vn_data);
+              const VectornavData_s &vn_data);
     LaunchStates_e get_launch_state() { return launch_state_; }
-    virtual void calc_launch_algo(const vectornav &vn_data) = 0;
+    virtual void calc_launch_algo(const VectornavData_s &vn_data) = 0;
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 #endif // __BASELAUNCHCONTROLLER_H__

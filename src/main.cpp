@@ -664,7 +664,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    DrivetrainCommand_s controller_output = case_system.evaluate(
+    auto _ = case_system.evaluate(
         current_system_tick,
         vn_interface.get_vn_struct(),
         steering_system.getSteeringSystemData(),

@@ -74,7 +74,7 @@ template <typename message_queue>
 void VNInterface<message_queue>::retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg) {
     VN_ECEF_POS_Z_MSG_t ecef_z;
     Unpack_VN_ECEF_POS_Z_MSG_hytech(&ecef_z, recvd_msg.buf, recvd_msg.len);
-    vn_data.ecef_coords[2] = HYTECH_vn_ecef_pos_z_msg_ro_fromS(ecef_z.vn_ecef_pos_z_ro);
+    vn_data.ecef_coords[2] = HYTECH_vn_ecef_pos_z_ro_fromS(ecef_z.vn_ecef_pos_z_ro);
 }
 
 template <typename message_queue>
@@ -90,9 +90,9 @@ void VNInterface<message_queue>::receive_ang_rates_CAN(CAN_message_t & recvd_msg
  * @brief 
  * getter method for returning vn_data structure
  * @tparam message_queue 
- * @return vectornav 
+ * @return VectornavData_s 
  */
 template<typename message_queue>
-vectornav VNInterface<message_queue>::get_vn_struct() {
+VectornavData_s VNInterface<message_queue>::get_vn_struct() {
     return vn_data; 
 }

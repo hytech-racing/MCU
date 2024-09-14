@@ -11,7 +11,7 @@ private:
     /* Watchdog last kicked time */
     message_queue *msg_queue_;
     uint32_t can_id_;
-    vectornav vn_data;
+    VectornavData_s vn_data;
     
 public:
     VNInterface(message_queue *msg_output_queue) {
@@ -33,7 +33,7 @@ public:
     void retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg);
     void receive_ang_rates_CAN(CAN_message_t &recvd_msg);
     // getters
-    vectornav get_vn_struct();
+    VectornavData_s get_vn_struct();
     
     uint32_t get_id() { return can_id_;};
 };

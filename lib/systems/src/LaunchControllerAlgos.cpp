@@ -3,7 +3,7 @@
 #include "SimpleLaunchController.h"
 
 
-void TorqueControllerSimpleLaunch::calc_launch_algo(const vectornav &vn_data)
+void TorqueControllerSimpleLaunch::calc_launch_algo(const VectornavData_s &vn_data)
 {
     /*
     Stolen launch algo from HT07. This ramps up the speed target over time.
@@ -18,7 +18,7 @@ void TorqueControllerSimpleLaunch::calc_launch_algo(const vectornav &vn_data)
     launch_speed_target_ = std::min((int)PhysicalParameters::AMK_MAX_RPM, std::max(0, (int)launch_speed_target_));
 }
 
-void TorqueControllerLookupLaunch::calc_launch_algo(const vectornav &vn_data)
+void TorqueControllerLookupLaunch::calc_launch_algo(const VectornavData_s &vn_data)
 {
 
     launch_speed_target_ = std::max((float)LookupLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET, launch_speed_target_);
@@ -44,7 +44,7 @@ void TorqueControllerLookupLaunch::calc_launch_algo(const vectornav &vn_data)
     float new_speed_target = mps_target * METERS_PER_SECOND_TO_RPM;
     launch_speed_target_ = std::max(launch_speed_target_, new_speed_target);
 }
-void TorqueControllerSlipLaunch::calc_launch_algo(const vectornav &vn_data)
+void TorqueControllerSlipLaunch::calc_launch_algo(const VectornavData_s &vn_data)
 {
     // accelerate at constant speed for a period of time to get body velocity up
     // may want to make this the ht07 launch algo
