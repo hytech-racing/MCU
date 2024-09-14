@@ -30,12 +30,6 @@ void DashboardInterface::read(const CAN_message_t &can_msg)
 void DashboardInterface::update_torque_mode_(bool button_pressed)
 {
     // detect high-to-low transition
-    Serial.println("prev button state: ");
-    Serial.println(prev_button_pressed_state_);
-    Serial.println("button pressed: ");
-    Serial.println(button_pressed);
-    Serial.println("torque mode limit");
-    Serial.println(static_cast<int>(_data.torque_limit_mode));
     if (prev_button_pressed_state_ == true && button_pressed == false)
     {
         
