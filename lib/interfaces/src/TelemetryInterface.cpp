@@ -177,10 +177,10 @@ void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
     // TODO: change this to use actual torque values from inverter
     // Torque current just temporary for gearbox seal validation
     DRIVETRAIN_TORQUE_TELEM_t torque;
-    torque.fl_motor_torque_ro = HYTECH_fl_motor_torque_ro_toS(fl->get_torque_current());
-    torque.fr_motor_torque_ro = HYTECH_fr_motor_torque_ro_toS(fr->get_torque_current());
-    torque.rl_motor_torque_ro = HYTECH_rl_motor_torque_ro_toS(rl->get_torque_current());
-    torque.rr_motor_torque_ro = HYTECH_rr_motor_torque_ro_toS(rr->get_torque_current());
+    torque.fl_motor_torque = fl->get_torque_current();
+    torque.fr_motor_torque = fr->get_torque_current();
+    torque.rl_motor_torque = rl->get_torque_current();
+    torque.rr_motor_torque = rr->get_torque_current();
 
     enqueue_new_CAN<DRIVETRAIN_TORQUE_TELEM_t>(&torque, &Pack_DRIVETRAIN_TORQUE_TELEM_hytech);
 }
@@ -219,16 +219,16 @@ void TelemetryInterface::update_steering_status_CAN_msg(const float steering_sys
                                                         const uint8_t steering_encoder_status,
                                                         const uint8_t steering_analog_status)
 {
-    // STEERING_SYSTEM_REPORT_t msg;
+    STEERING_SYSTEM_REPORT_t msg;
 
-    // msg.steering_system_angle_ro = HYTECH_steering_system_angle_ro_toS(steering_system_angle);
-    // msg.steering_encoder_angle_ro = HYTECH_steering_encoder_angle_ro_toS(filtered_angle_encoder);
-    // msg.steering_analog_angle_ro = HYTECH_steering_analog_angle_ro_toS(filtered_angle_analog);
-    // msg.steering_system_status = steering_system_status;
-    // msg.steering_encoder_status = steering_encoder_status;
-    // msg.steering_analog_status = steering_analog_status;
+    msg.steering_system_angle_ro = HYTECH_steering_system_angle_ro_toS(steering_system_angle);
+    msg.steering_encoder_angle_ro = HYTECH_steering_encoder_angle_ro_toS(filtered_angle_encoder);
+    msg.steering_analog_angle_ro = HYTECH_steering_analog_angle_ro_toS(filtered_angle_analog);
+    msg.steering_system_status = steering_system_status;
+    msg.steering_encoder_status = steering_encoder_status;
+    msg.steering_analog_status = steering_analog_status;
 
-    // enqueue_new_CAN<STEERING_SYSTEM_REPORT_t>(&msg, &Pack_STEERING_SYSTEM_REPORT_hytech);
+    enqueue_new_CAN<STEERING_SYSTEM_REPORT_t>(&msg, &Pack_STEERING_SYSTEM_REPORT_hytech);
 }
 
 /* Send CAN messages */

@@ -1,7 +1,7 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-#include "ParameterInterface.h"
+// #include "ParameterInterface.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -175,8 +175,7 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
-ParameterInterface param_interface;
-ETHInterfaces ethernet_interfaces = {&param_interface};
+ETHInterfaces ethernet_interfaces = {};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
@@ -446,9 +445,6 @@ void loop()
 
     fsm.tick_state_machine(curr_tick.millis, car_state_inst);
 
-    // give the state of the car to the param interface
-    param_interface.update_car_state(fsm.get_state());
-
     // tick safety system
     safety_system.software_shutdown(curr_tick);
 
@@ -492,8 +488,11 @@ void loop()
         Serial.println(ams_interface.get_filtered_min_cell_voltage());
         Serial.print("Filtered max cell temp: ");
         Serial.println(ams_interface.get_filtered_max_cell_temp());
+        Serial.print("Current TC index: ");
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_));
+        Serial.print("Current TC error: ");
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
         Serial.println();
-
         Serial.println();
     }
     
@@ -677,7 +676,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         vn_interface.get_vn_struct().vn_status);
 
-    // case_system.update_config_from_param_interface(param_interface);
 }
 
 void handle_ethernet_interface_comms()
@@ -686,17 +684,6 @@ void handle_ethernet_interface_comms()
     // via the union message. this is a little bit cursed ngl.
     // TODO un fuck this and make it more sane
     // Serial.println("bruh");
-    handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
+    // handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
 
-    // this is just kinda here i know.
-    if (param_interface.params_need_sending())
-    {
-        // Serial.println("handling ethernet");
-        auto config = param_interface.get_config();
-        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
-        {
-            // TODO this means that something bad has happend
-        }
-        param_interface.reset_params_need_sending();
-    }
 }
