@@ -16,7 +16,7 @@ const int MCU15_THERM_FR_CHANNEL = 1;
 class ThermistorInterface 
 {
 private:
-    Thermistors<MCU15_NUM_THERMISTORS> front_thermistors;
+    Thermistors<MCU15_NUM_THERMISTORS> _front_thermistors;
      
     float therm_fl;
     float therm_fr;
