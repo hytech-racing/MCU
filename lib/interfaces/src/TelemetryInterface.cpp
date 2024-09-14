@@ -58,16 +58,6 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
 
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
-// void TelemetryInterface::update_front_thermistors_CAN_msg(const AnalogConversion_s &therm_fl,
-//                                                           const AnalogConversion_s &therm_fr)
-// {
-
-//     FRONT_THERMISTORS_t front_thermistors_;
-//     front_thermistors_.thermistor_motor_fl = therm_fl.raw;
-//     front_thermistors_.thermistor_motor_fr = therm_fr.raw;
-
-//     enqueue_new_CAN<FRONT_THERMISTORS_t>(&front_thermistors_, &Pack_FRONT_THERMISTORS_hytech);
-// }
 
 void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)
 {
@@ -195,23 +185,6 @@ void TelemetryInterface::update_penthouse_accum_CAN_msg(const AnalogConversion_s
     enqueue_new_CAN<PENTHOUSE_ACCUM_MSG_t>(&message, &Pack_PENTHOUSE_ACCUM_MSG_hytech);
 }
 
-// void TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &tcMuxStatus)
-// {
-//     TCMUX_STATUS_REPORT_t msg;
-
-//     msg.speed_above_thresh = tcMuxStatus.speedPreventsModeChange;
-//     msg.torque_delta_above_thresh = tcMuxStatus.torqueDeltaPreventsModeChange;
-//     msg.tc_not_ready = tcMuxStatus.controllerNotReadyPreventsModeChange;
-//     msg.steering_system_has_err = tcMuxStatus.steeringSystemError;
-//     msg.mode_intended = tcMuxStatus.modeIntended;
-//     msg.mode_actual = tcMuxStatus.modeActual;
-//     msg.dash_dial_mode = tcMuxStatus.dialMode;
-//     msg.torque_mode = tcMuxStatus.torqueMode;
-//     msg.torque_limit_ro = HYTECH_torque_limit_ro_toS(tcMuxStatus.maxTorque);
-
-//     enqueue_new_CAN<TCMUX_STATUS_REPORT_t>(&msg, &Pack_TCMUX_STATUS_REPORT_hytech);
-// }
-
 void TelemetryInterface::update_steering_status_CAN_msg(const float steering_system_angle,
                                                         const float filtered_angle_encoder,
                                                         const float filtered_angle_analog,
@@ -312,6 +285,4 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);
 
-    // update_front_thermistors_CAN_msg(mcu_adc.conversions[channels_.therm_fl_channel],
-    //                                  mcu_adc.conversions[channels_.therm_fr_channel]);
 }
