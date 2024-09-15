@@ -5,10 +5,9 @@
 #include "MCUStateMachine.h"
 #include "fake_controller_type.h"
 
-
-class DumbController : public Controller 
+class DumbController : public Controller
 {
-    TorqueControllerOutput_s evaluate(const SharedCarState_s & state) {return {};}
+    TorqueControllerOutput_s evaluate(const SharedCarState_s &state) { return {}; }
 };
 class DrivetrainMock
 {
@@ -68,7 +67,8 @@ void handle_startup(MCUStateMachine<DrivetrainMock> &state_machine, unsigned lon
 TEST(MCUStateMachineTesting, test_state_machine_init_tick)
 {
 
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
@@ -84,13 +84,15 @@ TEST(MCUStateMachineTesting, test_state_machine_init_tick)
 
 TEST(MCUStateMachineTesting, test_state_machine_tractive_system_activation)
 {
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
+
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
     
-    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
     SafetySystem ss(&ams, 0);
     MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
     unsigned long sys_time = 1000;
@@ -120,13 +122,15 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
 {
     unsigned long sys_time = 1000;
 
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
-    
-    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
+
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
+    ;
     SafetySystem ss(&ams, 0);
     MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
 
@@ -166,7 +170,8 @@ TEST(MCUStateMachineTesting, test_state_machine_tractive_system_enabling)
 // test getting into and out of the waiting RTD and ensuring it stays within the state when we want it to
 TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert)
 {
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
@@ -200,12 +205,14 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert)
 
 TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert_leaving)
 {
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
-    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
+    ;
 
     SafetySystem ss(&ams, 0);
     MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
@@ -233,13 +240,15 @@ TEST(MCUStateMachineTesting, test_state_machine_ready_to_drive_alert_leaving)
 TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_active)
 {
 
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     drivetrain.drivetrain_error_ = false;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
-    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
+    ;
 
     SafetySystem ss(&ams, 0);
     MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);
@@ -278,14 +287,16 @@ TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_acti
 TEST(MCUStateMachineTesting, test_state_machine_rtd_state_transitions_to_ts_not_active)
 {
 
-    AMSInterface ams(0, 0, 0, 0, 0);
+    int mock;
+    AMSInterface ams(&mock, 0, 0, 0, 0, 0);
     BuzzerController buzzer(50);
     DrivetrainMock drivetrain;
     drivetrain.drivetrain_error_ = false;
     PedalsSystem pedals({}, {});
     DashboardInterface dash_interface;
 
-    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});;
+    TCMuxType tc_mux({static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c), static_cast<Controller *>(&c)}, {true, true, true, true, true});
+    ;
 
     SafetySystem ss(&ams, 0);
     MCUStateMachine<DrivetrainMock> state_machine(&buzzer, &drivetrain, &dash_interface, &pedals, &tc_mux, &ss);

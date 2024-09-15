@@ -4,7 +4,7 @@
 #include "hytech.h"
 #include "DashboardInterface.h"
 
-Circular_Buffer <uint8_t, (uint32_t)16, sizeof(CAN_message_t)> dash_CAN_buffer;
+CANBufferType dash_CAN_buffer;
 
 /* CHAT GPT FUNCTIONS */
 void printMemoryHex(void* ptr, size_t length) {
@@ -63,7 +63,7 @@ void test_dashboard_unpacking_can_message(void)
 void test_dashboard_circular_buffer(void)
 {
 
-    Circular_Buffer <uint8_t, (uint32_t)16, sizeof(CAN_message_t)> dash_CAN_buffer_2;
+    CANBufferType dash_CAN_buffer_2;
     DashboardInterface dash_interface(&dash_CAN_buffer_2);
 
     uint8_t LED[12] = {};

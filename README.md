@@ -1,78 +1,89 @@
-## using and updating CASE
+## CASE Library Usage and Updates
 
-#### DO THIS ONCE
-you will need to add ssh key to your github account to allow platformio to pull in CASE as a library. 
+> [!IMPORTANT]
+> DO THIS ONCE
+> Before you begin, you need to add an SSH key to your GitHub account to allow PlatformIO to pull the CASE library. Follow these instructions to set up your SSH key: [GitHub SSH Key Setup](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 
-[follow these instructions on how to do this.](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+### Updating CASE Library
 
-#### UPDATING CASE
+To update the CASE library, find the latest tag from the repository: [CASE Library Tags](https://github.com/hytech-racing/CASE_lib/tags). Once identified, update the `platformio.ini` file in this repository by replacing the version number in the following line:
 
-to update case, look for the latest tag at this repo: https://github.com/hytech-racing/CASE_lib/tags
+```text
+git+ssh://git@github.com/hytech-racing/CASE_lib.git#v(INSERT VERSION NUMBER HERE)
+```
 
-and then in the `platformio.ini` file in this repository, change the number at this line:
+For example:
 
-`git+ssh://git@github.com/hytech-racing/CASE_lib.git#v(INSERT NUMBER HERE)`
+```text
+git+ssh://git@github.com/hytech-racing/CASE_lib.git#v34
+```
 
-for example: 
-    ```git+ssh://git@github.com/hytech-racing/CASE_lib.git#v34```
+## Build, Test, and Run Instructions
 
-## building testing and running
-This project uses [Platformio](https://docs.platformio.org/en/latest/) for building, testing, checking and packaging. 
+This project utilizes [PlatformIO](https://docs.platformio.org/en/latest/) for building, testing, and packaging.
 
-There are two main options for using Platformio:
-1. [as a VSCode extension](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation)
-2. [the platformio core CLI](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html)
+You can use PlatformIO in two ways:
+1. [As a VSCode extension](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation)
+2. [Through the PlatformIO Core CLI](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html)
 
-Quick start guide on how to use VSCode's extension through the [platformio toolbar](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar)
+For a quick guide on using the VSCode extension, refer to the [PlatformIO toolbar](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar).
 
-![ide upload and build](image.png)
+![IDE Upload and Build](image.png)
 
-The main thing to understand is that there exists two "environments" that this project gets built in (`test_env`). One of them is for native running of tests and the other is for building for the teensy and deploying to the teensy (`teensy41`). 
+### Environments
+
+There are two main environments for this project:
+* `test_env`: Used for native testing.
+* `teensy41`: Used for building and deploying to the Teensy board.
 
 ### Building
-To build the project for an environment, simply use platformio build check mark after switching to the specified `env`
 
-To build using platformio core CLI simply run `pio run -e teensy41`
+To build the project in a specific environment, switch to that environment in PlatformIO and use the build feature ( `check mark` icon) in VSCode. For CLI users, run:
+
+```bash
+pio run -e teensy41
+```
 
 ### Testing
-![testing through vscode](image-2.png)
 
-Before your feature / code addition / branch can get put into the `master` branch you must ensure the unit tests run with your code and that your code compiles. The remote CI will check your work and ensure that your code compiles and that it passes the unit tests however to check locally simply switch to the `test_env` and run the unit tests. This can be done through the VSCode IDE extension through the [project tasks menu](https://docs.platformio.org/en/latest/integration/ide/vscode.html#project-tasks) and selecting under `test_env` > `Advanced` > `Test`.
+Before merging code into the main branch, ensure all unit tests pass and the code compiles. The Continuous Integration (CI) system will verify this as well, but you can run the tests locally by switching to the `test_env` and executing the unit tests.
 
+In VSCode, navigate to the [Project Tasks Menu](https://docs.platformio.org/en/latest/integration/ide/vscode.html#project-tasks) and select `test_env > Advanced > Test` .
 
-To test using platformio core CLI simply run `pio test -e test_env`.
+For CLI users, run:
+
+```bash
+pio test -e test_env
+```
 
 ### Uploading
 
-To upload to the teensy simply use the platformio upload arrow shown [here at number 3](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar).
+To upload to the Teensy, use the upload feature (arrow icon) in the PlatformIO toolbar, shown [here at number 3](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar).
 
-##### On Implementing and Importance of tests
-Unit tests are a great way to ensure that new features and new code in general can integrate and work well with other code. It provides a framework to verify that your stuff works the way it should and lets you know when and how it doesnt. 
+### Importance of Unit Tests
 
-This project uses unit tests in the `test` folder to for both local testing and testing in the CI on github.
+> [!WARNING]
+> Unit tests MUST be maintained for functionality of the car.
 
-The remote github CI testing currently only encompases system level testing and not the hardware dependent testing that is available locally for running.
+Unit tests ensure the stability of new features and code changes by verifying integration with the existing codebase. The unit tests for this project are located in the `test` folder and are run both locally and in the GitHub CI environment.
 
-You can see results of previous test runs on commits here: https://github.com/hytech-racing/MCU/actions
+Note: CI testing currently only includes system-level tests, not hardware-dependent tests, which can be run locally.
 
-These MUST be maintained for functionality of the car. 
+View previous test results here: [GitHub Actions](https://github.com/hytech-racing/MCU/actions).
 
-### setup vscode 
-##### with auto-completition and advanced navigation using compile commands
+### VSCode Setup for Auto-completion and Code Navigation
 
+For advanced code navigation and auto-completion, you can generate a `compile_commands.json` file for the build environment. This file is created using the [PlatformIO compiledb task](https://docs.platformio.org/en/latest/integration/compile_commands.html).
 
-the `compile_commands.json` file is a file that gets generated in the build folder upon excution of the [compiledb platformio task](https://docs.platformio.org/en/latest/integration/compile_commands.html) that sets up the include paths for vscode. [more about compile_commands.json here](https://clangd.llvm.org/design/compile-commands).
+To generate the file:
+1. Open the PlatformIO terminal in VSCode.
+2. Run:
 
-If you enter the platformio terminal, you can generate compile commands with 
-1. ![alt text](image-1.png)
+```bash
+pio run -t compiledb -e teensy41
+```
 
-then 
-2. ```pio run -t compiledb -e teensy41```
-
-
-this will generate the compile commands for the `teensy41` environment which is the environment we use to build and flash to the car. in a similar fashion, other environments (eg: `test_env`) can have their compile commands generated.
-
-3. then you need to setup vscode to recognize where this file is, which gets put into the `.pio` folder in your workspace. To do this, simply create a `.vscode` folder in the workspace and add a file called `c_cpp_properties.json` and it should look like this:
+This will create the `compile_commands.json` file in the `.pio/build/teensy41` folder. You can configure VSCode to use this file by creating a `.vscode/c_cpp_properties.json` file with the following content:
 
 ```json
 {
@@ -82,7 +93,6 @@ this will generate the compile commands for the `teensy41` environment which is 
             "includePath": [
                 "${workspaceFolder}/**"
             ],
-            "defines": [],
             "cStandard": "c17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x64",
@@ -92,35 +102,34 @@ this will generate the compile commands for the `teensy41` environment which is 
     "version": 4
 }
 ```
-then you can select this configuration to be used with [this c/c++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) in vscode for auto-completition and code navigation. 
 
-to select the configuration, use the hotkey `ctrl+shift+p` to open the command prompt in vscode, and then type \`C/C++: Select a Configuration\` and then select your configuration for which you named above.
+Select this configuration using the VSCode command palette ( `Ctrl+Shift+P` ) and choosing `C/C++: Select a Configuration` .
 
-## updating CASE (manual / old way)
+## Manual CASE Update (Legacy)
 
-1. generate the .zip file in HyTech_sim by generating the code for CASE
-2. while in the HyTech_sim directory, there exists `process_lib.py`. use this by running:
-```
+1. Generate the `.zip` file for CASE from the HyTech_sim directory.
+2. Run the `process_lib.py` script:
+
+```bash
 python3 process_lib.py HT08_CONTROL_SYSTEM.zip /path/to/MCU/lib/CASE_lib CASE_lib
 ```
-while ensuring that you fill in your path to MCU.
 
-3. profit
+Replace `/path/to/MCU` with your MCU path.
 
-## Design Lore of the Code
-### outline
+## System Design and Structure
 
-Levels represent the layer of abstraction they are on. The reason for keeping track of this is to minimize the layers of abstraction for ease of understanding while also creating logical structure and getting maximum benefit per abstraction.
+### Overview
 
-##### state diagram legend
+The project is built using different levels of abstraction to maintain logical structure while minimizing complexity.
 
-`+`  = Public
-`-`  = Private
+##### State Diagram Legend
 
+`+` = Public
+`-` = Private
 
-#### level 1: state machine goals for interface design and implementation
-- __Reason for abstraction__: allows for easy swapping and adding of different portable systems and better [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) from [business logic](https://www.techtarget.com/whatis/definition/business-logic) of the car to the business logic of the system.
+#### Level 1: State Machine goals for interface design and implementation
 
+* __Reason for abstraction__: allows for easy swapping and adding of different portable systems and better [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) from [business logic](https://www.techtarget.com/whatis/definition/business-logic) of the car to the business logic of the system.
 
 Any firmware project that needs to have different states needs each system that creates outputs and / or controls real systems of the car needs can be thought of as each system being controlled by the state machine. What I am thinking is that in a similar fashion to the shared bus, each system can contain a pointer to the state machine. The system can know what state the car is in and based on the state it can determine how to behave. Obviously the state machine also needs to know about what the system is doing as well to determine the state, so the system also needs to be able to pass back data to the state machine. 
 
@@ -128,10 +137,7 @@ For example, our state machine needs to handle understand the state of the pedal
 
 It is only within the logic of our state machine that the systems are allowed to communicate with one another. 
 
-The main idea is that each firmware project has a specific implementation of a state machine, however the systems are portable between firmware projects. Additionally, the systems remain as concrete 
-
-
-
+The main idea is that each firmware project has a specific implementation of a state machine, however the systems are portable between firmware projects. Additionally, the systems remain as concrete.
 
 ```mermaid
 ---
@@ -154,7 +160,6 @@ classDiagram
         PedalsSystel* pedals
         DashInterface* dashboard
 
-
         DrivetrainSystem* drivetrain
 
         TorqueVectoringControllerSystem* tvc
@@ -171,15 +176,14 @@ classDiagram
 
 ```
 
-
-
 #### level 2 portable Systems: interfaces, logic and structure
 
-- __Reason for abstraction__: these Systems allow us to have board portable pieces so that when newer iterations of boards are made, the same systems that the previous iteration handled can be kept while only the hardware specific code changes. 
+* __Reason for abstraction__: these Systems allow us to have board portable pieces so that when newer iterations of boards are made, the same systems that the previous iteration handled can be kept while only the hardware specific code changes. 
 
 For instance, when a new MCU board is created with a new steering sensor input, code within the controller systems will not need to change, only that a new sensor system will be used within the state machine to feed the controller input.
 
 below are some hypothetical system class definitions.
+
 ```mermaid
 ---
 title: systems
@@ -217,7 +221,7 @@ classDiagram
 
 #### level 2 SPI / i2c data bus abstraction from hardware specific implementations
 
-- __Reason for abstraction__: this allows us to create a specific type of system that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other systems.
+* __Reason for abstraction__: this allows us to create a specific type of system that uses a shared resource, for example multiple sensors on a SPI bus, that each have their own scaling to produce data for feeding other systems.
 
 This is currently aimed at our use of a SPI bus. The read data functions are what convert the data gotten from the shared bus to the real-world values for each one of the sensors. This was being attempted with ADC_SPI versus STEERING_SPI using just copies of the class. 
 
@@ -248,7 +252,6 @@ classDiagram
 
 ```
 
-
 ### state machine documentation
 
 ```mermaid
@@ -271,32 +274,36 @@ stateDiagram-v2
     rtd --> trac_sys_na: drivetrain voltage _not_ over threshold
     rtd --> trac_sys_a: drivetrain error occured
 ```
-#### running the tests
 
-This repo uses platformio testing for CI unit testing. these tests can be run locally with `pio test -e test_env`. The CI checks to ensure that the code both compiles for the teensy and ensures that the tests are passing.
+### Running the Tests
 
+PlatformIO is used for CI unit testing. You can run tests locally using:
 
+```bash
+pio test -e test_env
+```
 
-#### notes
-new MCU code:
-- system definition:
-     an abstract sub-system of the physical car or the code that requires logic to be evaluated by the MCU to determine what input to give it or logic required to handle output from.
-- interface definition:
-    - code required to purely unpack / pack data into internal structs / classes for use by systems or logic
+The CI checks ensure code compiles for the Teensy and that all tests pass.
 
-- architecture:
+#### Notes
 
-    - over-arching state machine
-    - systems level 
-        - inverters (multiple)
-        - pedals
-        - torque / speed controller
-        - dashboard interface
-        
-    - interface level:
-        - hytech_can interface
-        - spi interfaces: SPI adcs for load cells, steering input, glv, etc.
+##### New MCU Code: Definitions and Architecture
 
+- **System Definition**: An abstract sub-system that requires logic from the MCU to handle inputs and outputs.
+- **Interface Definition**: Code to pack/unpack data into internal structures for use by systems or logic.
+
+* architecture:
+  - over-arching state machine
+  - systems level 
+      - inverters (multiple)
+      - pedals
+      - torque / speed controller
+      - dashboard interface
+      
+
+  - interface level:
+      - hytech_can interface
+      - spi interfaces: SPI adcs for load cells, steering input, glv, etc.
 
 ```mermaid
 flowchart LR
@@ -349,5 +356,4 @@ flowchart LR
     nanopb --> MCU
     other_protos[other msgs.proto]
     other_protos --> h_proto
-  
 ```
