@@ -18,7 +18,6 @@ const float DEFAULT_INIT_TEMP       = 40.0;
 const float DEFAULT_INIT_VOLTAGE    = 3.5;
 const float DEFAULT_TEMP_ALPHA      = 0.8;
 const float DEFAULT_VOLTAGE_ALPHA   = 0.8;
-const unsigned short MAX_PACK_CHARGE      = 48600;
 const unsigned long DEFAULT_INITIALIZATION_WAIT_INTERVAL = 5000;
 
 class AMSInterface
