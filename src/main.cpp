@@ -33,6 +33,7 @@
 #include "SafetySystem.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
+#include "DrivebrainController.h"
 // #include "TorqueControllerMux.h"
 #include "TorqueControllerMux.h"
 
@@ -304,13 +305,14 @@ TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
 // mode 3
 TorqueControllerSimpleLaunch simple_launch;
 // mode 4
-TorqueControllerSlipLaunch slip_launch;
+DrivebrainController db_controller(210, 210);
+
 TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
                                  static_cast<Controller *>(&tc_vec),
                                  static_cast<Controller *>(&case_wrapper),
                                  static_cast<Controller *>(&simple_launch),
-                                 static_cast<Controller *>(&slip_launch)},
-                                {false, false, true, false, false});
+                                 static_cast<Controller *>(&db_controller)},
+                                {false, false, true, false, true});
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -491,6 +493,10 @@ void loop()
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_));
         Serial.print("Current TC error: ");
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
+        Serial.println();
+        Serial.print("dial state: ");
+        Serial.println(static_cast<int>(dashboard.getDialMode()));
+        Serial.println(db_interface.get_latest_db_data().torque_limits_nm.FL);
         Serial.println();
         Serial.println();
     }

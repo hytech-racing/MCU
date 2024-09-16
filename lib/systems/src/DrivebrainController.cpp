@@ -50,7 +50,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
 
 
         db_input.speed_setpoints_rpm.copy_to_arr(output.command.speeds_rpm); 
-        db_input.speed_setpoints_rpm.copy_to_arr(output.command.torqueSetpoints); 
+        db_input.torque_limits_nm.copy_to_arr(output.command.torqueSetpoints); 
     }
     else
     {
