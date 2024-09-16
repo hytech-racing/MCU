@@ -1,7 +1,7 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-#include "ParameterInterface.h"
+// #include "ParameterInterface.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -25,6 +25,7 @@
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
 #include "DrivebrainInterface.h"
+#include "TorqueControllers.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -32,6 +33,7 @@
 #include "SafetySystem.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
+// #include "TorqueControllerMux.h"
 #include "TorqueControllerMux.h"
 
 #include "CASESystem.h"
@@ -39,6 +41,7 @@
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
+#include "PrintLogger.h"
 /*
     PARAMETER STRUCTS
 */
@@ -87,7 +90,6 @@ const PedalsParams accel2_only_params = {
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
 
-
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
     .min_pedal_2 = ACCEL2_PEDAL_MIN,
@@ -101,7 +103,6 @@ const PedalsParams accel_params = {
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
-
 
 const PedalsParams brake1_only_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
@@ -173,8 +174,7 @@ OrbisBR10 steering1(&Serial5);
 // /*
 //     INTERFACES
 // */
-ParameterInterface param_interface;
-ETHInterfaces ethernet_interfaces = {&param_interface};
+ETHInterfaces ethernet_interfaces = {};
 VNInterface<CircularBufferType> vn_interface(&CAN3_txBuffer);
 DashboardInterface dashboard(&CAN3_txBuffer);
 AMSInterface ams_interface(&CAN3_txBuffer, SOFTWARE_OK);
@@ -213,7 +213,6 @@ SafetySystem safety_system(&ams_interface, &wd_interface);
 PedalsSystem pedals_system(accel_params, brake_params);
 using DriveSys_t = DrivetrainSystem<InvInt_t>;
 DriveSys_t drivetrain = DriveSys_t({&inv.fl, &inv.fr, &inv.rl, &inv.rr}, &main_ecu, INVERTER_ENABLING_TIMEOUT_INTERVAL);
-TorqueControllerMux torque_controller_mux(SIMPLE_TC_REAR_TORQUE_SCALE, SIMPLE_TC_REGEN_TORQUE_SCALE, &telem_interface);
 // TODO ensure that case uses max regen torque, right now its not
 CASEConfiguration case_config = {
     // Following used for generated code
@@ -254,7 +253,7 @@ CASEConfiguration case_config = {
     .useTorqueBias = true,
     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
     .BrakeTorquePercentFront = 0.6,
-    .MechPowerMaxkW =51.5,            // kW
+    .MechPowerMaxkW = 51.5,            // kW
     .launchLeftRightMaxDiff = 2.0,     // N-m
     .tcs_pid_lower_rpm_front = 0.0,    // RPM
     .tcs_pid_upper_rpm_front = 5000.0, // RPM
@@ -267,7 +266,7 @@ CASEConfiguration case_config = {
     .TCSGenLeftRightDiffUpperBound = 20, // N-m
     .TCSWheelSteerLowerBound = 2,        // Deg
     .TCSWheelSteerUpperBound = 25,       // Deg
-    .useRPM_TCS_GainSchedule = true,    // If both are false, then P values defaults to lower bound per axle
+    .useRPM_TCS_GainSchedule = true,     // If both are false, then P values defaults to lower bound per axle
     .useNL_TCS_GainSchedule = false,
     .TCS_NL_startBoundPerc_FrontAxle = 0.5,
     .TCS_NL_endBoundPerc_FrontAxle = 0.4,
@@ -292,8 +291,26 @@ CASEConfiguration case_config = {
     .max_regen_torque = 21.42,
     .max_torque = 21.42,
 };
-
+RateLimitedLogger logger;
+//// Controllers
 CASESystem<CircularBufferType> case_system(&CAN3_txBuffer, 100, 70, 550, case_config);
+// mode 0
+TorqueControllerSimple tc_simple(1.0f, 1.0f);
+// mode 1
+TorqueControllerLoadCellVectoring tc_vec;
+// mode 2
+TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
+
+// mode 3
+TorqueControllerSimpleLaunch simple_launch;
+// mode 4
+TorqueControllerSlipLaunch slip_launch;
+TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
+                                 static_cast<Controller *>(&tc_vec),
+                                 static_cast<Controller *>(&case_wrapper),
+                                 static_cast<Controller *>(&simple_launch),
+                                 static_cast<Controller *>(&slip_launch)},
+                                {false, false, true, false, false});
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -333,11 +350,6 @@ void setup()
     // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
     // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
-    /* Do this to send message VVV */
-    // protobuf_socket.beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_port);
-    // protobuf_socket.write(buf, len);
-    // protobuf_socker.endPacket();
-
     SPI.begin();
     a1.init();
     a2.init();
@@ -371,9 +383,9 @@ void setup()
         Init Interfaces
     */
 
-    main_ecu.init();                      // initial shutdown circuit readings,
-    wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick);        // initialize last heartbeat time
+    main_ecu.init();                     // initial shutdown circuit readings,
+    wd_interface.init(curr_tick.millis); // initialize wd kick time
+    ams_interface.init(curr_tick);       // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -408,6 +420,18 @@ void loop()
     tick_all_interfaces(curr_tick);
 
     // tick systems
+
+    // single source of truth for the state of the car.
+    // no systems or interfaces should write directly to this.
+    SharedCarState_s car_state_inst(curr_tick,
+                                    steering_system.getSteeringSystemData(),
+                                    drivetrain.get_dynamic_data(),
+                                    load_cell_interface.getLoadCellForces(),
+                                    pedals_system.getPedalsSystemData(),
+                                    vn_interface.get_vn_struct(),
+                                    db_interface.get_latest_db_data(),
+                                    torque_controller_mux.get_tc_mux_status());
+
     tick_all_systems(curr_tick);
 
     // inverter procedure before entering state machine
@@ -417,10 +441,8 @@ void loop()
         drivetrain.reset_drivetrain();
     }
     // tick state machine
-    fsm.tick_state_machine(curr_tick.millis);
 
-    // give the state of the car to the param interface
-    param_interface.update_car_state(fsm.get_state());
+    fsm.tick_state_machine(curr_tick.millis, car_state_inst);
 
     // tick safety system
     safety_system.software_shutdown(curr_tick);
@@ -430,46 +452,48 @@ void loop()
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 
     // Basic debug prints
-    // if (curr_tick.triggers.trigger5)
-    // {
-    //     Serial.print("Steering system reported angle (deg): ");
-    //     Serial.println(steering_system.getSteeringSystemData().angle);
-    //     Serial.print("Steering system status: ");
-    //     Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
-    //     Serial.print("Primary sensor angle: ");
-    //     Serial.println(steering1.convert().angle);
-    //     Serial.print("Secondary sensor angle: ");
-    //     Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
-    //     Serial.print("  raw: ");
-    //     Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
-    //     Serial.print("Sensor divergence: ");
-    //     Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
-    //     Serial.println();
-    //     Serial.println("Pedal outputs:");
-    //     Serial.print("Accel 1 raw: ");
-    //     Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
-    //     Serial.print("Accel 2 raw: ");
-    //     Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
-    //     Serial.print("Accel percent: ");
-    //     Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
-    //     Serial.print("Brake 1 raw: ");
-    //     Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
-    //     Serial.print("Brake 2 raw: ");
-    //     Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
-    //     Serial.print("Brake percent: ");
-    //     Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
-    //     Serial.println();
-    //     Serial.print("Derating factor: ");
-    //     Serial.println(ams_interface.get_acc_derate_factor());
-    //     Serial.print("Filtered min cell voltage: ");
-    //     Serial.println(ams_interface.get_filtered_min_cell_voltage());
-    //     Serial.print("Filtered max cell temp: ");
-    //     Serial.println(ams_interface.get_filtered_max_cell_temp());
-    //     Serial.println();
-
-    //     Serial.println();
-    // }
-    
+    if (curr_tick.triggers.trigger5)
+    {
+        Serial.print("Steering system reported angle (deg): ");
+        Serial.println(steering_system.getSteeringSystemData().angle);
+        Serial.print("Steering system status: ");
+        Serial.println(static_cast<uint8_t>(steering_system.getSteeringSystemData().status));
+        Serial.print("Primary sensor angle: ");
+        Serial.println(steering1.convert().angle);
+        Serial.print("Secondary sensor angle: ");
+        Serial.print(a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.print("  raw: ");
+        Serial.println(a1.get().conversions[MCU15_STEERING_CHANNEL].raw);
+        Serial.print("Sensor divergence: ");
+        Serial.println(steering1.convert().angle - a1.get().conversions[MCU15_STEERING_CHANNEL].conversion);
+        Serial.println();
+        Serial.println("Pedal outputs:");
+        Serial.print("Accel 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL1_CHANNEL].raw);
+        Serial.print("Accel 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
+        Serial.print("Accel percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
+        Serial.print("Brake 1 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
+        Serial.print("Brake 2 raw: ");
+        Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
+        Serial.print("Brake percent: ");
+        Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
+        Serial.println();
+        Serial.print("Derating factor: ");
+        Serial.println(ams_interface.get_acc_derate_factor());
+        Serial.print("Filtered min cell voltage: ");
+        Serial.println(ams_interface.get_filtered_min_cell_voltage());
+        Serial.print("Filtered max cell temp: ");
+        Serial.println(ams_interface.get_filtered_max_cell_temp());
+        Serial.print("Current TC index: ");
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_));
+        Serial.print("Current TC error: ");
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
+        Serial.println();
+        Serial.println();
+    }
 }
 
 /*
@@ -512,19 +536,19 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
             drivetrain.drivetrain_error_occured(),
-            torque_controller_mux.getTorqueLimit(),
+            torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
             ams_interface.get_filtered_min_cell_voltage(),
             a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
-            static_cast<int>(torque_controller_mux.activeController()->get_launch_state()),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
             dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
             drivetrain.drivetrain_error_occured(),
             safety_system.get_software_is_ok(),
-            static_cast<int>(torque_controller_mux.getDriveMode()),
-            static_cast<int>(torque_controller_mux.getTorqueLimit()),
-            torque_controller_mux.getMaxTorque(),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_torque_limit_enum),
+            torque_controller_mux.get_tc_mux_status().current_torque_limit_value,
             buzzer.buzzer_is_on(),
             pedals_system.getPedalsSystemData(),
             ams_interface.pack_charge_is_critical(),
@@ -550,7 +574,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            {});
+            torque_controller_mux.get_tc_mux_status().current_error);
         ams_interface.tick(current_system_tick);
     }
 
@@ -593,14 +617,14 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_BRAKE1_CHANNEL],
         a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
-    // accel 1 only accel 2 dead, brake normal 
+    // accel 1 only accel 2 dead, brake normal
     // pedals_system.tick(
     //     current_system_tick,
     //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
     //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
     //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
     //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // accel 2 only accel 1 dead, brake normal 
+    // accel 2 only accel 1 dead, brake normal
     // pedals_system.tick(
     //     current_system_tick,
     //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
@@ -622,7 +646,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     //     a1.get().conversions[MCU15_BRAKE2_CHANNEL],
     //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
-
     // tick steering system
     steering_system.tick(
         (SteeringSystemTick_s){
@@ -638,7 +661,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    DrivetrainCommand_s controller_output = case_system.evaluate(
+    auto _ = case_system.evaluate(
         current_system_tick,
         vn_interface.get_vn_struct(),
         steering_system.getSteeringSystemData(),
@@ -650,20 +673,6 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         vn_interface.get_vn_struct().vn_status);
 
-    // case_system.update_config_from_param_interface(param_interface);
-    auto test = db_interface.get_latest_db_data();
-    torque_controller_mux.tick(
-        current_system_tick,
-        drivetrain.get_dynamic_data(),
-        pedals_system.getPedalsSystemData(),
-        steering_system.getSteeringSystemData(),
-        load_cell_interface.getLoadCellForces(),
-        dashboard.getDialMode(),
-        ams_interface.get_acc_derate_factor(),
-        dashboard.torqueModeButtonPressed(),
-        vn_interface.get_vn_struct(),
-        controller_output,
-        test);
 }
 
 void handle_ethernet_interface_comms()
@@ -672,17 +681,5 @@ void handle_ethernet_interface_comms()
     // via the union message. this is a little bit cursed ngl.
     // TODO un fuck this and make it more sane
     // Serial.println("bruh");
-    handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
-
-    // this is just kinda here i know.
-    if (param_interface.params_need_sending())
-    {
-        // Serial.println("handling ethernet");
-        auto config = param_interface.get_config();
-        if (!handle_ethernet_socket_send_pb(&protobuf_send_socket, config, config_fields))
-        {
-            // TODO this means that something bad has happend
-        }
-        param_interface.reset_params_need_sending();
-    }
+    // handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
 }

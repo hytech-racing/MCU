@@ -1,24 +1,21 @@
 #ifndef PROTOBUFMSGINTERFACE
 #define PROTOBUFMSGINTERFACE
 
-#include "ht_eth.pb.h"
 #include "pb_encode.h"
 #include "pb_decode.h"
 #include "pb_common.h"
-#include "ParameterInterface.h"
 #include "circular_buffer.h"
 #include "NativeEthernet.h"
-#include "MCU_rev15_defs.h"
-
+// #include "InterfaceParams.h"
 
 struct ETHInterfaces
 {
-    ParameterInterface* param_interface;
 };
 
 using recv_function_t = void (*)(const uint8_t* buffer, size_t packet_size, ETHInterfaces& interfaces);
 
 // this should be usable with arbitrary functions idk something
+template<size_t buffer_size>
 void handle_ethernet_socket_receive(EthernetUDP* socket, recv_function_t recv_function, ETHInterfaces& interfaces)
 {
     int packet_size = socket->parsePacket();
@@ -26,19 +23,18 @@ void handle_ethernet_socket_receive(EthernetUDP* socket, recv_function_t recv_fu
     {
         Serial.println("packet size");
         Serial.println(packet_size);
-        uint8_t buffer[EthParams::default_buffer_size];
+        uint8_t buffer[buffer_size];
         size_t read_bytes = socket->read(buffer, sizeof(buffer));
         socket->read(buffer, UDP_TX_PACKET_MAX_SIZE);
         recv_function(buffer, read_bytes, interfaces);
     }
 }
 
-template <typename pb_struct>
-bool handle_ethernet_socket_send_pb(EthernetUDP* socket, const pb_struct& msg, const pb_msgdesc_t* msg_desc)
+template <typename pb_struct, size_t buffer_size>
+bool handle_ethernet_socket_send_pb(IPAddress addr, uint16_t port, EthernetUDP* socket, const pb_struct& msg, const pb_msgdesc_t* msg_desc)
 {
-    socket->beginPacket(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port);
-    
-    uint8_t buffer[EthParams::default_buffer_size];
+    socket->beginPacket(addr, port);
+    uint8_t buffer[buffer_size];
     pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
     if (!pb_encode(&stream, msg_desc, &msg)) {
         // You can handle error more explicitly by looking at stream.errmsg
@@ -50,27 +46,17 @@ bool handle_ethernet_socket_send_pb(EthernetUDP* socket, const pb_struct& msg, c
     return true;
 }
 
-// 
-void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInterfaces& interfaces)
+
+template <typename pb_msg_type>
+std::pair<pb_msg_type, bool> recv_pb_stream_msg(const uint8_t *buffer, size_t packet_size, ETHInterfaces& interfaces, const pb_msgdesc_t * desc_pointer)
 {
     pb_istream_t stream = pb_istream_from_buffer(buffer, packet_size);
-    HT_ETH_Union msg = HT_ETH_Union_init_zero;
-    if (pb_decode(&stream, HT_ETH_Union_fields, &msg))
+    pb_msg_type msg = {};
+    if (pb_decode(&stream, desc_pointer, &msg))
     {
-        Serial.println("decoded!");
-
-        switch (msg.which_type_union)
-        {
-        case HT_ETH_Union_config__tag:
-            interfaces.param_interface->update_config(msg.type_union.config_);
-            break;
-        case HT_ETH_Union_get_config__tag:
-            interfaces.param_interface->set_params_need_sending();
-            break;
-        default:
-            break;
-        }
+        return {msg, true};
     }
+    return {msg, };
 }
 
 

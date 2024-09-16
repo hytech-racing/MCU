@@ -1,6 +1,7 @@
 #ifndef __UTILITY_H__
 #define __UTILITY_H__
-
+#include "PhysicalParameters.h"
+#include <array>
 // Defines
 const int FL =          0;
 const int FR =          1;
@@ -35,6 +36,7 @@ struct veh_vec
         arr_out[2]=RL;
         arr_out[3]=RR;
     }
+
 };
 
 template <typename T>

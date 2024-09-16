@@ -3,7 +3,7 @@
 
 #include "Utility.h"
 
-struct DrivebrainData
+struct DrivebrainData_s
 {
     unsigned long last_torque_lim_receive_time_millis;
     unsigned long last_speed_setpoint_receive_time_millis;

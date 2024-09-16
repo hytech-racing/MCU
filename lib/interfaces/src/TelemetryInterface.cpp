@@ -4,20 +4,22 @@
 // MCP3208 returns structure
 void TelemetryInterface::update_pedal_readings_CAN_msg(float accel_percent,
                                                        float brake_percent,
-                                                       float mech_brake_percent) {
+                                                       float mech_brake_percent)
+{
 
     MCU_PEDAL_READINGS_t pedal_readings;
 
-    pedal_readings.accel_percent_float_ro = HYTECH_accel_percent_float_ro_toS(accel_percent*100);
-    pedal_readings.brake_percent_float_ro = HYTECH_brake_percent_float_ro_toS(brake_percent*100);
-    pedal_readings.mechanical_brake_percent_float_ro = HYTECH_mechanical_brake_percent_float_ro_toS(mech_brake_percent*100);
+    pedal_readings.accel_percent_float_ro = HYTECH_accel_percent_float_ro_toS(accel_percent * 100);
+    pedal_readings.brake_percent_float_ro = HYTECH_brake_percent_float_ro_toS(brake_percent * 100);
+    pedal_readings.mechanical_brake_percent_float_ro = HYTECH_mechanical_brake_percent_float_ro_toS(mech_brake_percent * 100);
 
     enqueue_new_CAN<MCU_PEDAL_READINGS_t>(&pedal_readings, &Pack_MCU_PEDAL_READINGS_hytech);
 }
 void TelemetryInterface::update_pedal_readings_raw_CAN_msg(const AnalogConversion_s &accel_1,
                                                            const AnalogConversion_s &accel_2,
                                                            const AnalogConversion_s &brake_1,
-                                                           const AnalogConversion_s &brake_2) {
+                                                           const AnalogConversion_s &brake_2)
+{
     MCU_PEDAL_RAW_t pedal_read;
 
     pedal_read.accel_1_raw = accel_1.raw;
@@ -26,13 +28,13 @@ void TelemetryInterface::update_pedal_readings_raw_CAN_msg(const AnalogConversio
     pedal_read.brake_2_raw = brake_2.raw;
 
     enqueue_new_CAN<MCU_PEDAL_RAW_t>(&pedal_read, &Pack_MCU_PEDAL_RAW_hytech);
-
 }
 // MCP3204 returns structure
 void TelemetryInterface::update_suspension_CAN_msg(const AnalogConversion_s &lc_fl,
                                                    const AnalogConversion_s &lc_fr,
                                                    const AnalogConversion_s &pots_fl,
-                                                   const AnalogConversion_s &pots_fr) {
+                                                   const AnalogConversion_s &pots_fr)
+{
     MCU_SUSPENSION_t sus;
     sus.load_cell_fl = lc_fl.raw;
     sus.load_cell_fr = lc_fr.raw;
@@ -46,7 +48,8 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
                                                         const AnalogConversion_s &steer2,
                                                         const AnalogConversion_s &current,
                                                         const AnalogConversion_s &reference,
-                                                        const AnalogConversion_s &glv) {
+                                                        const AnalogConversion_s &glv)
+{
     // do sth with mcu_analog_readings_
     mcu_analog_readings_.set_steering_1(steer1.raw);
     mcu_analog_readings_.set_steering_2(steer2.raw);
@@ -56,22 +59,22 @@ void TelemetryInterface::update_analog_readings_CAN_msg(const SteeringEncoderCon
     enqueue_CAN<MCU_analog_readings>(mcu_analog_readings_, ID_MCU_ANALOG_READINGS);
 }
 
-
-void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
+void TelemetryInterface::update_drivetrain_rpms_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)
 {
     DRIVETRAIN_RPMS_TELEM_t rpms;
     rpms.fl_motor_rpm = fl->get_speed();
     rpms.fr_motor_rpm = fr->get_speed();
     rpms.rl_motor_rpm = rl->get_speed();
     rpms.rr_motor_rpm = rr->get_speed();
-    
+
     enqueue_new_CAN<DRIVETRAIN_RPMS_TELEM_t>(&rpms, &Pack_DRIVETRAIN_RPMS_TELEM_hytech);
 }
 
-void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvInt_t* fr, InvInt_t* rl, InvInt_t* rr)
+void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t *fl, InvInt_t *fr, InvInt_t *rl, InvInt_t *rr)
 {
 
-    if (1) { // We should only write error status if some error has occurred, but for now, this is just an if(1)
+    if (1)
+    { // We should only write error status if some error has occurred, but for now, this is just an if(1)
         DRIVETRAIN_ERR_STATUS_TELEM_t errors;
         errors.mc1_diagnostic_number = fl->get_error_status();
         errors.mc2_diagnostic_number = fr->get_error_status();
@@ -79,18 +82,17 @@ void TelemetryInterface::update_drivetrain_err_status_CAN_msg(InvInt_t* fl, InvI
         errors.mc4_diagnostic_number = rr->get_error_status();
         enqueue_new_CAN<DRIVETRAIN_ERR_STATUS_TELEM_t>(&errors, &Pack_DRIVETRAIN_ERR_STATUS_TELEM_hytech);
     }
-    
 }
 
 void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
-                                                                InvInt_t* fl,
-                                                                InvInt_t* fr,
-                                                                InvInt_t* rl,
-                                                                InvInt_t* rr,
-                                                                bool accel_implaus,
-                                                                bool brake_implaus,
-                                                                float accel_per,
-                                                                float brake_per)
+    InvInt_t *fl,
+    InvInt_t *fr,
+    InvInt_t *rl,
+    InvInt_t *rr,
+    bool accel_implaus,
+    bool brake_implaus,
+    float accel_per,
+    float brake_per)
 {
     DRIVETRAIN_STATUS_TELEM_t status;
 
@@ -139,7 +141,7 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
     MC_temps mc2_temps = fr->get_temps_msg();
     MC_temps mc3_temps = rl->get_temps_msg();
     MC_temps mc4_temps = rr->get_temps_msg();
-    
+
     MC_setpoints_command mc1_cmd = fl->get_cmd_msg();
     MC_setpoints_command mc2_cmd = fr->get_cmd_msg();
     MC_setpoints_command mc3_cmd = rl->get_cmd_msg();
@@ -157,10 +159,10 @@ void TelemetryInterface::update_drivetrain_status_telem_CAN_msg(
 }
 
 void TelemetryInterface::update_drivetrain_torque_telem_CAN_msg(
-                                                                InvInt_t* fl,
-                                                                InvInt_t* fr,
-                                                                InvInt_t* rl,
-                                                                InvInt_t* rr)
+    InvInt_t *fl,
+    InvInt_t *fr,
+    InvInt_t *rl,
+    InvInt_t *rr)
 {
     // TODO: change this to use actual torque values from inverter
     // Torque current just temporary for gearbox seal validation
@@ -200,23 +202,6 @@ void TelemetryInterface::update_penthouse_accum_CAN_msg(const AnalogConversion_s
     enqueue_new_CAN<PENTHOUSE_ACCUM_MSG_t>(&message, &Pack_PENTHOUSE_ACCUM_MSG_hytech);
 }
 
-void TelemetryInterface::update_TCMux_status_CAN_msg(const TCMuxStatus_s &tcMuxStatus)
-{
-    TCMUX_STATUS_REPORT_t msg;
-
-    msg.speed_above_thresh = tcMuxStatus.speedPreventsModeChange;
-    msg.torque_delta_above_thresh = tcMuxStatus.torqueDeltaPreventsModeChange;
-    msg.tc_not_ready = tcMuxStatus.controllerNotReadyPreventsModeChange;
-    msg.steering_system_has_err = tcMuxStatus.steeringSystemError;
-    msg.mode_intended = tcMuxStatus.modeIntended;
-    msg.mode_actual = tcMuxStatus.modeActual;
-    msg.dash_dial_mode = tcMuxStatus.dialMode;
-    msg.torque_mode = tcMuxStatus.torqueMode;
-    msg.torque_limit_ro = HYTECH_torque_limit_ro_toS(tcMuxStatus.maxTorque);
-
-    enqueue_new_CAN<TCMUX_STATUS_REPORT_t>(&msg, &Pack_TCMUX_STATUS_REPORT_hytech);
-}
-
 void TelemetryInterface::update_steering_status_CAN_msg(const float steering_system_angle,
                                                         const float filtered_angle_encoder,
                                                         const float filtered_angle_analog,
@@ -237,9 +222,10 @@ void TelemetryInterface::update_steering_status_CAN_msg(const float steering_sys
 }
 
 /* Send CAN messages */
-template<typename T>
-void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
-    
+template <typename T>
+void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t id)
+{
+
     CAN_message_t msg;
     msg_class.write(msg.buf);
     msg.id = id;
@@ -248,46 +234,29 @@ void TelemetryInterface::enqueue_CAN(T msg_class, uint32_t  id) {
     memmove(buf, &msg, sizeof(CAN_message_t));
 
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
-
 }
 
 /* Send inverter CAN messages with new CAN library */
-template<typename U>
-void TelemetryInterface::enqueue_new_CAN(U* structure, uint32_t (* pack_function)(U*, uint8_t*, uint8_t*, uint8_t*)) {
+template <typename U>
+void TelemetryInterface::enqueue_new_CAN(U *structure, uint32_t (*pack_function)(U *, uint8_t *, uint8_t *, uint8_t *))
+{
     CAN_message_t can_msg;
-    can_msg.id = pack_function(structure, can_msg.buf, &can_msg.len, (uint8_t*) &can_msg.flags.extended);
+    can_msg.id = pack_function(structure, can_msg.buf, &can_msg.len, (uint8_t *)&can_msg.flags.extended);
     uint8_t buf[sizeof(CAN_message_t)] = {};
     memmove(buf, &can_msg, sizeof(CAN_message_t));
     msg_queue_->push_back(buf, sizeof(CAN_message_t));
 }
 
-void TelemetryInterface::enqeue_controller_CAN_msg(const PIDTVTorqueControllerData& data)
-{
-    CONTROLLER_PID_TV_DATA_t msg;
-    msg.controller_input_ro = HYTECH_controller_input_ro_toS(data.controller_input);
-    msg.controller_output_ro = HYTECH_controller_output_ro_toS(data.controller_output);
-    enqueue_new_CAN<CONTROLLER_PID_TV_DATA_t>(&msg, &Pack_CONTROLLER_PID_TV_DATA_hytech);
-
-    CONTROLLER_PID_TV_DELTA_DATA_t delta_msg;
-    delta_msg.pid_tv_fl_delta_ro = HYTECH_pid_tv_fl_delta_ro_toS(data.fl_torque_delta);
-    delta_msg.pid_tv_fr_delta_ro = HYTECH_pid_tv_fr_delta_ro_toS(data.fr_torque_delta);
-    delta_msg.pid_tv_rl_delta_ro = HYTECH_pid_tv_rl_delta_ro_toS(data.rl_torque_delta);
-    delta_msg.pid_tv_rr_delta_ro = HYTECH_pid_tv_rr_delta_ro_toS(data.rr_torque_delta);
-    
-    enqueue_new_CAN<CONTROLLER_PID_TV_DELTA_DATA_t>(&delta_msg, &Pack_CONTROLLER_PID_TV_DELTA_DATA_hytech);
-
-    
-}
 
 /* Tick SysClock */
 void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const AnalogConversionPacket_s<4> &adc2,
                               const AnalogConversionPacket_s<4> &adc3,
                               const SteeringEncoderConversion_s &encoder,
-                              InvInt_t* fl,
-                              InvInt_t* fr,
-                              InvInt_t* rl,
-                              InvInt_t* rr,
+                              InvInt_t *fl,
+                              InvInt_t *fr,
+                              InvInt_t *rl,
+                              InvInt_t *rr,
                               bool accel_implaus,
                               bool brake_implaus,
                               float accel_per,
@@ -297,17 +266,22 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
                               const AnalogConversion_s &brake_1,
                               const AnalogConversion_s &brake_2,
                               float mech_brake_active_percent,
-                              const PIDTVTorqueControllerData& data) {
+                              const TorqueControllerMuxError &current_mux_status)
+{
+
+    MCU_ERROR_STATES_t error_states;
+    error_states.torque_controller_mux_status = static_cast<uint8_t>(current_mux_status);
+    enqueue_new_CAN<MCU_ERROR_STATES_t>(&error_states, &Pack_MCU_ERROR_STATES_hytech);
 
     // Pedals
     update_pedal_readings_CAN_msg(accel_per,
                                   brake_per,
                                   mech_brake_active_percent);
-                                  
+
     update_pedal_readings_raw_CAN_msg(accel_1,
                                       accel_2,
                                       brake_1,
-                                      brake_2); 
+                                      brake_2);
     // Analog readings
     update_analog_readings_CAN_msg(encoder,
                                    adc1.conversions[channels_.analog_steering_channel],
@@ -328,7 +302,5 @@ void TelemetryInterface::tick(const AnalogConversionPacket_s<8> &adc1,
 
     update_penthouse_accum_CAN_msg(adc1.conversions[channels_.current_channel],
                                    adc1.conversions[channels_.current_ref_channel]);
-
-    enqeue_controller_CAN_msg(data);
 
 }

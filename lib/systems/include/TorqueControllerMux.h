@@ -1,160 +1,127 @@
-#ifndef __TORQUECTRLMUX_H__
-#define __TORQUECTRLMUX_H__
+#ifndef TORQUECONTROLLERMUX
+#define TORQUECONTROLLERMUX
 
 #include <unordered_map>
-#include <cmath>
+#include <array>
+#include "SharedDataTypes.h"
+#include "BaseController.h"
 
-#include "TorqueControllers.h"
-#include "DrivetrainSystem.h"
-#include "PedalsSystem.h"
-#include "SteeringSystem.h"
-#include "DashboardInterface.h"
-#include "VectornavInterface.h"
-#include "LoadCellInterface.h"
-#include "TelemetryInterface.h"
-#include "DrivebrainController.h"
+// notes:
+// 21 torque limit should be first
 
-const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
-const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
+// tc mux needs to handle these things:
+// 1 swapping between controller outputs
+// 2 turning on and off running of controllers
+// 3 application of safeties and limits to controller outputs
+// 4 torque limit changing (torque mode) -->
+// TODO the torque limit value changing should be handled in the dashboard interface
 
-/// @brief multiplexer class for managing available torque controllers
-class TorqueControllerMux
+
+// TODOs
+// - [x] make the controllers inherit from the base controller class
+//      - [x] port TorqueControllerSimple
+//      - [x] port TorqueControllerLoadCellVectoring
+//      - [x] port BaseLaunchController
+//      - [x] port TorqueControllerSimpleLaunch
+//      - [x] port slip launch
+//      - [x] port TorqueControllerLookupLaunch
+//      - [x] port CASE 
+// - [x] add the torque limit evaluation logic into dashboard interface
+// - [x] integrate into state machine
+//   - [x] pass through the car state
+//   - [x] get dial and torque mode from the dashboard
+// - [x] create car_state in main and pass into state machine
+// - [x] add 3 bit status to a telemetry message for the TC mux status to HT_CAN 
+// - [x] pass state of tc mux into telem interface and add the CAN signal
+// - [x] remove the old tc mux
+// - [ ] add back checking of the ready flag of the controllers and if the controller isnt ready it defaults
+//        - [ ] add test for this
+// - [ ] make folder for the controllers
+// - [ ] write integration tests for the real controllers
+//      - [x] test construction with real controllers
+//      - [ ] ensure that sane outputs occur on first tick of each controller
+// - [x] update the state machine unit test with integration test of new tc mux
+
+// ON CAR testing
+// - [ ] test the change of the torque mode from the dashboard interface
+//      - [ ] write testing code for this in separate environment
+
+
+namespace TC_MUX_DEFAULT_PARAMS
 {
-private:
-    TorqueControllerNone torqueControllerNone_;
-    TorqueControllerSimple torqueControllerSimple_;
-    TorqueControllerLoadCellVectoring torqueControllerLoadCellVectoring_;
-    TorqueControllerSimpleLaunch torqueControllerSimpleLaunch_;
-    DrivebrainController _dbController;
-    TorqueControllerCASEWrapper tcCASEWrapper_;
-
-
-    // Use this to map the dial to TCMUX modes
-    std::unordered_map<DialMode_e, TorqueController_e> dialModeMap_ = {
-        {DialMode_e::MODE_0, TorqueController_e::TC_SAFE_MODE},
-        {DialMode_e::MODE_1, TorqueController_e::TC_LOAD_CELL_VECTORING},
-        {DialMode_e::MODE_2, TorqueController_e::TC_CASE_SYSTEM},
-        {DialMode_e::MODE_3, TorqueController_e::TC_SIMPLE_LAUNCH},
-        {DialMode_e::MODE_4, TorqueController_e::TC_DRIVEBRAIN},
-        {DialMode_e::MODE_5, TorqueController_e::TC_NO_CONTROLLER},
-    };
-    std::unordered_map<TorqueLimit_e, float> torqueLimitMap_ = {
-        {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0},
-        {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0},
-        {TorqueLimit_e::TCMUX_FULL_TORQUE, AMK_MAX_TORQUE}
-    };
-
-    TorqueController_e muxMode_ = TorqueController_e::TC_NO_CONTROLLER;
-    DialMode_e currDialMode_ = DialMode_e::MODE_0;
-
-    TorqueControllerOutput_s controllerOutputs_[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)];
-    
-    // Handle array for all torque controllers
-    TorqueControllerBase* controllers[static_cast<int>(TorqueController_e::TC_NUM_CONTROLLERS)] = {
-        static_cast<TorqueControllerBase*>(&torqueControllerNone_),
-        static_cast<TorqueControllerBase*>(&torqueControllerSimple_),
-        static_cast<TorqueControllerBase*>(&torqueControllerLoadCellVectoring_),
-        static_cast<TorqueControllerBase*>(&torqueControllerSimpleLaunch_),
-        static_cast<TorqueControllerBase*>(&_dbController),
-        static_cast<TorqueControllerBase*>(&tcCASEWrapper_)
-    };
-
-    // Status tracking structure for visibility
-    TCMuxStatus_s tcMuxStatus_;
-
-    DrivetrainCommand_s drivetrainCommand_;
-    TorqueLimit_e torqueLimit_ = TorqueLimit_e::TCMUX_FULL_TORQUE;
-    bool torqueLimitButtonPressed_ = false;
-    unsigned long torqueLimitButtonPressedTime_ = 0;
-    TelemetryInterface *telemHandle_;
-
-public:
-    /// @brief torque controller mux in which default instances of all torque controllers are created for use
-    TorqueControllerMux(TelemetryInterface *telemInterface)
-    : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
-    , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)])
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)])
-    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
-    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 100, 10)
-    , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
-    , telemHandle_(telemInterface) {}
-
-
-    /// @brief torque controller mux constructor that leaves all other TCs with defaults accept for simple TC
-    /// @param simpleTCRearTorqueScale the scaling from 0 to 2 in which 2 is full rear torque allocation, 0 is full front, 1 = balanced
-    /// @param simpleTCRegenTorqueScale scaling from 0 to 2 in which 0 is full rear regen and 2 is full front regen, 1 = balanced
-    TorqueControllerMux(float simpleTCRearTorqueScale, float simpleTCRegenTorqueScale, TelemetryInterface *telemInterface)
-    : torqueControllerNone_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_NO_CONTROLLER)])
-    , torqueControllerSimple_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SAFE_MODE)], simpleTCRearTorqueScale, simpleTCRegenTorqueScale)
-    , torqueControllerLoadCellVectoring_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_LOAD_CELL_VECTORING)], 1.0, simpleTCRegenTorqueScale)
-    , torqueControllerSimpleLaunch_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_SIMPLE_LAUNCH)])
-    , _dbController(controllerOutputs_[static_cast<int>(TorqueController_e::TC_DRIVEBRAIN)], 200, 120)
-    , tcCASEWrapper_(controllerOutputs_[static_cast<int>(TorqueController_e::TC_CASE_SYSTEM)])
-    , telemHandle_(telemInterface) {}
-
-    // Functions
-    /// @brief tick controllers to calculate drivetrain command
-    void tick(
-        const SysTick_s &tick,
-        const DrivetrainDynamicReport_s &drivetrainData,
-        const PedalsSystemData_s &pedalsData,
-        const SteeringSystemData_s &steeringData,
-        const LoadCellInterfaceOutput_s &loadCellData,
-        DialMode_e dashboardDialMode,
-        float accDerateFactor,
-        bool dashboardTorqueModeButtonPressed,
-        const vector_nav &vn_data, 
-        const DrivetrainCommand_s &CASECommand,
-        DrivebrainData db_input
-    );
-
-    /// @brief apply corresponding limits on drivetrain command calculated by torque controller
-    void applyRegenLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
-    void applyTorqueLimit(DrivetrainCommand_s* command);
-    void applyPowerLimit(DrivetrainCommand_s* command, const DrivetrainDynamicReport_s* drivetrain);
-    void applyPosSpeedLimit(DrivetrainCommand_s* command);
-    void applyDerate(DrivetrainCommand_s* command, float accDerateFactor);
-
-    /// @brief GETTERS
-    const DrivetrainCommand_s &getDrivetrainCommand()
-    {
-        return drivetrainCommand_;
-    };
-    
-    const TorqueLimit_e getTorqueLimit()
-    {
-        return torqueLimit_;
-    };
-
-    const float getMaxTorque()
-    {
-        return torqueLimitMap_[torqueLimit_];
-    }
-
-    const DialMode_e getDialMode()
-    {
-        return currDialMode_;
-    }
-
-    const TorqueController_e getDriveMode()
-    {
-        return muxMode_;
-    }
-    
-
-    TorqueControllerBase* activeController()
-    {
-        // check to make sure that there is actually a controller
-        // at the muxMode_ idx
-        if (controllers[muxMode_] != NULL) {
-            return controllers[muxMode_];
-        } else {
-            return static_cast<TorqueControllerBase*>(&torqueControllerNone_);
-        }
-    }
-
-    /// @brief report TCMux status through Telemetry via CAN
-    void reportTCMuxStatus();
+    constexpr const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
+    constexpr const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5; // Nm
+    constexpr const float MAX_POWER_LIMIT = 63000.0;
 };
 
-#endif /* __TORQUECTRLMUX_H__ */
+template <std::size_t num_controllers>
+class TorqueControllerMux
+{
+    static_assert(num_controllers > 0, "Must create TC mux with at least 1 controller");
+
+    
+
+private:
+    std::array<Controller *, num_controllers> controller_pointers_;
+
+    std::array<bool, num_controllers> mux_bypass_limits_;
+
+    std::unordered_map<TorqueLimit_e, float> torque_limit_map_ = {
+        {TorqueLimit_e::TCMUX_FULL_TORQUE, PhysicalParameters::AMK_MAX_TORQUE},
+        {TorqueLimit_e::TCMUX_MID_TORQUE, 15.0f},
+        {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0f}};
+    float max_change_speed_, max_torque_pos_change_delta_, max_power_limit_;
+    DrivetrainCommand_s prev_command_ = {};
+    TorqueControllerMuxStatus current_status_ = {};
+    TorqueControllerMuxError can_switch_controller_(DrivetrainDynamicReport_s current_drivetrain_data,
+                                                    DrivetrainCommand_s previous_controller_command,
+                                                    DrivetrainCommand_s desired_controller_out);
+
+    DrivetrainCommand_s apply_positive_speed_limit_(const DrivetrainCommand_s &command);
+    DrivetrainCommand_s apply_torque_limit_(const DrivetrainCommand_s &command, float max_torque);
+    DrivetrainCommand_s apply_power_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain, float power_limit, float max_torque);
+    DrivetrainCommand_s apply_regen_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain_data);
+    
+public:
+    
+    TorqueControllerMux() = delete;
+    /// @brief constructor for the TC mux
+    /// @param controller_pointers the array of pointers to the controllers being muxed between
+    /// @param mux_bypass_limits the array of aligned bools for determining if the limits should be applied to the controller outputs defaults to TC_MUX_DEFAULT_PARAMS::MAX_SPEED_FOR_MODE_CHANGE
+    /// @param max_change_speed the max speed difference between the requested controller output and the actual speed of each wheel that if the controller has a diff larger than the mux will not switch to the requested controller
+    /// @param max_torque_pos_change_delta same as speed but evaluated between the controller commanded torques defaults to TC_MUX_DEFAULT_PARAMS::MAX_TORQUE_DELTA_FOR_MODE_CHANGE
+    /// @param max_power_limit the max power limit defaults to TC_MUX_DEFAULT_PARAMS::MAX_POWER_LIMIT
+    explicit TorqueControllerMux(std::array<Controller *, num_controllers> controller_pointers,
+                          std::array<bool, num_controllers> mux_bypass_limits,
+                          float max_change_speed = TC_MUX_DEFAULT_PARAMS::MAX_SPEED_FOR_MODE_CHANGE,
+                          float max_torque_pos_change_delta = TC_MUX_DEFAULT_PARAMS::MAX_TORQUE_DELTA_FOR_MODE_CHANGE,
+                          float max_power_limit = TC_MUX_DEFAULT_PARAMS::MAX_POWER_LIMIT) : controller_pointers_(controller_pointers),
+                                                                                            mux_bypass_limits_(mux_bypass_limits),
+                                                                                            max_change_speed_(max_change_speed),
+                                                                                            max_torque_pos_change_delta_(max_torque_pos_change_delta),
+                                                                                            max_power_limit_(max_power_limit)
+
+
+    {
+        static_assert(num_controllers > 0, "Must create TC mux with at least 1 controller");
+
+    }
+    
+    const TorqueControllerMuxStatus &get_tc_mux_status() { return current_status_; }
+
+    /// @brief function that evaluates the mux, controllers and gets the current command
+    /// @param requested_controller_type the requested controller type from the dial state
+    /// @param controller_command_torque_limit the torque limit state enum set by dashboard
+    /// @param input_state the current state of the car
+    /// @return the current drivetrain command to be sent to the drivetrain
+    DrivetrainCommand_s getDrivetrainCommand(ControllerMode_e requested_controller_type,
+                                             TorqueLimit_e controller_command_torque_limit,
+                                             const SharedCarState_s &input_state);
+};
+// }
+
+const int number_of_controllers = 5;
+using TCMuxType = TorqueControllerMux<number_of_controllers>;
+
+#include "TorqueControllerMux.tpp"
+#endif // __TorqueControllerMux_H__
