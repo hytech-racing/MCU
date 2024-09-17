@@ -52,10 +52,12 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
         current_status_.current_torque_limit_value = torque_limit_map_[requested_torque_limit];
         current_output.command = apply_power_limit_(current_output.command, input_state.drivetrain_data, max_power_limit_, torque_limit_map_[requested_torque_limit]);
         current_output.command = apply_positive_speed_limit_(current_output.command);
+        current_status_.output_is_bypassing_limits = false;
     }
     else{
         current_status_.current_torque_limit_enum = TorqueLimit_e::TCMUX_FULL_TORQUE;
         current_status_.current_torque_limit_value= PhysicalParameters::AMK_MAX_TORQUE;
+        current_status_.output_is_bypassing_limits = true;
     }
 
     // std::cout << "output torques before return " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
