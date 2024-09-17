@@ -341,7 +341,7 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
-void handle_ethernet_interface_comms();
+void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg);
 
 /*
     SETUP
@@ -416,7 +416,6 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -435,8 +434,12 @@ void loop()
                                     load_cell_interface.getLoadCellForces(),
                                     pedals_system.getPedalsSystemData(),
                                     vn_interface.get_vn_struct(),
-                                    db_interface.get_latest_db_data(),
+                                    db_eth_interface.get_latest_data(),
                                     torque_controller_mux.get_tc_mux_status());
+
+    hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
+
+    handle_ethernet_interface_comms(curr_tick, out_eth_msg);
 
     tick_all_systems(curr_tick);
 
@@ -458,7 +461,8 @@ void loop()
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 
     // Basic debug prints
-    if (curr_tick.triggers.trigger5)
+    // if (curr_tick.triggers.trigger5)
+    if (false)
     {
         Serial.print("Steering system reported angle (deg): ");
         Serial.println(steering_system.getSteeringSystemData().angle);
@@ -685,7 +689,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
 
 }
 
-void handle_ethernet_interface_comms()
+void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg)
 {
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
@@ -693,7 +697,11 @@ void handle_ethernet_interface_comms()
     // Serial.println("bruh");
 
 
-    std::function<void(const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUData, DrivebrainETHInterface>;
-    handle_ethernet_socket_receive<1024, hytech_msgs_MCUData>(&protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUData_fields);
+    std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
+    handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);
 
+    if(systick.triggers.trigger500)
+    {
+        handle_ethernet_socket_send_pb<hytech_msgs_MCUOutputData, 1024>(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port, &protobuf_send_socket, out_msg, hytech_msgs_MCUOutputData_fields);
+    }
 }

@@ -1,7 +1,7 @@
 #ifndef __DRIVEBRAINCONTROLLER_H__
 #define __DRIVEBRAINCONTROLLER_H__
 
-#include "DrivebrainInterface.h"
+
 #include "TorqueControllers.h"
 #include "DrivebrainData.h"
 #include "BaseController.h"

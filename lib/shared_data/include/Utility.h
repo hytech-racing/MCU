@@ -20,12 +20,12 @@ struct veh_vec
     T RL;
     T RR;
 
-    void construct(T FL, T FR, T RL, T RR)
+    void construct(T _FL, T _FR, T _RL, T _RR)
     {
-        FL = FL;
-        FR = FR;
-        RL = RL;
-        RR = RR;
+        FL = _FL;
+        FR = _FR;
+        RL = _RL;
+        RR = _RR;
     }
     
     /// @brief copy values to array in FL, FR, RL, RR order 

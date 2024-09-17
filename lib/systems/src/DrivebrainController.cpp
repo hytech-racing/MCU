@@ -7,7 +7,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
 
     auto sys_tick = state.systick;
     auto db_input = state.db_data;     
-
+    
     bool speed_setpoint_too_latent = (::abs((int)(sys_tick.millis - db_input.last_speed_setpoint_receive_time_millis)) > (int)_params.allowed_latency);
     bool torque_setpoint_too_latent = (::abs((int)(sys_tick.millis - db_input.last_torque_lim_receive_time_millis)) > (int)_params.allowed_latency);
 
