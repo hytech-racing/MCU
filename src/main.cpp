@@ -7,9 +7,10 @@
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
 // #include "NativeEthernet.h"
-
+#include "pb.h"
 // /* Interfaces */
-
+#include "DrivebrainETHInterface.h"
+#include "ProtobufMsgInterface.hpp"
 #include "HytechCANInterface.h"
 #include "ThermistorInterface.h"
 #include "Teensy_ADC.h"
@@ -34,7 +35,6 @@
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
 #include "DrivebrainController.h"
-// #include "TorqueControllerMux.h"
 #include "TorqueControllerMux.h"
 
 #include "CASESystem.h"
@@ -42,7 +42,10 @@
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
+#include "InterfaceParams.h"
 #include "PrintLogger.h"
+
+#include "hytech_msgs.pb.h"
 /*
     PARAMETER STRUCTS
 */
@@ -322,6 +325,7 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 // */
 
 DrivebrainInterface db_interface(&CAN3_txBuffer);
+DrivebrainETHInterface db_eth_interface;
 CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface, &db_interface};
 
 /*
@@ -348,9 +352,9 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     SPI.begin();
     a1.init();
@@ -412,7 +416,7 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-    // handle_ethernet_interface_comms();
+    handle_ethernet_interface_comms();
 
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -687,5 +691,9 @@ void handle_ethernet_interface_comms()
     // via the union message. this is a little bit cursed ngl.
     // TODO un fuck this and make it more sane
     // Serial.println("bruh");
-    // handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
+
+
+    std::function<void(const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUData, DrivebrainETHInterface>;
+    handle_ethernet_socket_receive<1024, hytech_msgs_MCUData>(&protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUData_fields);
+
 }

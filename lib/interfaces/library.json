@@ -5,7 +5,8 @@
     "dependencies": {
         "can_lib": "*",
         "shared_data": "*",
-        "CASE_lib": "*"
+        "CASE_lib": "*",
+        "nanopb": "*"
       },
     "frameworks": "*",
     "platforms": "*"
