@@ -10,7 +10,7 @@
 #include "pb.h"
 // /* Interfaces */
 #include "DrivebrainETHInterface.h"
-#include "ProtobufMsgInterface.hpp"
+#include "ProtobufMsgInterface.h"
 #include "HytechCANInterface.h"
 #include "ThermistorInterface.h"
 #include "Teensy_ADC.h"

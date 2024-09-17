@@ -7,7 +7,7 @@
 #include "DrivetrainSystem.h"
 #include "SteeringSystem.h"
 #include "MCUStateMachine.h"
-#include "ProtobufMsgInterface.hpp"
+#include "ProtobufMsgInterface.h"
 // #include "ParameterInterface.h"
 
 struct CASEConfiguration
