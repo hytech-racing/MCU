@@ -5,6 +5,7 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
+#include "PrintLogger.h"
 
 // /* Interfaces */
 
@@ -37,7 +38,6 @@
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
-#include "PrintLogger.h"
 /*
     PARAMETER STRUCTS
 */
