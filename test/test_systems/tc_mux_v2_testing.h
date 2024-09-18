@@ -84,7 +84,7 @@ TEST(TorqueControllerMuxTesting, test_controller_output_swap_logic)
     // auto out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
 
-    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode_, ControllerMode_e::MODE_0);
+    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
     ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH);
 
     set_outputs(inst1, 0, 1);
@@ -93,7 +93,7 @@ TEST(TorqueControllerMuxTesting, test_controller_output_swap_logic)
 
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
 
-    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode_, ControllerMode_e::MODE_1);
+    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_1);
     ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
 }
 
@@ -107,7 +107,7 @@ TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
 
     auto out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
-    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode_, ControllerMode_e::MODE_0);
+    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
     ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH);
 
     // tick it a bunch of times
@@ -120,7 +120,7 @@ TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
 
     ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH);
 
-    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode_, ControllerMode_e::MODE_0);
+    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
 
     ASSERT_EQ(out1.torqueSetpoints[0], 1);
     ASSERT_EQ(out1.torqueSetpoints[1], 1);

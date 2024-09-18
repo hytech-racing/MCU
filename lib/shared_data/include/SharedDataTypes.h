@@ -92,7 +92,7 @@ enum class TorqueControllerMuxError
 struct TorqueControllerMuxStatus
 {
     TorqueControllerMuxError current_error;
-    ControllerMode_e current_controller_mode_;
+    ControllerMode_e current_controller_mode;
     TorqueLimit_e current_torque_limit_enum;
     float current_torque_limit_value;
     bool output_is_bypassing_limits;

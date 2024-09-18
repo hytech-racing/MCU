@@ -13,7 +13,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
         .ready = true};
 
     int req_controller_mode_index = static_cast<int>(requested_controller_type);
-    int current_controller_mode_index = static_cast<int>(current_status_.current_controller_mode_);
+    int current_controller_mode_index = static_cast<int>(current_status_.current_controller_mode);
 
     if ((std::size_t)req_controller_mode_index > ( controller_pointers_.size() - 1 ))
     {
@@ -30,7 +30,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
     current_output = controller_pointers_[current_controller_mode_index]->evaluate(input_state);
 
     // std::cout << "output torques " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
-    bool requesting_controller_change = requested_controller_type != current_status_.current_controller_mode_;
+    bool requesting_controller_change = requested_controller_type != current_status_.current_controller_mode;
 
     if (requesting_controller_change)
     {
@@ -38,7 +38,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
         TorqueControllerMuxError error_state = can_switch_controller_(input_state.drivetrain_data, current_output.command, proposed_output.command);
         if (error_state == TorqueControllerMuxError::NO_ERROR)
         {
-            current_status_.current_controller_mode_ = requested_controller_type;
+            current_status_.current_controller_mode = requested_controller_type;
             current_controller_mode_index = req_controller_mode_index;
             current_output = proposed_output;
         }
