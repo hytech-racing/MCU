@@ -5,7 +5,6 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-// #include "NativeEthernet.h"
 
 // /* Interfaces */
 
@@ -23,7 +22,6 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
-#include "TorqueControllers.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -32,8 +30,9 @@
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
 #include "TorqueControllerMux.h"
-
+#include "TorqueControllers.h"
 #include "CASESystem.h"
+
 // /* State machine */
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
