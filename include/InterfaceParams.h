@@ -1,6 +1,9 @@
 #ifndef INTERFACEPARAMS
 #define INTERFACEPARAMS
-#include "NativeEthernet.h"
+
+#include <QNEthernet.h>
+
+using namespace qindesign::network;
 
 namespace EthParams
 {

@@ -5,14 +5,15 @@
 #include "pb_decode.h"
 #include "pb_common.h"
 #include "circular_buffer.h"
-#include "NativeEthernet.h"
+#include <QNEthernet.h>
+
 #include <functional>
-// #include "InterfaceParams.h"
 
 struct ETHInterfaces
 {
 };
 
+using namespace qindesign::network;
 
 // this should be usable with arbitrary functions idk something
 template <size_t buffer_size, typename pb_msg_type, class eth_interface>
@@ -23,7 +24,7 @@ void handle_ethernet_socket_receive(const SysTick_s& tick, EthernetUDP *socket, 
         {
         uint8_t buffer[buffer_size];
         size_t read_bytes = socket->read(buffer, sizeof(buffer));
-        socket->read(buffer, UDP_TX_PACKET_MAX_SIZE);
+        socket->read(buffer, 1024);
         recv_function(tick.millis, buffer, read_bytes, interface, desc_pointer);
     }
 }

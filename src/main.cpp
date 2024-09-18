@@ -6,7 +6,6 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-// #include "NativeEthernet.h"
 #include "pb.h"
 // /* Interfaces */
 #include "DrivebrainETHInterface.h"
@@ -49,6 +48,8 @@
 /*
     PARAMETER STRUCTS
 */
+using namespace qindesign::network;
+
 
 const TelemetryInterfaceReadChannels telem_read_channels = {
     .accel1_channel = MCU15_ACCEL1_CHANNEL,
