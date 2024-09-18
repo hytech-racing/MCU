@@ -1,4 +1,4 @@
-#include "LoadCellVectoringController.h"
+#include "Controllers/LoadCellVectoringController.h"
 
 
 void TorqueControllerLoadCellVectoring::tick(

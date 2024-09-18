@@ -1,4 +1,4 @@
-#include "SimpleController.h"
+#include "Controllers/SimpleController.h"
 
 void TorqueControllerSimple::tick(const PedalsSystemData_s &pedalsData)
 {
