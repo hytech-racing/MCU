@@ -60,9 +60,9 @@ TEST(LaunchIntergationTesting, test_simple_launch_controller)
     // mode 1
     TorqueControllerLoadCellVectoring tc_vec;
     // mode 2
-    dummy_queue q;
-    CASESystem<dummy_queue> case_sys(&q, 100, 70, 550, {});
-    TorqueControllerCASEWrapper<dummy_queue> case_wrapper(&case_sys);
+    DummyQueue_s q;
+    CASESystem<DummyQueue_s> case_sys(&q, 100, 70, 550, {});
+    TorqueControllerCASEWrapper<DummyQueue_s> case_wrapper(&case_sys);
 
     // mode 3
     TorqueControllerSimpleLaunch simple_launch;
@@ -118,9 +118,9 @@ TEST(LaunchIntergationTesting, test_slip_launch_controller)
     // mode 1
     TorqueControllerLoadCellVectoring tc_vec;
     // mode 2
-    dummy_queue q;
-    CASESystem<dummy_queue> case_sys(&q, 100, 70, 550, {});
-    TorqueControllerCASEWrapper<dummy_queue> case_wrapper(&case_sys);
+    DummyQueue_s q;
+    CASESystem<DummyQueue_s> case_sys(&q, 100, 70, 550, {});
+    TorqueControllerCASEWrapper<DummyQueue_s> case_wrapper(&case_sys);
 
     // mode 3
     TorqueControllerSimpleLaunch simple_launch;
