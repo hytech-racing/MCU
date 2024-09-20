@@ -1,14 +1,19 @@
 var searchData=
 [
-  ['vehicle_5fmath_5foffset_5fms_5f_0',['vehicle_math_offset_ms_',['../classCASESystem.html#a9958e6677e029354df7488e05c484ac7',1,'CASESystem']]],
-  ['vel_5fdist_5flookup_1',['vel_dist_lookup',['../accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca',1,'accel_lookup.h']]],
-  ['velocity_5fx_2',['velocity_x',['../structvector__nav.html#aae1d0320b2a6dafbd439483081ca736c',1,'vector_nav']]],
-  ['velocity_5fy_3',['velocity_y',['../structvector__nav.html#a6ea733e4de75f7fd892d9f10aeadf8c9',1,'vector_nav']]],
-  ['velocity_5fz_4',['velocity_z',['../structvector__nav.html#ae9ae7fbd64c06beab86498f682083f88',1,'vector_nav']]],
-  ['vn_5factive_5fstart_5ftime_5f_5',['vn_active_start_time_',['../classCASESystem.html#a16d82cc132ed930dbec67cff827d4364',1,'CASESystem']]],
-  ['vn_5fdata_6',['vn_data',['../classVNInterface.html#ab64659f9ac2b4899007a108dda186a29',1,'VNInterface']]],
-  ['vn_5finterface_7',['vn_interface',['../structCANInterfaces.html#a533f1756091e5af750d5d4a7af8b7fb2',1,'CANInterfaces']]],
-  ['vn_5fstatus_8',['vn_status',['../structvector__nav.html#a7efb0220eb0330aa7f48d84d03de65bb',1,'vector_nav']]],
-  ['voltage_5f_9',['voltage_',['../classInverterMock.html#af4be6e861940919af68a740562a1f87f',1,'InverterMock']]],
-  ['voltage_5flookup_5ftable_10',['VOLTAGE_LOOKUP_TABLE',['../classAMSInterface.html#ade24b908baf656ad85794392032ceb2d',1,'AMSInterface']]]
+  ['uncomplinear_5faccel_0',['uncompLinear_accel',['../structVectornavData__s.html#aaddd62e1db31d3b2353217747d365503',1,'VectornavData_s']]],
+  ['use_5fem_5ffor_5fsoc_5f_1',['use_em_for_soc_',['../classAMSInterface.html#a7975d8313abda8fcb8f393f92925de53',1,'AMSInterface']]],
+  ['usedecoupledyawbrakes_2',['useDecoupledYawBrakes',['../structCASEConfiguration.html#a9c2cce1a06ffaf238cc8c0d46c3b5096',1,'CASEConfiguration']]],
+  ['usediscontinuousyawpidbrakes_3',['useDiscontinuousYawPIDBrakes',['../structCASEConfiguration.html#a767b37b995941be2720115eb377ba7aa',1,'CASEConfiguration']]],
+  ['uselaunch_4',['useLaunch',['../structCASEConfiguration.html#ac344445e87775d33491b111c2b7ad960',1,'CASEConfiguration']]],
+  ['usenl_5ftcs_5fgainschedule_5',['useNL_TCS_GainSchedule',['../structCASEConfiguration.html#a6c52404b46d9f8cb4a4532866b47a929',1,'CASEConfiguration']]],
+  ['usenl_5ftcs_5fslipschedule_6',['useNL_TCS_SlipSchedule',['../structCASEConfiguration.html#aea2f03a75732017c6c9d2dc1408a7d84',1,'CASEConfiguration']]],
+  ['usenoregen5kph_7',['useNoRegen5kph',['../structCASEConfiguration.html#a03bc587a1a14dbee0593129850abb14b',1,'CASEConfiguration']]],
+  ['usenormalforce_8',['useNormalForce',['../structCASEConfiguration.html#aa5344dd88eb1611f8a64f60bd50231a9',1,'CASEConfiguration']]],
+  ['usepidpowerlimit_9',['usePIDPowerLimit',['../structCASEConfiguration.html#a4cb9c677cd0fe42a3a4875f1ae6735c1',1,'CASEConfiguration']]],
+  ['usepidtv_10',['usePIDTV',['../structCASEConfiguration.html#afe0f10218b36bf30abce22cec5acf112',1,'CASEConfiguration']]],
+  ['usepowerlimit_11',['usePowerLimit',['../structCASEConfiguration.html#a3abbc5bf1766d404ad4b1205e228dda8',1,'CASEConfiguration']]],
+  ['userpm_5ftcs_5fgainschedule_12',['useRPM_TCS_GainSchedule',['../structCASEConfiguration.html#a60eda332f0699e82f3b4cc2cd3cb885b',1,'CASEConfiguration']]],
+  ['usetcslimitedyawpid_13',['useTCSLimitedYawPID',['../structCASEConfiguration.html#af09fae8969d76baa9f063935b11986c5',1,'CASEConfiguration']]],
+  ['usetorquebias_14',['useTorqueBias',['../structCASEConfiguration.html#a481c6e88d8938a18f19b056462f48d76',1,'CASEConfiguration']]],
+  ['usetractioncontrol_15',['useTractionControl',['../structCASEConfiguration.html#a996b338aa10627747f84f341434e7b07',1,'CASEConfiguration']]]
 ];

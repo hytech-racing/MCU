@@ -80,28 +80,33 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;gmock/gmock.h&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="state__machine__test_8h.html">state_machine_test.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// #include &quot;pedals_system_test.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="torque__controller__mux__test_8h.html">torque_controller_mux_test.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="drivetrain__system__test_8h.html">drivetrain_system_test.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="safety__system__test_8h.html">safety_system_test.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// #include &quot;test_CASE.h&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// #include &quot;param_system_test.h&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// #include &quot;steering_system_test.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="test_2test__systems_2main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">   13</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="test_2test__systems_2main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    testing::InitGoogleMock(&amp;argc, argv);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (RUN_ALL_TESTS())</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    ;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="comment">// Always return zero-code and allow PlatformIO to parse results</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="pedals__system__test_8h.html">pedals_system_test.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="launch__controller__integration__testing_8h.html">launch_controller_integration_testing.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="tc__mux__v2__testing_8h.html">tc_mux_v2_testing.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="drivetrain__system__test_8h.html">drivetrain_system_test.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="safety__system__test_8h.html">safety_system_test.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="test__CASE_8h.html">test_CASE.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// #include &quot;param_system_test.h&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// #include &quot;steering_system_test.h&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="test_2test__systems_2main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">   15</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="test_2test__systems_2main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    testing::InitGoogleMock(&amp;argc, argv);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">if</span> (RUN_ALL_TESTS())</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    ;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="comment">// Always return zero-code and allow PlatformIO to parse results</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
 <div class="ttc" id="adrivetrain__system__test_8h_html"><div class="ttname"><a href="drivetrain__system__test_8h.html">drivetrain_system_test.h</a></div></div>
+<div class="ttc" id="alaunch__controller__integration__testing_8h_html"><div class="ttname"><a href="launch__controller__integration__testing_8h.html">launch_controller_integration_testing.h</a></div></div>
+<div class="ttc" id="apedals__system__test_8h_html"><div class="ttname"><a href="pedals__system__test_8h.html">pedals_system_test.h</a></div></div>
 <div class="ttc" id="asafety__system__test_8h_html"><div class="ttname"><a href="safety__system__test_8h.html">safety_system_test.h</a></div></div>
 <div class="ttc" id="astate__machine__test_8h_html"><div class="ttname"><a href="state__machine__test_8h.html">state_machine_test.h</a></div></div>
-<div class="ttc" id="atest_2test__systems_2main_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="test_2test__systems_2main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="test_2test__systems_2main_8cpp_source.html#l00013">main.cpp:13</a></div></div>
-<div class="ttc" id="atorque__controller__mux__test_8h_html"><div class="ttname"><a href="torque__controller__mux__test_8h.html">torque_controller_mux_test.h</a></div></div>
+<div class="ttc" id="atc__mux__v2__testing_8h_html"><div class="ttname"><a href="tc__mux__v2__testing_8h.html">tc_mux_v2_testing.h</a></div></div>
+<div class="ttc" id="atest_2test__systems_2main_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="test_2test__systems_2main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="test_2test__systems_2main_8cpp_source.html#l00015">main.cpp:15</a></div></div>
+<div class="ttc" id="atest__CASE_8h_html"><div class="ttname"><a href="test__CASE_8h.html">test_CASE.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

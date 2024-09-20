@@ -75,66 +75,76 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">TorqueControllerMux.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;unordered_map&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &quot;<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="PedalsSystem_8h_source.html">PedalsSystem.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>&quot;</code><br />
-<code>#include &quot;DashboardInterface.h&quot;</code><br />
-<code>#include &quot;VectornavInterface.h&quot;</code><br />
-<code>#include &quot;LoadCellInterface.h&quot;</code><br />
-<code>#include &quot;TelemetryInterface.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &quot;<a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="BaseController_8h_source.html">BaseController.h</a>&quot;</code><br />
+<code>#include &quot;TorqueControllerMux.tpp&quot;</code><br />
 </div>
 <p><a href="TorqueControllerMux_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiplexer class for managing available torque controllers  <a href="classTorqueControllerMux.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html">TorqueControllerMux&lt; num_controllers &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceTC__MUX__DEFAULT__PARAMS"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTC__MUX__DEFAULT__PARAMS.html">TC_MUX_DEFAULT_PARAMS</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a3ce6228bd93d369d47ea3dda8615a8ac"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllerMux_8h.html#a3ce6228bd93d369d47ea3dda8615a8ac">TCMuxType</a> = <a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&lt; <a class="el" href="TorqueControllerMux_8h.html#ae91e288cab4ee9b85f82bface8689259">number_of_controllers</a> &gt;</td></tr>
+<tr class="separator:a3ce6228bd93d369d47ea3dda8615a8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a6ba155949a221de068fa4c52357d2292"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllerMux_8h.html#a6ba155949a221de068fa4c52357d2292">MAX_SPEED_FOR_MODE_CHANGE</a> = 5.0</td></tr>
-<tr class="separator:a6ba155949a221de068fa4c52357d2292"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ef6befa59ffe5cc13b08b5e570fc1f6"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllerMux_8h.html#a7ef6befa59ffe5cc13b08b5e570fc1f6">MAX_TORQUE_DELTA_FOR_MODE_CHANGE</a> = 0.5</td></tr>
-<tr class="separator:a7ef6befa59ffe5cc13b08b5e570fc1f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c6e12285451a5ad836c70fb372fc537"><td class="memItemLeft" align="right" valign="top">constexpr const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTC__MUX__DEFAULT__PARAMS.html#a4c6e12285451a5ad836c70fb372fc537">TC_MUX_DEFAULT_PARAMS::MAX_SPEED_FOR_MODE_CHANGE</a> = 5.0</td></tr>
+<tr class="separator:a4c6e12285451a5ad836c70fb372fc537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae023f61f96e5f5c3b532131a4873365a"><td class="memItemLeft" align="right" valign="top">constexpr const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTC__MUX__DEFAULT__PARAMS.html#ae023f61f96e5f5c3b532131a4873365a">TC_MUX_DEFAULT_PARAMS::MAX_TORQUE_DELTA_FOR_MODE_CHANGE</a> = 0.5</td></tr>
+<tr class="separator:ae023f61f96e5f5c3b532131a4873365a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa6f37991ed66730901b7c883bc36c4"><td class="memItemLeft" align="right" valign="top">constexpr const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTC__MUX__DEFAULT__PARAMS.html#a2aa6f37991ed66730901b7c883bc36c4">TC_MUX_DEFAULT_PARAMS::MAX_POWER_LIMIT</a> = 63000.0</td></tr>
+<tr class="separator:a2aa6f37991ed66730901b7c883bc36c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae91e288cab4ee9b85f82bface8689259"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="TorqueControllerMux_8h.html#ae91e288cab4ee9b85f82bface8689259">number_of_controllers</a> = 5</td></tr>
+<tr class="separator:ae91e288cab4ee9b85f82bface8689259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a3ce6228bd93d369d47ea3dda8615a8ac" name="a3ce6228bd93d369d47ea3dda8615a8ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ce6228bd93d369d47ea3dda8615a8ac">&#9670;&#160;</a></span>TCMuxType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="TorqueControllerMux_8h.html#a3ce6228bd93d369d47ea3dda8615a8ac">TCMuxType</a> =  <a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&lt;<a class="el" href="TorqueControllerMux_8h.html#ae91e288cab4ee9b85f82bface8689259">number_of_controllers</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00123">123</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a6ba155949a221de068fa4c52357d2292" name="a6ba155949a221de068fa4c52357d2292"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ba155949a221de068fa4c52357d2292">&#9670;&#160;</a></span>MAX_SPEED_FOR_MODE_CHANGE</h2>
+<a id="ae91e288cab4ee9b85f82bface8689259" name="ae91e288cab4ee9b85f82bface8689259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae91e288cab4ee9b85f82bface8689259">&#9670;&#160;</a></span>number_of_controllers</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const float MAX_SPEED_FOR_MODE_CHANGE = 5.0</td>
+          <td class="memname">const int number_of_controllers = 5</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00016">16</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-
-</div>
-</div>
-<a id="a7ef6befa59ffe5cc13b08b5e570fc1f6" name="a7ef6befa59ffe5cc13b08b5e570fc1f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ef6befa59ffe5cc13b08b5e570fc1f6">&#9670;&#160;</a></span>MAX_TORQUE_DELTA_FOR_MODE_CHANGE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const float MAX_TORQUE_DELTA_FOR_MODE_CHANGE = 0.5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00017">17</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00122">122</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>

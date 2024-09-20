@@ -81,7 +81,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a68396bef42d10067fba2fb64bf16b42a"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; N &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalogMultiSensor.html#a68396bef42d10067fba2fb64bf16b42a">get</a> ()</td></tr>
+<tr class="memitem:a68396bef42d10067fba2fb64bf16b42a"><td class="memItemLeft" align="right" valign="top">const AnalogConversionPacket_s&lt; N &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalogMultiSensor.html#a68396bef42d10067fba2fb64bf16b42a">get</a> ()</td></tr>
 <tr class="memdesc:a68396bef42d10067fba2fb64bf16b42a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used by systems to get data out of this device when it's self-actualizing sampling &amp; conversion.  <a href="classAnalogMultiSensor.html#a68396bef42d10067fba2fb64bf16b42a">More...</a><br /></td></tr>
 <tr class="separator:a68396bef42d10067fba2fb64bf16b42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafc60dbbf5f2dcb4012d114478068c26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalogMultiSensor.html#aafc60dbbf5f2dcb4012d114478068c26">convert</a> ()</td></tr>
@@ -93,13 +93,13 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a1367561e670a94041e532c6d442a91ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; N &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca">data</a></td></tr>
+<tr class="memitem:a1367561e670a94041e532c6d442a91ca"><td class="memItemLeft" align="right" valign="top">AnalogConversionPacket_s&lt; N &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca">data</a></td></tr>
 <tr class="separator:a1367561e670a94041e532c6d442a91ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;int N&gt;<br />
 class AnalogMultiSensor&lt; N &gt;</div>
-<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00038">38</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00021">21</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aafc60dbbf5f2dcb4012d114478068c26" name="aafc60dbbf5f2dcb4012d114478068c26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aafc60dbbf5f2dcb4012d114478068c26">&#9670;&#160;</a></span>convert()</h2>
@@ -128,13 +128,13 @@ template&lt;int N&gt; </div>
 
 <p>Performs unit conversions on all channels. </p>
 
-<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00052">52</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   53</span>    {</div>
-<div class="line"><span class="lineno">   54</span>        <span class="comment">// for (int i = 0; i &lt; N; i++)</span></div>
-<div class="line"><span class="lineno">   55</span>        <span class="comment">// {</span></div>
-<div class="line"><span class="lineno">   56</span>        <span class="comment">//     data.conversions[i] = channels_[i].convert();</span></div>
-<div class="line"><span class="lineno">   57</span>        <span class="comment">// }</span></div>
-<div class="line"><span class="lineno">   58</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00035">35</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>    {</div>
+<div class="line"><span class="lineno">   37</span>        <span class="comment">// for (int i = 0; i &lt; N; i++)</span></div>
+<div class="line"><span class="lineno">   38</span>        <span class="comment">// {</span></div>
+<div class="line"><span class="lineno">   39</span>        <span class="comment">//     data.conversions[i] = channels_[i].convert();</span></div>
+<div class="line"><span class="lineno">   40</span>        <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">   41</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -150,7 +150,7 @@ template&lt;int N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt; N &gt; &amp; <a class="el" href="classAnalogMultiSensor.html">AnalogMultiSensor</a>&lt; N &gt;::get </td>
+          <td class="memname">const AnalogConversionPacket_s&lt; N &gt; &amp; <a class="el" href="classAnalogMultiSensor.html">AnalogMultiSensor</a>&lt; N &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -166,11 +166,11 @@ template&lt;int N&gt; </div>
 <p>Used by systems to get data out of this device when it's self-actualizing sampling &amp; conversion. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const ref to last data conversion. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00046">46</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>    {</div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca">data</a>;</div>
-<div class="line"><span class="lineno">   49</span>    }</div>
-<div class="ttc" id="aclassAnalogMultiSensor_html_a1367561e670a94041e532c6d442a91ca"><div class="ttname"><a href="classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca">AnalogMultiSensor::data</a></div><div class="ttdeci">AnalogConversionPacket_s&lt; N &gt; data</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00041">AnalogSensorsInterface.h:41</a></div></div>
+<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00029">29</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   30</span>    {</div>
+<div class="line"><span class="lineno">   31</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca">data</a>;</div>
+<div class="line"><span class="lineno">   32</span>    }</div>
+<div class="ttc" id="aclassAnalogMultiSensor_html_a1367561e670a94041e532c6d442a91ca"><div class="ttname"><a href="classAnalogMultiSensor.html#a1367561e670a94041e532c6d442a91ca">AnalogMultiSensor::data</a></div><div class="ttdeci">AnalogConversionPacket_s&lt; N &gt; data</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00024">AnalogSensorsInterface.h:24</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -205,12 +205,12 @@ template&lt;int N&gt; </div>
 template&lt;int N&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structAnalogConversionPacket__s.html">AnalogConversionPacket_s</a>&lt;N&gt; <a class="el" href="classAnalogMultiSensor.html">AnalogMultiSensor</a>&lt; N &gt;::data</td>
+          <td class="memname">AnalogConversionPacket_s&lt;N&gt; <a class="el" href="classAnalogMultiSensor.html">AnalogMultiSensor</a>&lt; N &gt;::data</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00041">41</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AnalogSensorsInterface_8h_source.html#l00024">24</a> of file <a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>.</p>
 
 </div>
 </div>

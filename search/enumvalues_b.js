@@ -5,8 +5,8 @@ var searchData=
   ['steering_5fencoder_5ferror_2',['STEERING_ENCODER_ERROR',['../SteeringEncoderInterface_8h.html#a272b077b05c72fabd58eccf09922d974a4c21420d2e1bce04d7e78f0d9bcedc6e',1,'SteeringEncoderInterface.h']]],
   ['steering_5fencoder_5fmarginal_3',['STEERING_ENCODER_MARGINAL',['../SteeringEncoderInterface_8h.html#a272b077b05c72fabd58eccf09922d974a6254386a029f6cd2f88efdebd8b359c3',1,'SteeringEncoderInterface.h']]],
   ['steering_5fencoder_5fnominal_4',['STEERING_ENCODER_NOMINAL',['../SteeringEncoderInterface_8h.html#a272b077b05c72fabd58eccf09922d974aaf3d37e1cdf3e0eae2e4a9342fd06ebd',1,'SteeringEncoderInterface.h']]],
-  ['steering_5fsystem_5fdegraded_5',['STEERING_SYSTEM_DEGRADED',['../SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de',1,'SteeringSystem.h']]],
-  ['steering_5fsystem_5ferror_6',['STEERING_SYSTEM_ERROR',['../SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9',1,'SteeringSystem.h']]],
-  ['steering_5fsystem_5fmarginal_7',['STEERING_SYSTEM_MARGINAL',['../SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1',1,'SteeringSystem.h']]],
-  ['steering_5fsystem_5fnominal_8',['STEERING_SYSTEM_NOMINAL',['../SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756',1,'SteeringSystem.h']]]
+  ['steering_5fsystem_5fdegraded_5',['STEERING_SYSTEM_DEGRADED',['../SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de',1,'SharedDataTypes.h']]],
+  ['steering_5fsystem_5ferror_6',['STEERING_SYSTEM_ERROR',['../SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9',1,'SharedDataTypes.h']]],
+  ['steering_5fsystem_5fmarginal_7',['STEERING_SYSTEM_MARGINAL',['../SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1',1,'SharedDataTypes.h']]],
+  ['steering_5fsystem_5fnominal_8',['STEERING_SYSTEM_NOMINAL',['../SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756',1,'SharedDataTypes.h']]]
 ];

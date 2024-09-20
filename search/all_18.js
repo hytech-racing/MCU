@@ -1,7 +1,7 @@
 var searchData=
 [
   ['y_0',['y',['../structxy__vec.html#a646d067e58ab704f6bb3ada165ad3f48',1,'xy_vec::y()'],['../structxyz__vec.html#ab6a4217356d901f1dbc07da4012a9acb',1,'xyz_vec::y()']]],
-  ['yaw_1',['yaw',['../structvector__nav.html#a6cbd10e24d2aa62f23750a1700ffd2c9',1,'vector_nav']]],
+  ['yaw_1',['yaw',['../structVectornavData__s.html#adad51b0b3979aa1817916b2eb003b0d6',1,'VectornavData_s']]],
   ['yaw_5fpid_5fbrakes_5fd_2',['yaw_pid_brakes_d',['../structCASEConfiguration.html#a6606076d3c546c4eec985e247a3a1720',1,'CASEConfiguration']]],
   ['yaw_5fpid_5fbrakes_5fi_3',['yaw_pid_brakes_i',['../structCASEConfiguration.html#a62a9aaf945b235be877110ef02c67398',1,'CASEConfiguration']]],
   ['yaw_5fpid_5fbrakes_5fp_4',['yaw_pid_brakes_p',['../structCASEConfiguration.html#a9e8cf0a4da4a5e8281b852cd9e914533',1,'CASEConfiguration']]],

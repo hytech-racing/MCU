@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['steeringencoderstatus_5fe_0',['SteeringEncoderStatus_e',['../SteeringEncoderInterface_8h.html#a272b077b05c72fabd58eccf09922d974',1,'SteeringEncoderInterface.h']]],
-  ['steeringsystemstatus_5fe_1',['SteeringSystemStatus_e',['../SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3',1,'SteeringSystem.h']]]
+  ['torquecontrollermuxerror_0',['TorqueControllerMuxError',['../SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d',1,'SharedDataTypes.h']]],
+  ['torquelimit_5fe_1',['TorqueLimit_e',['../SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b',1,'SharedDataTypes.h']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ecef_5fcoords_0',['ecef_coords',['../structvector__nav.html#a45263991441dbf6f047296a6fb2ada59',1,'vector_nav']]],
+  ['ecef_5fcoords_0',['ecef_coords',['../structVectornavData__s.html#ab5e7a0fa3bcfc6242cbb9341dbcdb40f',1,'VectornavData_s']]],
   ['em_5fmeasurements_5f_1',['em_measurements_',['../classAMSInterface.html#ab30da889ea7a02fca9704cd4c54df603',1,'AMSInterface']]],
   ['enable_5frequested_5f_2',['enable_requested_',['../classDrivetrainSystem.html#a8604672aaf6d3e71852831a5c9915b1e',1,'DrivetrainSystem']]],
   ['error_5f_3',['error_',['../classInverterInterface.html#a852a87cc8a1924cd0cd6ada56ed21095',1,'InverterInterface::error_()'],['../classInverterMock.html#a893f491343191644b2cacf91e89aafd5',1,'InverterMock::error_()']]],

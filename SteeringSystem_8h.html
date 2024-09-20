@@ -75,8 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">SteeringSystem.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -84,6 +83,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="AnalogSensorsInterface_8h_source.html">AnalogSensorsInterface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Filter__IIR_8h_source.html">Filter_IIR.h</a>&quot;</code><br />
 <code>#include &quot;SysClock.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>&quot;</code><br />
 <code>#include &quot;TelemetryInterface.h&quot;</code><br />
 </div>
 <p><a href="SteeringSystem_8h_source.html">Go to the source code of this file.</a></p>
@@ -91,8 +91,6 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSteeringSystemTick__s.html">SteeringSystemTick_s</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSteeringSystemData__s.html">SteeringSystemData_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteeringSystem.html">SteeringSystem</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,15 +105,6 @@ Macros</h2></td></tr>
 <tr class="separator:add02d1c189e3b727b722638327642a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32532e548c1fac405db7a741bdfd2699"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SteeringSystem_8h.html#a32532e548c1fac405db7a741bdfd2699">DEFAULT_STEERING_ALPHA</a>&#160;&#160;&#160;(0.0)</td></tr>
 <tr class="separator:a32532e548c1fac405db7a741bdfd2699"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a13d307fc2e5826ca5ed033fe647569a3"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3">SteeringSystemStatus_e</a> { <a class="el" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0
-, <a class="el" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1
-, <a class="el" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">STEERING_SYSTEM_DEGRADED</a> = 2
-, <a class="el" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">STEERING_SYSTEM_ERROR</a> = 3
- }</td></tr>
-<tr class="separator:a13d307fc2e5826ca5ed033fe647569a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a32532e548c1fac405db7a741bdfd2699" name="a32532e548c1fac405db7a741bdfd2699"></a>
@@ -180,47 +169,6 @@ Enumerations</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00016">16</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
-</div>
-</div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a13d307fc2e5826ca5ed033fe647569a3" name="a13d307fc2e5826ca5ed033fe647569a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13d307fc2e5826ca5ed033fe647569a3">&#9670;&#160;</a></span>SteeringSystemStatus_e</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum class <a class="el" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3">SteeringSystemStatus_e</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756" name="a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756"></a>STEERING_SYSTEM_NOMINAL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1" name="a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1"></a>STEERING_SYSTEM_MARGINAL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de" name="a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de"></a>STEERING_SYSTEM_DEGRADED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9" name="a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9"></a>STEERING_SYSTEM_ERROR&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00021">21</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   22</span>{</div>
-<div class="line"><span class="lineno">   23</span>    <a class="code hl_enumvalue" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0,</div>
-<div class="line"><span class="lineno">   24</span>    <a class="code hl_enumvalue" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1,</div>
-<div class="line"><span class="lineno">   25</span>    <a class="code hl_enumvalue" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">STEERING_SYSTEM_DEGRADED</a> = 2,</div>
-<div class="line"><span class="lineno">   26</span>    <a class="code hl_enumvalue" href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">STEERING_SYSTEM_ERROR</a> = 3,</div>
-<div class="line"><span class="lineno">   27</span>};</div>
-<div class="ttc" id="aSteeringSystem_8h_html_a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1"><div class="ttname"><a href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">SteeringSystemStatus_e::STEERING_SYSTEM_MARGINAL</a></div><div class="ttdeci">@ STEERING_SYSTEM_MARGINAL</div></div>
-<div class="ttc" id="aSteeringSystem_8h_html_a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756"><div class="ttname"><a href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL</a></div><div class="ttdeci">@ STEERING_SYSTEM_NOMINAL</div></div>
-<div class="ttc" id="aSteeringSystem_8h_html_a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de"><div class="ttname"><a href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">SteeringSystemStatus_e::STEERING_SYSTEM_DEGRADED</a></div><div class="ttdeci">@ STEERING_SYSTEM_DEGRADED</div></div>
-<div class="ttc" id="aSteeringSystem_8h_html_a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9"><div class="ttname"><a href="SteeringSystem_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">SteeringSystemStatus_e::STEERING_SYSTEM_ERROR</a></div><div class="ttdeci">@ STEERING_SYSTEM_ERROR</div></div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

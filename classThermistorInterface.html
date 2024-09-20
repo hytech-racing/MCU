@@ -89,7 +89,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aad51fd4f24549c6826c6ac0efef6026c"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
 <tr class="memitem:aad51fd4f24549c6826c6ac0efef6026c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#aad51fd4f24549c6826c6ac0efef6026c">enqueue_CAN_front_thermistors</a> (U *structure, uint32_t(*pack_function)(U *, uint8_t *, uint8_t *, uint8_t *))</td></tr>
 <tr class="separator:aad51fd4f24549c6826c6ac0efef6026c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a509f6ab189a35ec939209ee2644267c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#a509f6ab189a35ec939209ee2644267c5">tick</a> (const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;raw_therm_fl, const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;raw_therm_fr)</td></tr>
+<tr class="memitem:a509f6ab189a35ec939209ee2644267c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#a509f6ab189a35ec939209ee2644267c5">tick</a> (const AnalogConversion_s &amp;raw_therm_fl, const AnalogConversion_s &amp;raw_therm_fr)</td></tr>
 <tr class="separator:a509f6ab189a35ec939209ee2644267c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
@@ -99,8 +99,8 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ab39d7c4607fabd006491374d698c9304"><td class="memItemLeft" align="right" valign="top">Thermistors&lt; <a class="el" href="ThermistorInterface_8h.html#aeef9d9655c9116e405ce729e7c4399cb">MCU15_NUM_THERMISTORS</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#ab39d7c4607fabd006491374d698c9304">front_thermistors</a></td></tr>
-<tr class="separator:ab39d7c4607fabd006491374d698c9304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e5a02f5d59ae6b06d8255e8437c93ff"><td class="memItemLeft" align="right" valign="top">Thermistors&lt; <a class="el" href="ThermistorInterface_8h.html#aeef9d9655c9116e405ce729e7c4399cb">MCU15_NUM_THERMISTORS</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#a8e5a02f5d59ae6b06d8255e8437c93ff">_front_thermistors</a></td></tr>
+<tr class="separator:a8e5a02f5d59ae6b06d8255e8437c93ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99dc3be5402c069247ed0aebf15824fa"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#a99dc3be5402c069247ed0aebf15824fa">therm_fl</a></td></tr>
 <tr class="separator:a99dc3be5402c069247ed0aebf15824fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d242404fe1c04cdd6f6f0e7ea9c2adf"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermistorInterface.html#a5d242404fe1c04cdd6f6f0e7ea9c2adf">therm_fr</a></td></tr>
@@ -129,13 +129,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00006">6</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    6</span>                                                                        : <a class="code hl_variable" href="classThermistorInterface.html#ab39d7c4607fabd006491374d698c9304">front_thermistors</a>()</div>
-<div class="line"><span class="lineno">    7</span>{</div>
+<div class="fragment"><div class="line"><span class="lineno">    7</span>{</div>
 <div class="line"><span class="lineno">    8</span>    <a class="code hl_variable" href="classThermistorInterface.html#a0fa04ececefbe2f7f868549556e98b00">_msg_queue</a> = msg_output_queue;</div>
 <div class="line"><span class="lineno">    9</span>    </div>
 <div class="line"><span class="lineno">   10</span>}</div>
 <div class="ttc" id="aclassThermistorInterface_html_a0fa04ececefbe2f7f868549556e98b00"><div class="ttname"><a href="classThermistorInterface.html#a0fa04ececefbe2f7f868549556e98b00">ThermistorInterface::_msg_queue</a></div><div class="ttdeci">CANBufferType * _msg_queue</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00024">ThermistorInterface.h:24</a></div></div>
-<div class="ttc" id="aclassThermistorInterface_html_ab39d7c4607fabd006491374d698c9304"><div class="ttname"><a href="classThermistorInterface.html#ab39d7c4607fabd006491374d698c9304">ThermistorInterface::front_thermistors</a></div><div class="ttdeci">Thermistors&lt; MCU15_NUM_THERMISTORS &gt; front_thermistors</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00019">ThermistorInterface.h:19</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -194,14 +192,14 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00025">25</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   26</span>{</div>
-<div class="line"><span class="lineno">   27</span>    CAN_message_t can_msg;</div>
-<div class="line"><span class="lineno">   28</span>    can_msg.id = pack_function(structure, can_msg.buf, &amp;can_msg.len, (uint8_t*) &amp;can_msg.flags.extended);</div>
-<div class="line"><span class="lineno">   29</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)] = {};</div>
-<div class="line"><span class="lineno">   30</span>    memmove(buf, &amp;can_msg, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">   31</span>    <a class="code hl_variable" href="classThermistorInterface.html#a0fa04ececefbe2f7f868549556e98b00">_msg_queue</a>-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><span class="lineno">   32</span>}</div>
+<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00024">24</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   25</span>{</div>
+<div class="line"><span class="lineno">   26</span>    CAN_message_t can_msg;</div>
+<div class="line"><span class="lineno">   27</span>    can_msg.id = pack_function(structure, can_msg.buf, &amp;can_msg.len, (uint8_t*) &amp;can_msg.flags.extended);</div>
+<div class="line"><span class="lineno">   28</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)] = {};</div>
+<div class="line"><span class="lineno">   29</span>    memmove(buf, &amp;can_msg, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">   30</span>    <a class="code hl_variable" href="classThermistorInterface.html#a0fa04ececefbe2f7f868549556e98b00">_msg_queue</a>-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><span class="lineno">   31</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -214,13 +212,13 @@ template&lt;typename U &gt; </div>
         <tr>
           <td class="memname">void ThermistorInterface::tick </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;&#160;</td>
+          <td class="paramtype">const AnalogConversion_s &amp;&#160;</td>
           <td class="paramname"><em>raw_therm_fl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structAnalogConversion__s.html">AnalogConversion_s</a> &amp;&#160;</td>
+          <td class="paramtype">const AnalogConversion_s &amp;&#160;</td>
           <td class="paramname"><em>raw_therm_fr</em>&#160;</td>
         </tr>
         <tr>
@@ -231,19 +229,22 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00034">34</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00033">33</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   35</span>{</div>
 <div class="line"><span class="lineno">   36</span> </div>
-<div class="line"><span class="lineno">   37</span>    <a class="code hl_variable" href="classThermistorInterface.html#a99dc3be5402c069247ed0aebf15824fa">therm_fl</a> = <a class="code hl_variable" href="classThermistorInterface.html#ab39d7c4607fabd006491374d698c9304">front_thermistors</a>.get(<a class="code hl_variable" href="ThermistorInterface_8h.html#ab72f7d853c27100f0f950082b09e0d41">MCU15_THERM_FL_CHANNEL</a>).convert(raw_therm_fl.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>);</div>
-<div class="line"><span class="lineno">   38</span>    <a class="code hl_variable" href="classThermistorInterface.html#a5d242404fe1c04cdd6f6f0e7ea9c2adf">therm_fr</a> = <a class="code hl_variable" href="classThermistorInterface.html#ab39d7c4607fabd006491374d698c9304">front_thermistors</a>.get(<a class="code hl_variable" href="ThermistorInterface_8h.html#a2a5d7776ddc5d118fadc0b55998b5ee2">MCU15_THERM_FR_CHANNEL</a>).convert(raw_therm_fr.<a class="code hl_variable" href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">raw</a>);</div>
-<div class="line"><span class="lineno">   39</span>    <a class="code hl_function" href="classThermistorInterface.html#ac008fa29948e061808fda3b8df09a361">update_front_thermistor_readings</a>();</div>
-<div class="line"><span class="lineno">   40</span>}</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keyword">auto</span> fl_channel = <a class="code hl_variable" href="classThermistorInterface.html#a8e5a02f5d59ae6b06d8255e8437c93ff">_front_thermistors</a>.get(<a class="code hl_variable" href="ThermistorInterface_8h.html#ab72f7d853c27100f0f950082b09e0d41">MCU15_THERM_FL_CHANNEL</a>);</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keyword">auto</span> fr_channel = <a class="code hl_variable" href="classThermistorInterface.html#a8e5a02f5d59ae6b06d8255e8437c93ff">_front_thermistors</a>.get(<a class="code hl_variable" href="ThermistorInterface_8h.html#a2a5d7776ddc5d118fadc0b55998b5ee2">MCU15_THERM_FR_CHANNEL</a>);</div>
+<div class="line"><span class="lineno">   39</span> </div>
+<div class="line"><span class="lineno">   40</span>    <a class="code hl_variable" href="classThermistorInterface.html#a99dc3be5402c069247ed0aebf15824fa">therm_fl</a> = fl_channel.convert((uint16_t)raw_therm_fl.raw);</div>
+<div class="line"><span class="lineno">   41</span>    <a class="code hl_variable" href="classThermistorInterface.html#a5d242404fe1c04cdd6f6f0e7ea9c2adf">therm_fr</a> = fr_channel.convert((uint16_t)raw_therm_fr.raw);</div>
+<div class="line"><span class="lineno">   42</span>    <a class="code hl_function" href="classThermistorInterface.html#ac008fa29948e061808fda3b8df09a361">update_front_thermistor_readings</a>();</div>
+<div class="line"><span class="lineno">   43</span>}</div>
 <div class="ttc" id="aThermistorInterface_8h_html_a2a5d7776ddc5d118fadc0b55998b5ee2"><div class="ttname"><a href="ThermistorInterface_8h.html#a2a5d7776ddc5d118fadc0b55998b5ee2">MCU15_THERM_FR_CHANNEL</a></div><div class="ttdeci">const int MCU15_THERM_FR_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00014">ThermistorInterface.h:14</a></div></div>
 <div class="ttc" id="aThermistorInterface_8h_html_ab72f7d853c27100f0f950082b09e0d41"><div class="ttname"><a href="ThermistorInterface_8h.html#ab72f7d853c27100f0f950082b09e0d41">MCU15_THERM_FL_CHANNEL</a></div><div class="ttdeci">const int MCU15_THERM_FL_CHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00013">ThermistorInterface.h:13</a></div></div>
 <div class="ttc" id="aclassThermistorInterface_html_a5d242404fe1c04cdd6f6f0e7ea9c2adf"><div class="ttname"><a href="classThermistorInterface.html#a5d242404fe1c04cdd6f6f0e7ea9c2adf">ThermistorInterface::therm_fr</a></div><div class="ttdeci">float therm_fr</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00022">ThermistorInterface.h:22</a></div></div>
+<div class="ttc" id="aclassThermistorInterface_html_a8e5a02f5d59ae6b06d8255e8437c93ff"><div class="ttname"><a href="classThermistorInterface.html#a8e5a02f5d59ae6b06d8255e8437c93ff">ThermistorInterface::_front_thermistors</a></div><div class="ttdeci">Thermistors&lt; MCU15_NUM_THERMISTORS &gt; _front_thermistors</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00019">ThermistorInterface.h:19</a></div></div>
 <div class="ttc" id="aclassThermistorInterface_html_a99dc3be5402c069247ed0aebf15824fa"><div class="ttname"><a href="classThermistorInterface.html#a99dc3be5402c069247ed0aebf15824fa">ThermistorInterface::therm_fl</a></div><div class="ttdeci">float therm_fl</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8h_source.html#l00021">ThermistorInterface.h:21</a></div></div>
-<div class="ttc" id="aclassThermistorInterface_html_ac008fa29948e061808fda3b8df09a361"><div class="ttname"><a href="classThermistorInterface.html#ac008fa29948e061808fda3b8df09a361">ThermistorInterface::update_front_thermistor_readings</a></div><div class="ttdeci">void update_front_thermistor_readings()</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8cpp_source.html#l00014">ThermistorInterface.cpp:14</a></div></div>
-<div class="ttc" id="astructAnalogConversion__s_html_afe17b102dcd5f3eaa00d3e9004c9e37f"><div class="ttname"><a href="structAnalogConversion__s.html#afe17b102dcd5f3eaa00d3e9004c9e37f">AnalogConversion_s::raw</a></div><div class="ttdeci">int raw</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00015">AnalogSensorsInterface.h:15</a></div></div>
+<div class="ttc" id="aclassThermistorInterface_html_ac008fa29948e061808fda3b8df09a361"><div class="ttname"><a href="classThermistorInterface.html#ac008fa29948e061808fda3b8df09a361">ThermistorInterface::update_front_thermistor_readings</a></div><div class="ttdeci">void update_front_thermistor_readings()</div><div class="ttdef"><b>Definition:</b> <a href="ThermistorInterface_8cpp_source.html#l00013">ThermistorInterface.cpp:13</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -262,19 +263,43 @@ template&lt;typename U &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00014">14</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   15</span>{</div>
-<div class="line"><span class="lineno">   16</span>    FRONT_THERMISTORS_t front_thermistors_;</div>
-<div class="line"><span class="lineno">   17</span>    <span class="comment">//scale by 500 for easy packing</span></div>
-<div class="line"><span class="lineno">   18</span>    front_thermistors_.thermistor_motor_fl_ro = HYTECH_thermistor_motor_fl_ro_toS(<a class="code hl_variable" href="classThermistorInterface.html#a99dc3be5402c069247ed0aebf15824fa">therm_fl</a>);</div>
-<div class="line"><span class="lineno">   19</span>    front_thermistors_.thermistor_motor_fr_ro = HYTECH_thermistor_motor_fr_ro_toS(<a class="code hl_variable" href="classThermistorInterface.html#a5d242404fe1c04cdd6f6f0e7ea9c2adf">therm_fr</a>);</div>
-<div class="line"><span class="lineno">   20</span> </div>
-<div class="line"><span class="lineno">   21</span>    enqueue_CAN_front_thermistors&lt;FRONT_THERMISTORS_t&gt;(&amp;front_thermistors_, &amp;Pack_FRONT_THERMISTORS_hytech);</div>
-<div class="line"><span class="lineno">   22</span>}</div>
+<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8cpp_source.html#l00013">13</a> of file <a class="el" href="ThermistorInterface_8cpp_source.html">ThermistorInterface.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>{</div>
+<div class="line"><span class="lineno">   15</span>    FRONT_THERMISTORS_t front_thermistors;</div>
+<div class="line"><span class="lineno">   16</span>    <span class="comment">//scale by 500 for easy packing</span></div>
+<div class="line"><span class="lineno">   17</span>    front_thermistors.thermistor_motor_fl_ro = HYTECH_thermistor_motor_fl_ro_toS(<a class="code hl_variable" href="classThermistorInterface.html#a99dc3be5402c069247ed0aebf15824fa">therm_fl</a>);</div>
+<div class="line"><span class="lineno">   18</span>    front_thermistors.thermistor_motor_fr_ro = HYTECH_thermistor_motor_fr_ro_toS(<a class="code hl_variable" href="classThermistorInterface.html#a5d242404fe1c04cdd6f6f0e7ea9c2adf">therm_fr</a>);</div>
+<div class="line"><span class="lineno">   19</span> </div>
+<div class="line"><span class="lineno">   20</span>    enqueue_CAN_front_thermistors&lt;FRONT_THERMISTORS_t&gt;(&amp;front_thermistors, &amp;Pack_FRONT_THERMISTORS_hytech);</div>
+<div class="line"><span class="lineno">   21</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8e5a02f5d59ae6b06d8255e8437c93ff" name="a8e5a02f5d59ae6b06d8255e8437c93ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e5a02f5d59ae6b06d8255e8437c93ff">&#9670;&#160;</a></span>_front_thermistors</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Thermistors&lt;<a class="el" href="ThermistorInterface_8h.html#aeef9d9655c9116e405ce729e7c4399cb">MCU15_NUM_THERMISTORS</a>&gt; ThermistorInterface::_front_thermistors</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8h_source.html#l00019">19</a> of file <a class="el" href="ThermistorInterface_8h_source.html">ThermistorInterface.h</a>.</p>
+
+</div>
+</div>
 <a id="a0fa04ececefbe2f7f868549556e98b00" name="a0fa04ececefbe2f7f868549556e98b00"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0fa04ececefbe2f7f868549556e98b00">&#9670;&#160;</a></span>_msg_queue</h2>
 
@@ -296,30 +321,6 @@ template&lt;typename U &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ThermistorInterface_8h_source.html#l00024">24</a> of file <a class="el" href="ThermistorInterface_8h_source.html">ThermistorInterface.h</a>.</p>
-
-</div>
-</div>
-<a id="ab39d7c4607fabd006491374d698c9304" name="ab39d7c4607fabd006491374d698c9304"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab39d7c4607fabd006491374d698c9304">&#9670;&#160;</a></span>front_thermistors</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Thermistors&lt;<a class="el" href="ThermistorInterface_8h.html#aeef9d9655c9116e405ce729e7c4399cb">MCU15_NUM_THERMISTORS</a>&gt; ThermistorInterface::front_thermistors</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ThermistorInterface_8h_source.html#l00019">19</a> of file <a class="el" href="ThermistorInterface_8h_source.html">ThermistorInterface.h</a>.</p>
 
 </div>
 </div>

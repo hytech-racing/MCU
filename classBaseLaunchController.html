@@ -77,32 +77,39 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BaseLaunchController:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classBaseLaunchController.png" usemap="#BaseLaunchController_map" alt=""/>
   <map id="BaseLaunchController_map" name="BaseLaunchController_map">
-<area href="classTorqueControllerLookupLaunch.html" alt="TorqueControllerLookupLaunch" shape="rect" coords="0,56,190,80"/>
-<area href="classTorqueControllerSimpleLaunch.html" alt="TorqueControllerSimpleLaunch" shape="rect" coords="200,56,390,80"/>
-<area href="classTorqueControllerSlipLaunch.html" alt="TorqueControllerSlipLaunch" shape="rect" coords="400,56,590,80"/>
+<area href="classController.html" alt="Controller" shape="rect" coords="200,0,390,24"/>
+<area href="classTorqueControllerLookupLaunch.html" alt="TorqueControllerLookupLaunch" shape="rect" coords="0,112,190,136"/>
+<area href="classTorqueControllerSimpleLaunch.html" alt="TorqueControllerSimpleLaunch" shape="rect" coords="200,112,390,136"/>
+<area href="classTorqueControllerSlipLaunch.html" alt="TorqueControllerSlipLaunch" shape="rect" coords="400,112,590,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a045b503a83957c30304a5061d3a3595c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a045b503a83957c30304a5061d3a3595c">BaseLaunchController</a> (<a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;writeout, int16_t initial_speed_target)</td></tr>
-<tr class="separator:a045b503a83957c30304a5061d3a3595c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a112851989ad02703d1eb263ac7b54c77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a112851989ad02703d1eb263ac7b54c77">tick</a> (const SysTick_s &amp;tick, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;pedalsData, const float wheel_rpms[], const <a class="el" href="structvector__nav.html">vector_nav</a> *vn_data)</td></tr>
-<tr class="separator:a112851989ad02703d1eb263ac7b54c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0f7e58e2e72dba782eca4db9b2c5e2b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#af0f7e58e2e72dba782eca4db9b2c5e2b">calc_launch_algo</a> (const <a class="el" href="structvector__nav.html">vector_nav</a> *vn_data)=0</td></tr>
-<tr class="separator:af0f7e58e2e72dba782eca4db9b2c5e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f61f1433405c414422350a682503de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a71f61f1433405c414422350a682503de">BaseLaunchController</a> (int16_t initial_speed_target)</td></tr>
+<tr class="separator:a71f61f1433405c414422350a682503de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd12d85b5259f0adfb115306779d16d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">tick</a> (const SysTick_s &amp;tick, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;pedalsData, const float wheel_rpms[], const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;vn_data)</td></tr>
+<tr class="separator:a9cd12d85b5259f0adfb115306779d16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b5b72079b6e5dd17d8d1d2b1ef26adc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a3b5b72079b6e5dd17d8d1d2b1ef26adc">get_launch_state</a> ()</td></tr>
+<tr class="separator:a3b5b72079b6e5dd17d8d1d2b1ef26adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf9e3474ced62d66ba12ce0ba8bae24c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#adf9e3474ced62d66ba12ce0ba8bae24c">calc_launch_algo</a> (const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;vn_data)=0</td></tr>
+<tr class="separator:adf9e3474ced62d66ba12ce0ba8bae24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07439af8aff84fd91238a149d970f1a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a07439af8aff84fd91238a149d970f1a5">evaluate</a> (const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;state) override</td></tr>
+<tr class="separator:a07439af8aff84fd91238a149d970f1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd879d218121028029cc0a3620e004aa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classController.html#afd879d218121028029cc0a3620e004aa">evaluate</a> (const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;state)=0</td></tr>
+<tr class="separator:afd879d218121028029cc0a3620e004aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a022265139ec8955e7fbb17dc75bf7c61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a></td></tr>
-<tr class="separator:a022265139ec8955e7fbb17dc75bf7c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ea2138e9d062a22b7a3a3a6a2a34bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a></td></tr>
+<tr class="separator:a34ea2138e9d062a22b7a3a3a6a2a34bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a003d0180c9abef36a7533ecc2b8d3c8d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">time_of_launch_</a></td></tr>
 <tr class="separator:a003d0180c9abef36a7533ecc2b8d3c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a056f848edac740e2a9f5d780503a6600"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a056f848edac740e2a9f5d780503a6600">initial_ecef_x_</a></td></tr>
@@ -111,21 +118,21 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7dcf05b00c434dbef3da6ffc3672a566"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a134011bbdeb34dab981abb68164773e3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a134011bbdeb34dab981abb68164773e3">initial_ecef_z_</a></td></tr>
 <tr class="separator:a134011bbdeb34dab981abb68164773e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a678181bc40008847485d3c897ce7d253"><td class="memItemLeft" align="right" valign="top"><a class="el" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_NOT_READY</td></tr>
+<tr class="memitem:a678181bc40008847485d3c897ce7d253"><td class="memItemLeft" align="right" valign="top"><a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_NOT_READY</td></tr>
 <tr class="separator:a678181bc40008847485d3c897ce7d253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af56b0ad1e82bc945cd06c45b18677b72"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">current_millis_</a></td></tr>
 <tr class="separator:af56b0ad1e82bc945cd06c45b18677b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ea65c4e7c6f638cbfa16ee809b8d738"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a> = 0.0</td></tr>
 <tr class="separator:a2ea65c4e7c6f638cbfa16ee809b8d738"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af80ca8fe09f9e81281c0fa01a68e89fe"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">init_speed_target_</a> = 0.0</td></tr>
+<tr class="memitem:af80ca8fe09f9e81281c0fa01a68e89fe"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">init_speed_target_</a> = 0</td></tr>
 <tr class="separator:af80ca8fe09f9e81281c0fa01a68e89fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00216">216</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00026">26</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a045b503a83957c30304a5061d3a3595c" name="a045b503a83957c30304a5061d3a3595c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a045b503a83957c30304a5061d3a3595c">&#9670;&#160;</a></span>BaseLaunchController()</h2>
+<a id="a71f61f1433405c414422350a682503de" name="a71f61f1433405c414422350a682503de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71f61f1433405c414422350a682503de">&#9670;&#160;</a></span>BaseLaunchController()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,19 +143,9 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">BaseLaunchController::BaseLaunchController </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> &amp;&#160;</td>
-          <td class="paramname"><em>writeout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>initial_speed_target</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>initial_speed_target</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -158,24 +155,23 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00229">229</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  230</span>        : <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>(writeout),</div>
-<div class="line"><span class="lineno">  231</span>          <a class="code hl_variable" href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">init_speed_target_</a>(initial_speed_target)</div>
-<div class="line"><span class="lineno">  232</span>    {</div>
-<div class="line"><span class="lineno">  233</span>        writeout.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a> = <a class="code hl_variable" href="TorqueControllers_8h.html#a45e479ed7f57380fd87a3b9c9d1fbef8">TC_COMMAND_NO_TORQUE</a>;</div>
-<div class="line"><span class="lineno">  234</span>        <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">ready</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  235</span>    }</div>
-<div class="ttc" id="aTorqueControllers_8h_html_a45e479ed7f57380fd87a3b9c9d1fbef8"><div class="ttname"><a href="TorqueControllers_8h.html#a45e479ed7f57380fd87a3b9c9d1fbef8">TC_COMMAND_NO_TORQUE</a></div><div class="ttdeci">const DrivetrainCommand_s TC_COMMAND_NO_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00051">TorqueControllers.h:51</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a022265139ec8955e7fbb17dc75bf7c61"><div class="ttname"><a href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">BaseLaunchController::writeout_</a></div><div class="ttdeci">TorqueControllerOutput_s &amp; writeout_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00219">TorqueControllers.h:219</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_af80ca8fe09f9e81281c0fa01a68e89fe"><div class="ttname"><a href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">BaseLaunchController::init_speed_target_</a></div><div class="ttdeci">int16_t init_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00227">TorqueControllers.h:227</a></div></div>
-<div class="ttc" id="astructTorqueControllerOutput__s_html_a85f1248f94789f10b46e7fbe9a8daf15"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">TorqueControllerOutput_s::ready</a></div><div class="ttdeci">bool ready</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00058">TorqueControllers.h:58</a></div></div>
-<div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00057">TorqueControllers.h:57</a></div></div>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00040">40</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>        : <a class="code hl_variable" href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">init_speed_target_</a>(initial_speed_target)</div>
+<div class="line"><span class="lineno">   42</span>    {</div>
+<div class="line"><span class="lineno">   43</span>        <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a> = <a class="code hl_variable" href="namespaceBaseControllerParams.html#a68423539e2ec79f9b363d107f5f45f88">BaseControllerParams::TC_COMMAND_NO_TORQUE</a>;</div>
+<div class="line"><span class="lineno">   44</span>        <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   45</span>    }</div>
+<div class="ttc" id="aclassBaseLaunchController_html_a34ea2138e9d062a22b7a3a3a6a2a34bc"><div class="ttname"><a href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">BaseLaunchController::writeout_</a></div><div class="ttdeci">TorqueControllerOutput_s writeout_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00029">BaseLaunchController.h:29</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_af80ca8fe09f9e81281c0fa01a68e89fe"><div class="ttname"><a href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">BaseLaunchController::init_speed_target_</a></div><div class="ttdeci">int16_t init_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00037">BaseLaunchController.h:37</a></div></div>
+<div class="ttc" id="anamespaceBaseControllerParams_html_a68423539e2ec79f9b363d107f5f45f88"><div class="ttname"><a href="namespaceBaseControllerParams.html#a68423539e2ec79f9b363d107f5f45f88">BaseControllerParams::TC_COMMAND_NO_TORQUE</a></div><div class="ttdeci">const DrivetrainCommand_s TC_COMMAND_NO_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="BaseController_8h_source.html#l00006">BaseController.h:6</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a85f1248f94789f10b46e7fbe9a8daf15"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">TorqueControllerOutput_s::ready</a></div><div class="ttdeci">bool ready</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00061">SharedDataTypes.h:61</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00060">SharedDataTypes.h:60</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af0f7e58e2e72dba782eca4db9b2c5e2b" name="af0f7e58e2e72dba782eca4db9b2c5e2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0f7e58e2e72dba782eca4db9b2c5e2b">&#9670;&#160;</a></span>calc_launch_algo()</h2>
+<a id="adf9e3474ced62d66ba12ce0ba8bae24c" name="adf9e3474ced62d66ba12ce0ba8bae24c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf9e3474ced62d66ba12ce0ba8bae24c">&#9670;&#160;</a></span>calc_launch_algo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +182,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual void BaseLaunchController::calc_launch_algo </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structvector__nav.html">vector_nav</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;&#160;</td>
           <td class="paramname"><em>vn_data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -198,12 +194,81 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classTorqueControllerSimpleLaunch.html#ac0e046e5322299e1e33944b06a007e74">TorqueControllerSimpleLaunch</a>, <a class="el" href="classTorqueControllerSlipLaunch.html#a46f45c0cce50fd4866efc099f103ae9f">TorqueControllerSlipLaunch</a>, and <a class="el" href="classTorqueControllerLookupLaunch.html#aaee5738db6e575990d0bafa4ac46c56e">TorqueControllerLookupLaunch</a>.</p>
+<p>Implemented in <a class="el" href="classTorqueControllerLookupLaunch.html#a84447fb9219147270edc4c5335607916">TorqueControllerLookupLaunch</a>, <a class="el" href="classTorqueControllerSimpleLaunch.html#a6cf94490e572e2e4254fd03f5e1f53c3">TorqueControllerSimpleLaunch</a>, and <a class="el" href="classTorqueControllerSlipLaunch.html#a479ea4cc9115115e38bb7a712d1c3a0a">TorqueControllerSlipLaunch</a>.</p>
 
 </div>
 </div>
-<a id="a112851989ad02703d1eb263ac7b54c77" name="a112851989ad02703d1eb263ac7b54c77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a112851989ad02703d1eb263ac7b54c77">&#9670;&#160;</a></span>tick()</h2>
+<a id="a07439af8aff84fd91238a149d970f1a5" name="a07439af8aff84fd91238a149d970f1a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07439af8aff84fd91238a149d970f1a5">&#9670;&#160;</a></span>evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> BaseLaunchController::evaluate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classController.html#afd879d218121028029cc0a3620e004aa">Controller</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8cpp_source.html#l00110">110</a> of file <a class="el" href="BaseLaunchController_8cpp_source.html">BaseLaunchController.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>{</div>
+<div class="line"><span class="lineno">  112</span>    <a class="code hl_function" href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">tick</a>(state.<a class="code hl_variable" href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">systick</a>, state.<a class="code hl_variable" href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">pedals_data</a>, state.<a class="code hl_variable" href="structSharedCarState__s.html#aafea5c14da41314ecf80803d3767e030">drivetrain_data</a>.<a class="code hl_variable" href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">measuredSpeeds</a>, state.<a class="code hl_variable" href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">vn_data</a>);</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>;</div>
+<div class="line"><span class="lineno">  114</span>}</div>
+<div class="ttc" id="aclassBaseLaunchController_html_a9cd12d85b5259f0adfb115306779d16d"><div class="ttname"><a href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">BaseLaunchController::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, const float wheel_rpms[], const VectornavData_s &amp;vn_data)</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8cpp_source.html#l00003">BaseLaunchController.cpp:3</a></div></div>
+<div class="ttc" id="astructDrivetrainDynamicReport__s_html_a77c47cfa97df348c8dd93b260975f980"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980">DrivetrainDynamicReport_s::measuredSpeeds</a></div><div class="ttdeci">float measuredSpeeds[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00047">SharedDataTypes.h:47</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_a6e5fd8f02dc610be2a8bd68ab961cd0b"><div class="ttname"><a href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">SharedCarState_s::pedals_data</a></div><div class="ttdeci">PedalsSystemData_s pedals_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00135">SharedDataTypes.h:135</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_aafea5c14da41314ecf80803d3767e030"><div class="ttname"><a href="structSharedCarState__s.html#aafea5c14da41314ecf80803d3767e030">SharedCarState_s::drivetrain_data</a></div><div class="ttdeci">DrivetrainDynamicReport_s drivetrain_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00133">SharedDataTypes.h:133</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_ac3cdaa36480cc15ddb3916fd7c07326d"><div class="ttname"><a href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">SharedCarState_s::vn_data</a></div><div class="ttdeci">VectornavData_s vn_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00136">SharedDataTypes.h:136</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_ac3e4e4f978ad37d5a9a927fc87918c4a"><div class="ttname"><a href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">SharedCarState_s::systick</a></div><div class="ttdeci">SysTick_s systick</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00131">SharedDataTypes.h:131</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3b5b72079b6e5dd17d8d1d2b1ef26adc" name="a3b5b72079b6e5dd17d8d1d2b1ef26adc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5b72079b6e5dd17d8d1d2b1ef26adc">&#9670;&#160;</a></span>get_launch_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> BaseLaunchController::get_launch_state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00051">51</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a>; }</div>
+<div class="ttc" id="aclassBaseLaunchController_html_a678181bc40008847485d3c897ce7d253"><div class="ttname"><a href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">BaseLaunchController::launch_state_</a></div><div class="ttdeci">LaunchStates_e launch_state_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00034">BaseLaunchController.h:34</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9cd12d85b5259f0adfb115306779d16d" name="a9cd12d85b5259f0adfb115306779d16d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd12d85b5259f0adfb115306779d16d">&#9670;&#160;</a></span>tick()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +294,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structvector__nav.html">vector_nav</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;&#160;</td>
           <td class="paramname"><em>vn_data</em>&#160;</td>
         </tr>
         <tr>
@@ -240,135 +305,132 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8cpp_source.html#l00172">172</a> of file <a class="el" href="TorqueControllers_8cpp_source.html">TorqueControllers.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  177</span>{</div>
-<div class="line"><span class="lineno">  178</span> </div>
-<div class="line"><span class="lineno">  179</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classBaseLaunchController.html#a112851989ad02703d1eb263ac7b54c77">tick</a>.triggers.trigger100){</div>
-<div class="line"><span class="lineno">  180</span> </div>
-<div class="line"><span class="lineno">  181</span>        <a class="code hl_variable" href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">current_millis_</a> = <a class="code hl_function" href="classBaseLaunchController.html#a112851989ad02703d1eb263ac7b54c77">tick</a>.millis;</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>        int16_t brake_torque_req = pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">regenPercent</a> * <a class="code hl_variable" href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a>;</div>
-<div class="line"><span class="lineno">  184</span> </div>
-<div class="line"><span class="lineno">  185</span>        <span class="keywordtype">float</span> max_speed = 0;</div>
-<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 4; i++){</div>
-<div class="line"><span class="lineno">  187</span>            max_speed = std::max(max_speed, abs(wheel_rpms[i]));</div>
-<div class="line"><span class="lineno">  188</span>        }</div>
-<div class="line"><span class="lineno">  189</span> </div>
-<div class="line"><span class="lineno">  190</span>        <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">ready</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  191</span> </div>
-<div class="line"><span class="lineno">  192</span>        <span class="keywordflow">switch</span>(<a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a>){</div>
-<div class="line"><span class="lineno">  193</span>            <span class="keywordflow">case</span> LaunchStates_e::LAUNCH_NOT_READY:</div>
-<div class="line"><span class="lineno">  194</span>                <span class="comment">// set torques and speed to 0</span></div>
-<div class="line"><span class="lineno">  195</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  196</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  197</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  198</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  199</span> </div>
-<div class="line"><span class="lineno">  200</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  201</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  202</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  203</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  204</span> </div>
-<div class="line"><span class="lineno">  205</span>                <span class="comment">//init launch vars</span></div>
-<div class="line"><span class="lineno">  206</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a> = 0;</div>
-<div class="line"><span class="lineno">  207</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">time_of_launch_</a> = <a class="code hl_function" href="classBaseLaunchController.html#a112851989ad02703d1eb263ac7b54c77">tick</a>.millis;</div>
-<div class="line"><span class="lineno">  208</span>                <span class="comment">// check speed is 0 and pedals not pressed</span></div>
-<div class="line"><span class="lineno">  209</span>                <span class="keywordflow">if</span>((pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> &lt; <a class="code hl_variable" href="TorqueControllers_8h.html#a358397591e3db49ecd40a6f517fe95f9">launch_ready_accel_threshold</a>)</div>
-<div class="line"><span class="lineno">  210</span>                &amp;&amp; (pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &lt; <a class="code hl_variable" href="TorqueControllers_8h.html#a33bf99ab987e6aae67d0dabca83bc373">launch_ready_brake_threshold</a>)</div>
-<div class="line"><span class="lineno">  211</span>                &amp;&amp; (max_speed &lt; <a class="code hl_variable" href="TorqueControllers_8h.html#ab609834b868d4db79911e80542ee4a19">launch_ready_speed_threshold</a>))</div>
-<div class="line"><span class="lineno">  212</span>                {</div>
-<div class="line"><span class="lineno">  213</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_READY;</div>
-<div class="line"><span class="lineno">  214</span>                }</div>
-<div class="line"><span class="lineno">  215</span> </div>
-<div class="line"><span class="lineno">  216</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  217</span>            <span class="keywordflow">case</span> LaunchStates_e::LAUNCH_READY:</div>
-<div class="line"><span class="lineno">  218</span>                <span class="comment">// set torques and speed to 0</span></div>
-<div class="line"><span class="lineno">  219</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  220</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  221</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  222</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
-<div class="line"><span class="lineno">  223</span> </div>
-<div class="line"><span class="lineno">  224</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  225</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  226</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  227</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = brake_torque_req;</div>
-<div class="line"><span class="lineno">  228</span> </div>
-<div class="line"><span class="lineno">  229</span>                <span class="comment">//init launch vars</span></div>
-<div class="line"><span class="lineno">  230</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a> = 0;</div>
-<div class="line"><span class="lineno">  231</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">time_of_launch_</a> = <a class="code hl_variable" href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">current_millis_</a>;</div>
-<div class="line"><span class="lineno">  232</span> </div>
-<div class="line"><span class="lineno">  233</span>                <span class="comment">//check speed is 0 and brake not pressed</span></div>
-<div class="line"><span class="lineno">  234</span>                <span class="keywordflow">if</span> ((pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &gt;= <a class="code hl_variable" href="TorqueControllers_8h.html#a33bf99ab987e6aae67d0dabca83bc373">launch_ready_brake_threshold</a>)</div>
-<div class="line"><span class="lineno">  235</span>                    || (max_speed &gt;= <a class="code hl_variable" href="TorqueControllers_8h.html#ab609834b868d4db79911e80542ee4a19">launch_ready_speed_threshold</a>))</div>
-<div class="line"><span class="lineno">  236</span>                {</div>
-<div class="line"><span class="lineno">  237</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_NOT_READY;</div>
-<div class="line"><span class="lineno">  238</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> &gt;= <a class="code hl_variable" href="TorqueControllers_8h.html#ac70ffde2d6ce27ecf65744315df71904">launch_go_accel_threshold</a>){</div>
-<div class="line"><span class="lineno">  239</span> </div>
-<div class="line"><span class="lineno">  240</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a056f848edac740e2a9f5d780503a6600">initial_ecef_x_</a> = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[0];</div>
-<div class="line"><span class="lineno">  241</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a7dcf05b00c434dbef3da6ffc3672a566">initial_ecef_y_</a> = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[1];</div>
-<div class="line"><span class="lineno">  242</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a134011bbdeb34dab981abb68164773e3">initial_ecef_z_</a> = vn_data-&gt;<a class="code hl_variable" href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">ecef_coords</a>[2];</div>
-<div class="line"><span class="lineno">  243</span> </div>
-<div class="line"><span class="lineno">  244</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCHING;</div>
-<div class="line"><span class="lineno">  245</span>                }</div>
-<div class="line"><span class="lineno">  246</span> </div>
-<div class="line"><span class="lineno">  247</span>                <span class="comment">//check accel above launch threshold and launch</span></div>
-<div class="line"><span class="lineno">  248</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  249</span>            <span class="keywordflow">case</span> LaunchStates_e::LAUNCHING:</div>
-<div class="line"><span class="lineno">  250</span>                { <span class="comment">// use brackets to ignore &#39;cross initialization&#39; of secs_since_launch</span></div>
-<div class="line"><span class="lineno">  251</span>                <span class="comment">//check accel below launch threshold and brake above</span></div>
-<div class="line"><span class="lineno">  252</span>                <span class="keywordflow">if</span>((pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> &lt;= <a class="code hl_variable" href="TorqueControllers_8h.html#a5554b1837fe8731a9b171e7ef5633012">launch_stop_accel_threshold</a>)</div>
-<div class="line"><span class="lineno">  253</span>                || (pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &gt;= <a class="code hl_variable" href="TorqueControllers_8h.html#a33bf99ab987e6aae67d0dabca83bc373">launch_ready_brake_threshold</a>))</div>
-<div class="line"><span class="lineno">  254</span>                {</div>
-<div class="line"><span class="lineno">  255</span>                    <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_NOT_READY;</div>
-<div class="line"><span class="lineno">  256</span>                }</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>                <a class="code hl_function" href="classBaseLaunchController.html#af0f7e58e2e72dba782eca4db9b2c5e2b">calc_launch_algo</a>(vn_data);</div>
-<div class="line"><span class="lineno">  259</span> </div>
-<div class="line"><span class="lineno">  260</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
-<div class="line"><span class="lineno">  261</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
-<div class="line"><span class="lineno">  262</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
-<div class="line"><span class="lineno">  263</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
-<div class="line"><span class="lineno">  264</span> </div>
-<div class="line"><span class="lineno">  265</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a>;</div>
-<div class="line"><span class="lineno">  266</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a>;</div>
-<div class="line"><span class="lineno">  267</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a>;</div>
-<div class="line"><span class="lineno">  268</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = <a class="code hl_variable" href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a>;</div>
-<div class="line"><span class="lineno">  269</span> </div>
-<div class="line"><span class="lineno">  270</span>                }</div>
-<div class="line"><span class="lineno">  271</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  272</span>            <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  273</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  274</span> </div>
-<div class="line"><span class="lineno">  275</span>        }</div>
-<div class="line"><span class="lineno">  276</span> </div>
-<div class="line"><span class="lineno">  277</span>    }</div>
-<div class="line"><span class="lineno">  278</span>}</div>
-<div class="ttc" id="aTorqueControllers_8h_html_a029c8f98807f0d9b74fc89ffd5a1099d"><div class="ttname"><a href="TorqueControllers_8h.html#a029c8f98807f0d9b74fc89ffd5a1099d">MAX_REGEN_TORQUE</a></div><div class="ttdeci">const float MAX_REGEN_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00033">TorqueControllers.h:33</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a33bf99ab987e6aae67d0dabca83bc373"><div class="ttname"><a href="TorqueControllers_8h.html#a33bf99ab987e6aae67d0dabca83bc373">launch_ready_brake_threshold</a></div><div class="ttdeci">const float launch_ready_brake_threshold</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00044">TorqueControllers.h:44</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a358397591e3db49ecd40a6f517fe95f9"><div class="ttname"><a href="TorqueControllers_8h.html#a358397591e3db49ecd40a6f517fe95f9">launch_ready_accel_threshold</a></div><div class="ttdeci">const float launch_ready_accel_threshold</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00043">TorqueControllers.h:43</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a5554b1837fe8731a9b171e7ef5633012"><div class="ttname"><a href="TorqueControllers_8h.html#a5554b1837fe8731a9b171e7ef5633012">launch_stop_accel_threshold</a></div><div class="ttdeci">const float launch_stop_accel_threshold</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00047">TorqueControllers.h:47</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_a7ec80f409ae2327c088489fb3b0830b8"><div class="ttname"><a href="TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8">AMK_MAX_TORQUE</a></div><div class="ttdeci">const float AMK_MAX_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00032">TorqueControllers.h:32</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ab609834b868d4db79911e80542ee4a19"><div class="ttname"><a href="TorqueControllers_8h.html#ab609834b868d4db79911e80542ee4a19">launch_ready_speed_threshold</a></div><div class="ttdeci">const float launch_ready_speed_threshold</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00045">TorqueControllers.h:45</a></div></div>
-<div class="ttc" id="aTorqueControllers_8h_html_ac70ffde2d6ce27ecf65744315df71904"><div class="ttname"><a href="TorqueControllers_8h.html#ac70ffde2d6ce27ecf65744315df71904">launch_go_accel_threshold</a></div><div class="ttdeci">const float launch_go_accel_threshold</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00046">TorqueControllers.h:46</a></div></div>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8cpp_source.html#l00003">3</a> of file <a class="el" href="BaseLaunchController_8cpp_source.html">BaseLaunchController.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    8</span>{</div>
+<div class="line"><span class="lineno">    9</span> </div>
+<div class="line"><span class="lineno">   10</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">tick</a>.triggers.trigger100)</div>
+<div class="line"><span class="lineno">   11</span>    {</div>
+<div class="line"><span class="lineno">   12</span> </div>
+<div class="line"><span class="lineno">   13</span>        <a class="code hl_variable" href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">current_millis_</a> = <a class="code hl_function" href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">tick</a>.millis;</div>
+<div class="line"><span class="lineno">   14</span> </div>
+<div class="line"><span class="lineno">   15</span>        int16_t brake_torque_req = pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">regenPercent</a> * <a class="code hl_variable" href="namespacePhysicalParameters.html#a95f9fc91ba89b73fbc86b8e52b369f26">PhysicalParameters::MAX_REGEN_TORQUE</a>;</div>
+<div class="line"><span class="lineno">   16</span> </div>
+<div class="line"><span class="lineno">   17</span>        <span class="keywordtype">float</span> max_speed = 0;</div>
+<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">   19</span>        {</div>
+<div class="line"><span class="lineno">   20</span>            max_speed = std::max(max_speed, abs(wheel_rpms[i]));</div>
+<div class="line"><span class="lineno">   21</span>        }</div>
+<div class="line"><span class="lineno">   22</span> </div>
+<div class="line"><span class="lineno">   23</span>        <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a85f1248f94789f10b46e7fbe9a8daf15">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>        <span class="keywordflow">switch</span> (<a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a>)</div>
+<div class="line"><span class="lineno">   26</span>        {</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">case</span> LaunchStates_e::LAUNCH_NOT_READY:</div>
+<div class="line"><span class="lineno">   28</span>            <span class="comment">// set torques and speed to 0</span></div>
+<div class="line"><span class="lineno">   29</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   30</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   31</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   32</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   33</span> </div>
+<div class="line"><span class="lineno">   34</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   35</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   36</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   37</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   38</span> </div>
+<div class="line"><span class="lineno">   39</span>            <span class="comment">// init launch vars</span></div>
+<div class="line"><span class="lineno">   40</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a> = 0;</div>
+<div class="line"><span class="lineno">   41</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">time_of_launch_</a> = <a class="code hl_function" href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">tick</a>.millis;</div>
+<div class="line"><span class="lineno">   42</span>            <span class="comment">// check speed is 0 and pedals not pressed</span></div>
+<div class="line"><span class="lineno">   43</span>            <span class="keywordflow">if</span> ((pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> &lt; <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#a986287cc27a1e2db79b30913a7064837">BaseLaunchControllerParams::launch_ready_accel_threshold</a>) &amp;&amp; (pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &lt; <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#a8e300b4c608327ea9269a6f0a6336562">BaseLaunchControllerParams::launch_ready_brake_threshold</a>) &amp;&amp; (max_speed &lt; <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#ab106534042b67227c011fbf1260f9d84">BaseLaunchControllerParams::launch_ready_speed_threshold</a>))</div>
+<div class="line"><span class="lineno">   44</span>            {</div>
+<div class="line"><span class="lineno">   45</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_READY;</div>
+<div class="line"><span class="lineno">   46</span>            }</div>
+<div class="line"><span class="lineno">   47</span> </div>
+<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   49</span>        <span class="keywordflow">case</span> LaunchStates_e::LAUNCH_READY:</div>
+<div class="line"><span class="lineno">   50</span>            <span class="comment">// set torques and speed to 0</span></div>
+<div class="line"><span class="lineno">   51</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   52</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   53</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   54</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = 0.0;</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   56</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   57</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   58</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   59</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = brake_torque_req;</div>
+<div class="line"><span class="lineno">   60</span> </div>
+<div class="line"><span class="lineno">   61</span>            <span class="comment">// init launch vars</span></div>
+<div class="line"><span class="lineno">   62</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a> = 0;</div>
+<div class="line"><span class="lineno">   63</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">time_of_launch_</a> = <a class="code hl_variable" href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">current_millis_</a>;</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>            <span class="comment">// check speed is 0 and brake not pressed</span></div>
+<div class="line"><span class="lineno">   66</span>            <span class="keywordflow">if</span> ((pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &gt;= <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#a8e300b4c608327ea9269a6f0a6336562">BaseLaunchControllerParams::launch_ready_brake_threshold</a>) || (max_speed &gt;= <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#ab106534042b67227c011fbf1260f9d84">BaseLaunchControllerParams::launch_ready_speed_threshold</a>))</div>
+<div class="line"><span class="lineno">   67</span>            {</div>
+<div class="line"><span class="lineno">   68</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_NOT_READY;</div>
+<div class="line"><span class="lineno">   69</span>            }</div>
+<div class="line"><span class="lineno">   70</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> &gt;= <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#a2a4738a8f87630c3f6cafb5be8ef2af5">BaseLaunchControllerParams::launch_go_accel_threshold</a>)</div>
+<div class="line"><span class="lineno">   71</span>            {</div>
+<div class="line"><span class="lineno">   72</span> </div>
+<div class="line"><span class="lineno">   73</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a056f848edac740e2a9f5d780503a6600">initial_ecef_x_</a> = vn_data.<a class="code hl_variable" href="structVectornavData__s.html#ab5e7a0fa3bcfc6242cbb9341dbcdb40f">ecef_coords</a>[0];</div>
+<div class="line"><span class="lineno">   74</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a7dcf05b00c434dbef3da6ffc3672a566">initial_ecef_y_</a> = vn_data.<a class="code hl_variable" href="structVectornavData__s.html#ab5e7a0fa3bcfc6242cbb9341dbcdb40f">ecef_coords</a>[1];</div>
+<div class="line"><span class="lineno">   75</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a134011bbdeb34dab981abb68164773e3">initial_ecef_z_</a> = vn_data.<a class="code hl_variable" href="structVectornavData__s.html#ab5e7a0fa3bcfc6242cbb9341dbcdb40f">ecef_coords</a>[2];</div>
+<div class="line"><span class="lineno">   76</span> </div>
+<div class="line"><span class="lineno">   77</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCHING;</div>
+<div class="line"><span class="lineno">   78</span>            }</div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span>            <span class="comment">// check accel above launch threshold and launch</span></div>
+<div class="line"><span class="lineno">   81</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">case</span> LaunchStates_e::LAUNCHING:</div>
+<div class="line"><span class="lineno">   83</span>        { <span class="comment">// use brackets to ignore &#39;cross initialization&#39; of secs_since_launch</span></div>
+<div class="line"><span class="lineno">   84</span>            <span class="comment">// check accel below launch threshold and brake above</span></div>
+<div class="line"><span class="lineno">   85</span>            <span class="keywordflow">if</span> ((pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">accelPercent</a> &lt;= <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#ada510dc835b8528dcb9acab4f69e3e17">BaseLaunchControllerParams::launch_stop_accel_threshold</a>) || (pedalsData.<a class="code hl_variable" href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">brakePercent</a> &gt;= <a class="code hl_variable" href="namespaceBaseLaunchControllerParams.html#a8e300b4c608327ea9269a6f0a6336562">BaseLaunchControllerParams::launch_ready_brake_threshold</a>))</div>
+<div class="line"><span class="lineno">   86</span>            {</div>
+<div class="line"><span class="lineno">   87</span>                <a class="code hl_variable" href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">launch_state_</a> = LaunchStates_e::LAUNCH_NOT_READY;</div>
+<div class="line"><span class="lineno">   88</span>            }</div>
+<div class="line"><span class="lineno">   89</span> </div>
+<div class="line"><span class="lineno">   90</span>            <a class="code hl_function" href="classBaseLaunchController.html#adf9e3474ced62d66ba12ce0ba8bae24c">calc_launch_algo</a>(vn_data);</div>
+<div class="line"><span class="lineno">   91</span> </div>
+<div class="line"><span class="lineno">   92</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
+<div class="line"><span class="lineno">   93</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
+<div class="line"><span class="lineno">   94</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
+<div class="line"><span class="lineno">   95</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>;</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a>] = <a class="code hl_variable" href="namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78">PhysicalParameters::AMK_MAX_TORQUE</a>;</div>
+<div class="line"><span class="lineno">   98</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a>] = <a class="code hl_variable" href="namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78">PhysicalParameters::AMK_MAX_TORQUE</a>;</div>
+<div class="line"><span class="lineno">   99</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a>] = <a class="code hl_variable" href="namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78">PhysicalParameters::AMK_MAX_TORQUE</a>;</div>
+<div class="line"><span class="lineno">  100</span>            <a class="code hl_variable" href="classBaseLaunchController.html#a34ea2138e9d062a22b7a3a3a6a2a34bc">writeout_</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[<a class="code hl_variable" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a>] = <a class="code hl_variable" href="namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78">PhysicalParameters::AMK_MAX_TORQUE</a>;</div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  103</span>        }</div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  105</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  106</span>        }</div>
+<div class="line"><span class="lineno">  107</span>    }</div>
+<div class="line"><span class="lineno">  108</span>}</div>
 <div class="ttc" id="aUtility_8h_html_a070b34e47f13ddfdaa2502536eee14ce"><div class="ttname"><a href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR</a></div><div class="ttdeci">const int RR</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00008">Utility.h:8</a></div></div>
 <div class="ttc" id="aUtility_8h_html_a232e53b0b909b708971e1ff0886a269e"><div class="ttname"><a href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL</a></div><div class="ttdeci">const int FL</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00005">Utility.h:5</a></div></div>
 <div class="ttc" id="aUtility_8h_html_a47968b41e57a835656473a78eb95a36c"><div class="ttname"><a href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR</a></div><div class="ttdeci">const int FR</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00006">Utility.h:6</a></div></div>
 <div class="ttc" id="aUtility_8h_html_ae422df0ea387cc2ead9435c88d092c27"><div class="ttname"><a href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL</a></div><div class="ttdeci">const int RL</div><div class="ttdef"><b>Definition:</b> <a href="Utility_8h_source.html#l00007">Utility.h:7</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a003d0180c9abef36a7533ecc2b8d3c8d"><div class="ttname"><a href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">BaseLaunchController::time_of_launch_</a></div><div class="ttdeci">uint32_t time_of_launch_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00220">TorqueControllers.h:220</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a056f848edac740e2a9f5d780503a6600"><div class="ttname"><a href="classBaseLaunchController.html#a056f848edac740e2a9f5d780503a6600">BaseLaunchController::initial_ecef_x_</a></div><div class="ttdeci">double initial_ecef_x_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00221">TorqueControllers.h:221</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a112851989ad02703d1eb263ac7b54c77"><div class="ttname"><a href="classBaseLaunchController.html#a112851989ad02703d1eb263ac7b54c77">BaseLaunchController::tick</a></div><div class="ttdeci">void tick(const SysTick_s &amp;tick, const PedalsSystemData_s &amp;pedalsData, const float wheel_rpms[], const vector_nav *vn_data)</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8cpp_source.html#l00172">TorqueControllers.cpp:172</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a134011bbdeb34dab981abb68164773e3"><div class="ttname"><a href="classBaseLaunchController.html#a134011bbdeb34dab981abb68164773e3">BaseLaunchController::initial_ecef_z_</a></div><div class="ttdeci">double initial_ecef_z_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00223">TorqueControllers.h:223</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a2ea65c4e7c6f638cbfa16ee809b8d738"><div class="ttname"><a href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">BaseLaunchController::launch_speed_target_</a></div><div class="ttdeci">float launch_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00226">TorqueControllers.h:226</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a678181bc40008847485d3c897ce7d253"><div class="ttname"><a href="classBaseLaunchController.html#a678181bc40008847485d3c897ce7d253">BaseLaunchController::launch_state_</a></div><div class="ttdeci">LaunchStates_e launch_state_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00224">TorqueControllers.h:224</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a7dcf05b00c434dbef3da6ffc3672a566"><div class="ttname"><a href="classBaseLaunchController.html#a7dcf05b00c434dbef3da6ffc3672a566">BaseLaunchController::initial_ecef_y_</a></div><div class="ttdeci">double initial_ecef_y_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00222">TorqueControllers.h:222</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_af0f7e58e2e72dba782eca4db9b2c5e2b"><div class="ttname"><a href="classBaseLaunchController.html#af0f7e58e2e72dba782eca4db9b2c5e2b">BaseLaunchController::calc_launch_algo</a></div><div class="ttdeci">virtual void calc_launch_algo(const vector_nav *vn_data)=0</div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_af56b0ad1e82bc945cd06c45b18677b72"><div class="ttname"><a href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">BaseLaunchController::current_millis_</a></div><div class="ttdeci">uint32_t current_millis_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllers_8h_source.html#l00225">TorqueControllers.h:225</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00012">DrivetrainSystem.h:12</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00013">DrivetrainSystem.h:13</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a03435669a9f0c4fea7e268e6ce3eb4d8"><div class="ttname"><a href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">PedalsSystemData_s::brakePercent</a></div><div class="ttdeci">float brakePercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00020">PedalsSystem.h:20</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a6c4e6145913766af3968ad78d6789f3f"><div class="ttname"><a href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">PedalsSystemData_s::accelPercent</a></div><div class="ttdeci">float accelPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00019">PedalsSystem.h:19</a></div></div>
-<div class="ttc" id="astructPedalsSystemData__s_html_a71792b1ecf0e495d43f94169dd3248ca"><div class="ttname"><a href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">PedalsSystemData_s::regenPercent</a></div><div class="ttdeci">float regenPercent</div><div class="ttdef"><b>Definition:</b> <a href="PedalsSystem_8h_source.html#l00021">PedalsSystem.h:21</a></div></div>
-<div class="ttc" id="astructvector__nav_html_a45263991441dbf6f047296a6fb2ada59"><div class="ttname"><a href="structvector__nav.html#a45263991441dbf6f047296a6fb2ada59">vector_nav::ecef_coords</a></div><div class="ttdeci">double ecef_coords[3]</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2VectornavInterface_8h_source.html#l00019">VectornavInterface.h:19</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a003d0180c9abef36a7533ecc2b8d3c8d"><div class="ttname"><a href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">BaseLaunchController::time_of_launch_</a></div><div class="ttdeci">uint32_t time_of_launch_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00030">BaseLaunchController.h:30</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a056f848edac740e2a9f5d780503a6600"><div class="ttname"><a href="classBaseLaunchController.html#a056f848edac740e2a9f5d780503a6600">BaseLaunchController::initial_ecef_x_</a></div><div class="ttdeci">double initial_ecef_x_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00031">BaseLaunchController.h:31</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a134011bbdeb34dab981abb68164773e3"><div class="ttname"><a href="classBaseLaunchController.html#a134011bbdeb34dab981abb68164773e3">BaseLaunchController::initial_ecef_z_</a></div><div class="ttdeci">double initial_ecef_z_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00033">BaseLaunchController.h:33</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a2ea65c4e7c6f638cbfa16ee809b8d738"><div class="ttname"><a href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">BaseLaunchController::launch_speed_target_</a></div><div class="ttdeci">float launch_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00036">BaseLaunchController.h:36</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a7dcf05b00c434dbef3da6ffc3672a566"><div class="ttname"><a href="classBaseLaunchController.html#a7dcf05b00c434dbef3da6ffc3672a566">BaseLaunchController::initial_ecef_y_</a></div><div class="ttdeci">double initial_ecef_y_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00032">BaseLaunchController.h:32</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_adf9e3474ced62d66ba12ce0ba8bae24c"><div class="ttname"><a href="classBaseLaunchController.html#adf9e3474ced62d66ba12ce0ba8bae24c">BaseLaunchController::calc_launch_algo</a></div><div class="ttdeci">virtual void calc_launch_algo(const VectornavData_s &amp;vn_data)=0</div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_af56b0ad1e82bc945cd06c45b18677b72"><div class="ttname"><a href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">BaseLaunchController::current_millis_</a></div><div class="ttdeci">uint32_t current_millis_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00035">BaseLaunchController.h:35</a></div></div>
+<div class="ttc" id="anamespaceBaseLaunchControllerParams_html_a2a4738a8f87630c3f6cafb5be8ef2af5"><div class="ttname"><a href="namespaceBaseLaunchControllerParams.html#a2a4738a8f87630c3f6cafb5be8ef2af5">BaseLaunchControllerParams::launch_go_accel_threshold</a></div><div class="ttdeci">const float launch_go_accel_threshold</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00022">BaseLaunchController.h:22</a></div></div>
+<div class="ttc" id="anamespaceBaseLaunchControllerParams_html_a8e300b4c608327ea9269a6f0a6336562"><div class="ttname"><a href="namespaceBaseLaunchControllerParams.html#a8e300b4c608327ea9269a6f0a6336562">BaseLaunchControllerParams::launch_ready_brake_threshold</a></div><div class="ttdeci">const float launch_ready_brake_threshold</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00020">BaseLaunchController.h:20</a></div></div>
+<div class="ttc" id="anamespaceBaseLaunchControllerParams_html_a986287cc27a1e2db79b30913a7064837"><div class="ttname"><a href="namespaceBaseLaunchControllerParams.html#a986287cc27a1e2db79b30913a7064837">BaseLaunchControllerParams::launch_ready_accel_threshold</a></div><div class="ttdeci">const float launch_ready_accel_threshold</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00019">BaseLaunchController.h:19</a></div></div>
+<div class="ttc" id="anamespaceBaseLaunchControllerParams_html_ab106534042b67227c011fbf1260f9d84"><div class="ttname"><a href="namespaceBaseLaunchControllerParams.html#ab106534042b67227c011fbf1260f9d84">BaseLaunchControllerParams::launch_ready_speed_threshold</a></div><div class="ttdeci">const float launch_ready_speed_threshold</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00021">BaseLaunchController.h:21</a></div></div>
+<div class="ttc" id="anamespaceBaseLaunchControllerParams_html_ada510dc835b8528dcb9acab4f69e3e17"><div class="ttname"><a href="namespaceBaseLaunchControllerParams.html#ada510dc835b8528dcb9acab4f69e3e17">BaseLaunchControllerParams::launch_stop_accel_threshold</a></div><div class="ttdeci">const float launch_stop_accel_threshold</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00023">BaseLaunchController.h:23</a></div></div>
+<div class="ttc" id="anamespacePhysicalParameters_html_a2e2b221505554c9718d4840eb9ef0d78"><div class="ttname"><a href="namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78">PhysicalParameters::AMK_MAX_TORQUE</a></div><div class="ttdeci">const float AMK_MAX_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00007">PhysicalParameters.h:7</a></div></div>
+<div class="ttc" id="anamespacePhysicalParameters_html_a95f9fc91ba89b73fbc86b8e52b369f26"><div class="ttname"><a href="namespacePhysicalParameters.html#a95f9fc91ba89b73fbc86b8e52b369f26">PhysicalParameters::MAX_REGEN_TORQUE</a></div><div class="ttdeci">const float MAX_REGEN_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00008">PhysicalParameters.h:8</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00054">SharedDataTypes.h:54</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00055">SharedDataTypes.h:55</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a03435669a9f0c4fea7e268e6ce3eb4d8"><div class="ttname"><a href="structPedalsSystemData__s.html#a03435669a9f0c4fea7e268e6ce3eb4d8">PedalsSystemData_s::brakePercent</a></div><div class="ttdeci">float brakePercent</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00041">SharedDataTypes.h:41</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a6c4e6145913766af3968ad78d6789f3f"><div class="ttname"><a href="structPedalsSystemData__s.html#a6c4e6145913766af3968ad78d6789f3f">PedalsSystemData_s::accelPercent</a></div><div class="ttdeci">float accelPercent</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00040">SharedDataTypes.h:40</a></div></div>
+<div class="ttc" id="astructPedalsSystemData__s_html_a71792b1ecf0e495d43f94169dd3248ca"><div class="ttname"><a href="structPedalsSystemData__s.html#a71792b1ecf0e495d43f94169dd3248ca">PedalsSystemData_s::regenPercent</a></div><div class="ttdeci">float regenPercent</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00042">SharedDataTypes.h:42</a></div></div>
+<div class="ttc" id="astructVectornavData__s_html_ab5e7a0fa3bcfc6242cbb9341dbcdb40f"><div class="ttname"><a href="structVectornavData__s.html#ab5e7a0fa3bcfc6242cbb9341dbcdb40f">VectornavData_s::ecef_coords</a></div><div class="ttdeci">double ecef_coords[3]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00077">SharedDataTypes.h:77</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -393,7 +455,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00225">225</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00035">35</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +469,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t BaseLaunchController::init_speed_target_ = 0.0</td>
+          <td class="memname">int16_t BaseLaunchController::init_speed_target_ = 0</td>
         </tr>
       </table>
   </td>
@@ -417,7 +479,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00227">227</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00037">37</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -441,7 +503,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00221">221</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00031">31</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +527,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00222">222</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00032">32</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -489,7 +551,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00223">223</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00033">33</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -513,7 +575,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00226">226</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00036">36</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -527,7 +589,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="TorqueControllers_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> BaseLaunchController::launch_state_ = LaunchStates_e::LAUNCH_NOT_READY</td>
+          <td class="memname"><a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a> BaseLaunchController::launch_state_ = LaunchStates_e::LAUNCH_NOT_READY</td>
         </tr>
       </table>
   </td>
@@ -537,7 +599,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00224">224</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00034">34</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
@@ -561,12 +623,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00220">220</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00030">30</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
-<a id="a022265139ec8955e7fbb17dc75bf7c61" name="a022265139ec8955e7fbb17dc75bf7c61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a022265139ec8955e7fbb17dc75bf7c61">&#9670;&#160;</a></span>writeout_</h2>
+<a id="a34ea2138e9d062a22b7a3a3a6a2a34bc" name="a34ea2138e9d062a22b7a3a3a6a2a34bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ea2138e9d062a22b7a3a3a6a2a34bc">&#9670;&#160;</a></span>writeout_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -575,7 +637,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&amp; BaseLaunchController::writeout_</td>
+          <td class="memname"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> BaseLaunchController::writeout_</td>
         </tr>
       </table>
   </td>
@@ -585,13 +647,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllers_8h_source.html#l00219">219</a> of file <a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00029">29</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>lib/systems/include/<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a></li>
-<li>lib/systems/src/<a class="el" href="TorqueControllers_8cpp_source.html">TorqueControllers.cpp</a></li>
+<li>lib/systems/include/<a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a></li>
+<li>lib/systems/src/Controllers/<a class="el" href="BaseLaunchController_8cpp_source.html">BaseLaunchController.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

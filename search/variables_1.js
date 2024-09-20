@@ -29,12 +29,12 @@ var searchData=
   ['adc2_5fcs_26',['ADC2_CS',['../MCU__rev15__defs_8h.html#ab25ab6b42051dd04d6fa01e83b13e235',1,'MCU_rev15_defs.h']]],
   ['adc3_5fcs_27',['ADC3_CS',['../MCU__rev15__defs_8h.html#afef284a61dec31ceaf620f532c528f07',1,'MCU_rev15_defs.h']]],
   ['alpha_28',['alpha',['../classFilter__IIR.html#ab1bb65cb5b107154fbbc15aa7624dce7',1,'Filter_IIR']]],
-  ['amk_5fmax_5frpm_29',['AMK_MAX_RPM',['../TorqueControllers_8h.html#a82baa3a9bb5bff28d581a673391aa7a6',1,'TorqueControllers.h']]],
-  ['amk_5fmax_5ftorque_30',['AMK_MAX_TORQUE',['../TorqueControllers_8h.html#a7ec80f409ae2327c088489fb3b0830b8',1,'TorqueControllers.h']]],
+  ['amk_5fmax_5frpm_29',['AMK_MAX_RPM',['../namespacePhysicalParameters.html#aa6a88a3f564b8fa6b24a75e86bc65278',1,'PhysicalParameters']]],
+  ['amk_5fmax_5ftorque_30',['AMK_MAX_TORQUE',['../namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78',1,'PhysicalParameters']]],
   ['ams_5f_31',['ams_',['../classSafetySystem.html#aba7787a5ea370fe285cdc43c7549e927',1,'SafetySystem']]],
   ['ams_5finterface_32',['ams_interface',['../structCANInterfaces.html#a07b2512ce4dd8b21566334315e9026fa',1,'CANInterfaces::ams_interface()'],['../src_2main_8cpp.html#ae532f63e2eea4c28064c0d3fc0c9a152',1,'ams_interface():&#160;main.cpp']]],
   ['analog_5fsteering_5fchannel_33',['analog_steering_channel',['../structTelemetryInterfaceReadChannels.html#a8fda4ad1ac9ac8a275e194f5606f3d89',1,'TelemetryInterfaceReadChannels']]],
   ['angle_34',['angle',['../structSteeringSystemData__s.html#a2935bd230dc29a1fbc7c462c425cca79',1,'SteeringSystemData_s::angle()'],['../structSteeringEncoderConversion__s.html#ada5152e3d6306f8a36c2e571bb0e1714',1,'SteeringEncoderConversion_s::angle()']]],
-  ['angular_5frates_35',['angular_rates',['../structvector__nav.html#a37e901d5313d1c2ffe1079c2d11dc84c',1,'vector_nav']]],
+  ['angular_5frates_35',['angular_rates',['../structVectornavData__s.html#a802ff7a2826eb45686a834a290cb3818',1,'VectornavData_s']]],
   ['apps_5factivation_5fpercentage_36',['APPS_ACTIVATION_PERCENTAGE',['../MCU__rev15__defs_8h.html#aab2255080c05bedf1a06302bd7154293',1,'MCU_rev15_defs.h']]]
 ];

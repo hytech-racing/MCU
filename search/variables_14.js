@@ -1,12 +1,14 @@
 var searchData=
 [
-  ['warning_5f_0',['warning_',['../classInverterInterface.html#accc29a90884103e933154755296cb939',1,'InverterInterface']]],
-  ['watchdog_5finput_1',['WATCHDOG_INPUT',['../MCU__rev15__defs_8h.html#a2e4da32aa1ef69980b1ee0afb899862f',1,'MCU_rev15_defs.h']]],
-  ['watchdog_5fkick_5finterval_2',['WATCHDOG_KICK_INTERVAL',['../interfaces_2include_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26',1,'WATCHDOG_KICK_INTERVAL():&#160;WatchdogInterface.h'],['../mock__interfaces_2WatchdogInterface_8h.html#a646ea29789fa1318efa493bcd6656d26',1,'WATCHDOG_KICK_INTERVAL():&#160;WatchdogInterface.h']]],
-  ['watchdog_5fstate_3',['watchdog_state',['../classWatchdogInterface.html#a90c26636a649db3650321e9701ef9a67',1,'WatchdogInterface']]],
-  ['watchdog_5ftime_4',['watchdog_time',['../classWatchdogInterface.html#a4441e7d0bd1720e5d709fa509a513013',1,'WatchdogInterface']]],
-  ['wd_5f_5',['wd_',['../classSafetySystem.html#a1bca879af5f476fd3f4a3e93e3a8397f',1,'SafetySystem']]],
-  ['wd_5finterface_6',['wd_interface',['../src_2main_8cpp.html#ab38aceb67800dab467af6c2aa001d7df',1,'main.cpp']]],
-  ['wheel_5fdiameter_7',['WHEEL_DIAMETER',['../PhysicalParameters_8h.html#a8f307256fa2a407634b97cf749a54a6c',1,'PhysicalParameters.h']]],
-  ['writeout_5f_8',['writeout_',['../classTorqueControllerSimple.html#aad6fe3c64c75a3e9f1a1f33967781d0e',1,'TorqueControllerSimple::writeout_()'],['../classTorqueControllerLoadCellVectoring.html#a9335e2823a14f4d9ab566bddb7947688',1,'TorqueControllerLoadCellVectoring::writeout_()'],['../classBaseLaunchController.html#a022265139ec8955e7fbb17dc75bf7c61',1,'BaseLaunchController::writeout_()'],['../classTorqueControllerCASEWrapper.html#aebafa66f4984b33f583389d6e31cc128',1,'TorqueControllerCASEWrapper::writeout_()']]]
+  ['vehicle_5fmath_5foffset_5fms_5f_0',['vehicle_math_offset_ms_',['../classCASESystem.html#a9958e6677e029354df7488e05c484ac7',1,'CASESystem']]],
+  ['vel_5fdist_5flookup_1',['vel_dist_lookup',['../accel__lookup_8h.html#ad7897ffe38fbc6c7fcd38231f7add5ca',1,'accel_lookup.h']]],
+  ['velocity_5fx_2',['velocity_x',['../structVectornavData__s.html#a836a99413c8d641fe99e2c3df61ee51c',1,'VectornavData_s']]],
+  ['velocity_5fy_3',['velocity_y',['../structVectornavData__s.html#a96de5aa448470d1ccb57dcbab62a7275',1,'VectornavData_s']]],
+  ['velocity_5fz_4',['velocity_z',['../structVectornavData__s.html#a66fb755a80b848b4b159a5f532efc892',1,'VectornavData_s']]],
+  ['vn_5factive_5fstart_5ftime_5f_5',['vn_active_start_time_',['../classCASESystem.html#a16d82cc132ed930dbec67cff827d4364',1,'CASESystem']]],
+  ['vn_5fdata_6',['vn_data',['../classVNInterface.html#a45e157f99f517ad46aa0c0286b980a40',1,'VNInterface::vn_data()'],['../structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d',1,'SharedCarState_s::vn_data()']]],
+  ['vn_5finterface_7',['vn_interface',['../structCANInterfaces.html#a533f1756091e5af750d5d4a7af8b7fb2',1,'CANInterfaces']]],
+  ['vn_5fstatus_8',['vn_status',['../structVectornavData__s.html#aceac8a1a06e23744af52638d8dd9b199',1,'VectornavData_s']]],
+  ['voltage_5f_9',['voltage_',['../classInverterMock.html#af4be6e861940919af68a740562a1f87f',1,'InverterMock']]],
+  ['voltage_5flookup_5ftable_10',['VOLTAGE_LOOKUP_TABLE',['../classAMSInterface.html#ade24b908baf656ad85794392032ceb2d',1,'AMSInterface']]]
 ];

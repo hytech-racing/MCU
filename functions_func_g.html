@@ -79,7 +79,7 @@ $(function() {
 <li>get_bms_voltages()&#160;:&#160;<a class="el" href="classAMSInterface.html#aa43f15461f3c55c5a47a4e44984b4e48">AMSInterface</a></li>
 <li>get_bots_ok()&#160;:&#160;<a class="el" href="classMCUInterface.html#a748730d4238924e66f60c8029b113467">MCUInterface</a></li>
 <li>get_cmd_msg()&#160;:&#160;<a class="el" href="classInverterInterface.html#aa9d82741b6d7ab88ebdaf18249fd3c60">InverterInterface&lt; message_queue &gt;</a></li>
-<li>get_config()&#160;:&#160;<a class="el" href="classParameterInterface.html#ac01a7cb50645c0130cd30bffa2ee0262">ParameterInterface</a></li>
+<li>get_current_drive_command()&#160;:&#160;<a class="el" href="classCASESystem.html#aa9b09ef891bd1cc9595d1beb4b87043a">CASESystem&lt; message_queue &gt;</a></li>
 <li>get_dc_on()&#160;:&#160;<a class="el" href="classInverterInterface.html#a83e19e68e4bc94b241f75bb5c67b4b77">InverterInterface&lt; message_queue &gt;</a></li>
 <li>get_derating_on()&#160;:&#160;<a class="el" href="classInverterInterface.html#a2b41f49f03a051cc966216c6b4e95296">InverterInterface&lt; message_queue &gt;</a></li>
 <li>get_dynamic_data()&#160;:&#160;<a class="el" href="classDrivetrainSystem.html#aa703f3d20b3a6f38b034e5d55d5a707a">DrivetrainSystem&lt; InverterType &gt;</a></li>
@@ -91,7 +91,7 @@ $(function() {
 <li>get_glv_voltage()&#160;:&#160;<a class="el" href="classTelemetryInterface.html#af1be5956893c7fb731bb3226459d5a62">TelemetryInterface</a></li>
 <li>get_id()&#160;:&#160;<a class="el" href="classInverterInterface.html#a8b13e9519e6d739f430ca4eb79fdba01">InverterInterface&lt; message_queue &gt;</a>, <a class="el" href="classVNInterface.html#a8e8dd67c8c5b9e5767ec217ffd53a6cc">VNInterface&lt; message_queue &gt;</a></li>
 <li>get_inverter_on()&#160;:&#160;<a class="el" href="classInverterInterface.html#aef0878ec5dc3dbb6cfd682372d497d2b">InverterInterface&lt; message_queue &gt;</a></li>
-<li>get_launch_state()&#160;:&#160;<a class="el" href="classTorqueControllerBase.html#a46648b6b5e5121fefa3ae9e07af79bf9">TorqueControllerBase</a>, <a class="el" href="classTorqueControllerLookupLaunch.html#aa1e5dca2dee9fdb9391c37312254c572">TorqueControllerLookupLaunch</a>, <a class="el" href="classTorqueControllerSimpleLaunch.html#a3fa35e4862393b4dd4010a58ce81f2c8">TorqueControllerSimpleLaunch</a>, <a class="el" href="classTorqueControllerSlipLaunch.html#acef6982ffd1edeff5c12ffac08feb641">TorqueControllerSlipLaunch</a></li>
+<li>get_launch_state()&#160;:&#160;<a class="el" href="classBaseLaunchController.html#a3b5b72079b6e5dd17d8d1d2b1ef26adc">BaseLaunchController</a></li>
 <li>get_mag_current()&#160;:&#160;<a class="el" href="classInverterInterface.html#af52ea25a52c152546083023f2c70cff0">InverterInterface&lt; message_queue &gt;</a></li>
 <li>get_prev_reading()&#160;:&#160;<a class="el" href="classFilter__IIR.html#a0593c582c5725423734fd5817acf5a87">Filter_IIR&lt; dataType &gt;</a></li>
 <li>get_quit_dc_on()&#160;:&#160;<a class="el" href="classInverterInterface.html#a2ed5f5273a845272c5a499e873f55487">InverterInterface&lt; message_queue &gt;</a>, <a class="el" href="classInverterMock.html#a189b4dfd4d653eedde02b1a9ed2ac182">InverterMock</a></li>
@@ -101,21 +101,20 @@ $(function() {
 <li>get_software_is_ok()&#160;:&#160;<a class="el" href="classSafetySystem.html#ade5ab559e1b2fbb93f5319136d75be38">SafetySystem</a></li>
 <li>get_speed()&#160;:&#160;<a class="el" href="classInverterInterface.html#a4f22168794371e6609332877857ce076">InverterInterface&lt; message_queue &gt;</a></li>
 <li>get_state()&#160;:&#160;<a class="el" href="classMCUStateMachine.html#a3b419b1b3ffa46e9126a32e566fd201d">MCUStateMachine&lt; DrivetrainSysType &gt;</a></li>
+<li>get_tc_mux_status()&#160;:&#160;<a class="el" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">TorqueControllerMux&lt; num_controllers &gt;</a></li>
 <li>get_temps_msg()&#160;:&#160;<a class="el" href="classInverterInterface.html#a99498f404d473df849fa5524eb429a62">InverterInterface&lt; message_queue &gt;</a></li>
 <li>get_torque_current()&#160;:&#160;<a class="el" href="classInverterInterface.html#a6736f67dfb896d479fdc5ca91914bbf3">InverterInterface&lt; message_queue &gt;</a></li>
-<li>get_vn_struct()&#160;:&#160;<a class="el" href="classVNInterface.html#a85f684af65c7120e2f7fac2381e23c1d">VNInterface&lt; message_queue &gt;</a></li>
+<li>get_vn_struct()&#160;:&#160;<a class="el" href="classVNInterface.html#a910b752ad3410eb32e93c551ba6b6fef">VNInterface&lt; message_queue &gt;</a></li>
 <li>get_warning()&#160;:&#160;<a class="el" href="classInverterInterface.html#aeb986af3cd3e5ac6344dc1bd3c3b2c9c">InverterInterface&lt; message_queue &gt;</a></li>
 <li>get_watchdog_state()&#160;:&#160;<a class="el" href="classWatchdogInterface.html#a6947390399a4275d51c7b34ee3c96d16">WatchdogInterface</a></li>
-<li>getDialMode()&#160;:&#160;<a class="el" href="classDashboardInterface.html#a111879c011f5cb5bddfc8ed09f736099">DashboardInterface</a>, <a class="el" href="classTorqueControllerMux.html#ad876ddbd104e481f4cd308faa9fe538c">TorqueControllerMux</a></li>
-<li>getDriveMode()&#160;:&#160;<a class="el" href="classTorqueControllerMux.html#added00eeee93af38cba5ad3af7c6425c">TorqueControllerMux</a></li>
-<li>getDrivetrainCommand()&#160;:&#160;<a class="el" href="classTorqueControllerMux.html#a71217aa07bca005b9131252473c4463d">TorqueControllerMux</a></li>
+<li>getDialMode()&#160;:&#160;<a class="el" href="classDashboardInterface.html#a117bc46351e12fc89a94cb65348cede4">DashboardInterface</a></li>
+<li>getDrivetrainCommand()&#160;:&#160;<a class="el" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">TorqueControllerMux&lt; num_controllers &gt;</a></li>
 <li>getLoadCellForces()&#160;:&#160;<a class="el" href="classLoadCellInterface.html#a3f81f21773d2eec5053b345ebbbd4895">LoadCellInterface</a></li>
-<li>getMaxTorque()&#160;:&#160;<a class="el" href="classTorqueControllerMux.html#a160fa55363d010205f742fafab0e1b90">TorqueControllerMux</a></li>
 <li>getMechBrakeActiveThreshold()&#160;:&#160;<a class="el" href="classPedalsSystem.html#addd0da418f7eeec586a9c9dde07f23a3">PedalsSystem</a></li>
 <li>getPedalsSystemData()&#160;:&#160;<a class="el" href="classPedalsSystem.html#a8cdf6d36ae9dc05bfeae37e32521f9ed">PedalsSystem</a></li>
 <li>getPedalsSystemDataCopy()&#160;:&#160;<a class="el" href="classPedalsSystem.html#a713dbdab41328be38e74fb6a39977b21">PedalsSystem</a></li>
 <li>getSteeringSystemData()&#160;:&#160;<a class="el" href="classSteeringSystem.html#a107225173f99325f7606f5de6bcd050f">SteeringSystem</a></li>
-<li>getTorqueLimit()&#160;:&#160;<a class="el" href="classTorqueControllerMux.html#a1d88fb7c12522590ad756cc3fe60d394">TorqueControllerMux</a></li>
+<li>getTorqueLimitMode()&#160;:&#160;<a class="el" href="classDashboardInterface.html#a4658282ee1f6d922267c2fec3811c045">DashboardInterface</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

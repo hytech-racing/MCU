@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ethparams_0',['EthParams',['../namespaceEthParams.html',1,'']]],
-  ['extra_5fscript_1',['extra_script',['../namespaceextra__script.html',1,'']]]
+  ['basecontrollerparams_0',['BaseControllerParams',['../namespaceBaseControllerParams.html',1,'']]],
+  ['baselaunchcontrollerparams_1',['BaseLaunchControllerParams',['../namespaceBaseLaunchControllerParams.html',1,'']]]
 ];

@@ -115,7 +115,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00042">42</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00030">30</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af43613a0f3f17bd1bbe13868d85cf51d" name="af43613a0f3f17bd1bbe13868d85cf51d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af43613a0f3f17bd1bbe13868d85cf51d">&#9670;&#160;</a></span>SteeringSystem() <span class="overload">[1/3]</span></h2>
@@ -151,11 +151,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00060">60</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   61</span>    : <a class="code hl_class" href="classSteeringSystem.html">SteeringSystem</a>(primarySensor, telemInterface, <a class="code hl_define" href="SteeringSystem_8h.html#a32532e548c1fac405db7a741bdfd2699">DEFAULT_STEERING_ALPHA</a>)</div>
-<div class="line"><span class="lineno">   62</span>    {}</div>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00048">48</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>    : <a class="code hl_class" href="classSteeringSystem.html">SteeringSystem</a>(primarySensor, telemInterface, <a class="code hl_define" href="SteeringSystem_8h.html#a32532e548c1fac405db7a741bdfd2699">DEFAULT_STEERING_ALPHA</a>)</div>
+<div class="line"><span class="lineno">   50</span>    {}</div>
 <div class="ttc" id="aSteeringSystem_8h_html_a32532e548c1fac405db7a741bdfd2699"><div class="ttname"><a href="SteeringSystem_8h.html#a32532e548c1fac405db7a741bdfd2699">DEFAULT_STEERING_ALPHA</a></div><div class="ttdeci">#define DEFAULT_STEERING_ALPHA</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00018">SteeringSystem.h:18</a></div></div>
-<div class="ttc" id="aclassSteeringSystem_html"><div class="ttname"><a href="classSteeringSystem.html">SteeringSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00042">SteeringSystem.h:43</a></div></div>
+<div class="ttc" id="aclassSteeringSystem_html"><div class="ttname"><a href="classSteeringSystem.html">SteeringSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00030">SteeringSystem.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -199,9 +199,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00064">64</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   65</span>    : <a class="code hl_class" href="classSteeringSystem.html">SteeringSystem</a>(primarySensor, telemInterface, filterAlpha, filterAlpha)</div>
-<div class="line"><span class="lineno">   66</span>    {}</div>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00052">52</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>    : <a class="code hl_class" href="classSteeringSystem.html">SteeringSystem</a>(primarySensor, telemInterface, filterAlpha, filterAlpha)</div>
+<div class="line"><span class="lineno">   54</span>    {}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -251,18 +251,18 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00068">68</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   69</span>    : <a class="code hl_variable" href="classSteeringSystem.html#a21ca597ee83a5776d09a9cce2cf9e5fb">primarySensor_</a>(primarySensor)</div>
-<div class="line"><span class="lineno">   70</span>    , <a class="code hl_variable" href="classSteeringSystem.html#a5ee78fe81dc019caa369e497739ca296">telemHandle_</a>(telemInterface)</div>
-<div class="line"><span class="lineno">   71</span>    {</div>
-<div class="line"><span class="lineno">   72</span>        <a class="code hl_variable" href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">steeringFilters_</a>[0] = <a class="code hl_class" href="classFilter__IIR.html">Filter_IIR&lt;float&gt;</a>(filterAlphaPrimary);</div>
-<div class="line"><span class="lineno">   73</span>        <a class="code hl_variable" href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">steeringFilters_</a>[1] = <a class="code hl_class" href="classFilter__IIR.html">Filter_IIR&lt;float&gt;</a>(filterAlphaSecondary);</div>
-<div class="line"><span class="lineno">   74</span>        </div>
-<div class="line"><span class="lineno">   75</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00056">56</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>    : <a class="code hl_variable" href="classSteeringSystem.html#a21ca597ee83a5776d09a9cce2cf9e5fb">primarySensor_</a>(primarySensor)</div>
+<div class="line"><span class="lineno">   58</span>    , <a class="code hl_variable" href="classSteeringSystem.html#a5ee78fe81dc019caa369e497739ca296">telemHandle_</a>(telemInterface)</div>
+<div class="line"><span class="lineno">   59</span>    {</div>
+<div class="line"><span class="lineno">   60</span>        <a class="code hl_variable" href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">steeringFilters_</a>[0] = <a class="code hl_class" href="classFilter__IIR.html">Filter_IIR&lt;float&gt;</a>(filterAlphaPrimary);</div>
+<div class="line"><span class="lineno">   61</span>        <a class="code hl_variable" href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">steeringFilters_</a>[1] = <a class="code hl_class" href="classFilter__IIR.html">Filter_IIR&lt;float&gt;</a>(filterAlphaSecondary);</div>
+<div class="line"><span class="lineno">   62</span>        </div>
+<div class="line"><span class="lineno">   63</span>    }</div>
 <div class="ttc" id="aclassFilter__IIR_html"><div class="ttname"><a href="classFilter__IIR.html">Filter_IIR</a></div><div class="ttdef"><b>Definition:</b> <a href="Filter__IIR_8h_source.html#l00010">Filter_IIR.h:11</a></div></div>
-<div class="ttc" id="aclassSteeringSystem_html_a21ca597ee83a5776d09a9cce2cf9e5fb"><div class="ttname"><a href="classSteeringSystem.html#a21ca597ee83a5776d09a9cce2cf9e5fb">SteeringSystem::primarySensor_</a></div><div class="ttdeci">SteeringEncoderInterface * primarySensor_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00045">SteeringSystem.h:45</a></div></div>
-<div class="ttc" id="aclassSteeringSystem_html_a5ee78fe81dc019caa369e497739ca296"><div class="ttname"><a href="classSteeringSystem.html#a5ee78fe81dc019caa369e497739ca296">SteeringSystem::telemHandle_</a></div><div class="ttdeci">TelemetryInterface * telemHandle_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00058">SteeringSystem.h:58</a></div></div>
-<div class="ttc" id="aclassSteeringSystem_html_afe56cc09a69b435fe1ea2d21527a2841"><div class="ttname"><a href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">SteeringSystem::steeringFilters_</a></div><div class="ttdeci">Filter_IIR&lt; float &gt; steeringFilters_[NUM_SENSORS]</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00054">SteeringSystem.h:54</a></div></div>
+<div class="ttc" id="aclassSteeringSystem_html_a21ca597ee83a5776d09a9cce2cf9e5fb"><div class="ttname"><a href="classSteeringSystem.html#a21ca597ee83a5776d09a9cce2cf9e5fb">SteeringSystem::primarySensor_</a></div><div class="ttdeci">SteeringEncoderInterface * primarySensor_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00033">SteeringSystem.h:33</a></div></div>
+<div class="ttc" id="aclassSteeringSystem_html_a5ee78fe81dc019caa369e497739ca296"><div class="ttname"><a href="classSteeringSystem.html#a5ee78fe81dc019caa369e497739ca296">SteeringSystem::telemHandle_</a></div><div class="ttdeci">TelemetryInterface * telemHandle_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00046">SteeringSystem.h:46</a></div></div>
+<div class="ttc" id="aclassSteeringSystem_html_afe56cc09a69b435fe1ea2d21527a2841"><div class="ttname"><a href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">SteeringSystem::steeringFilters_</a></div><div class="ttdeci">Filter_IIR&lt; float &gt; steeringFilters_[NUM_SENSORS]</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00042">SteeringSystem.h:42</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -293,11 +293,11 @@ Private Attributes</h2></td></tr>
 <p>Get a reference to the steering system's data. </p>
 <dl class="section return"><dt>Returns</dt><dd>const <a class="el" href="structSteeringSystemData__s.html">SteeringSystemData_s</a>&amp; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00084">84</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   85</span>    {</div>
-<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSteeringSystem.html#afb88150a660a39215992583da037309f">steeringData_</a>;</div>
-<div class="line"><span class="lineno">   87</span>    }</div>
-<div class="ttc" id="aclassSteeringSystem_html_afb88150a660a39215992583da037309f"><div class="ttname"><a href="classSteeringSystem.html#afb88150a660a39215992583da037309f">SteeringSystem::steeringData_</a></div><div class="ttdeci">SteeringSystemData_s steeringData_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00047">SteeringSystem.h:47</a></div></div>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00072">72</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   73</span>    {</div>
+<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSteeringSystem.html#afb88150a660a39215992583da037309f">steeringData_</a>;</div>
+<div class="line"><span class="lineno">   75</span>    }</div>
+<div class="ttc" id="aclassSteeringSystem_html_afb88150a660a39215992583da037309f"><div class="ttname"><a href="classSteeringSystem.html#afb88150a660a39215992583da037309f">SteeringSystem::steeringData_</a></div><div class="ttdeci">SteeringSystemData_s steeringData_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00035">SteeringSystem.h:35</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -361,7 +361,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   44</span>        encoderStatus,</div>
 <div class="line"><span class="lineno">   45</span>        analogSensorStatus);</div>
 <div class="line"><span class="lineno">   46</span>}</div>
-<div class="ttc" id="aclassTelemetryInterface_html_a2c66564189f90630de7aa6d085380e8e"><div class="ttname"><a href="classTelemetryInterface.html#a2c66564189f90630de7aa6d085380e8e">TelemetryInterface::update_steering_status_CAN_msg</a></div><div class="ttdeci">void update_steering_status_CAN_msg(const float steering_system_angle, const float filtered_angle_encoder, const float filtered_angle_analog, const uint8_t steering_system_status, const uint8_t steering_encoder_status, const uint8_t steering_analog_status)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00203">TelemetryInterface.cpp:203</a></div></div>
+<div class="ttc" id="aclassTelemetryInterface_html_a2c66564189f90630de7aa6d085380e8e"><div class="ttname"><a href="classTelemetryInterface.html#a2c66564189f90630de7aa6d085380e8e">TelemetryInterface::update_steering_status_CAN_msg</a></div><div class="ttdeci">void update_steering_status_CAN_msg(const float steering_system_angle, const float filtered_angle_encoder, const float filtered_angle_analog, const uint8_t steering_system_status, const uint8_t steering_encoder_status, const uint8_t steering_analog_status)</div><div class="ttdef"><b>Definition:</b> <a href="TelemetryInterface_8cpp_source.html#l00188">TelemetryInterface.cpp:188</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -397,7 +397,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">    8</span>    <span class="comment">// 2. Computes internal state</span></div>
 <div class="line"><span class="lineno">    9</span>    <span class="keywordflow">if</span> (intake.<a class="code hl_variable" href="structSteeringSystemTick__s.html#ac09d7002955d1c98f4cbe332f6dc013b">tick</a>.triggers.trigger100)</div>
 <div class="line"><span class="lineno">   10</span>    {</div>
-<div class="line"><span class="lineno">   11</span>        <a class="code hl_variable" href="classSteeringSystem.html#afac3be2c7f85fb8af5bd6886d9a52315">filteredAngleSecondary_</a> = <a class="code hl_variable" href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">steeringFilters_</a>[1].<a class="code hl_function" href="classFilter__IIR.html#ad835f73689b42fecf15fd840201e06b1">filtered_result</a>(intake.<a class="code hl_variable" href="structSteeringSystemTick__s.html#a94358e84674473d20fb787d14694b744">secondaryConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">conversion</a>);</div>
+<div class="line"><span class="lineno">   11</span>        <a class="code hl_variable" href="classSteeringSystem.html#afac3be2c7f85fb8af5bd6886d9a52315">filteredAngleSecondary_</a> = <a class="code hl_variable" href="classSteeringSystem.html#afe56cc09a69b435fe1ea2d21527a2841">steeringFilters_</a>[1].<a class="code hl_function" href="classFilter__IIR.html#ad835f73689b42fecf15fd840201e06b1">filtered_result</a>(intake.<a class="code hl_variable" href="structSteeringSystemTick__s.html#a94358e84674473d20fb787d14694b744">secondaryConversion</a>.conversion);</div>
 <div class="line"><span class="lineno">   12</span>        <a class="code hl_variable" href="classSteeringSystem.html#adf659da2ba872f4d5e511ac5f903884f">primaryConversion_</a>.<a class="code hl_variable" href="structSteeringEncoderConversion__s.html#ae44df9361a7c0f50986df62948feb228">status</a> = SteeringEncoderStatus_e::STEERING_ENCODER_ERROR;</div>
 <div class="line"><span class="lineno">   13</span>        <a class="code hl_variable" href="classSteeringSystem.html#afb88150a660a39215992583da037309f">steeringData_</a>.<a class="code hl_variable" href="structSteeringSystemData__s.html#a678fdc945ef7a1e535cac2764aec9ac1">status</a> = SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL;</div>
 <div class="line"><span class="lineno">   14</span>        <a class="code hl_variable" href="classSteeringSystem.html#afb88150a660a39215992583da037309f">steeringData_</a> = {</div>
@@ -414,20 +414,18 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   25</span>            <a class="code hl_variable" href="classSteeringSystem.html#afac3be2c7f85fb8af5bd6886d9a52315">filteredAngleSecondary_</a>,</div>
 <div class="line"><span class="lineno">   26</span>            <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(<a class="code hl_variable" href="classSteeringSystem.html#afb88150a660a39215992583da037309f">steeringData_</a>.<a class="code hl_variable" href="structSteeringSystemData__s.html#a678fdc945ef7a1e535cac2764aec9ac1">status</a>),</div>
 <div class="line"><span class="lineno">   27</span>            <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(<a class="code hl_variable" href="classSteeringSystem.html#adf659da2ba872f4d5e511ac5f903884f">primaryConversion_</a>.<a class="code hl_variable" href="structSteeringEncoderConversion__s.html#ae44df9361a7c0f50986df62948feb228">status</a>),</div>
-<div class="line"><span class="lineno">   28</span>            <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(intake.<a class="code hl_variable" href="structSteeringSystemTick__s.html#a94358e84674473d20fb787d14694b744">secondaryConversion</a>.<a class="code hl_variable" href="structAnalogConversion__s.html#a4c54058eab349a25c1adf18557c8e365">status</a>));</div>
+<div class="line"><span class="lineno">   28</span>            <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(intake.<a class="code hl_variable" href="structSteeringSystemTick__s.html#a94358e84674473d20fb787d14694b744">secondaryConversion</a>.status));</div>
 <div class="line"><span class="lineno">   29</span>    }</div>
 <div class="line"><span class="lineno">   30</span>}</div>
 <div class="ttc" id="aclassFilter__IIR_html_ad835f73689b42fecf15fd840201e06b1"><div class="ttname"><a href="classFilter__IIR.html#ad835f73689b42fecf15fd840201e06b1">Filter_IIR::filtered_result</a></div><div class="ttdeci">dataType filtered_result(dataType new_val)</div><div class="ttdef"><b>Definition:</b> <a href="Filter__IIR_8h_source.html#l00050">Filter_IIR.h:50</a></div></div>
 <div class="ttc" id="aclassSteeringSystem_html_a1568d41521cf67a69c4a07daf3f97b11"><div class="ttname"><a href="classSteeringSystem.html#a1568d41521cf67a69c4a07daf3f97b11">SteeringSystem::reportSteeringStatus</a></div><div class="ttdeci">void reportSteeringStatus(const float angle, const float filteredAngleEncoder, const float filteredAngleAnalog, const uint8_t systemStatus, const uint8_t encoderStatus, const uint8_t analogSensorStatus)</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8cpp_source.html#l00032">SteeringSystem.cpp:32</a></div></div>
-<div class="ttc" id="aclassSteeringSystem_html_adf659da2ba872f4d5e511ac5f903884f"><div class="ttname"><a href="classSteeringSystem.html#adf659da2ba872f4d5e511ac5f903884f">SteeringSystem::primaryConversion_</a></div><div class="ttdeci">SteeringEncoderConversion_s primaryConversion_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00046">SteeringSystem.h:46</a></div></div>
-<div class="ttc" id="aclassSteeringSystem_html_afac3be2c7f85fb8af5bd6886d9a52315"><div class="ttname"><a href="classSteeringSystem.html#afac3be2c7f85fb8af5bd6886d9a52315">SteeringSystem::filteredAngleSecondary_</a></div><div class="ttdeci">float filteredAngleSecondary_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00056">SteeringSystem.h:56</a></div></div>
-<div class="ttc" id="astructAnalogConversion__s_html_a1873377ed9fcaa212ebe08ef2aa6b6af"><div class="ttname"><a href="structAnalogConversion__s.html#a1873377ed9fcaa212ebe08ef2aa6b6af">AnalogConversion_s::conversion</a></div><div class="ttdeci">float conversion</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00016">AnalogSensorsInterface.h:16</a></div></div>
-<div class="ttc" id="astructAnalogConversion__s_html_a4c54058eab349a25c1adf18557c8e365"><div class="ttname"><a href="structAnalogConversion__s.html#a4c54058eab349a25c1adf18557c8e365">AnalogConversion_s::status</a></div><div class="ttdeci">AnalogSensorStatus_e status</div><div class="ttdef"><b>Definition:</b> <a href="AnalogSensorsInterface_8h_source.html#l00017">AnalogSensorsInterface.h:17</a></div></div>
+<div class="ttc" id="aclassSteeringSystem_html_adf659da2ba872f4d5e511ac5f903884f"><div class="ttname"><a href="classSteeringSystem.html#adf659da2ba872f4d5e511ac5f903884f">SteeringSystem::primaryConversion_</a></div><div class="ttdeci">SteeringEncoderConversion_s primaryConversion_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00034">SteeringSystem.h:34</a></div></div>
+<div class="ttc" id="aclassSteeringSystem_html_afac3be2c7f85fb8af5bd6886d9a52315"><div class="ttname"><a href="classSteeringSystem.html#afac3be2c7f85fb8af5bd6886d9a52315">SteeringSystem::filteredAngleSecondary_</a></div><div class="ttdeci">float filteredAngleSecondary_</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00044">SteeringSystem.h:44</a></div></div>
 <div class="ttc" id="astructSteeringEncoderConversion__s_html_ae44df9361a7c0f50986df62948feb228"><div class="ttname"><a href="structSteeringEncoderConversion__s.html#ae44df9361a7c0f50986df62948feb228">SteeringEncoderConversion_s::status</a></div><div class="ttdeci">SteeringEncoderStatus_e status</div><div class="ttdef"><b>Definition:</b> <a href="SteeringEncoderInterface_8h_source.html#l00017">SteeringEncoderInterface.h:17</a></div></div>
-<div class="ttc" id="astructSteeringSystemData__s_html_a2935bd230dc29a1fbc7c462c425cca79"><div class="ttname"><a href="structSteeringSystemData__s.html#a2935bd230dc29a1fbc7c462c425cca79">SteeringSystemData_s::angle</a></div><div class="ttdeci">float angle</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00038">SteeringSystem.h:38</a></div></div>
-<div class="ttc" id="astructSteeringSystemData__s_html_a678fdc945ef7a1e535cac2764aec9ac1"><div class="ttname"><a href="structSteeringSystemData__s.html#a678fdc945ef7a1e535cac2764aec9ac1">SteeringSystemData_s::status</a></div><div class="ttdeci">SteeringSystemStatus_e status</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00039">SteeringSystem.h:39</a></div></div>
-<div class="ttc" id="astructSteeringSystemTick__s_html_a94358e84674473d20fb787d14694b744"><div class="ttname"><a href="structSteeringSystemTick__s.html#a94358e84674473d20fb787d14694b744">SteeringSystemTick_s::secondaryConversion</a></div><div class="ttdeci">const AnalogConversion_s &amp; secondaryConversion</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00033">SteeringSystem.h:33</a></div></div>
-<div class="ttc" id="astructSteeringSystemTick__s_html_ac09d7002955d1c98f4cbe332f6dc013b"><div class="ttname"><a href="structSteeringSystemTick__s.html#ac09d7002955d1c98f4cbe332f6dc013b">SteeringSystemTick_s::tick</a></div><div class="ttdeci">const SysTick_s &amp; tick</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00032">SteeringSystem.h:32</a></div></div>
+<div class="ttc" id="astructSteeringSystemData__s_html_a2935bd230dc29a1fbc7c462c425cca79"><div class="ttname"><a href="structSteeringSystemData__s.html#a2935bd230dc29a1fbc7c462c425cca79">SteeringSystemData_s::angle</a></div><div class="ttdeci">float angle</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00119">SharedDataTypes.h:119</a></div></div>
+<div class="ttc" id="astructSteeringSystemData__s_html_a678fdc945ef7a1e535cac2764aec9ac1"><div class="ttname"><a href="structSteeringSystemData__s.html#a678fdc945ef7a1e535cac2764aec9ac1">SteeringSystemData_s::status</a></div><div class="ttdeci">SteeringSystemStatus_e status</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00120">SharedDataTypes.h:120</a></div></div>
+<div class="ttc" id="astructSteeringSystemTick__s_html_a94358e84674473d20fb787d14694b744"><div class="ttname"><a href="structSteeringSystemTick__s.html#a94358e84674473d20fb787d14694b744">SteeringSystemTick_s::secondaryConversion</a></div><div class="ttdeci">const AnalogConversion_s &amp; secondaryConversion</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00026">SteeringSystem.h:26</a></div></div>
+<div class="ttc" id="astructSteeringSystemTick__s_html_ac09d7002955d1c98f4cbe332f6dc013b"><div class="ttname"><a href="structSteeringSystemTick__s.html#ac09d7002955d1c98f4cbe332f6dc013b">SteeringSystemTick_s::tick</a></div><div class="ttdeci">const SysTick_s &amp; tick</div><div class="ttdef"><b>Definition:</b> <a href="SteeringSystem_8h_source.html#l00025">SteeringSystem.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -452,7 +450,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00055">55</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00043">43</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
@@ -476,7 +474,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00056">56</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00044">44</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
@@ -500,7 +498,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00046">46</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00034">34</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
@@ -524,7 +522,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00045">45</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00033">33</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
@@ -548,7 +546,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00047">47</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00035">35</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
@@ -573,7 +571,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Utility digital IIR filters 0 : primary sensor filter 1 : secondary sensor filter </p>
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00054">54</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00042">42</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
@@ -597,7 +595,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00058">58</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SteeringSystem_8h_source.html#l00046">46</a> of file <a class="el" href="SteeringSystem_8h_source.html">SteeringSystem.h</a>.</p>
 
 </div>
 </div>
