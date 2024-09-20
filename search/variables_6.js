@@ -16,13 +16,14 @@ var searchData=
   ['fl_5finv_13',['fl_inv',['../test__can__interface_8cpp.html#a1ceb5a90d36f51d9b235995ad54bfa2b',1,'test_can_interface.cpp']]],
   ['fl_5ftorque_5fdelta_14',['fl_torque_delta',['../structPIDTVTorqueControllerData.html#adfc64daca8dff87e746189286eeb14bc',1,'PIDTVTorqueControllerData']]],
   ['flconversion_15',['FLConversion',['../structLoadCellInterfaceTick__s.html#a712a3e24aba2bd1a9701f27b15858d5e',1,'LoadCellInterfaceTick_s']]],
-  ['fr_16',['FR',['../Utility_8h.html#a47968b41e57a835656473a78eb95a36c',1,'FR():&#160;Utility.h'],['../structveh__vec.html#afb22022daf1059305f77f28a0da1cf11',1,'veh_vec::FR()']]],
+  ['fr_16',['FR',['../Utility_8h.html#a47968b41e57a835656473a78eb95a36c',1,'Utility.h']]],
   ['fr_17',['fr',['../structinverters.html#a9f76fc53b189f72fbd7dfce987175a9d',1,'inverters']]],
-  ['fr_5finv_18',['fr_inv',['../test__can__interface_8cpp.html#aa524e9c095efa63ef80d5e08ab1cf68f',1,'test_can_interface.cpp']]],
-  ['fr_5ftorque_5fdelta_19',['fr_torque_delta',['../structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25',1,'PIDTVTorqueControllerData']]],
-  ['frconversion_20',['FRConversion',['../structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24',1,'LoadCellInterfaceTick_s']]],
-  ['front_5fleft_5finv_21',['front_left_inv',['../structCANInterfaces.html#a23480f6f133858123ca290ddd1cc0063',1,'CANInterfaces']]],
-  ['front_5fright_5finv_22',['front_right_inv',['../structCANInterfaces.html#ab5f3b577f9e63dacf2f0863b51fa902e',1,'CANInterfaces']]],
-  ['frontregentorquescale_5f_23',['frontRegenTorqueScale_',['../classTorqueControllerLoadCellVectoring.html#a5600728787e282a24bb985e6e29a2406',1,'TorqueControllerLoadCellVectoring::frontRegenTorqueScale_()'],['../classTorqueControllerSimple.html#a628343dfdc7fd67b9dedbf50a5b0bb4d',1,'TorqueControllerSimple::frontRegenTorqueScale_()']]],
-  ['fronttorquescale_5f_24',['frontTorqueScale_',['../classTorqueControllerLoadCellVectoring.html#aaaf71002bb1b417d5160948b65282225',1,'TorqueControllerLoadCellVectoring::frontTorqueScale_()'],['../classTorqueControllerSimple.html#a147d3c84f3600cce15be699935dd95a9',1,'TorqueControllerSimple::frontTorqueScale_()']]]
+  ['fr_18',['FR',['../structveh__vec.html#afb22022daf1059305f77f28a0da1cf11',1,'veh_vec']]],
+  ['fr_5finv_19',['fr_inv',['../test__can__interface_8cpp.html#aa524e9c095efa63ef80d5e08ab1cf68f',1,'test_can_interface.cpp']]],
+  ['fr_5ftorque_5fdelta_20',['fr_torque_delta',['../structPIDTVTorqueControllerData.html#a5bd64cc0d60cbcb2f5daa1f0b8f8ff25',1,'PIDTVTorqueControllerData']]],
+  ['frconversion_21',['FRConversion',['../structLoadCellInterfaceTick__s.html#a68923c22a1cd58e9ee81946ee8eb4b24',1,'LoadCellInterfaceTick_s']]],
+  ['front_5fleft_5finv_22',['front_left_inv',['../structCANInterfaces.html#a23480f6f133858123ca290ddd1cc0063',1,'CANInterfaces']]],
+  ['front_5fright_5finv_23',['front_right_inv',['../structCANInterfaces.html#ab5f3b577f9e63dacf2f0863b51fa902e',1,'CANInterfaces']]],
+  ['frontregentorquescale_5f_24',['frontRegenTorqueScale_',['../classTorqueControllerLoadCellVectoring.html#a5600728787e282a24bb985e6e29a2406',1,'TorqueControllerLoadCellVectoring::frontRegenTorqueScale_()'],['../classTorqueControllerSimple.html#a628343dfdc7fd67b9dedbf50a5b0bb4d',1,'TorqueControllerSimple::frontRegenTorqueScale_()']]],
+  ['fronttorquescale_5f_25',['frontTorqueScale_',['../classTorqueControllerLoadCellVectoring.html#aaaf71002bb1b417d5160948b65282225',1,'TorqueControllerLoadCellVectoring::frontTorqueScale_()'],['../classTorqueControllerSimple.html#a147d3c84f3600cce15be699935dd95a9',1,'TorqueControllerSimple::frontTorqueScale_()']]]
 ];
