@@ -3,23 +3,23 @@
 #include <math.h>
 #include <tuple>
 #include "AnalogSensorsInterface.h"
-
+#include "SharedDataTypes.h"
 #include "SysClock.h"
 
 /// @brief system interface struct that contains the data from the pedal system
-struct PedalsSystemData_s
-{
-    bool accelImplausible : 1;
-    bool brakeImplausible : 1;
-    bool brakePressed : 1;
-    bool accelPressed : 1;
-    bool mechBrakeActive : 1;
-    bool brakeAndAccelPressedImplausibility : 1;
-    bool implausibilityExceededMaxDuration : 1;
-    float accelPercent;
-    float brakePercent;
-    float regenPercent;
-};
+// struct PedalsSystemData_s
+// {
+//     bool accelImplausible : 1;
+//     bool brakeImplausible : 1;
+//     bool brakePressed : 1;
+//     bool accelPressed : 1;
+//     bool mechBrakeActive : 1;
+//     bool brakeAndAccelPressedImplausibility : 1;
+//     bool implausibilityExceededMaxDuration : 1;
+//     float accelPercent;
+//     float brakePercent;
+//     float regenPercent;
+// };
 
 /// @brief Pedals params struct that will hold min / max that will be used for evaluateion.
 struct PedalsParams

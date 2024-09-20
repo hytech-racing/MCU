@@ -11,8 +11,7 @@
 #include "SafetySystem.h"
 #include "DashboardInterface.h"
 #include "AMSInterface.h"
-
-// #include "IMDInterface.h"
+#include "PrintLogger.h"
 
 enum class CAR_STATE
 {
@@ -32,7 +31,7 @@ public:
                     DrivetrainSysType *drivetrain,
                     DashboardInterface *dashboard,
                     PedalsSystem *pedals,
-                    TorqueControllerMux *mux,
+                    TCMuxType *mux,
                     SafetySystem *safety_system)
     {
         current_state_ = CAR_STATE::STARTUP;
@@ -44,10 +43,12 @@ public:
         safety_system_ = safety_system;
     }
 
-    /// @brief our components can use this time to tell when to do things. We can set this ourselves for testing purposes instead of using metro timers
-    /// @param current_millis the current millis() call
-    // void tick_state_machine(const SysTick_s &tick);
-    void tick_state_machine(unsigned long cm);
+    // TODO update this to just use the car_state struct instead of having to pass in cm
+    /// @brief function to tick the state machine. 
+    /// @param cm current millis from systick
+    /// @param current_car_state current state of the car (not to be confused with the CAR_STATE enum which is the state machine state)
+    void tick_state_machine(unsigned long cm, const SharedCarState_s &current_car_state);
+
     CAR_STATE get_state() { return current_state_; }
     bool car_in_ready_to_drive() { return current_state_ == CAR_STATE::READY_TO_DRIVE; };
 
@@ -72,7 +73,8 @@ private:
     DashboardInterface *dashboard_;
     // IMDInterface *imd_;
     SafetySystem *safety_system_;
-    TorqueControllerMux *controller_mux_;
+    TCMuxType *controller_mux_;
+    RateLimitedLogger logger_;
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */

@@ -6,6 +6,7 @@
 #define CANBufferType_mock int
 #define CAN_message_t_mock int
 
+
 /**
  * Mock interface for testing purposes. Please see the real AMSInterface for proper documentation.
 */

@@ -5,8 +5,8 @@
 #include "AnalogSensorsInterface.h"
 #include "Filter_IIR.h"
 #include "SysClock.h"
+#include "SharedDataTypes.h"
 #include "TelemetryInterface.h"
-
 // Digital Encoder = Primary Sensor
 // Analog Encoder = Secondary Sensor
 
@@ -17,14 +17,7 @@
 #define NUM_SENSORS 2
 #define DEFAULT_STEERING_ALPHA (0.0)
 
-// Enums
-enum class SteeringSystemStatus_e
-{
-    STEERING_SYSTEM_NOMINAL = 0,
-    STEERING_SYSTEM_MARGINAL = 1,
-    STEERING_SYSTEM_DEGRADED = 2,
-    STEERING_SYSTEM_ERROR = 3,
-};
+
 
 // Structs
 struct SteeringSystemTick_s
@@ -33,11 +26,6 @@ struct SteeringSystemTick_s
     const AnalogConversion_s &secondaryConversion;
 };
 
-struct SteeringSystemData_s
-{
-    float angle;
-    SteeringSystemStatus_e status;
-};
 
 class SteeringSystem
 {

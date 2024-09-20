@@ -8,7 +8,7 @@
 #include "SteeringSystem.h"
 #include "MCUStateMachine.h"
 #include "ProtobufMsgInterface.h"
-#include "ParameterInterface.h"
+// #include "ParameterInterface.h"
 
 struct CASEConfiguration
 {
@@ -96,6 +96,7 @@ template <typename message_queue>
 class CASESystem
 {
 public:
+    CASESystem() = delete;
     /// @brief constructor for state estimator system.
     /// @param can_queue the pointer to the message queue that will have the CAN messages put onto it
     /// @param send_period_ms the period in which messages will be put into the queue to be sent in milliseconds.
@@ -135,7 +136,7 @@ public:
     /// @return controller output
     DrivetrainCommand_s evaluate(
         const SysTick_s &tick,
-        const vector_nav &vn_data,
+        const VectornavData_s &vn_data,
         const SteeringSystemData_s &steering_data,
         const DrivetrainDynamicReport_s &drivetrain_data,
         const veh_vec<AnalogConversion_s> &load_cell_vals,
@@ -145,78 +146,12 @@ public:
         bool start_button_pressed,
         uint8_t vn_status);
 
-    // void update_pid(float yaw_p, float yaw_i, float yaw_d, float tcs_p, float tcs_i, float tcs_d, float brake_p, float brake_i, float brake_d)
-    // {
-    //     config_.yaw_pid_p = yaw_p;
-    //     config_.yaw_pid_p = yaw_i;
-    //     config_.yaw_pid_p = yaw_d;
+    DrivetrainCommand_s get_current_drive_command() { return current_command_; }
 
-    //     config_.tcs_pid_p = tcs_p;
-    //     config_.tcs_pid_i = tcs_i;
-    //     config_.tcs_pid_d = tcs_d;
-
-    //     config_.yaw_pid_brakes_p = brake_p;
-    //     config_.yaw_pid_brakes_i = brake_i;
-    //     config_.yaw_pid_brakes_d = brake_d;
-    // }
-
-    float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm);
+    float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_torque, float max_regen_torque, float max_rpm);
     /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
     /// @param config the configuration struct we will be setting
 
-    void update_config_from_param_interface(ParameterInterface &param_interface_ref)
-    {
-        config cfg = param_interface_ref.get_config();
-        config_.AbsoluteTorqueLimit = cfg.AbsoluteTorqueLimit;
-        config_.yaw_pid_p = cfg.yaw_pid_p;
-        config_.yaw_pid_i = cfg.yaw_pid_i;
-        config_.yaw_pid_d = cfg.yaw_pid_d;
-        config_.tcs_pid_p_lowerBound_front = cfg.tcs_pid_p_lowerBound_front;
-        config_.tcs_pid_p_upperBound_front = cfg.tcs_pid_p_upperBound_front;
-        config_.tcs_pid_p_lowerBound_rear = cfg.tcs_pid_p_lowerBound_rear;
-        config_.tcs_pid_p_upperBound_rear = cfg.tcs_pid_p_upperBound_rear;
-        config_.tcs_pid_i = cfg.tcs_pid_i;
-        config_.tcs_pid_d = cfg.tcs_pid_d;
-        config_.useLaunch = cfg.useLaunch;
-        config_.usePIDTV = cfg.usePIDTV;
-        config_.useTCSLimitedYawPID = cfg.useTCSLimitedYawPID;
-        config_.useNormalForce = cfg.useNormalForce;
-        config_.useTractionControl = cfg.useTractionControl;
-        config_.usePowerLimit = cfg.usePowerLimit;
-        config_.usePIDPowerLimit = cfg.usePIDPowerLimit;
-        config_.useDecoupledYawBrakes = cfg.useDecoupledYawBrakes;
-        config_.useDiscontinuousYawPIDBrakes = cfg.useDiscontinuousYawPIDBrakes;
-        config_.tcsSLThreshold = cfg.tcsSLThreshold;
-        config_.launchSL = cfg.launchSL;
-        config_.launchDeadZone = cfg.launchDeadZone;
-        config_.launchVelThreshold = cfg.launchVelThreshold;
-        config_.tcsVelThreshold = cfg.tcsVelThreshold;
-        config_.yawPIDMaxDifferential = cfg.yawPIDMaxDifferential;
-        config_.yawPIDErrorThreshold = cfg.yawPIDErrorThreshold;
-        config_.yawPIDVelThreshold = cfg.yawPIDVelThreshold;
-        config_.yawPIDCoastThreshold = cfg.yawPIDCoastThreshold;
-        config_.yaw_pid_brakes_p = cfg.yaw_pid_brakes_p;
-        config_.yaw_pid_brakes_i = cfg.yaw_pid_brakes_i;
-        config_.yaw_pid_brakes_d = cfg.yaw_pid_brakes_d;
-        config_.decoupledYawPIDBrakesMaxDIfference = cfg.decoupledYawPIDBrakesMaxDIfference;
-        config_.discontinuousBrakesPercentThreshold = cfg.discontinuousBrakesPercentThreshold;
-        config_.TorqueMode = cfg.TorqueMode;
-        config_.RegenLimit = cfg.RegenLimit;
-        config_.useNoRegen5kph = cfg.useNoRegen5kph;
-        config_.useTorqueBias = cfg.useTorqueBias;
-        config_.DriveTorquePercentFront = cfg.DriveTorquePercentFront;
-        config_.BrakeTorquePercentFront = cfg.BrakeTorquePercentFront;
-        config_.MechPowerMaxkW = cfg.MechPowerMaxkW;
-        config_.launchLeftRightMaxDiff = cfg.launchLeftRightMaxDiff;
-        config_.tcs_pid_lower_rpm_front = cfg.tcs_pid_lower_rpm_front;
-        config_.tcs_pid_upper_rpm_front = cfg.tcs_pid_upper_rpm_front;
-        config_.tcs_pid_lower_rpm_rear = cfg.tcs_pid_lower_rpm_rear;
-        config_.tcs_pid_upper_rpm_rear = cfg.tcs_pid_upper_rpm_rear;
-        config_.maxNormalLoadBrakeScalingFront = cfg.maxNormalLoadBrakeScalingFront;
-        config_.max_rpm = cfg.max_rpm;
-        config_.max_regen_torque = cfg.max_regen_torque;
-        config_.max_torque = cfg.max_torque;
-    }
     float get_rpm_setpoint(float final_torque)
     {
         if (final_torque > 0)
@@ -230,6 +165,7 @@ public:
     }
 
 private:
+    DrivetrainCommand_s current_command_;
     CASEConfiguration config_;
     message_queue *msg_queue_;
     HT08_CASE case_;

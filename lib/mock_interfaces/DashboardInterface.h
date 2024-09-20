@@ -1,33 +1,7 @@
 #ifndef DASHBOARDINTERFACE
 #define DASHBOARDINTERFACE
 
-/*
-    Enum for the car's torque limits
-    MOVE ME! - ideally into a TorqueControllerDefs.h file
-    to prevent circular dependencies
-*/
-enum class TorqueLimit_e
-{
-    TCMUX_LOW_TORQUE = 0,
-    TCMUX_MID_TORQUE = 1,
-    TCMUX_FULL_TORQUE = 2,
-    TCMUX_NUM_TORQUE_LIMITS = 3,
-};
-
-/* Enum for the modes on the dial, corresponds directly to dial index pos. */
-enum class DialMode_e
-{   
-    /* No torque vectoring */
-    MODE_0,
-    /* Normal force torque vectoring */
-    MODE_1,
-    /* PID torque vectoring */
-    MODE_2,
-    /* Launch Ctrl */
-    MODE_3,
-    MODE_4,
-    MODE_5,
-};
+#include "SharedDataTypes.h"
 
 /* Enum for defined LED colors. ON will be LED's default color on dashboard*/
 enum class LEDColors_e
@@ -61,6 +35,8 @@ private:
 public:
     bool buzzer = false;
     bool start_button_status_;
+    ControllerMode_e getDialMode() {return {};}
+    TorqueLimit_e getTorqueLimitMode() {return {};}
     bool startButtonPressed() { return  start_button_status_; };
     bool checkBuzzer(){ return buzzer; };
 };

@@ -50,8 +50,8 @@ void VNInterface<message_queue>::retrieve_lat_lon_CAN(CAN_message_t &recvd_msg) 
 
 template<typename message_queue>
 void VNInterface<message_queue>::retrieve_gps_time_CAN(CAN_message_t &recvd_msg) {
-    VN_GPS_TIME_t gps_time_data;
-    Unpack_VN_GPS_TIME_hytech(&gps_time_data, recvd_msg.buf, recvd_msg.len);
+    VN_GPS_TIME_MSG_t gps_time_data;
+    Unpack_VN_GPS_TIME_MSG_hytech(&gps_time_data, recvd_msg.buf, recvd_msg.len);
     vn_data.gps_time = gps_time_data.vn_gps_time;
 }
 
@@ -72,8 +72,8 @@ void VNInterface<message_queue>::retrieve_vn_ecef_pos_xy_CAN(CAN_message_t &recv
 
 template <typename message_queue>
 void VNInterface<message_queue>::retrieve_vn_ecef_pos_z_CAN(CAN_message_t &recvd_msg) {
-    VN_ECEF_POS_Z_t ecef_z;
-    Unpack_VN_ECEF_POS_Z_hytech(&ecef_z, recvd_msg.buf, recvd_msg.len);
+    VN_ECEF_POS_Z_MSG_t ecef_z;
+    Unpack_VN_ECEF_POS_Z_MSG_hytech(&ecef_z, recvd_msg.buf, recvd_msg.len);
     vn_data.ecef_coords[2] = HYTECH_vn_ecef_pos_z_ro_fromS(ecef_z.vn_ecef_pos_z_ro);
 }
 
@@ -90,9 +90,9 @@ void VNInterface<message_queue>::receive_ang_rates_CAN(CAN_message_t & recvd_msg
  * @brief 
  * getter method for returning vn_data structure
  * @tparam message_queue 
- * @return vector_nav 
+ * @return VectornavData_s 
  */
 template<typename message_queue>
-vector_nav VNInterface<message_queue>::get_vn_struct() {
+VectornavData_s VNInterface<message_queue>::get_vn_struct() {
     return vn_data; 
 }

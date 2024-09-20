@@ -7,6 +7,7 @@
 #include "hytech.h"
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
+#include "SharedDataTypes.h"
 
 const int DEFAULT_BMS_OK_READ         = 17;      // SHDN_D_READ
 const int DEFAULT_BMS_SENSE_PIN       = 16;      // BMS_OK_SENSE
@@ -123,9 +124,7 @@ public:
         int fsm_state,
         bool inv_has_error,
         bool software_is_ok,
-        int drive_mode,
-        int torque_mode,
-        float max_torque,
+        const TorqueControllerMuxStatus& tc_mux_status, 
         bool buzzer_is_on,
         const PedalsSystemData_s &pedals_data,
         bool pack_charge_is_critical,

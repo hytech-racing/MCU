@@ -3,22 +3,21 @@
 
 
 
-ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue) : front_thermistors()
+ThermistorInterface::ThermistorInterface(CANBufferType *msg_output_queue)
 {
     _msg_queue = msg_output_queue;
     
 }
 
 
-
 void ThermistorInterface::update_front_thermistor_readings() 
 {
-    FRONT_THERMISTORS_t front_thermistors_;
+    FRONT_THERMISTORS_t front_thermistors;
     //scale by 500 for easy packing
-    front_thermistors_.thermistor_motor_fl_ro = HYTECH_thermistor_motor_fl_ro_toS(therm_fl);
-    front_thermistors_.thermistor_motor_fr_ro = HYTECH_thermistor_motor_fr_ro_toS(therm_fr);
+    front_thermistors.thermistor_motor_fl_ro = HYTECH_thermistor_motor_fl_ro_toS(therm_fl);
+    front_thermistors.thermistor_motor_fr_ro = HYTECH_thermistor_motor_fr_ro_toS(therm_fr);
 
-    enqueue_CAN_front_thermistors<FRONT_THERMISTORS_t>(&front_thermistors_, &Pack_FRONT_THERMISTORS_hytech);
+    enqueue_CAN_front_thermistors<FRONT_THERMISTORS_t>(&front_thermistors, &Pack_FRONT_THERMISTORS_hytech);
 }
 
 template<typename U>
@@ -32,9 +31,13 @@ void ThermistorInterface::enqueue_CAN_front_thermistors(U* structure, uint32_t (
 }
 
 void ThermistorInterface::tick(const AnalogConversion_s &raw_therm_fl, const AnalogConversion_s &raw_therm_fr) 
+
 {
 
-    therm_fl = front_thermistors.get(MCU15_THERM_FL_CHANNEL).convert(raw_therm_fl.raw);
-    therm_fr = front_thermistors.get(MCU15_THERM_FR_CHANNEL).convert(raw_therm_fr.raw);
+    auto fl_channel = _front_thermistors.get(MCU15_THERM_FL_CHANNEL);
+    auto fr_channel = _front_thermistors.get(MCU15_THERM_FR_CHANNEL);
+
+    therm_fl = fl_channel.convert((uint16_t)raw_therm_fl.raw);
+    therm_fr = fr_channel.convert((uint16_t)raw_therm_fr.raw);
     update_front_thermistor_readings();
 }

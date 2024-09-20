@@ -170,7 +170,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case VN_LAT_LON_CANID:
             interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
             break;
-        case VN_GPS_TIME_CANID:
+        case VN_GPS_TIME_MSG_CANID:
             interfaces.vn_interface->retrieve_gps_time_CAN(recvd_msg);
             break;
         case VN_STATUS_CANID:

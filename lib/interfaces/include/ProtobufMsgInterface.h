@@ -1,19 +1,16 @@
 #ifndef PROTOBUFMSGINTERFACE
 #define PROTOBUFMSGINTERFACE
 
-#include "ht_eth.pb.h"
 #include "pb_encode.h"
 #include "pb_decode.h"
 #include "pb_common.h"
-#include "ParameterInterface.h"
 #include "circular_buffer.h"
 #include "NativeEthernet.h"
 #include "MCU_rev15_defs.h"
-
+#include "InterfaceParams.h"
 
 struct ETHInterfaces
 {
-    ParameterInterface* param_interface;
 };
 
 using recv_function_t = void (*)(const uint8_t* buffer, size_t packet_size, ETHInterfaces& interfaces);
@@ -50,27 +47,17 @@ bool handle_ethernet_socket_send_pb(EthernetUDP* socket, const pb_struct& msg, c
     return true;
 }
 
-// 
-void recv_pb_stream_union_msg(const uint8_t *buffer, size_t packet_size, ETHInterfaces& interfaces)
+
+template <typename pb_msg_type>
+std::pair<pb_msg_type, bool> recv_pb_stream_msg(const uint8_t *buffer, size_t packet_size, ETHInterfaces& interfaces, const pb_msgdesc_t * desc_pointer)
 {
     pb_istream_t stream = pb_istream_from_buffer(buffer, packet_size);
-    HT_ETH_Union msg = HT_ETH_Union_init_zero;
-    if (pb_decode(&stream, HT_ETH_Union_fields, &msg))
+    pb_msg_type msg = {};
+    if (pb_decode(&stream, desc_pointer, &msg))
     {
-        Serial.println("decoded!");
-
-        switch (msg.which_type_union)
-        {
-        case HT_ETH_Union_config__tag:
-            interfaces.param_interface->update_config(msg.type_union.config_);
-            break;
-        case HT_ETH_Union_get_config__tag:
-            interfaces.param_interface->set_params_need_sending();
-            break;
-        default:
-            break;
-        }
+        return {msg, true};
     }
+    return {msg, };
 }
 
 
