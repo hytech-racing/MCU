@@ -182,6 +182,19 @@ void MCUInterface::update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals
     mcu_status_.no_brake_implausibility = !pedals.brakeImplausible;
     mcu_status_.no_accel_or_brake_implausibility = !(pedals.brakeAndAccelPressedImplausibility);
 }
+void MCUInterface::update_brake_pressure_CAN()
+{
+    BRAKE_PRESSURE_SENSOR_t brake_sensor_msg;
+    brake_sensor_msg.brake_sensor_analog_read = analogRead(pins_.pin_brake_pressure_sensor_read);
+    
+    CAN_message_t msg;
+    
+    msg.id = Pack_BRAKE_PRESSURE_SENSOR_hytech(&brake_sensor_msg, msg.buf, &msg.len, (uint8_t*) &msg.flags.extended);
+
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
+}
 
 void MCUInterface::tick(int fsm_state,
                         bool inv_has_error,
@@ -209,6 +222,7 @@ void MCUInterface::tick(int fsm_state,
     // External Interfaces
     update_mcu_status_CAN_ams(pack_charge_is_critical);
     update_mcu_status_CAN_dashboard(button_is_pressed);
+    update_brake_pressure_CAN();
     // Internal values
     update_mcu_status_CAN();
     // Push into buffer
