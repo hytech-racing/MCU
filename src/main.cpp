@@ -568,6 +568,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
         front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL], mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
+        // TODO pass in the shared state instead
         telem_interface.tick(
             a1.get(),
             a2.get(),
@@ -587,6 +588,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
             torque_controller_mux.get_tc_mux_status().current_error);
+
         ams_interface.tick(current_system_tick);
     }
 

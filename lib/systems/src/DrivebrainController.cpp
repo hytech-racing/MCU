@@ -1,5 +1,4 @@
 #include "DrivebrainController.h"
-#include <algorithm> // for std::copy
 
 
 TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &state)

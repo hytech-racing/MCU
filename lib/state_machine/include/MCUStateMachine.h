@@ -73,7 +73,6 @@ private:
     // IMDInterface *imd_;
     SafetySystem *safety_system_;
     TCMuxType *controller_mux_;
-    // RateLimitedLogger logger_;
 };
 #include "MCUStateMachine.tpp"
 #endif /* MCUSTATEMACHINE */
