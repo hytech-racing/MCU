@@ -631,45 +631,11 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_BRAKE1_CHANNEL],
         a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
-    // accel 1 only accel 2 dead, brake normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // accel 2 only accel 1 dead, brake normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // brake 1 only brake 2 dead, accel normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
-    // brake 2 only brake 1 dead, accel normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-
     // tick steering system
     steering_system.tick(
         (SteeringSystemTick_s){
             .tick = current_system_tick,
             .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]});
-
-    // Serial.println("Steering angle");
-    // Serial.println(steering_system.getSteeringSystemData().angle);
-    // Serial.println("Steering status");
-    // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
 
     // tick drivetrain system
     drivetrain.tick(current_system_tick);
@@ -693,9 +659,6 @@ void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs
 {
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
-    // TODO un fuck this and make it more sane
-    // Serial.println("bruh");
-
 
     std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
     handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);
