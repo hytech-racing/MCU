@@ -3,11 +3,11 @@
 #include "PhysicalParameters.h"
 #include <array>
 // Defines
-const int FL =          0;
-const int FR =          1;
-const int RL =          2;
-const int RR =          3;
-const int NUM_MOTORS =  4;
+const int FL = 0;
+const int FR = 1;
+const int RL = 2;
+const int RR = 3;
+const int NUM_MOTORS = 4;
 
 const int DEBOUNCE_MILLIS = 10; // milliseconds before registering another button press
 
@@ -15,28 +15,30 @@ const int DEBOUNCE_MILLIS = 10; // milliseconds before registering another butto
 template <typename T>
 struct veh_vec
 {
+public:
     T FL;
     T FR;
     T RL;
     T RR;
 
-    void construct(T _FL, T _FR, T _RL, T _RR)
+public:
+    veh_vec() = default;
+    veh_vec(T _FL, T _FR, T _RL, T _RR)
     {
         FL = _FL;
         FR = _FR;
         RL = _RL;
         RR = _RR;
     }
-    
-    /// @brief copy values to array in FL, FR, RL, RR order 
-    void copy_to_arr(T(&arr_out)[4])
-    {
-        arr_out[0]=FL;
-        arr_out[1]=FR;
-        arr_out[2]=RL;
-        arr_out[3]=RR;
-    }
 
+    /// @brief copy values to array in FL, FR, RL, RR order
+    void copy_to_arr(T (&arr_out)[4])
+    {
+        arr_out[0] = FL;
+        arr_out[1] = FR;
+        arr_out[2] = RL;
+        arr_out[3] = RR;
+    }
 };
 
 template <typename T>

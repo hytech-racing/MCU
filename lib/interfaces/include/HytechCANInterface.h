@@ -14,7 +14,6 @@
 #include "VectornavInterface.h"
 #include "HT08_CASE_types.h"
 #include "MessageQueueDefine.h"
-#include "DrivebrainInterface.h"
 /*
     struct holding interfaces processed by process_ring_buffer()
     FL = MC1

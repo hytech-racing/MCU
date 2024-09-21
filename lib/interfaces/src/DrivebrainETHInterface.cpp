@@ -16,13 +16,9 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
 
 void DrivebrainETHInterface::receive_pb_msg(const hytech_msgs_MCUCommandData &msg_in, unsigned long curr_millis)
 {
-    // Serial.println("msg recvd in here");
-    veh_vec<float> nm_lim;
-    nm_lim.construct(msg_in.torque_limit_nm.FL, msg_in.torque_limit_nm.FR, msg_in.torque_limit_nm.RL, msg_in.torque_limit_nm.RR);
+    veh_vec<float> nm_lim(msg_in.torque_limit_nm.FL, msg_in.torque_limit_nm.FR, msg_in.torque_limit_nm.RL, msg_in.torque_limit_nm.RR);
 
-    veh_vec<float> speed_set;
-    speed_set.construct(msg_in.desired_rpms.FL, msg_in.desired_rpms.FR, msg_in.desired_rpms.RL, msg_in.desired_rpms.RR);
-    // Serial.println(msg_in.desired_rpms.FL);
+    veh_vec<float> speed_set(msg_in.desired_rpms.FL, msg_in.desired_rpms.FR, msg_in.desired_rpms.RL, msg_in.desired_rpms.RR);
 
     _latest_data.torque_limits_nm = nm_lim;
     _latest_data.speed_setpoints_rpm = speed_set;

@@ -24,7 +24,6 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
-#include "DrivebrainInterface.h"
 #include "TorqueControllers.h"
 
 /* Systems */
