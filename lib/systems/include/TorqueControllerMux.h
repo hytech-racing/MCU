@@ -78,22 +78,26 @@ private:
 
     /// @brief Clamps negative rpms to 0f
     /// @param const DrivetrainCommand_s &command provides the rpm info as a DrivetrainCommand_s
+    /// @return DrivetrainCommand_s
     DrivetrainCommand_s apply_positive_speed_limit_(const DrivetrainCommand_s &command);
 
     /// @brief Ensure torque is at most at the specified limit. If exceeding, then limit it in the returned DrivetrainCommand_s
     /// @param const DrivetrainCommand_s &command is a DrivetrainCommand_s, which provides torque info
     /// @param float max_torque is the maximum average torque the wheels are allowed to experience before it is limited.
+    /// @return DrivetrainCommand_s
     DrivetrainCommand_s apply_torque_limit_(const DrivetrainCommand_s &command, float max_torque);
     
     /// @brief Apply power limit such that the mechanical power of all wheels never exceeds the preset mechanical power limit. Scales all wheels down to preserve functionality of torque controllers
     /// @param const DrivetrainCommand_s &command provides torque info, which is used to calculate mechanical power
     /// @param const DrivetrainDynamicReport_s &drivetrain provides RPMS, which are used to calculate radians / s
     /// @param float max_torque is used to indirectly specifiy the max power
+    /// @return DrivetrainCommand_s
     DrivetrainCommand_s apply_power_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain, float power_limit, float max_torque);
 
     /// @brief begin limiting regen at noRegenLimitKPH (hardcoded in func) and completely limit regen at fullRegenLimitKPH (hardcoded in func)
     /// @param const DrivetrainCommand_s &command 
     /// @param const DrivetrainDynamicReport_s &drivetrain_data provides RPMs
+    /// @return DrivetrainCommand_s
     DrivetrainCommand_s apply_regen_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain_data);
     
 public:
