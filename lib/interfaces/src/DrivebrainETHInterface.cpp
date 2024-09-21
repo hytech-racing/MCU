@@ -26,6 +26,5 @@ void DrivebrainETHInterface::receive_pb_msg(const hytech_msgs_MCUCommandData &ms
 
     _latest_data.torque_limits_nm = nm_lim;
     _latest_data.speed_setpoints_rpm = speed_set;
-    _latest_data.last_torque_lim_receive_time_millis = curr_millis;
-    _latest_data.last_speed_setpoint_receive_time_millis = curr_millis;
+    _latest_data.last_receive_time_millis = curr_millis;
 }

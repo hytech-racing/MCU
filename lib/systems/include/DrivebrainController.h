@@ -23,11 +23,11 @@ class DrivebrainController : public Controller
 {
 public:
 
-    DrivebrainController(unsigned long allowed_latency, unsigned long allowed_jitter,
+    DrivebrainController(unsigned long allowed_latency,
                          float max_fault_clear_speed_m_s = 1.0,
                          ControllerMode_e assigned_controller_mode = ControllerMode_e::MODE_4)
     {
-        _params = {allowed_jitter, allowed_latency, max_fault_clear_speed_m_s, assigned_controller_mode};
+        _params = {allowed_latency, max_fault_clear_speed_m_s, assigned_controller_mode};
     }
 
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state);
@@ -35,15 +35,13 @@ public:
 private:
     struct
     {
-        unsigned long allowed_jitter;
         unsigned long allowed_latency;
         float max_fault_clear_speed_m_s;
         ControllerMode_e assigned_controller_mode;
     } _params;
 
     bool _timing_failure = false;
-    unsigned long _last_sent_torque_lim_millis = -1;
-    unsigned long _last_sent_speed_setpoint_millis = -1;
+    unsigned long _last_setpoint_millis = -1;
 };
 
 #endif // __DRIVEBRAINCONTROLLER_H__

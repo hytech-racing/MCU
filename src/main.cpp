@@ -325,9 +325,8 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 // */
 
-DrivebrainInterface db_interface(&CAN3_txBuffer);
 DrivebrainETHInterface db_eth_interface;
-CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface, &db_interface};
+CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
 
 /*
     FUNCTION DEFINITIONS
@@ -505,7 +504,6 @@ void loop()
         Serial.println();
         Serial.print("dial state: ");
         Serial.println(static_cast<int>(dashboard.getDialMode()));
-        Serial.println(db_interface.get_latest_db_data().torque_limits_nm.FL);
         Serial.println();
         Serial.println();
     }

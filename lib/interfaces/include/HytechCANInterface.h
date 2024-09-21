@@ -33,7 +33,6 @@ struct CANInterfaces
     DashboardInterface *dash_interface;
     AMSInterface *ams_interface;
     SABInterface *sab_interface;
-    DrivebrainInterface *db_interface;
 };
 
 // the goal with the can interface is that there exists a receive call that appends to a circular buffer
@@ -168,7 +167,6 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case VN_YPR_CANID:
             interfaces.vn_interface->retrieve_ypr_CAN(recvd_msg);
             break;
-
         case VN_LAT_LON_CANID:
             interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
             break;
@@ -181,11 +179,7 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case VN_ANGULAR_RATE_CANID:
             interfaces.vn_interface->receive_ang_rates_CAN(recvd_msg);
             break;
-        case DRIVEBRAIN_TORQUE_LIM_INPUT_CANID:
-            interfaces.db_interface->receive_db_torque_lim_message(recvd_msg, curr_millis);
-            break;
-        case DRIVEBRAIN_SPEED_SET_INPUT_CANID:
-            interfaces.db_interface->receive_db_speed_setpoint_message(recvd_msg, curr_millis);
+        default:
             break;
         }
     }

@@ -119,8 +119,8 @@ public:
     }
 
     int16_t get_speed() { return speed_; }
-    float get_torque_current() { return torque_current_; }
-    int16_t get_mag_current() { return magnetizing_current_; }
+    float get_motor_torque() { return actual_motor_torque_; }
+    int16_t get_commanded_torque() { return commanded_torque_; }
     float get_actual_torque() { return actual_torque_nm_; }
     uint16_t get_error_status();
     MC_temps get_temps_msg() { return mc_temps_; }
@@ -128,7 +128,7 @@ public:
 
 private:
     float id110_val_;                            // for scaling to proper iq and id vals
-    int16_t torque_current_, magnetizing_current_; // iq and id in A respectively
+    int16_t actual_motor_torque_, commanded_torque_;
     float actual_torque_nm_;
     /* write setpoints message to the CAN buffer */
     void write_cmd_msg_to_queue_(MC_setpoints_command msg);

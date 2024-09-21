@@ -5,8 +5,7 @@
 
 struct DrivebrainData_s
 {
-    unsigned long last_torque_lim_receive_time_millis;
-    unsigned long last_speed_setpoint_receive_time_millis;
+    unsigned long last_receive_time_millis;
     veh_vec<float> torque_limits_nm;
     veh_vec<float> speed_setpoints_rpm;
 };
