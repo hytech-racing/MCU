@@ -1,6 +1,8 @@
 #ifndef BASECONTROLLER
 #define BASECONTROLLER
 #include "SharedDataTypes.h"
+
+/// @brief definition for a drivetrain command with no torque
 namespace BaseControllerParams
 {
     const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {

@@ -4,6 +4,8 @@
 #include "BaseController.h"
 #include <algorithm>
 #include <math.h> 
+
+/// @brief Modes to guide tick behavior and progression 
 enum class LaunchStates_e
 {
     NO_LAUNCH_MODE,
@@ -12,6 +14,7 @@ enum class LaunchStates_e
     LAUNCHING
 };
 
+/// @brief contains constants for tick behavior and progression
 namespace BaseLaunchControllerParams
 {
     const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
@@ -37,6 +40,9 @@ protected:
     int16_t init_speed_target_ = 0;
 
 public:
+    /// @brief Constructor for template launch controller
+    /// @param initial_speed_target unused right now
+    /// @note requires one method: calc_launch_algo
     BaseLaunchController(int16_t initial_speed_target)
         : init_speed_target_(initial_speed_target)
     {
@@ -44,6 +50,11 @@ public:
         writeout_.ready = true;
     }
 
+    /// @brief ticks launch controller to progress through launch states when conditions are met
+    /// @param SysTick_s &tick 
+    /// @param PedalsSystemData_s &pedalsData 
+    /// @param float[] wheel_rpms 
+    /// @param VectornavData_s &vn_data 
     void tick(const SysTick_s &tick,
               const PedalsSystemData_s &pedalsData,
               const float wheel_rpms[],
