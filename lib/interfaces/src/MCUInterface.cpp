@@ -185,7 +185,7 @@ void MCUInterface::update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals
 void MCUInterface::update_brake_pressure_CAN()
 {
     BRAKE_PRESSURE_SENSOR_t brake_sensor_msg;
-    brake_sensor_msg.brake_sensor_analog_read = analogRead(pins_.pin_brake_pressure_sensor_read);
+    brake_sensor_msg.brake_sensor_analog_read_ro = analogRead(pins_.pin_brake_pressure_sensor_read);
     
     CAN_message_t msg;
     
