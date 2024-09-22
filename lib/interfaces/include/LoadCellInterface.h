@@ -6,14 +6,16 @@
 
 /* Library Includes */
 #include "SysClock.h"
+
+/* Interface */
 #include "AnalogSensorsInterface.h"
 
 
 
-/* Structs */
-
 /**
- * One load cell tick containing an AnalogConversion struct for each of the four load cells.
+ * Struct holding conversions for each wheel's load cell data. 
+ * AnalogConversion_s struct holds raw and converted values and whether the result was clamped.
+ * Load cell data is converted from raw -> lbs 
  */
 struct LoadCellInterfaceTick_s
 {
@@ -34,9 +36,10 @@ struct LoadCellInterfaceOutput_s
     bool FIRSaturated;
 };
 
+
 /**
- * An interface for the LoadCells. This class holds the data for a FIR filter, applies it to the given inputs, and can
- * return the filtered load cells.
+ * The LoadCellInterface filters load cell signals to be used in the TorqueControllers system.
+ * Applies FIR filter and determines if signal is saturated
  */
 class LoadCellInterface
 {
