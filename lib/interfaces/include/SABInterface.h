@@ -66,7 +66,7 @@ public:
 
     /**
      * Parses CAN message into individual values for rear load cell and potentiometer readings.
-     * Updates each sensor's lastSample and converts data to pounds
+     * Updates each sensor's lastSample value and converts data (rlLoadCell and rrLoadCell converted to pounds)
      */
     void retrieve_pots_and_load_cells_CAN(CAN_message_t &recvd_msg);
 };

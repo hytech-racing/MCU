@@ -22,7 +22,7 @@ struct LoadCellInterfaceTick_s
 };
 
 /**
- * Struct containing converted and filtered load cell data
+ * Updates loadCellForcesFiltered_ vectors after receiving new data
  */
 struct LoadCellInterfaceOutput_s
 {
@@ -35,7 +35,6 @@ struct LoadCellInterfaceOutput_s
 /**
  * The LoadCellInterface filters load cell signals to be used in the TorqueControllers system.
  * Applies FIR filter and determines if signal is saturated
- * [why specifically do we use a FIR filter?]
  */
 class LoadCellInterface
 {
