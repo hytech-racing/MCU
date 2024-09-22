@@ -9,7 +9,7 @@
 #include "AnalogSensorsInterface.h"
 
 /**
- * The SAB Interface receieves CAN messages containing load cell and potentionmeter readings.
+ * The SAB Interface receieves CAN messages containing load cell and potentilmeter readings.
  * Through this interface values are parsed, updated, and converted to real units.
  */
 class SABInterface
@@ -25,7 +25,7 @@ public:
     AnalogChannel pot4;
 
     /**
-     * Constructor that defines conversion for both load cells and potentionmeter data
+     * Constructor that defines conversion for both load cells and potentiometer data
      * Defined offset and scale values from MCU_rev15_defs are used to convert from raw data to correct units (pounds)
      */
     SABInterface(
