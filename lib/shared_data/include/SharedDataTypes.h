@@ -5,6 +5,7 @@
 #include "SysClock.h"
 #include "SharedFirmwareTypes.h"
 
+/// @brief defines modes of torque limit to be processed in torque limit map for exact values
 enum class TorqueLimit_e
 {
     TCMUX_FULL_TORQUE = 0,
@@ -49,12 +50,15 @@ struct DrivetrainDynamicReport_s
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
+/// @brief stores two arrays of size equal to the amount of motors: speed setpoints and necessary torque to reach those setpoints 
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
     float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
 };
 
+/// @brief Packages drivebrain command with ready boolean
+///@note returned by all car controllers evaluate method 
 struct TorqueControllerOutput_s
 {
     DrivetrainCommand_s command;
@@ -80,6 +84,7 @@ struct VectornavData_s
     xyz_vec<float> angular_rates;
 };
 
+/// @brief Defins errors for TC Mux to use to maintain system safety
 enum class TorqueControllerMuxError
 {
     NO_ERROR = 0,
@@ -89,6 +94,7 @@ enum class TorqueControllerMuxError
     ERROR_CONTROLLER_NULL_POINTER =4
 };
 
+/// @brief packages TC Mux indicators: errors, mode, torque limit, bypass
 struct TorqueControllerMuxStatus
 {
     TorqueControllerMuxError current_error;

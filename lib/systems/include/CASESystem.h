@@ -148,10 +148,17 @@ public:
 
     DrivetrainCommand_s get_current_drive_command() { return current_command_; }
 
+    /// @brief uses pedal data to determine the requested torque by the car
+    /// @param PedalsSystemData_s &pedals_data 
+    /// @param float max_torque 
+    /// @param float max_regen_torque
+    /// @param float max_rpm 
+    /// @return float representing the calculated request
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_torque, float max_regen_torque, float max_rpm);
-    /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
-    /// @param config the configuration struct we will be setting
 
+    /// @brief retrieves rpm setpoint based on final torque value
+    /// @param float final_torque 
+    /// @return The maximum RPM from the configuration if torque is positive, otherwise 0.
     float get_rpm_setpoint(float final_torque)
     {
         if (final_torque > 0)
