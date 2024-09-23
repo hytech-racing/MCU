@@ -57,7 +57,7 @@ struct DrivetrainCommand_s
     float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
 };
 
-/// @brief Packages drivebrain command with ready boolean
+/// @brief Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating
 ///@note returned by all car controllers evaluate method 
 struct TorqueControllerOutput_s
 {

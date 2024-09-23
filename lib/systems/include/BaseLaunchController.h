@@ -60,7 +60,13 @@ public:
               const float wheel_rpms[],
               const VectornavData_s &vn_data);
     LaunchStates_e get_launch_state() { return launch_state_; }
+    /// @brief calculates how speed target is set among launch controllers
+    /// @param VectornavData_s &vn_data 
+    /// @note has important variation in launch controller tick as the launch controllers share a tick method
     virtual void calc_launch_algo(const VectornavData_s &vn_data) = 0;
+    /// @brief ticks launch controller
+    /// @param SharedCarState_s &state 
+    /// @return TorqueControllerOutput_s
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 #endif // __BASELAUNCHCONTROLLER_H__

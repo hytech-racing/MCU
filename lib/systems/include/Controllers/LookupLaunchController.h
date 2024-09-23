@@ -22,9 +22,10 @@ public:
     */
     TorqueControllerLookupLaunch(int16_t initial_speed_target)
         : BaseLaunchController(initial_speed_target) {}
-
+    /// @brief default constructor for slip launch controller: DEFAULT_LAUNCH_SPEED_TARGET = 1500(rpm)
     TorqueControllerLookupLaunch() : TorqueControllerLookupLaunch(LookupLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
-
+    /// @brief increases speed target based on distance from start to ensure the speed target is progressing as the car begins to move
+    /// @param VectornavData_s &vn_data 
     void calc_launch_algo(const VectornavData_s &vn_data) override;
 };
 

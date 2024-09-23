@@ -28,8 +28,12 @@ public:
         writeout_.command = BaseControllerParams::TC_COMMAND_NO_TORQUE;
         writeout_.ready = true;
     }
-
+    /// @brief calculates torqe output based off max torque and simple torque scaling metric defined in constructor
+    /// @param PedalsSystemData_s &pedalsData 
     void tick(const PedalsSystemData_s &pedalsData);
+    /// @brief ticks controller
+    /// @param SharedCarState_s &state 
+    /// @return TorqueControllerOutput_s
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 
