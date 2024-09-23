@@ -14,7 +14,7 @@ enum class LaunchStates_e
     LAUNCHING
 };
 
-/// @brief contains constants for tick behavior and progression
+/// @brief contains constants for tick behavior/progression and defaults
 namespace BaseLaunchControllerParams
 {
     const int16_t DEFAULT_LAUNCH_SPEED_TARGET = 1500;
