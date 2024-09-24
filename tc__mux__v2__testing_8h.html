@@ -81,6 +81,7 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="fake__controller__type_8h_source.html">fake_controller_type.h</a>&quot;</code><br />
+<code>#include &lt;gtest/gtest.h&gt;</code><br />
 </div>
 <p><a href="tc__mux__v2__testing_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -97,22 +98,30 @@ Functions</h2></td></tr>
 <tr class="separator:a918344fc2c8db0bd4405852638594a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af07b98ba2533ae25bc16604323248223"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#af07b98ba2533ae25bc16604323248223">TEST</a> (TorqueControllerMuxTesting, test_construction)</td></tr>
 <tr class="separator:af07b98ba2533ae25bc16604323248223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2abac080a4b99548ed3a7863e4d6180"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#ab2abac080a4b99548ed3a7863e4d6180">TEST</a> (TorqueControllerMuxTesting, test_invalid_controller_request_error)</td></tr>
-<tr class="separator:ab2abac080a4b99548ed3a7863e4d6180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae344a8e0771f1198635b007c6703c40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#aae344a8e0771f1198635b007c6703c40">TEST</a> (TorqueControllerMuxTesting, test_controller_output_swap_logic)</td></tr>
-<tr class="separator:aae344a8e0771f1198635b007c6703c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49b063f20261c9cae44543a6bfd6356f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a49b063f20261c9cae44543a6bfd6356f">TEST</a> (TorqueControllerMuxTesting, test_torque_diff_swap_limit)</td></tr>
-<tr class="separator:a49b063f20261c9cae44543a6bfd6356f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0fe278476547a7cb7bf1f5499a6a4b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#ae0fe278476547a7cb7bf1f5499a6a4b5">TEST</a> (TorqueControllerMuxTesting, test_construction_with_new_controller_orgs)</td></tr>
 <tr class="separator:ae0fe278476547a7cb7bf1f5499a6a4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab77deca39ef6b094aa23c634ec86a5f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#ab77deca39ef6b094aa23c634ec86a5f4">TEST</a> (TorqueControllerMuxTesting, test_construction_bypass_limits)</td></tr>
+<tr class="separator:ab77deca39ef6b094aa23c634ec86a5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae344a8e0771f1198635b007c6703c40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#aae344a8e0771f1198635b007c6703c40">TEST</a> (TorqueControllerMuxTesting, test_controller_output_swap_logic)</td></tr>
+<tr class="separator:aae344a8e0771f1198635b007c6703c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51989232360ebcf30535158bbbdd02a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a51989232360ebcf30535158bbbdd02a5">TEST</a> (TorqueControllerMuxTesting, simple_switch_many_active_modes)</td></tr>
+<tr class="separator:a51989232360ebcf30535158bbbdd02a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2abac080a4b99548ed3a7863e4d6180"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#ab2abac080a4b99548ed3a7863e4d6180">TEST</a> (TorqueControllerMuxTesting, test_invalid_controller_request_error)</td></tr>
+<tr class="separator:ab2abac080a4b99548ed3a7863e4d6180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49b063f20261c9cae44543a6bfd6356f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a49b063f20261c9cae44543a6bfd6356f">TEST</a> (TorqueControllerMuxTesting, test_torque_diff_swap_limit)</td></tr>
+<tr class="separator:a49b063f20261c9cae44543a6bfd6356f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7803a7e86bcaeb543969af30de218212"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a7803a7e86bcaeb543969af30de218212">TEST</a> (TorqueControllerMuxTesting, test_null_pointer_error_state)</td></tr>
+<tr class="separator:a7803a7e86bcaeb543969af30de218212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac99871ddb09af3484fe4370c6e5b1616"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#ac99871ddb09af3484fe4370c6e5b1616">TEST</a> (TorqueControllerMuxTesting, test_mode0_evaluation)</td></tr>
 <tr class="separator:ac99871ddb09af3484fe4370c6e5b1616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5831b8b21312d6229649bc2d28fd814"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#ac5831b8b21312d6229649bc2d28fd814">TEST</a> (TorqueControllerMuxTesting, test_power_limit)</td></tr>
 <tr class="separator:ac5831b8b21312d6229649bc2d28fd814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81ef89825fd95d70f001771f00ec4dc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a81ef89825fd95d70f001771f00ec4dc5">TEST</a> (TorqueControllerMuxTesting, test_torque_limit)</td></tr>
 <tr class="separator:a81ef89825fd95d70f001771f00ec4dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7803a7e86bcaeb543969af30de218212"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a7803a7e86bcaeb543969af30de218212">TEST</a> (TorqueControllerMuxTesting, test_null_pointer_error_state)</td></tr>
-<tr class="separator:a7803a7e86bcaeb543969af30de218212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83698ec47750f9963ab87d8630c83370"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a83698ec47750f9963ab87d8630c83370">TEST</a> (TorqueControllerMuxTesting, test_tc_mux_status)</td></tr>
+<tr class="separator:a83698ec47750f9963ab87d8630c83370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7906e4d1b59207872664c4c48819ad8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tc__mux__v2__testing_8h.html#a7906e4d1b59207872664c4c48819ad8c">TEST</a> (TorqueControllerMuxTesting, test_real_controllers_output)</td></tr>
+<tr class="separator:a7906e4d1b59207872664c4c48819ad8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ade2c320e6eeaade97087c0aa469d2bae" name="ade2c320e6eeaade97087c0aa469d2bae"></a>
@@ -143,13 +152,13 @@ template&lt;typename quad_array_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00013">13</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   14</span>{</div>
-<div class="line"><span class="lineno">   15</span>    out[0] = val;</div>
-<div class="line"><span class="lineno">   16</span>    out[1] = val;</div>
-<div class="line"><span class="lineno">   17</span>    out[2] = val;</div>
-<div class="line"><span class="lineno">   18</span>    out[3] = val;</div>
-<div class="line"><span class="lineno">   19</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00014">14</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   15</span>{</div>
+<div class="line"><span class="lineno">   16</span>    out[0] = val;</div>
+<div class="line"><span class="lineno">   17</span>    out[1] = val;</div>
+<div class="line"><span class="lineno">   18</span>    out[2] = val;</div>
+<div class="line"><span class="lineno">   19</span>    out[3] = val;</div>
+<div class="line"><span class="lineno">   20</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -187,17 +196,17 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00034">34</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   35</span>{</div>
-<div class="line"><span class="lineno">   36</span>    controller.output.command.speeds_rpm[0] = rpm;</div>
-<div class="line"><span class="lineno">   37</span>    controller.output.command.speeds_rpm[1] = rpm;</div>
-<div class="line"><span class="lineno">   38</span>    controller.output.command.speeds_rpm[2] = rpm;</div>
-<div class="line"><span class="lineno">   39</span>    controller.output.command.speeds_rpm[3] = rpm;</div>
-<div class="line"><span class="lineno">   40</span>    controller.output.command.torqueSetpoints[0] = torque;</div>
-<div class="line"><span class="lineno">   41</span>    controller.output.command.torqueSetpoints[1] = torque;</div>
-<div class="line"><span class="lineno">   42</span>    controller.output.command.torqueSetpoints[2] = torque;</div>
-<div class="line"><span class="lineno">   43</span>    controller.output.command.torqueSetpoints[3] = torque;</div>
-<div class="line"><span class="lineno">   44</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00035">35</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>{</div>
+<div class="line"><span class="lineno">   37</span>    controller.output.command.speeds_rpm[0] = rpm;</div>
+<div class="line"><span class="lineno">   38</span>    controller.output.command.speeds_rpm[1] = rpm;</div>
+<div class="line"><span class="lineno">   39</span>    controller.output.command.speeds_rpm[2] = rpm;</div>
+<div class="line"><span class="lineno">   40</span>    controller.output.command.speeds_rpm[3] = rpm;</div>
+<div class="line"><span class="lineno">   41</span>    controller.output.command.torqueSetpoints[0] = torque;</div>
+<div class="line"><span class="lineno">   42</span>    controller.output.command.torqueSetpoints[1] = torque;</div>
+<div class="line"><span class="lineno">   43</span>    controller.output.command.torqueSetpoints[2] = torque;</div>
+<div class="line"><span class="lineno">   44</span>    controller.output.command.torqueSetpoints[3] = torque;</div>
+<div class="line"><span class="lineno">   45</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -235,23 +244,102 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00022">22</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   23</span>{</div>
-<div class="line"><span class="lineno">   24</span>    controller.output.command.speeds_rpm[0] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
-<div class="line"><span class="lineno">   25</span>    controller.output.command.speeds_rpm[1] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
-<div class="line"><span class="lineno">   26</span>    controller.output.command.speeds_rpm[2] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
-<div class="line"><span class="lineno">   27</span>    controller.output.command.speeds_rpm[3] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
-<div class="line"><span class="lineno">   28</span>    controller.output.command.torqueSetpoints[0] = torque;</div>
-<div class="line"><span class="lineno">   29</span>    controller.output.command.torqueSetpoints[1] = torque;</div>
-<div class="line"><span class="lineno">   30</span>    controller.output.command.torqueSetpoints[2] = torque;</div>
-<div class="line"><span class="lineno">   31</span>    controller.output.command.torqueSetpoints[3] = torque;</div>
-<div class="line"><span class="lineno">   32</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00023">23</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   24</span>{</div>
+<div class="line"><span class="lineno">   25</span>    controller.output.command.speeds_rpm[0] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
+<div class="line"><span class="lineno">   26</span>    controller.output.command.speeds_rpm[1] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
+<div class="line"><span class="lineno">   27</span>    controller.output.command.speeds_rpm[2] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
+<div class="line"><span class="lineno">   28</span>    controller.output.command.speeds_rpm[3] = <a class="code hl_variable" href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a> * mps;</div>
+<div class="line"><span class="lineno">   29</span>    controller.output.command.torqueSetpoints[0] = torque;</div>
+<div class="line"><span class="lineno">   30</span>    controller.output.command.torqueSetpoints[1] = torque;</div>
+<div class="line"><span class="lineno">   31</span>    controller.output.command.torqueSetpoints[2] = torque;</div>
+<div class="line"><span class="lineno">   32</span>    controller.output.command.torqueSetpoints[3] = torque;</div>
+<div class="line"><span class="lineno">   33</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_aac55cdf0c5999b90193f6c334f7df144"><div class="ttname"><a href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a></div><div class="ttdeci">constexpr const float METERS_PER_SECOND_TO_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00015">PhysicalParameters.h:15</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a51989232360ebcf30535158bbbdd02a5" name="a51989232360ebcf30535158bbbdd02a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51989232360ebcf30535158bbbdd02a5">&#9670;&#160;</a></span>TEST() <span class="overload">[1/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">TorqueControllerMuxTesting&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">simple_switch_many_active_modes&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00144">144</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>{</div>
+<div class="line"><span class="lineno">  146</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2, inst3, inst4;</div>
+<div class="line"><span class="lineno">  147</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0, 1);</div>
+<div class="line"><span class="lineno">  148</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 0, 1);</div>
+<div class="line"><span class="lineno">  149</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst3, 0, 1);</div>
+<div class="line"><span class="lineno">  150</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst4, 0, 1);</div>
+<div class="line"><span class="lineno">  151</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;4&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst3), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst4)}, {<span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  152</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  153</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a>(state.drivetrain_data.measuredSpeeds, 2);</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>    state.pedals_data = {};</div>
+<div class="line"><span class="lineno">  156</span>    state.vn_data = {};</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>    <span class="keyword">auto</span> out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  159</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  160</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  161</span>   </div>
+<div class="line"><span class="lineno">  162</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  163</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>);</div>
+<div class="line"><span class="lineno">  164</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  167</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>);</div>
+<div class="line"><span class="lineno">  168</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  169</span> </div>
+<div class="line"><span class="lineno">  170</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  171</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a>);</div>
+<div class="line"><span class="lineno">  172</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  175</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>);</div>
+<div class="line"><span class="lineno">  176</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  177</span>   </div>
+<div class="line"><span class="lineno">  178</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  179</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  180</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  181</span>}</div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a></div><div class="ttdeci">@ TCMUX_FULL_TORQUE</div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a></div><div class="ttdeci">@ MODE_3</div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a></div><div class="ttdeci">@ MODE_2</div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a></div><div class="ttdeci">@ MODE_1</div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div></div>
+<div class="ttc" id="aclassController_html"><div class="ttname"><a href="classController.html">Controller</a></div><div class="ttdef"><b>Definition:</b> <a href="BaseController_8h_source.html#l00011">BaseController.h:12</a></div></div>
+<div class="ttc" id="aclassTestControllerType_html"><div class="ttname"><a href="classTestControllerType.html">TestControllerType</a></div><div class="ttdef"><b>Definition:</b> <a href="fake__controller__type_8h_source.html#l00008">fake_controller_type.h:9</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html"><div class="ttname"><a href="classTorqueControllerMux.html">TorqueControllerMux</a></div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00057">TorqueControllerMux.h:58</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html"><div class="ttname"><a href="structSharedCarState__s.html">SharedCarState_s</a></div><div class="ttdoc">car state struct that contains state of everything about the car including</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00128">SharedDataTypes.h:129</a></div></div>
+<div class="ttc" id="atc__mux__v2__testing_8h_html_a369f099de4546860a18c896c392cb17d"><div class="ttname"><a href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a></div><div class="ttdeci">void set_outputs(controller_type &amp;controller, float mps, float torque)</div><div class="ttdef"><b>Definition:</b> <a href="tc__mux__v2__testing_8h_source.html#l00023">tc_mux_v2_testing.h:23</a></div></div>
+<div class="ttc" id="atc__mux__v2__testing_8h_html_ade2c320e6eeaade97087c0aa469d2bae"><div class="ttname"><a href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a></div><div class="ttdeci">void set_four_outputs(quad_array_type &amp;out, float val)</div><div class="ttdef"><b>Definition:</b> <a href="tc__mux__v2__testing_8h_source.html#l00014">tc_mux_v2_testing.h:14</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="af07b98ba2533ae25bc16604323248223" name="af07b98ba2533ae25bc16604323248223"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af07b98ba2533ae25bc16604323248223">&#9670;&#160;</a></span>TEST() <span class="overload">[1/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af07b98ba2533ae25bc16604323248223">&#9670;&#160;</a></span>TEST() <span class="overload">[2/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,19 +364,85 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00045">45</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>{</div>
-<div class="line"><span class="lineno">   47</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">   49</span>}</div>
-<div class="ttc" id="aclassController_html"><div class="ttname"><a href="classController.html">Controller</a></div><div class="ttdef"><b>Definition:</b> <a href="BaseController_8h_source.html#l00011">BaseController.h:12</a></div></div>
-<div class="ttc" id="aclassTestControllerType_html"><div class="ttname"><a href="classTestControllerType.html">TestControllerType</a></div><div class="ttdef"><b>Definition:</b> <a href="fake__controller__type_8h_source.html#l00008">fake_controller_type.h:9</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html"><div class="ttname"><a href="classTorqueControllerMux.html">TorqueControllerMux</a></div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00057">TorqueControllerMux.h:58</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00048">48</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>{</div>
+<div class="line"><span class="lineno">   50</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
+<div class="line"><span class="lineno">   51</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">   52</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab77deca39ef6b094aa23c634ec86a5f4" name="ab77deca39ef6b094aa23c634ec86a5f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab77deca39ef6b094aa23c634ec86a5f4">&#9670;&#160;</a></span>TEST() <span class="overload">[3/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">TorqueControllerMuxTesting&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">test_construction_bypass_limits&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00077">77</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>{</div>
+<div class="line"><span class="lineno">   79</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
+<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 500, 30.0);</div>
+<div class="line"><span class="lineno">   81</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst2, 500, 30.0);</div>
+<div class="line"><span class="lineno">   82</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">true</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain_data = {};</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">   86</span>    {</div>
+<div class="line"><span class="lineno">   87</span>        drivetrain_data.measuredSpeeds[i] = 500.0f;</div>
+<div class="line"><span class="lineno">   88</span>    }</div>
+<div class="line"><span class="lineno">   89</span>    <span class="comment">//onlhy use mode 0 for the input state in all tests and then test if they would act the same, idk how to do that</span></div>
+<div class="line"><span class="lineno">   90</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
+<div class="line"><span class="lineno">   91</span> </div>
+<div class="line"><span class="lineno">   92</span>    <span class="keyword">auto</span> drive_command = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>    ASSERT_EQ(drive_command.torqueSetpoints[0], 30.0f);</div>
+<div class="line"><span class="lineno">   95</span>    ASSERT_EQ(drive_command.torqueSetpoints[1], 30.0f);</div>
+<div class="line"><span class="lineno">   96</span>    ASSERT_EQ(drive_command.torqueSetpoints[2], 30.0f);</div>
+<div class="line"><span class="lineno">   97</span>    ASSERT_EQ(drive_command.torqueSetpoints[3], 30.0f);</div>
+<div class="line"><span class="lineno">   98</span> </div>
+<div class="line"><span class="lineno">   99</span>    ASSERT_EQ(test.get_tc_mux_status().output_is_bypassing_limits, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  100</span> </div>
+<div class="line"><span class="lineno">  101</span>    inst1.<a class="code hl_variable" href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">output</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
+<div class="line"><span class="lineno">  102</span>    drive_command = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>    ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);</div>
+<div class="line"><span class="lineno">  105</span>    ASSERT_EQ(drive_command.torqueSetpoints[1], 30.0f);</div>
+<div class="line"><span class="lineno">  106</span>    ASSERT_EQ(drive_command.torqueSetpoints[2], 30.0f);</div>
+<div class="line"><span class="lineno">  107</span>    ASSERT_EQ(drive_command.torqueSetpoints[3], 30.0f);</div>
+<div class="line"><span class="lineno">  108</span> </div>
+<div class="line"><span class="lineno">  109</span>    ASSERT_EQ(test.get_tc_mux_status().output_is_bypassing_limits, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  110</span>}</div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a></div><div class="ttdeci">@ TCMUX_LOW_TORQUE</div></div>
+<div class="ttc" id="aclassTestControllerType_html_a400eba51843c45432f9c33a3d163c3aa"><div class="ttname"><a href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">TestControllerType::output</a></div><div class="ttdeci">TorqueControllerOutput_s output</div><div class="ttdef"><b>Definition:</b> <a href="fake__controller__type_8h_source.html#l00012">fake_controller_type.h:12</a></div></div>
+<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00055">SharedDataTypes.h:55</a></div></div>
+<div class="ttc" id="astructDrivetrainDynamicReport__s_html"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a></div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00044">SharedDataTypes.h:45</a></div></div>
+<div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00060">SharedDataTypes.h:60</a></div></div>
+<div class="ttc" id="atc__mux__v2__testing_8h_html_a918344fc2c8db0bd4405852638594a88"><div class="ttname"><a href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a></div><div class="ttdeci">void set_output_rpm(controller_type &amp;controller, float rpm, float torque)</div><div class="ttdef"><b>Definition:</b> <a href="tc__mux__v2__testing_8h_source.html#l00035">tc_mux_v2_testing.h:35</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="ae0fe278476547a7cb7bf1f5499a6a4b5" name="ae0fe278476547a7cb7bf1f5499a6a4b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0fe278476547a7cb7bf1f5499a6a4b5">&#9670;&#160;</a></span>TEST() <span class="overload">[2/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0fe278476547a7cb7bf1f5499a6a4b5">&#9670;&#160;</a></span>TEST() <span class="overload">[4/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,30 +467,30 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00131">131</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  132</span>{</div>
-<div class="line"><span class="lineno">  133</span>    <span class="comment">// mode 0</span></div>
-<div class="line"><span class="lineno">  134</span>    <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a> <a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>(1.0f, 1.0f);</div>
-<div class="line"><span class="lineno">  135</span>    <span class="comment">// mode 1</span></div>
-<div class="line"><span class="lineno">  136</span>    <a class="code hl_class" href="classTorqueControllerLoadCellVectoring.html">TorqueControllerLoadCellVectoring</a> <a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>;</div>
-<div class="line"><span class="lineno">  137</span>    <span class="comment">// mode 2</span></div>
-<div class="line"><span class="lineno">  138</span>    <a class="code hl_struct" href="structDummyQueue__s.html">DummyQueue_s</a> q;</div>
-<div class="line"><span class="lineno">  139</span>    <a class="code hl_class" href="classCASESystem.html">CASESystem&lt;DummyQueue_s&gt;</a> case_sys(&amp;q, 100, 70, 550, {});</div>
-<div class="line"><span class="lineno">  140</span>    <a class="code hl_class" href="classTorqueControllerCASEWrapper.html">TorqueControllerCASEWrapper&lt;DummyQueue_s&gt;</a> case_wrapper(&amp;case_sys);</div>
-<div class="line"><span class="lineno">  141</span> </div>
-<div class="line"><span class="lineno">  142</span>    <span class="comment">// mode 3</span></div>
-<div class="line"><span class="lineno">  143</span>    <a class="code hl_class" href="classTorqueControllerSimpleLaunch.html">TorqueControllerSimpleLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>;</div>
-<div class="line"><span class="lineno">  144</span>    <span class="comment">// mode 4</span></div>
-<div class="line"><span class="lineno">  145</span>    <a class="code hl_class" href="classTorqueControllerSlipLaunch.html">TorqueControllerSlipLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>;</div>
-<div class="line"><span class="lineno">  146</span> </div>
-<div class="line"><span class="lineno">  147</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;5&gt;</a></div>
-<div class="line"><span class="lineno">  148</span>        <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>),</div>
-<div class="line"><span class="lineno">  149</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>),</div>
-<div class="line"><span class="lineno">  150</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;case_wrapper),</div>
-<div class="line"><span class="lineno">  151</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>),</div>
-<div class="line"><span class="lineno">  152</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>)},</div>
-<div class="line"><span class="lineno">  153</span>                              {<span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">  154</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00053">53</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   54</span>{</div>
+<div class="line"><span class="lineno">   55</span>    <span class="comment">// mode 0</span></div>
+<div class="line"><span class="lineno">   56</span>    <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a> <a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>(1.0f, 1.0f);</div>
+<div class="line"><span class="lineno">   57</span>    <span class="comment">// mode 1</span></div>
+<div class="line"><span class="lineno">   58</span>    <a class="code hl_class" href="classTorqueControllerLoadCellVectoring.html">TorqueControllerLoadCellVectoring</a> <a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>;</div>
+<div class="line"><span class="lineno">   59</span>    <span class="comment">// mode 2</span></div>
+<div class="line"><span class="lineno">   60</span>    <a class="code hl_struct" href="structDummyQueue__s.html">DummyQueue_s</a> q;</div>
+<div class="line"><span class="lineno">   61</span>    <a class="code hl_class" href="classCASESystem.html">CASESystem&lt;DummyQueue_s&gt;</a> case_sys(&amp;q, 100, 70, 550, {});</div>
+<div class="line"><span class="lineno">   62</span>    <a class="code hl_class" href="classTorqueControllerCASEWrapper.html">TorqueControllerCASEWrapper&lt;DummyQueue_s&gt;</a> case_wrapper(&amp;case_sys);</div>
+<div class="line"><span class="lineno">   63</span> </div>
+<div class="line"><span class="lineno">   64</span>    <span class="comment">// mode 3</span></div>
+<div class="line"><span class="lineno">   65</span>    <a class="code hl_class" href="classTorqueControllerSimpleLaunch.html">TorqueControllerSimpleLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>;</div>
+<div class="line"><span class="lineno">   66</span>    <span class="comment">// mode 4</span></div>
+<div class="line"><span class="lineno">   67</span>    <a class="code hl_class" href="classTorqueControllerSlipLaunch.html">TorqueControllerSlipLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>;</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;5&gt;</a></div>
+<div class="line"><span class="lineno">   70</span>        <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>),</div>
+<div class="line"><span class="lineno">   71</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>),</div>
+<div class="line"><span class="lineno">   72</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;case_wrapper),</div>
+<div class="line"><span class="lineno">   73</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>),</div>
+<div class="line"><span class="lineno">   74</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>)},</div>
+<div class="line"><span class="lineno">   75</span>                              {<span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">   76</span>}</div>
 <div class="ttc" id="aclassCASESystem_html"><div class="ttname"><a href="classCASESystem.html">CASESystem</a></div><div class="ttdoc">this class with both take in sensor inputs as well as handle calculations for various derived states ...</div><div class="ttdef"><b>Definition:</b> <a href="CASESystem_8h_source.html#l00096">CASESystem.h:97</a></div></div>
 <div class="ttc" id="aclassTorqueControllerCASEWrapper_html"><div class="ttname"><a href="classTorqueControllerCASEWrapper.html">TorqueControllerCASEWrapper</a></div><div class="ttdef"><b>Definition:</b> <a href="CASEControllerWrapper_8h_source.html#l00008">CASEControllerWrapper.h:9</a></div></div>
 <div class="ttc" id="aclassTorqueControllerLoadCellVectoring_html"><div class="ttname"><a href="classTorqueControllerLoadCellVectoring.html">TorqueControllerLoadCellVectoring</a></div><div class="ttdef"><b>Definition:</b> <a href="LoadCellVectoringController_8h_source.html#l00005">LoadCellVectoringController.h:6</a></div></div>
@@ -353,7 +507,7 @@ template&lt;typename controller_type &gt; </div>
 </div>
 </div>
 <a id="aae344a8e0771f1198635b007c6703c40" name="aae344a8e0771f1198635b007c6703c40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae344a8e0771f1198635b007c6703c40">&#9670;&#160;</a></span>TEST() <span class="overload">[3/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aae344a8e0771f1198635b007c6703c40">&#9670;&#160;</a></span>TEST() <span class="overload">[5/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,48 +532,41 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00070">70</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   71</span>{</div>
-<div class="line"><span class="lineno">   72</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
-<div class="line"><span class="lineno">   73</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0, 1);</div>
-<div class="line"><span class="lineno">   74</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 6, 1);</div>
-<div class="line"><span class="lineno">   75</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">   76</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
-<div class="line"><span class="lineno">   77</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a>(state.drivetrain_data.measuredSpeeds, 10000.0);</div>
-<div class="line"><span class="lineno">   78</span> </div>
-<div class="line"><span class="lineno">   79</span>    state.pedals_data = {};</div>
-<div class="line"><span class="lineno">   80</span>    state.vn_data = {};</div>
-<div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>    <span class="keyword">auto</span> out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">   83</span> </div>
-<div class="line"><span class="lineno">   84</span>    <span class="comment">// auto out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);</span></div>
-<div class="line"><span class="lineno">   85</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">   86</span> </div>
-<div class="line"><span class="lineno">   87</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
-<div class="line"><span class="lineno">   88</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH</a>);</div>
-<div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0, 1);</div>
-<div class="line"><span class="lineno">   91</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 0, 1);</div>
-<div class="line"><span class="lineno">   92</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a>(state.drivetrain_data.measuredSpeeds, 0);</div>
-<div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">   95</span> </div>
-<div class="line"><span class="lineno">   96</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>);</div>
-<div class="line"><span class="lineno">   97</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
-<div class="line"><span class="lineno">   98</span>}</div>
-<div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a></div><div class="ttdeci">@ TCMUX_FULL_TORQUE</div></div>
-<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
-<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a></div><div class="ttdeci">@ MODE_1</div></div>
-<div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div></div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00115">115</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>{</div>
+<div class="line"><span class="lineno">  117</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
+<div class="line"><span class="lineno">  118</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0, 1);</div>
+<div class="line"><span class="lineno">  119</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 6, 1);</div>
+<div class="line"><span class="lineno">  120</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  121</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  122</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a>(state.drivetrain_data.measuredSpeeds, 10000.0);</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>    state.pedals_data = {};</div>
+<div class="line"><span class="lineno">  125</span>    state.vn_data = {};</div>
+<div class="line"><span class="lineno">  126</span> </div>
+<div class="line"><span class="lineno">  127</span>    <span class="keyword">auto</span> out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>    <span class="comment">// auto out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);</span></div>
+<div class="line"><span class="lineno">  130</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  133</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH</a>);</div>
+<div class="line"><span class="lineno">  134</span> </div>
+<div class="line"><span class="lineno">  135</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0, 1);</div>
+<div class="line"><span class="lineno">  136</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 0, 1);</div>
+<div class="line"><span class="lineno">  137</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a>(state.drivetrain_data.measuredSpeeds, 0);</div>
+<div class="line"><span class="lineno">  138</span> </div>
+<div class="line"><span class="lineno">  139</span>    out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  140</span> </div>
+<div class="line"><span class="lineno">  141</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>);</div>
+<div class="line"><span class="lineno">  142</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  143</span>}</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH</a></div><div class="ttdeci">@ ERROR_SPEED_DIFF_TOO_HIGH</div></div>
-<div class="ttc" id="astructSharedCarState__s_html"><div class="ttname"><a href="structSharedCarState__s.html">SharedCarState_s</a></div><div class="ttdoc">car state struct that contains state of everything about the car including</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00128">SharedDataTypes.h:129</a></div></div>
-<div class="ttc" id="atc__mux__v2__testing_8h_html_a369f099de4546860a18c896c392cb17d"><div class="ttname"><a href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a></div><div class="ttdeci">void set_outputs(controller_type &amp;controller, float mps, float torque)</div><div class="ttdef"><b>Definition:</b> <a href="tc__mux__v2__testing_8h_source.html#l00022">tc_mux_v2_testing.h:22</a></div></div>
-<div class="ttc" id="atc__mux__v2__testing_8h_html_ade2c320e6eeaade97087c0aa469d2bae"><div class="ttname"><a href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a></div><div class="ttdeci">void set_four_outputs(quad_array_type &amp;out, float val)</div><div class="ttdef"><b>Definition:</b> <a href="tc__mux__v2__testing_8h_source.html#l00013">tc_mux_v2_testing.h:13</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="ab2abac080a4b99548ed3a7863e4d6180" name="ab2abac080a4b99548ed3a7863e4d6180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2abac080a4b99548ed3a7863e4d6180">&#9670;&#160;</a></span>TEST() <span class="overload">[4/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2abac080a4b99548ed3a7863e4d6180">&#9670;&#160;</a></span>TEST() <span class="overload">[6/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -444,28 +591,27 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00051">51</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>{</div>
-<div class="line"><span class="lineno">   53</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
-<div class="line"><span class="lineno">   54</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">   55</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keyword">auto</span> res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">   57</span>    </div>
-<div class="line"><span class="lineno">   58</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a>);</div>
-<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =0; i&lt; 4; i++)</div>
-<div class="line"><span class="lineno">   60</span>    {</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>        ASSERT_EQ(res.speeds_rpm[i], 0.0);</div>
-<div class="line"><span class="lineno">   63</span>        ASSERT_EQ(res.torqueSetpoints[i], 0.0);</div>
-<div class="line"><span class="lineno">   64</span>    }</div>
-<div class="line"><span class="lineno">   65</span>}</div>
-<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a></div><div class="ttdeci">@ MODE_2</div></div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00184">184</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  185</span>{</div>
+<div class="line"><span class="lineno">  186</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
+<div class="line"><span class="lineno">  187</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  188</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keyword">auto</span> res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  190</span>   </div>
+<div class="line"><span class="lineno">  191</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a>);</div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =0; i&lt; 4; i++)</div>
+<div class="line"><span class="lineno">  193</span>    {</div>
+<div class="line"><span class="lineno">  194</span> </div>
+<div class="line"><span class="lineno">  195</span>        ASSERT_EQ(res.speeds_rpm[i], 0.0);</div>
+<div class="line"><span class="lineno">  196</span>        ASSERT_EQ(res.torqueSetpoints[i], 0.0);</div>
+<div class="line"><span class="lineno">  197</span>    }</div>
+<div class="line"><span class="lineno">  198</span>}</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a></div><div class="ttdeci">@ ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="ac99871ddb09af3484fe4370c6e5b1616" name="ac99871ddb09af3484fe4370c6e5b1616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac99871ddb09af3484fe4370c6e5b1616">&#9670;&#160;</a></span>TEST() <span class="overload">[5/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac99871ddb09af3484fe4370c6e5b1616">&#9670;&#160;</a></span>TEST() <span class="overload">[7/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -490,53 +636,53 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00156">156</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  157</span>{</div>
-<div class="line"><span class="lineno">  158</span> </div>
-<div class="line"><span class="lineno">  159</span>    <span class="keywordtype">float</span> max_torque = 21.42;</div>
-<div class="line"><span class="lineno">  160</span>    <span class="comment">// mode 0</span></div>
-<div class="line"><span class="lineno">  161</span>    <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a> <a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>(1.0f, 1.0f);</div>
-<div class="line"><span class="lineno">  162</span>    <span class="comment">// mode 1</span></div>
-<div class="line"><span class="lineno">  163</span>    <a class="code hl_class" href="classTorqueControllerLoadCellVectoring.html">TorqueControllerLoadCellVectoring</a> <a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>;</div>
-<div class="line"><span class="lineno">  164</span>    <span class="comment">// mode 2</span></div>
-<div class="line"><span class="lineno">  165</span>    <a class="code hl_struct" href="structDummyQueue__s.html">DummyQueue_s</a> q;</div>
-<div class="line"><span class="lineno">  166</span>    <a class="code hl_class" href="classCASESystem.html">CASESystem&lt;DummyQueue_s&gt;</a> case_sys(&amp;q, 100, 70, 550, {});</div>
-<div class="line"><span class="lineno">  167</span>    <a class="code hl_class" href="classTorqueControllerCASEWrapper.html">TorqueControllerCASEWrapper&lt;DummyQueue_s&gt;</a> case_wrapper(&amp;case_sys);</div>
-<div class="line"><span class="lineno">  168</span> </div>
-<div class="line"><span class="lineno">  169</span>    <span class="comment">// mode 3</span></div>
-<div class="line"><span class="lineno">  170</span>    <a class="code hl_class" href="classTorqueControllerSimpleLaunch.html">TorqueControllerSimpleLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>;</div>
-<div class="line"><span class="lineno">  171</span>    <span class="comment">// mode 4</span></div>
-<div class="line"><span class="lineno">  172</span>    <a class="code hl_class" href="classTorqueControllerSlipLaunch.html">TorqueControllerSlipLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>;</div>
-<div class="line"><span class="lineno">  173</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;5&gt;</a> <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>),</div>
-<div class="line"><span class="lineno">  174</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>),</div>
-<div class="line"><span class="lineno">  175</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;case_wrapper),</div>
-<div class="line"><span class="lineno">  176</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>),</div>
-<div class="line"><span class="lineno">  177</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>)},</div>
-<div class="line"><span class="lineno">  178</span>                                                 {<span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">  179</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
-<div class="line"><span class="lineno">  180</span> </div>
-<div class="line"><span class="lineno">  181</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> out = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state);</div>
-<div class="line"><span class="lineno">  182</span>    ASSERT_NEAR(out.torqueSetpoints[0], (max_torque / 2), 0.01);</div>
-<div class="line"><span class="lineno">  183</span>    ASSERT_NEAR(out.torqueSetpoints[1], (max_torque / 2), 0.01);</div>
-<div class="line"><span class="lineno">  184</span>    ASSERT_NEAR(out.torqueSetpoints[2], (max_torque / 2), 0.01);</div>
-<div class="line"><span class="lineno">  185</span>    ASSERT_NEAR(out.torqueSetpoints[3], (max_torque / 2), 0.01);</div>
-<div class="line"><span class="lineno">  186</span> </div>
-<div class="line"><span class="lineno">  187</span>    mode_0_input_state = {{}, {}, {}, {}, {.accelPercent = 0.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {}};</div>
-<div class="line"><span class="lineno">  188</span>    out = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state);</div>
-<div class="line"><span class="lineno">  189</span>    ASSERT_EQ(out.torqueSetpoints[0], 0);</div>
-<div class="line"><span class="lineno">  190</span>    ASSERT_EQ(out.torqueSetpoints[1], 0);</div>
-<div class="line"><span class="lineno">  191</span>    ASSERT_EQ(out.torqueSetpoints[2], 0);</div>
-<div class="line"><span class="lineno">  192</span>    ASSERT_EQ(out.torqueSetpoints[3], 0);</div>
-<div class="line"><span class="lineno">  193</span> </div>
-<div class="line"><span class="lineno">  194</span>    <span class="comment">// out = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_1_input_state);</span></div>
-<div class="line"><span class="lineno">  195</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00245">245</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  246</span>{</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span>    <span class="keywordtype">float</span> max_torque = 21.42;</div>
+<div class="line"><span class="lineno">  249</span>    <span class="comment">// mode 0</span></div>
+<div class="line"><span class="lineno">  250</span>    <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a> <a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>(1.0f, 1.0f);</div>
+<div class="line"><span class="lineno">  251</span>    <span class="comment">// mode 1</span></div>
+<div class="line"><span class="lineno">  252</span>    <a class="code hl_class" href="classTorqueControllerLoadCellVectoring.html">TorqueControllerLoadCellVectoring</a> <a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>;</div>
+<div class="line"><span class="lineno">  253</span>    <span class="comment">// mode 2</span></div>
+<div class="line"><span class="lineno">  254</span>    <a class="code hl_struct" href="structDummyQueue__s.html">DummyQueue_s</a> q;</div>
+<div class="line"><span class="lineno">  255</span>    <a class="code hl_class" href="classCASESystem.html">CASESystem&lt;DummyQueue_s&gt;</a> case_sys(&amp;q, 100, 70, 550, {});</div>
+<div class="line"><span class="lineno">  256</span>    <a class="code hl_class" href="classTorqueControllerCASEWrapper.html">TorqueControllerCASEWrapper&lt;DummyQueue_s&gt;</a> case_wrapper(&amp;case_sys);</div>
+<div class="line"><span class="lineno">  257</span> </div>
+<div class="line"><span class="lineno">  258</span>    <span class="comment">// mode 3</span></div>
+<div class="line"><span class="lineno">  259</span>    <a class="code hl_class" href="classTorqueControllerSimpleLaunch.html">TorqueControllerSimpleLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>;</div>
+<div class="line"><span class="lineno">  260</span>    <span class="comment">// mode 4</span></div>
+<div class="line"><span class="lineno">  261</span>    <a class="code hl_class" href="classTorqueControllerSlipLaunch.html">TorqueControllerSlipLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>;</div>
+<div class="line"><span class="lineno">  262</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;5&gt;</a> <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>),</div>
+<div class="line"><span class="lineno">  263</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>),</div>
+<div class="line"><span class="lineno">  264</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;case_wrapper),</div>
+<div class="line"><span class="lineno">  265</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>),</div>
+<div class="line"><span class="lineno">  266</span>                                                  <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>)},</div>
+<div class="line"><span class="lineno">  267</span>                                                 {<span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  268</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
+<div class="line"><span class="lineno">  269</span> </div>
+<div class="line"><span class="lineno">  270</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> out = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">  271</span>    ASSERT_NEAR(out.torqueSetpoints[0], (max_torque / 2), 0.01);</div>
+<div class="line"><span class="lineno">  272</span>    ASSERT_NEAR(out.torqueSetpoints[1], (max_torque / 2), 0.01);</div>
+<div class="line"><span class="lineno">  273</span>    ASSERT_NEAR(out.torqueSetpoints[2], (max_torque / 2), 0.01);</div>
+<div class="line"><span class="lineno">  274</span>    ASSERT_NEAR(out.torqueSetpoints[3], (max_torque / 2), 0.01);</div>
+<div class="line"><span class="lineno">  275</span> </div>
+<div class="line"><span class="lineno">  276</span>    mode_0_input_state = {{}, {}, {}, {}, {.accelPercent = 0.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {}};</div>
+<div class="line"><span class="lineno">  277</span>    out = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">  278</span>    ASSERT_EQ(out.torqueSetpoints[0], 0);</div>
+<div class="line"><span class="lineno">  279</span>    ASSERT_EQ(out.torqueSetpoints[1], 0);</div>
+<div class="line"><span class="lineno">  280</span>    ASSERT_EQ(out.torqueSetpoints[2], 0);</div>
+<div class="line"><span class="lineno">  281</span>    ASSERT_EQ(out.torqueSetpoints[3], 0);</div>
+<div class="line"><span class="lineno">  282</span> </div>
+<div class="line"><span class="lineno">  283</span>    <span class="comment">// out = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_1_input_state);</span></div>
+<div class="line"><span class="lineno">  284</span>}</div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a0a4e85c5462c31f7caae73bebb4d7d55"><div class="ttname"><a href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">TorqueControllerMux::getDrivetrainCommand</a></div><div class="ttdeci">DrivetrainCommand_s getDrivetrainCommand(ControllerMode_e requested_controller_type, TorqueLimit_e controller_command_torque_limit, const SharedCarState_s &amp;input_state)</div><div class="ttdoc">function that evaluates the mux, controllers and gets the current command</div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html"><div class="ttname"><a href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a></div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00052">SharedDataTypes.h:53</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="a7803a7e86bcaeb543969af30de218212" name="a7803a7e86bcaeb543969af30de218212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7803a7e86bcaeb543969af30de218212">&#9670;&#160;</a></span>TEST() <span class="overload">[6/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7803a7e86bcaeb543969af30de218212">&#9670;&#160;</a></span>TEST() <span class="overload">[8/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -561,25 +707,24 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00271">271</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  272</span>{</div>
-<div class="line"><span class="lineno">  273</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">nullptr</span>}, {<span class="keyword">true</span>});</div>
-<div class="line"><span class="lineno">  274</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
-<div class="line"><span class="lineno">  275</span>    <span class="keyword">auto</span> res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
-<div class="line"><span class="lineno">  277</span>    {</div>
-<div class="line"><span class="lineno">  278</span>        ASSERT_EQ(res.torqueSetpoints[i], 0.0f);</div>
-<div class="line"><span class="lineno">  279</span>        ASSERT_EQ(res.speeds_rpm[i], 0.0f);</div>
-<div class="line"><span class="lineno">  280</span>    }</div>
-<div class="line"><span class="lineno">  281</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER</a>);</div>
-<div class="line"><span class="lineno">  282</span>}</div>
-<div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a></div><div class="ttdeci">@ TCMUX_LOW_TORQUE</div></div>
-<div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER</a></div><div class="ttdeci">@ ERROR_CONTROLLER_NULL_POINTER</div></div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00229">229</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  230</span>{</div>
+<div class="line"><span class="lineno">  231</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">nullptr</span>}, {<span class="keyword">true</span>});</div>
+<div class="line"><span class="lineno">  232</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  233</span>    <span class="keyword">auto</span> res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">  235</span>    {</div>
+<div class="line"><span class="lineno">  236</span>        ASSERT_EQ(res.torqueSetpoints[i], 0.0f);</div>
+<div class="line"><span class="lineno">  237</span>        ASSERT_EQ(res.speeds_rpm[i], 0.0f);</div>
+<div class="line"><span class="lineno">  238</span>    }</div>
+<div class="line"><span class="lineno">  239</span>    <span class="comment">//makes it not able to test, assume i didnt pull most recent code</span></div>
+<div class="line"><span class="lineno">  240</span>    <span class="comment">// ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER);</span></div>
+<div class="line"><span class="lineno">  241</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="ac5831b8b21312d6229649bc2d28fd814" name="ac5831b8b21312d6229649bc2d28fd814"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5831b8b21312d6229649bc2d28fd814">&#9670;&#160;</a></span>TEST() <span class="overload">[7/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5831b8b21312d6229649bc2d28fd814">&#9670;&#160;</a></span>TEST() <span class="overload">[9/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -604,46 +749,193 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00197">197</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  198</span>{</div>
-<div class="line"><span class="lineno">  199</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1;</div>
-<div class="line"><span class="lineno">  200</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 20000, 10.0);</div>
-<div class="line"><span class="lineno">  201</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1)}, {<span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">  202</span> </div>
-<div class="line"><span class="lineno">  203</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain_data = {};</div>
-<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
-<div class="line"><span class="lineno">  205</span>    {</div>
-<div class="line"><span class="lineno">  206</span>        drivetrain_data.measuredSpeeds[i] = 500.0f;</div>
-<div class="line"><span class="lineno">  207</span>    }</div>
-<div class="line"><span class="lineno">  208</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
-<div class="line"><span class="lineno">  209</span> </div>
-<div class="line"><span class="lineno">  210</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state);</div>
-<div class="line"><span class="lineno">  211</span> </div>
-<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
-<div class="line"><span class="lineno">  213</span>    {</div>
-<div class="line"><span class="lineno">  214</span>        ASSERT_EQ(res.torqueSetpoints[i], 10.0f);</div>
-<div class="line"><span class="lineno">  215</span>    }</div>
-<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
-<div class="line"><span class="lineno">  217</span>    {</div>
-<div class="line"><span class="lineno">  218</span>        drivetrain_data.measuredSpeeds[i] = 20000.0f;</div>
-<div class="line"><span class="lineno">  219</span>    }</div>
-<div class="line"><span class="lineno">  220</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 20000, 21.0);</div>
-<div class="line"><span class="lineno">  221</span> </div>
-<div class="line"><span class="lineno">  222</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state_high_power({}, {}, drivetrain_data, {}, {.accelPercent = 1.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
-<div class="line"><span class="lineno">  223</span>    res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state_high_power);</div>
-<div class="line"><span class="lineno">  224</span> </div>
-<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
-<div class="line"><span class="lineno">  226</span>    {</div>
-<div class="line"><span class="lineno">  227</span>        ASSERT_LT(res.torqueSetpoints[i], 7.6); <span class="comment">// hardcoded value based on online calculator</span></div>
-<div class="line"><span class="lineno">  228</span>    }</div>
-<div class="line"><span class="lineno">  229</span>}</div>
-<div class="ttc" id="astructDrivetrainDynamicReport__s_html"><div class="ttname"><a href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a></div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00044">SharedDataTypes.h:45</a></div></div>
-<div class="ttc" id="atc__mux__v2__testing_8h_html_a918344fc2c8db0bd4405852638594a88"><div class="ttname"><a href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a></div><div class="ttdeci">void set_output_rpm(controller_type &amp;controller, float rpm, float torque)</div><div class="ttdef"><b>Definition:</b> <a href="tc__mux__v2__testing_8h_source.html#l00034">tc_mux_v2_testing.h:34</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00287">287</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  288</span>{</div>
+<div class="line"><span class="lineno">  289</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1;</div>
+<div class="line"><span class="lineno">  290</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 20000, 10.0);</div>
+<div class="line"><span class="lineno">  291</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1)}, {<span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  292</span> </div>
+<div class="line"><span class="lineno">  293</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain_data = {};</div>
+<div class="line"><span class="lineno">  294</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">  295</span>    {</div>
+<div class="line"><span class="lineno">  296</span>        drivetrain_data.measuredSpeeds[i] = 500.0f;</div>
+<div class="line"><span class="lineno">  297</span>    }</div>
+<div class="line"><span class="lineno">  298</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
+<div class="line"><span class="lineno">  299</span> </div>
+<div class="line"><span class="lineno">  300</span>    <a class="code hl_struct" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">  301</span> </div>
+<div class="line"><span class="lineno">  302</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">  303</span>    {</div>
+<div class="line"><span class="lineno">  304</span>        ASSERT_EQ(res.torqueSetpoints[i], 10.0f);</div>
+<div class="line"><span class="lineno">  305</span>    }</div>
+<div class="line"><span class="lineno">  306</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">  307</span>    {</div>
+<div class="line"><span class="lineno">  308</span>        drivetrain_data.measuredSpeeds[i] = 20000.0f;</div>
+<div class="line"><span class="lineno">  309</span>    }</div>
+<div class="line"><span class="lineno">  310</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 20000, 21.0);</div>
+<div class="line"><span class="lineno">  311</span> </div>
+<div class="line"><span class="lineno">  312</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state_high_power({}, {}, drivetrain_data, {}, {.accelPercent = 1.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
+<div class="line"><span class="lineno">  313</span>    res = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, mode_0_input_state_high_power);</div>
+<div class="line"><span class="lineno">  314</span> </div>
+<div class="line"><span class="lineno">  315</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">  316</span>    {</div>
+<div class="line"><span class="lineno">  317</span>        ASSERT_LT(res.torqueSetpoints[i], 7.6); <span class="comment">// hardcoded value based on online calculator</span></div>
+<div class="line"><span class="lineno">  318</span>    }</div>
+<div class="line"><span class="lineno">  319</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7906e4d1b59207872664c4c48819ad8c" name="a7906e4d1b59207872664c4c48819ad8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7906e4d1b59207872664c4c48819ad8c">&#9670;&#160;</a></span>TEST() <span class="overload">[10/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">TorqueControllerMuxTesting&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">test_real_controllers_output&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00380">380</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  381</span>{</div>
+<div class="line"><span class="lineno">  382</span>    <span class="comment">//mode 0</span></div>
+<div class="line"><span class="lineno">  383</span>    <a class="code hl_class" href="classTorqueControllerSimple.html">TorqueControllerSimple</a> <a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>(1.0f, 1.0f);</div>
+<div class="line"><span class="lineno">  384</span>    <span class="comment">// mode 1</span></div>
+<div class="line"><span class="lineno">  385</span>    <a class="code hl_class" href="classTorqueControllerLoadCellVectoring.html">TorqueControllerLoadCellVectoring</a> <a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>;</div>
+<div class="line"><span class="lineno">  386</span>    <span class="comment">// mode 2</span></div>
+<div class="line"><span class="lineno">  387</span>    <a class="code hl_struct" href="structDummyQueue__s.html">DummyQueue_s</a> q;</div>
+<div class="line"><span class="lineno">  388</span>    <a class="code hl_class" href="classCASESystem.html">CASESystem&lt;DummyQueue_s&gt;</a> case_sys(&amp;q, 100, 70, 550, {});</div>
+<div class="line"><span class="lineno">  389</span>    <a class="code hl_class" href="classTorqueControllerCASEWrapper.html">TorqueControllerCASEWrapper&lt;DummyQueue_s&gt;</a> case_wrapper(&amp;case_sys);</div>
+<div class="line"><span class="lineno">  390</span> </div>
+<div class="line"><span class="lineno">  391</span>    <span class="comment">// mode 3</span></div>
+<div class="line"><span class="lineno">  392</span>    <a class="code hl_class" href="classTorqueControllerSimpleLaunch.html">TorqueControllerSimpleLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>;</div>
+<div class="line"><span class="lineno">  393</span>    <span class="comment">// mode 4</span></div>
+<div class="line"><span class="lineno">  394</span>    <a class="code hl_class" href="classTorqueControllerSlipLaunch.html">TorqueControllerSlipLaunch</a> <a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>;</div>
+<div class="line"><span class="lineno">  395</span> </div>
+<div class="line"><span class="lineno">  396</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;5&gt;</a></div>
+<div class="line"><span class="lineno">  397</span>        <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a1a8d0bd2db020de4c61c50a57d4edb67">tc_simple</a>),</div>
+<div class="line"><span class="lineno">  398</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a56a27dd218f51d1e809fdac78dfc7f78">tc_vec</a>),</div>
+<div class="line"><span class="lineno">  399</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;case_wrapper),</div>
+<div class="line"><span class="lineno">  400</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#afc59ba092cfd99168f849f1ec6640b33">simple_launch</a>),</div>
+<div class="line"><span class="lineno">  401</span>                               <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="src_2main_8cpp.html#a378540df1eb79d38c7726b46d65b03ea">slip_launch</a>)},</div>
+<div class="line"><span class="lineno">  402</span>                              {<span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  403</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  404</span>    state.<a class="code hl_variable" href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">pedals_data</a> = {};</div>
+<div class="line"><span class="lineno">  405</span>    state.vn_data = {};</div>
+<div class="line"><span class="lineno">  406</span>    state.drivetrain_data = {};</div>
+<div class="line"><span class="lineno">  407</span>    </div>
+<div class="line"><span class="lineno">  408</span>    <span class="keyword">auto</span> out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  409</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  410</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  411</span>   </div>
+<div class="line"><span class="lineno">  412</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  413</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  414</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>);</div>
+<div class="line"><span class="lineno">  415</span> </div>
+<div class="line"><span class="lineno">  416</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  417</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  418</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>);</div>
+<div class="line"><span class="lineno">  419</span> </div>
+<div class="line"><span class="lineno">  420</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  421</span>    ASSERT_EQ(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>));</div>
+<div class="line"><span class="lineno">  422</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a>);</div>
+<div class="line"><span class="lineno">  423</span> </div>
+<div class="line"><span class="lineno">  424</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  425</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  426</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a>);</div>
+<div class="line"><span class="lineno">  427</span> </div>
+<div class="line"><span class="lineno">  428</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  429</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  430</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a>);</div>
+<div class="line"><span class="lineno">  431</span> </div>
+<div class="line"><span class="lineno">  432</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  433</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  434</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">ControllerMode_e::MODE_3</a>);</div>
+<div class="line"><span class="lineno">  435</span> </div>
+<div class="line"><span class="lineno">  436</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  437</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  438</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">ControllerMode_e::MODE_2</a>);</div>
+<div class="line"><span class="lineno">  439</span>   </div>
+<div class="line"><span class="lineno">  440</span>    out1 = <a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  441</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>);</div>
+<div class="line"><span class="lineno">  442</span>    ASSERT_EQ(<a class="code hl_variable" href="src_2main_8cpp.html#aa0ce1f54903198fbfc0e237a260106a6">torque_controller_mux</a>.<a class="code hl_function" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a>().<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  443</span>}</div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a></div><div class="ttdeci">@ MODE_4</div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a7323107380e91f7136cde767624e4902"><div class="ttname"><a href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">TorqueControllerMux::get_tc_mux_status</a></div><div class="ttdeci">const TorqueControllerMuxStatus &amp; get_tc_mux_status()</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00108">TorqueControllerMux.h:108</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_a6e5fd8f02dc610be2a8bd68ab961cd0b"><div class="ttname"><a href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">SharedCarState_s::pedals_data</a></div><div class="ttdeci">PedalsSystemData_s pedals_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00135">SharedDataTypes.h:135</a></div></div>
+<div class="ttc" id="astructTorqueControllerMuxStatus_html_a2bdfc79cfc4f1584aa25f4c2c0d298ac"><div class="ttname"><a href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">TorqueControllerMuxStatus::current_controller_mode</a></div><div class="ttdeci">ControllerMode_e current_controller_mode</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00095">SharedDataTypes.h:95</a></div></div>
+<div class="ttc" id="astructTorqueControllerMuxStatus_html_a66c5c715ebf720731cf9ff41494b9d72"><div class="ttname"><a href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">TorqueControllerMuxStatus::current_error</a></div><div class="ttdeci">TorqueControllerMuxError current_error</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00094">SharedDataTypes.h:94</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a83698ec47750f9963ab87d8630c83370" name="a83698ec47750f9963ab87d8630c83370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83698ec47750f9963ab87d8630c83370">&#9670;&#160;</a></span>TEST() <span class="overload">[11/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">TorqueControllerMuxTesting&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">test_tc_mux_status&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00361">361</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  362</span>{</div>
+<div class="line"><span class="lineno">  363</span>    <a class="code hl_enumeration" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a> testErr = <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a>;</div>
+<div class="line"><span class="lineno">  364</span>    <a class="code hl_enumeration" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a> testMode = <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>;</div>
+<div class="line"><span class="lineno">  365</span>    <a class="code hl_enumeration" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> testTorqLim = <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>;</div>
+<div class="line"><span class="lineno">  366</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1;</div>
+<div class="line"><span class="lineno">  367</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0, 1);</div>
+<div class="line"><span class="lineno">  368</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1)}, { <span class="keyword">false</span> });</div>
+<div class="line"><span class="lineno">  369</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  370</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#ade2c320e6eeaade97087c0aa469d2bae">set_four_outputs</a>(state.drivetrain_data.measuredSpeeds, 2);</div>
+<div class="line"><span class="lineno">  371</span> </div>
+<div class="line"><span class="lineno">  372</span>    state.pedals_data = {};</div>
+<div class="line"><span class="lineno">  373</span>    state.vn_data = {};</div>
+<div class="line"><span class="lineno">  374</span> </div>
+<div class="line"><span class="lineno">  375</span>    <span class="keyword">auto</span> out1 = test.getDrivetrainCommand(testMode, testTorqLim, state);</div>
+<div class="line"><span class="lineno">  376</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, testErr);</div>
+<div class="line"><span class="lineno">  377</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, testMode);</div>
+<div class="line"><span class="lineno">  378</span>    ASSERT_EQ(test.get_tc_mux_status().current_torque_limit_enum, testTorqLim);</div>
+<div class="line"><span class="lineno">  379</span>}</div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644b"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a></div><div class="ttdeci">TorqueLimit_e</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00008">SharedDataTypes.h:9</a></div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76a"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a></div><div class="ttdeci">ControllerMode_e</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00017">SharedDataTypes.h:18</a></div></div>
+<div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498d"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a></div><div class="ttdeci">TorqueControllerMuxError</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00083">SharedDataTypes.h:84</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="a49b063f20261c9cae44543a6bfd6356f" name="a49b063f20261c9cae44543a6bfd6356f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49b063f20261c9cae44543a6bfd6356f">&#9670;&#160;</a></span>TEST() <span class="overload">[8/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a49b063f20261c9cae44543a6bfd6356f">&#9670;&#160;</a></span>TEST() <span class="overload">[12/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -668,42 +960,42 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00100">100</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  101</span>{</div>
-<div class="line"><span class="lineno">  102</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
-<div class="line"><span class="lineno">  103</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0.1, 1);</div>
-<div class="line"><span class="lineno">  104</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 3, 10);</div>
-<div class="line"><span class="lineno">  105</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">  106</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
-<div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>    <span class="keyword">auto</span> out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  109</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  110</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
-<div class="line"><span class="lineno">  111</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH</a>);</div>
-<div class="line"><span class="lineno">  112</span> </div>
-<div class="line"><span class="lineno">  113</span>    <span class="comment">// tick it a bunch of times</span></div>
-<div class="line"><span class="lineno">  114</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  115</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  116</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  117</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  118</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  119</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
-<div class="line"><span class="lineno">  120</span> </div>
-<div class="line"><span class="lineno">  121</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH</a>);</div>
-<div class="line"><span class="lineno">  122</span> </div>
-<div class="line"><span class="lineno">  123</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
-<div class="line"><span class="lineno">  124</span> </div>
-<div class="line"><span class="lineno">  125</span>    ASSERT_EQ(out1.torqueSetpoints[0], 1);</div>
-<div class="line"><span class="lineno">  126</span>    ASSERT_EQ(out1.torqueSetpoints[1], 1);</div>
-<div class="line"><span class="lineno">  127</span>    ASSERT_EQ(out1.torqueSetpoints[2], 1);</div>
-<div class="line"><span class="lineno">  128</span>    ASSERT_EQ(out1.torqueSetpoints[3], 1);</div>
-<div class="line"><span class="lineno">  129</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00199">199</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  200</span>{</div>
+<div class="line"><span class="lineno">  201</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1, inst2;</div>
+<div class="line"><span class="lineno">  202</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst1, 0.1, 1);</div>
+<div class="line"><span class="lineno">  203</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a369f099de4546860a18c896c392cb17d">set_outputs</a>(inst2, 3, 10);</div>
+<div class="line"><span class="lineno">  204</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;2&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1), <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst2)}, {<span class="keyword">false</span>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  205</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> state({}, {}, {}, {}, {}, {});</div>
+<div class="line"><span class="lineno">  206</span> </div>
+<div class="line"><span class="lineno">  207</span>    <span class="keyword">auto</span> out1 = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  208</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  209</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  210</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH</a>);</div>
+<div class="line"><span class="lineno">  211</span> </div>
+<div class="line"><span class="lineno">  212</span>    <span class="comment">// tick it a bunch of times</span></div>
+<div class="line"><span class="lineno">  213</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  214</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  215</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  216</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  217</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  218</span>    out1 = test.<a class="code hl_function" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a>(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">ControllerMode_e::MODE_1</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a>, state);</div>
+<div class="line"><span class="lineno">  219</span> </div>
+<div class="line"><span class="lineno">  220</span>    ASSERT_EQ(test.get_tc_mux_status().current_error, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH</a>);</div>
+<div class="line"><span class="lineno">  221</span> </div>
+<div class="line"><span class="lineno">  222</span>    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>);</div>
+<div class="line"><span class="lineno">  223</span> </div>
+<div class="line"><span class="lineno">  224</span>    ASSERT_EQ(out1.torqueSetpoints[0], 1);</div>
+<div class="line"><span class="lineno">  225</span>    ASSERT_EQ(out1.torqueSetpoints[1], 1);</div>
+<div class="line"><span class="lineno">  226</span>    ASSERT_EQ(out1.torqueSetpoints[2], 1);</div>
+<div class="line"><span class="lineno">  227</span>    ASSERT_EQ(out1.torqueSetpoints[3], 1);</div>
+<div class="line"><span class="lineno">  228</span>}</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH</a></div><div class="ttdeci">@ ERROR_TORQUE_DIFF_TOO_HIGH</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="a81ef89825fd95d70f001771f00ec4dc5" name="a81ef89825fd95d70f001771f00ec4dc5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81ef89825fd95d70f001771f00ec4dc5">&#9670;&#160;</a></span>TEST() <span class="overload">[9/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ef89825fd95d70f001771f00ec4dc5">&#9670;&#160;</a></span>TEST() <span class="overload">[13/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -728,48 +1020,45 @@ template&lt;typename controller_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00231">231</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  232</span>{</div>
-<div class="line"><span class="lineno">  233</span> </div>
-<div class="line"><span class="lineno">  234</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1;</div>
-<div class="line"><span class="lineno">  235</span> </div>
-<div class="line"><span class="lineno">  236</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 500, 10.0);</div>
-<div class="line"><span class="lineno">  237</span>    inst1.<a class="code hl_variable" href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">output</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
-<div class="line"><span class="lineno">  238</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1)}, {<span class="keyword">false</span>});</div>
-<div class="line"><span class="lineno">  239</span> </div>
-<div class="line"><span class="lineno">  240</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain_data = {};</div>
-<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
-<div class="line"><span class="lineno">  242</span>    {</div>
-<div class="line"><span class="lineno">  243</span>        drivetrain_data.measuredSpeeds[i] = 500.0f;</div>
-<div class="line"><span class="lineno">  244</span>    }</div>
-<div class="line"><span class="lineno">  245</span> </div>
-<div class="line"><span class="lineno">  246</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
-<div class="line"><span class="lineno">  247</span> </div>
-<div class="line"><span class="lineno">  248</span>    <span class="keyword">auto</span> drive_command = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, mode_0_input_state);</div>
-<div class="line"><span class="lineno">  249</span> </div>
-<div class="line"><span class="lineno">  250</span>    ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);</div>
-<div class="line"><span class="lineno">  251</span>    ASSERT_EQ(drive_command.torqueSetpoints[1], 10.0f);</div>
-<div class="line"><span class="lineno">  252</span>    ASSERT_EQ(drive_command.torqueSetpoints[2], 10.0f);</div>
-<div class="line"><span class="lineno">  253</span>    ASSERT_EQ(drive_command.torqueSetpoints[3], 10.0f);</div>
-<div class="line"><span class="lineno">  254</span> </div>
-<div class="line"><span class="lineno">  255</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 500, 20.0);</div>
-<div class="line"><span class="lineno">  256</span>    inst1.<a class="code hl_variable" href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">output</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>    drive_command = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, mode_0_input_state);</div>
-<div class="line"><span class="lineno">  259</span> </div>
-<div class="line"><span class="lineno">  260</span>    ASSERT_LT(drive_command.torqueSetpoints[0], 3.5f);</div>
-<div class="line"><span class="lineno">  261</span>    ASSERT_LT(drive_command.torqueSetpoints[1], 12.5f);</div>
-<div class="line"><span class="lineno">  262</span>    ASSERT_LT(drive_command.torqueSetpoints[2], 12.5f);</div>
-<div class="line"><span class="lineno">  263</span>    ASSERT_LT(drive_command.torqueSetpoints[3], 12.5f);</div>
-<div class="line"><span class="lineno">  264</span>    </div>
-<div class="line"><span class="lineno">  265</span>    printf(<span class="stringliteral">&quot;torque 1: %.2f\n&quot;</span>, drive_command.torqueSetpoints[0]);</div>
-<div class="line"><span class="lineno">  266</span>    printf(<span class="stringliteral">&quot;torque 2: %.2f\n&quot;</span>, drive_command.torqueSetpoints[1]);</div>
-<div class="line"><span class="lineno">  267</span>    printf(<span class="stringliteral">&quot;torque 3: %.2f\n&quot;</span>, drive_command.torqueSetpoints[2]);</div>
-<div class="line"><span class="lineno">  268</span>    printf(<span class="stringliteral">&quot;torque 4: %.2f\n&quot;</span>, drive_command.torqueSetpoints[3]);</div>
-<div class="line"><span class="lineno">  269</span>}</div>
-<div class="ttc" id="aclassTestControllerType_html_a400eba51843c45432f9c33a3d163c3aa"><div class="ttname"><a href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">TestControllerType::output</a></div><div class="ttdeci">TorqueControllerOutput_s output</div><div class="ttdef"><b>Definition:</b> <a href="fake__controller__type_8h_source.html#l00012">fake_controller_type.h:12</a></div></div>
-<div class="ttc" id="astructDrivetrainCommand__s_html_a7045866fd15833c0657810146182dad6"><div class="ttname"><a href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">DrivetrainCommand_s::torqueSetpoints</a></div><div class="ttdeci">float torqueSetpoints[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00055">SharedDataTypes.h:55</a></div></div>
-<div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00060">SharedDataTypes.h:60</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tc__mux__v2__testing_8h_source.html#l00320">320</a> of file <a class="el" href="tc__mux__v2__testing_8h_source.html">tc_mux_v2_testing.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  321</span>{</div>
+<div class="line"><span class="lineno">  322</span> </div>
+<div class="line"><span class="lineno">  323</span>    <a class="code hl_class" href="classTestControllerType.html">TestControllerType</a> inst1;</div>
+<div class="line"><span class="lineno">  324</span> </div>
+<div class="line"><span class="lineno">  325</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 500, 10.0);</div>
+<div class="line"><span class="lineno">  326</span>    inst1.<a class="code hl_variable" href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">output</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
+<div class="line"><span class="lineno">  327</span>    <a class="code hl_class" href="classTorqueControllerMux.html">TorqueControllerMux&lt;1&gt;</a> test({<span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classController.html">Controller</a> *<span class="keyword">&gt;</span>(&amp;inst1)}, {<span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  328</span> </div>
+<div class="line"><span class="lineno">  329</span>    <a class="code hl_struct" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> drivetrain_data = {};</div>
+<div class="line"><span class="lineno">  330</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line"><span class="lineno">  331</span>    {</div>
+<div class="line"><span class="lineno">  332</span>        drivetrain_data.measuredSpeeds[i] = 500.0f;</div>
+<div class="line"><span class="lineno">  333</span>    }</div>
+<div class="line"><span class="lineno">  334</span> </div>
+<div class="line"><span class="lineno">  335</span>    <a class="code hl_struct" href="structSharedCarState__s.html">SharedCarState_s</a> mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});</div>
+<div class="line"><span class="lineno">  336</span> </div>
+<div class="line"><span class="lineno">  337</span>    <span class="keyword">auto</span> drive_command = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">  338</span> </div>
+<div class="line"><span class="lineno">  339</span>    ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);</div>
+<div class="line"><span class="lineno">  340</span>    ASSERT_EQ(drive_command.torqueSetpoints[1], 10.0f);</div>
+<div class="line"><span class="lineno">  341</span>    ASSERT_EQ(drive_command.torqueSetpoints[2], 10.0f);</div>
+<div class="line"><span class="lineno">  342</span>    ASSERT_EQ(drive_command.torqueSetpoints[3], 10.0f);</div>
+<div class="line"><span class="lineno">  343</span> </div>
+<div class="line"><span class="lineno">  344</span>    <a class="code hl_function" href="tc__mux__v2__testing_8h.html#a918344fc2c8db0bd4405852638594a88">set_output_rpm</a>(inst1, 500, 20.0);</div>
+<div class="line"><span class="lineno">  345</span>    inst1.<a class="code hl_variable" href="classTestControllerType.html#a400eba51843c45432f9c33a3d163c3aa">output</a>.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a>[0] = 5;</div>
+<div class="line"><span class="lineno">  346</span> </div>
+<div class="line"><span class="lineno">  347</span>    drive_command = test.getDrivetrainCommand(<a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a>, <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a>, mode_0_input_state);</div>
+<div class="line"><span class="lineno">  348</span> </div>
+<div class="line"><span class="lineno">  349</span>    ASSERT_LT(drive_command.torqueSetpoints[0], 3.5f);</div>
+<div class="line"><span class="lineno">  350</span>    ASSERT_LT(drive_command.torqueSetpoints[1], 12.5f);</div>
+<div class="line"><span class="lineno">  351</span>    ASSERT_LT(drive_command.torqueSetpoints[2], 12.5f);</div>
+<div class="line"><span class="lineno">  352</span>    ASSERT_LT(drive_command.torqueSetpoints[3], 12.5f);</div>
+<div class="line"><span class="lineno">  353</span>   </div>
+<div class="line"><span class="lineno">  354</span>    printf(<span class="stringliteral">&quot;torque 1: %.2f\n&quot;</span>, drive_command.torqueSetpoints[0]);</div>
+<div class="line"><span class="lineno">  355</span>    printf(<span class="stringliteral">&quot;torque 2: %.2f\n&quot;</span>, drive_command.torqueSetpoints[1]);</div>
+<div class="line"><span class="lineno">  356</span>    printf(<span class="stringliteral">&quot;torque 3: %.2f\n&quot;</span>, drive_command.torqueSetpoints[2]);</div>
+<div class="line"><span class="lineno">  357</span>    printf(<span class="stringliteral">&quot;torque 4: %.2f\n&quot;</span>, drive_command.torqueSetpoints[3]);</div>
+<div class="line"><span class="lineno">  358</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
