@@ -223,18 +223,18 @@ template&lt;std::size_t num_controllers&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00092">92</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span>                                                                                        : <a class="code hl_variable" href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">controller_pointers_</a>(controller_pointers),</div>
-<div class="line"><span class="lineno">   97</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">mux_bypass_limits_</a>(mux_bypass_limits),</div>
-<div class="line"><span class="lineno">   98</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">max_change_speed_</a>(max_change_speed),</div>
-<div class="line"><span class="lineno">   99</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a671077a80a552fd9cab7a2d963f2f528">max_torque_pos_change_delta_</a>(max_torque_pos_change_delta),</div>
-<div class="line"><span class="lineno">  100</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a92006db4ad3e12f0cb528959b12d95ca">max_power_limit_</a>(max_power_limit)</div>
-<div class="line"><span class="lineno">  101</span> </div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00093">93</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                                                        : <a class="code hl_variable" href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">controller_pointers_</a>(controller_pointers),</div>
+<div class="line"><span class="lineno">   98</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">mux_bypass_limits_</a>(mux_bypass_limits),</div>
+<div class="line"><span class="lineno">   99</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">max_change_speed_</a>(max_change_speed),</div>
+<div class="line"><span class="lineno">  100</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a671077a80a552fd9cab7a2d963f2f528">max_torque_pos_change_delta_</a>(max_torque_pos_change_delta),</div>
+<div class="line"><span class="lineno">  101</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a92006db4ad3e12f0cb528959b12d95ca">max_power_limit_</a>(max_power_limit)</div>
 <div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>    {</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keyword">static_assert</span>(num_controllers &gt; 0, <span class="stringliteral">&quot;Must create TC mux with at least 1 controller&quot;</span>);</div>
-<div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>    }</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>    {</div>
+<div class="line"><span class="lineno">  105</span>        <span class="keyword">static_assert</span>(num_controllers &gt; 0, <span class="stringliteral">&quot;Must create TC mux with at least 1 controller&quot;</span>);</div>
+<div class="line"><span class="lineno">  106</span> </div>
+<div class="line"><span class="lineno">  107</span>    }</div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a1fdff880066de19d31f4ca100c4260bb"><div class="ttname"><a href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">TorqueControllerMux::max_change_speed_</a></div><div class="ttdeci">float max_change_speed_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00072">TorqueControllerMux.h:72</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a24a03d2e08bcc24255d3c83455820a96"><div class="ttname"><a href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">TorqueControllerMux::controller_pointers_</a></div><div class="ttdeci">std::array&lt; Controller *, num_controllers &gt; controller_pointers_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00064">TorqueControllerMux.h:64</a></div></div>
 <div class="ttc" id="aclassTorqueControllerMux_html_a4fb4d65e295aa1111a112471251fb143"><div class="ttname"><a href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">TorqueControllerMux::mux_bypass_limits_</a></div><div class="ttdeci">std::array&lt; bool, num_controllers &gt; mux_bypass_limits_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00066">TorqueControllerMux.h:66</a></div></div>
@@ -467,8 +467,8 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00108">108</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  108</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542">current_status_</a>; }</div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00109">109</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542">current_status_</a>; }</div>
 <div class="ttc" id="aclassTorqueControllerMux_html_ad25f641d91e0b068287a2a138a8bf542"><div class="ttname"><a href="classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542">TorqueControllerMux::current_status_</a></div><div class="ttdeci">TorqueControllerMuxStatus current_status_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
 </div><!-- fragment -->
 </div>
