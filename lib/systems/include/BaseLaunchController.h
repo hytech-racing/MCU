@@ -5,7 +5,10 @@
 #include <algorithm>
 #include <math.h> 
 
-/// @brief Modes to guide tick behavior and progression 
+/// @brief Modes to define launch behavior, where each one waits for acceleration request threshold to move to next mode
+/// LAUNCH_NOT_READY keeps speed at 0 and makes sure pedals are not pressed
+/// LAUNCH_READY keeps speed at 0 and makes sure break is not pressed
+/// LAUNCHING uses respective algorithm to set speed set point and requests torque from motors to reach it
 enum class LaunchStates_e
 {
     NO_LAUNCH_MODE,
@@ -41,7 +44,7 @@ protected:
 
 public:
     /// @brief Constructor for template launch controller
-    /// @param initial_speed_target unused right now
+    /// @param initial_speed_target used only in simple launch controller algorithm
     /// @note requires one method: calc_launch_algo
     BaseLaunchController(int16_t initial_speed_target)
         : init_speed_target_(initial_speed_target)
@@ -51,22 +54,17 @@ public:
     }
 
     /// @brief ticks launch controller to progress through launch states when conditions are met
-    /// @param SysTick_s &tick 
-    /// @param PedalsSystemData_s &pedalsData 
-    /// @param float[] wheel_rpms 
-    /// @param VectornavData_s &vn_data 
     void tick(const SysTick_s &tick,
               const PedalsSystemData_s &pedalsData,
               const float wheel_rpms[],
               const VectornavData_s &vn_data);
     LaunchStates_e get_launch_state() { return launch_state_; }
-    /// @brief calculates how speed target is set among launch controllers
-    /// @param VectornavData_s &vn_data 
-    /// @note has important variation in launch controller tick as the launch controllers share a tick method
+    /// @brief calculates how speed target, the speed the car is trying to achieve during launch, is set and/or increased during launch
+    /// @param vn_data vector data like speed and coordinates
+    /// @note defines important variation in launch controller tick/evaluation as the launch controllers share a tick method defined in this parent class implementation
+    /// @note all launch algorithms are implemented in LaunchControllerAlgos.cpp
     virtual void calc_launch_algo(const VectornavData_s &vn_data) = 0;
-    /// @brief ticks launch controller
-    /// @param SharedCarState_s &state 
-    /// @return TorqueControllerOutput_s
+    /// @note refer to parent class
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 #endif // __BASELAUNCHCONTROLLER_H__

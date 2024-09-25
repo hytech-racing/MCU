@@ -5,17 +5,17 @@
 #include "CASESystem.h"
 
 template <typename message_queue>
+/// @brief makes CASE system a part of Controller hierarchy for use in TC Mux
 class TorqueControllerCASEWrapper : public virtual Controller
 {
 public:
     TorqueControllerCASEWrapper() = delete;
-    /// @brief makes CASE system apart of Controller hierarchy for use in TC Mux
-    /// @param case_instance 
+    /// @param case_instance provide current instance to ensure there are not duplicates of this system as it needs to stay updated for MCU to get data.
     TorqueControllerCASEWrapper(CASESystem<message_queue> *case_instance) : case_instance_(case_instance)
     {
     }
     /// @brief packages CASE system command into Torque Controller Output
-    /// @param SharedCarState_s &state
+    /// @param state this state is updated by the CASE system in main repeatedly
     /// @return TorqueControllerOutput_s
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override
     {

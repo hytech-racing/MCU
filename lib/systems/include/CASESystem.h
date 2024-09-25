@@ -148,17 +148,17 @@ public:
 
     DrivetrainCommand_s get_current_drive_command() { return current_command_; }
 
-    /// @brief uses pedal data to determine the requested torque by the car
-    /// @param PedalsSystemData_s &pedals_data 
-    /// @param float max_torque 
-    /// @param float max_regen_torque
-    /// @param float max_rpm 
+    /// @brief uses pedal data to determine the torque to be requested from the motors
+    /// @param pedals_data has accel and regen percent 
+    /// @param max_torque not used right now
+    /// @param max_regen_torque used for calculation of torque request
+    /// @param max_rpm not used right now
     /// @return float representing the calculated request
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_torque, float max_regen_torque, float max_rpm);
 
     /// @brief retrieves rpm setpoint based on final torque value
     /// @param float final_torque 
-    /// @return The maximum RPM from the configuration if torque is positive, otherwise 0.
+    /// @return The maximum RPM from the case configuration if torque is positive, otherwise 0.
     float get_rpm_setpoint(float final_torque)
     {
         if (final_torque > 0)

@@ -46,6 +46,8 @@
 //      - [ ] write testing code for this in separate environment
 
 
+/// @brief Contains a max speed for mode changes(5 m/s), a max torque delta for mode change(.5 nm) and a max power limit(63000 W).
+///        These values are used in the event that no value is provided for them in the constructor. 
 namespace TC_MUX_DEFAULT_PARAMS
 {
     constexpr const float MAX_SPEED_FOR_MODE_CHANGE = 5.0;        // m/s
@@ -109,6 +111,7 @@ public:
     /// @param max_change_speed the max speed difference between the requested controller output and the actual speed of each wheel that if the controller has a diff larger than the mux will not switch to the requested controller
     /// @param max_torque_pos_change_delta same as speed but evaluated between the controller commanded torques defaults to TC_MUX_DEFAULT_PARAMS::MAX_TORQUE_DELTA_FOR_MODE_CHANGE
     /// @param max_power_limit the max power limit defaults to TC_MUX_DEFAULT_PARAMS::MAX_POWER_LIMIT
+    /// @note TC Mux must be created with at least 1 controller.
     explicit TorqueControllerMux(std::array<Controller *, num_controllers> controller_pointers,
                           std::array<bool, num_controllers> mux_bypass_limits,
                           float max_change_speed = TC_MUX_DEFAULT_PARAMS::MAX_SPEED_FOR_MODE_CHANGE,
@@ -131,7 +134,7 @@ public:
     /// @param requested_controller_type the requested controller type from the dial state
     /// @param controller_command_torque_limit the torque limit state enum set by dashboard
     /// @param input_state the current state of the car
-    /// @return the current drivetrain command to be sent to the drivetrain
+    /// @return the current DrivetrainCommand_s to be sent to the drivetrain
     DrivetrainCommand_s getDrivetrainCommand(ControllerMode_e requested_controller_type,
                                              TorqueLimit_e controller_command_torque_limit,
                                              const SharedCarState_s &input_state);

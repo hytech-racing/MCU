@@ -57,7 +57,7 @@ public:
         writeout_.command = BaseControllerParams::TC_COMMAND_NO_TORQUE;
         writeout_.ready = false;
     }
-    /// @brief default contructor with balanced dfault values: rearTorqueScale = 1.0, regenTorqueScale = 1.0
+    /// @brief default contructor with balanced default values: rearTorqueScale = 1.0, regenTorqueScale = 1.0
     TorqueControllerLoadCellVectoring() : TorqueControllerLoadCellVectoring(1.0, 1.0) {}
 
     /// @brief Calculates speed set point based on normal force applied to wheels individually
@@ -68,9 +68,7 @@ public:
         const SysTick_s &tick,
         const PedalsSystemData_s &pedalsData,
         const LoadCellInterfaceOutput_s &loadCellData);
-    /// @brief ticks controller
-    /// @param SharedCarState_s &state 
-    /// @return TorqueControllerOutput_s
+    /// @note refer to parent class
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 

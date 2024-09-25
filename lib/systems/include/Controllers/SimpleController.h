@@ -28,12 +28,10 @@ public:
         writeout_.command = BaseControllerParams::TC_COMMAND_NO_TORQUE;
         writeout_.ready = true;
     }
-    /// @brief calculates torqe output based off max torque and simple torque scaling metric defined in constructor
-    /// @param PedalsSystemData_s &pedalsData 
+    /// @brief calculates torqe output based off max torque and simple torque scaling metric defined in constructor and adjusts writeout_ accordingly
+    /// @param pedalsData controller calculates acceleration request from the pedals based off of this data
     void tick(const PedalsSystemData_s &pedalsData);
-    /// @brief ticks controller
-    /// @param SharedCarState_s &state 
-    /// @return TorqueControllerOutput_s
+    /// @note refer to parent class
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 

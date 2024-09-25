@@ -5,7 +5,7 @@
 #include "SysClock.h"
 #include "SharedFirmwareTypes.h"
 
-/// @brief defines modes of torque limit to be processed in torque limit map for exact values
+/// @brief Defines modes of torque limit to be processed in torque limit map for exact values.
 enum class TorqueLimit_e
 {
     TCMUX_FULL_TORQUE = 0,
@@ -50,7 +50,11 @@ struct DrivetrainDynamicReport_s
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
-/// @brief stores two arrays of size equal to the amount of motors: speed setpoints and necessary torque to reach those setpoints 
+/// @brief Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. 
+/// The Speeds unit is rpm and are the targeted speeds for each wheel of the car.
+/// The torques unit is nm and is the torque requested from the motors to reach such speeds.
+/// One can use the arrays with FR(Front Left), FL(Front Left), RL(Rear Left), RR(Rear Right)  to access or modify the respective set points. eg. speeds_rpm[FR] = 0.0;
+/// Their indexes are defined in utility.h as follows: FL = 0, FR = 1, RL = 2, RR = 3.
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
@@ -58,7 +62,7 @@ struct DrivetrainCommand_s
 };
 
 /// @brief Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating
-///@note returned by all car controllers evaluate method 
+/// @note returned by all car controllers evaluate method 
 struct TorqueControllerOutput_s
 {
     DrivetrainCommand_s command;
@@ -84,7 +88,7 @@ struct VectornavData_s
     xyz_vec<float> angular_rates;
 };
 
-/// @brief Defins errors for TC Mux to use to maintain system safety
+/// @brief Defines errors for TC Mux to use to maintain system safety
 enum class TorqueControllerMuxError
 {
     NO_ERROR = 0,

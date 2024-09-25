@@ -19,7 +19,7 @@ private:
 public:
     /*!
         SIMPLE LAUNCH CONTROLLER
-        @brief launch controller is based off of a specified launch rate and an initial speed target
+        @brief this launch controller is based off of a specified launch rate and an initial speed target
         It will ramp up the speed target linearlly over time to accelerate
         @param launch_rate specified launch rate in m/s^2
         @param initial_speed_target the initial speed commanded to the wheels
@@ -30,8 +30,8 @@ public:
 
     /// @brief base constrcutor with default values: Default_Launch_Rate = 11.76, DEFAULT_LAUNCH_SPEED_TARGET = 1500(rpm)
     TorqueControllerSimpleLaunch() : TorqueControllerSimpleLaunch(SLParams::DEFAULT_LAUNCH_RATE, SLParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
-    /// @brief Increases speed target during launch linearly
-    /// @param VectornavData_s &vn_data 
+    /// @brief Increases speed target during launch linearly based off launch rate provided in the constructor
+    /// @param vn_data this data is not necessary for this controller but is supplied according to the interface
     void calc_launch_algo(const VectornavData_s &vn_data) override;
 };
 #endif // __SIMPLELAUNCHCONTROLLER_H__
