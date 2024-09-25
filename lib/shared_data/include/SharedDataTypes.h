@@ -50,15 +50,15 @@ struct DrivetrainDynamicReport_s
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
-/// @brief Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. 
+/// @brief Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. These setpoints are defined in the torque controllers cycled by the TC Muxer. 
 /// The Speeds unit is rpm and are the targeted speeds for each wheel of the car.
-/// The torques unit is nm and is the torque requested from the motors to reach such speeds.
+/// The torques unit is nm and is the max torque requested from the inverter to reach such speeds.
 /// One can use the arrays with FR(Front Left), FL(Front Left), RL(Rear Left), RR(Rear Right)  to access or modify the respective set points. eg. speeds_rpm[FR] = 0.0;
 /// Their indexes are defined in utility.h as follows: FL = 0, FR = 1, RL = 2, RR = 3.
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
-    float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
+    float inverter_torque_limit[NUM_MOTORS]; 
 };
 
 /// @brief Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating
@@ -68,6 +68,7 @@ struct TorqueControllerOutput_s
     DrivetrainCommand_s command;
     bool ready;
 };
+
 struct VectornavData_s
 {
     float velocity_x;
@@ -101,10 +102,10 @@ enum class TorqueControllerMuxError
 /// @brief packages TC Mux indicators: errors, mode, torque limit, bypass
 struct TorqueControllerMuxStatus
 {
-    TorqueControllerMuxError current_error;
-    ControllerMode_e current_controller_mode;
-    TorqueLimit_e current_torque_limit_enum;
-    float current_torque_limit_value;
+    TorqueControllerMuxError active_error;
+    ControllerMode_e active_controller_mode;
+    TorqueLimit_e active_torque_limit_enum;
+    float active_torque_limit_value;
     bool output_is_bypassing_limits;
 };
 

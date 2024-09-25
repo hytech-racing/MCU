@@ -426,7 +426,7 @@ void loop()
 
     tick_all_systems(curr_tick);
     
-    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode), curr_tick.millis, 100);
+    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode), curr_tick.millis, 100);
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
@@ -481,7 +481,7 @@ void loop()
         Serial.print("Filtered max cell temp: ");
         Serial.println(ams_interface.get_filtered_max_cell_temp());
         Serial.print("Current TC index: ");
-        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode));
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode));
         Serial.print("Current TC error: ");
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
         Serial.println();
@@ -530,10 +530,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
             drivetrain.drivetrain_error_occured(),
-            torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
+            torque_controller_mux.get_tc_mux_status().active_torque_limit_enum,
             ams_interface.get_filtered_min_cell_voltage(),
             a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode),
             dashboard.getDialMode());
 
         main_ecu.tick(

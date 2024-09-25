@@ -27,7 +27,7 @@ public:
     /// @brief default constructor for slip launch controller: DEFAULT_SLIP_RATIO = 0.2, DEFAULT_LAUNCH_SPEED_TARGET = 1500(rpm)
     TorqueControllerSlipLaunch() : TorqueControllerSlipLaunch(SlipLaunchControllerParams::DEFAULT_SLIP_RATIO, SlipLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET) {}
     /// @brief Increases speed target during launch linearly according to slip ratio to keep the cars wheels spinning faster than the velocity for increased traction
-    /// @param VectornavData_s &vn_data 
+    /// @param vn_data This controller needs velocity data for to keep updating increasing the speed according to the slip ratio
     void calc_launch_algo(const VectornavData_s &vn_data) override;
 };
 #endif // __SLIPLAUNCHCONTROLLER_H__

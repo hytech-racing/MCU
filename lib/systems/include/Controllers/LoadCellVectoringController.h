@@ -68,7 +68,7 @@ public:
         const SysTick_s &tick,
         const PedalsSystemData_s &pedalsData,
         const LoadCellInterfaceOutput_s &loadCellData);
-    /// @note refer to parent class
+    /// @note refer to parent class for function documentation
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state) override;
 };
 

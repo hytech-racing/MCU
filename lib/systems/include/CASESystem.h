@@ -149,6 +149,7 @@ public:
     DrivetrainCommand_s get_current_drive_command() { return current_command_; }
 
     /// @brief uses pedal data to determine the torque to be requested from the motors
+    /// pedals_data.accelPercent - pedals_data.regenPercent -> where accelpercent is to what percent the acellerator is pushed and the regen percent is the amount of regenerative braking currently applied
     /// @param pedals_data has accel and regen percent 
     /// @param max_torque not used right now
     /// @param max_regen_torque used for calculation of torque request

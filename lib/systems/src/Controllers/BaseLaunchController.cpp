@@ -31,10 +31,10 @@ void BaseLaunchController::tick(
             writeout_.command.speeds_rpm[RL] = 0.0;
             writeout_.command.speeds_rpm[RR] = 0.0;
 
-            writeout_.command.torqueSetpoints[FL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[FR] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RR] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[FL] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[FR] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[RL] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[RR] = brake_torque_req;
 
             // init launch vars
             launch_speed_target_ = 0;
@@ -53,10 +53,10 @@ void BaseLaunchController::tick(
             writeout_.command.speeds_rpm[RL] = 0.0;
             writeout_.command.speeds_rpm[RR] = 0.0;
 
-            writeout_.command.torqueSetpoints[FL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[FR] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RL] = brake_torque_req;
-            writeout_.command.torqueSetpoints[RR] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[FL] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[FR] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[RL] = brake_torque_req;
+            writeout_.command.inverter_torque_limit[RR] = brake_torque_req;
 
             // init launch vars
             launch_speed_target_ = 0;
@@ -94,10 +94,10 @@ void BaseLaunchController::tick(
             writeout_.command.speeds_rpm[RL] = launch_speed_target_;
             writeout_.command.speeds_rpm[RR] = launch_speed_target_;
 
-            writeout_.command.torqueSetpoints[FL] = PhysicalParameters::AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[FR] = PhysicalParameters::AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[RL] = PhysicalParameters::AMK_MAX_TORQUE;
-            writeout_.command.torqueSetpoints[RR] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.inverter_torque_limit[FL] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.inverter_torque_limit[FR] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.inverter_torque_limit[RL] = PhysicalParameters::AMK_MAX_TORQUE;
+            writeout_.command.inverter_torque_limit[RR] = PhysicalParameters::AMK_MAX_TORQUE;
 
             break;
         }
