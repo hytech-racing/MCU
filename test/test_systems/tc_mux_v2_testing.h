@@ -4,6 +4,7 @@
 #include "TorqueControllerMux.h"
 #include "TorqueControllers.h"
 #include "fake_controller_type.h"
+#include "gtest/gtest.h"
 
 
 
@@ -55,7 +56,7 @@ TEST(TorqueControllerMuxTesting, test_invalid_controller_request_error)
     SharedCarState_s state({}, {}, {}, {}, {}, {});
     auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_2, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS);
+    ASSERT_EQ(test.get_tc_mux_status().active_error, TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS);
     for (int i =0; i< 4; i++)
     {
 
@@ -85,7 +86,7 @@ TEST(TorqueControllerMuxTesting, test_controller_output_swap_logic)
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
 
     ASSERT_EQ(test.get_tc_mux_status().active_controller_mode, ControllerMode_e::MODE_0);
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH);
+    ASSERT_EQ(test.get_tc_mux_status().active_error, TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH);
 
     set_outputs(inst1, 0, 1);
     set_outputs(inst2, 0, 1);
@@ -94,7 +95,7 @@ TEST(TorqueControllerMuxTesting, test_controller_output_swap_logic)
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
 
     ASSERT_EQ(test.get_tc_mux_status().active_controller_mode, ControllerMode_e::MODE_1);
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+    ASSERT_EQ(test.get_tc_mux_status().active_error, TorqueControllerMuxError::NO_ERROR);
 }
 
 TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
@@ -108,7 +109,7 @@ TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
     auto out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     ASSERT_EQ(test.get_tc_mux_status().active_controller_mode, ControllerMode_e::MODE_0);
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH);
+    ASSERT_EQ(test.get_tc_mux_status().active_error, TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH);
 
     // tick it a bunch of times
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
@@ -118,7 +119,7 @@ TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
 
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH);
+    ASSERT_EQ(test.get_tc_mux_status().active_error, TorqueControllerMuxError::ERROR_TORQUE_DIFF_TOO_HIGH);
 
     ASSERT_EQ(test.get_tc_mux_status().active_controller_mode, ControllerMode_e::MODE_0);
 
@@ -278,6 +279,6 @@ TEST(TorqueControllerMuxTesting, test_null_pointer_error_state)
         ASSERT_EQ(res.inverter_torque_limit[i], 0.0f);
         ASSERT_EQ(res.speeds_rpm[i], 0.0f);
     }
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER);
+    ASSERT_EQ(test.get_tc_mux_status().active_error, TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER);
 }
 #endif // __TC_MUX_V2_TESTING_H__

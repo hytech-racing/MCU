@@ -64,10 +64,10 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = PhysicalParameters::AMK_MAX_RPM;
                 writeout_.command.speeds_rpm[RR] = PhysicalParameters::AMK_MAX_RPM;
 
-                writeout_.command.torqueSetpoints[FL] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce;
-                writeout_.command.torqueSetpoints[FR] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce;
-                writeout_.command.torqueSetpoints[RL] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[2] / sumNormalForce;
-                writeout_.command.torqueSetpoints[RR] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[3] / sumNormalForce;
+                writeout_.command.inverter_torque_limit[FL] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[0] / sumNormalForce;
+                writeout_.command.inverter_torque_limit[FR] = torquePool * frontTorqueScale_ * loadCellForcesFiltered_[1] / sumNormalForce;
+                writeout_.command.inverter_torque_limit[RL] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[2] / sumNormalForce;
+                writeout_.command.inverter_torque_limit[RR] = torquePool * rearTorqueScale_ * loadCellForcesFiltered_[3] / sumNormalForce;
             }
             else
             {
@@ -80,10 +80,10 @@ void TorqueControllerLoadCellVectoring::tick(
                 writeout_.command.speeds_rpm[RL] = 0.0;
                 writeout_.command.speeds_rpm[RR] = 0.0;
 
-                writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
-                writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
-                writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
-                writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.inverter_torque_limit[FL] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.inverter_torque_limit[FR] = torqueRequest * frontRegenTorqueScale_;
+                writeout_.command.inverter_torque_limit[RL] = torqueRequest * rearRegenTorqueScale_;
+                writeout_.command.inverter_torque_limit[RR] = torqueRequest * rearRegenTorqueScale_;
             }
         }
         else
