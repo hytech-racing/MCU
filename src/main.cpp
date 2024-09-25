@@ -483,7 +483,7 @@ void loop()
         Serial.print("Current TC index: ");
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode));
         Serial.print("Current TC error: ");
-        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_error));
         Serial.println();
         Serial.println();
     }
@@ -566,7 +566,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            torque_controller_mux.get_tc_mux_status().current_error);
+            torque_controller_mux.get_tc_mux_status().active_error);
     }
 
     if (t.trigger50) // 50Hz
