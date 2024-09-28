@@ -75,7 +75,6 @@ private:
     TorqueControllerMuxError can_switch_controller_(DrivetrainDynamicReport_s current_drivetrain_data,
                                                     DrivetrainCommand_s previous_controller_command,
                                                     DrivetrainCommand_s desired_controller_out);
-
     DrivetrainCommand_s apply_positive_speed_limit_(const DrivetrainCommand_s &command);
     DrivetrainCommand_s apply_torque_limit_(const DrivetrainCommand_s &command, float max_torque);
     DrivetrainCommand_s apply_power_limit_(const DrivetrainCommand_s &command, const DrivetrainDynamicReport_s &drivetrain, float power_limit, float max_torque);
