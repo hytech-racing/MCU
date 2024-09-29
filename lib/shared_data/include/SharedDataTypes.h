@@ -6,6 +6,9 @@
 #include "SharedFirmwareTypes.h"
 #include "DrivebrainData.h"
 
+using speed_rpm = float;
+using torque_nm = float;
+
 enum class TorqueLimit_e
 {
     TCMUX_FULL_TORQUE = 0,
@@ -45,8 +48,8 @@ struct PedalsSystemData_s
 struct DrivetrainDynamicReport_s
 {
     uint16_t measuredInverterFLPackVoltage;
-    float measuredSpeeds[NUM_MOTORS]; // rpm
-    float measuredTorques[NUM_MOTORS];
+    speed_rpm measuredSpeeds[NUM_MOTORS]; // rpm
+    torque_nm measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
