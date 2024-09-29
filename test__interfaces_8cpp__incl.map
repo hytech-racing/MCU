@@ -1,0 +1,29 @@
+<map id="test/test_interfaces/test_interfaces.cpp" name="test/test_interfaces/test_interfaces.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="550,5,686,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="497,255,573,280"/>
+<area shape="rect" id="node3" title=" " alt="" coords="589,181,647,207"/>
+<area shape="rect" id="node4" href="$AMS__interface__test_8h.html" title=" " alt="" coords="691,101,838,126"/>
+<area shape="rect" id="node8" href="$dashboard__interface__test_8h.html" title=" " alt="" coords="159,93,298,133"/>
+<area shape="rect" id="node11" href="$Watchdog__interface__test_8h.html" title=" " alt="" coords="435,93,572,133"/>
+<area shape="rect" id="node13" href="$Coulomb__Counting__Tests_8h.html" title=" " alt="" coords="1010,101,1191,126"/>
+<area shape="rect" id="node17" href="$MCU__rev15__defs_8h.html" title=" " alt="" coords="1383,101,1517,126"/>
+<area shape="rect" id="node5" title=" " alt="" coords="951,181,1063,207"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1455,401,1541,427"/>
+<area shape="rect" id="node7" href="$CAN__testing__utilities_8h.html" title=" " alt="" coords="722,181,877,207"/>
+<area shape="rect" id="node9" title=" " alt="" coords="227,181,297,207"/>
+<area shape="rect" id="node10" title=" " alt="" coords="5,181,151,207"/>
+<area shape="rect" id="node12" title=" " alt="" coords="423,181,565,207"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1322,181,1394,207"/>
+<area shape="rect" id="node15" href="$MessageQueueDefine_8h.html" title=" " alt="" coords="1139,181,1297,207"/>
+<area shape="rect" id="node16" title=" " alt="" coords="1165,255,1271,280"/>
+<area shape="rect" id="node18" href="$PedalsSystem_8h.html" title=" " alt="" coords="1535,181,1651,207"/>
+<area shape="rect" id="node19" title=" " alt="" coords="1469,255,1530,280"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1609,328,1659,353"/>
+<area shape="rect" id="node21" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="1655,255,1826,280"/>
+<area shape="rect" id="node23" href="$SharedDataTypes_8h.html" title=" " alt="" coords="1784,328,1919,353"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1685,328,1759,353"/>
+<area shape="rect" id="node24" title=" " alt="" coords="1819,401,1883,427"/>
+<area shape="rect" id="node25" href="$Utility_8h.html" title=" " alt="" coords="1908,401,1973,427"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1633,401,1795,427"/>
+<area shape="rect" id="node26" href="$PhysicalParameters_8h.html" title=" " alt="" coords="1867,475,2015,500"/>
+</map>

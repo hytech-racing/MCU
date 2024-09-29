@@ -1,0 +1,5 @@
+<map id="SafetySystem" name="SafetySystem">
+<area shape="rect" id="node1" title=" " alt="" coords="134,577,289,691"/>
+<area shape="rect" id="node2" href="$classAMSInterface.html" title="this class is for interfacing with the AMS (accumulator management system)" alt="" coords="5,5,212,515"/>
+<area shape="rect" id="node3" href="$classWatchdogInterface.html" title=" " alt="" coords="236,145,395,375"/>
+</map>

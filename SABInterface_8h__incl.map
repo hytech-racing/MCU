@@ -1,0 +1,14 @@
+<map id="lib/interfaces/include/SABInterface.h" name="lib/interfaces/include/SABInterface.h">
+<area shape="rect" id="node1" title=" " alt="" coords="83,5,225,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,76,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="101,93,207,119"/>
+<area shape="rect" id="node4" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="231,93,402,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="205,167,255,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="279,167,354,192"/>
+<area shape="rect" id="node7" href="$SharedDataTypes_8h.html" title=" " alt="" coords="379,167,513,192"/>
+<area shape="rect" id="node8" title=" " alt="" coords="275,240,339,265"/>
+<area shape="rect" id="node9" href="$Utility_8h.html" title=" " alt="" coords="364,240,429,265"/>
+<area shape="rect" id="node11" title=" " alt="" coords="453,240,540,265"/>
+<area shape="rect" id="node12" title=" " alt="" coords="565,240,727,265"/>
+<area shape="rect" id="node10" href="$PhysicalParameters_8h.html" title=" " alt="" coords="323,313,471,339"/>
+</map>

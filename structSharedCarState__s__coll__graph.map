@@ -1,0 +1,11 @@
+<map id="SharedCarState_s" name="SharedCarState_s">
+<area shape="rect" id="node1" title="car state struct that contains state of everything about the car including" alt="" coords="455,489,605,573"/>
+<area shape="rect" id="node2" href="$structSteeringSystemData__s.html" title=" " alt="" coords="5,262,164,331"/>
+<area shape="rect" id="node3" href="$structDrivetrainDynamicReport__s.html" title=" " alt="" coords="189,240,415,353"/>
+<area shape="rect" id="node4" href="$structLoadCellInterfaceOutput__s.html" title=" " alt="" coords="439,269,621,324"/>
+<area shape="rect" id="node5" href="$structveh__vec.html" title=" " alt="" coords="372,5,493,104"/>
+<area shape="rect" id="node6" href="$structveh__vec.html" title=" " alt="" coords="518,5,734,104"/>
+<area shape="rect" id="node7" href="$structPedalsSystemData__s.html" title=" " alt="" coords="645,196,889,397"/>
+<area shape="rect" id="node8" href="$structVectornavData__s.html" title=" " alt="" coords="913,167,1067,427"/>
+<area shape="rect" id="node9" href="$structxyz__vec.html" title=" " alt="" coords="931,13,1049,97"/>
+</map>

@@ -1,0 +1,21 @@
+<map id="lib/interfaces/include/ProtobufMsgInterface.h" name="lib/interfaces/include/ProtobufMsgInterface.h">
+<area shape="rect" id="node1" title=" " alt="" coords="345,5,507,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,100,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="124,93,219,119"/>
+<area shape="rect" id="node4" title=" " alt="" coords="243,93,345,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="369,93,483,119"/>
+<area shape="rect" id="node6" title=" " alt="" coords="512,167,631,192"/>
+<area shape="rect" id="node7" href="$MCU__rev15__defs_8h.html" title=" " alt="" coords="710,93,843,119"/>
+<area shape="rect" id="node19" href="$InterfaceParams_8h.html" title=" " alt="" coords="558,93,686,119"/>
+<area shape="rect" id="node8" href="$PedalsSystem_8h.html" title=" " alt="" coords="719,167,835,192"/>
+<area shape="rect" id="node9" title=" " alt="" coords="555,240,617,265"/>
+<area shape="rect" id="node10" title=" " alt="" coords="643,313,694,339"/>
+<area shape="rect" id="node11" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="691,240,862,265"/>
+<area shape="rect" id="node13" href="$SharedDataTypes_8h.html" title=" " alt="" coords="824,313,959,339"/>
+<area shape="rect" id="node17" title=" " alt="" coords="997,387,1084,412"/>
+<area shape="rect" id="node12" title=" " alt="" coords="725,313,799,339"/>
+<area shape="rect" id="node14" title=" " alt="" coords="631,387,695,412"/>
+<area shape="rect" id="node15" href="$Utility_8h.html" title=" " alt="" coords="720,387,785,412"/>
+<area shape="rect" id="node18" title=" " alt="" coords="810,387,973,412"/>
+<area shape="rect" id="node16" href="$PhysicalParameters_8h.html" title=" " alt="" coords="679,460,827,485"/>
+</map>

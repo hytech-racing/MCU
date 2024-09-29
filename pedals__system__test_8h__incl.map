@@ -1,0 +1,18 @@
+<map id="test/test_systems/pedals_system_test.h" name="test/test_systems/pedals_system_test.h">
+<area shape="rect" id="node1" title=" " alt="" coords="133,5,301,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,100,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="124,93,179,119"/>
+<area shape="rect" id="node4" href="$PedalsSystem_8h.html" title=" " alt="" coords="248,167,364,192"/>
+<area shape="rect" id="node15" title=" " alt="" coords="254,93,305,119"/>
+<area shape="rect" id="node16" href="$MCU__rev15__defs_8h.html" title=" " alt="" coords="329,93,462,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="85,240,146,265"/>
+<area shape="rect" id="node6" title=" " alt="" coords="173,313,223,339"/>
+<area shape="rect" id="node7" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="221,240,391,265"/>
+<area shape="rect" id="node9" href="$SharedDataTypes_8h.html" title=" " alt="" coords="353,313,488,339"/>
+<area shape="rect" id="node13" title=" " alt="" coords="527,387,613,412"/>
+<area shape="rect" id="node8" title=" " alt="" coords="254,313,329,339"/>
+<area shape="rect" id="node10" title=" " alt="" coords="161,387,225,412"/>
+<area shape="rect" id="node11" href="$Utility_8h.html" title=" " alt="" coords="249,387,315,412"/>
+<area shape="rect" id="node14" title=" " alt="" coords="339,387,502,412"/>
+<area shape="rect" id="node12" href="$PhysicalParameters_8h.html" title=" " alt="" coords="208,460,356,485"/>
+</map>

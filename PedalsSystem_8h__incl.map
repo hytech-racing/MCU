@@ -1,0 +1,13 @@
+<map id="lib/systems/include/PedalsSystem.h" name="lib/systems/include/PedalsSystem.h">
+<area shape="rect" id="node1" title=" " alt="" coords="160,5,293,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,67,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="93,167,144,192"/>
+<area shape="rect" id="node4" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="141,93,312,119"/>
+<area shape="rect" id="node6" href="$SharedDataTypes_8h.html" title=" " alt="" coords="274,167,409,192"/>
+<area shape="rect" id="node10" title=" " alt="" coords="447,240,534,265"/>
+<area shape="rect" id="node5" title=" " alt="" coords="175,167,249,192"/>
+<area shape="rect" id="node7" title=" " alt="" coords="81,240,145,265"/>
+<area shape="rect" id="node8" href="$Utility_8h.html" title=" " alt="" coords="170,240,235,265"/>
+<area shape="rect" id="node11" title=" " alt="" coords="260,240,423,265"/>
+<area shape="rect" id="node9" href="$PhysicalParameters_8h.html" title=" " alt="" coords="129,313,277,339"/>
+</map>

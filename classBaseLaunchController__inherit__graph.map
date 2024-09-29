@@ -1,0 +1,7 @@
+<map id="BaseLaunchController" name="BaseLaunchController">
+<area shape="rect" id="node1" title=" " alt="" coords="280,108,452,353"/>
+<area shape="rect" id="node3" href="$classTorqueControllerLookupLaunch.html" title=" " alt="" coords="5,401,231,500"/>
+<area shape="rect" id="node4" href="$classTorqueControllerSimpleLaunch.html" title=" " alt="" coords="255,401,477,500"/>
+<area shape="rect" id="node5" href="$classTorqueControllerSlipLaunch.html" title=" " alt="" coords="501,401,705,500"/>
+<area shape="rect" id="node2" href="$classController.html" title=" " alt="" coords="318,5,414,60"/>
+</map>

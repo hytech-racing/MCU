@@ -1,0 +1,15 @@
+<map id="lib/interfaces/include/MessageQueueDefine.h" name="lib/interfaces/include/MessageQueueDefine.h">
+<area shape="rect" id="node1" title=" " alt="" coords="377,5,540,45"/>
+<area shape="rect" id="node2" href="$interfaces_2include_2AMSInterface_8h.html" title=" " alt="" coords="5,284,147,324"/>
+<area shape="rect" id="node3" href="$interfaces_2include_2HytechCANInterface_8h.html" title=" " alt="" coords="162,372,318,412"/>
+<area shape="rect" id="node4" href="$interfaces_2include_2DashboardInterface_8h.html" title=" " alt="" coords="221,284,371,324"/>
+<area shape="rect" id="node5" href="$interfaces_2include_2MCUInterface_8h.html" title=" " alt="" coords="335,101,476,141"/>
+<area shape="rect" id="node7" href="$interfaces_2include_2TelemetryInterface_8h.html" title=" " alt="" coords="445,284,589,324"/>
+<area shape="rect" id="node8" href="$ThermistorInterface_8h.html" title=" " alt="" coords="553,101,703,141"/>
+<area shape="rect" id="node11" href="$Coulomb__Counting__Tests_8h.html" title=" " alt="" coords="727,101,913,141"/>
+<area shape="rect" id="node13" href="$Telemetry__interface__test_8h.html" title=" " alt="" coords="937,93,1077,148"/>
+<area shape="rect" id="node6" href="$lib_2interfaces_2include_2InverterInterface_8h.html" title=" " alt="" coords="335,196,476,236"/>
+<area shape="rect" id="node9" href="$ThermistorInterface_8cpp.html" title=" " alt="" coords="551,196,713,236"/>
+<area shape="rect" id="node10" href="$src_2main_8cpp.html" title=" " alt="" coords="737,203,833,229"/>
+<area shape="rect" id="node12" href="$test__interfaces_8cpp.html" title=" " alt="" coords="857,196,993,236"/>
+</map>

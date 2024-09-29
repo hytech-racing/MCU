@@ -1,0 +1,5 @@
+<map id="PedalsSystem" name="PedalsSystem">
+<area shape="rect" id="node1" title=" " alt="" coords="129,313,352,691"/>
+<area shape="rect" id="node2" href="$structPedalsSystemData__s.html" title=" " alt="" coords="5,20,249,221"/>
+<area shape="rect" id="node3" href="$structPedalsParams.html" title="system interface struct that contains the data from the pedal system" alt="" coords="274,5,437,236"/>
+</map>

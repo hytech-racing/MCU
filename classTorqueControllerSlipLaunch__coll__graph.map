@@ -1,0 +1,7 @@
+<map id="TorqueControllerSlipLaunch" name="TorqueControllerSlipLaunch">
+<area shape="rect" id="node1" title=" " alt="" coords="5,535,209,633"/>
+<area shape="rect" id="node2" href="$classBaseLaunchController.html" title=" " alt="" coords="21,255,193,485"/>
+<area shape="rect" id="node3" href="$classController.html" title=" " alt="" coords="38,137,134,192"/>
+<area shape="rect" id="node4" href="$structTorqueControllerOutput__s.html" title=" " alt="" coords="159,137,333,192"/>
+<area shape="rect" id="node5" href="$structDrivetrainCommand__s.html" title=" " alt="" coords="169,5,323,75"/>
+</map>

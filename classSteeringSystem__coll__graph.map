@@ -1,0 +1,9 @@
+<map id="SteeringSystem" name="SteeringSystem">
+<area shape="rect" id="node1" title=" " alt="" coords="375,724,554,881"/>
+<area shape="rect" id="node2" href="$classSteeringEncoderInterface.html" title=" " alt="" coords="189,445,361,529"/>
+<area shape="rect" id="node3" href="$structSteeringEncoderConversion__s.html" title=" " alt="" coords="13,86,213,170"/>
+<area shape="rect" id="node4" href="$structSteeringSystemData__s.html" title=" " alt="" coords="385,453,544,522"/>
+<area shape="rect" id="node5" href="$classFilter__IIR.html" title=" " alt="" coords="568,416,708,559"/>
+<area shape="rect" id="node6" href="$classTelemetryInterface.html" title=" " alt="" coords="732,313,912,661"/>
+<area shape="rect" id="node7" href="$structTelemetryInterfaceReadChannels.html" title=" " alt="" coords="713,5,931,251"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="lib/interfaces/include/MCUInterface.h" name="lib/interfaces/include/MCUInterface.h">
+<area shape="rect" id="node1" title=" " alt="" coords="377,5,519,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,313,69,339"/>
+<area shape="rect" id="node3" title=" " alt="" coords="512,167,619,192"/>
+<area shape="rect" id="node4" title=" " alt="" coords="603,93,715,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="739,93,810,119"/>
+<area shape="rect" id="node6" href="$MessageQueueDefine_8h.html" title=" " alt="" coords="369,93,527,119"/>
+<area shape="rect" id="node7" href="$PedalsSystem_8h.html" title=" " alt="" coords="229,93,345,119"/>
+<area shape="rect" id="node12" href="$SharedDataTypes_8h.html" title=" " alt="" coords="107,240,242,265"/>
+<area shape="rect" id="node8" title=" " alt="" coords="80,167,141,192"/>
+<area shape="rect" id="node9" title=" " alt="" coords="375,240,425,265"/>
+<area shape="rect" id="node10" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="216,167,387,192"/>
+<area shape="rect" id="node15" title=" " alt="" coords="413,313,499,339"/>
+<area shape="rect" id="node11" title=" " alt="" coords="267,240,341,265"/>
+<area shape="rect" id="node13" href="$Utility_8h.html" title=" " alt="" coords="117,313,182,339"/>
+<area shape="rect" id="node16" title=" " alt="" coords="207,313,369,339"/>
+<area shape="rect" id="node14" href="$PhysicalParameters_8h.html" title=" " alt="" coords="75,387,223,412"/>
+</map>

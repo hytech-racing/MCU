@@ -1,0 +1,6 @@
+<map id="BaseLaunchController" name="BaseLaunchController">
+<area shape="rect" id="node1" title=" " alt="" coords="5,255,177,485"/>
+<area shape="rect" id="node2" href="$classController.html" title=" " alt="" coords="22,137,118,192"/>
+<area shape="rect" id="node3" href="$structTorqueControllerOutput__s.html" title=" " alt="" coords="143,137,317,192"/>
+<area shape="rect" id="node4" href="$structDrivetrainCommand__s.html" title=" " alt="" coords="153,5,307,75"/>
+</map>
