@@ -1,3 +1,9 @@
+#ifdef ENABLE_DEBUG_PRINTS
+#define DEBUG_PRINTS true
+#else 
+#define DEBUG_PRINTS false
+#endif
+
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
@@ -461,7 +467,7 @@ void loop()
 
     // Basic debug prints
     // if (curr_tick.triggers.trigger5)
-    if (false)
+    if (DEBUG_PRINTS)
     {
         Serial.print("Steering system reported angle (deg): ");
         Serial.println(steering_system.getSteeringSystemData().angle);
