@@ -186,6 +186,7 @@ TEST(TorqueControllerMuxTesting, test_invalid_controller_request_error)
     TestControllerType inst1, inst2;
     TorqueControllerMux<2> test({static_cast<Controller *>(&inst1), static_cast<Controller *>(&inst2)}, {false, false});
     SharedCarState_s state({}, {}, {}, {}, {}, {});
+    //test positve out of bounds
     auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_2, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
    
     ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS);
@@ -195,6 +196,32 @@ TEST(TorqueControllerMuxTesting, test_invalid_controller_request_error)
         ASSERT_EQ(res.speeds_rpm[i], 0.0);
         ASSERT_EQ(res.torqueSetpoints[i], 0.0);
     }
+
+    //reset to no error
+    res = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+
+    //test negative out of bounds
+    res = test.getDrivetrainCommand(static_cast<ControllerMode_e>(-1), TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS);
+    for (int i =0; i< 4; i++)
+    {
+ 
+        ASSERT_EQ(res.speeds_rpm[i], 0.0);
+        ASSERT_EQ(res.torqueSetpoints[i], 0.0);
+    }
+}
+TEST(TorqueControllerMuxTesting, test_null_pointer_error_state)
+{
+    TorqueControllerMux<1> test({nullptr}, {true});
+    SharedCarState_s state({}, {}, {}, {}, {}, {});
+    auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, state);
+    for (int i = 0; i < 4; i++)
+    {
+        ASSERT_EQ(res.torqueSetpoints[i], 0.0f);
+        ASSERT_EQ(res.speeds_rpm[i], 0.0f);
+    }
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER);
 }
 TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
 {
@@ -226,18 +253,38 @@ TEST(TorqueControllerMuxTesting, test_torque_diff_swap_limit)
     ASSERT_EQ(out1.torqueSetpoints[2], 1);
     ASSERT_EQ(out1.torqueSetpoints[3], 1);
 }
-TEST(TorqueControllerMuxTesting, test_null_pointer_error_state)
+TEST(TorqueControllerMuxTesting, test_speed_diff_swap_limit)
 {
-    TorqueControllerMux<1> test({nullptr}, {true});
+    TestControllerType inst1, inst2;
+    TorqueControllerMux<2> test({static_cast<Controller *>(&inst1), static_cast<Controller *>(&inst2)}, {false, false});
     SharedCarState_s state({}, {}, {}, {}, {}, {});
-    auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, state);
-    for (int i = 0; i < 4; i++)
-    {
-        ASSERT_EQ(res.torqueSetpoints[i], 0.0f);
-        ASSERT_EQ(res.speeds_rpm[i], 0.0f);
-    }
-    //makes it not able to test, assume i didnt pull most recent code
-    // ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER);
+    set_outputs(inst1, 0.1, 1);
+    set_outputs(inst2, 3, 1);
+ 
+    auto out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_1);
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    state.drivetrain_data = { 0, { 3000, 0, 0, 0 }, {}, {}, {} };
+
+    // tick it a bunch of times
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    out1 = test.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+ 
+    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH);
+ 
+    ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
+ 
+    ASSERT_EQ(out1.torqueSetpoints[0], 1);
+    ASSERT_EQ(out1.torqueSetpoints[1], 1);
+    ASSERT_EQ(out1.torqueSetpoints[2], 1);
+    ASSERT_EQ(out1.torqueSetpoints[3], 1);
 }
  
 //make generic
