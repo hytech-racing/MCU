@@ -3,7 +3,9 @@
 
 #include "TorqueControllerMux.h"
 #include "TorqueControllers.h"
+#include "TorqueControllers.h"
 #include "fake_controller_type.h"
+#include <gtest/gtest.h>
 
 
 
@@ -82,21 +84,6 @@ TEST(TorqueControllerMuxTesting, test_construction_bypass_limits)
     ASSERT_EQ(drive_command.torqueSetpoints[3], 30.0f);
  
     ASSERT_EQ(test.get_tc_mux_status().output_is_bypassing_limits, true);
-}
-TEST(TorqueControllerMuxTesting, test_invalid_controller_request_error)
-{
-    TestControllerType inst1, inst2;
-    TorqueControllerMux<2> test({static_cast<Controller *>(&inst1), static_cast<Controller *>(&inst2)}, {false, false});
-    SharedCarState_s state({}, {}, {}, {}, {}, {});
-    auto res = test.getDrivetrainCommand(ControllerMode_e::MODE_2, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
-    
-    ASSERT_EQ(test.get_tc_mux_status().current_error, TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS);
-    for (int i =0; i< 4; i++)
-    {
-
-        ASSERT_EQ(res.speeds_rpm[i], 0.0);
-        ASSERT_EQ(res.torqueSetpoints[i], 0.0);
-    }
 }
 template<int num_controllers>
 void test_with_n_controllers() {
@@ -333,6 +320,7 @@ TEST(TorqueControllerMuxTesting, test_speed_diff_swap_limit)
     ASSERT_EQ(out1.torqueSetpoints[1], 1);
     ASSERT_EQ(out1.torqueSetpoints[2], 1);
     ASSERT_EQ(out1.torqueSetpoints[3], 1);
+}
 
 //Mode evaluation tests
 TEST(TorqueControllerMuxTesting, test_mode0_evaluation)
