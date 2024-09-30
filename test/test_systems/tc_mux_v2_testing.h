@@ -108,6 +108,41 @@ TEST(TorqueControllerMuxTesting, test_construction_bypass_limits)
  
     ASSERT_EQ(test.get_tc_mux_status().output_is_bypassing_limits, true);
 }
+template<int num_controllers>
+void test_with_n_controllers() {
+    SharedCarState_s state({}, {}, {}, {}, {}, {});
+    std::array<TestControllerType, num_controllers> controller_instances; 
+    std::array<Controller*, num_controllers> controller_ptrs; 
+    std::array<bool, num_controllers> error_flags{}; 
+
+    for (int i = 0; i < num_controllers; ++i) {
+        controller_ptrs[i] = static_cast<Controller*>(&controller_instances[i]);
+    }
+
+    // Instantiate TorqueControllerMux with the current number of controllers
+    TorqueControllerMux<num_controllers> mux(controller_ptrs, error_flags);
+
+    // Test the getDrivetrainCommand method
+    auto result = mux.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+
+    // Assert no error has occurred
+    ASSERT_EQ(mux.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+}
+
+// Test case for different numbers of controllers (hardcoded bc needs a const)
+TEST(TorqueControllerMuxTesting, test_variable_length_controllers)
+{
+    test_with_n_controllers<1>();
+    test_with_n_controllers<2>();
+    test_with_n_controllers<3>();
+    test_with_n_controllers<4>();
+    test_with_n_controllers<5>();
+    test_with_n_controllers<6>();
+    test_with_n_controllers<7>();
+    test_with_n_controllers<8>();
+    test_with_n_controllers<9>();
+    test_with_n_controllers<10>();
+}
  
 //logic testing
 // ensure that swapping to a controller that has a higher desired output speed than previously
