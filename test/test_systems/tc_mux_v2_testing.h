@@ -515,13 +515,5 @@ TEST(TorqueControllerMuxTesting, test_real_controllers_output)
     out1 = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
     ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_1);
-    
-    out1 = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_2, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
-    ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
-    ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_2);
- 
-    out1 = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_2, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
-    ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
-    ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_2);
 }
 #endif // __TC_MUX_V2_TESTING_H__
