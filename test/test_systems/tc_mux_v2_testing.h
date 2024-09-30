@@ -424,6 +424,7 @@ TEST(TorqueControllerMuxTesting, test_tc_mux_status)
     ASSERT_EQ(test.get_tc_mux_status().current_controller_mode, testMode);
     ASSERT_EQ(test.get_tc_mux_status().current_torque_limit_enum, testTorqLim);
 }
+//set shared car state so that it does not randomly pass and not pass anymore
 TEST(TorqueControllerMuxTesting, test_real_controllers_output)
 {
     //mode 0
