@@ -439,6 +439,71 @@ TEST(TorqueControllerMuxTesting, test_torque_limit)
     printf("torque 4: %.2f\n", drive_command.torqueSetpoints[3]);
 }
 
+TEST(TorqueControllerMuxTesting, test_apply_regen_limit) 
+{
+    TestControllerType inst1;
+    set_output_rpm(inst1, 300, 10.0); 
+
+    inst1.output.command.torqueSetpoints[0] = 10; 
+    TorqueControllerMux<1> test({static_cast<Controller *>(&inst1)}, {false});
+    SharedCarState_s mode_0_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+
+    DrivetrainDynamicReport_s drivetrain_data_below_no_regen = {};
+    drivetrain_data_below_no_regen.measuredSpeeds[0] = 12.0f / RPM_TO_KILOMETERS_PER_HOUR; 
+    inst1.output.command.torqueSetpoints[0] = 0.0f; 
+    auto command_below_no_regen = test.getDrivetrainCommand(
+        ControllerMode_e::MODE_0,
+        TorqueLimit_e::TCMUX_LOW_TORQUE,
+        mode_0_input_state
+    );
+    ASSERT_EQ(command_below_no_regen.torqueSetpoints[0], 0.0f); 
+
+    DrivetrainDynamicReport_s drivetrain_data_above_no_regen = {};
+    drivetrain_data_above_no_regen.measuredSpeeds[0] = 15.0f / RPM_TO_KILOMETERS_PER_HOUR; 
+    inst1.output.command.torqueSetpoints[0] = 10.0f; 
+    auto command_above_no_regen = test.getDrivetrainCommand(
+        ControllerMode_e::MODE_0,
+        TorqueLimit_e::TCMUX_LOW_TORQUE,
+        mode_0_input_state
+    );
+    ASSERT_GT(command_above_no_regen.torqueSetpoints[0], 0.0f); 
+  
+    DrivetrainDynamicReport_s drivetrain_data_between_limits = {};
+    drivetrain_data_between_limits.measuredSpeeds[0] = 8.0f / RPM_TO_KILOMETERS_PER_HOUR; 
+    inst1.output.command.torqueSetpoints[0] = 10.0f; 
+    auto command_between_limits = test.getDrivetrainCommand(
+        ControllerMode_e::MODE_0,
+        TorqueLimit_e::TCMUX_LOW_TORQUE,
+        mode_0_input_state
+    );
+    ASSERT_LE(command_between_limits.torqueSetpoints[0], 10.0f); 
+} 
+
+
+
+TEST(TorqueControllerMuxTesting, test_apply_positive_speed_limit) 
+{
+    TestControllerType inst1;
+    set_output_rpm(inst1, -300, 10.0); 
+    inst1.output.command.torqueSetpoints[0] = 5;
+    TorqueControllerMux<1> test({static_cast<Controller *>(&inst1)}, {false});
+    SharedCarState_s mode_0_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+
+    // apply speed limit happens in here
+    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_0_input_state);
+
+    ASSERT_EQ(drive_command.speeds_rpm[0], 0.0f);
+    ASSERT_EQ(drive_command.speeds_rpm[1], 0.0f);
+    ASSERT_EQ(drive_command.speeds_rpm[2], 0.0f);
+    ASSERT_EQ(drive_command.speeds_rpm[3], 0.0f);
+
+    printf("Speed 1: %.2f\n", drive_command.speeds_rpm[0]);
+    printf("Speed 2: %.2f\n", drive_command.speeds_rpm[1]);
+    printf("Speed 3: %.2f\n", drive_command.speeds_rpm[2]);
+    printf("Speed 4: %.2f\n", drive_command.speeds_rpm[3]);
+
+} 
+
 //integration testing
 TEST(TorqueControllerMuxTesting, test_tc_mux_status)
 {
