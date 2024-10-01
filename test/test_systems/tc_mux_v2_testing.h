@@ -7,10 +7,6 @@
 #include "fake_controller_type.h"
 #include <gtest/gtest.h>
 
-
-
-// TODO
-// - [x] test to ensure that the size checking for desired modes works and failes properly
 template <typename quad_array_type>
 void set_four_outputs(quad_array_type &out, float val)
 {
@@ -64,9 +60,9 @@ TEST(TorqueControllerMuxTesting, test_construction_bypass_limits)
         drivetrain_data.measuredSpeeds[i] = 500.0f;
     }
     //onlhy use mode 0 for the input state in all tests and then test if they would act the same, idk how to do that
-    SharedCarState_s mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+    SharedCarState_s mode_1_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
  
-    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_0_input_state);
+    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_1_input_state);
  
     ASSERT_EQ(drive_command.torqueSetpoints[0], 30.0f);
     ASSERT_EQ(drive_command.torqueSetpoints[1], 30.0f);
@@ -76,7 +72,7 @@ TEST(TorqueControllerMuxTesting, test_construction_bypass_limits)
     ASSERT_EQ(test.get_tc_mux_status().output_is_bypassing_limits, true);
  
     inst1.output.command.torqueSetpoints[0] = 5;
-    drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_0_input_state);
+    drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_1_input_state);
  
     ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);
     ASSERT_EQ(drive_command.torqueSetpoints[1], 30.0f);
@@ -353,16 +349,38 @@ TEST(TorqueControllerMuxTesting, test_mode0_evaluation)
     ASSERT_NEAR(out.torqueSetpoints[1], (max_torque / 2), 0.01);
     ASSERT_NEAR(out.torqueSetpoints[2], (max_torque / 2), 0.01);
     ASSERT_NEAR(out.torqueSetpoints[3], (max_torque / 2), 0.01);
-
-    mode_0_input_state = {{}, {}, {}, {}, {.accelPercent = 0.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {}};
-    out = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_0_input_state);
-    ASSERT_EQ(out.torqueSetpoints[0], 0);
-    ASSERT_EQ(out.torqueSetpoints[1], 0);
-    ASSERT_EQ(out.torqueSetpoints[2], 0);
-    ASSERT_EQ(out.torqueSetpoints[3], 0);
-
-    // out = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_1_input_state);
 }
+
+TEST(TorqueControllerMuxTesting, test_modeX_stationary)
+{
+    float max_torque = 21.42;
+    TorqueControllerSimple tc_simple(1.0f, 1.0f);
+    TorqueControllerLoadCellVectoring tc_vec;
+    DummyQueue_s q;
+    CASESystem<DummyQueue_s> case_sys(&q, 100, 70, 550, {});
+    TorqueControllerCASEWrapper<DummyQueue_s> case_wrapper(&case_sys);
+    TorqueControllerSimpleLaunch simple_launch;
+    TorqueControllerSlipLaunch slip_launch;
+    TorqueControllerMux<5> torque_controller_mux({static_cast<Controller *>(&tc_simple),
+                                                  static_cast<Controller *>(&tc_vec),
+                                                  static_cast<Controller *>(&case_wrapper),
+                                                  static_cast<Controller *>(&simple_launch),
+                                                  static_cast<Controller *>(&slip_launch)},
+                                                 {false, false, false, false, false});
+
+
+    for (int i = 0; i <= 4; ++i) {
+        ControllerMode_e mode = static_cast<ControllerMode_e>(static_cast<int>(ControllerMode_e::MODE_0) + i);
+        SharedCarState_s mode_X_input_state({}, {}, {}, {}, {.accelPercent = 0.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+        DrivetrainCommand_s out = torque_controller_mux.getDrivetrainCommand(mode, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_X_input_state);
+        ASSERT_EQ(out.torqueSetpoints[0], 0);
+        ASSERT_EQ(out.torqueSetpoints[1], 0);
+        ASSERT_EQ(out.torqueSetpoints[2], 0);
+        ASSERT_EQ(out.torqueSetpoints[3], 0);
+    }
+}
+
+
 
  //limit testing
 TEST(TorqueControllerMuxTesting, test_power_limit)
@@ -376,9 +394,9 @@ TEST(TorqueControllerMuxTesting, test_power_limit)
     {
         drivetrain_data.measuredSpeeds[i] = 500.0f;
     }
-    SharedCarState_s mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+    SharedCarState_s mode_1_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
 
-    DrivetrainCommand_s res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_0_input_state);
+    DrivetrainCommand_s res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_1_input_state);
 
     for (int i = 0; i < 4; i++)
     {
@@ -390,8 +408,8 @@ TEST(TorqueControllerMuxTesting, test_power_limit)
     }
     set_output_rpm(inst1, 20000, 21.0);
 
-    SharedCarState_s mode_0_input_state_high_power({}, {}, drivetrain_data, {}, {.accelPercent = 1.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
-    res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_0_input_state_high_power);
+    SharedCarState_s mode_1_input_state_high_power({}, {}, drivetrain_data, {}, {.accelPercent = 1.0f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+    res = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, mode_1_input_state_high_power);
 
     for (int i = 0; i < 4; i++)
     {
@@ -414,9 +432,9 @@ TEST(TorqueControllerMuxTesting, test_torque_limit)
         drivetrain_data.measuredSpeeds[i] = 500.0f;
     }
 
-    SharedCarState_s mode_0_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+    SharedCarState_s mode_1_input_state({}, {}, drivetrain_data, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
 
-    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_0_input_state);
+    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_1_input_state);
 
     ASSERT_EQ(drive_command.torqueSetpoints[0], 5.0f);
     ASSERT_EQ(drive_command.torqueSetpoints[1], 10.0f);
@@ -426,7 +444,7 @@ TEST(TorqueControllerMuxTesting, test_torque_limit)
     set_output_rpm(inst1, 500, 20.0);
     inst1.output.command.torqueSetpoints[0] = 5;
 
-    drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_0_input_state);
+    drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_1_input_state);
 
     ASSERT_LT(drive_command.torqueSetpoints[0], 3.5f);
     ASSERT_LT(drive_command.torqueSetpoints[1], 12.5f);
@@ -446,7 +464,7 @@ TEST(TorqueControllerMuxTesting, test_apply_regen_limit)
 
     inst1.output.command.torqueSetpoints[0] = 10; 
     TorqueControllerMux<1> test({static_cast<Controller *>(&inst1)}, {false});
-    SharedCarState_s mode_0_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+    SharedCarState_s mode_1_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
 
     DrivetrainDynamicReport_s drivetrain_data_below_no_regen = {};
     drivetrain_data_below_no_regen.measuredSpeeds[0] = 12.0f / RPM_TO_KILOMETERS_PER_HOUR; 
@@ -454,7 +472,7 @@ TEST(TorqueControllerMuxTesting, test_apply_regen_limit)
     auto command_below_no_regen = test.getDrivetrainCommand(
         ControllerMode_e::MODE_0,
         TorqueLimit_e::TCMUX_LOW_TORQUE,
-        mode_0_input_state
+        mode_1_input_state
     );
     ASSERT_EQ(command_below_no_regen.torqueSetpoints[0], 0.0f); 
 
@@ -464,7 +482,7 @@ TEST(TorqueControllerMuxTesting, test_apply_regen_limit)
     auto command_above_no_regen = test.getDrivetrainCommand(
         ControllerMode_e::MODE_0,
         TorqueLimit_e::TCMUX_LOW_TORQUE,
-        mode_0_input_state
+        mode_1_input_state
     );
     ASSERT_GT(command_above_no_regen.torqueSetpoints[0], 0.0f); 
   
@@ -474,7 +492,7 @@ TEST(TorqueControllerMuxTesting, test_apply_regen_limit)
     auto command_between_limits = test.getDrivetrainCommand(
         ControllerMode_e::MODE_0,
         TorqueLimit_e::TCMUX_LOW_TORQUE,
-        mode_0_input_state
+        mode_1_input_state
     );
     ASSERT_LE(command_between_limits.torqueSetpoints[0], 10.0f); 
 } 
@@ -487,10 +505,10 @@ TEST(TorqueControllerMuxTesting, test_apply_positive_speed_limit)
     set_output_rpm(inst1, -300, 10.0); 
     inst1.output.command.torqueSetpoints[0] = 5;
     TorqueControllerMux<1> test({static_cast<Controller *>(&inst1)}, {false});
-    SharedCarState_s mode_0_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
+    SharedCarState_s mode_1_input_state({}, {}, {}, {}, {.accelPercent = 0.5f, .brakePercent = 0.0f, .regenPercent = 0.0}, {});
 
     // apply speed limit happens in here
-    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_0_input_state);
+    auto drive_command = test.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_LOW_TORQUE, mode_1_input_state);
 
     ASSERT_EQ(drive_command.speeds_rpm[0], 0.0f);
     ASSERT_EQ(drive_command.speeds_rpm[1], 0.0f);
