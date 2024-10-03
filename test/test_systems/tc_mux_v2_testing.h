@@ -762,7 +762,8 @@ TEST(TorqueControllerMuxTesting, test_state_machine_progression_launch_controlle
 
     //ensures during launch that speed target increases and torque is requested
     expected = DrivetrainCommand_s
-    {
+    {   
+        //calculated values for rpm based on time elapsed + algo
         .speeds_rpm = { 7989 , 7989 , 7989 , 7989 },
         .torqueSetpoints = { PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE}
     };
@@ -776,6 +777,7 @@ TEST(TorqueControllerMuxTesting, test_state_machine_progression_launch_controlle
     //again
     expected = DrivetrainCommand_s
     {
+        //calculated values for rpm based on time elapsed + algo
         .speeds_rpm = { 14543 , 14543 , 14543 , 14543 },
         .torqueSetpoints = { PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE}
     };
