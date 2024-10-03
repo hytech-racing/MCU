@@ -529,7 +529,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             &main_ecu,
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
-            drivetrain.drivetrain_error_occured(),
+            sys.drivetrain_error_occured(),
             torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
             ams_interface.get_filtered_min_cell_voltage(),
             a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],

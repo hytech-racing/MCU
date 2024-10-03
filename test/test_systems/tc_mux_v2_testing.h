@@ -380,8 +380,6 @@ TEST(TorqueControllerMuxTesting, test_modeX_stationary)
     }
 }
 
-
-
  //limit testing
 TEST(TorqueControllerMuxTesting, test_power_limit)
 {
@@ -598,5 +596,195 @@ TEST(TorqueControllerMuxTesting, test_real_controllers_output)
     out1 = torque_controller_mux.getDrivetrainCommand(ControllerMode_e::MODE_1, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
     ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
     ASSERT_EQ(torque_controller_mux.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_1);
+}
+
+void set_state_mcu(SharedCarState_s & state)
+{
+        state.vn_data = {
+        .velocity_x = 0.0f,
+        .velocity_y = 0.0f,
+        .velocity_z = 0.0f,
+        .linear_accel_x = 0.0f,
+        .linear_accel_y = 0.0f,
+        .linear_accel_z = 0.0f,
+        .uncompLinear_accel = { 0.0f, 0.0f, 0.0f },  
+        .yaw = 0.0f,
+        .pitch = 0.0f,
+        .roll = 0.0f,
+        .latitude = 0.0f,
+        .longitude = 0.0f,
+        .ecef_coords = { 0.0f, 0.0f, 0.0f },
+        .gps_time = 0,
+        .vn_status = 0,
+        .angular_rates = { 0.0f, 0.0f, 0.0f }
+    };
+    state.steering_data = SteeringSystemData_s{
+        .angle = 0,
+        .status = SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL
+    };
+    state.drivetrain_data = DrivetrainDynamicReport_s{
+        .measuredInverterFLPackVoltage = 26,     
+        .measuredSpeeds = {0.0f, 0.0f, 0.0f, 0.0f}, 
+        .measuredTorques = {0.0f, 0.0f, 0.0f, 0.0f}, 
+        .measuredTorqueCurrents = {0.0f, 0.0f, 0.0f, 0.0f}, 
+        .measuredMagnetizingCurrents = {0.0f, 0.0f, 0.0f, 0.0f} 
+    };
+    state.pedals_data = PedalsSystemData_s{
+        .accelImplausible = false,                  
+        .brakeImplausible = false,                   
+        .brakePressed = false,                       
+        .accelPressed = false,                       
+        .mechBrakeActive = false,                    
+        .brakeAndAccelPressedImplausibility = false, 
+        .implausibilityExceededMaxDuration = false,  
+        .accelPercent = 0.0f,                       
+        .brakePercent = 0.0f,                       
+        .regenPercent = 0.0f                        
+    };
+    state.loadcell_data = LoadCellInterfaceOutput_s{
+        .loadCellForcesFiltered = {100.0f, 100.0f, 100.0f, 100.0f},  
+        .loadCellConversions = { },  
+        .FIRSaturated = true       
+    };
+    state.systick = SysTick_s{
+        .millis = 10,
+        .micros = 10,
+        .triggers = TriggerBits_s{
+            .trigger1000 = true,
+            .trigger500 = true,
+            .trigger100 = true,
+            .trigger50 = true,
+            .trigger10 = true,
+            .trigger5 = true,
+            .trigger1 = true
+        },
+    };
+}
+
+TEST(TorqueControllerMuxTesting, test_state_machine_progression_simple_controller)
+{
+    //recreating environment in CAR_STATE::READY_TO_DRIVE in MCU
+    //which is when the tc mux is used to request torque from active controller
+    SharedCarState_s state({}, {}, {}, {}, {}, {});
+    set_state_mcu(state);
+
+    //make tc mux to see if under these conditions it is sending out correct commands
+    //mode 0
+    TorqueControllerSimple tc_simple(1.0f, 1.0f);
+ 
+    TorqueControllerMux<1> test_mux0({static_cast<Controller *>(&tc_simple)}, {false});
+
+    //expected command 
+
+    DrivetrainCommand_s expected = DrivetrainCommand_s
+    {
+        .speeds_rpm = { PhysicalParameters::AMK_MAX_RPM , PhysicalParameters::AMK_MAX_RPM , PhysicalParameters::AMK_MAX_RPM , PhysicalParameters::AMK_MAX_RPM },
+        .torqueSetpoints = { 0 , 0 , 0 , 0 }
+    };
+
+    auto out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    ASSERT_EQ(test_mux0.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+    ASSERT_EQ(test_mux0.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+
+    state.pedals_data.accelPercent = .5f;
+    state.pedals_data.accelPressed = true;
+    expected = DrivetrainCommand_s
+    {
+        .speeds_rpm = { PhysicalParameters::AMK_MAX_RPM , PhysicalParameters::AMK_MAX_RPM , PhysicalParameters::AMK_MAX_RPM , PhysicalParameters::AMK_MAX_RPM },
+        .torqueSetpoints = { PhysicalParameters::AMK_MAX_TORQUE*.5 , PhysicalParameters::AMK_MAX_TORQUE*.5 , PhysicalParameters::AMK_MAX_TORQUE*.5 , PhysicalParameters::AMK_MAX_TORQUE*.5}
+    };
+    out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+
+    state.pedals_data.accelPercent = 0;
+    state.pedals_data.regenPercent = .5f;
+    state.pedals_data.accelPressed = true;
+    expected = DrivetrainCommand_s
+    {
+        .speeds_rpm = { 0 , 0 , 0 , 0 },
+        .torqueSetpoints = { 0 , 0 , 0 , 0}
+    };
+    out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+}
+TEST(TorqueControllerMuxTesting, test_state_machine_progression_launch_controller)
+{
+    //recreating environment in CAR_STATE::READY_TO_DRIVE in MCU
+    //which is when the tc mux is used to request torque from active controller
+    SharedCarState_s state({}, {}, {}, {}, {}, {});
+    set_state_mcu(state);
+
+    //make tc mux to see if under these conditions it is sending out correct commands
+    // mode 1
+    TorqueControllerSimpleLaunch tc_sl;
+   
+    TorqueControllerMux<1> test_mux0({static_cast<Controller *>(&tc_sl)}, {false});
+
+    //expected command for launch not ready
+
+    DrivetrainCommand_s expected = DrivetrainCommand_s
+    {
+        .speeds_rpm = { 0 , 0 , 0 , 0 },
+        .torqueSetpoints = { 0 , 0 , 0 , 0 }
+    };
+
+    //makes sure launch not ready state is initialized and it moves to next state while outputting command with no torque or speed
+    ASSERT_EQ(tc_sl.get_launch_state(), LaunchStates_e::LAUNCH_NOT_READY);
+    auto out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    ASSERT_EQ(test_mux0.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+    ASSERT_EQ(test_mux0.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
+    ASSERT_EQ(tc_sl.get_launch_state(), LaunchStates_e::LAUNCH_READY);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+
+    //ensures that from this state, it transitions from launch ready to launching when accelerator is pressed, still outputs a command with no torque or speed
+    state.pedals_data.accelPercent = .9;
+    out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    ASSERT_EQ(test_mux0.get_tc_mux_status().current_error, TorqueControllerMuxError::NO_ERROR);
+    ASSERT_EQ(test_mux0.get_tc_mux_status().current_controller_mode, ControllerMode_e::MODE_0);
+    ASSERT_EQ(tc_sl.get_launch_state(), LaunchStates_e::LAUNCHING);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+
+    //ensures during launch that speed target increases and torque is requested
+    expected = DrivetrainCommand_s
+    {
+        .speeds_rpm = { 7989 , 7989 , 7989 , 7989 },
+        .torqueSetpoints = { PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE}
+    };
+    state.systick.millis = 1000;
+    out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+
+    //again
+    expected = DrivetrainCommand_s
+    {
+        .speeds_rpm = { 14543 , 14543 , 14543 , 14543 },
+        .torqueSetpoints = { PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE , PhysicalParameters::AMK_MAX_TORQUE}
+    };
+    state.systick.millis = 2000;
+    out1 = test_mux0.getDrivetrainCommand(ControllerMode_e::MODE_0, TorqueLimit_e::TCMUX_FULL_TORQUE, state);
+    for(int i = 0; i < 4; i++){
+        ASSERT_EQ(expected.speeds_rpm[i], out1.speeds_rpm[i]);
+        ASSERT_EQ(expected.torqueSetpoints[i], out1.torqueSetpoints[i]);
+    }
+    
 }
 #endif // __TC_MUX_V2_TESTING_H__
