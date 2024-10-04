@@ -6,7 +6,10 @@
 class DrivebrainETHInterface
 {
 public:
-    DrivebrainETHInterface() = default;
+    DrivebrainETHInterface(){
+        _latest_data.last_receive_time_millis = -1;
+        _latest_data.DB_prev_MCU_recv_millis = -1;
+    };
 
     void receive_pb_msg(const hytech_msgs_MCUCommandData &msg_in, unsigned long curr_millis);
 
@@ -14,6 +17,7 @@ public:
     DrivebrainData_s get_latest_data() { return _latest_data; }
 
 private:
+
     DrivebrainData_s _latest_data = {};
 };
 

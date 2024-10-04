@@ -11,6 +11,9 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
                     shared_state.drivetrain_data.measuredSpeeds[1],
                     shared_state.drivetrain_data.measuredSpeeds[2],
                     shared_state.drivetrain_data.measuredSpeeds[3]};
+
+    out.steering_angle_deg = shared_state.steering_data.angle;
+    out.MCU_recv_millis = _latest_data.last_receive_time_millis; 
     return out;
 }
 
@@ -22,5 +25,7 @@ void DrivebrainETHInterface::receive_pb_msg(const hytech_msgs_MCUCommandData &ms
 
     _latest_data.torque_limits_nm = nm_lim;
     _latest_data.speed_setpoints_rpm = speed_set;
-    _latest_data.last_receive_time_millis = curr_millis;
+    _latest_data.DB_prev_MCU_recv_millis = msg_in.prev_MCU_recv_millis;
+    _latest_data.last_receive_time_millis = curr_millis; // current tick millis
+    
 }

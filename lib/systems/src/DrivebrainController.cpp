@@ -7,10 +7,20 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     auto sys_tick = state.systick;
     auto db_input = state.db_data;     
     
-    bool message_too_latent = (::abs((int)(sys_tick.millis - db_input.last_receive_time_millis)) > (int)_params.allowed_latency);
+    // cases for timing_failure:
+    // 1 if the last_receive_time_millis < 0, then we have not received any messages from the db (initialized at -1 in constructor)
+    bool no_messages_received = db_input.last_receive_time_millis < 0;
+    
+    // 2 if the DB_prev_MCU_recv_millis < 0, then the drivebrain has not received a time from the MCU 
+    // (meaning that the MCU is not sending properly or the drivebrain is not receiving properly or it has 
+    // yet to receive from the MCU yet)
+    bool drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis < 0);
+
+    // 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high
+    bool message_too_latent = (::abs((int)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) > (int)_params.allowed_latency);
    
 
-    bool timing_failure = (message_too_latent);
+    bool timing_failure = (message_too_latent || no_messages_received || drivebrain_has_not_received_time);
 
     // only in the case that our speed is low enough (<1 m/s) do we want to clear the fault
     
