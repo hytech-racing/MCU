@@ -212,9 +212,9 @@ void MCUInterface::tick(int fsm_state,
     update_mcu_status_CAN_drivetrain(inv_has_error);
     update_mcu_status_CAN_safety(software_is_ok);
     
-    auto drive_mode = static_cast<int>(tc_mux_status.current_controller_mode);
-    auto torque_mode = static_cast<int>(tc_mux_status.current_torque_limit_enum);
-    auto max_torque = tc_mux_status.current_torque_limit_value;
+    auto drive_mode = static_cast<int>(tc_mux_status.active_controller_mode);
+    auto torque_mode = static_cast<int>(tc_mux_status.active_torque_limit_enum);
+    auto max_torque = tc_mux_status.active_torque_limit_value;
 
     update_mcu_status_CAN_TCMux(drive_mode, torque_mode, max_torque);
     update_mcu_status_CAN_buzzer(buzzer_is_on);
