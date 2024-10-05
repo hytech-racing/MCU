@@ -83,7 +83,7 @@ Inheritance diagram for DumbController:</div>
 <div class="center"><img src="classDumbController__inherit__graph.png" border="0" usemap="#aDumbController_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDumbController_inherit__map" id="aDumbController_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,108,120,163"/>
-<area shape="rect" href="classController.html" title=" " alt="" coords="15,5,111,60"/>
+<area shape="rect" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="15,5,111,60"/>
 </map>
 </div>
 <div class="dynheader">
@@ -92,18 +92,20 @@ Collaboration diagram for DumbController:</div>
 <div class="center"><img src="classDumbController__coll__graph.png" border="0" usemap="#aDumbController_coll__map" alt="Collaboration graph"/></div>
 <map name="aDumbController_coll__map" id="aDumbController_coll__map">
 <area shape="rect" title=" " alt="" coords="5,108,120,163"/>
-<area shape="rect" href="classController.html" title=" " alt="" coords="15,5,111,60"/>
+<area shape="rect" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="15,5,111,60"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a5e282c3a95bb7534fadd4ad46e14d334"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDumbController.html#a5e282c3a95bb7534fadd4ad46e14d334">evaluate</a> (const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;state)</td></tr>
+<tr class="memdesc:a5e282c3a95bb7534fadd4ad46e14d334"><td class="mdescLeft">&#160;</td><td class="mdescRight">This mehod must be implemented by every controller in the Tc Muxer. This is called in the Muxer whenever the drivetrain command is obtained. TorqueControllerMux.cpp to see that in every tick of the system, the active controller must be ticked through this method.  <a href="classDumbController.html#a5e282c3a95bb7534fadd4ad46e14d334">More...</a><br /></td></tr>
 <tr class="separator:a5e282c3a95bb7534fadd4ad46e14d334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="memitem:afd879d218121028029cc0a3620e004aa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classController.html#afd879d218121028029cc0a3620e004aa">evaluate</a> (const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;state)=0</td></tr>
+<tr class="memdesc:afd879d218121028029cc0a3620e004aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This mehod must be implemented by every controller in the Tc Muxer. This is called in the Muxer whenever the drivetrain command is obtained. TorqueControllerMux.cpp to see that in every tick of the system, the active controller must be ticked through this method.  <a href="classController.html#afd879d218121028029cc0a3620e004aa">More...</a><br /></td></tr>
 <tr class="separator:afd879d218121028029cc0a3620e004aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -133,6 +135,15 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This mehod must be implemented by every controller in the Tc Muxer. This is called in the Muxer whenever the drivetrain command is obtained. TorqueControllerMux.cpp to see that in every tick of the system, the active controller must be ticked through this method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>with all sensor information to properly define torque set points </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structTorqueControllerOutput__s.html" title="Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating...">TorqueControllerOutput_s</a> This is a Drivetrain command passed along with a state boolean to ensure car controllers are working properly </dd></dl>
 
 <p>Implements <a class="el" href="classController.html#afd879d218121028029cc0a3620e004aa">Controller</a>.</p>
 

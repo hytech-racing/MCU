@@ -163,12 +163,15 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. These setpoints are defined in the torque controllers cycled by the TC Muxer. The Speeds unit is rpm and are the targeted speeds for each wheel of the car. The torques unit is nm and is the max torque requested from the inverter to reach such speeds. One can use the arrays with <a class="el" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR(Front Left)</a>, <a class="el" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL(Front Left)</a>, <a class="el" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL(Rear Left)</a>, <a class="el" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR(Rear Right)</a> to access or modify the respective set points. eg. speeds_rpm[FR] = 0.0; Their indexes are defined in utility.h as follows: FL = 0, FR = 1, RL = 2, RR = 3.  <a href="structDrivetrainCommand__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating.  <a href="structTorqueControllerOutput__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVectornavData__s.html">VectornavData_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">packages TC Mux indicators: errors, mode, torque limit, bypass  <a href="structTorqueControllerMuxStatus.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLoadCellInterfaceOutput__s.html">LoadCellInterfaceOutput_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,6 +188,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TCMUX_LOW_TORQUE</a> = 2
 , <a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b">TCMUX_NUM_TORQUE_LIMITS</a> = 3
  }</td></tr>
+<tr class="memdesc:a347b41a134c22d96f783682b6da8644b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines modes of torque limit to be processed in torque limit map for exact values.  <a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">More...</a><br /></td></tr>
 <tr class="separator:a347b41a134c22d96f783682b6da8644b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f9f696ecee7e1ce7536910bdd45f76a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a> { <br />
 &#160;&#160;<a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">MODE_0</a>
@@ -206,6 +210,7 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">ERROR_CONTROLLER_NULL_POINTER</a> =4
 <br />
  }</td></tr>
+<tr class="memdesc:abfda7c61f67dbd395b16edf70659498d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines errors for TC Mux to use to maintain system safety.  <a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">More...</a><br /></td></tr>
 <tr class="separator:abfda7c61f67dbd395b16edf70659498d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13d307fc2e5826ca5ed033fe647569a3"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3">SteeringSystemStatus_e</a> { <a class="el" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0
 , <a class="el" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1
@@ -243,19 +248,19 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27" name="a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27"></a>MODE_5&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00017">17</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   18</span>{</div>
-<div class="line"><span class="lineno">   19</span>    <span class="comment">/* No torque vectoring */</span></div>
-<div class="line"><span class="lineno">   20</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">MODE_0</a>,</div>
-<div class="line"><span class="lineno">   21</span>    <span class="comment">/* Normal force torque vectoring */</span></div>
-<div class="line"><span class="lineno">   22</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">MODE_1</a>,</div>
-<div class="line"><span class="lineno">   23</span>    <span class="comment">/* PID torque vectoring */</span></div>
-<div class="line"><span class="lineno">   24</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">MODE_2</a>,</div>
-<div class="line"><span class="lineno">   25</span>    <span class="comment">/* Launch Ctrl */</span></div>
-<div class="line"><span class="lineno">   26</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">MODE_3</a>,</div>
-<div class="line"><span class="lineno">   27</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">MODE_4</a>,</div>
-<div class="line"><span class="lineno">   28</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27">MODE_5</a>,</div>
-<div class="line"><span class="lineno">   29</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00018">18</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>{</div>
+<div class="line"><span class="lineno">   20</span>    <span class="comment">/* No torque vectoring */</span></div>
+<div class="line"><span class="lineno">   21</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">MODE_0</a>,</div>
+<div class="line"><span class="lineno">   22</span>    <span class="comment">/* Normal force torque vectoring */</span></div>
+<div class="line"><span class="lineno">   23</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">MODE_1</a>,</div>
+<div class="line"><span class="lineno">   24</span>    <span class="comment">/* PID torque vectoring */</span></div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">MODE_2</a>,</div>
+<div class="line"><span class="lineno">   26</span>    <span class="comment">/* Launch Ctrl */</span></div>
+<div class="line"><span class="lineno">   27</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">MODE_3</a>,</div>
+<div class="line"><span class="lineno">   28</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">MODE_4</a>,</div>
+<div class="line"><span class="lineno">   29</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27">MODE_5</a>,</div>
+<div class="line"><span class="lineno">   30</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a></div><div class="ttdeci">@ MODE_4</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27">ControllerMode_e::MODE_5</a></div><div class="ttdeci">@ MODE_5</div></div>
@@ -291,13 +296,13 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9" name="a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9"></a>STEERING_SYSTEM_ERROR&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00109">109</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  110</span>{</div>
-<div class="line"><span class="lineno">  111</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0,</div>
-<div class="line"><span class="lineno">  112</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1,</div>
-<div class="line"><span class="lineno">  113</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">STEERING_SYSTEM_DEGRADED</a> = 2,</div>
-<div class="line"><span class="lineno">  114</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">STEERING_SYSTEM_ERROR</a> = 3,</div>
-<div class="line"><span class="lineno">  115</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00120">120</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  121</span>{</div>
+<div class="line"><span class="lineno">  122</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0,</div>
+<div class="line"><span class="lineno">  123</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1,</div>
+<div class="line"><span class="lineno">  124</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">STEERING_SYSTEM_DEGRADED</a> = 2,</div>
+<div class="line"><span class="lineno">  125</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">STEERING_SYSTEM_ERROR</a> = 3,</div>
+<div class="line"><span class="lineno">  126</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1"><div class="ttname"><a href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">SteeringSystemStatus_e::STEERING_SYSTEM_MARGINAL</a></div><div class="ttdeci">@ STEERING_SYSTEM_MARGINAL</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756"><div class="ttname"><a href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL</a></div><div class="ttdeci">@ STEERING_SYSTEM_NOMINAL</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de"><div class="ttname"><a href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">SteeringSystemStatus_e::STEERING_SYSTEM_DEGRADED</a></div><div class="ttdeci">@ STEERING_SYSTEM_DEGRADED</div></div>
@@ -324,6 +329,8 @@ Enumerations</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Defines errors for TC Mux to use to maintain system safety. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c" name="abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c"></a>NO_ERROR&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf" name="abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf"></a>ERROR_SPEED_DIFF_TOO_HIGH&#160;</td><td class="fielddoc"></td></tr>
@@ -332,14 +339,14 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae" name="abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae"></a>ERROR_CONTROLLER_NULL_POINTER&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00083">83</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>{</div>
-<div class="line"><span class="lineno">   85</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">NO_ERROR</a> = 0,</div>
-<div class="line"><span class="lineno">   86</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">ERROR_SPEED_DIFF_TOO_HIGH</a> = 1,</div>
-<div class="line"><span class="lineno">   87</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">ERROR_TORQUE_DIFF_TOO_HIGH</a> = 2,</div>
-<div class="line"><span class="lineno">   88</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a> =3,</div>
-<div class="line"><span class="lineno">   89</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">ERROR_CONTROLLER_NULL_POINTER</a> =4</div>
-<div class="line"><span class="lineno">   90</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00093">93</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>{</div>
+<div class="line"><span class="lineno">   95</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">NO_ERROR</a> = 0,</div>
+<div class="line"><span class="lineno">   96</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">ERROR_SPEED_DIFF_TOO_HIGH</a> = 1,</div>
+<div class="line"><span class="lineno">   97</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">ERROR_TORQUE_DIFF_TOO_HIGH</a> = 2,</div>
+<div class="line"><span class="lineno">   98</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a> =3,</div>
+<div class="line"><span class="lineno">   99</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">ERROR_CONTROLLER_NULL_POINTER</a> =4</div>
+<div class="line"><span class="lineno">  100</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER</a></div><div class="ttdeci">@ ERROR_CONTROLLER_NULL_POINTER</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a></div><div class="ttdeci">@ ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div></div>
@@ -367,6 +374,8 @@ Enumerations</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Defines modes of torque limit to be processed in torque limit map for exact values. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a" name="a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a"></a>TCMUX_FULL_TORQUE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127" name="a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127"></a>TCMUX_MID_TORQUE&#160;</td><td class="fielddoc"></td></tr>
@@ -374,13 +383,13 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b" name="a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b"></a>TCMUX_NUM_TORQUE_LIMITS&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00008">8</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    9</span>{</div>
-<div class="line"><span class="lineno">   10</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TCMUX_FULL_TORQUE</a> = 0,</div>
-<div class="line"><span class="lineno">   11</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127">TCMUX_MID_TORQUE</a> = 1,</div>
-<div class="line"><span class="lineno">   12</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TCMUX_LOW_TORQUE</a> = 2,</div>
-<div class="line"><span class="lineno">   13</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b">TCMUX_NUM_TORQUE_LIMITS</a> = 3,</div>
-<div class="line"><span class="lineno">   14</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00009">9</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   10</span>{</div>
+<div class="line"><span class="lineno">   11</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TCMUX_FULL_TORQUE</a> = 0,</div>
+<div class="line"><span class="lineno">   12</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127">TCMUX_MID_TORQUE</a> = 1,</div>
+<div class="line"><span class="lineno">   13</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TCMUX_LOW_TORQUE</a> = 2,</div>
+<div class="line"><span class="lineno">   14</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b">TCMUX_NUM_TORQUE_LIMITS</a> = 3,</div>
+<div class="line"><span class="lineno">   15</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127">TorqueLimit_e::TCMUX_MID_TORQUE</a></div><div class="ttdeci">@ TCMUX_MID_TORQUE</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a></div><div class="ttdeci">@ TCMUX_FULL_TORQUE</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a></div><div class="ttdeci">@ TCMUX_LOW_TORQUE</div></div>

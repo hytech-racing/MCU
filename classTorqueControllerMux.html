@@ -84,9 +84,9 @@ Collaboration diagram for TorqueControllerMux&lt; num_controllers &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classTorqueControllerMux__coll__graph.png" border="0" usemap="#aTorqueControllerMux_3_01num__controllers_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="aTorqueControllerMux_3_01num__controllers_01_4_coll__map" id="aTorqueControllerMux_3_01num__controllers_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="93,211,267,515"/>
-<area shape="rect" href="structDrivetrainCommand__s.html" title=" " alt="" coords="5,42,160,111"/>
-<area shape="rect" href="structTorqueControllerMuxStatus.html" title=" " alt="" coords="184,5,371,148"/>
+<area shape="rect" title=" " alt="" coords="92,211,265,515"/>
+<area shape="rect" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="5,42,160,111"/>
+<area shape="rect" href="structTorqueControllerMuxStatus.html" title="packages TC Mux indicators: errors, mode, torque limit, bypass" alt="" coords="185,5,367,148"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -100,20 +100,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7323107380e91f7136cde767624e4902"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a7323107380e91f7136cde767624e4902">get_tc_mux_status</a> ()</td></tr>
 <tr class="separator:a7323107380e91f7136cde767624e4902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a4e85c5462c31f7caae73bebb4d7d55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">getDrivetrainCommand</a> (<a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a> requested_controller_type, <a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> controller_command_torque_limit, const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;input_state)</td></tr>
-<tr class="memdesc:a0a4e85c5462c31f7caae73bebb4d7d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that evaluates the mux, controllers and gets the current command  <a href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">More...</a><br /></td></tr>
+<tr class="memdesc:a0a4e85c5462c31f7caae73bebb4d7d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that evaluates the mux, controllers and gets the active command  <a href="classTorqueControllerMux.html#a0a4e85c5462c31f7caae73bebb4d7d55">More...</a><br /></td></tr>
 <tr class="separator:a0a4e85c5462c31f7caae73bebb4d7d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a290417c4b7098524810ab65b088d51a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a290417c4b7098524810ab65b088d51a5">can_switch_controller_</a> (<a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> current_drivetrain_data, <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> previous_controller_command, <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> desired_controller_out)</td></tr>
-<tr class="separator:a290417c4b7098524810ab65b088d51a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c70caa14c3ba1cc34ad4a28e56181bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a5c70caa14c3ba1cc34ad4a28e56181bd">can_switch_controller_</a> (<a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> active_drivetrain_data, <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> previous_controller_command, <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> desired_controller_out)</td></tr>
+<tr class="separator:a5c70caa14c3ba1cc34ad4a28e56181bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bc0a25409c56638ab1ebf3d459c3050"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a4bc0a25409c56638ab1ebf3d459c3050">apply_positive_speed_limit_</a> (const <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command)</td></tr>
+<tr class="memdesc:a4bc0a25409c56638ab1ebf3d459c3050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clamps negative rpms to 0f.  <a href="classTorqueControllerMux.html#a4bc0a25409c56638ab1ebf3d459c3050">More...</a><br /></td></tr>
 <tr class="separator:a4bc0a25409c56638ab1ebf3d459c3050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08033a30f1d5307e00b5b0b8c03bfae9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a08033a30f1d5307e00b5b0b8c03bfae9">apply_torque_limit_</a> (const <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, float max_torque)</td></tr>
+<tr class="memdesc:a08033a30f1d5307e00b5b0b8c03bfae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure torque is at most at the specified limit. If exceeding, then limit it in the returned <a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a>.  <a href="classTorqueControllerMux.html#a08033a30f1d5307e00b5b0b8c03bfae9">More...</a><br /></td></tr>
 <tr class="separator:a08033a30f1d5307e00b5b0b8c03bfae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b261845bad659145e69fd60fa4728bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a4b261845bad659145e69fd60fa4728bd">apply_power_limit_</a> (const <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;<a class="el" href="src_2main_8cpp.html#a60b1f8a5e4ac159bc3ca1710391a185f">drivetrain</a>, float power_limit, float max_torque)</td></tr>
+<tr class="memdesc:a4b261845bad659145e69fd60fa4728bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply power limit (watts) such that the mechanical power of all wheels never exceeds the preset mechanical power limit. Scales all wheels down to preserve functionality of torque controllers.  <a href="classTorqueControllerMux.html#a4b261845bad659145e69fd60fa4728bd">More...</a><br /></td></tr>
 <tr class="separator:a4b261845bad659145e69fd60fa4728bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f2f6529919bb7a9f3fcc0ada9c915fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a2f2f6529919bb7a9f3fcc0ada9c915fc">apply_regen_limit_</a> (const <a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a> &amp;command, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrain_data)</td></tr>
+<tr class="memdesc:a2f2f6529919bb7a9f3fcc0ada9c915fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin limiting regen at noRegenLimitKPH (hardcoded in func) and completely limit regen at fullRegenLimitKPH (hardcoded in func)  <a href="classTorqueControllerMux.html#a2f2f6529919bb7a9f3fcc0ada9c915fc">More...</a><br /></td></tr>
 <tr class="separator:a2f2f6529919bb7a9f3fcc0ada9c915fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -132,13 +136,13 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a92006db4ad3e12f0cb528959b12d95ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45766059cb66748ddb90afaaf304ec75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainCommand__s.html">DrivetrainCommand_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#a45766059cb66748ddb90afaaf304ec75">prev_command_</a> = {}</td></tr>
 <tr class="separator:a45766059cb66748ddb90afaaf304ec75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad25f641d91e0b068287a2a138a8bf542"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542">current_status_</a> = {}</td></tr>
-<tr class="separator:ad25f641d91e0b068287a2a138a8bf542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa000b57751d0b9a206e49188d5056b23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerMux.html#aa000b57751d0b9a206e49188d5056b23">active_status_</a> = {}</td></tr>
+<tr class="separator:aa000b57751d0b9a206e49188d5056b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;std::size_t num_controllers&gt;<br />
 class TorqueControllerMux&lt; num_controllers &gt;</div>
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00057">57</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00059">59</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac75ee9c468b85337faf16eb2f08397c8" name="ac75ee9c468b85337faf16eb2f08397c8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac75ee9c468b85337faf16eb2f08397c8">&#9670;&#160;</a></span>TorqueControllerMux() <span class="overload">[1/2]</span></h2>
@@ -232,24 +236,25 @@ template&lt;std::size_t num_controllers&gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>TC Mux must be created with at least 1 controller. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00093">93</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                                                        : <a class="code hl_variable" href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">controller_pointers_</a>(controller_pointers),</div>
-<div class="line"><span class="lineno">   98</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">mux_bypass_limits_</a>(mux_bypass_limits),</div>
-<div class="line"><span class="lineno">   99</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">max_change_speed_</a>(max_change_speed),</div>
-<div class="line"><span class="lineno">  100</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a671077a80a552fd9cab7a2d963f2f528">max_torque_pos_change_delta_</a>(max_torque_pos_change_delta),</div>
-<div class="line"><span class="lineno">  101</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a92006db4ad3e12f0cb528959b12d95ca">max_power_limit_</a>(max_power_limit)</div>
-<div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span> </div>
-<div class="line"><span class="lineno">  104</span>    {</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keyword">static_assert</span>(num_controllers &gt; 0, <span class="stringliteral">&quot;Must create TC mux with at least 1 controller&quot;</span>);</div>
-<div class="line"><span class="lineno">  106</span> </div>
-<div class="line"><span class="lineno">  107</span>    }</div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a1fdff880066de19d31f4ca100c4260bb"><div class="ttname"><a href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">TorqueControllerMux::max_change_speed_</a></div><div class="ttdeci">float max_change_speed_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00072">TorqueControllerMux.h:72</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a24a03d2e08bcc24255d3c83455820a96"><div class="ttname"><a href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">TorqueControllerMux::controller_pointers_</a></div><div class="ttdeci">std::array&lt; Controller *, num_controllers &gt; controller_pointers_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00064">TorqueControllerMux.h:64</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a4fb4d65e295aa1111a112471251fb143"><div class="ttname"><a href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">TorqueControllerMux::mux_bypass_limits_</a></div><div class="ttdeci">std::array&lt; bool, num_controllers &gt; mux_bypass_limits_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00066">TorqueControllerMux.h:66</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a671077a80a552fd9cab7a2d963f2f528"><div class="ttname"><a href="classTorqueControllerMux.html#a671077a80a552fd9cab7a2d963f2f528">TorqueControllerMux::max_torque_pos_change_delta_</a></div><div class="ttdeci">float max_torque_pos_change_delta_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00072">TorqueControllerMux.h:72</a></div></div>
-<div class="ttc" id="aclassTorqueControllerMux_html_a92006db4ad3e12f0cb528959b12d95ca"><div class="ttname"><a href="classTorqueControllerMux.html#a92006db4ad3e12f0cb528959b12d95ca">TorqueControllerMux::max_power_limit_</a></div><div class="ttdeci">float max_power_limit_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00072">TorqueControllerMux.h:72</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00115">115</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  119</span>                                                                                        : <a class="code hl_variable" href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">controller_pointers_</a>(controller_pointers),</div>
+<div class="line"><span class="lineno">  120</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">mux_bypass_limits_</a>(mux_bypass_limits),</div>
+<div class="line"><span class="lineno">  121</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">max_change_speed_</a>(max_change_speed),</div>
+<div class="line"><span class="lineno">  122</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a671077a80a552fd9cab7a2d963f2f528">max_torque_pos_change_delta_</a>(max_torque_pos_change_delta),</div>
+<div class="line"><span class="lineno">  123</span>                                                                                            <a class="code hl_variable" href="classTorqueControllerMux.html#a92006db4ad3e12f0cb528959b12d95ca">max_power_limit_</a>(max_power_limit)</div>
+<div class="line"><span class="lineno">  124</span> </div>
+<div class="line"><span class="lineno">  125</span> </div>
+<div class="line"><span class="lineno">  126</span>    {</div>
+<div class="line"><span class="lineno">  127</span>        <span class="keyword">static_assert</span>(num_controllers &gt; 0, <span class="stringliteral">&quot;Must create TC mux with at least 1 controller&quot;</span>);</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>    }</div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a1fdff880066de19d31f4ca100c4260bb"><div class="ttname"><a href="classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb">TorqueControllerMux::max_change_speed_</a></div><div class="ttdeci">float max_change_speed_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a24a03d2e08bcc24255d3c83455820a96"><div class="ttname"><a href="classTorqueControllerMux.html#a24a03d2e08bcc24255d3c83455820a96">TorqueControllerMux::controller_pointers_</a></div><div class="ttdeci">std::array&lt; Controller *, num_controllers &gt; controller_pointers_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00066">TorqueControllerMux.h:66</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a4fb4d65e295aa1111a112471251fb143"><div class="ttname"><a href="classTorqueControllerMux.html#a4fb4d65e295aa1111a112471251fb143">TorqueControllerMux::mux_bypass_limits_</a></div><div class="ttdeci">std::array&lt; bool, num_controllers &gt; mux_bypass_limits_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00068">TorqueControllerMux.h:68</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a671077a80a552fd9cab7a2d963f2f528"><div class="ttname"><a href="classTorqueControllerMux.html#a671077a80a552fd9cab7a2d963f2f528">TorqueControllerMux::max_torque_pos_change_delta_</a></div><div class="ttdeci">float max_torque_pos_change_delta_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
+<div class="ttc" id="aclassTorqueControllerMux_html_a92006db4ad3e12f0cb528959b12d95ca"><div class="ttname"><a href="classTorqueControllerMux.html#a92006db4ad3e12f0cb528959b12d95ca">TorqueControllerMux::max_power_limit_</a></div><div class="ttdeci">float max_power_limit_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -279,6 +284,15 @@ template&lt;std::size_t num_controllers&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Clamps negative rpms to 0f. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> &amp;command provides the rpm info as a <a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> to update the drivetrain command in the getDrivetrainCommand method </dd></dl>
 
 </div>
 </div>
@@ -330,6 +344,17 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Apply power limit (watts) such that the mechanical power of all wheels never exceeds the preset mechanical power limit. Scales all wheels down to preserve functionality of torque controllers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> &amp;command provides torque info, which is used to calculate mechanical power </td></tr>
+    <tr><td class="paramname">const</td><td><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrain provides RPMS, which are used to calculate radians / s </td></tr>
+    <tr><td class="paramname">float</td><td>max_torque is used to indirectly specifiy the max power </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> to update the drivetrain command in the getDrivetrainCommand method </dd></dl>
+
 </div>
 </div>
 <a id="a2f2f6529919bb7a9f3fcc0ada9c915fc" name="a2f2f6529919bb7a9f3fcc0ada9c915fc"></a>
@@ -367,6 +392,16 @@ template&lt;std::size_t num_controllers&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>begin limiting regen at noRegenLimitKPH (hardcoded in func) and completely limit regen at fullRegenLimitKPH (hardcoded in func) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> &amp;command </td></tr>
+    <tr><td class="paramname">const</td><td><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;drivetrain_data provides RPMs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> to update the drivetrain command in the getDrivetrainCommand method </dd></dl>
 
 </div>
 </div>
@@ -406,10 +441,20 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Ensure torque is at most at the specified limit. If exceeding, then limit it in the returned <a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> &amp;command is a <a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a>, which provides torque info </td></tr>
+    <tr><td class="paramname">float</td><td>max_torque this is the maximum average torque the wheels are allowed to experience before it is limited. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> to update the drivetrain command in the getDrivetrainCommand method </dd></dl>
+
 </div>
 </div>
-<a id="a290417c4b7098524810ab65b088d51a5" name="a290417c4b7098524810ab65b088d51a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a290417c4b7098524810ab65b088d51a5">&#9670;&#160;</a></span>can_switch_controller_()</h2>
+<a id="a5c70caa14c3ba1cc34ad4a28e56181bd" name="a5c70caa14c3ba1cc34ad4a28e56181bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c70caa14c3ba1cc34ad4a28e56181bd">&#9670;&#160;</a></span>can_switch_controller_()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -423,7 +468,7 @@ template&lt;std::size_t num_controllers&gt; </div>
           <td class="memname"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a> <a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&lt; num_controllers &gt;::can_switch_controller_ </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a>&#160;</td>
-          <td class="paramname"><em>current_drivetrain_data</em>, </td>
+          <td class="paramname"><em>active_drivetrain_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -477,9 +522,9 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00109">109</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  109</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542">current_status_</a>; }</div>
-<div class="ttc" id="aclassTorqueControllerMux_html_ad25f641d91e0b068287a2a138a8bf542"><div class="ttname"><a href="classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542">TorqueControllerMux::current_status_</a></div><div class="ttdeci">TorqueControllerMuxStatus current_status_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00074">TorqueControllerMux.h:74</a></div></div>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00131">131</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  131</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classTorqueControllerMux.html#aa000b57751d0b9a206e49188d5056b23">active_status_</a>; }</div>
+<div class="ttc" id="aclassTorqueControllerMux_html_aa000b57751d0b9a206e49188d5056b23"><div class="ttname"><a href="classTorqueControllerMux.html#aa000b57751d0b9a206e49188d5056b23">TorqueControllerMux::active_status_</a></div><div class="ttdeci">TorqueControllerMuxStatus active_status_</div><div class="ttdef"><b>Definition:</b> <a href="TorqueControllerMux_8h_source.html#l00076">TorqueControllerMux.h:76</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -517,20 +562,46 @@ template&lt;std::size_t num_controllers&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>function that evaluates the mux, controllers and gets the current command </p>
+<p>function that evaluates the mux, controllers and gets the active command </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">requested_controller_type</td><td>the requested controller type from the dial state </td></tr>
     <tr><td class="paramname">controller_command_torque_limit</td><td>the torque limit state enum set by dashboard </td></tr>
-    <tr><td class="paramname">input_state</td><td>the current state of the car </td></tr>
+    <tr><td class="paramname">input_state</td><td>the active state of the car </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the current drivetrain command to be sent to the drivetrain </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the active <a class="el" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto...">DrivetrainCommand_s</a> to be sent to the drivetrain to command increases and decreases in torque </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa000b57751d0b9a206e49188d5056b23" name="aa000b57751d0b9a206e49188d5056b23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa000b57751d0b9a206e49188d5056b23">&#9670;&#160;</a></span>active_status_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t num_controllers&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a> <a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&lt; num_controllers &gt;::active_status_ = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00076">76</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+
+</div>
+</div>
 <a id="a24a03d2e08bcc24255d3c83455820a96" name="a24a03d2e08bcc24255d3c83455820a96"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a24a03d2e08bcc24255d3c83455820a96">&#9670;&#160;</a></span>controller_pointers_</h2>
 
@@ -553,33 +624,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00064">64</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
-
-</div>
-</div>
-<a id="ad25f641d91e0b068287a2a138a8bf542" name="ad25f641d91e0b068287a2a138a8bf542"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad25f641d91e0b068287a2a138a8bf542">&#9670;&#160;</a></span>current_status_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t num_controllers&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a> <a class="el" href="classTorqueControllerMux.html">TorqueControllerMux</a>&lt; num_controllers &gt;::current_status_ = {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00074">74</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00066">66</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>
@@ -605,7 +650,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00072">72</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00074">74</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>
@@ -631,7 +676,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00072">72</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00074">74</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>
@@ -657,7 +702,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00072">72</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00074">74</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>
@@ -683,7 +728,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00066">66</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00068">68</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>
@@ -709,7 +754,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00073">73</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00075">75</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>
@@ -740,7 +785,7 @@ template&lt;std::size_t num_controllers&gt; </div>
 <div class="line">        {TorqueLimit_e::TCMUX_LOW_TORQUE, 10.0f}}</div>
 <div class="ttc" id="anamespacePhysicalParameters_html_a2e2b221505554c9718d4840eb9ef0d78"><div class="ttname"><a href="namespacePhysicalParameters.html#a2e2b221505554c9718d4840eb9ef0d78">PhysicalParameters::AMK_MAX_TORQUE</a></div><div class="ttdeci">const float AMK_MAX_TORQUE</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00007">PhysicalParameters.h:7</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00068">68</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TorqueControllerMux_8h_source.html#l00070">70</a> of file <a class="el" href="TorqueControllerMux_8h_source.html">TorqueControllerMux.h</a>.</p>
 
 </div>
 </div>

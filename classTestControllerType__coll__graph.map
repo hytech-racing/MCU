@@ -1,6 +1,6 @@
 <map id="TestControllerType" name="TestControllerType">
 <area shape="rect" id="node1" title=" " alt="" coords="7,255,142,309"/>
-<area shape="rect" id="node2" href="$classController.html" title=" " alt="" coords="5,137,101,192"/>
-<area shape="rect" id="node3" href="$structTorqueControllerOutput__s.html" title=" " alt="" coords="126,137,301,192"/>
-<area shape="rect" id="node4" href="$structDrivetrainCommand__s.html" title=" " alt="" coords="136,5,291,75"/>
+<area shape="rect" id="node2" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="5,137,101,192"/>
+<area shape="rect" id="node3" href="$structTorqueControllerOutput__s.html" title="Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating..." alt="" coords="126,137,301,192"/>
+<area shape="rect" id="node4" href="$structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="136,5,291,75"/>
 </map>

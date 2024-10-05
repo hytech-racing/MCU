@@ -1,7 +1,7 @@
 <map id="TorqueControllerSimpleLaunch" name="TorqueControllerSimpleLaunch">
 <area shape="rect" id="node1" title=" " alt="" coords="5,535,228,633"/>
 <area shape="rect" id="node2" href="$classBaseLaunchController.html" title=" " alt="" coords="31,255,203,485"/>
-<area shape="rect" id="node3" href="$classController.html" title=" " alt="" coords="47,137,143,192"/>
-<area shape="rect" id="node4" href="$structTorqueControllerOutput__s.html" title=" " alt="" coords="168,137,343,192"/>
-<area shape="rect" id="node5" href="$structDrivetrainCommand__s.html" title=" " alt="" coords="178,5,333,75"/>
+<area shape="rect" id="node3" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="47,137,143,192"/>
+<area shape="rect" id="node4" href="$structTorqueControllerOutput__s.html" title="Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating..." alt="" coords="168,137,343,192"/>
+<area shape="rect" id="node5" href="$structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="178,5,333,75"/>
 </map>

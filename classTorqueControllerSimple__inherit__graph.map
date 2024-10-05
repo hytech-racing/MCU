@@ -1,4 +1,4 @@
 <map id="TorqueControllerSimple" name="TorqueControllerSimple">
 <area shape="rect" id="node1" title=" " alt="" coords="5,108,184,265"/>
-<area shape="rect" id="node2" href="$classController.html" title=" " alt="" coords="47,5,143,60"/>
+<area shape="rect" id="node2" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="47,5,143,60"/>
 </map>

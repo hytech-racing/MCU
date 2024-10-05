@@ -1,10 +1,10 @@
 var searchData=
 [
   ['c_0',['c',['../state__machine__test_8h.html#ac43d02085002101b9536539f7daee2c2',1,'state_machine_test.h']]],
-  ['can1_5frxbuffer_1',['CAN1_rxBuffer',['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can1_5ftxbuffer_2',['CAN1_txBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can2_5frxbuffer_3',['CAN2_rxBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp']]],
-  ['can2_5ftxbuffer_4',['CAN2_txBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#aee02772efd58d30d9935a14dba4bcd34',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#aee02772efd58d30d9935a14dba4bcd34',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can1_5frxbuffer_1',['CAN1_rxBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#ac6e1127319d762b3edecd01ba64541a1',1,'CAN1_rxBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can1_5ftxbuffer_2',['CAN1_txBuffer',['../HytechCANInterface_8cpp.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp'],['../interfaces_2include_2HytechCANInterface_8h.html#a160c1a2fcd4624822e816be5d12ff0f1',1,'CAN1_txBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can2_5frxbuffer_3',['CAN2_rxBuffer',['../HytechCANInterface_8cpp.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp'],['../interfaces_2include_2HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72',1,'CAN2_rxBuffer():&#160;HytechCANInterface.cpp']]],
+  ['can2_5ftxbuffer_4',['CAN2_txBuffer',['../HytechCANInterface_8cpp.html#aee02772efd58d30d9935a14dba4bcd34',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp'],['../interfaces_2include_2HytechCANInterface_8h.html#aee02772efd58d30d9935a14dba4bcd34',1,'CAN2_txBuffer():&#160;HytechCANInterface.cpp']]],
   ['can3_5frxbuffer_5',['CAN3_rxBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7',1,'CAN3_rxBuffer():&#160;HytechCANInterface.cpp'],['../HytechCANInterface_8cpp.html#a29aa040358a501c30e482164867b44a7',1,'CAN3_rxBuffer():&#160;HytechCANInterface.cpp']]],
   ['can3_5ftxbuffer_6',['CAN3_txBuffer',['../interfaces_2include_2HytechCANInterface_8h.html#a62b929443815afd5529cf611dc056db3',1,'CAN3_txBuffer():&#160;main.cpp'],['../HytechCANInterface_8cpp.html#a1d9055c81526511a60d939f2c4ad1de3',1,'CAN3_txBuffer():&#160;HytechCANInterface.cpp'],['../src_2main_8cpp.html#ab793fa34bb5167b766174b697c116b7b',1,'CAN3_txBuffer():&#160;main.cpp']]],
   ['can_5fbuffer_7',['CAN_BUFFER',['../AMS__interface__test_8h.html#a25101f4b6a61ff5dc84bc518493659f6',1,'AMS_interface_test.h']]],
@@ -41,13 +41,8 @@ var searchData=
   ['curr_5fsystem_5fmillis_5f_38',['curr_system_millis_',['../classDrivetrainSystem.html#aa6ea7457c6228374ce0b8474ffea4f82',1,'DrivetrainSystem']]],
   ['current_5fchannel_39',['current_channel',['../structTelemetryInterfaceReadChannels.html#aa2038f0f3c6a37c59409860e3ea932e4',1,'TelemetryInterfaceReadChannels']]],
   ['current_5fcommand_5f_40',['current_command_',['../classCASESystem.html#a1809ed75a90fa9c6fedb9843d3c2d6c9',1,'CASESystem']]],
-  ['current_5fcontroller_5fmode_41',['current_controller_mode',['../structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac',1,'TorqueControllerMuxStatus']]],
-  ['current_5fdrivetrain_5fcommand_5f_42',['current_drivetrain_command_',['../classDrivetrainSystem.html#ad18a988bcc293a394d428c0142fb24af',1,'DrivetrainSystem']]],
-  ['current_5ferror_43',['current_error',['../structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72',1,'TorqueControllerMuxStatus']]],
-  ['current_5fmillis_5f_44',['current_millis_',['../classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72',1,'BaseLaunchController']]],
-  ['current_5fref_5fchannel_45',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]],
-  ['current_5fstate_5f_46',['current_state_',['../classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315',1,'MCUStateMachine']]],
-  ['current_5fstatus_5f_47',['current_status_',['../classTorqueControllerMux.html#ad25f641d91e0b068287a2a138a8bf542',1,'TorqueControllerMux']]],
-  ['current_5ftorque_5flimit_5fenum_48',['current_torque_limit_enum',['../structTorqueControllerMuxStatus.html#a1ad262cf9c0120de63c9206328cc7307',1,'TorqueControllerMuxStatus']]],
-  ['current_5ftorque_5flimit_5fvalue_49',['current_torque_limit_value',['../structTorqueControllerMuxStatus.html#aa8667b6aee378b75bd7ff2254ee8a9fc',1,'TorqueControllerMuxStatus']]]
+  ['current_5fdrivetrain_5fcommand_5f_41',['current_drivetrain_command_',['../classDrivetrainSystem.html#ad18a988bcc293a394d428c0142fb24af',1,'DrivetrainSystem']]],
+  ['current_5fmillis_5f_42',['current_millis_',['../classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72',1,'BaseLaunchController']]],
+  ['current_5fref_5fchannel_43',['current_ref_channel',['../structTelemetryInterfaceReadChannels.html#acd9987af930709a36e92bd9be2d3f91d',1,'TelemetryInterfaceReadChannels']]],
+  ['current_5fstate_5f_44',['current_state_',['../classMCUStateMachine.html#a59390c340f239ddf22cfcb93fd53a315',1,'MCUStateMachine']]]
 ];

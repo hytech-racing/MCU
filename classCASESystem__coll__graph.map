@@ -1,5 +1,5 @@
 <map id="CASESystem&lt; message_queue &gt;" name="CASESystem&lt; message_queue &gt;">
 <area shape="rect" id="node1" title="this class with both take in sensor inputs as well as handle calculations for various derived states ..." alt="" coords="79,299,284,691"/>
-<area shape="rect" id="node2" href="$structDrivetrainCommand__s.html" title=" " alt="" coords="5,86,160,155"/>
+<area shape="rect" id="node2" href="$structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="5,86,160,155"/>
 <area shape="rect" id="node3" href="$structCASEConfiguration.html" title=" " alt="" coords="184,5,379,236"/>
 </map>

@@ -76,94 +76,98 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>packages TC Mux indicators: errors, mode, torque limit, bypass  
+ <a href="structTorqueControllerMuxStatus.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for TorqueControllerMuxStatus:</div>
 <div class="dyncontent">
 <div class="center"><img src="structTorqueControllerMuxStatus__coll__graph.png" border="0" usemap="#aTorqueControllerMuxStatus_coll__map" alt="Collaboration graph"/></div>
 <map name="aTorqueControllerMuxStatus_coll__map" id="aTorqueControllerMuxStatus_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,192,148"/>
+<area shape="rect" title="packages TC Mux indicators: errors, mode, torque limit, bypass" alt="" coords="5,5,188,148"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a66c5c715ebf720731cf9ff41494b9d72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#a66c5c715ebf720731cf9ff41494b9d72">current_error</a></td></tr>
-<tr class="separator:a66c5c715ebf720731cf9ff41494b9d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bdfc79cfc4f1584aa25f4c2c0d298ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#a2bdfc79cfc4f1584aa25f4c2c0d298ac">current_controller_mode</a></td></tr>
-<tr class="separator:a2bdfc79cfc4f1584aa25f4c2c0d298ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ad262cf9c0120de63c9206328cc7307"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#a1ad262cf9c0120de63c9206328cc7307">current_torque_limit_enum</a></td></tr>
-<tr class="separator:a1ad262cf9c0120de63c9206328cc7307"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8667b6aee378b75bd7ff2254ee8a9fc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#aa8667b6aee378b75bd7ff2254ee8a9fc">current_torque_limit_value</a></td></tr>
-<tr class="separator:aa8667b6aee378b75bd7ff2254ee8a9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af26232d1a7b6bb8f8637bfde45f63895"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#af26232d1a7b6bb8f8637bfde45f63895">active_error</a></td></tr>
+<tr class="separator:af26232d1a7b6bb8f8637bfde45f63895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af75ca78a60aaeb398c29c8b69e622c05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#af75ca78a60aaeb398c29c8b69e622c05">active_controller_mode</a></td></tr>
+<tr class="separator:af75ca78a60aaeb398c29c8b69e622c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a572f1d245d55e4c033b6230ef364bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#a4a572f1d245d55e4c033b6230ef364bb">active_torque_limit_enum</a></td></tr>
+<tr class="separator:a4a572f1d245d55e4c033b6230ef364bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c0f2dec9dd0d6c0d9fd98dc427db90"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#af4c0f2dec9dd0d6c0d9fd98dc427db90">active_torque_limit_value</a></td></tr>
+<tr class="separator:af4c0f2dec9dd0d6c0d9fd98dc427db90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8475a2c7175ef6ebaad5fa86fd2b9d22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTorqueControllerMuxStatus.html#a8475a2c7175ef6ebaad5fa86fd2b9d22">output_is_bypassing_limits</a></td></tr>
 <tr class="separator:a8475a2c7175ef6ebaad5fa86fd2b9d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00092">92</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="textblock"><p >packages TC Mux indicators: errors, mode, torque limit, bypass </p>
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00103">103</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2bdfc79cfc4f1584aa25f4c2c0d298ac" name="a2bdfc79cfc4f1584aa25f4c2c0d298ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bdfc79cfc4f1584aa25f4c2c0d298ac">&#9670;&#160;</a></span>current_controller_mode</h2>
+<a id="af75ca78a60aaeb398c29c8b69e622c05" name="af75ca78a60aaeb398c29c8b69e622c05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af75ca78a60aaeb398c29c8b69e622c05">&#9670;&#160;</a></span>active_controller_mode</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a> TorqueControllerMuxStatus::current_controller_mode</td>
+          <td class="memname"><a class="el" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76a">ControllerMode_e</a> TorqueControllerMuxStatus::active_controller_mode</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00095">95</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00106">106</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
-<a id="a66c5c715ebf720731cf9ff41494b9d72" name="a66c5c715ebf720731cf9ff41494b9d72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66c5c715ebf720731cf9ff41494b9d72">&#9670;&#160;</a></span>current_error</h2>
+<a id="af26232d1a7b6bb8f8637bfde45f63895" name="af26232d1a7b6bb8f8637bfde45f63895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af26232d1a7b6bb8f8637bfde45f63895">&#9670;&#160;</a></span>active_error</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a> TorqueControllerMuxStatus::current_error</td>
+          <td class="memname"><a class="el" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498d">TorqueControllerMuxError</a> TorqueControllerMuxStatus::active_error</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00094">94</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00105">105</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
-<a id="a1ad262cf9c0120de63c9206328cc7307" name="a1ad262cf9c0120de63c9206328cc7307"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ad262cf9c0120de63c9206328cc7307">&#9670;&#160;</a></span>current_torque_limit_enum</h2>
+<a id="a4a572f1d245d55e4c033b6230ef364bb" name="a4a572f1d245d55e4c033b6230ef364bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a572f1d245d55e4c033b6230ef364bb">&#9670;&#160;</a></span>active_torque_limit_enum</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> TorqueControllerMuxStatus::current_torque_limit_enum</td>
+          <td class="memname"><a class="el" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644b">TorqueLimit_e</a> TorqueControllerMuxStatus::active_torque_limit_enum</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00096">96</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00107">107</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
-<a id="aa8667b6aee378b75bd7ff2254ee8a9fc" name="aa8667b6aee378b75bd7ff2254ee8a9fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8667b6aee378b75bd7ff2254ee8a9fc">&#9670;&#160;</a></span>current_torque_limit_value</h2>
+<a id="af4c0f2dec9dd0d6c0d9fd98dc427db90" name="af4c0f2dec9dd0d6c0d9fd98dc427db90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4c0f2dec9dd0d6c0d9fd98dc427db90">&#9670;&#160;</a></span>active_torque_limit_value</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float TorqueControllerMuxStatus::current_torque_limit_value</td>
+          <td class="memname">float TorqueControllerMuxStatus::active_torque_limit_value</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00097">97</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00108">108</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
@@ -179,7 +183,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00098">98</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00109">109</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>

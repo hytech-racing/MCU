@@ -76,13 +76,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. These setpoints are defined in the torque controllers cycled by the TC Muxer. The Speeds unit is rpm and are the targeted speeds for each wheel of the car. The torques unit is nm and is the max torque requested from the inverter to reach such speeds. One can use the arrays with <a class="el" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR(Front Left)</a>, <a class="el" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL(Front Left)</a>, <a class="el" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL(Rear Left)</a>, <a class="el" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR(Rear Right)</a> to access or modify the respective set points. eg. speeds_rpm[FR] = 0.0; Their indexes are defined in utility.h as follows: FL = 0, FR = 1, RL = 2, RR = 3.  
+ <a href="structDrivetrainCommand__s.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for DrivetrainCommand_s:</div>
 <div class="dyncontent">
 <div class="center"><img src="structDrivetrainCommand__s__coll__graph.png" border="0" usemap="#aDrivetrainCommand__s_coll__map" alt="Collaboration graph"/></div>
 <map name="aDrivetrainCommand__s_coll__map" id="aDrivetrainCommand__s_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,160,75"/>
+<area shape="rect" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="5,5,160,75"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -90,13 +93,30 @@ Collaboration diagram for DrivetrainCommand_s:</div>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a5bdb12f04edaaeea2377f679d16afc59"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a> [<a class="el" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
 <tr class="separator:a5bdb12f04edaaeea2377f679d16afc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7045866fd15833c0657810146182dad6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6">torqueSetpoints</a> [<a class="el" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
-<tr class="separator:a7045866fd15833c0657810146182dad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed1e275177948e44c931ab699499175"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDrivetrainCommand__s.html#a4ed1e275177948e44c931ab699499175">inverter_torque_limit</a> [<a class="el" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
+<tr class="separator:a4ed1e275177948e44c931ab699499175"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00052">52</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="textblock"><p >Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. These setpoints are defined in the torque controllers cycled by the TC Muxer. The Speeds unit is rpm and are the targeted speeds for each wheel of the car. The torques unit is nm and is the max torque requested from the inverter to reach such speeds. One can use the arrays with <a class="el" href="Utility_8h.html#a47968b41e57a835656473a78eb95a36c">FR(Front Left)</a>, <a class="el" href="Utility_8h.html#a232e53b0b909b708971e1ff0886a269e">FL(Front Left)</a>, <a class="el" href="Utility_8h.html#ae422df0ea387cc2ead9435c88d092c27">RL(Rear Left)</a>, <a class="el" href="Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce">RR(Rear Right)</a> to access or modify the respective set points. eg. speeds_rpm[FR] = 0.0; Their indexes are defined in utility.h as follows: FL = 0, FR = 1, RL = 2, RR = 3. </p>
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00058">58</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4ed1e275177948e44c931ab699499175" name="a4ed1e275177948e44c931ab699499175"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed1e275177948e44c931ab699499175">&#9670;&#160;</a></span>inverter_torque_limit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DrivetrainCommand_s::inverter_torque_limit[<a class="el" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00061">61</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+
+</div>
+</div>
 <a id="a5bdb12f04edaaeea2377f679d16afc59" name="a5bdb12f04edaaeea2377f679d16afc59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5bdb12f04edaaeea2377f679d16afc59">&#9670;&#160;</a></span>speeds_rpm</h2>
 
@@ -109,23 +129,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00054">54</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-
-</div>
-</div>
-<a id="a7045866fd15833c0657810146182dad6" name="a7045866fd15833c0657810146182dad6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7045866fd15833c0657810146182dad6">&#9670;&#160;</a></span>torqueSetpoints</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float DrivetrainCommand_s::torqueSetpoints[<a class="el" href="Utility_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00055">55</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00060">60</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>

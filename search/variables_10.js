@@ -26,11 +26,10 @@ var searchData=
   ['rpm_5fto_5fkilometers_5fper_5fhour_23',['RPM_TO_KILOMETERS_PER_HOUR',['../PhysicalParameters_8h.html#a97cc2510c98f5d4021f6baaf08418f80',1,'PhysicalParameters.h']]],
   ['rpm_5fto_5fmeters_5fper_5fsecond_24',['RPM_TO_METERS_PER_SECOND',['../PhysicalParameters_8h.html#a2508ea5f926dc8e172ebe958498a58bb',1,'PhysicalParameters.h']]],
   ['rpm_5fto_5frad_5fper_5fsecond_25',['RPM_TO_RAD_PER_SECOND',['../PhysicalParameters_8h.html#aafafe227a03de7be5332f7cce15d5b41',1,'PhysicalParameters.h']]],
-  ['rr_26',['RR',['../structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3',1,'veh_vec']]],
-  ['rr_27',['rr',['../structinverters.html#a50cf4dd8729da63738e9f98800cbd236',1,'inverters']]],
-  ['rr_28',['RR',['../Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce',1,'Utility.h']]],
-  ['rr_5finv_29',['rr_inv',['../test__can__interface_8cpp.html#af05a5a532cb86f5d6d8be755d9a23e55',1,'test_can_interface.cpp']]],
-  ['rr_5ftorque_5fdelta_30',['rr_torque_delta',['../structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b',1,'PIDTVTorqueControllerData']]],
-  ['rrconversion_31',['RRConversion',['../structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a',1,'LoadCellInterfaceTick_s']]],
-  ['rrloadcell_32',['rrLoadCell',['../classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c',1,'SABInterface']]]
+  ['rr_26',['rr',['../structinverters.html#a50cf4dd8729da63738e9f98800cbd236',1,'inverters']]],
+  ['rr_27',['RR',['../structveh__vec.html#aa3a75ad1f1d1d78c14ffff2b6fe55de3',1,'veh_vec::RR()'],['../Utility_8h.html#a070b34e47f13ddfdaa2502536eee14ce',1,'RR():&#160;Utility.h']]],
+  ['rr_5finv_28',['rr_inv',['../test__can__interface_8cpp.html#af05a5a532cb86f5d6d8be755d9a23e55',1,'test_can_interface.cpp']]],
+  ['rr_5ftorque_5fdelta_29',['rr_torque_delta',['../structPIDTVTorqueControllerData.html#a920ab4ecd12ed53a368c2fe0015aa81b',1,'PIDTVTorqueControllerData']]],
+  ['rrconversion_30',['RRConversion',['../structLoadCellInterfaceTick__s.html#a4cdd38cc38d6a36845523356f2dad16a',1,'LoadCellInterfaceTick_s']]],
+  ['rrloadcell_31',['rrLoadCell',['../classSABInterface.html#aeffa0f19967ce50d7b8e691c6a48eb7c',1,'SABInterface']]]
 ];

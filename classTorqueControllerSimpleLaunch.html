@@ -85,7 +85,7 @@ Inheritance diagram for TorqueControllerSimpleLaunch:</div>
 <map name="aTorqueControllerSimpleLaunch_inherit__map" id="aTorqueControllerSimpleLaunch_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,401,228,500"/>
 <area shape="rect" href="classBaseLaunchController.html" title=" " alt="" coords="31,108,203,353"/>
-<area shape="rect" href="classController.html" title=" " alt="" coords="69,5,165,60"/>
+<area shape="rect" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="69,5,165,60"/>
 </map>
 </div>
 <div class="dynheader">
@@ -95,32 +95,40 @@ Collaboration diagram for TorqueControllerSimpleLaunch:</div>
 <map name="aTorqueControllerSimpleLaunch_coll__map" id="aTorqueControllerSimpleLaunch_coll__map">
 <area shape="rect" title=" " alt="" coords="5,535,228,633"/>
 <area shape="rect" href="classBaseLaunchController.html" title=" " alt="" coords="31,255,203,485"/>
-<area shape="rect" href="classController.html" title=" " alt="" coords="47,137,143,192"/>
-<area shape="rect" href="structTorqueControllerOutput__s.html" title=" " alt="" coords="168,137,343,192"/>
-<area shape="rect" href="structDrivetrainCommand__s.html" title=" " alt="" coords="178,5,333,75"/>
+<area shape="rect" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="47,137,143,192"/>
+<area shape="rect" href="structTorqueControllerOutput__s.html" title="Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating..." alt="" coords="168,137,343,192"/>
+<area shape="rect" href="structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="178,5,333,75"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae06f2002f1de64259404c676e4eb374d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimpleLaunch.html#ae06f2002f1de64259404c676e4eb374d">TorqueControllerSimpleLaunch</a> (float launch_rate, int16_t initial_speed_target)</td></tr>
+<tr class="memdesc:ae06f2002f1de64259404c676e4eb374d"><td class="mdescLeft">&#160;</td><td class="mdescRight">this launch controller is based off of a specified launch rate and an initial speed target It will ramp up the speed target linearly over time to accelerate  <a href="classTorqueControllerSimpleLaunch.html#ae06f2002f1de64259404c676e4eb374d">More...</a><br /></td></tr>
 <tr class="separator:ae06f2002f1de64259404c676e4eb374d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83e7005495e563676b9cebbf03610f02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimpleLaunch.html#a83e7005495e563676b9cebbf03610f02">TorqueControllerSimpleLaunch</a> ()</td></tr>
+<tr class="memdesc:a83e7005495e563676b9cebbf03610f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">base constructor with default values: Default_Launch_Rate = 11.76, DEFAULT_LAUNCH_SPEED_TARGET = 1500(rpm)  <a href="classTorqueControllerSimpleLaunch.html#a83e7005495e563676b9cebbf03610f02">More...</a><br /></td></tr>
 <tr class="separator:a83e7005495e563676b9cebbf03610f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cf94490e572e2e4254fd03f5e1f53c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTorqueControllerSimpleLaunch.html#a6cf94490e572e2e4254fd03f5e1f53c3">calc_launch_algo</a> (const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;vn_data) override</td></tr>
+<tr class="memdesc:a6cf94490e572e2e4254fd03f5e1f53c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increases speed target during launch linearly based off launch rate provided in the constructor.  <a href="classTorqueControllerSimpleLaunch.html#a6cf94490e572e2e4254fd03f5e1f53c3">More...</a><br /></td></tr>
 <tr class="separator:a6cf94490e572e2e4254fd03f5e1f53c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classBaseLaunchController"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBaseLaunchController')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBaseLaunchController.html">BaseLaunchController</a></td></tr>
 <tr class="memitem:a71f61f1433405c414422350a682503de inherit pub_methods_classBaseLaunchController"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a71f61f1433405c414422350a682503de">BaseLaunchController</a> (int16_t initial_speed_target)</td></tr>
+<tr class="memdesc:a71f61f1433405c414422350a682503de inherit pub_methods_classBaseLaunchController"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for parent launch controller.  <a href="classBaseLaunchController.html#a71f61f1433405c414422350a682503de">More...</a><br /></td></tr>
 <tr class="separator:a71f61f1433405c414422350a682503de inherit pub_methods_classBaseLaunchController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd12d85b5259f0adfb115306779d16d inherit pub_methods_classBaseLaunchController"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">tick</a> (const SysTick_s &amp;tick, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;pedalsData, const float wheel_rpms[], const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;vn_data)</td></tr>
+<tr class="memdesc:a9cd12d85b5259f0adfb115306779d16d inherit pub_methods_classBaseLaunchController"><td class="mdescLeft">&#160;</td><td class="mdescRight">ticks launch controller to progress through launch states when conditions are met. The conditions are explained above the launch states enum. all launch controllers use this class' implementation of tick. tick conatains the current system tick controlled by main.cpp pedalsData conatins the brake and accelerator values wheel_rpms[] contains how fast each wheel is spinning, order of wheels in this array is defined in <a class="el" href="SharedDataTypes_8h.html">SharedDataTypes.h</a> and <a class="el" href="Utility_8h.html">Utility.h</a> vn_data contains vector states of the car that will be provided to the calc_launch_algo method called in the LAUNCHING state of this set of modes  <a href="classBaseLaunchController.html#a9cd12d85b5259f0adfb115306779d16d">More...</a><br /></td></tr>
 <tr class="separator:a9cd12d85b5259f0adfb115306779d16d inherit pub_methods_classBaseLaunchController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b5b72079b6e5dd17d8d1d2b1ef26adc inherit pub_methods_classBaseLaunchController"><td class="memItemLeft" align="right" valign="top"><a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">LaunchStates_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a3b5b72079b6e5dd17d8d1d2b1ef26adc">get_launch_state</a> ()</td></tr>
 <tr class="separator:a3b5b72079b6e5dd17d8d1d2b1ef26adc inherit pub_methods_classBaseLaunchController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf9e3474ced62d66ba12ce0ba8bae24c inherit pub_methods_classBaseLaunchController"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#adf9e3474ced62d66ba12ce0ba8bae24c">calc_launch_algo</a> (const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;vn_data)=0</td></tr>
+<tr class="memdesc:adf9e3474ced62d66ba12ce0ba8bae24c inherit pub_methods_classBaseLaunchController"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates how speed target (the speed the car is trying to achieve during launch) is set and/or increased during launch This updates internal speed target variable launch_speed_target_  <a href="classBaseLaunchController.html#adf9e3474ced62d66ba12ce0ba8bae24c">More...</a><br /></td></tr>
 <tr class="separator:adf9e3474ced62d66ba12ce0ba8bae24c inherit pub_methods_classBaseLaunchController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07439af8aff84fd91238a149d970f1a5 inherit pub_methods_classBaseLaunchController"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseLaunchController.html#a07439af8aff84fd91238a149d970f1a5">evaluate</a> (const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;state) override</td></tr>
+<tr class="memdesc:a07439af8aff84fd91238a149d970f1a5 inherit pub_methods_classBaseLaunchController"><td class="mdescLeft">&#160;</td><td class="mdescRight">all launch controllers share the same evaluate method implemented in this class implementation.  <a href="classBaseLaunchController.html#a07439af8aff84fd91238a149d970f1a5">More...</a><br /></td></tr>
 <tr class="separator:a07439af8aff84fd91238a149d970f1a5 inherit pub_methods_classBaseLaunchController"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd879d218121028029cc0a3620e004aa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classController.html#afd879d218121028029cc0a3620e004aa">evaluate</a> (const <a class="el" href="structSharedCarState__s.html">SharedCarState_s</a> &amp;state)=0</td></tr>
+<tr class="memdesc:afd879d218121028029cc0a3620e004aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This mehod must be implemented by every controller in the Tc Muxer. This is called in the Muxer whenever the drivetrain command is obtained. TorqueControllerMux.cpp to see that in every tick of the system, the active controller must be ticked through this method.  <a href="classController.html#afd879d218121028029cc0a3620e004aa">More...</a><br /></td></tr>
 <tr class="separator:afd879d218121028029cc0a3620e004aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -187,7 +195,9 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >SIMPLE LAUNCH CONTROLLER This launch controller is based off of a specified launch rate and an initial speed target It will ramp up the speed target linearlly over time to accelerate </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>this launch controller is based off of a specified launch rate and an initial speed target It will ramp up the speed target linearly over time to accelerate </p>
+<p >SIMPLE LAUNCH CONTROLLER </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">launch_rate</td><td>specified launch rate in m/s^2 </td></tr>
     <tr><td class="paramname">initial_speed_target</td><td>the initial speed commanded to the wheels </td></tr>
@@ -198,7 +208,7 @@ Additional Inherited Members</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="SimpleLaunchController_8h_source.html#l00027">27</a> of file <a class="el" href="SimpleLaunchController_8h_source.html">SimpleLaunchController.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   28</span>        : <a class="code hl_class" href="classBaseLaunchController.html">BaseLaunchController</a>(initial_speed_target),</div>
 <div class="line"><span class="lineno">   29</span>          <a class="code hl_variable" href="classTorqueControllerSimpleLaunch.html#a4c607d2224f27fca7ddf016cc8e17822">launch_rate_target_</a>(launch_rate) {}</div>
-<div class="ttc" id="aclassBaseLaunchController_html"><div class="ttname"><a href="classBaseLaunchController.html">BaseLaunchController</a></div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00026">BaseLaunchController.h:27</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html"><div class="ttname"><a href="classBaseLaunchController.html">BaseLaunchController</a></div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00036">BaseLaunchController.h:37</a></div></div>
 <div class="ttc" id="aclassTorqueControllerSimpleLaunch_html_a4c607d2224f27fca7ddf016cc8e17822"><div class="ttname"><a href="classTorqueControllerSimpleLaunch.html#a4c607d2224f27fca7ddf016cc8e17822">TorqueControllerSimpleLaunch::launch_rate_target_</a></div><div class="ttdeci">float launch_rate_target_</div><div class="ttdef"><b>Definition:</b> <a href="SimpleLaunchController_8h_source.html#l00017">SimpleLaunchController.h:17</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -226,9 +236,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>base constructor with default values: Default_Launch_Rate = 11.76, DEFAULT_LAUNCH_SPEED_TARGET = 1500(rpm) </p>
+
 <p class="definition">Definition at line <a class="el" href="SimpleLaunchController_8h_source.html#l00032">32</a> of file <a class="el" href="SimpleLaunchController_8h_source.html">SimpleLaunchController.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   32</span>: <a class="code hl_function" href="classTorqueControllerSimpleLaunch.html#a83e7005495e563676b9cebbf03610f02">TorqueControllerSimpleLaunch</a>(<a class="code hl_variable" href="namespaceSimpleLaunchControllerParams.html#a0992d9d7164c68b82fd5e0a78318edde">SLParams::DEFAULT_LAUNCH_RATE</a>, <a class="code hl_variable" href="namespaceSimpleLaunchControllerParams.html#a2b5cee97f3c33cd6ba512c3d97dc4797">SLParams::DEFAULT_LAUNCH_SPEED_TARGET</a>) {}</div>
-<div class="ttc" id="aclassTorqueControllerSimpleLaunch_html_a83e7005495e563676b9cebbf03610f02"><div class="ttname"><a href="classTorqueControllerSimpleLaunch.html#a83e7005495e563676b9cebbf03610f02">TorqueControllerSimpleLaunch::TorqueControllerSimpleLaunch</a></div><div class="ttdeci">TorqueControllerSimpleLaunch()</div><div class="ttdef"><b>Definition:</b> <a href="SimpleLaunchController_8h_source.html#l00032">SimpleLaunchController.h:32</a></div></div>
+<div class="ttc" id="aclassTorqueControllerSimpleLaunch_html_a83e7005495e563676b9cebbf03610f02"><div class="ttname"><a href="classTorqueControllerSimpleLaunch.html#a83e7005495e563676b9cebbf03610f02">TorqueControllerSimpleLaunch::TorqueControllerSimpleLaunch</a></div><div class="ttdeci">TorqueControllerSimpleLaunch()</div><div class="ttdoc">base constructor with default values: Default_Launch_Rate = 11.76, DEFAULT_LAUNCH_SPEED_TARGET = 1500...</div><div class="ttdef"><b>Definition:</b> <a href="SimpleLaunchController_8h_source.html#l00032">SimpleLaunchController.h:32</a></div></div>
 <div class="ttc" id="anamespaceSimpleLaunchControllerParams_html_a0992d9d7164c68b82fd5e0a78318edde"><div class="ttname"><a href="namespaceSimpleLaunchControllerParams.html#a0992d9d7164c68b82fd5e0a78318edde">SimpleLaunchControllerParams::DEFAULT_LAUNCH_RATE</a></div><div class="ttdeci">const float DEFAULT_LAUNCH_RATE</div><div class="ttdef"><b>Definition:</b> <a href="SimpleLaunchController_8h_source.html#l00008">SimpleLaunchController.h:8</a></div></div>
 <div class="ttc" id="anamespaceSimpleLaunchControllerParams_html_a2b5cee97f3c33cd6ba512c3d97dc4797"><div class="ttname"><a href="namespaceSimpleLaunchControllerParams.html#a2b5cee97f3c33cd6ba512c3d97dc4797">SimpleLaunchControllerParams::DEFAULT_LAUNCH_SPEED_TARGET</a></div><div class="ttdeci">const int16_t DEFAULT_LAUNCH_SPEED_TARGET</div><div class="ttdef"><b>Definition:</b> <a href="SimpleLaunchController_8h_source.html#l00009">SimpleLaunchController.h:9</a></div></div>
 </div><!-- fragment -->
@@ -259,6 +271,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Increases speed target during launch linearly based off launch rate provided in the constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vn_data</td><td>this data is not necessary for this controller but is supplied according to the interface </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Implements <a class="el" href="classBaseLaunchController.html#adf9e3474ced62d66ba12ce0ba8bae24c">BaseLaunchController</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="LaunchControllerAlgos_8cpp_source.html#l00006">6</a> of file <a class="el" href="LaunchControllerAlgos_8cpp_source.html">LaunchControllerAlgos.cpp</a>.</p>
@@ -276,10 +296,10 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a> = std::min((<span class="keywordtype">int</span>)<a class="code hl_variable" href="namespacePhysicalParameters.html#aa6a88a3f564b8fa6b24a75e86bc65278">PhysicalParameters::AMK_MAX_RPM</a>, std::max(0, (<span class="keywordtype">int</span>)<a class="code hl_variable" href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">launch_speed_target_</a>));</div>
 <div class="line"><span class="lineno">   19</span>}</div>
 <div class="ttc" id="aPhysicalParameters_8h_html_aac55cdf0c5999b90193f6c334f7df144"><div class="ttname"><a href="PhysicalParameters_8h.html#aac55cdf0c5999b90193f6c334f7df144">METERS_PER_SECOND_TO_RPM</a></div><div class="ttdeci">constexpr const float METERS_PER_SECOND_TO_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00015">PhysicalParameters.h:15</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a003d0180c9abef36a7533ecc2b8d3c8d"><div class="ttname"><a href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">BaseLaunchController::time_of_launch_</a></div><div class="ttdeci">uint32_t time_of_launch_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00030">BaseLaunchController.h:30</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_a2ea65c4e7c6f638cbfa16ee809b8d738"><div class="ttname"><a href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">BaseLaunchController::launch_speed_target_</a></div><div class="ttdeci">float launch_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00036">BaseLaunchController.h:36</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_af56b0ad1e82bc945cd06c45b18677b72"><div class="ttname"><a href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">BaseLaunchController::current_millis_</a></div><div class="ttdeci">uint32_t current_millis_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00035">BaseLaunchController.h:35</a></div></div>
-<div class="ttc" id="aclassBaseLaunchController_html_af80ca8fe09f9e81281c0fa01a68e89fe"><div class="ttname"><a href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">BaseLaunchController::init_speed_target_</a></div><div class="ttdeci">int16_t init_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00037">BaseLaunchController.h:37</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a003d0180c9abef36a7533ecc2b8d3c8d"><div class="ttname"><a href="classBaseLaunchController.html#a003d0180c9abef36a7533ecc2b8d3c8d">BaseLaunchController::time_of_launch_</a></div><div class="ttdeci">uint32_t time_of_launch_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00040">BaseLaunchController.h:40</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_a2ea65c4e7c6f638cbfa16ee809b8d738"><div class="ttname"><a href="classBaseLaunchController.html#a2ea65c4e7c6f638cbfa16ee809b8d738">BaseLaunchController::launch_speed_target_</a></div><div class="ttdeci">float launch_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00046">BaseLaunchController.h:46</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_af56b0ad1e82bc945cd06c45b18677b72"><div class="ttname"><a href="classBaseLaunchController.html#af56b0ad1e82bc945cd06c45b18677b72">BaseLaunchController::current_millis_</a></div><div class="ttdeci">uint32_t current_millis_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00045">BaseLaunchController.h:45</a></div></div>
+<div class="ttc" id="aclassBaseLaunchController_html_af80ca8fe09f9e81281c0fa01a68e89fe"><div class="ttname"><a href="classBaseLaunchController.html#af80ca8fe09f9e81281c0fa01a68e89fe">BaseLaunchController::init_speed_target_</a></div><div class="ttdeci">int16_t init_speed_target_</div><div class="ttdef"><b>Definition:</b> <a href="BaseLaunchController_8h_source.html#l00047">BaseLaunchController.h:47</a></div></div>
 <div class="ttc" id="anamespacePhysicalParameters_html_aa6a88a3f564b8fa6b24a75e86bc65278"><div class="ttname"><a href="namespacePhysicalParameters.html#aa6a88a3f564b8fa6b24a75e86bc65278">PhysicalParameters::AMK_MAX_RPM</a></div><div class="ttdeci">const float AMK_MAX_RPM</div><div class="ttdef"><b>Definition:</b> <a href="PhysicalParameters_8h_source.html#l00006">PhysicalParameters.h:6</a></div></div>
 </div><!-- fragment -->
 </div>

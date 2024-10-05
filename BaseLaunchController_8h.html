@@ -132,6 +132,7 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceBaseLaunchControllerParams"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBaseLaunchControllerParams.html">BaseLaunchControllerParams</a></td></tr>
+<tr class="memdesc:namespaceBaseLaunchControllerParams"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains constants for tick behavior/progression(_threshold variables used to determine when to move to the next step) and defaults(DEFAULT_LAUNCH_SPEED_TARGET) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -141,6 +142,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LAUNCH_READY</a>
 , <a class="el" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LAUNCHING</a>
  }</td></tr>
+<tr class="memdesc:a7e422301465b5cc1afc64ff1f6be0d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modes to define launch behavior, where each one waits for acceleration request threshold to move to next mode LAUNCH_NOT_READY keeps speed at 0 and makes sure pedals are not pressed, the launch controller begins in this state From this state the launch can only progress forwards to LAUNCH_READY LAUNCH_READY keeps speed at 0, below the speed threshold(5 m/s) and makes sure brake is not pressed harder than the threshold of .2(20% pushed) From this state the launch can progress forwards to LAUNCHING according to the two conditions defined above or backwards to LAUNCH_NOT_READY if those conditions are not met LAUNCHING uses respective algorithm to set speed set point and requests torque from motors to reach it From this state the launch can fully begin and set speed set points above 0.0 m/s and the maximum available torque can be requested from the inverters This launch state can be terminated if the brake is pressed above the threshold(.2(20% pushed)) or if the accelerator is not pressed enough (&lt;= .5(50% pushed))  <a href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03">More...</a><br /></td></tr>
 <tr class="separator:a7e422301465b5cc1afc64ff1f6be0d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -180,6 +182,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Modes to define launch behavior, where each one waits for acceleration request threshold to move to next mode LAUNCH_NOT_READY keeps speed at 0 and makes sure pedals are not pressed, the launch controller begins in this state From this state the launch can only progress forwards to LAUNCH_READY LAUNCH_READY keeps speed at 0, below the speed threshold(5 m/s) and makes sure brake is not pressed harder than the threshold of .2(20% pushed) From this state the launch can progress forwards to LAUNCHING according to the two conditions defined above or backwards to LAUNCH_NOT_READY if those conditions are not met LAUNCHING uses respective algorithm to set speed set point and requests torque from motors to reach it From this state the launch can fully begin and set speed set points above 0.0 m/s and the maximum available torque can be requested from the inverters This launch state can be terminated if the brake is pressed above the threshold(.2(20% pushed)) or if the accelerator is not pressed enough (&lt;= .5(50% pushed)) </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9" name="a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9"></a>NO_LAUNCH_MODE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd" name="a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd"></a>LAUNCH_NOT_READY&#160;</td><td class="fielddoc"></td></tr>
@@ -187,13 +191,13 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995" name="a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995"></a>LAUNCHING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00007">7</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    8</span>{</div>
-<div class="line"><span class="lineno">    9</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9">NO_LAUNCH_MODE</a>,</div>
-<div class="line"><span class="lineno">   10</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LAUNCH_NOT_READY</a>,</div>
-<div class="line"><span class="lineno">   11</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LAUNCH_READY</a>,</div>
-<div class="line"><span class="lineno">   12</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LAUNCHING</a></div>
-<div class="line"><span class="lineno">   13</span>};</div>
+<p class="definition">Definition at line <a class="el" href="BaseLaunchController_8h_source.html#l00016">16</a> of file <a class="el" href="BaseLaunchController_8h_source.html">BaseLaunchController.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>{</div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9">NO_LAUNCH_MODE</a>,</div>
+<div class="line"><span class="lineno">   19</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03af681398e2411beb2a421c8f2cc1471bd">LAUNCH_NOT_READY</a>,</div>
+<div class="line"><span class="lineno">   20</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LAUNCH_READY</a>,</div>
+<div class="line"><span class="lineno">   21</span>    <a class="code hl_enumvalue" href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LAUNCHING</a></div>
+<div class="line"><span class="lineno">   22</span>};</div>
 <div class="ttc" id="aBaseLaunchController_8h_html_a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4"><div class="ttname"><a href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a5c0e947d7bf2cc7b82452205a324dba4">LaunchStates_e::LAUNCH_READY</a></div><div class="ttdeci">@ LAUNCH_READY</div></div>
 <div class="ttc" id="aBaseLaunchController_8h_html_a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995"><div class="ttname"><a href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03a9426a429f2963ca39b13340eddc4e995">LaunchStates_e::LAUNCHING</a></div><div class="ttdeci">@ LAUNCHING</div></div>
 <div class="ttc" id="aBaseLaunchController_8h_html_a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9"><div class="ttname"><a href="BaseLaunchController_8h.html#a7e422301465b5cc1afc64ff1f6be0d03ac7a5de8aa0b90f5e29cc393a7976d4c9">LaunchStates_e::NO_LAUNCH_MODE</a></div><div class="ttdeci">@ NO_LAUNCH_MODE</div></div>

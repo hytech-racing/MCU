@@ -16,5 +16,6 @@ var searchData=
   ['inv_5fcan_5fbaudrate_13',['INV_CAN_BAUDRATE',['../MCU__rev15__defs_8h.html#acf780f904fac84a7a0897fbdbe970795',1,'MCU_rev15_defs.h']]],
   ['inverter_5fenabling_5ftimeout_5finterval_14',['INVERTER_ENABLING_TIMEOUT_INTERVAL',['../MCU__rev15__defs_8h.html#af703dfb934c8b49dcd5462a8fa0593b8',1,'MCU_rev15_defs.h']]],
   ['inverter_5fon_5f_15',['inverter_on_',['../classInverterInterface.html#ab76e1c03780a8e67eee05681cfa03e5a',1,'InverterInterface']]],
-  ['inverters_5f_16',['inverters_',['../classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189',1,'DrivetrainSystem']]]
+  ['inverter_5ftorque_5flimit_16',['inverter_torque_limit',['../structDrivetrainCommand__s.html#a4ed1e275177948e44c931ab699499175',1,'DrivetrainCommand_s']]],
+  ['inverters_5f_17',['inverters_',['../classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189',1,'DrivetrainSystem']]]
 ];

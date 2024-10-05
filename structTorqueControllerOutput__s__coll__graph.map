@@ -1,4 +1,4 @@
 <map id="TorqueControllerOutput_s" name="TorqueControllerOutput_s">
-<area shape="rect" id="node1" title=" " alt="" coords="5,137,180,192"/>
-<area shape="rect" id="node2" href="$structDrivetrainCommand__s.html" title=" " alt="" coords="15,5,170,75"/>
+<area shape="rect" id="node1" title="Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating..." alt="" coords="5,137,180,192"/>
+<area shape="rect" id="node2" href="$structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="15,5,170,75"/>
 </map>

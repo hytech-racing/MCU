@@ -55,7 +55,6 @@ var searchData=
   ['torque_5fsetpoint_5fnm_52',['torque_setpoint_nm',['../structInverterCommand.html#ae3c9426b0e77469337dcecb1d46d8307',1,'InverterCommand']]],
   ['torque_5fsetpoint_5fnm_5f_53',['torque_setpoint_nm_',['../classInverterMock.html#a764a4e1216d52b71f357145248ca42cb',1,'InverterMock']]],
   ['torquedeltapreventsmodechange_54',['torqueDeltaPreventsModeChange',['../structTCMuxStatus__s.html#aed061a6a63694d7228a8a7fd4636e54c',1,'TCMuxStatus_s']]],
-  ['torquemode_55',['torqueMode',['../structTCMuxStatus__s.html#a9e7cde2813481286c10630a167247d46',1,'TCMuxStatus_s']]],
-  ['torquemode_56',['TorqueMode',['../structCASEConfiguration.html#ab520e05af2589db1ad17a3ba083de211',1,'CASEConfiguration']]],
-  ['torquesetpoints_57',['torqueSetpoints',['../structDrivetrainCommand__s.html#a7045866fd15833c0657810146182dad6',1,'DrivetrainCommand_s']]]
+  ['torquemode_55',['TorqueMode',['../structCASEConfiguration.html#ab520e05af2589db1ad17a3ba083de211',1,'CASEConfiguration']]],
+  ['torquemode_56',['torqueMode',['../structTCMuxStatus__s.html#a9e7cde2813481286c10630a167247d46',1,'TCMuxStatus_s']]]
 ];
