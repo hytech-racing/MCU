@@ -34,9 +34,14 @@ void LoadCellInterface::tick(const LoadCellInterfaceTick_s &intake)
 
 LoadCellInterfaceOutput_s LoadCellInterface::getLoadCellForces()
 {
-    return (LoadCellInterfaceOutput_s) {
+    return (LoadCellInterfaceOutput_s){
         .loadCellForcesFiltered = loadCellForcesFiltered_,
         .loadCellConversions = loadCellConversions_,
-        .FIRSaturated = FIRSaturated_
-    };
+        .FIRSaturated = FIRSaturated_};
+}
+
+// this is a hack, i know, i just want all the data.
+void LoadCellInterface::update_raw_data(const LoadCellInterfaceTick_s &intake)
+{
+    _raw_data.raw_load_cell_data = {intake.FLConversion.raw, intake.FRConversion.raw, intake.RLConversion.raw, intake.RRConversion.raw};
 }

@@ -1,6 +1,6 @@
 #ifdef ENABLE_DEBUG_PRINTS
 #define DEBUG_PRINTS true
-#else 
+#else
 #define DEBUG_PRINTS false
 #endif
 
@@ -54,7 +54,6 @@
     PARAMETER STRUCTS
 */
 using namespace qindesign::network;
-
 
 const TelemetryInterfaceReadChannels telem_read_channels = {
     .accel1_channel = MCU15_ACCEL1_CHANNEL,
@@ -346,7 +345,7 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
-void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg);
+void handle_ethernet_interface_comms(const SysTick_s &systick, const hytech_msgs_MCUOutputData &out_msg);
 
 /*
     SETUP
@@ -421,7 +420,6 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
     process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -437,6 +435,7 @@ void loop()
                                     steering_system.getSteeringSystemData(),
                                     drivetrain.get_dynamic_data(),
                                     load_cell_interface.getLoadCellForces(),
+                                    load_cell_interface.get_latest_raw_data(),
                                     pedals_system.getPedalsSystemData(),
                                     vn_interface.get_vn_struct(),
                                     db_eth_interface.get_latest_data(),
@@ -617,6 +616,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                 .RLConversion = sab_interface.rlLoadCell.convert(),
                 .RRConversion = sab_interface.rrLoadCell.convert()});
     }
+    load_cell_interface.update_raw_data((LoadCellInterfaceTick_s){
+        .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
+        .FRConversion = a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
+        .RLConversion = sab_interface.rlLoadCell.convert(),
+        .RRConversion = sab_interface.rrLoadCell.convert()});
     // // Untriggered
     main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
                                 // DO NOT call in main_ecu.tick()
@@ -658,10 +662,9 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         fsm.get_state(),
         dashboard.startButtonPressed(),
         vn_interface.get_vn_struct().vn_status);
-
 }
 
-void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg)
+void handle_ethernet_interface_comms(const SysTick_s &systick, const hytech_msgs_MCUOutputData &out_msg)
 {
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
@@ -669,7 +672,7 @@ void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs
     std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
     handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);
 
-    if(systick.triggers.trigger500)
+    if (systick.triggers.trigger100)
     {
         handle_ethernet_socket_send_pb<hytech_msgs_MCUOutputData, 1024>(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port, &protobuf_send_socket, out_msg, hytech_msgs_MCUOutputData_fields);
     }
