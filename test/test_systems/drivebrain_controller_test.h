@@ -60,6 +60,26 @@ TEST(DrivebrainControllerTesting, failing_stay_failing) {
   EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 0);
 }
 
+TEST(DrivebrainControllerTesting, failing_in_control) {
+  DrivebrainController controller(10);
+  auto torque_controller_output_s = runTick(
+      &controller, 200, 1011, ControllerMode_e::MODE_4, 1032, 0.01f, 0.0f);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 0);
+
+  torque_controller_output_s = runTick(
+      &controller, 200, 1033, ControllerMode_e::MODE_4, 1033, 0.01f, 0.0f);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 0);
+
+  torque_controller_output_s = runTick(
+      &controller, 400, 1034, ControllerMode_e::MODE_4, 1034, 0.01f, 0.0f);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 0);
+
+  torque_controller_output_s = runTick(
+      &controller, 400, 1034, ControllerMode_e::MODE_4, 1034, 0.0f, 1.0f);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 20000);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.torqueSetpoints[0], PhysicalParameters::AMK_MAX_TORQUE);
+}
+
 TEST(DrivebrainControllerTesting, failing_reset_success) {
   DrivebrainController controller(10);
   auto torque_controller_output_s =
