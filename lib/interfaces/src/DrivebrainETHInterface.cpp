@@ -21,6 +21,8 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
                           shared_state.raw_loadcell_data.raw_load_cell_data.RL,
                           shared_state.raw_loadcell_data.raw_load_cell_data.RR};
     out.has_load_cell_data = true;
+
+    out.timing_failure_active = shared_state.drivebrain_timing_failure;
     return out;
 }
 

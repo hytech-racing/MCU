@@ -26,7 +26,7 @@ auto runTick(DrivebrainController *controller,
   pedals_data.accelPercent = accelPercent;
   SharedCarState_s state(systick, {/*steering data*/}, {/*drivetrain_data*/},
                          {/*loadcell_data*/}, {/*raw_loadcell_data*/},
-                         pedals_data, {}, data, status);
+                         pedals_data, {}, data, status, {});
   return controller->evaluate(state);
 }
 

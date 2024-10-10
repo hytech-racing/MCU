@@ -439,7 +439,8 @@ void loop()
                                     pedals_system.getPedalsSystemData(),
                                     vn_interface.get_vn_struct(),
                                     db_eth_interface.get_latest_data(),
-                                    torque_controller_mux.get_tc_mux_status());
+                                    torque_controller_mux.get_tc_mux_status(),
+                                    db_controller.get_timing_failure_status());
 
     hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
 

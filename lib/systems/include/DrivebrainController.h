@@ -34,6 +34,7 @@ public:
     }
 
     TorqueControllerOutput_s evaluate(const SharedCarState_s &state);
+    bool get_timing_failure_status() { return _timing_failure; }
 
 private:
     struct
