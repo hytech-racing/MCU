@@ -1,6 +1,5 @@
 #include "DrivebrainController.h"
 // #include <Arduino.h>
-
 TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &state)
 {
 
@@ -59,7 +58,8 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     else
     {
         _timing_failure = true;
-        output.command = {{0.0f}, {0.0f}};
+        // output.command = {{0.0f}, {0.0f}};
+        output = _emergency_control.evaluate(state);
     }
     return output;
 }

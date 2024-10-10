@@ -6,7 +6,7 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
 {
     hytech_msgs_MCUOutputData out;
     out.accel_percent = shared_state.pedals_data.accelPercent;
-    out.brake_percent = shared_state.pedals_data.brakePercent;
+    out.brake_percent = shared_state.pedals_data.regenPercent;
     
     out.has_rpm_data = true;
     out.rpm_data.FL = shared_state.drivetrain_data.measuredSpeeds[0];

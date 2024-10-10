@@ -1,12 +1,12 @@
 #ifndef __DRIVEBRAINCONTROLLER_H__
 #define __DRIVEBRAINCONTROLLER_H__
 
-
-#include "TorqueControllers.h"
+#include <SimpleController.h>
+// #include "TorqueControllers.h"
 #include "DrivebrainData.h"
 #include "BaseController.h"
 #include "SharedDataTypes.h"
-
+#include <cmath>
 // TODO - [x] need to validate that the times that are apparent in the drivebrain data
 //            and ensure that they are within tolerence to current sys-tick
 
@@ -26,6 +26,7 @@ public:
     DrivebrainController(unsigned long allowed_latency,
                          float max_fault_clear_speed_m_s = 1.0,
                          ControllerMode_e assigned_controller_mode = ControllerMode_e::MODE_4)
+        : _emergency_control(1.0f, 1.0f)
     {
         _last_worst_latency_rec_time =0;
         _worst_latency_so_far = -1;
@@ -46,6 +47,7 @@ private:
     int64_t _worst_latency_so_far;
     bool _timing_failure = false;
     unsigned long _last_setpoint_millis = -1;
+    TorqueControllerSimple _emergency_control;
 };
 
 #endif // __DRIVEBRAINCONTROLLER_H__
