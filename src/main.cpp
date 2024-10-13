@@ -313,7 +313,7 @@ TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
 // mode 3
 TorqueControllerSimpleLaunch simple_launch;
 // mode 4
-DrivebrainController db_controller(210, 210);
+DrivebrainController db_controller(210);
 
 TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
                                  static_cast<Controller *>(&tc_vec),
