@@ -442,6 +442,7 @@ void loop()
                                     torque_controller_mux.get_tc_mux_status(),
                                     db_controller.get_timing_failure_status());
 
+    car_state_inst.drivebrain_timing_failure = db_controller.get_timing_failure_status();
     hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
 
     handle_ethernet_interface_comms(curr_tick, out_eth_msg);
