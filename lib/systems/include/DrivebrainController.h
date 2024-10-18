@@ -27,6 +27,8 @@ public:
                          float max_fault_clear_speed_m_s = 1.0,
                          ControllerMode_e assigned_controller_mode = ControllerMode_e::MODE_4)
     {
+        _last_worst_latency_rec_time =0;
+        _worst_latency_so_far = -1;
         _params = {allowed_latency, max_fault_clear_speed_m_s, assigned_controller_mode};
     }
 
@@ -40,6 +42,8 @@ private:
         ControllerMode_e assigned_controller_mode;
     } _params;
 
+    unsigned long _last_worst_latency_rec_time;
+    int64_t _worst_latency_so_far;
     bool _timing_failure = false;
     unsigned long _last_setpoint_millis = -1;
 };
