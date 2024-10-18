@@ -1,8 +1,10 @@
 <map id="lib/shared_data/include/SharedDataTypes.h" name="lib/shared_data/include/SharedDataTypes.h">
-<area shape="rect" id="node1" title=" " alt="" coords="99,5,253,45"/>
+<area shape="rect" id="node1" title=" " alt="" coords="111,5,265,45"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,93,69,119"/>
-<area shape="rect" id="node3" href="$Utility_8h.html" title=" " alt="" coords="94,93,159,119"/>
-<area shape="rect" id="node5" title=" " alt="" coords="183,93,270,119"/>
-<area shape="rect" id="node6" title=" " alt="" coords="295,93,457,119"/>
-<area shape="rect" id="node4" href="$PhysicalParameters_8h.html" title=" " alt="" coords="53,167,201,192"/>
+<area shape="rect" id="node3" href="$Utility_8h.html" title=" " alt="" coords="271,167,337,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="145,93,231,119"/>
+<area shape="rect" id="node7" title=" " alt="" coords="256,93,419,119"/>
+<area shape="rect" id="node8" href="$DrivebrainData_8h.html" title=" " alt="" coords="443,93,560,119"/>
+<area shape="rect" id="node4" href="$PhysicalParameters_8h.html" title=" " alt="" coords="169,240,317,265"/>
+<area shape="rect" id="node5" title=" " alt="" coords="341,240,392,265"/>
 </map>

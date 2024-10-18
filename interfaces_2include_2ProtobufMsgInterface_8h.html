@@ -75,7 +75,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">ProtobufMsgInterface.h File Reference</div></div>
 </div><!--header-->
@@ -84,33 +83,20 @@ $(function() {
 <code>#include &quot;pb_decode.h&quot;</code><br />
 <code>#include &quot;pb_common.h&quot;</code><br />
 <code>#include &quot;circular_buffer.h&quot;</code><br />
-<code>#include &quot;NativeEthernet.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="MCU__rev15__defs_8h_source.html">MCU_rev15_defs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="InterfaceParams_8h_source.html">InterfaceParams.h</a>&quot;</code><br />
+<code>#include &lt;QNEthernet.h&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ProtobufMsgInterface.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="interfaces_2include_2ProtobufMsgInterface_8h__incl.png" border="0" usemap="#alib_2interfaces_2include_2ProtobufMsgInterface_8h" alt=""/></div>
 <map name="alib_2interfaces_2include_2ProtobufMsgInterface_8h" id="alib_2interfaces_2include_2ProtobufMsgInterface_8h">
-<area shape="rect" title=" " alt="" coords="345,5,507,45"/>
+<area shape="rect" title=" " alt="" coords="279,5,440,45"/>
 <area shape="rect" title=" " alt="" coords="5,93,100,119"/>
 <area shape="rect" title=" " alt="" coords="124,93,219,119"/>
 <area shape="rect" title=" " alt="" coords="243,93,345,119"/>
 <area shape="rect" title=" " alt="" coords="369,93,483,119"/>
-<area shape="rect" title=" " alt="" coords="512,167,631,192"/>
-<area shape="rect" href="MCU__rev15__defs_8h.html" title=" " alt="" coords="710,93,843,119"/>
-<area shape="rect" href="InterfaceParams_8h.html" title=" " alt="" coords="558,93,686,119"/>
-<area shape="rect" href="PedalsSystem_8h.html" title=" " alt="" coords="719,167,835,192"/>
-<area shape="rect" title=" " alt="" coords="555,240,617,265"/>
-<area shape="rect" title=" " alt="" coords="643,313,694,339"/>
-<area shape="rect" href="AnalogSensorsInterface_8h.html" title=" " alt="" coords="691,240,862,265"/>
-<area shape="rect" href="SharedDataTypes_8h.html" title=" " alt="" coords="824,313,959,339"/>
-<area shape="rect" title=" " alt="" coords="997,387,1084,412"/>
-<area shape="rect" title=" " alt="" coords="725,313,799,339"/>
-<area shape="rect" title=" " alt="" coords="631,387,695,412"/>
-<area shape="rect" href="Utility_8h.html" title=" " alt="" coords="720,387,785,412"/>
-<area shape="rect" title=" " alt="" coords="810,387,973,412"/>
-<area shape="rect" href="PhysicalParameters_8h.html" title=" " alt="" coords="679,460,827,485"/>
+<area shape="rect" title=" " alt="" coords="507,93,607,119"/>
+<area shape="rect" title=" " alt="" coords="631,93,709,119"/>
 </map>
 </div>
 </div>
@@ -121,63 +107,56 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structETHInterfaces.html">ETHInterfaces</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:afa066df47c8ffbefbf1cefdaa7b5033a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#afa066df47c8ffbefbf1cefdaa7b5033a">recv_function_t</a> = void(*)(const uint8_t *buffer, size_t packet_size, <a class="el" href="structETHInterfaces.html">ETHInterfaces</a> &amp;interfaces)</td></tr>
-<tr class="separator:afa066df47c8ffbefbf1cefdaa7b5033a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abdf4a016cd483034e6ef9c64a3966e9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#abdf4a016cd483034e6ef9c64a3966e9d">handle_ethernet_socket_receive</a> (EthernetUDP *socket, <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#afa066df47c8ffbefbf1cefdaa7b5033a">recv_function_t</a> recv_function, <a class="el" href="structETHInterfaces.html">ETHInterfaces</a> &amp;interfaces)</td></tr>
-<tr class="separator:abdf4a016cd483034e6ef9c64a3966e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af59f858b5f82b6d12604feb2d91f7e7b"><td class="memTemplParams" colspan="2">template&lt;typename pb_struct &gt; </td></tr>
-<tr class="memitem:af59f858b5f82b6d12604feb2d91f7e7b"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#af59f858b5f82b6d12604feb2d91f7e7b">handle_ethernet_socket_send_pb</a> (EthernetUDP *socket, const pb_struct &amp;<a class="el" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, const pb_msgdesc_t *msg_desc)</td></tr>
-<tr class="separator:af59f858b5f82b6d12604feb2d91f7e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77582e3fc4ebc26a994d2e01b2dbde8d"><td class="memTemplParams" colspan="2">template&lt;typename pb_msg_type &gt; </td></tr>
-<tr class="memitem:a77582e3fc4ebc26a994d2e01b2dbde8d"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; pb_msg_type, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#a77582e3fc4ebc26a994d2e01b2dbde8d">recv_pb_stream_msg</a> (const uint8_t *buffer, size_t packet_size, <a class="el" href="structETHInterfaces.html">ETHInterfaces</a> &amp;interfaces, const pb_msgdesc_t *desc_pointer)</td></tr>
-<tr class="separator:a77582e3fc4ebc26a994d2e01b2dbde8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55744f9cc21461911f949e52ec4abea1"><td class="memTemplParams" colspan="2">template&lt;size_t buffer_size, typename pb_msg_type , class eth_interface &gt; </td></tr>
+<tr class="memitem:a55744f9cc21461911f949e52ec4abea1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#a55744f9cc21461911f949e52ec4abea1">handle_ethernet_socket_receive</a> (const SysTick_s &amp;tick, qindesign::network::EthernetUDP *socket, std::function&lt; void(unsigned long, const uint8_t *, size_t, eth_interface &amp;, const pb_msgdesc_t *)&gt; recv_function, eth_interface &amp;interface, const pb_msgdesc_t *desc_pointer)</td></tr>
+<tr class="separator:a55744f9cc21461911f949e52ec4abea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746a92355e339569b31cde06f8f68d66"><td class="memTemplParams" colspan="2">template&lt;typename pb_struct , size_t buffer_size&gt; </td></tr>
+<tr class="memitem:a746a92355e339569b31cde06f8f68d66"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#a746a92355e339569b31cde06f8f68d66">handle_ethernet_socket_send_pb</a> (IPAddress addr, uint16_t port, qindesign::network::EthernetUDP *socket, const pb_struct &amp;<a class="el" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, const pb_msgdesc_t *msg_desc)</td></tr>
+<tr class="separator:a746a92355e339569b31cde06f8f68d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554bd2b74232409bcdde12c807e04408"><td class="memTemplParams" colspan="2">template&lt;typename pb_msg_type , class eth_interface &gt; </td></tr>
+<tr class="memitem:a554bd2b74232409bcdde12c807e04408"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#a554bd2b74232409bcdde12c807e04408">recv_pb_stream_msg</a> (unsigned long curr_millis, const uint8_t *buffer, size_t packet_size, eth_interface &amp;interface, const pb_msgdesc_t *desc_pointer)</td></tr>
+<tr class="separator:a554bd2b74232409bcdde12c807e04408"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="afa066df47c8ffbefbf1cefdaa7b5033a" name="afa066df47c8ffbefbf1cefdaa7b5033a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa066df47c8ffbefbf1cefdaa7b5033a">&#9670;&#160;</a></span>recv_function_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#afa066df47c8ffbefbf1cefdaa7b5033a">recv_function_t</a> =  void (*)(const uint8_t* buffer, size_t packet_size, <a class="el" href="structETHInterfaces.html">ETHInterfaces</a>&amp; interfaces)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00016">16</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="abdf4a016cd483034e6ef9c64a3966e9d" name="abdf4a016cd483034e6ef9c64a3966e9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdf4a016cd483034e6ef9c64a3966e9d">&#9670;&#160;</a></span>handle_ethernet_socket_receive()</h2>
+<a id="a55744f9cc21461911f949e52ec4abea1" name="a55744f9cc21461911f949e52ec4abea1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55744f9cc21461911f949e52ec4abea1">&#9670;&#160;</a></span>handle_ethernet_socket_receive()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;size_t buffer_size, typename pb_msg_type , class eth_interface &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void handle_ethernet_socket_receive </td>
           <td>(</td>
-          <td class="paramtype">EthernetUDP *&#160;</td>
+          <td class="paramtype">const SysTick_s &amp;&#160;</td>
+          <td class="paramname"><em>tick</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">qindesign::network::EthernetUDP *&#160;</td>
           <td class="paramname"><em>socket</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h.html#afa066df47c8ffbefbf1cefdaa7b5033a">recv_function_t</a>&#160;</td>
+          <td class="paramtype">std::function&lt; void(unsigned long, const uint8_t *, size_t, eth_interface &amp;, const pb_msgdesc_t *)&gt;&#160;</td>
           <td class="paramname"><em>recv_function</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structETHInterfaces.html">ETHInterfaces</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaces</em>&#160;</td>
+          <td class="paramtype">eth_interface &amp;&#160;</td>
+          <td class="paramname"><em>interface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const pb_msgdesc_t *&#160;</td>
+          <td class="paramname"><em>desc_pointer</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -187,35 +166,44 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00019">19</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   20</span>{</div>
-<div class="line"><span class="lineno">   21</span>    <span class="keywordtype">int</span> packet_size = socket-&gt;parsePacket();</div>
-<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">if</span>(packet_size &gt; 0)</div>
-<div class="line"><span class="lineno">   23</span>    {</div>
-<div class="line"><span class="lineno">   24</span>        Serial.println(<span class="stringliteral">&quot;packet size&quot;</span>);</div>
-<div class="line"><span class="lineno">   25</span>        Serial.println(packet_size);</div>
-<div class="line"><span class="lineno">   26</span>        uint8_t buffer[<a class="code hl_variable" href="namespaceEthParams.html#afd50fdb9f630cc78e342b507bdc31a78">EthParams::default_buffer_size</a>];</div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordtype">size_t</span> read_bytes = socket-&gt;read(buffer, <span class="keyword">sizeof</span>(buffer));</div>
-<div class="line"><span class="lineno">   28</span>        socket-&gt;read(buffer, UDP_TX_PACKET_MAX_SIZE);</div>
-<div class="line"><span class="lineno">   29</span>        recv_function(buffer, read_bytes, interfaces);</div>
-<div class="line"><span class="lineno">   30</span>    }</div>
-<div class="line"><span class="lineno">   31</span>}</div>
-<div class="ttc" id="anamespaceEthParams_html_afd50fdb9f630cc78e342b507bdc31a78"><div class="ttname"><a href="namespaceEthParams.html#afd50fdb9f630cc78e342b507bdc31a78">EthParams::default_buffer_size</a></div><div class="ttdeci">const uint16_t default_buffer_size</div><div class="ttdef"><b>Definition:</b> <a href="InterfaceParams_8h_source.html#l00019">InterfaceParams.h:19</a></div></div>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00018">18</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>{</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keywordtype">int</span> packet_size = socket-&gt;parsePacket();</div>
+<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">if</span> (packet_size &gt; 0)</div>
+<div class="line"><span class="lineno">   22</span>        {</div>
+<div class="line"><span class="lineno">   23</span>        uint8_t buffer[buffer_size];</div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordtype">size_t</span> read_bytes = socket-&gt;read(buffer, <span class="keyword">sizeof</span>(buffer));</div>
+<div class="line"><span class="lineno">   25</span>        socket-&gt;read(buffer, buffer_size);</div>
+<div class="line"><span class="lineno">   26</span>        recv_function(tick.millis, buffer, read_bytes, interface, desc_pointer);</div>
+<div class="line"><span class="lineno">   27</span>    }</div>
+<div class="line"><span class="lineno">   28</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="af59f858b5f82b6d12604feb2d91f7e7b" name="af59f858b5f82b6d12604feb2d91f7e7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af59f858b5f82b6d12604feb2d91f7e7b">&#9670;&#160;</a></span>handle_ethernet_socket_send_pb()</h2>
+<a id="a746a92355e339569b31cde06f8f68d66" name="a746a92355e339569b31cde06f8f68d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a746a92355e339569b31cde06f8f68d66">&#9670;&#160;</a></span>handle_ethernet_socket_send_pb()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename pb_struct &gt; </div>
+template&lt;typename pb_struct , size_t buffer_size&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool handle_ethernet_socket_send_pb </td>
           <td>(</td>
-          <td class="paramtype">EthernetUDP *&#160;</td>
+          <td class="paramtype">IPAddress&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">qindesign::network::EthernetUDP *&#160;</td>
           <td class="paramname"><em>socket</em>, </td>
         </tr>
         <tr>
@@ -238,38 +226,42 @@ template&lt;typename pb_struct &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00034">34</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   35</span>{</div>
-<div class="line"><span class="lineno">   36</span>    socket-&gt;beginPacket(<a class="code hl_function" href="namespaceEthParams.html#a977b51147f6a68e6f8b186502f913738">EthParams::default_TCU_ip</a>, <a class="code hl_variable" href="namespaceEthParams.html#a2669391c6dc7ff453c4692e59927c27c">EthParams::default_protobuf_send_port</a>);</div>
-<div class="line"><span class="lineno">   37</span>    </div>
-<div class="line"><span class="lineno">   38</span>    uint8_t buffer[<a class="code hl_variable" href="namespaceEthParams.html#afd50fdb9f630cc78e342b507bdc31a78">EthParams::default_buffer_size</a>];</div>
-<div class="line"><span class="lineno">   39</span>    pb_ostream_t stream = pb_ostream_from_buffer(buffer, <span class="keyword">sizeof</span>(buffer));</div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">if</span> (!pb_encode(&amp;stream, msg_desc, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>)) {</div>
-<div class="line"><span class="lineno">   41</span>        <span class="comment">// You can handle error more explicitly by looking at stream.errmsg</span></div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   43</span>    }</div>
-<div class="line"><span class="lineno">   44</span>    <span class="keyword">auto</span> message_length = stream.bytes_written;</div>
-<div class="line"><span class="lineno">   45</span>    socket-&gt;write(buffer, message_length);</div>
-<div class="line"><span class="lineno">   46</span>    socket-&gt;endPacket();</div>
-<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   48</span>}</div>
-<div class="ttc" id="anamespaceEthParams_html_a2669391c6dc7ff453c4692e59927c27c"><div class="ttname"><a href="namespaceEthParams.html#a2669391c6dc7ff453c4692e59927c27c">EthParams::default_protobuf_send_port</a></div><div class="ttdeci">const uint16_t default_protobuf_send_port</div><div class="ttdef"><b>Definition:</b> <a href="InterfaceParams_8h_source.html#l00013">InterfaceParams.h:13</a></div></div>
-<div class="ttc" id="anamespaceEthParams_html_a977b51147f6a68e6f8b186502f913738"><div class="ttname"><a href="namespaceEthParams.html#a977b51147f6a68e6f8b186502f913738">EthParams::default_TCU_ip</a></div><div class="ttdeci">const IPAddress default_TCU_ip(192, 168, 1, 68)</div></div>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00031">31</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>{</div>
+<div class="line"><span class="lineno">   33</span>    socket-&gt;beginPacket(addr, port);</div>
+<div class="line"><span class="lineno">   34</span>    uint8_t buffer[buffer_size];</div>
+<div class="line"><span class="lineno">   35</span>    pb_ostream_t stream = pb_ostream_from_buffer(buffer, <span class="keyword">sizeof</span>(buffer));</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span> (!pb_encode(&amp;stream, msg_desc, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>))</div>
+<div class="line"><span class="lineno">   37</span>    {</div>
+<div class="line"><span class="lineno">   38</span>        <span class="comment">// You can handle error more explicitly by looking at stream.errmsg</span></div>
+<div class="line"><span class="lineno">   39</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   40</span>    }</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keyword">auto</span> message_length = stream.bytes_written;</div>
+<div class="line"><span class="lineno">   42</span>    socket-&gt;write(buffer, message_length);</div>
+<div class="line"><span class="lineno">   43</span>    socket-&gt;endPacket();</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   45</span>}</div>
 <div class="ttc" id="atest__can__interface_8cpp_html_a7b7e0c51c97a7d2837c3aef9953192f1"><div class="ttname"><a href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a></div><div class="ttdeci">CAN_message_t msg</div><div class="ttdef"><b>Definition:</b> <a href="test__can__interface_8cpp_source.html#l00009">test_can_interface.cpp:9</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a77582e3fc4ebc26a994d2e01b2dbde8d" name="a77582e3fc4ebc26a994d2e01b2dbde8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77582e3fc4ebc26a994d2e01b2dbde8d">&#9670;&#160;</a></span>recv_pb_stream_msg()</h2>
+<a id="a554bd2b74232409bcdde12c807e04408" name="a554bd2b74232409bcdde12c807e04408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554bd2b74232409bcdde12c807e04408">&#9670;&#160;</a></span>recv_pb_stream_msg()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename pb_msg_type &gt; </div>
+template&lt;typename pb_msg_type , class eth_interface &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; pb_msg_type, bool &gt; recv_pb_stream_msg </td>
+          <td class="memname">void recv_pb_stream_msg </td>
           <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>curr_millis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
         </tr>
@@ -282,8 +274,8 @@ template&lt;typename pb_msg_type &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structETHInterfaces.html">ETHInterfaces</a> &amp;&#160;</td>
-          <td class="paramname"><em>interfaces</em>, </td>
+          <td class="paramtype">eth_interface &amp;&#160;</td>
+          <td class="paramname"><em>interface</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -299,16 +291,15 @@ template&lt;typename pb_msg_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00052">52</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   53</span>{</div>
-<div class="line"><span class="lineno">   54</span>    pb_istream_t stream = pb_istream_from_buffer(buffer, packet_size);</div>
-<div class="line"><span class="lineno">   55</span>    pb_msg_type <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a> = {};</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">if</span> (pb_decode(&amp;stream, desc_pointer, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>))</div>
-<div class="line"><span class="lineno">   57</span>    {</div>
-<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">return</span> {<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, <span class="keyword">true</span>};</div>
-<div class="line"><span class="lineno">   59</span>    }</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> {<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, };</div>
-<div class="line"><span class="lineno">   61</span>}</div>
+<p class="definition">Definition at line <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html#l00048">48</a> of file <a class="el" href="interfaces_2include_2ProtobufMsgInterface_8h_source.html">ProtobufMsgInterface.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>{</div>
+<div class="line"><span class="lineno">   50</span>    pb_istream_t stream = pb_istream_from_buffer(buffer, packet_size);</div>
+<div class="line"><span class="lineno">   51</span>    pb_msg_type <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a> = {};</div>
+<div class="line"><span class="lineno">   52</span>    <span class="keywordflow">if</span> (pb_decode(&amp;stream, desc_pointer, &amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>))</div>
+<div class="line"><span class="lineno">   53</span>    {</div>
+<div class="line"><span class="lineno">   54</span>        interface.receive_pb_msg(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, curr_millis);</div>
+<div class="line"><span class="lineno">   55</span>    }</div>
+<div class="line"><span class="lineno">   56</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

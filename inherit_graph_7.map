@@ -1,11 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="5,183,83,208"/>
+<area shape="rect" id="node1" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="5,203,83,228"/>
 <area shape="rect" id="node2" href="$classBaseLaunchController.html" title=" " alt="" coords="155,55,306,80"/>
-<area shape="rect" id="node6" href="$classDumbController.html" title=" " alt="" coords="175,104,286,129"/>
-<area shape="rect" id="node7" href="$classTestControllerType.html" title=" " alt="" coords="165,153,296,179"/>
-<area shape="rect" id="node8" href="$classTorqueControllerCASEWrapper.html" title="makes CASE system a part of Controller hierarchy for use in TC Mux" alt="" coords="131,203,331,243"/>
-<area shape="rect" id="node9" href="$classTorqueControllerLoadCellVectoring.html" title=" " alt="" coords="147,267,315,307"/>
-<area shape="rect" id="node10" href="$classTorqueControllerSimple.html" title=" " alt="" coords="152,332,309,357"/>
+<area shape="rect" id="node6" href="$classDrivebrainController.html" title=" " alt="" coords="163,104,298,129"/>
+<area shape="rect" id="node7" href="$classDumbController.html" title=" " alt="" coords="175,153,286,179"/>
+<area shape="rect" id="node8" href="$classTestControllerType.html" title=" " alt="" coords="165,203,296,228"/>
+<area shape="rect" id="node9" href="$classTorqueControllerCASEWrapper.html" title="makes CASE system a part of Controller hierarchy for use in TC Mux" alt="" coords="131,253,331,293"/>
+<area shape="rect" id="node10" href="$classTorqueControllerLoadCellVectoring.html" title=" " alt="" coords="147,317,315,357"/>
+<area shape="rect" id="node11" href="$classTorqueControllerSimple.html" title=" " alt="" coords="152,381,309,407"/>
 <area shape="rect" id="node3" href="$classTorqueControllerLookupLaunch.html" title=" " alt="" coords="379,5,581,31"/>
 <area shape="rect" id="node4" href="$classTorqueControllerSimpleLaunch.html" title=" " alt="" coords="380,55,580,80"/>
 <area shape="rect" id="node5" href="$classTorqueControllerSlipLaunch.html" title=" " alt="" coords="389,104,571,129"/>

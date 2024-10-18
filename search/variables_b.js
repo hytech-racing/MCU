@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['magnetizing_5fcurrent_5f_0',['magnetizing_current_',['../classInverterInterface.html#a4e525ce92f3c84d13f4a2c808b2c927e',1,'InverterInterface']]],
-  ['mark_1',['mark',['../structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926',1,'DashButtons_s']]],
-  ['max_5fchange_5fspeed_5f_2',['max_change_speed_',['../classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb',1,'TorqueControllerMux']]],
+  ['mark_0',['mark',['../structDashButtons__s.html#ab81dede1f9ea2601deb9c1163c056926',1,'DashButtons_s']]],
+  ['max_5fchange_5fspeed_5f_1',['max_change_speed_',['../classTorqueControllerMux.html#a1fdff880066de19d31f4ca100c4260bb',1,'TorqueControllerMux']]],
+  ['max_5ffault_5fclear_5fspeed_5fm_5fs_2',['max_fault_clear_speed_m_s',['../classDrivebrainController.html#a2cb998e60829ba698bc57627f5abc61c',1,'DrivebrainController']]],
   ['max_5fpack_5fcharge_3',['MAX_PACK_CHARGE',['../mock__interfaces_2AMSInterface_8h.html#a433fef879ffc4bc3a5753d7dd5385689',1,'MAX_PACK_CHARGE():&#160;AMSInterface.h'],['../interfaces_2include_2AMSInterface_8h.html#a7b7a1a2d472399d9a0bec1b773b49d8d',1,'MAX_PACK_CHARGE():&#160;AMSInterface.h']]],
   ['max_5fpedal_5f1_4',['max_pedal_1',['../structPedalsParams.html#ac10c4cab837dc563897fad327a0e9449',1,'PedalsParams']]],
   ['max_5fpedal_5f2_5',['max_pedal_2',['../structPedalsParams.html#afd571f2b4e08ec205efffa3a3e9014b3',1,'PedalsParams']]],
@@ -46,9 +46,9 @@ var searchData=
   ['mcu_5fstatus_5f_43',['mcu_status_',['../classMCUInterface.html#ae47702108e5f8a8f56580e02cb68d5b9',1,'MCUInterface']]],
   ['measuredinverterflpackvoltage_44',['measuredInverterFLPackVoltage',['../structDrivetrainDynamicReport__s.html#ab0441c85e9a1a81f716a75256aba48f6',1,'DrivetrainDynamicReport_s']]],
   ['measuredmagnetizingcurrents_45',['measuredMagnetizingCurrents',['../structDrivetrainDynamicReport__s.html#afb34dd314ad0574b8939397c175a3b95',1,'DrivetrainDynamicReport_s']]],
-  ['measuredspeeds_46',['measuredSpeeds',['../structDrivetrainDynamicReport__s.html#a77c47cfa97df348c8dd93b260975f980',1,'DrivetrainDynamicReport_s']]],
+  ['measuredspeeds_46',['measuredSpeeds',['../structDrivetrainDynamicReport__s.html#ad11a842ebfab19527f95f2f0a2cee2c6',1,'DrivetrainDynamicReport_s']]],
   ['measuredtorquecurrents_47',['measuredTorqueCurrents',['../structDrivetrainDynamicReport__s.html#a346fc09ab8a1a4e110361b1bf6a6d645',1,'DrivetrainDynamicReport_s']]],
-  ['measuredtorques_48',['measuredTorques',['../structDrivetrainDynamicReport__s.html#adf69ddf924426f0a87075b7bc1677184',1,'DrivetrainDynamicReport_s']]],
+  ['measuredtorques_48',['measuredTorques',['../structDrivetrainDynamicReport__s.html#a3d087c75803d02b9b31b9de6f21619cc',1,'DrivetrainDynamicReport_s']]],
   ['mechanical_5factivation_5fpercentage_49',['mechanical_activation_percentage',['../structPedalsParams.html#a580f479c4f2b8b242097ef9df4a9d051',1,'PedalsParams']]],
   ['mechbrakeactive_50',['mechBrakeActive',['../structPedalsSystemData__s.html#a57aae961a223b79e18f8f75e83b33f0f',1,'PedalsSystemData_s']]],
   ['mechpowermaxkw_51',['MechPowerMaxkW',['../structCASEConfiguration.html#a48959ff79c509061896ba5c392f01092',1,'CASEConfiguration']]],

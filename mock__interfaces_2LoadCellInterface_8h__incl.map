@@ -1,12 +1,14 @@
 <map id="lib/mock_interfaces/LoadCellInterface.h" name="lib/mock_interfaces/LoadCellInterface.h">
-<area shape="rect" id="node1" title=" " alt="" coords="26,5,165,45"/>
-<area shape="rect" id="node2" href="$Utility_8h.html" title=" " alt="" coords="47,240,112,265"/>
-<area shape="rect" id="node4" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="85,93,255,119"/>
-<area shape="rect" id="node3" href="$PhysicalParameters_8h.html" title=" " alt="" coords="5,313,153,339"/>
-<area shape="rect" id="node5" title=" " alt="" coords="71,167,122,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="146,167,221,192"/>
-<area shape="rect" id="node7" href="$SharedDataTypes_8h.html" title=" " alt="" coords="245,167,380,192"/>
-<area shape="rect" id="node8" title=" " alt="" coords="181,240,245,265"/>
-<area shape="rect" id="node9" title=" " alt="" coords="269,240,356,265"/>
-<area shape="rect" id="node10" title=" " alt="" coords="381,240,543,265"/>
+<area shape="rect" id="node1" title=" " alt="" coords="53,5,191,45"/>
+<area shape="rect" id="node2" href="$Utility_8h.html" title=" " alt="" coords="108,313,173,339"/>
+<area shape="rect" id="node5" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="111,93,282,119"/>
+<area shape="rect" id="node3" href="$PhysicalParameters_8h.html" title=" " alt="" coords="5,387,153,412"/>
+<area shape="rect" id="node4" title=" " alt="" coords="178,387,229,412"/>
+<area shape="rect" id="node6" title=" " alt="" coords="98,167,149,192"/>
+<area shape="rect" id="node7" title=" " alt="" coords="173,167,247,192"/>
+<area shape="rect" id="node8" href="$SharedDataTypes_8h.html" title=" " alt="" coords="272,167,407,192"/>
+<area shape="rect" id="node9" title=" " alt="" coords="178,240,242,265"/>
+<area shape="rect" id="node10" title=" " alt="" coords="267,240,353,265"/>
+<area shape="rect" id="node11" title=" " alt="" coords="378,240,541,265"/>
+<area shape="rect" id="node12" href="$DrivebrainData_8h.html" title=" " alt="" coords="565,240,682,265"/>
 </map>

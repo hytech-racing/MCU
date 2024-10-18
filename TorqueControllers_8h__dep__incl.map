@@ -1,8 +1,11 @@
 <map id="lib/systems/include/TorqueControllers.h" name="lib/systems/include/TorqueControllers.h">
-<area shape="rect" id="node1" title=" " alt="" coords="229,5,368,45"/>
-<area shape="rect" id="node2" href="$src_2main_8cpp.html" title=" " alt="" coords="5,108,101,133"/>
-<area shape="rect" id="node3" href="$launch__controller__integration__testing_8h.html" title=" " alt="" coords="125,93,293,148"/>
-<area shape="rect" id="node5" href="$tc__mux__v2__testing_8h.html" title=" " alt="" coords="317,101,459,141"/>
-<area shape="rect" id="node6" href="$test__CASE_8h.html" title=" " alt="" coords="483,101,635,141"/>
-<area shape="rect" id="node4" href="$test_2test__systems_2main_8cpp.html" title=" " alt="" coords="297,196,479,221"/>
+<area shape="rect" id="node1" title=" " alt="" coords="459,5,598,45"/>
+<area shape="rect" id="node2" href="$DrivebrainController_8h.html" title=" " alt="" coords="221,101,370,141"/>
+<area shape="rect" id="node4" href="$src_2main_8cpp.html" title=" " alt="" coords="413,203,509,229"/>
+<area shape="rect" id="node7" href="$launch__controller__integration__testing_8h.html" title=" " alt="" coords="445,93,613,148"/>
+<area shape="rect" id="node8" href="$tc__mux__v2__testing_8h.html" title=" " alt="" coords="637,101,778,141"/>
+<area shape="rect" id="node9" href="$test__CASE_8h.html" title=" " alt="" coords="726,196,878,236"/>
+<area shape="rect" id="node3" href="$DrivebrainController_8cpp.html" title=" " alt="" coords="5,196,177,236"/>
+<area shape="rect" id="node5" href="$drivebrain__controller__test_8h.html" title=" " alt="" coords="202,196,389,236"/>
+<area shape="rect" id="node6" href="$test_2test__systems_2main_8cpp.html" title=" " alt="" coords="493,284,676,309"/>
 </map>

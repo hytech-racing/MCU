@@ -86,15 +86,17 @@ Collaboration diagram for SharedCarState_s:</div>
 <div class="dyncontent">
 <div class="center"><img src="structSharedCarState__s__coll__graph.png" border="0" usemap="#aSharedCarState__s_coll__map" alt="Collaboration graph"/></div>
 <map name="aSharedCarState__s_coll__map" id="aSharedCarState__s_coll__map">
-<area shape="rect" title="car state struct that contains state of everything about the car including" alt="" coords="455,489,605,573"/>
-<area shape="rect" href="structSteeringSystemData__s.html" title=" " alt="" coords="5,262,164,331"/>
-<area shape="rect" href="structDrivetrainDynamicReport__s.html" title=" " alt="" coords="189,240,415,353"/>
-<area shape="rect" href="structLoadCellInterfaceOutput__s.html" title=" " alt="" coords="439,269,621,324"/>
-<area shape="rect" href="structveh__vec.html" title=" " alt="" coords="372,5,493,104"/>
-<area shape="rect" href="structveh__vec.html" title=" " alt="" coords="518,5,734,104"/>
-<area shape="rect" href="structPedalsSystemData__s.html" title=" " alt="" coords="645,196,889,397"/>
-<area shape="rect" href="structVectornavData__s.html" title=" " alt="" coords="913,167,1067,427"/>
-<area shape="rect" href="structxyz__vec.html" title=" " alt="" coords="931,13,1049,97"/>
+<area shape="rect" title="car state struct that contains state of everything about the car including" alt="" coords="668,548,819,632"/>
+<area shape="rect" href="structSteeringSystemData__s.html" title=" " alt="" coords="5,321,164,390"/>
+<area shape="rect" href="structDrivetrainDynamicReport__s.html" title=" " alt="" coords="189,299,415,412"/>
+<area shape="rect" href="structLoadCellInterfaceOutput__s.html" title=" " alt="" coords="653,328,834,383"/>
+<area shape="rect" href="structveh__vec.html" title=" " alt="" coords="547,5,668,148"/>
+<area shape="rect" href="structDrivebrainData__s.html" title=" " alt="" coords="439,321,629,390"/>
+<area shape="rect" href="structveh__vec.html" title=" " alt="" coords="765,5,981,148"/>
+<area shape="rect" href="structPedalsSystemData__s.html" title=" " alt="" coords="859,255,1103,456"/>
+<area shape="rect" href="structVectornavData__s.html" title=" " alt="" coords="1127,225,1280,485"/>
+<area shape="rect" href="structxyz__vec.html" title=" " alt="" coords="1144,35,1263,119"/>
+<area shape="rect" href="structTorqueControllerMuxStatus.html" title="packages TC Mux indicators: errors, mode, torque limit, bypass" alt="" coords="1304,284,1487,427"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -102,8 +104,8 @@ Collaboration diagram for SharedCarState_s:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8886b900b05d626a88e71196f75ca1f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html#a8886b900b05d626a88e71196f75ca1f9">SharedCarState_s</a> ()=delete</td></tr>
 <tr class="separator:a8886b900b05d626a88e71196f75ca1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9481892910857133b64a8abe416ad8bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html#a9481892910857133b64a8abe416ad8bb">SharedCarState_s</a> (const SysTick_s &amp;_systick, const <a class="el" href="structSteeringSystemData__s.html">SteeringSystemData_s</a> &amp;_steering_data, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;_drivetrain_data, const <a class="el" href="structLoadCellInterfaceOutput__s.html">LoadCellInterfaceOutput_s</a> &amp;_loadcell_data, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;_pedals_data, const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;_vn_data)</td></tr>
-<tr class="separator:a9481892910857133b64a8abe416ad8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a5f5fda475f9c116f254456ec4ac548"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html#a2a5f5fda475f9c116f254456ec4ac548">SharedCarState_s</a> (const SysTick_s &amp;_systick, const <a class="el" href="structSteeringSystemData__s.html">SteeringSystemData_s</a> &amp;_steering_data, const <a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a> &amp;_drivetrain_data, const <a class="el" href="structLoadCellInterfaceOutput__s.html">LoadCellInterfaceOutput_s</a> &amp;_loadcell_data, const <a class="el" href="structPedalsSystemData__s.html">PedalsSystemData_s</a> &amp;_pedals_data, const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;_vn_data, const <a class="el" href="structDrivebrainData__s.html">DrivebrainData_s</a> &amp;_db_data, const <a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a> &amp;_tc_mux_status)</td></tr>
+<tr class="separator:a2a5f5fda475f9c116f254456ec4ac548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -119,11 +121,15 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6e5fd8f02dc610be2a8bd68ab961cd0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3cdaa36480cc15ddb3916fd7c07326d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVectornavData__s.html">VectornavData_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">vn_data</a></td></tr>
 <tr class="separator:ac3cdaa36480cc15ddb3916fd7c07326d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a773ee7195e593fa88874844230803a90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivebrainData__s.html">DrivebrainData_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">db_data</a></td></tr>
+<tr class="separator:a773ee7195e593fa88874844230803a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2a3aa30dbc45da868fa59774efae22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">tc_mux_status</a></td></tr>
+<tr class="separator:acc2a3aa30dbc45da868fa59774efae22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >car state struct that contains state of everything about the car including </p>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00139">139</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00143">143</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8886b900b05d626a88e71196f75ca1f9" name="a8886b900b05d626a88e71196f75ca1f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8886b900b05d626a88e71196f75ca1f9">&#9670;&#160;</a></span>SharedCarState_s() <span class="overload">[1/2]</span></h2>
@@ -150,8 +156,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9481892910857133b64a8abe416ad8bb" name="a9481892910857133b64a8abe416ad8bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9481892910857133b64a8abe416ad8bb">&#9670;&#160;</a></span>SharedCarState_s() <span class="overload">[2/2]</span></h2>
+<a id="a2a5f5fda475f9c116f254456ec4ac548" name="a2a5f5fda475f9c116f254456ec4ac548"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a5f5fda475f9c116f254456ec4ac548">&#9670;&#160;</a></span>SharedCarState_s() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +199,19 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structVectornavData__s.html">VectornavData_s</a> &amp;&#160;</td>
-          <td class="paramname"><em>_vn_data</em>&#160;</td>
+          <td class="paramname"><em>_vn_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structDrivebrainData__s.html">DrivebrainData_s</a> &amp;&#160;</td>
+          <td class="paramname"><em>_db_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a> &amp;&#160;</td>
+          <td class="paramname"><em>_tc_mux_status</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -208,26 +226,46 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00149">149</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  155</span>        : <a class="code hl_variable" href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">systick</a>(_systick),</div>
-<div class="line"><span class="lineno">  156</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a2dc2cc28c5551c982b29991c17154842">steering_data</a>(_steering_data),</div>
-<div class="line"><span class="lineno">  157</span>          <a class="code hl_variable" href="structSharedCarState__s.html#aafea5c14da41314ecf80803d3767e030">drivetrain_data</a>(_drivetrain_data),</div>
-<div class="line"><span class="lineno">  158</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a68a8e67ca0668f2bba06d65a38e96917">loadcell_data</a>(_loadcell_data),</div>
-<div class="line"><span class="lineno">  159</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">pedals_data</a>(_pedals_data),</div>
-<div class="line"><span class="lineno">  160</span>          <a class="code hl_variable" href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">vn_data</a>(_vn_data)</div>
-<div class="line"><span class="lineno">  161</span>    {</div>
-<div class="line"><span class="lineno">  162</span>        <span class="comment">// constructor body (if needed)</span></div>
-<div class="line"><span class="lineno">  163</span>    }</div>
-<div class="ttc" id="astructSharedCarState__s_html_a2dc2cc28c5551c982b29991c17154842"><div class="ttname"><a href="structSharedCarState__s.html#a2dc2cc28c5551c982b29991c17154842">SharedCarState_s::steering_data</a></div><div class="ttdeci">SteeringSystemData_s steering_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00143">SharedDataTypes.h:143</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_a68a8e67ca0668f2bba06d65a38e96917"><div class="ttname"><a href="structSharedCarState__s.html#a68a8e67ca0668f2bba06d65a38e96917">SharedCarState_s::loadcell_data</a></div><div class="ttdeci">LoadCellInterfaceOutput_s loadcell_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00145">SharedDataTypes.h:145</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_a6e5fd8f02dc610be2a8bd68ab961cd0b"><div class="ttname"><a href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">SharedCarState_s::pedals_data</a></div><div class="ttdeci">PedalsSystemData_s pedals_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00146">SharedDataTypes.h:146</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_aafea5c14da41314ecf80803d3767e030"><div class="ttname"><a href="structSharedCarState__s.html#aafea5c14da41314ecf80803d3767e030">SharedCarState_s::drivetrain_data</a></div><div class="ttdeci">DrivetrainDynamicReport_s drivetrain_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00144">SharedDataTypes.h:144</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_ac3cdaa36480cc15ddb3916fd7c07326d"><div class="ttname"><a href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">SharedCarState_s::vn_data</a></div><div class="ttdeci">VectornavData_s vn_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00147">SharedDataTypes.h:147</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_ac3e4e4f978ad37d5a9a927fc87918c4a"><div class="ttname"><a href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">SharedCarState_s::systick</a></div><div class="ttdeci">SysTick_s systick</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00142">SharedDataTypes.h:142</a></div></div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00155">155</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  163</span>        : <a class="code hl_variable" href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">systick</a>(_systick),</div>
+<div class="line"><span class="lineno">  164</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a2dc2cc28c5551c982b29991c17154842">steering_data</a>(_steering_data),</div>
+<div class="line"><span class="lineno">  165</span>          <a class="code hl_variable" href="structSharedCarState__s.html#aafea5c14da41314ecf80803d3767e030">drivetrain_data</a>(_drivetrain_data),</div>
+<div class="line"><span class="lineno">  166</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a68a8e67ca0668f2bba06d65a38e96917">loadcell_data</a>(_loadcell_data),</div>
+<div class="line"><span class="lineno">  167</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">pedals_data</a>(_pedals_data),</div>
+<div class="line"><span class="lineno">  168</span>          <a class="code hl_variable" href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">vn_data</a>(_vn_data),</div>
+<div class="line"><span class="lineno">  169</span>          <a class="code hl_variable" href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">db_data</a>(_db_data),</div>
+<div class="line"><span class="lineno">  170</span>          <a class="code hl_variable" href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">tc_mux_status</a>(_tc_mux_status)</div>
+<div class="line"><span class="lineno">  171</span>    {</div>
+<div class="line"><span class="lineno">  172</span>        <span class="comment">// constructor body (if needed)</span></div>
+<div class="line"><span class="lineno">  173</span>    }</div>
+<div class="ttc" id="astructSharedCarState__s_html_a2dc2cc28c5551c982b29991c17154842"><div class="ttname"><a href="structSharedCarState__s.html#a2dc2cc28c5551c982b29991c17154842">SharedCarState_s::steering_data</a></div><div class="ttdeci">SteeringSystemData_s steering_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00147">SharedDataTypes.h:147</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_a68a8e67ca0668f2bba06d65a38e96917"><div class="ttname"><a href="structSharedCarState__s.html#a68a8e67ca0668f2bba06d65a38e96917">SharedCarState_s::loadcell_data</a></div><div class="ttdeci">LoadCellInterfaceOutput_s loadcell_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00149">SharedDataTypes.h:149</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_a6e5fd8f02dc610be2a8bd68ab961cd0b"><div class="ttname"><a href="structSharedCarState__s.html#a6e5fd8f02dc610be2a8bd68ab961cd0b">SharedCarState_s::pedals_data</a></div><div class="ttdeci">PedalsSystemData_s pedals_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00150">SharedDataTypes.h:150</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_a773ee7195e593fa88874844230803a90"><div class="ttname"><a href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">SharedCarState_s::db_data</a></div><div class="ttdeci">DrivebrainData_s db_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00152">SharedDataTypes.h:152</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_aafea5c14da41314ecf80803d3767e030"><div class="ttname"><a href="structSharedCarState__s.html#aafea5c14da41314ecf80803d3767e030">SharedCarState_s::drivetrain_data</a></div><div class="ttdeci">DrivetrainDynamicReport_s drivetrain_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00148">SharedDataTypes.h:148</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_ac3cdaa36480cc15ddb3916fd7c07326d"><div class="ttname"><a href="structSharedCarState__s.html#ac3cdaa36480cc15ddb3916fd7c07326d">SharedCarState_s::vn_data</a></div><div class="ttdeci">VectornavData_s vn_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00151">SharedDataTypes.h:151</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_ac3e4e4f978ad37d5a9a927fc87918c4a"><div class="ttname"><a href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">SharedCarState_s::systick</a></div><div class="ttdeci">SysTick_s systick</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00146">SharedDataTypes.h:146</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_acc2a3aa30dbc45da868fa59774efae22"><div class="ttname"><a href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">SharedCarState_s::tc_mux_status</a></div><div class="ttdeci">TorqueControllerMuxStatus tc_mux_status</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00153">SharedDataTypes.h:153</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a773ee7195e593fa88874844230803a90" name="a773ee7195e593fa88874844230803a90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773ee7195e593fa88874844230803a90">&#9670;&#160;</a></span>db_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structDrivebrainData__s.html">DrivebrainData_s</a> SharedCarState_s::db_data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00152">152</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+
+</div>
+</div>
 <a id="aafea5c14da41314ecf80803d3767e030" name="aafea5c14da41314ecf80803d3767e030"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aafea5c14da41314ecf80803d3767e030">&#9670;&#160;</a></span>drivetrain_data</h2>
 
@@ -240,7 +278,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00144">144</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00148">148</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +294,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00145">145</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00149">149</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
@@ -272,7 +310,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00146">146</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00150">150</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
@@ -288,7 +326,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00143">143</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00147">147</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
@@ -304,7 +342,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00142">142</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00146">146</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+
+</div>
+</div>
+<a id="acc2a3aa30dbc45da868fa59774efae22" name="acc2a3aa30dbc45da868fa59774efae22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc2a3aa30dbc45da868fa59774efae22">&#9670;&#160;</a></span>tc_mux_status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structTorqueControllerMuxStatus.html">TorqueControllerMuxStatus</a> SharedCarState_s::tc_mux_status</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00153">153</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>
@@ -320,7 +374,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00147">147</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00151">151</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
 
 </div>
 </div>

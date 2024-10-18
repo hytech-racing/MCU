@@ -1,9 +1,11 @@
 <map id="lib/mock_interfaces/DashboardInterface.h" name="lib/mock_interfaces/DashboardInterface.h">
-<area shape="rect" id="node1" title=" " alt="" coords="101,5,251,45"/>
-<area shape="rect" id="node2" href="$SharedDataTypes_8h.html" title=" " alt="" coords="109,93,243,119"/>
+<area shape="rect" id="node1" title=" " alt="" coords="113,5,263,45"/>
+<area shape="rect" id="node2" href="$SharedDataTypes_8h.html" title=" " alt="" coords="121,93,255,119"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,167,69,192"/>
-<area shape="rect" id="node4" href="$Utility_8h.html" title=" " alt="" coords="94,167,159,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="183,167,270,192"/>
-<area shape="rect" id="node7" title=" " alt="" coords="295,167,457,192"/>
-<area shape="rect" id="node5" href="$PhysicalParameters_8h.html" title=" " alt="" coords="53,240,201,265"/>
+<area shape="rect" id="node4" href="$Utility_8h.html" title=" " alt="" coords="271,240,337,265"/>
+<area shape="rect" id="node7" title=" " alt="" coords="145,167,231,192"/>
+<area shape="rect" id="node8" title=" " alt="" coords="256,167,419,192"/>
+<area shape="rect" id="node9" href="$DrivebrainData_8h.html" title=" " alt="" coords="443,167,560,192"/>
+<area shape="rect" id="node5" href="$PhysicalParameters_8h.html" title=" " alt="" coords="169,313,317,339"/>
+<area shape="rect" id="node6" title=" " alt="" coords="341,313,392,339"/>
 </map>

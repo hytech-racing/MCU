@@ -1,10 +1,13 @@
 <map id="lib/systems/include/Controllers/SimpleController.h" name="lib/systems/include/Controllers/SimpleController.h">
-<area shape="rect" id="node1" title=" " alt="" coords="291,5,488,45"/>
-<area shape="rect" id="node2" href="$TorqueControllers_8h.html" title=" " alt="" coords="229,93,368,133"/>
-<area shape="rect" id="node8" href="$SimpleController_8cpp.html" title=" " alt="" coords="392,93,568,133"/>
-<area shape="rect" id="node3" href="$src_2main_8cpp.html" title=" " alt="" coords="5,196,101,221"/>
-<area shape="rect" id="node4" href="$launch__controller__integration__testing_8h.html" title=" " alt="" coords="125,181,293,236"/>
-<area shape="rect" id="node6" href="$tc__mux__v2__testing_8h.html" title=" " alt="" coords="317,189,459,229"/>
-<area shape="rect" id="node7" href="$test__CASE_8h.html" title=" " alt="" coords="483,189,635,229"/>
-<area shape="rect" id="node5" href="$test_2test__systems_2main_8cpp.html" title=" " alt="" coords="297,284,479,309"/>
+<area shape="rect" id="node1" title=" " alt="" coords="521,5,718,45"/>
+<area shape="rect" id="node2" href="$TorqueControllers_8h.html" title=" " alt="" coords="459,93,598,133"/>
+<area shape="rect" id="node11" href="$SimpleController_8cpp.html" title=" " alt="" coords="622,93,798,133"/>
+<area shape="rect" id="node3" href="$DrivebrainController_8h.html" title=" " alt="" coords="221,189,370,229"/>
+<area shape="rect" id="node5" href="$src_2main_8cpp.html" title=" " alt="" coords="413,291,509,317"/>
+<area shape="rect" id="node8" href="$launch__controller__integration__testing_8h.html" title=" " alt="" coords="445,181,613,236"/>
+<area shape="rect" id="node9" href="$tc__mux__v2__testing_8h.html" title=" " alt="" coords="637,189,778,229"/>
+<area shape="rect" id="node10" href="$test__CASE_8h.html" title=" " alt="" coords="726,284,878,324"/>
+<area shape="rect" id="node4" href="$DrivebrainController_8cpp.html" title=" " alt="" coords="5,284,177,324"/>
+<area shape="rect" id="node6" href="$drivebrain__controller__test_8h.html" title=" " alt="" coords="202,284,389,324"/>
+<area shape="rect" id="node7" href="$test_2test__systems_2main_8cpp.html" title=" " alt="" coords="493,372,676,397"/>
 </map>

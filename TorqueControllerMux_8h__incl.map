@@ -1,12 +1,14 @@
 <map id="lib/systems/include/TorqueControllerMux.h" name="lib/systems/include/TorqueControllerMux.h">
-<area shape="rect" id="node1" title=" " alt="" coords="99,5,253,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="40,93,91,119"/>
-<area shape="rect" id="node3" href="$SharedDataTypes_8h.html" title=" " alt="" coords="109,167,243,192"/>
-<area shape="rect" id="node9" href="$BaseController_8h.html" title=" " alt="" coords="165,93,283,119"/>
-<area shape="rect" id="node10" title=" " alt="" coords="307,93,469,119"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,240,69,265"/>
-<area shape="rect" id="node5" href="$Utility_8h.html" title=" " alt="" coords="94,240,159,265"/>
-<area shape="rect" id="node7" title=" " alt="" coords="183,240,270,265"/>
-<area shape="rect" id="node8" title=" " alt="" coords="295,240,457,265"/>
-<area shape="rect" id="node6" href="$PhysicalParameters_8h.html" title=" " alt="" coords="53,313,201,339"/>
+<area shape="rect" id="node1" title=" " alt="" coords="127,5,282,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,116,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="137,387,187,412"/>
+<area shape="rect" id="node4" href="$SharedDataTypes_8h.html" title=" " alt="" coords="233,167,368,192"/>
+<area shape="rect" id="node11" href="$BaseController_8h.html" title=" " alt="" coords="242,93,359,119"/>
+<area shape="rect" id="node12" title=" " alt="" coords="383,93,546,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="191,240,255,265"/>
+<area shape="rect" id="node6" href="$Utility_8h.html" title=" " alt="" coords="260,313,325,339"/>
+<area shape="rect" id="node8" title=" " alt="" coords="331,240,417,265"/>
+<area shape="rect" id="node9" title=" " alt="" coords="442,240,605,265"/>
+<area shape="rect" id="node10" href="$DrivebrainData_8h.html" title=" " alt="" coords="629,240,746,265"/>
+<area shape="rect" id="node7" href="$PhysicalParameters_8h.html" title=" " alt="" coords="219,387,367,412"/>
 </map>

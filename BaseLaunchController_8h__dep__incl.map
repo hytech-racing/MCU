@@ -1,14 +1,17 @@
 <map id="lib/systems/include/BaseLaunchController.h" name="lib/systems/include/BaseLaunchController.h">
-<area shape="rect" id="node1" title=" " alt="" coords="309,5,473,45"/>
-<area shape="rect" id="node2" href="$LookupLaunchController_8h.html" title=" " alt="" coords="36,181,279,221"/>
-<area shape="rect" id="node10" href="$SimpleLaunchController_8h.html" title=" " alt="" coords="271,93,511,133"/>
-<area shape="rect" id="node12" href="$BaseLaunchController_8cpp.html" title=" " alt="" coords="535,93,713,133"/>
-<area shape="rect" id="node3" href="$TorqueControllers_8h.html" title=" " alt="" coords="229,269,368,309"/>
-<area shape="rect" id="node9" href="$LaunchControllerAlgos_8cpp.html" title=" " alt="" coords="392,269,573,309"/>
-<area shape="rect" id="node4" href="$src_2main_8cpp.html" title=" " alt="" coords="5,372,101,397"/>
-<area shape="rect" id="node5" href="$launch__controller__integration__testing_8h.html" title=" " alt="" coords="125,357,293,412"/>
-<area shape="rect" id="node7" href="$tc__mux__v2__testing_8h.html" title=" " alt="" coords="317,365,459,405"/>
-<area shape="rect" id="node8" href="$test__CASE_8h.html" title=" " alt="" coords="483,365,635,405"/>
-<area shape="rect" id="node6" href="$test_2test__systems_2main_8cpp.html" title=" " alt="" coords="297,460,479,485"/>
-<area shape="rect" id="node11" href="$SlipLaunchController_8h.html" title=" " alt="" coords="354,181,577,221"/>
+<area shape="rect" id="node1" title=" " alt="" coords="341,5,505,45"/>
+<area shape="rect" id="node2" href="$LookupLaunchController_8h.html" title=" " alt="" coords="68,181,311,221"/>
+<area shape="rect" id="node13" href="$SimpleLaunchController_8h.html" title=" " alt="" coords="303,93,543,133"/>
+<area shape="rect" id="node15" href="$BaseLaunchController_8cpp.html" title=" " alt="" coords="567,93,745,133"/>
+<area shape="rect" id="node3" href="$TorqueControllers_8h.html" title=" " alt="" coords="261,269,400,309"/>
+<area shape="rect" id="node12" href="$LaunchControllerAlgos_8cpp.html" title=" " alt="" coords="424,269,605,309"/>
+<area shape="rect" id="node4" href="$DrivebrainController_8h.html" title=" " alt="" coords="256,365,405,405"/>
+<area shape="rect" id="node6" href="$src_2main_8cpp.html" title=" " alt="" coords="124,467,220,493"/>
+<area shape="rect" id="node9" href="$launch__controller__integration__testing_8h.html" title=" " alt="" coords="5,357,173,412"/>
+<area shape="rect" id="node10" href="$tc__mux__v2__testing_8h.html" title=" " alt="" coords="652,460,793,500"/>
+<area shape="rect" id="node11" href="$test__CASE_8h.html" title=" " alt="" coords="685,365,837,405"/>
+<area shape="rect" id="node5" href="$DrivebrainController_8cpp.html" title=" " alt="" coords="245,460,417,500"/>
+<area shape="rect" id="node7" href="$drivebrain__controller__test_8h.html" title=" " alt="" coords="441,460,628,500"/>
+<area shape="rect" id="node8" href="$test_2test__systems_2main_8cpp.html" title=" " alt="" coords="537,548,719,573"/>
+<area shape="rect" id="node14" href="$SlipLaunchController_8h.html" title=" " alt="" coords="386,181,609,221"/>
 </map>

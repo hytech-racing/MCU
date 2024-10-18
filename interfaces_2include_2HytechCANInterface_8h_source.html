@@ -244,62 +244,63 @@ $(function() {
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">case</span> VN_YPR_CANID:</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            interfaces.vn_interface-&gt;retrieve_ypr_CAN(recvd_msg);</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordflow">case</span> VN_LAT_LON_CANID:</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            interfaces.vn_interface-&gt;retrieve_lat_lon_CAN(recvd_msg);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordflow">case</span> VN_GPS_TIME_MSG_CANID:</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            interfaces.vn_interface-&gt;retrieve_gps_time_CAN(recvd_msg);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">case</span> VN_STATUS_CANID:</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            interfaces.vn_interface-&gt;retrieve_vn_status_CAN(recvd_msg); <span class="comment">// double check this</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordflow">case</span> VN_ANGULAR_RATE_CANID:</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            interfaces.vn_interface-&gt;receive_ang_rates_CAN(recvd_msg);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        }</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">    Sends out all CAN messages on the specified buffer</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> bufferType&gt;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">  190</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>{</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">while</span> (buffer.available())</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        buffer.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        memmove(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, buf, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        can_interface-&gt;write(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>);</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="comment">// delayMicroseconds(2500);</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>}</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">// TODO should this be here? my reasoning right now for this being here is that right now this interface is </span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">//      only being used on MCU and is also tied integrally into other interfaces however the existence of this</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">//      function necessitates the CAN_MESSAGE_BUS type from generated simulink code which in theory we want to keep</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">//      segregated to the CASESystem. what we probably want our own CAN message type that we can use in the shared</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">//      data lib that is seperate from both. idk, not worth it for now just leaving this brain dump here.</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> bufferType&gt;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669">  215</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669">enqueue_matlab_msg</a>(bufferType *msg_queue, <span class="keyword">const</span> CAN_MESSAGE_BUS &amp; structure)</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>{</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    CAN_message_t can_msg = {};</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    can_msg.id = structure.ID;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    can_msg.len = structure.Length;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="comment">// TODO ensure memory safety of this, but this should be fine</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    memmove( can_msg.buf, structure.Data, structure.Length );</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)] = {};</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    memmove(buf, &amp;can_msg, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    msg_queue-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>}</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">case</span> VN_LAT_LON_CANID:</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            interfaces.vn_interface-&gt;retrieve_lat_lon_CAN(recvd_msg);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">case</span> VN_GPS_TIME_MSG_CANID:</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            interfaces.vn_interface-&gt;retrieve_gps_time_CAN(recvd_msg);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">case</span> VN_STATUS_CANID:</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            interfaces.vn_interface-&gt;retrieve_vn_status_CAN(recvd_msg); <span class="comment">// double check this</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">case</span> VN_ANGULAR_RATE_CANID:</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            interfaces.vn_interface-&gt;receive_ang_rates_CAN(recvd_msg);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>}</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">    Sends out all CAN messages on the specified buffer</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> bufferType&gt;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">  191</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a>(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>{</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">while</span> (buffer.available())</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        CAN_message_t <a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)];</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        buffer.pop_front(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        memmove(&amp;<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>, buf, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>));</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        can_interface-&gt;write(<a class="code hl_variable" href="test__can__interface_8cpp.html#a7b7e0c51c97a7d2837c3aef9953192f1">msg</a>);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="comment">// delayMicroseconds(2500);</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">// TODO should this be here? my reasoning right now for this being here is that right now this interface is </span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">//      only being used on MCU and is also tied integrally into other interfaces however the existence of this</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">//      function necessitates the CAN_MESSAGE_BUS type from generated simulink code which in theory we want to keep</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">//      segregated to the CASESystem. what we probably want our own CAN message type that we can use in the shared</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">//      data lib that is seperate from both. idk, not worth it for now just leaving this brain dump here.</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> bufferType&gt;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669">  216</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669">enqueue_matlab_msg</a>(bufferType *msg_queue, <span class="keyword">const</span> CAN_MESSAGE_BUS &amp; structure)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>{</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    CAN_message_t can_msg = {};</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    can_msg.id = structure.ID;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    can_msg.len = structure.Length;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="comment">// TODO ensure memory safety of this, but this should be fine</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    memmove( can_msg.buf, structure.Data, structure.Length );</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    uint8_t buf[<span class="keyword">sizeof</span>(CAN_message_t)] = {};</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    memmove(buf, &amp;can_msg, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    msg_queue-&gt;push_back(buf, <span class="keyword">sizeof</span>(CAN_message_t));</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>}</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="preprocessor">#endif </span><span class="comment">/* HYTECHCANINTERFACE */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="preprocessor">#endif </span><span class="comment">/* HYTECHCANINTERFACE */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aMessageQueueDefine_8h_html"><div class="ttname"><a href="MessageQueueDefine_8h.html">MessageQueueDefine.h</a></div></div>
 <div class="ttc" id="aMessageQueueDefine_8h_html_a101fc9b842e0c199b8eee0be1cf205e0"><div class="ttname"><a href="MessageQueueDefine_8h.html#a101fc9b842e0c199b8eee0be1cf205e0">CANBufferType</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 128, sizeof(CAN_message_t)&gt; CANBufferType</div><div class="ttdef"><b>Definition:</b> <a href="MessageQueueDefine_8h_source.html#l00006">MessageQueueDefine.h:6</a></div></div>
 <div class="ttc" id="aSABInterface_8h_html"><div class="ttname"><a href="SABInterface_8h.html">SABInterface.h</a></div></div>
@@ -312,10 +313,10 @@ $(function() {
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a160c1a2fcd4624822e816be5d12ff0f1"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a160c1a2fcd4624822e816be5d12ff0f1">CAN1_txBuffer</a></div><div class="ttdeci">CANBufferType CAN1_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00007">HytechCANInterface.cpp:7</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a29aa040358a501c30e482164867b44a7"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a29aa040358a501c30e482164867b44a7">CAN3_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN3_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00005">HytechCANInterface.cpp:5</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a2c220fe23cdc6c1770ad068858b26080"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a2c220fe23cdc6c1770ad068858b26080">process_ring_buffer</a></div><div class="ttdeci">void process_ring_buffer(BufferType &amp;rx_buffer, const InterfaceType &amp;interfaces, unsigned long curr_millis)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00072">HytechCANInterface.h:72</a></div></div>
-<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00190">HytechCANInterface.h:190</a></div></div>
-<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a62b929443815afd5529cf611dc056db3"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a62b929443815afd5529cf611dc056db3">CAN3_txBuffer</a></div><div class="ttdeci">CANBufferType CAN3_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00177">main.cpp:177</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a59d2a0782178ea0ceda71bd6adbfdddd"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a59d2a0782178ea0ceda71bd6adbfdddd">send_all_CAN_msgs</a></div><div class="ttdeci">void send_all_CAN_msgs(bufferType &amp;buffer, FlexCAN_T4_Base *can_interface)</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00191">HytechCANInterface.h:191</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a62b929443815afd5529cf611dc056db3"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a62b929443815afd5529cf611dc056db3">CAN3_txBuffer</a></div><div class="ttdeci">CANBufferType CAN3_txBuffer</div><div class="ttdef"><b>Definition:</b> <a href="src_2main_8cpp_source.html#l00190">main.cpp:190</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a983dcec234a2ed40ef72c2b0347d83ce"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a983dcec234a2ed40ef72c2b0347d83ce">on_can3_receive</a></div><div class="ttdeci">void on_can3_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00026">HytechCANInterface.cpp:26</a></div></div>
-<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a996f1847b27fb0409e188515ecfbb669"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669">enqueue_matlab_msg</a></div><div class="ttdeci">void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS &amp;structure)</div><div class="ttdoc">message enque function for matlab generated CAN_MESSAGE_BUS type</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00215">HytechCANInterface.h:215</a></div></div>
+<div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_a996f1847b27fb0409e188515ecfbb669"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#a996f1847b27fb0409e188515ecfbb669">enqueue_matlab_msg</a></div><div class="ttdeci">void enqueue_matlab_msg(bufferType *msg_queue, const CAN_MESSAGE_BUS &amp;structure)</div><div class="ttdoc">message enque function for matlab generated CAN_MESSAGE_BUS type</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_2include_2HytechCANInterface_8h_source.html#l00216">HytechCANInterface.h:216</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_ac6e1127319d762b3edecd01ba64541a1"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#ac6e1127319d762b3edecd01ba64541a1">CAN1_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN1_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00003">HytechCANInterface.cpp:3</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_ac94cbbb38b834761938aa1a627ba27a3"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#ac94cbbb38b834761938aa1a627ba27a3">on_can1_receive</a></div><div class="ttdeci">void on_can1_receive(const CAN_message_t &amp;msg)</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00012">HytechCANInterface.cpp:12</a></div></div>
 <div class="ttc" id="ainterfaces_2include_2HytechCANInterface_8h_html_ad97681e0953a0b25effdbce5aef0ce72"><div class="ttname"><a href="interfaces_2include_2HytechCANInterface_8h.html#ad97681e0953a0b25effdbce5aef0ce72">CAN2_rxBuffer</a></div><div class="ttdeci">Circular_Buffer&lt; uint8_t,(uint32_t) 16, sizeof(CAN_message_t)&gt; CAN2_rxBuffer</div><div class="ttdef"><b>Definition:</b> <a href="HytechCANInterface_8cpp_source.html#l00004">HytechCANInterface.cpp:4</a></div></div>

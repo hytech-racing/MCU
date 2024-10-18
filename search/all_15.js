@@ -2,7 +2,7 @@ var searchData=
 [
   ['vectornavdata_5fs_0',['VectornavData_s',['../structVectornavData__s.html',1,'']]],
   ['vectornavinterface_2eh_1',['VectornavInterface.h',['../interfaces_2include_2VectornavInterface_8h.html',1,'(Global Namespace)'],['../mock__interfaces_2VectornavInterface_8h.html',1,'(Global Namespace)']]],
-  ['veh_5fvec_2',['veh_vec',['../structveh__vec.html',1,'']]],
+  ['veh_5fvec_2',['veh_vec',['../structveh__vec.html',1,'veh_vec&lt; T &gt;'],['../structveh__vec.html#a9e0d64fb3292a87846b7f3e3d907dd26',1,'veh_vec::veh_vec()=default'],['../structveh__vec.html#a478dfd7a2d3d95ddf1fff7a89b18ef39',1,'veh_vec::veh_vec(T _FL, T _FR, T _RL, T _RR)']]],
   ['veh_5fvec_3c_20analogconversion_5fs_20_3e_3',['veh_vec&lt; AnalogConversion_s &gt;',['../structveh__vec.html',1,'']]],
   ['veh_5fvec_3c_20float_20_3e_4',['veh_vec&lt; float &gt;',['../structveh__vec.html',1,'']]],
   ['veh_5fvec_3c_20float_5bnumfirtaps_5f_5d_3e_5',['veh_vec&lt; float[numFIRTaps_]&gt;',['../structveh__vec.html',1,'']]],

@@ -1,13 +1,14 @@
 <map id="test/test_systems/drivetrain_system_test.h" name="test/test_systems/drivetrain_system_test.h">
-<area shape="rect" id="node1" title=" " alt="" coords="288,5,471,45"/>
-<area shape="rect" id="node2" href="$DrivetrainSystem_8h.html" title=" " alt="" coords="314,93,445,119"/>
-<area shape="rect" id="node3" href="$Utility_8h.html" title=" " alt="" coords="47,240,112,265"/>
-<area shape="rect" id="node5" title=" " alt="" coords="417,167,467,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="137,240,201,265"/>
-<area shape="rect" id="node7" title=" " alt="" coords="412,240,499,265"/>
-<area shape="rect" id="node8" title=" " alt="" coords="492,167,605,192"/>
-<area shape="rect" id="node9" href="$SharedDataTypes_8h.html" title=" " alt="" coords="207,167,341,192"/>
-<area shape="rect" id="node11" title=" " alt="" coords="629,167,772,192"/>
-<area shape="rect" id="node4" href="$PhysicalParameters_8h.html" title=" " alt="" coords="5,313,153,339"/>
-<area shape="rect" id="node10" title=" " alt="" coords="225,240,387,265"/>
+<area shape="rect" id="node1" title=" " alt="" coords="119,5,302,45"/>
+<area shape="rect" id="node2" href="$DrivetrainSystem_8h.html" title=" " alt="" coords="145,93,276,119"/>
+<area shape="rect" id="node3" href="$Utility_8h.html" title=" " alt="" coords="150,313,215,339"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,387,56,412"/>
+<area shape="rect" id="node6" title=" " alt="" coords="64,240,128,265"/>
+<area shape="rect" id="node7" title=" " alt="" coords="531,240,618,265"/>
+<area shape="rect" id="node8" title=" " alt="" coords="354,167,467,192"/>
+<area shape="rect" id="node9" href="$SharedDataTypes_8h.html" title=" " alt="" coords="143,167,278,192"/>
+<area shape="rect" id="node12" title=" " alt="" coords="491,167,634,192"/>
+<area shape="rect" id="node4" href="$PhysicalParameters_8h.html" title=" " alt="" coords="109,387,257,412"/>
+<area shape="rect" id="node10" title=" " alt="" coords="293,240,456,265"/>
+<area shape="rect" id="node11" href="$DrivebrainData_8h.html" title=" " alt="" coords="152,240,269,265"/>
 </map>

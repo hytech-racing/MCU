@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">SharedDataTypes.h File Reference</div></div>
 </div><!--header-->
@@ -83,17 +84,20 @@ $(function() {
 <code>#include &quot;<a class="el" href="Utility_8h_source.html">Utility.h</a>&quot;</code><br />
 <code>#include &quot;SysClock.h&quot;</code><br />
 <code>#include &quot;SharedFirmwareTypes.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="DrivebrainData_8h_source.html">DrivebrainData.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SharedDataTypes.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="SharedDataTypes_8h__incl.png" border="0" usemap="#alib_2shared__data_2include_2SharedDataTypes_8h" alt=""/></div>
 <map name="alib_2shared__data_2include_2SharedDataTypes_8h" id="alib_2shared__data_2include_2SharedDataTypes_8h">
-<area shape="rect" title=" " alt="" coords="99,5,253,45"/>
+<area shape="rect" title=" " alt="" coords="111,5,265,45"/>
 <area shape="rect" title=" " alt="" coords="5,93,69,119"/>
-<area shape="rect" href="Utility_8h.html" title=" " alt="" coords="94,93,159,119"/>
-<area shape="rect" title=" " alt="" coords="183,93,270,119"/>
-<area shape="rect" title=" " alt="" coords="295,93,457,119"/>
-<area shape="rect" href="PhysicalParameters_8h.html" title=" " alt="" coords="53,167,201,192"/>
+<area shape="rect" href="Utility_8h.html" title=" " alt="" coords="271,167,337,192"/>
+<area shape="rect" title=" " alt="" coords="145,93,231,119"/>
+<area shape="rect" title=" " alt="" coords="256,93,419,119"/>
+<area shape="rect" href="DrivebrainData_8h.html" title=" " alt="" coords="443,93,560,119"/>
+<area shape="rect" href="PhysicalParameters_8h.html" title=" " alt="" coords="169,240,317,265"/>
+<area shape="rect" title=" " alt="" coords="341,240,392,265"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -101,56 +105,56 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="SharedDataTypes_8h__dep__incl.png" border="0" usemap="#alib_2shared__data_2include_2SharedDataTypes_8hdep" alt=""/></div>
 <map name="alib_2shared__data_2include_2SharedDataTypes_8hdep" id="alib_2shared__data_2include_2SharedDataTypes_8hdep">
-<area shape="rect" title=" " alt="" coords="1061,5,1216,45"/>
-<area shape="rect" href="interfaces_2include_2DashboardInterface_8h.html" title=" " alt="" coords="381,467,531,507"/>
-<area shape="rect" href="interfaces_2include_2LoadCellInterface_8h.html" title=" " alt="" coords="379,189,520,229"/>
-<area shape="rect" href="interfaces_2include_2MCUInterface_8h.html" title=" " alt="" coords="379,284,520,324"/>
-<area shape="rect" href="interfaces_2include_2TelemetryInterface_8h.html" title=" " alt="" coords="163,467,307,507"/>
-<area shape="rect" href="interfaces_2include_2VectornavInterface_8h.html" title=" " alt="" coords="5,93,152,133"/>
-<area shape="rect" href="AnalogSensorsInterface_8h.html" title=" " alt="" coords="801,93,975,133"/>
-<area shape="rect" href="PedalsSystem_8h.html" title=" " alt="" coords="1147,189,1280,229"/>
-<area shape="rect" href="SteeringSystem_8h.html" title=" " alt="" coords="1796,189,1929,229"/>
-<area shape="rect" href="mock__interfaces_2DashboardInterface_8h.html" title=" " alt="" coords="1201,93,1351,133"/>
-<area shape="rect" href="mock__interfaces_2VectornavInterface_8h.html" title=" " alt="" coords="1375,93,1521,133"/>
-<area shape="rect" href="BaseController_8h.html" title=" " alt="" coords="2453,93,2587,133"/>
-<area shape="rect" href="BaseLaunchController_8h.html" title=" " alt="" coords="3009,284,3173,324"/>
-<area shape="rect" href="TorqueControllerMux_8h.html" title=" " alt="" coords="2173,189,2328,229"/>
-<area shape="rect" href="DrivetrainSystem_8h.html" title=" " alt="" coords="1431,189,1566,229"/>
-<area shape="rect" href="interfaces_2include_2HytechCANInterface_8h.html" title=" " alt="" coords="362,563,518,603"/>
-<area shape="rect" href="lib_2interfaces_2include_2InverterInterface_8h.html" title=" " alt="" coords="277,372,419,412"/>
-<area shape="rect" href="SABInterface_8h.html" title=" " alt="" coords="555,467,696,507"/>
-<area shape="rect" href="ThermistorInterface_8h.html" title=" " alt="" coords="645,189,795,229"/>
-<area shape="rect" href="mock__interfaces_2LoadCellInterface_8h.html" title=" " alt="" coords="819,189,957,229"/>
-<area shape="rect" href="Telemetry__interface__test_8h.html" title=" " alt="" coords="982,181,1122,236"/>
-<area shape="rect" href="SABInterface_8cpp.html" title=" " alt="" coords="544,563,672,603"/>
-<area shape="rect" href="src_2main_8cpp.html" title=" " alt="" coords="1451,665,1547,691"/>
-<area shape="rect" href="ThermistorInterface_8cpp.html" title=" " alt="" coords="595,284,757,324"/>
-<area shape="rect" href="MCU__rev15__defs_8h.html" title=" " alt="" coords="1131,291,1309,317"/>
-<area shape="rect" href="pedals__system__test_8h.html" title=" " alt="" coords="832,372,1000,412"/>
-<area shape="rect" href="MCUStateMachine_8h.html" title=" " alt="" coords="1537,284,1706,324"/>
-<area shape="rect" href="CASESystem_8h.html" title=" " alt="" coords="1987,372,2120,412"/>
-<area shape="rect" href="PedalsSystem_8cpp.html" title=" " alt="" coords="883,291,1106,317"/>
-<area shape="rect" href="interfaces_2include_2ProtobufMsgInterface_8h.html" title=" " alt="" coords="1139,372,1301,412"/>
-<area shape="rect" href="test_2test__systems_2main_8cpp.html" title=" " alt="" coords="1973,753,2155,779"/>
-<area shape="rect" href="state__machine__test_8h.html" title=" " alt="" coords="2075,658,2234,698"/>
-<area shape="rect" href="CASEControllerWrapper_8h.html" title=" " alt="" coords="2265,460,2447,515"/>
-<area shape="rect" href="test__CASE_8h.html" title=" " alt="" coords="1899,658,2051,698"/>
-<area shape="rect" href="TorqueControllers_8h.html" title=" " alt="" coords="2264,563,2403,603"/>
-<area shape="rect" href="launch__controller__integration__testing_8h.html" title=" " alt="" coords="2424,651,2592,705"/>
-<area shape="rect" href="tc__mux__v2__testing_8h.html" title=" " alt="" coords="2259,658,2400,698"/>
-<area shape="rect" href="SteeringSystem_8cpp.html" title=" " alt="" coords="1781,284,1944,324"/>
-<area shape="rect" href="steering__system__test_8h.html" title=" " alt="" coords="1968,284,2144,324"/>
-<area shape="rect" href="LoadCellVectoringController_8h.html" title=" " alt="" coords="2643,181,2842,236"/>
-<area shape="rect" href="SimpleController_8h.html" title=" " alt="" coords="2421,189,2619,229"/>
-<area shape="rect" href="fake__controller__type_8h.html" title=" " alt="" coords="2427,563,2581,603"/>
-<area shape="rect" href="LookupLaunchController_8h.html" title=" " alt="" coords="2792,467,3035,507"/>
-<area shape="rect" href="SimpleLaunchController_8h.html" title=" " alt="" coords="2971,372,3211,412"/>
-<area shape="rect" href="BaseLaunchController_8cpp.html" title=" " alt="" coords="3235,372,3413,412"/>
-<area shape="rect" href="LaunchControllerAlgos_8cpp.html" title=" " alt="" coords="3131,563,3312,603"/>
-<area shape="rect" href="SlipLaunchController_8h.html" title=" " alt="" coords="3110,467,3333,507"/>
-<area shape="rect" href="LoadCellVectoringController_8cpp.html" title=" " alt="" coords="2723,284,2933,324"/>
-<area shape="rect" href="SimpleController_8cpp.html" title=" " alt="" coords="2472,284,2648,324"/>
-<area shape="rect" href="drivetrain__system__test_8h.html" title=" " alt="" coords="1177,563,1359,603"/>
+<area shape="rect" title=" " alt="" coords="928,5,1083,45"/>
+<area shape="rect" href="interfaces_2include_2DashboardInterface_8h.html" title=" " alt="" coords="229,467,379,507"/>
+<area shape="rect" href="DrivebrainETHInterface_8h.html" title=" " alt="" coords="8,93,179,133"/>
+<area shape="rect" href="DrivebrainETHInterface_8cpp.html" title=" " alt="" coords="43,189,229,229"/>
+<area shape="rect" href="interfaces_2include_2LoadCellInterface_8h.html" title=" " alt="" coords="463,189,604,229"/>
+<area shape="rect" href="interfaces_2include_2MCUInterface_8h.html" title=" " alt="" coords="372,284,513,324"/>
+<area shape="rect" href="interfaces_2include_2TelemetryInterface_8h.html" title=" " alt="" coords="453,467,597,507"/>
+<area shape="rect" href="interfaces_2include_2VectornavInterface_8h.html" title=" " alt="" coords="109,372,256,412"/>
+<area shape="rect" href="AnalogSensorsInterface_8h.html" title=" " alt="" coords="793,93,967,133"/>
+<area shape="rect" href="PedalsSystem_8h.html" title=" " alt="" coords="1231,189,1364,229"/>
+<area shape="rect" href="DrivebrainController_8h.html" title=" " alt="" coords="3139,658,3288,698"/>
+<area shape="rect" href="SteeringSystem_8h.html" title=" " alt="" coords="1591,189,1724,229"/>
+<area shape="rect" href="mock__interfaces_2DashboardInterface_8h.html" title=" " alt="" coords="1144,93,1293,133"/>
+<area shape="rect" href="mock__interfaces_2VectornavInterface_8h.html" title=" " alt="" coords="1317,93,1464,133"/>
+<area shape="rect" href="BaseController_8h.html" title=" " alt="" coords="2859,93,2992,133"/>
+<area shape="rect" href="BaseLaunchController_8h.html" title=" " alt="" coords="3359,189,3523,229"/>
+<area shape="rect" href="TorqueControllerMux_8h.html" title=" " alt="" coords="2472,189,2627,229"/>
+<area shape="rect" href="DrivetrainSystem_8h.html" title=" " alt="" coords="2082,189,2217,229"/>
+<area shape="rect" href="interfaces_2include_2HytechCANInterface_8h.html" title=" " alt="" coords="282,563,438,603"/>
+<area shape="rect" href="src_2main_8cpp.html" title=" " alt="" coords="1972,761,2068,786"/>
+<area shape="rect" href="lib_2interfaces_2include_2InverterInterface_8h.html" title=" " alt="" coords="381,372,523,412"/>
+<area shape="rect" href="SABInterface_8h.html" title=" " alt="" coords="621,467,763,507"/>
+<area shape="rect" href="ThermistorInterface_8h.html" title=" " alt="" coords="1057,189,1207,229"/>
+<area shape="rect" href="mock__interfaces_2LoadCellInterface_8h.html" title=" " alt="" coords="729,189,868,229"/>
+<area shape="rect" href="Telemetry__interface__test_8h.html" title=" " alt="" coords="893,181,1033,236"/>
+<area shape="rect" href="SABInterface_8cpp.html" title=" " alt="" coords="635,563,763,603"/>
+<area shape="rect" href="ThermistorInterface_8cpp.html" title=" " alt="" coords="780,284,943,324"/>
+<area shape="rect" href="MCU__rev15__defs_8h.html" title=" " alt="" coords="1265,291,1444,317"/>
+<area shape="rect" href="pedals__system__test_8h.html" title=" " alt="" coords="1060,372,1228,412"/>
+<area shape="rect" href="MCUStateMachine_8h.html" title=" " alt="" coords="2317,284,2486,324"/>
+<area shape="rect" href="CASESystem_8h.html" title=" " alt="" coords="2085,372,2219,412"/>
+<area shape="rect" href="PedalsSystem_8cpp.html" title=" " alt="" coords="1018,291,1241,317"/>
+<area shape="rect" href="state__machine__test_8h.html" title=" " alt="" coords="2325,372,2483,412"/>
+<area shape="rect" href="CASEControllerWrapper_8h.html" title=" " alt="" coords="2842,460,3025,515"/>
+<area shape="rect" href="TorqueControllers_8h.html" title=" " alt="" coords="3071,563,3209,603"/>
+<area shape="rect" href="launch__controller__integration__testing_8h.html" title=" " alt="" coords="2573,651,2741,705"/>
+<area shape="rect" href="tc__mux__v2__testing_8h.html" title=" " alt="" coords="2765,658,2907,698"/>
+<area shape="rect" href="DrivebrainController_8cpp.html" title=" " alt="" coords="3025,753,3197,793"/>
+<area shape="rect" href="drivebrain__controller__test_8h.html" title=" " alt="" coords="3221,753,3408,793"/>
+<area shape="rect" href="SteeringSystem_8cpp.html" title=" " alt="" coords="1769,284,1932,324"/>
+<area shape="rect" href="steering__system__test_8h.html" title=" " alt="" coords="1569,284,1745,324"/>
+<area shape="rect" href="LoadCellVectoringController_8h.html" title=" " alt="" coords="2895,181,3094,236"/>
+<area shape="rect" href="SimpleController_8h.html" title=" " alt="" coords="3119,189,3316,229"/>
+<area shape="rect" href="fake__controller__type_8h.html" title=" " alt="" coords="2612,284,2767,324"/>
+<area shape="rect" href="LookupLaunchController_8h.html" title=" " alt="" coords="3465,372,3708,412"/>
+<area shape="rect" href="SimpleLaunchController_8h.html" title=" " alt="" coords="3268,467,3508,507"/>
+<area shape="rect" href="BaseLaunchController_8cpp.html" title=" " alt="" coords="3529,284,3708,324"/>
+<area shape="rect" href="LoadCellVectoringController_8cpp.html" title=" " alt="" coords="2892,284,3103,324"/>
+<area shape="rect" href="SimpleController_8cpp.html" title=" " alt="" coords="3228,284,3404,324"/>
+<area shape="rect" href="drivetrain__system__test_8h.html" title=" " alt="" coords="2058,284,2241,324"/>
 </map>
 </div>
 </div>
@@ -180,6 +184,13 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSharedCarState__s.html">SharedCarState_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">car state struct that contains state of everything about the car including  <a href="structSharedCarState__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a7dd22aab601319ea77fdc980d6cbe53e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SharedDataTypes_8h.html#a7dd22aab601319ea77fdc980d6cbe53e">speed_rpm</a> = float</td></tr>
+<tr class="separator:a7dd22aab601319ea77fdc980d6cbe53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadfac7c359c9ccc13db143845b0eb645"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SharedDataTypes_8h.html#aadfac7c359c9ccc13db143845b0eb645">torque_nm</a> = float</td></tr>
+<tr class="separator:aadfac7c359c9ccc13db143845b0eb645"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -219,6 +230,39 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="separator:a13d307fc2e5826ca5ed033fe647569a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a7dd22aab601319ea77fdc980d6cbe53e" name="a7dd22aab601319ea77fdc980d6cbe53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd22aab601319ea77fdc980d6cbe53e">&#9670;&#160;</a></span>speed_rpm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="SharedDataTypes_8h.html#a7dd22aab601319ea77fdc980d6cbe53e">speed_rpm</a> =  float</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00009">9</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+
+</div>
+</div>
+<a id="aadfac7c359c9ccc13db143845b0eb645" name="aadfac7c359c9ccc13db143845b0eb645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadfac7c359c9ccc13db143845b0eb645">&#9670;&#160;</a></span>torque_nm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="SharedDataTypes_8h.html#aadfac7c359c9ccc13db143845b0eb645">torque_nm</a> =  float</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00010">10</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a3f9f696ecee7e1ce7536910bdd45f76a" name="a3f9f696ecee7e1ce7536910bdd45f76a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3f9f696ecee7e1ce7536910bdd45f76a">&#9670;&#160;</a></span>ControllerMode_e</h2>
@@ -248,19 +292,19 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27" name="a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27"></a>MODE_5&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00018">18</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   19</span>{</div>
-<div class="line"><span class="lineno">   20</span>    <span class="comment">/* No torque vectoring */</span></div>
-<div class="line"><span class="lineno">   21</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">MODE_0</a>,</div>
-<div class="line"><span class="lineno">   22</span>    <span class="comment">/* Normal force torque vectoring */</span></div>
-<div class="line"><span class="lineno">   23</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">MODE_1</a>,</div>
-<div class="line"><span class="lineno">   24</span>    <span class="comment">/* PID torque vectoring */</span></div>
-<div class="line"><span class="lineno">   25</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">MODE_2</a>,</div>
-<div class="line"><span class="lineno">   26</span>    <span class="comment">/* Launch Ctrl */</span></div>
-<div class="line"><span class="lineno">   27</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">MODE_3</a>,</div>
-<div class="line"><span class="lineno">   28</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">MODE_4</a>,</div>
-<div class="line"><span class="lineno">   29</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27">MODE_5</a>,</div>
-<div class="line"><span class="lineno">   30</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00022">22</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>{</div>
+<div class="line"><span class="lineno">   24</span>    <span class="comment">/* No torque vectoring */</span></div>
+<div class="line"><span class="lineno">   25</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">MODE_0</a>,</div>
+<div class="line"><span class="lineno">   26</span>    <span class="comment">/* Normal force torque vectoring */</span></div>
+<div class="line"><span class="lineno">   27</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaf7ede748a6b41c7c91c18ed2d155b33e">MODE_1</a>,</div>
+<div class="line"><span class="lineno">   28</span>    <span class="comment">/* PID torque vectoring */</span></div>
+<div class="line"><span class="lineno">   29</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aacac4185dc8a44d8ae07bfb94c2830017">MODE_2</a>,</div>
+<div class="line"><span class="lineno">   30</span>    <span class="comment">/* Launch Ctrl */</span></div>
+<div class="line"><span class="lineno">   31</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aac5b781763a4c930367500c96e64a0166">MODE_3</a>,</div>
+<div class="line"><span class="lineno">   32</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">MODE_4</a>,</div>
+<div class="line"><span class="lineno">   33</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27">MODE_5</a>,</div>
+<div class="line"><span class="lineno">   34</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa3a769a916836dccf98801212615595d3">ControllerMode_e::MODE_0</a></div><div class="ttdeci">@ MODE_0</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aa89b1c811012c8d7e515b0216c9ab73f6">ControllerMode_e::MODE_4</a></div><div class="ttdeci">@ MODE_4</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27"><div class="ttname"><a href="SharedDataTypes_8h.html#a3f9f696ecee7e1ce7536910bdd45f76aaab2ff7d02164896cfaead0661a47ba27">ControllerMode_e::MODE_5</a></div><div class="ttdeci">@ MODE_5</div></div>
@@ -296,13 +340,13 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9" name="a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9"></a>STEERING_SYSTEM_ERROR&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00120">120</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  121</span>{</div>
-<div class="line"><span class="lineno">  122</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0,</div>
-<div class="line"><span class="lineno">  123</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1,</div>
-<div class="line"><span class="lineno">  124</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">STEERING_SYSTEM_DEGRADED</a> = 2,</div>
-<div class="line"><span class="lineno">  125</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">STEERING_SYSTEM_ERROR</a> = 3,</div>
-<div class="line"><span class="lineno">  126</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00124">124</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  125</span>{</div>
+<div class="line"><span class="lineno">  126</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">STEERING_SYSTEM_NOMINAL</a> = 0,</div>
+<div class="line"><span class="lineno">  127</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">STEERING_SYSTEM_MARGINAL</a> = 1,</div>
+<div class="line"><span class="lineno">  128</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">STEERING_SYSTEM_DEGRADED</a> = 2,</div>
+<div class="line"><span class="lineno">  129</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3abdc57fff8aa5867c322aeb932471afa9">STEERING_SYSTEM_ERROR</a> = 3,</div>
+<div class="line"><span class="lineno">  130</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1"><div class="ttname"><a href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a5b6603112fefc7c415d89cbac29e2dd1">SteeringSystemStatus_e::STEERING_SYSTEM_MARGINAL</a></div><div class="ttdeci">@ STEERING_SYSTEM_MARGINAL</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756"><div class="ttname"><a href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a94884e6c5aff70eab5eb102949deb756">SteeringSystemStatus_e::STEERING_SYSTEM_NOMINAL</a></div><div class="ttdeci">@ STEERING_SYSTEM_NOMINAL</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de"><div class="ttname"><a href="SharedDataTypes_8h.html#a13d307fc2e5826ca5ed033fe647569a3a9a23e8f57e4fd09c84fd94d4be2c12de">SteeringSystemStatus_e::STEERING_SYSTEM_DEGRADED</a></div><div class="ttdeci">@ STEERING_SYSTEM_DEGRADED</div></div>
@@ -339,14 +383,14 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae" name="abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae"></a>ERROR_CONTROLLER_NULL_POINTER&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00093">93</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>{</div>
-<div class="line"><span class="lineno">   95</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">NO_ERROR</a> = 0,</div>
-<div class="line"><span class="lineno">   96</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">ERROR_SPEED_DIFF_TOO_HIGH</a> = 1,</div>
-<div class="line"><span class="lineno">   97</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">ERROR_TORQUE_DIFF_TOO_HIGH</a> = 2,</div>
-<div class="line"><span class="lineno">   98</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a> =3,</div>
-<div class="line"><span class="lineno">   99</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">ERROR_CONTROLLER_NULL_POINTER</a> =4</div>
-<div class="line"><span class="lineno">  100</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00097">97</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>{</div>
+<div class="line"><span class="lineno">   99</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">NO_ERROR</a> = 0,</div>
+<div class="line"><span class="lineno">  100</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad46efa8267691383966460acb54aefaf">ERROR_SPEED_DIFF_TOO_HIGH</a> = 1,</div>
+<div class="line"><span class="lineno">  101</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daf38080c32a39ffa5eab7f9dc770a8869">ERROR_TORQUE_DIFF_TOO_HIGH</a> = 2,</div>
+<div class="line"><span class="lineno">  102</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a> =3,</div>
+<div class="line"><span class="lineno">  103</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">ERROR_CONTROLLER_NULL_POINTER</a> =4</div>
+<div class="line"><span class="lineno">  104</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498da22025bb4c87926448fb0cb52981885ae">TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER</a></div><div class="ttdeci">@ ERROR_CONTROLLER_NULL_POINTER</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498daad85765daeedf396f7401ef387732425">TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</a></div><div class="ttdeci">@ ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c"><div class="ttname"><a href="SharedDataTypes_8h.html#abfda7c61f67dbd395b16edf70659498dad306b6fdee05fe87455110ddf6501e6c">TorqueControllerMuxError::NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div></div>
@@ -383,13 +427,13 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b" name="a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b"></a>TCMUX_NUM_TORQUE_LIMITS&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00009">9</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   10</span>{</div>
-<div class="line"><span class="lineno">   11</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TCMUX_FULL_TORQUE</a> = 0,</div>
-<div class="line"><span class="lineno">   12</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127">TCMUX_MID_TORQUE</a> = 1,</div>
-<div class="line"><span class="lineno">   13</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TCMUX_LOW_TORQUE</a> = 2,</div>
-<div class="line"><span class="lineno">   14</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b">TCMUX_NUM_TORQUE_LIMITS</a> = 3,</div>
-<div class="line"><span class="lineno">   15</span>};</div>
+<p class="definition">Definition at line <a class="el" href="SharedDataTypes_8h_source.html#l00013">13</a> of file <a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>{</div>
+<div class="line"><span class="lineno">   15</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TCMUX_FULL_TORQUE</a> = 0,</div>
+<div class="line"><span class="lineno">   16</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127">TCMUX_MID_TORQUE</a> = 1,</div>
+<div class="line"><span class="lineno">   17</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TCMUX_LOW_TORQUE</a> = 2,</div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644bab4ccbaa39f232490aaedf2f615e2bf0b">TCMUX_NUM_TORQUE_LIMITS</a> = 3,</div>
+<div class="line"><span class="lineno">   19</span>};</div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba067fa4d22c8126b2aa4c65a22b276127">TorqueLimit_e::TCMUX_MID_TORQUE</a></div><div class="ttdeci">@ TCMUX_MID_TORQUE</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba43ea287dacd066a7f250f0218de1609a">TorqueLimit_e::TCMUX_FULL_TORQUE</a></div><div class="ttdeci">@ TCMUX_FULL_TORQUE</div></div>
 <div class="ttc" id="aSharedDataTypes_8h_html_a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302"><div class="ttname"><a href="SharedDataTypes_8h.html#a347b41a134c22d96f783682b6da8644ba9eeb65646114f64addc3ca181e7c6302">TorqueLimit_e::TCMUX_LOW_TORQUE</a></div><div class="ttdeci">@ TCMUX_LOW_TORQUE</div></div>

@@ -1,12 +1,14 @@
 <map id="lib/interfaces/include/LoadCellInterface.h" name="lib/interfaces/include/LoadCellInterface.h">
-<area shape="rect" id="node1" title=" " alt="" coords="117,5,258,45"/>
-<area shape="rect" id="node2" href="$Utility_8h.html" title=" " alt="" coords="47,240,112,265"/>
-<area shape="rect" id="node4" title=" " alt="" coords="136,240,223,265"/>
-<area shape="rect" id="node5" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="294,93,465,119"/>
-<area shape="rect" id="node8" href="$SharedDataTypes_8h.html" title=" " alt="" coords="200,167,335,192"/>
-<area shape="rect" id="node3" href="$PhysicalParameters_8h.html" title=" " alt="" coords="5,313,153,339"/>
-<area shape="rect" id="node6" title=" " alt="" coords="458,167,509,192"/>
-<area shape="rect" id="node7" title=" " alt="" coords="359,167,434,192"/>
-<area shape="rect" id="node9" title=" " alt="" coords="247,240,311,265"/>
-<area shape="rect" id="node10" title=" " alt="" coords="335,240,498,265"/>
+<area shape="rect" id="node1" title=" " alt="" coords="37,5,178,45"/>
+<area shape="rect" id="node2" href="$Utility_8h.html" title=" " alt="" coords="126,313,191,339"/>
+<area shape="rect" id="node5" title=" " alt="" coords="34,240,120,265"/>
+<area shape="rect" id="node6" href="$AnalogSensorsInterface_8h.html" title=" " alt="" coords="97,93,268,119"/>
+<area shape="rect" id="node9" href="$SharedDataTypes_8h.html" title=" " alt="" coords="258,167,392,192"/>
+<area shape="rect" id="node3" href="$PhysicalParameters_8h.html" title=" " alt="" coords="23,387,171,412"/>
+<area shape="rect" id="node4" title=" " alt="" coords="196,387,246,412"/>
+<area shape="rect" id="node7" title=" " alt="" coords="84,167,134,192"/>
+<area shape="rect" id="node8" title=" " alt="" coords="158,167,233,192"/>
+<area shape="rect" id="node10" title=" " alt="" coords="196,240,260,265"/>
+<area shape="rect" id="node11" title=" " alt="" coords="284,240,446,265"/>
+<area shape="rect" id="node12" href="$DrivebrainData_8h.html" title=" " alt="" coords="470,240,588,265"/>
 </map>

@@ -1,12 +1,13 @@
 <map id="lib/systems/include/DrivetrainSystem.h" name="lib/systems/include/DrivetrainSystem.h">
-<area shape="rect" id="node1" title=" " alt="" coords="312,5,447,45"/>
-<area shape="rect" id="node2" href="$Utility_8h.html" title=" " alt="" coords="47,167,112,192"/>
-<area shape="rect" id="node4" title=" " alt="" coords="417,93,467,119"/>
-<area shape="rect" id="node5" title=" " alt="" coords="137,167,201,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="412,167,499,192"/>
-<area shape="rect" id="node7" title=" " alt="" coords="492,93,605,119"/>
-<area shape="rect" id="node8" href="$SharedDataTypes_8h.html" title=" " alt="" coords="207,93,341,119"/>
-<area shape="rect" id="node10" title=" " alt="" coords="629,93,772,119"/>
-<area shape="rect" id="node3" href="$PhysicalParameters_8h.html" title=" " alt="" coords="5,240,153,265"/>
-<area shape="rect" id="node9" title=" " alt="" coords="225,167,387,192"/>
+<area shape="rect" id="node1" title=" " alt="" coords="143,5,278,45"/>
+<area shape="rect" id="node2" href="$Utility_8h.html" title=" " alt="" coords="150,240,215,265"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,313,56,339"/>
+<area shape="rect" id="node5" title=" " alt="" coords="64,167,128,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="531,167,618,192"/>
+<area shape="rect" id="node7" title=" " alt="" coords="354,93,467,119"/>
+<area shape="rect" id="node8" href="$SharedDataTypes_8h.html" title=" " alt="" coords="143,93,278,119"/>
+<area shape="rect" id="node11" title=" " alt="" coords="491,93,634,119"/>
+<area shape="rect" id="node3" href="$PhysicalParameters_8h.html" title=" " alt="" coords="109,313,257,339"/>
+<area shape="rect" id="node9" title=" " alt="" coords="293,167,456,192"/>
+<area shape="rect" id="node10" href="$DrivebrainData_8h.html" title=" " alt="" coords="152,167,269,192"/>
 </map>
