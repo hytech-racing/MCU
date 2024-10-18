@@ -3,6 +3,7 @@
 
 #include "state_machine_test.h"
 #include "pedals_system_test.h"
+#include "drivebrain_controller_test.h"
 #include "launch_controller_integration_testing.h"
 #include "tc_mux_v2_testing.h"
 #include "drivetrain_system_test.h"

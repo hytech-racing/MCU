@@ -1,6 +1,9 @@
 #ifndef INTERFACEPARAMS
 #define INTERFACEPARAMS
-#include "NativeEthernet.h"
+
+#include <QNEthernet.h>
+
+using namespace qindesign::network;
 
 namespace EthParams
 {
@@ -8,7 +11,7 @@ namespace EthParams
     {0x04, 0xe9, 0xe5, 0x10, 0x1f, 0x22};
 
     const IPAddress default_MCU_ip(192, 168, 1, 30);
-    const IPAddress default_TCU_ip(192, 168, 1, 68);
+    const IPAddress default_TCU_ip(192, 168, 1, 69);
 
     const uint16_t default_protobuf_send_port = 2001;
     const uint16_t default_protobuf_recv_port = 2000;

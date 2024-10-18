@@ -1,3 +1,9 @@
+#ifdef ENABLE_DEBUG_PRINTS
+#define DEBUG_PRINTS true
+#else 
+#define DEBUG_PRINTS false
+#endif
+
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
@@ -5,10 +11,12 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
+#include "pb.h"
 #include "PrintLogger.h"
 
 // /* Interfaces */
-
+#include "DrivebrainETHInterface.h"
+#include "ProtobufMsgInterface.h"
 #include "HytechCANInterface.h"
 #include "ThermistorInterface.h"
 #include "Teensy_ADC.h"
@@ -30,6 +38,7 @@
 #include "SafetySystem.h"
 #include "DrivetrainSystem.h"
 #include "PedalsSystem.h"
+#include "DrivebrainController.h"
 #include "TorqueControllerMux.h"
 #include "TorqueControllers.h"
 #include "CASESystem.h"
@@ -38,9 +47,15 @@
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
 
+#include "InterfaceParams.h"
+#include "PrintLogger.h"
+
+#include "hytech_msgs.pb.h"
 /*
     PARAMETER STRUCTS
 */
+using namespace qindesign::network;
+
 
 const TelemetryInterfaceReadChannels telem_read_channels = {
     .accel1_channel = MCU15_ACCEL1_CHANNEL,
@@ -86,7 +101,6 @@ const PedalsParams accel2_only_params = {
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
 
-
 const PedalsParams accel_params = {
     .min_pedal_1 = ACCEL1_PEDAL_MIN,
     .min_pedal_2 = ACCEL2_PEDAL_MIN,
@@ -100,7 +114,6 @@ const PedalsParams accel_params = {
     .deadzone_margin = DEFAULT_PEDAL_DEADZONE,
     .implausibility_margin = DEFAULT_PEDAL_IMPLAUSIBILITY_MARGIN,
     .mechanical_activation_percentage = APPS_ACTIVATION_PERCENTAGE};
-
 
 const PedalsParams brake1_only_params = {
     .min_pedal_1 = BRAKE1_PEDAL_MIN,
@@ -251,7 +264,7 @@ CASEConfiguration case_config = {
     .useTorqueBias = true,
     .DriveTorquePercentFront = 0.5, // DON'T TOUCH UNTIL LOAD CELL ADHERES TO DRIVE BIAS
     .BrakeTorquePercentFront = 0.6,
-    .MechPowerMaxkW =51.5,            // kW
+    .MechPowerMaxkW = 51.5,            // kW
     .launchLeftRightMaxDiff = 2.0,     // N-m
     .tcs_pid_lower_rpm_front = 0.0,    // RPM
     .tcs_pid_upper_rpm_front = 5000.0, // RPM
@@ -264,7 +277,7 @@ CASEConfiguration case_config = {
     .TCSGenLeftRightDiffUpperBound = 20, // N-m
     .TCSWheelSteerLowerBound = 2,        // Deg
     .TCSWheelSteerUpperBound = 25,       // Deg
-    .useRPM_TCS_GainSchedule = true,    // If both are false, then P values defaults to lower bound per axle
+    .useRPM_TCS_GainSchedule = true,     // If both are false, then P values defaults to lower bound per axle
     .useNL_TCS_GainSchedule = false,
     .TCS_NL_startBoundPerc_FrontAxle = 0.5,
     .TCS_NL_endBoundPerc_FrontAxle = 0.4,
@@ -302,13 +315,14 @@ TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
 // mode 3
 TorqueControllerSimpleLaunch simple_launch;
 // mode 4
-TorqueControllerSlipLaunch slip_launch;
+DrivebrainController db_controller(210, 210);
+
 TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
-                           static_cast<Controller *>(&tc_vec),
-                           static_cast<Controller *>(&case_wrapper),
-                           static_cast<Controller *>(&simple_launch),
-                           static_cast<Controller *>(&slip_launch)},
-                          {false, false, true, false, false});
+                                 static_cast<Controller *>(&tc_vec),
+                                 static_cast<Controller *>(&case_wrapper),
+                                 static_cast<Controller *>(&simple_launch),
+                                 static_cast<Controller *>(&db_controller)},
+                                {false, false, true, false, true});
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -317,6 +331,7 @@ MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system
 //     GROUPING STRUCTS (To limit parameter count in utilizing functions)
 // */
 
+DrivebrainETHInterface db_eth_interface;
 CANInterfaces<CircularBufferType> CAN_receive_interfaces = {&inv.fl, &inv.fr, &inv.rl, &inv.rr, &vn_interface, &dashboard, &ams_interface, &sab_interface};
 
 /*
@@ -332,6 +347,7 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
+void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg);
 
 /*
     SETUP
@@ -342,9 +358,9 @@ void setup()
     // initialize CAN communication
     init_all_CAN_devices();
 
-    // Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
-    // protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
-    // protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
+    Ethernet.begin(EthParams::default_MCU_MAC_address, EthParams::default_MCU_ip);
+    protobuf_send_socket.begin(EthParams::default_protobuf_send_port);
+    protobuf_recv_socket.begin(EthParams::default_protobuf_recv_port);
 
     SPI.begin();
     a1.init();
@@ -379,9 +395,9 @@ void setup()
         Init Interfaces
     */
 
-    main_ecu.init();                      // initial shutdown circuit readings,
-    wd_interface.init(curr_tick.millis);  // initialize wd kick time
-    ams_interface.init(curr_tick);        // initialize last heartbeat time
+    main_ecu.init();                     // initial shutdown circuit readings,
+    wd_interface.init(curr_tick.millis); // initialize wd kick time
+    ams_interface.init(curr_tick);       // initialize last heartbeat time
     steering1.init();
     steering1.setOffset(PRIMARY_STEERING_SENSE_OFFSET);
 
@@ -418,15 +434,19 @@ void loop()
     // single source of truth for the state of the car.
     // no systems or interfaces should write directly to this.
     SharedCarState_s car_state_inst(curr_tick,
-                             steering_system.getSteeringSystemData(),
-                             drivetrain.get_dynamic_data(),
-                             load_cell_interface.getLoadCellForces(),
-                             pedals_system.getPedalsSystemData(),
-                             vn_interface.get_vn_struct());
+                                    steering_system.getSteeringSystemData(),
+                                    drivetrain.get_dynamic_data(),
+                                    load_cell_interface.getLoadCellForces(),
+                                    pedals_system.getPedalsSystemData(),
+                                    vn_interface.get_vn_struct(),
+                                    db_eth_interface.get_latest_data(),
+                                    torque_controller_mux.get_tc_mux_status());
+
+    hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
+
+    handle_ethernet_interface_comms(curr_tick, out_eth_msg);
 
     tick_all_systems(curr_tick);
-    
-    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode), curr_tick.millis, 100);
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
@@ -445,7 +465,8 @@ void loop()
     send_all_CAN_msgs(CAN3_txBuffer, &TELEM_CAN);
 
     // Basic debug prints
-    if (curr_tick.triggers.trigger5)
+    // if (curr_tick.triggers.trigger5)
+    if (DEBUG_PRINTS)
     {
         Serial.print("Steering system reported angle (deg): ");
         Serial.println(steering_system.getSteeringSystemData().angle);
@@ -485,9 +506,11 @@ void loop()
         Serial.print("Current TC error: ");
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_error));
         Serial.println();
+        Serial.print("dial state: ");
+        Serial.println(static_cast<int>(dashboard.getDialMode()));
+        Serial.println();
         Serial.println();
     }
-    
 }
 
 /*
@@ -548,6 +571,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
 
         PedalsSystemData_s data2 = pedals_system.getPedalsSystemDataCopy();
         front_thermistors_interface.tick(mcu_adc.get().conversions[MCU15_THERM_FL_CHANNEL], mcu_adc.get().conversions[MCU15_THERM_FR_CHANNEL]);
+        // TODO pass in the shared state instead
         telem_interface.tick(
             a1.get(),
             a2.get(),
@@ -567,12 +591,13 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
             torque_controller_mux.get_tc_mux_status().active_error);
+
+        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger50) // 50Hz
     {
         steering1.sample();
-        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger100) // 100Hz
@@ -609,46 +634,11 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_BRAKE1_CHANNEL],
         a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
-    // accel 1 only accel 2 dead, brake normal 
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // accel 2 only accel 1 dead, brake normal 
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // brake 1 only brake 2 dead, accel normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE1_CHANNEL]);
-    // brake 2 only brake 1 dead, accel normal
-    // pedals_system.tick(
-    //     current_system_tick,
-    //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
-    //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL],
-    //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-
-
     // tick steering system
     steering_system.tick(
         (SteeringSystemTick_s){
             .tick = current_system_tick,
             .secondaryConversion = a1.get().conversions[MCU15_STEERING_CHANNEL]});
-
-    // Serial.println("Steering angle");
-    // Serial.println(steering_system.getSteeringSystemData().angle);
-    // Serial.println("Steering status");
-    // Serial.println(static_cast<int>(steering_system.getSteeringSystemData().status));
 
     // tick drivetrain system
     drivetrain.tick(current_system_tick);
@@ -666,4 +656,18 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         dashboard.startButtonPressed(),
         vn_interface.get_vn_struct().vn_status);
 
+}
+
+void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg)
+{
+    // function that will handle receiving and distributing of all messages to all ethernet interfaces
+    // via the union message. this is a little bit cursed ngl.
+
+    std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
+    handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);
+
+    if(systick.triggers.trigger500)
+    {
+        handle_ethernet_socket_send_pb<hytech_msgs_MCUOutputData, 1024>(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port, &protobuf_send_socket, out_msg, hytech_msgs_MCUOutputData_fields);
+    }
 }

@@ -4,6 +4,10 @@
 #include "Utility.h"
 #include "SysClock.h"
 #include "SharedFirmwareTypes.h"
+#include "DrivebrainData.h"
+
+using speed_rpm = float;
+using torque_nm = float;
 
 /// @brief Defines modes of torque limit to be processed in torque limit map for exact values.
 enum class TorqueLimit_e
@@ -45,8 +49,8 @@ struct PedalsSystemData_s
 struct DrivetrainDynamicReport_s
 {
     uint16_t measuredInverterFLPackVoltage;
-    float measuredSpeeds[NUM_MOTORS];
-    float measuredTorques[NUM_MOTORS];
+    speed_rpm measuredSpeeds[NUM_MOTORS]; // rpm
+    torque_nm measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
@@ -145,19 +149,25 @@ struct SharedCarState_s
     LoadCellInterfaceOutput_s loadcell_data;
     PedalsSystemData_s pedals_data;
     VectornavData_s vn_data;
+    DrivebrainData_s db_data;
+    TorqueControllerMuxStatus tc_mux_status;
     SharedCarState_s() = delete;
     SharedCarState_s(const SysTick_s &_systick,
               const SteeringSystemData_s &_steering_data,
               const DrivetrainDynamicReport_s &_drivetrain_data,
               const LoadCellInterfaceOutput_s &_loadcell_data,
               const PedalsSystemData_s &_pedals_data,
-              const VectornavData_s &_vn_data)
+              const VectornavData_s &_vn_data,
+              const DrivebrainData_s &_db_data,
+              const TorqueControllerMuxStatus &_tc_mux_status)
         : systick(_systick),
           steering_data(_steering_data),
           drivetrain_data(_drivetrain_data),
           loadcell_data(_loadcell_data),
           pedals_data(_pedals_data),
-          vn_data(_vn_data)
+          vn_data(_vn_data),
+          db_data(_db_data),
+          tc_mux_status(_tc_mux_status)
     {
         // constructor body (if needed)
     }

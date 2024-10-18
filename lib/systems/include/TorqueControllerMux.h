@@ -1,6 +1,7 @@
 #ifndef TORQUECONTROLLERMUX
 #define TORQUECONTROLLERMUX
 
+#include <unordered_map>
 #include <array>
 #include "SharedDataTypes.h"
 #include "BaseController.h"
