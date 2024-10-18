@@ -7,18 +7,20 @@
 #include "hytech.h"
 #include "MessageQueueDefine.h"
 #include "PedalsSystem.h"
+#include "SharedDataTypes.h"
 
-const int DEFAULT_BMS_OK_READ         = 17;      // SHDN_D_READ
-const int DEFAULT_BMS_SENSE_PIN       = 16;      // BMS_OK_SENSE
-const int DEFAULT_IMD_OK_READ         = 10;      // SHDN_C_READ
-const int DEFAULT_IMD_SENSE_PIN       = 18;      // OKHS_SENSE
-const int DEFAULT_BSPD_OK_READ        = 39;      // SHDN_E_READ
-const int DEFAULT_SOFTWARE_OK_READ    = 25;      // SHDN_F_READ Watchdog Combined
-const int DEFAULT_BOTS_OK_READ        = 24;      // SHDN_B_READ
-const int DEFAULT_BRB_OK_READ         = 26;      // SHDN_G_READ
-const int DEFAULT_BRAKE_LIGHT_CTRL    = 6;
-const int DEFAULT_INVERTER_ENABLE     = 9;
-const int DEFAULT_INVERTER_24V_ENABLE = 7;
+const int DEFAULT_BMS_OK_READ                = 17;      // SHDN_D_READ
+const int DEFAULT_BMS_SENSE_PIN              = 16;      // BMS_OK_SENSE
+const int DEFAULT_IMD_OK_READ                = 10;      // SHDN_C_READ
+const int DEFAULT_IMD_SENSE_PIN              = 18;      // OKHS_SENSE
+const int DEFAULT_BSPD_OK_READ               = 39;      // SHDN_E_READ
+const int DEFAULT_SOFTWARE_OK_READ           = 25;      // SHDN_F_READ Watchdog Combined
+const int DEFAULT_BOTS_OK_READ               = 24;      // SHDN_B_READ
+const int DEFAULT_BRB_OK_READ                = 26;      // SHDN_G_READ
+const int DEFAULT_BRAKE_LIGHT_CTRL           = 6;
+const int DEFAULT_INVERTER_ENABLE            = 9;
+const int DEFAULT_INVERTER_24V_ENABLE        = 7;
+const int DEFAULT_BRAKE_PRESSURE_SENSOR_READ = 27;      // Read pin for brake pressure sensor.
 
 /// @brief specifically designed so that Walker would be happy
 struct MainECUHardwareReadPins
@@ -35,10 +37,12 @@ struct MainECUHardwareReadPins
     // inverter enable pins
     int pin_inv_en;
     int pin_inv_24V_en;
+    int pin_brake_pressure_sensor_read;
 };
 
 static const MainECUHardwareReadPins DEFAULT_PINS = {DEFAULT_BMS_OK_READ,DEFAULT_IMD_OK_READ, DEFAULT_BSPD_OK_READ, DEFAULT_SOFTWARE_OK_READ,
-                                                     DEFAULT_BOTS_OK_READ, DEFAULT_BRB_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_ENABLE, DEFAULT_INVERTER_24V_ENABLE};
+                                                     DEFAULT_BOTS_OK_READ, DEFAULT_BRB_OK_READ, DEFAULT_BRAKE_LIGHT_CTRL, DEFAULT_INVERTER_ENABLE,
+                                                     DEFAULT_INVERTER_24V_ENABLE, DEFAULT_BRAKE_PRESSURE_SENSOR_READ};
 
 class MCUInterface
 {
@@ -114,6 +118,7 @@ public:
     // Interfaces
     void update_mcu_status_CAN_ams(bool is_critical);
     void update_mcu_status_CAN_dashboard(bool is_active);
+    void update_brake_pressure_CAN();
 
     /* Enqueue MCU_status CAN  */
     void enqueue_CAN_mcu_status();
@@ -123,9 +128,7 @@ public:
         int fsm_state,
         bool inv_has_error,
         bool software_is_ok,
-        int drive_mode,
-        int torque_mode,
-        float max_torque,
+        const TorqueControllerMuxStatus& tc_mux_status, 
         bool buzzer_is_on,
         const PedalsSystemData_s &pedals_data,
         bool pack_charge_is_critical,

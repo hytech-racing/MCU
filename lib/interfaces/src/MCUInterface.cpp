@@ -182,13 +182,25 @@ void MCUInterface::update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals
     mcu_status_.no_brake_implausibility = !pedals.brakeImplausible;
     mcu_status_.no_accel_or_brake_implausibility = !(pedals.brakeAndAccelPressedImplausibility);
 }
+void MCUInterface::update_brake_pressure_CAN()
+{
+    BRAKE_PRESSURE_SENSOR_t brake_sensor_msg;
+    brake_sensor_msg.brake_sensor_analog_read = analogRead(pins_.pin_brake_pressure_sensor_read);
+    
+    CAN_message_t msg;
+    
+    msg.id = Pack_BRAKE_PRESSURE_SENSOR_hytech(&brake_sensor_msg, msg.buf, &msg.len, (uint8_t*) &msg.flags.extended);
+
+    uint8_t buf[sizeof(CAN_message_t)] = {};
+    memmove(buf, &msg, sizeof(CAN_message_t));
+    msg_queue_->push_back(buf, sizeof(CAN_message_t));
+}
 
 void MCUInterface::tick(int fsm_state,
                         bool inv_has_error,
                         bool software_is_ok,
-                        int drive_mode,
-                        int torque_mode,
-                        float max_torque,
+                        
+                        const TorqueControllerMuxStatus& tc_mux_status, 
                         bool buzzer_is_on,
                         const PedalsSystemData_s &pedals_data,
                         bool pack_charge_is_critical,
@@ -199,12 +211,18 @@ void MCUInterface::tick(int fsm_state,
     // Systems
     update_mcu_status_CAN_drivetrain(inv_has_error);
     update_mcu_status_CAN_safety(software_is_ok);
+    
+    auto drive_mode = static_cast<int>(tc_mux_status.active_controller_mode);
+    auto torque_mode = static_cast<int>(tc_mux_status.active_torque_limit_enum);
+    auto max_torque = tc_mux_status.active_torque_limit_value;
+
     update_mcu_status_CAN_TCMux(drive_mode, torque_mode, max_torque);
     update_mcu_status_CAN_buzzer(buzzer_is_on);
     update_mcu_status_CAN_pedals(pedals_data);
     // External Interfaces
     update_mcu_status_CAN_ams(pack_charge_is_critical);
     update_mcu_status_CAN_dashboard(button_is_pressed);
+    update_brake_pressure_CAN();
     // Internal values
     update_mcu_status_CAN();
     // Push into buffer
