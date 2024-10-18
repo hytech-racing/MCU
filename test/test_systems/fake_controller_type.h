@@ -1,7 +1,7 @@
 #ifndef __FAKE_CONTROLLER_TYPE_H__
 #define __FAKE_CONTROLLER_TYPE_H__
 #include "BaseController.h"
-struct dummy_queue
+struct DummyQueue_s
 {
 };
 

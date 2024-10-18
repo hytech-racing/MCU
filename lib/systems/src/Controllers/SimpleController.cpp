@@ -1,4 +1,4 @@
-#include "SimpleController.h"
+#include "Controllers/SimpleController.h"
 
 void TorqueControllerSimple::tick(const PedalsSystemData_s &pedalsData)
 {
@@ -18,10 +18,10 @@ void TorqueControllerSimple::tick(const PedalsSystemData_s &pedalsData)
         writeout_.command.speeds_rpm[RL] = PhysicalParameters::AMK_MAX_RPM;
         writeout_.command.speeds_rpm[RR] = PhysicalParameters::AMK_MAX_RPM;
 
-        writeout_.command.torqueSetpoints[FL] = torqueRequest * frontTorqueScale_;
-        writeout_.command.torqueSetpoints[FR] = torqueRequest * frontTorqueScale_;
-        writeout_.command.torqueSetpoints[RL] = torqueRequest * rearTorqueScale_;
-        writeout_.command.torqueSetpoints[RR] = torqueRequest * rearTorqueScale_;
+        writeout_.command.inverter_torque_limit[FL] = torqueRequest * frontTorqueScale_;
+        writeout_.command.inverter_torque_limit[FR] = torqueRequest * frontTorqueScale_;
+        writeout_.command.inverter_torque_limit[RL] = torqueRequest * rearTorqueScale_;
+        writeout_.command.inverter_torque_limit[RR] = torqueRequest * rearTorqueScale_;
     }
     else
     {
@@ -33,10 +33,10 @@ void TorqueControllerSimple::tick(const PedalsSystemData_s &pedalsData)
         writeout_.command.speeds_rpm[RL] = 0.0;
         writeout_.command.speeds_rpm[RR] = 0.0;
 
-        writeout_.command.torqueSetpoints[FL] = torqueRequest * frontRegenTorqueScale_;
-        writeout_.command.torqueSetpoints[FR] = torqueRequest * frontRegenTorqueScale_;
-        writeout_.command.torqueSetpoints[RL] = torqueRequest * rearRegenTorqueScale_;
-        writeout_.command.torqueSetpoints[RR] = torqueRequest * rearRegenTorqueScale_;
+        writeout_.command.inverter_torque_limit[FL] = torqueRequest * frontRegenTorqueScale_;
+        writeout_.command.inverter_torque_limit[FR] = torqueRequest * frontRegenTorqueScale_;
+        writeout_.command.inverter_torque_limit[RL] = torqueRequest * rearRegenTorqueScale_;
+        writeout_.command.inverter_torque_limit[RR] = torqueRequest * rearRegenTorqueScale_;
     }
 }
 

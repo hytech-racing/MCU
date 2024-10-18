@@ -7,12 +7,13 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-// #include "ParameterInterface.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
 #include "pb.h"
+#include "PrintLogger.h"
+
 // /* Interfaces */
 #include "DrivebrainETHInterface.h"
 #include "ProtobufMsgInterface.h"
@@ -30,7 +31,6 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
-#include "TorqueControllers.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -40,8 +40,9 @@
 #include "PedalsSystem.h"
 #include "DrivebrainController.h"
 #include "TorqueControllerMux.h"
-
+#include "TorqueControllers.h"
 #include "CASESystem.h"
+
 // /* State machine */
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
@@ -421,7 +422,6 @@ void loop()
     // get latest tick from sys clock
     SysTick_s curr_tick = sys_clock.tick(micros());
 
-
     // process received CAN messages
     process_ring_buffer(CAN2_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
     process_ring_buffer(CAN3_rxBuffer, CAN_receive_interfaces, curr_tick.millis);
@@ -447,7 +447,6 @@ void loop()
     handle_ethernet_interface_comms(curr_tick, out_eth_msg);
 
     tick_all_systems(curr_tick);
-
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
@@ -503,9 +502,9 @@ void loop()
         Serial.print("Filtered max cell temp: ");
         Serial.println(ams_interface.get_filtered_max_cell_temp());
         Serial.print("Current TC index: ");
-        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_));
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode));
         Serial.print("Current TC error: ");
-        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_error));
         Serial.println();
         Serial.print("dial state: ");
         Serial.println(static_cast<int>(dashboard.getDialMode()));
@@ -554,19 +553,17 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
             drivetrain.drivetrain_error_occured(),
-            torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
+            torque_controller_mux.get_tc_mux_status().active_torque_limit_enum,
             ams_interface.get_filtered_min_cell_voltage(),
             a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode),
             dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
             drivetrain.drivetrain_error_occured(),
             safety_system.get_software_is_ok(),
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_torque_limit_enum),
-            torque_controller_mux.get_tc_mux_status().current_torque_limit_value,
+            torque_controller_mux.get_tc_mux_status(),
             buzzer.buzzer_is_on(),
             pedals_system.getPedalsSystemData(),
             ams_interface.pack_charge_is_critical(),
@@ -593,7 +590,7 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            torque_controller_mux.get_tc_mux_status().current_error);
+            torque_controller_mux.get_tc_mux_status().active_error);
 
         ams_interface.tick(current_system_tick);
     }
@@ -647,7 +644,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    auto _ = case_system.evaluate(
+    auto __attribute__((unused)) case_status = case_system.evaluate(
         current_system_tick,
         vn_interface.get_vn_struct(),
         steering_system.getSteeringSystemData(),
