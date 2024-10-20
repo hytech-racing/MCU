@@ -17,7 +17,7 @@ auto runTick(DrivebrainController *controller, float last_DB_receive_time_millis
     systick.micros = 1000;
 
     TorqueControllerMuxStatus status = {};
-    status.current_controller_mode_ = current_control_mode;
+    status.active_controller_mode = current_control_mode;
     SharedCarState_s state(systick, {}, {}, {}, {}, {}, data, status);
     return controller->evaluate(state);
 }

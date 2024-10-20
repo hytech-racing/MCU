@@ -148,7 +148,7 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
         int index = 0;
         for (auto inv_pointer : inverters_)
         {
-            inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
+            inv_pointer->handle_command({data.inverter_torque_limit[index], data.speeds_rpm[index]});
             index++;
         }
         // last_general_cmd_time_ = curr_system_millis_;

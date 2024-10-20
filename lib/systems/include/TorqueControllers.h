@@ -1,7 +1,7 @@
 //controllers
-#include "CASEControllerWrapper.h"
-#include "LoadCellVectoringController.h"
-#include "LookupLaunchController.h"
-#include "SimpleLaunchController.h"
-#include "SimpleController.h"
-#include "SlipLaunchController.h"
+#include "Controllers/CASEControllerWrapper.h"
+#include "Controllers/LoadCellVectoringController.h"
+#include "Controllers/LookupLaunchController.h"
+#include "Controllers/SimpleLaunchController.h"
+#include "Controllers/SimpleController.h"
+#include "Controllers/SlipLaunchController.h"

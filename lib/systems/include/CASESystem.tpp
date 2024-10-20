@@ -268,10 +268,10 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     DrivetrainCommand_s command;
 
-    command.torqueSetpoints[0] = res.FinalTorqueFL;
-    command.torqueSetpoints[1] = res.FinalTorqueFR;
-    command.torqueSetpoints[2] = res.FinalTorqueRL;
-    command.torqueSetpoints[3] = res.FinalTorqueRR;
+    command.inverter_torque_limit[0] = res.FinalTorqueFL;
+    command.inverter_torque_limit[1] = res.FinalTorqueFR;
+    command.inverter_torque_limit[2] = res.FinalTorqueRL;
+    command.inverter_torque_limit[3] = res.FinalTorqueRR;
 
     command.speeds_rpm[0] = get_rpm_setpoint(res.FinalTorqueFL);
     command.speeds_rpm[1] = get_rpm_setpoint(res.FinalTorqueFR);

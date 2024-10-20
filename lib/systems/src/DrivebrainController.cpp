@@ -1,5 +1,4 @@
 #include "DrivebrainController.h"
-// #include <Arduino.h>
 
 TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &state)
 {
@@ -46,7 +45,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
 
     // only in the case that our speed is low enough (<1 m/s) do we want to clear the fault
     
-    bool is_active_controller = state.tc_mux_status.current_controller_mode_ == _params.assigned_controller_mode;
+    bool is_active_controller = state.tc_mux_status.active_controller_mode == _params.assigned_controller_mode;
 
     if ((!is_active_controller) && (!timing_failure))
     {
@@ -60,7 +59,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
         _last_setpoint_millis = db_input.last_receive_time_millis;
 
         db_input.speed_setpoints_rpm.copy_to_arr(output.command.speeds_rpm); 
-        db_input.torque_limits_nm.copy_to_arr(output.command.torqueSetpoints); 
+        db_input.torque_limits_nm.copy_to_arr(output.command.inverter_torque_limit); 
     }
     else
     {
