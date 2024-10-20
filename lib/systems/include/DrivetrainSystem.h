@@ -15,8 +15,8 @@ class DrivetrainSystem
 public:
     /// @brief order of array: 0: FL, 1: FR, 2: RL, 3: RR
     /// @param inverters inverter pointers
-    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, MCUInterface *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 1)
-        : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms), min_hv_voltage_(min_hv_voltage), min_cmd_period_(min_cmd_period_ms)
+    DrivetrainSystem(const std::array<InverterType *, 4> &inverters, MCUInterface *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage = 60, int min_cmd_period_ms = 1, float max_torque_setpoint_nm = 21.42)
+        : inverters_(inverters), init_time_limit_ms_(init_time_limit_ms), min_hv_voltage_(min_hv_voltage), min_cmd_period_(min_cmd_period_ms), max_torque_setpoint_nm_(max_torque_setpoint_nm)
     {
         // values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf
         motor_pole_pairs_ = 5;
@@ -94,6 +94,7 @@ private:
     unsigned long drivetrain_initialization_phase_start_time_;
     DrivetrainCommand_s current_drivetrain_command_;
     DrivetrainDynamicReport_s dynamic_data_;
+    float max_torque_setpoint_nm_;
 };
 
 #include "DrivetrainSystem.tpp"
