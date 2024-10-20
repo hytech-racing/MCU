@@ -31,7 +31,7 @@ public:
     void disable_no_pins(){};
 };
 
-SharedCarState_s dummy_state({}, {}, {}, {}, {}, {});
+SharedCarState_s dummy_state({}, {}, {}, {}, {}, {}, {}, {});
 DumbController c;
 
 void handle_startup(MCUStateMachine<DrivetrainMock> &state_machine, unsigned long sys_time, DrivetrainMock &drivetrain, PedalsSystem &pedals, DashboardInterface &dash_interface)

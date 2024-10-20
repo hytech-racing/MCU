@@ -4,7 +4,12 @@
 #include "Utility.h"
 #include "SysClock.h"
 #include "SharedFirmwareTypes.h"
+#include "DrivebrainData.h"
 
+using speed_rpm = float;
+using torque_nm = float;
+
+/// @brief Defines modes of torque limit to be processed in torque limit map for exact values.
 enum class TorqueLimit_e
 {
     TCMUX_FULL_TORQUE = 0,
@@ -44,22 +49,30 @@ struct PedalsSystemData_s
 struct DrivetrainDynamicReport_s
 {
     uint16_t measuredInverterFLPackVoltage;
-    float measuredSpeeds[NUM_MOTORS];
-    float measuredTorques[NUM_MOTORS];
+    speed_rpm measuredSpeeds[NUM_MOTORS]; // rpm
+    torque_nm measuredTorques[NUM_MOTORS];
     float measuredTorqueCurrents[NUM_MOTORS];
     float measuredMagnetizingCurrents[NUM_MOTORS];
 };
+/// @brief Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each motor. These setpoints are defined in the torque controllers cycled by the TC Muxer. 
+/// The Speeds unit is rpm and are the targeted speeds for each wheel of the car.
+/// The torques unit is nm and is the max torque requested from the inverter to reach such speeds.
+/// One can use the arrays with FR(Front Left), FL(Front Left), RL(Rear Left), RR(Rear Right)  to access or modify the respective set points. eg. speeds_rpm[FR] = 0.0;
+/// Their indexes are defined in utility.h as follows: FL = 0, FR = 1, RL = 2, RR = 3.
 struct DrivetrainCommand_s
 {
     float speeds_rpm[NUM_MOTORS];
-    float torqueSetpoints[NUM_MOTORS]; // FIXME: misnomer. This represents the magnitude of the torque the inverter can command to reach the commanded speed setpoint
+    float inverter_torque_limit[NUM_MOTORS]; 
 };
 
+/// @brief Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating
+/// @note returned by all car controllers evaluate method 
 struct TorqueControllerOutput_s
 {
     DrivetrainCommand_s command;
     bool ready;
 };
+
 struct VectornavData_s
 {
     float velocity_x;
@@ -80,6 +93,7 @@ struct VectornavData_s
     xyz_vec<float> angular_rates;
 };
 
+/// @brief Defines errors for TC Mux to use to maintain system safety
 enum class TorqueControllerMuxError
 {
     NO_ERROR = 0,
@@ -89,12 +103,13 @@ enum class TorqueControllerMuxError
     ERROR_CONTROLLER_NULL_POINTER =4
 };
 
+/// @brief packages TC Mux indicators: errors, mode, torque limit, bypass
 struct TorqueControllerMuxStatus
 {
-    TorqueControllerMuxError current_error;
-    ControllerMode_e current_controller_mode;
-    TorqueLimit_e current_torque_limit_enum;
-    float current_torque_limit_value;
+    TorqueControllerMuxError active_error;
+    ControllerMode_e active_controller_mode;
+    TorqueLimit_e active_torque_limit_enum;
+    float active_torque_limit_value;
     bool output_is_bypassing_limits;
 };
 
@@ -103,6 +118,11 @@ struct LoadCellInterfaceOutput_s
     veh_vec<float> loadCellForcesFiltered;
     veh_vec<AnalogConversion_s> loadCellConversions;
     bool FIRSaturated;
+};
+
+struct LoadCellInterfaceRawOutput_s
+{
+    veh_vec<int> raw_load_cell_data;
 };
 
 // Enums
@@ -132,21 +152,50 @@ struct SharedCarState_s
     SteeringSystemData_s steering_data;
     DrivetrainDynamicReport_s drivetrain_data;
     LoadCellInterfaceOutput_s loadcell_data;
+    LoadCellInterfaceRawOutput_s raw_loadcell_data;
     PedalsSystemData_s pedals_data;
     VectornavData_s vn_data;
+    DrivebrainData_s db_data;
+    TorqueControllerMuxStatus tc_mux_status;
     SharedCarState_s() = delete;
     SharedCarState_s(const SysTick_s &_systick,
               const SteeringSystemData_s &_steering_data,
               const DrivetrainDynamicReport_s &_drivetrain_data,
               const LoadCellInterfaceOutput_s &_loadcell_data,
               const PedalsSystemData_s &_pedals_data,
-              const VectornavData_s &_vn_data)
+              const VectornavData_s &_vn_data,
+              const DrivebrainData_s &_db_data,
+              const TorqueControllerMuxStatus &_tc_mux_status)
         : systick(_systick),
           steering_data(_steering_data),
           drivetrain_data(_drivetrain_data),
           loadcell_data(_loadcell_data),
+          raw_loadcell_data({}),
           pedals_data(_pedals_data),
-          vn_data(_vn_data)
+          vn_data(_vn_data),
+          db_data(_db_data),
+          tc_mux_status(_tc_mux_status)
+    {
+        // constructor body (if needed)
+    }
+    SharedCarState_s(const SysTick_s &_systick,
+              const SteeringSystemData_s &_steering_data,
+              const DrivetrainDynamicReport_s &_drivetrain_data,
+              const LoadCellInterfaceOutput_s &_loadcell_data,
+              const LoadCellInterfaceRawOutput_s &_raw_loadcell_data,
+              const PedalsSystemData_s &_pedals_data,
+              const VectornavData_s &_vn_data,
+              const DrivebrainData_s &_db_data,
+              const TorqueControllerMuxStatus &_tc_mux_status)
+        : systick(_systick),
+          steering_data(_steering_data),
+          drivetrain_data(_drivetrain_data),
+          loadcell_data(_loadcell_data),
+          raw_loadcell_data(_raw_loadcell_data),
+          pedals_data(_pedals_data),
+          vn_data(_vn_data),
+          db_data(_db_data),
+          tc_mux_status(_tc_mux_status)
     {
         // constructor body (if needed)
     }

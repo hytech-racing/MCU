@@ -13,24 +13,24 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
         .ready = true};
 
     int req_controller_mode_index = static_cast<int>(requested_controller_type);
-    int current_controller_mode_index = static_cast<int>(current_status_.current_controller_mode);
+    int active_controller_mode_index = static_cast<int>(active_status_.active_controller_mode);
 
     if ((std::size_t)req_controller_mode_index > ( controller_pointers_.size() - 1 ))
     {
-        current_status_.current_error = TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS;
+        active_status_.active_error = TorqueControllerMuxError::ERROR_CONTROLLER_INDEX_OUT_OF_BOUNDS;
         return empty_command;
     }
 
-    if( (!(controller_pointers_[current_controller_mode_index])) || (!controller_pointers_[req_controller_mode_index]))
+    if( (!(controller_pointers_[active_controller_mode_index])) || (!controller_pointers_[req_controller_mode_index]))
     {
-        current_status_.current_error = TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER;
+        active_status_.active_error = TorqueControllerMuxError::ERROR_CONTROLLER_NULL_POINTER;
         return empty_command;
     }
 
-    current_output = controller_pointers_[current_controller_mode_index]->evaluate(input_state);
+    current_output = controller_pointers_[active_controller_mode_index]->evaluate(input_state);
 
-    // std::cout << "output torques " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
-    bool requesting_controller_change = requested_controller_type != current_status_.current_controller_mode;
+    // std::cout << "output torques " << current_output.command.inverter_torque_limit[0] << " " << current_output.command.inverter_torque_limit[1] << " " << current_output.command.inverter_torque_limit[2] << " " << current_output.command.inverter_torque_limit[3] << std::endl;
+    bool requesting_controller_change = requested_controller_type != active_status_.active_controller_mode;
 
     if (requesting_controller_change)
     {
@@ -38,34 +38,34 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::getDrivetrainCommand(C
         TorqueControllerMuxError error_state = can_switch_controller_(input_state.drivetrain_data, current_output.command, proposed_output.command);
         if (error_state == TorqueControllerMuxError::NO_ERROR)
         {
-            current_status_.current_controller_mode = requested_controller_type;
-            current_controller_mode_index = req_controller_mode_index;
+            active_status_.active_controller_mode = requested_controller_type;
+            active_controller_mode_index = req_controller_mode_index;
             current_output = proposed_output;
         }
-        current_status_.current_error = error_state;
+        active_status_.active_error = error_state;
     }
-    if (!mux_bypass_limits_[current_controller_mode_index])
+    if (!mux_bypass_limits_[active_controller_mode_index])
     {
-        current_status_.current_torque_limit_enum = requested_torque_limit;
+        active_status_.active_torque_limit_enum = requested_torque_limit;
         current_output.command = apply_regen_limit_(current_output.command, input_state.drivetrain_data);
         current_output.command = apply_torque_limit_(current_output.command, torque_limit_map_[requested_torque_limit]);
-        current_status_.current_torque_limit_value = torque_limit_map_[requested_torque_limit];
+        active_status_.active_torque_limit_value = torque_limit_map_[requested_torque_limit];
         current_output.command = apply_power_limit_(current_output.command, input_state.drivetrain_data, max_power_limit_, torque_limit_map_[requested_torque_limit]);
         current_output.command = apply_positive_speed_limit_(current_output.command);
-        current_status_.output_is_bypassing_limits = false;
+        active_status_.output_is_bypassing_limits = false;
     }
     else{
-        current_status_.current_torque_limit_enum = TorqueLimit_e::TCMUX_FULL_TORQUE;
-        current_status_.current_torque_limit_value= PhysicalParameters::AMK_MAX_TORQUE;
-        current_status_.output_is_bypassing_limits = true;
+        active_status_.active_torque_limit_enum = TorqueLimit_e::TCMUX_FULL_TORQUE;
+        active_status_.active_torque_limit_value= PhysicalParameters::AMK_MAX_TORQUE;
+        active_status_.output_is_bypassing_limits = true;
     }
 
-    // std::cout << "output torques before return " << current_output.command.torqueSetpoints[0] << " " << current_output.command.torqueSetpoints[1] << " " << current_output.command.torqueSetpoints[2] << " " << current_output.command.torqueSetpoints[3] << std::endl;
+    // std::cout << "output torques before return " << current_output.command.inverter_torque_limit[0] << " " << current_output.command.inverter_torque_limit[1] << " " << current_output.command.inverter_torque_limit[2] << " " << current_output.command.inverter_torque_limit[3] << std::endl;
     return current_output.command;
 }
 
 template <std::size_t num_controllers>
-TorqueControllerMuxError TorqueControllerMux<num_controllers>::can_switch_controller_(DrivetrainDynamicReport_s current_drivetrain_data,
+TorqueControllerMuxError TorqueControllerMux<num_controllers>::can_switch_controller_(DrivetrainDynamicReport_s active_drivetrain_data,
                                                                                       DrivetrainCommand_s previous_controller_command,
                                                                                       DrivetrainCommand_s desired_controller_out)
 {
@@ -74,9 +74,9 @@ TorqueControllerMuxError TorqueControllerMux<num_controllers>::can_switch_contro
     bool torqueDeltaPreventsModeChange = false;
     for (int i = 0; i < NUM_MOTORS; i++)
     {
-        speedPreventsModeChange = (abs(current_drivetrain_data.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND) >= max_change_speed_);
+        speedPreventsModeChange = (abs(active_drivetrain_data.measuredSpeeds[i] * RPM_TO_METERS_PER_SECOND) >= max_change_speed_);
         // only if the torque delta is positive do we not want to switch to the new one
-        torqueDeltaPreventsModeChange = (desired_controller_out.torqueSetpoints[i] - previous_controller_command.torqueSetpoints[i]) > max_torque_pos_change_delta_;
+        torqueDeltaPreventsModeChange = (desired_controller_out.inverter_torque_limit[i] - previous_controller_command.inverter_torque_limit[i]) > max_torque_pos_change_delta_;
         if (speedPreventsModeChange)
         {
             return TorqueControllerMuxError::ERROR_SPEED_DIFF_TOO_HIGH;
@@ -111,7 +111,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_torque_limit_(co
     for (int i = 0; i < NUM_MOTORS; i++)
     {
 
-        avg_torque += abs(out.torqueSetpoints[i]);
+        avg_torque += abs(out.inverter_torque_limit[i]);
     }
     avg_torque /= NUM_MOTORS;
 
@@ -123,7 +123,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_torque_limit_(co
         // divide by scale to lower avg below max torque
         for (int i = 0; i < NUM_MOTORS; i++)
         {
-            out.torqueSetpoints[i] = out.torqueSetpoints[i] / scale;
+            out.inverter_torque_limit[i] = out.inverter_torque_limit[i] / scale;
         }
     }
     return out;
@@ -146,9 +146,9 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_power_limit_(con
     {
         // get the total magnitude of torque from all 4 wheels
         // sum up net torque
-        net_torque_mag += abs(out.torqueSetpoints[i]);
+        net_torque_mag += abs(out.inverter_torque_limit[i]);
         // calculate P = T*w for each wheel and sum together
-        net_power += abs(out.torqueSetpoints[i] * (drivetrain.measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
+        net_power += abs(out.inverter_torque_limit[i] * (drivetrain.measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
     }
 
     // only evaluate power limit if current power exceeds it
@@ -162,17 +162,17 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_power_limit_(con
             // enqueue_matlab_msg(msg_queue_, res.controllerBus_controller_power_);
 
             // calculate the percent of total torque requested per wheel
-            float torque_percent = abs(out.torqueSetpoints[i] / net_torque_mag);
+            float torque_percent = abs(out.inverter_torque_limit[i] / net_torque_mag);
             // based on the torque percent and max power limit, get the max power each wheel can use
             float power_per_corner = (torque_percent * power_limit);
 
             // std::cout <<"corner power " << power_per_corner <<std::endl;
             // power / omega (motor rad/s) to get torque per wheel
-            out.torqueSetpoints[i] = abs(power_per_corner / (drivetrain.measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
-            // std::cout <<"adjusted torque setpoint " << out.torqueSetpoints[i] <<std::endl;
-            out.torqueSetpoints[i] = std::max(0.0f, std::min(out.torqueSetpoints[i], max_torque));
+            out.inverter_torque_limit[i] = abs(power_per_corner / (drivetrain.measuredSpeeds[i] * RPM_TO_RAD_PER_SECOND));
+            // std::cout <<"adjusted torque setpoint " << out.inverter_torque_limit[i] <<std::endl;
+            out.inverter_torque_limit[i] = std::max(0.0f, std::min(out.inverter_torque_limit[i], max_torque));
 
-            // std::cout <<"final torque setpoint " << out.torqueSetpoints[i] <<std::endl;
+            // std::cout <<"final torque setpoint " << out.inverter_torque_limit[i] <<std::endl;
         }
     }
     return out;
@@ -203,7 +203,7 @@ DrivetrainCommand_s TorqueControllerMux<num_controllers>::apply_regen_limit_(con
     {
         for (int i = 0; i < NUM_MOTORS; i++)
         {
-            out.torqueSetpoints[i] *= torqueScaleDown;
+            out.inverter_torque_limit[i] *= torqueScaleDown;
         }
     }
     return out;

@@ -148,7 +148,7 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
         int index = 0;
         for (auto inv_pointer : inverters_)
         {
-            inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
+            inv_pointer->handle_command({data.inverter_torque_limit[index], data.speeds_rpm[index]});
             index++;
         }
         // last_general_cmd_time_ = curr_system_millis_;
@@ -233,8 +233,8 @@ DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_dynamic_data()
     int inverter_ind = 0;
     for (auto inv_pointer : inverters_)
     {
-        auto iq = inv_pointer->get_torque_current(); // iq in A
-        auto id = inv_pointer->get_mag_current();    // id in A
+        auto iq = inv_pointer->get_motor_torque(); // iq in A
+        auto id = inv_pointer->get_commanded_torque();    // id in A
         dynamic_data_.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
         dynamic_data_.measuredTorqueCurrents[inverter_ind] = iq;
         dynamic_data_.measuredMagnetizingCurrents[inverter_ind] = id;

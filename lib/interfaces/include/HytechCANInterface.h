@@ -166,7 +166,6 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
         case VN_YPR_CANID:
             interfaces.vn_interface->retrieve_ypr_CAN(recvd_msg);
             break;
-
         case VN_LAT_LON_CANID:
             interfaces.vn_interface->retrieve_lat_lon_CAN(recvd_msg);
             break;
@@ -178,6 +177,8 @@ void process_ring_buffer(BufferType &rx_buffer, const InterfaceType &interfaces,
             break;
         case VN_ANGULAR_RATE_CANID:
             interfaces.vn_interface->receive_ang_rates_CAN(recvd_msg);
+            break;
+        default:
             break;
         }
     }
