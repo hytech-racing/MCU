@@ -111,7 +111,7 @@ struct LoadCellInterfaceOutput_s
 
 struct LoadCellInterfaceRawOutput_s
 {
-    veh_vec<float> raw_load_cell_data;
+    veh_vec<int> raw_load_cell_data;
 };
 
 // Enums

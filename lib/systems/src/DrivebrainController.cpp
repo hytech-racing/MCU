@@ -18,6 +18,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     // Serial.println("uh");
     // 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high
     bool message_too_latent = (::abs((int)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) > (int)_params.allowed_latency);
+<<<<<<< Updated upstream
     if((sys_tick.millis - _last_worst_latency_rec_time) > 5000)
     {
         // Serial.print("_worst_latency_so_far ");
@@ -25,6 +26,11 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
         // Serial.print("errord:");
         // Serial.println(_timing_failure);
         _last_worst_latency_rec_time = sys_tick.millis;
+=======
+    if((sys_tick.millis - _last_worst_latency_timestamp) > 5000)
+    {    
+        _last_worst_latency_timestamp = sys_tick.millis;
+>>>>>>> Stashed changes
         _worst_latency_so_far = -1;
     }
 
