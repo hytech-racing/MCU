@@ -7,7 +7,6 @@
 /* Include files */
 /* System Includes*/
 #include <Arduino.h>
-// #include "ParameterInterface.h"
 /* Libraries */
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
@@ -30,7 +29,6 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
-#include "TorqueControllers.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -40,8 +38,9 @@
 #include "PedalsSystem.h"
 #include "DrivebrainController.h"
 #include "TorqueControllerMux.h"
-
+#include "TorqueControllers.h"
 #include "CASESystem.h"
+
 // /* State machine */
 #include "MCUStateMachine.h"
 #include "HT08_CASE.h"
@@ -504,9 +503,9 @@ void loop()
         Serial.print("Filtered max cell temp: ");
         Serial.println(ams_interface.get_filtered_max_cell_temp());
         Serial.print("Current TC index: ");
-        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_));
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode));
         Serial.print("Current TC error: ");
-        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_error));
+        Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_error));
         Serial.println();
         Serial.print("dial state: ");
         Serial.println(static_cast<int>(dashboard.getDialMode()));
@@ -555,19 +554,17 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             int(fsm.get_state()),
             buzzer.buzzer_is_on(),
             drivetrain.drivetrain_error_occured(),
-            torque_controller_mux.get_tc_mux_status().current_torque_limit_enum,
+            torque_controller_mux.get_tc_mux_status().active_torque_limit_enum,
             ams_interface.get_filtered_min_cell_voltage(),
             a1.get().conversions[MCU15_GLV_SENSE_CHANNEL],
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
+            static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode),
             dashboard.getDialMode());
 
         main_ecu.tick(
             static_cast<int>(fsm.get_state()),
             drivetrain.drivetrain_error_occured(),
             safety_system.get_software_is_ok(),
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_),
-            static_cast<int>(torque_controller_mux.get_tc_mux_status().current_torque_limit_enum),
-            torque_controller_mux.get_tc_mux_status().current_torque_limit_value,
+            torque_controller_mux.get_tc_mux_status(),
             buzzer.buzzer_is_on(),
             pedals_system.getPedalsSystemData(),
             ams_interface.pack_charge_is_critical(),
@@ -594,9 +591,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
-            torque_controller_mux.get_tc_mux_status().current_error);
+            torque_controller_mux.get_tc_mux_status().active_error);
 
         ams_interface.tick(current_system_tick);
+
     }
 
     if (t.trigger50) // 50Hz
@@ -653,7 +651,7 @@ void tick_all_systems(const SysTick_s &current_system_tick)
     drivetrain.tick(current_system_tick);
     // // tick torque controller mux
 
-    auto _ = case_system.evaluate(
+    auto __attribute__((unused)) case_status = case_system.evaluate(
         current_system_tick,
         vn_interface.get_vn_struct(),
         steering_system.getSteeringSystemData(),
@@ -674,7 +672,7 @@ void handle_ethernet_interface_comms(const SysTick_s &systick, const hytech_msgs
     std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
     handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);
 
-    if (systick.triggers.trigger100)
+    if (systick.triggers.trigger1000)
     {
         handle_ethernet_socket_send_pb<hytech_msgs_MCUOutputData, 1024>(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port, &protobuf_send_socket, out_msg, hytech_msgs_MCUOutputData_fields);
     }

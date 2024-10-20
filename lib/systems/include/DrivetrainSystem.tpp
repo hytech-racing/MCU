@@ -149,11 +149,11 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
         for (auto inv_pointer : inverters_)
         {
             float setpoint = 0;
-            if(data.torqueSetpoints[index] > max_torque_setpoint_nm_)
+            if(data.inverter_torque_limit[index] > max_torque_setpoint_nm_)
             {
                 setpoint = max_torque_setpoint_nm_;
             } else {
-                setpoint = data.torqueSetpoints[index];
+                setpoint = data.inverter_torque_limit[index];
             }
 
             inv_pointer->handle_command({setpoint, data.speeds_rpm[index]});

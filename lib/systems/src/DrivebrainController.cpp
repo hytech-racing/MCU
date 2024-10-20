@@ -12,14 +12,14 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     
     // 2 if the DB_prev_MCU_recv_millis < 0, then the drivebrain has not received a time from the MCU 
     // (meaning that the MCU is not sending properly or the drivebrain is not receiving properly or it has 
-    // yet to receive from the MCU yet) 
+    // yet to receive from the MCU yet)
     bool drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis < 0);
-    
+    // Serial.println("uh");
     // 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high
     bool message_too_latent = (::abs((int)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) > (int)_params.allowed_latency);
-    if((sys_tick.millis - _last_worst_latency_rec_time) > 5000)
+    if((sys_tick.millis - _last_worst_latency_timestamp) > 5000)
     {    
-        _last_worst_latency_rec_time = sys_tick.millis;
+        _last_worst_latency_timestamp = sys_tick.millis;
         _worst_latency_so_far = -1;
     }
 
@@ -31,9 +31,9 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
 
     bool timing_failure = (message_too_latent || no_messages_received || drivebrain_has_not_received_time);
 
-    // only in the case that we are not the active controller yet do we want to clear the fault
+    // only in the case that our speed is low enough (<1 m/s) do we want to clear the fault
     
-    bool is_active_controller = state.tc_mux_status.current_controller_mode_ == _params.assigned_controller_mode;
+    bool is_active_controller = state.tc_mux_status.active_controller_mode == _params.assigned_controller_mode;
 
     if ((!is_active_controller) && (!timing_failure))
     {
@@ -47,7 +47,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
         _last_setpoint_millis = db_input.last_receive_time_millis;
 
         db_input.speed_setpoints_rpm.copy_to_arr(output.command.speeds_rpm); 
-        db_input.torque_limits_nm.copy_to_arr(output.command.torqueSetpoints); 
+        db_input.torque_limits_nm.copy_to_arr(output.command.inverter_torque_limit); 
     }
     else
     {

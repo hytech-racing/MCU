@@ -1,7 +1,7 @@
 #ifndef __DRIVEBRAINCONTROLLER_H__
 #define __DRIVEBRAINCONTROLLER_H__
 
-#include <SimpleController.h>
+#include <Controllers/SimpleController.h>
 #include "DrivebrainData.h"
 #include "BaseController.h"
 #include "SharedDataTypes.h"
@@ -60,7 +60,7 @@ public:
                          ControllerMode_e assigned_controller_mode = ControllerMode_e::MODE_4)
         : _emergency_control(1.0f, 1.0f)
     {
-        _last_worst_latency_rec_time = 0;
+        _last_worst_latency_timestamp = 0;
         _worst_latency_so_far = -1;
         _params = {allowed_latency, assigned_controller_mode};
     }
@@ -81,7 +81,7 @@ private:
         ControllerMode_e assigned_controller_mode;
     } _params;
 
-    unsigned long _last_worst_latency_rec_time;
+    unsigned long _last_worst_latency_timestamp;
     int64_t _worst_latency_so_far;
     bool _timing_failure = false;
     unsigned long _last_setpoint_millis = -1;

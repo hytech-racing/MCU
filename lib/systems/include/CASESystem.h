@@ -148,10 +148,18 @@ public:
 
     DrivetrainCommand_s get_current_drive_command() { return current_command_; }
 
+    /// @brief uses pedal data to determine the torque to be requested from the motors
+    /// pedals_data.accelPercent - pedals_data.regenPercent -> where accelpercent is to what percent the acellerator is pushed and the regen percent is the amount of regenerative braking currently applied
+    /// @param pedals_data has accel and regen percent 
+    /// @param max_torque not used right now
+    /// @param max_regen_torque used for calculation of torque request
+    /// @param max_rpm not used right now
+    /// @return float representing the calculated request
     float calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_torque, float max_regen_torque, float max_rpm);
-    /// @brief configuration function to determine what CASE is using / turn on and off different features within CASE
-    /// @param config the configuration struct we will be setting
 
+    /// @brief retrieves rpm setpoint based on final torque value
+    /// @param float final_torque 
+    /// @return The maximum RPM from the case configuration if torque is positive, otherwise 0.
     float get_rpm_setpoint(float final_torque)
     {
         if (final_torque > 0)

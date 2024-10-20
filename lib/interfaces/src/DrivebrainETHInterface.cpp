@@ -13,7 +13,6 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
     out.rpm_data.FR = shared_state.drivetrain_data.measuredSpeeds[1];
     out.rpm_data.RL = shared_state.drivetrain_data.measuredSpeeds[2];
     out.rpm_data.RR = shared_state.drivetrain_data.measuredSpeeds[3];
-
     out.steering_angle_deg = shared_state.steering_data.angle;
     out.MCU_recv_millis = _latest_data.last_receive_time_millis;
     out.load_cell_data = {shared_state.raw_loadcell_data.raw_load_cell_data.FL,

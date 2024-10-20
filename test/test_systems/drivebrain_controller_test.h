@@ -20,7 +20,7 @@ auto runTick(DrivebrainController *controller,
   systick.micros = 1000;
 
   TorqueControllerMuxStatus status = {};
-  status.current_controller_mode_ = current_control_mode;
+  status.active_controller_mode = current_control_mode;
   PedalsSystemData_s pedals_data = {};
   pedals_data.regenPercent = brakePercent;
   pedals_data.accelPercent = accelPercent;
@@ -42,7 +42,7 @@ TEST(DrivebrainControllerTesting, setpoint_too_latent_still_in_control) {
   auto torque_controller_output_s = runTick(
       &controller, 800, 1006, ControllerMode_e::MODE_4, 1012, 1.0f, 0.0f);
   EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 0);
-  EXPECT_FLOAT_EQ(torque_controller_output_s.command.torqueSetpoints[0], PhysicalParameters::MAX_REGEN_TORQUE);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.inverter_torque_limit[0], PhysicalParameters::MAX_REGEN_TORQUE);
 }
 
 TEST(DrivebrainControllerTesting, failing_stay_failing) {
@@ -77,7 +77,7 @@ TEST(DrivebrainControllerTesting, failing_in_control) {
   torque_controller_output_s = runTick(
       &controller, 400, 1034, ControllerMode_e::MODE_4, 1034, 0.0f, 1.0f);
   EXPECT_FLOAT_EQ(torque_controller_output_s.command.speeds_rpm[0], 20000);
-  EXPECT_FLOAT_EQ(torque_controller_output_s.command.torqueSetpoints[0], PhysicalParameters::AMK_MAX_TORQUE);
+  EXPECT_FLOAT_EQ(torque_controller_output_s.command.inverter_torque_limit[0], PhysicalParameters::AMK_MAX_TORQUE);
 }
 
 TEST(DrivebrainControllerTesting, failing_reset_success) {

@@ -13,5 +13,4 @@ struct DrivebrainData_s
     veh_vec<float> speed_setpoints_rpm;
 };
 
-
 #endif // __DRIVEBRAINDATA_H__

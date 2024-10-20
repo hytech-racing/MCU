@@ -1,6 +1,6 @@
-#include "LookupLaunchController.h"
-#include "SlipLaunchController.h"
-#include "SimpleLaunchController.h"
+#include "Controllers/LookupLaunchController.h"
+#include "Controllers/SlipLaunchController.h"
+#include "Controllers/SimpleLaunchController.h"
 
 
 void TorqueControllerSimpleLaunch::calc_launch_algo(const VectornavData_s &vn_data)
