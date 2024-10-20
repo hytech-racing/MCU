@@ -1,6 +1,8 @@
 <map id="LoadCellInterface" name="LoadCellInterface">
-<area shape="rect" id="node1" title=" " alt="" coords="274,211,425,353"/>
-<area shape="rect" id="node2" href="$structveh__vec.html" title=" " alt="" coords="5,5,221,148"/>
-<area shape="rect" id="node3" href="$structveh__vec.html" title=" " alt="" coords="245,5,453,148"/>
-<area shape="rect" id="node4" href="$structveh__vec.html" title=" " alt="" coords="478,5,599,148"/>
+<area shape="rect" id="node1" title=" " alt="" coords="365,416,523,588"/>
+<area shape="rect" id="node2" href="$structveh__vec.html" title=" " alt="" coords="5,211,221,353"/>
+<area shape="rect" id="node3" href="$structveh__vec.html" title=" " alt="" coords="245,211,453,353"/>
+<area shape="rect" id="node4" href="$structveh__vec.html" title=" " alt="" coords="478,211,599,353"/>
+<area shape="rect" id="node5" href="$structLoadCellInterfaceRawOutput__s.html" title=" " alt="" coords="623,262,830,302"/>
+<area shape="rect" id="node6" href="$structveh__vec.html" title=" " alt="" coords="671,5,782,148"/>
 </map>

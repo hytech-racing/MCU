@@ -83,7 +83,7 @@ Inheritance diagram for DrivebrainController:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDrivebrainController__inherit__graph.png" border="0" usemap="#aDrivebrainController_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDrivebrainController_inherit__map" id="aDrivebrainController_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,108,204,265"/>
+<area shape="rect" title=" " alt="" coords="5,108,204,309"/>
 <area shape="rect" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="57,5,153,60"/>
 </map>
 </div>
@@ -92,7 +92,7 @@ Collaboration diagram for DrivebrainController:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDrivebrainController__coll__graph.png" border="0" usemap="#aDrivebrainController_coll__map" alt="Collaboration graph"/></div>
 <map name="aDrivebrainController_coll__map" id="aDrivebrainController_coll__map">
-<area shape="rect" title=" " alt="" coords="5,108,204,265"/>
+<area shape="rect" title=" " alt="" coords="5,108,204,309"/>
 <area shape="rect" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="57,5,153,60"/>
 </map>
 </div>
@@ -119,6 +119,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a1ef3160e864c24456559e32ad452e109"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59c55aa60560d06913fbf781c0dc4b14"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a></td></tr>
 <tr class="separator:a59c55aa60560d06913fbf781c0dc4b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77bc1ea0a687a78636497073d8a5ed4b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivebrainController.html#a77bc1ea0a687a78636497073d8a5ed4b">_last_worst_latency_timestamp</a></td></tr>
+<tr class="separator:a77bc1ea0a687a78636497073d8a5ed4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea1586b58b7618b869028df6369a6440"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivebrainController.html#aea1586b58b7618b869028df6369a6440">_worst_latency_so_far</a></td></tr>
+<tr class="separator:aea1586b58b7618b869028df6369a6440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c1461ea45576b27200ae52702ce164b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a> = false</td></tr>
 <tr class="separator:a0c1461ea45576b27200ae52702ce164b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0442afcd18875f86aed43a1f7b5fcf1"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivebrainController.html#ad0442afcd18875f86aed43a1f7b5fcf1">_last_setpoint_millis</a> = -1</td></tr>
@@ -170,12 +174,16 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00026">26</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   29</span>    {</div>
-<div class="line"><span class="lineno">   30</span>        <a class="code hl_variable" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a> = {<a class="code hl_variable" href="classDrivebrainController.html#a1a4c383999032d0f476d783e42be23a3">allowed_latency</a>, <a class="code hl_variable" href="classDrivebrainController.html#a2cb998e60829ba698bc57627f5abc61c">max_fault_clear_speed_m_s</a>, <a class="code hl_variable" href="classDrivebrainController.html#ae968d1149c0d1b5392dc1642c4746d85">assigned_controller_mode</a>};</div>
-<div class="line"><span class="lineno">   31</span>    }</div>
-<div class="ttc" id="aclassDrivebrainController_html_a1a4c383999032d0f476d783e42be23a3"><div class="ttname"><a href="classDrivebrainController.html#a1a4c383999032d0f476d783e42be23a3">DrivebrainController::allowed_latency</a></div><div class="ttdeci">unsigned long allowed_latency</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00038">DrivebrainController.h:38</a></div></div>
-<div class="ttc" id="aclassDrivebrainController_html_a2cb998e60829ba698bc57627f5abc61c"><div class="ttname"><a href="classDrivebrainController.html#a2cb998e60829ba698bc57627f5abc61c">DrivebrainController::max_fault_clear_speed_m_s</a></div><div class="ttdeci">float max_fault_clear_speed_m_s</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00039">DrivebrainController.h:39</a></div></div>
+<div class="line"><span class="lineno">   30</span>        <a class="code hl_variable" href="classDrivebrainController.html#a77bc1ea0a687a78636497073d8a5ed4b">_last_worst_latency_timestamp</a> = 0;</div>
+<div class="line"><span class="lineno">   31</span>        <a class="code hl_variable" href="classDrivebrainController.html#aea1586b58b7618b869028df6369a6440">_worst_latency_so_far</a> = -1;</div>
+<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a> = {<a class="code hl_variable" href="classDrivebrainController.html#a1a4c383999032d0f476d783e42be23a3">allowed_latency</a>, <a class="code hl_variable" href="classDrivebrainController.html#a2cb998e60829ba698bc57627f5abc61c">max_fault_clear_speed_m_s</a>, <a class="code hl_variable" href="classDrivebrainController.html#ae968d1149c0d1b5392dc1642c4746d85">assigned_controller_mode</a>};</div>
+<div class="line"><span class="lineno">   33</span>    }</div>
+<div class="ttc" id="aclassDrivebrainController_html_a1a4c383999032d0f476d783e42be23a3"><div class="ttname"><a href="classDrivebrainController.html#a1a4c383999032d0f476d783e42be23a3">DrivebrainController::allowed_latency</a></div><div class="ttdeci">unsigned long allowed_latency</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00040">DrivebrainController.h:40</a></div></div>
+<div class="ttc" id="aclassDrivebrainController_html_a2cb998e60829ba698bc57627f5abc61c"><div class="ttname"><a href="classDrivebrainController.html#a2cb998e60829ba698bc57627f5abc61c">DrivebrainController::max_fault_clear_speed_m_s</a></div><div class="ttdeci">float max_fault_clear_speed_m_s</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00041">DrivebrainController.h:41</a></div></div>
 <div class="ttc" id="aclassDrivebrainController_html_a59c55aa60560d06913fbf781c0dc4b14"><div class="ttname"><a href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">DrivebrainController::_params</a></div><div class="ttdeci">struct DrivebrainController::@0 _params</div></div>
-<div class="ttc" id="aclassDrivebrainController_html_ae968d1149c0d1b5392dc1642c4746d85"><div class="ttname"><a href="classDrivebrainController.html#ae968d1149c0d1b5392dc1642c4746d85">DrivebrainController::assigned_controller_mode</a></div><div class="ttdeci">ControllerMode_e assigned_controller_mode</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00040">DrivebrainController.h:40</a></div></div>
+<div class="ttc" id="aclassDrivebrainController_html_a77bc1ea0a687a78636497073d8a5ed4b"><div class="ttname"><a href="classDrivebrainController.html#a77bc1ea0a687a78636497073d8a5ed4b">DrivebrainController::_last_worst_latency_timestamp</a></div><div class="ttdeci">unsigned long _last_worst_latency_timestamp</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00045">DrivebrainController.h:45</a></div></div>
+<div class="ttc" id="aclassDrivebrainController_html_ae968d1149c0d1b5392dc1642c4746d85"><div class="ttname"><a href="classDrivebrainController.html#ae968d1149c0d1b5392dc1642c4746d85">DrivebrainController::assigned_controller_mode</a></div><div class="ttdeci">ControllerMode_e assigned_controller_mode</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00042">DrivebrainController.h:42</a></div></div>
+<div class="ttc" id="aclassDrivebrainController_html_aea1586b58b7618b869028df6369a6440"><div class="ttname"><a href="classDrivebrainController.html#aea1586b58b7618b869028df6369a6440">DrivebrainController::_worst_latency_so_far</a></div><div class="ttdeci">int64_t _worst_latency_so_far</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00046">DrivebrainController.h:46</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -215,60 +223,72 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classController.html#afd879d218121028029cc0a3620e004aa">Controller</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="DrivebrainController_8cpp_source.html#l00004">4</a> of file <a class="el" href="DrivebrainController_8cpp_source.html">DrivebrainController.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    5</span>{</div>
-<div class="line"><span class="lineno">    6</span> </div>
-<div class="line"><span class="lineno">    7</span>    <span class="keyword">auto</span> sys_tick = state.<a class="code hl_variable" href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">systick</a>;</div>
-<div class="line"><span class="lineno">    8</span>    <span class="keyword">auto</span> db_input = state.<a class="code hl_variable" href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">db_data</a>;     </div>
-<div class="line"><span class="lineno">    9</span>    </div>
-<div class="line"><span class="lineno">   10</span>    <span class="comment">// cases for timing_failure:</span></div>
-<div class="line"><span class="lineno">   11</span>    <span class="comment">// 1 if the last_receive_time_millis &lt; 0, then we have not received any messages from the db (initialized at -1 in constructor)</span></div>
-<div class="line"><span class="lineno">   12</span>    <span class="keywordtype">bool</span> no_messages_received = db_input.<a class="code hl_variable" href="structDrivebrainData__s.html#a4531a38153899a90daf56d3345e8417c">last_receive_time_millis</a> &lt; 0;</div>
-<div class="line"><span class="lineno">   13</span>    </div>
-<div class="line"><span class="lineno">   14</span>    <span class="comment">// 2 if the DB_prev_MCU_recv_millis &lt; 0, then the drivebrain has not received a time from the MCU </span></div>
-<div class="line"><span class="lineno">   15</span>    <span class="comment">// (meaning that the MCU is not sending properly or the drivebrain is not receiving properly or it has </span></div>
-<div class="line"><span class="lineno">   16</span>    <span class="comment">// yet to receive from the MCU yet)</span></div>
-<div class="line"><span class="lineno">   17</span>    <span class="keywordtype">bool</span> drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis &lt; 0);</div>
-<div class="line"><span class="lineno">   18</span> </div>
-<div class="line"><span class="lineno">   19</span>    <span class="comment">// 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high</span></div>
-<div class="line"><span class="lineno">   20</span>    <span class="keywordtype">bool</span> message_too_latent = (::abs((<span class="keywordtype">int</span>)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) &gt; (int)<a class="code hl_variable" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a>.allowed_latency);</div>
-<div class="line"><span class="lineno">   21</span>   </div>
-<div class="line"><span class="lineno">   22</span> </div>
-<div class="line"><span class="lineno">   23</span>    <span class="keywordtype">bool</span> timing_failure = (message_too_latent || no_messages_received || drivebrain_has_not_received_time);</div>
-<div class="line"><span class="lineno">   24</span> </div>
-<div class="line"><span class="lineno">   25</span>    <span class="comment">// only in the case that our speed is low enough (&lt;1 m/s) do we want to clear the fault</span></div>
-<div class="line"><span class="lineno">   26</span>    </div>
-<div class="line"><span class="lineno">   27</span>    <span class="keywordtype">bool</span> is_active_controller = state.<a class="code hl_variable" href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">tc_mux_status</a>.<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#af75ca78a60aaeb398c29c8b69e622c05">active_controller_mode</a> == <a class="code hl_variable" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a>.assigned_controller_mode;</div>
-<div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> ((!is_active_controller) &amp;&amp; (!timing_failure))</div>
-<div class="line"><span class="lineno">   30</span>    {</div>
-<div class="line"><span class="lineno">   31</span>        <span class="comment">// timing failure should be false here</span></div>
-<div class="line"><span class="lineno">   32</span>        <a class="code hl_variable" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   33</span>    }</div>
-<div class="line"><span class="lineno">   34</span> </div>
-<div class="line"><span class="lineno">   35</span>    <a class="code hl_struct" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> output;</div>
-<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span> (!timing_failure &amp;&amp; (!<a class="code hl_variable" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a>))</div>
-<div class="line"><span class="lineno">   37</span>    {</div>
-<div class="line"><span class="lineno">   38</span>        <a class="code hl_variable" href="classDrivebrainController.html#ad0442afcd18875f86aed43a1f7b5fcf1">_last_setpoint_millis</a> = db_input.last_receive_time_millis;</div>
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8cpp_source.html#l00003">3</a> of file <a class="el" href="DrivebrainController_8cpp_source.html">DrivebrainController.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    4</span>{</div>
+<div class="line"><span class="lineno">    5</span> </div>
+<div class="line"><span class="lineno">    6</span>    <span class="keyword">auto</span> sys_tick = state.<a class="code hl_variable" href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">systick</a>;</div>
+<div class="line"><span class="lineno">    7</span>    <span class="keyword">auto</span> db_input = state.<a class="code hl_variable" href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">db_data</a>;     </div>
+<div class="line"><span class="lineno">    8</span>    </div>
+<div class="line"><span class="lineno">    9</span>    <span class="comment">// cases for timing_failure:</span></div>
+<div class="line"><span class="lineno">   10</span>    <span class="comment">// 1 if the last_receive_time_millis &lt; 0, then we have not received any messages from the db (initialized at -1 in constructor)</span></div>
+<div class="line"><span class="lineno">   11</span>    <span class="keywordtype">bool</span> no_messages_received = db_input.<a class="code hl_variable" href="structDrivebrainData__s.html#a4531a38153899a90daf56d3345e8417c">last_receive_time_millis</a> &lt; 0;</div>
+<div class="line"><span class="lineno">   12</span>    </div>
+<div class="line"><span class="lineno">   13</span>    <span class="comment">// 2 if the DB_prev_MCU_recv_millis &lt; 0, then the drivebrain has not received a time from the MCU </span></div>
+<div class="line"><span class="lineno">   14</span>    <span class="comment">// (meaning that the MCU is not sending properly or the drivebrain is not receiving properly or it has </span></div>
+<div class="line"><span class="lineno">   15</span>    <span class="comment">// yet to receive from the MCU yet)</span></div>
+<div class="line"><span class="lineno">   16</span>    <span class="keywordtype">bool</span> drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis &lt; 0);</div>
+<div class="line"><span class="lineno">   17</span>    <span class="comment">// Serial.println(&quot;uh&quot;);</span></div>
+<div class="line"><span class="lineno">   18</span>    <span class="comment">// 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high</span></div>
+<div class="line"><span class="lineno">   19</span>    <span class="keywordtype">bool</span> message_too_latent = (::abs((<span class="keywordtype">int</span>)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) &gt; (int)<a class="code hl_variable" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a>.allowed_latency);</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">if</span>((sys_tick.millis - <a class="code hl_variable" href="classDrivebrainController.html#a77bc1ea0a687a78636497073d8a5ed4b">_last_worst_latency_timestamp</a>) &gt; 5000)</div>
+<div class="line"><span class="lineno">   21</span>    {    </div>
+<div class="line"><span class="lineno">   22</span>        <a class="code hl_variable" href="classDrivebrainController.html#a77bc1ea0a687a78636497073d8a5ed4b">_last_worst_latency_timestamp</a> = sys_tick.millis;</div>
+<div class="line"><span class="lineno">   23</span>        <a class="code hl_variable" href="classDrivebrainController.html#aea1586b58b7618b869028df6369a6440">_worst_latency_so_far</a> = -1;</div>
+<div class="line"><span class="lineno">   24</span>    }</div>
+<div class="line"><span class="lineno">   25</span> </div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span>( (sys_tick.millis - db_input.DB_prev_MCU_recv_millis) &gt; <a class="code hl_variable" href="classDrivebrainController.html#aea1586b58b7618b869028df6369a6440">_worst_latency_so_far</a>)</div>
+<div class="line"><span class="lineno">   27</span>    {</div>
+<div class="line"><span class="lineno">   28</span>        </div>
+<div class="line"><span class="lineno">   29</span>        <a class="code hl_variable" href="classDrivebrainController.html#aea1586b58b7618b869028df6369a6440">_worst_latency_so_far</a> = (sys_tick.millis - db_input.DB_prev_MCU_recv_millis);</div>
+<div class="line"><span class="lineno">   30</span>        </div>
+<div class="line"><span class="lineno">   31</span>    }</div>
+<div class="line"><span class="lineno">   32</span>    </div>
+<div class="line"><span class="lineno">   33</span> </div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordtype">bool</span> timing_failure = (message_too_latent || no_messages_received || drivebrain_has_not_received_time);</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    <span class="comment">// only in the case that our speed is low enough (&lt;1 m/s) do we want to clear the fault</span></div>
+<div class="line"><span class="lineno">   37</span>    </div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordtype">bool</span> is_active_controller = state.<a class="code hl_variable" href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">tc_mux_status</a>.<a class="code hl_variable" href="structTorqueControllerMuxStatus.html#af75ca78a60aaeb398c29c8b69e622c05">active_controller_mode</a> == <a class="code hl_variable" href="classDrivebrainController.html#a59c55aa60560d06913fbf781c0dc4b14">_params</a>.assigned_controller_mode;</div>
 <div class="line"><span class="lineno">   39</span> </div>
-<div class="line"><span class="lineno">   40</span>        db_input.speed_setpoints_rpm.copy_to_arr(output.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>); </div>
-<div class="line"><span class="lineno">   41</span>        db_input.torque_limits_nm.copy_to_arr(output.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a4ed1e275177948e44c931ab699499175">inverter_torque_limit</a>); </div>
-<div class="line"><span class="lineno">   42</span>    }</div>
-<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   44</span>    {</div>
-<div class="line"><span class="lineno">   45</span>        <a class="code hl_variable" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   46</span>        output.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a> = {{0.0f}, {0.0f}};</div>
-<div class="line"><span class="lineno">   47</span>    }</div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">return</span> output;</div>
-<div class="line"><span class="lineno">   49</span>}</div>
-<div class="ttc" id="aclassDrivebrainController_html_a0c1461ea45576b27200ae52702ce164b"><div class="ttname"><a href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">DrivebrainController::_timing_failure</a></div><div class="ttdeci">bool _timing_failure</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00043">DrivebrainController.h:43</a></div></div>
-<div class="ttc" id="aclassDrivebrainController_html_ad0442afcd18875f86aed43a1f7b5fcf1"><div class="ttname"><a href="classDrivebrainController.html#ad0442afcd18875f86aed43a1f7b5fcf1">DrivebrainController::_last_setpoint_millis</a></div><div class="ttdeci">unsigned long _last_setpoint_millis</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00044">DrivebrainController.h:44</a></div></div>
+<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">if</span> ((!is_active_controller) &amp;&amp; (!timing_failure))</div>
+<div class="line"><span class="lineno">   41</span>    {</div>
+<div class="line"><span class="lineno">   42</span>        <span class="comment">// timing failure should be false here</span></div>
+<div class="line"><span class="lineno">   43</span>        <a class="code hl_variable" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   44</span>    }</div>
+<div class="line"><span class="lineno">   45</span> </div>
+<div class="line"><span class="lineno">   46</span>    <a class="code hl_struct" href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a> output;</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">if</span> (!timing_failure &amp;&amp; (!<a class="code hl_variable" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a>))</div>
+<div class="line"><span class="lineno">   48</span>    {</div>
+<div class="line"><span class="lineno">   49</span>        <a class="code hl_variable" href="classDrivebrainController.html#ad0442afcd18875f86aed43a1f7b5fcf1">_last_setpoint_millis</a> = db_input.last_receive_time_millis;</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>        db_input.speed_setpoints_rpm.copy_to_arr(output.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">speeds_rpm</a>); </div>
+<div class="line"><span class="lineno">   52</span>        db_input.torque_limits_nm.copy_to_arr(output.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a>.<a class="code hl_variable" href="structDrivetrainCommand__s.html#a4ed1e275177948e44c931ab699499175">inverter_torque_limit</a>); </div>
+<div class="line"><span class="lineno">   53</span>    }</div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   55</span>    {</div>
+<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">_timing_failure</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   57</span>        output.<a class="code hl_variable" href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">command</a> = {{0.0f}, {0.0f}};</div>
+<div class="line"><span class="lineno">   58</span>    }</div>
+<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">return</span> output;</div>
+<div class="line"><span class="lineno">   60</span>}</div>
+<div class="ttc" id="aclassDrivebrainController_html_a0c1461ea45576b27200ae52702ce164b"><div class="ttname"><a href="classDrivebrainController.html#a0c1461ea45576b27200ae52702ce164b">DrivebrainController::_timing_failure</a></div><div class="ttdeci">bool _timing_failure</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00047">DrivebrainController.h:47</a></div></div>
+<div class="ttc" id="aclassDrivebrainController_html_ad0442afcd18875f86aed43a1f7b5fcf1"><div class="ttname"><a href="classDrivebrainController.html#ad0442afcd18875f86aed43a1f7b5fcf1">DrivebrainController::_last_setpoint_millis</a></div><div class="ttdeci">unsigned long _last_setpoint_millis</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainController_8h_source.html#l00048">DrivebrainController.h:48</a></div></div>
 <div class="ttc" id="astructDrivebrainData__s_html_a4531a38153899a90daf56d3345e8417c"><div class="ttname"><a href="structDrivebrainData__s.html#a4531a38153899a90daf56d3345e8417c">DrivebrainData_s::last_receive_time_millis</a></div><div class="ttdeci">int64_t last_receive_time_millis</div><div class="ttdoc">the latest time that the MCU received a message w.r.t the current tick's millis</div><div class="ttdef"><b>Definition:</b> <a href="DrivebrainData_8h_source.html#l00009">DrivebrainData.h:9</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html_a4ed1e275177948e44c931ab699499175"><div class="ttname"><a href="structDrivetrainCommand__s.html#a4ed1e275177948e44c931ab699499175">DrivetrainCommand_s::inverter_torque_limit</a></div><div class="ttdeci">float inverter_torque_limit[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00065">SharedDataTypes.h:65</a></div></div>
 <div class="ttc" id="astructDrivetrainCommand__s_html_a5bdb12f04edaaeea2377f679d16afc59"><div class="ttname"><a href="structDrivetrainCommand__s.html#a5bdb12f04edaaeea2377f679d16afc59">DrivetrainCommand_s::speeds_rpm</a></div><div class="ttdeci">float speeds_rpm[NUM_MOTORS]</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00064">SharedDataTypes.h:64</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_a773ee7195e593fa88874844230803a90"><div class="ttname"><a href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">SharedCarState_s::db_data</a></div><div class="ttdeci">DrivebrainData_s db_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00152">SharedDataTypes.h:152</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_ac3e4e4f978ad37d5a9a927fc87918c4a"><div class="ttname"><a href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">SharedCarState_s::systick</a></div><div class="ttdeci">SysTick_s systick</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00146">SharedDataTypes.h:146</a></div></div>
-<div class="ttc" id="astructSharedCarState__s_html_acc2a3aa30dbc45da868fa59774efae22"><div class="ttname"><a href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">SharedCarState_s::tc_mux_status</a></div><div class="ttdeci">TorqueControllerMuxStatus tc_mux_status</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00153">SharedDataTypes.h:153</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_a773ee7195e593fa88874844230803a90"><div class="ttname"><a href="structSharedCarState__s.html#a773ee7195e593fa88874844230803a90">SharedCarState_s::db_data</a></div><div class="ttdeci">DrivebrainData_s db_data</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00158">SharedDataTypes.h:158</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_ac3e4e4f978ad37d5a9a927fc87918c4a"><div class="ttname"><a href="structSharedCarState__s.html#ac3e4e4f978ad37d5a9a927fc87918c4a">SharedCarState_s::systick</a></div><div class="ttdeci">SysTick_s systick</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00151">SharedDataTypes.h:151</a></div></div>
+<div class="ttc" id="astructSharedCarState__s_html_acc2a3aa30dbc45da868fa59774efae22"><div class="ttname"><a href="structSharedCarState__s.html#acc2a3aa30dbc45da868fa59774efae22">SharedCarState_s::tc_mux_status</a></div><div class="ttdeci">TorqueControllerMuxStatus tc_mux_status</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00159">SharedDataTypes.h:159</a></div></div>
 <div class="ttc" id="astructTorqueControllerMuxStatus_html_af75ca78a60aaeb398c29c8b69e622c05"><div class="ttname"><a href="structTorqueControllerMuxStatus.html#af75ca78a60aaeb398c29c8b69e622c05">TorqueControllerMuxStatus::active_controller_mode</a></div><div class="ttdeci">ControllerMode_e active_controller_mode</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00110">SharedDataTypes.h:110</a></div></div>
 <div class="ttc" id="astructTorqueControllerOutput__s_html"><div class="ttname"><a href="structTorqueControllerOutput__s.html">TorqueControllerOutput_s</a></div><div class="ttdoc">Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating...</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00070">SharedDataTypes.h:71</a></div></div>
 <div class="ttc" id="astructTorqueControllerOutput__s_html_a985523f6bafe8793f212c94c47fb4957"><div class="ttname"><a href="structTorqueControllerOutput__s.html#a985523f6bafe8793f212c94c47fb4957">TorqueControllerOutput_s::command</a></div><div class="ttdeci">DrivetrainCommand_s command</div><div class="ttdef"><b>Definition:</b> <a href="SharedDataTypes_8h_source.html#l00072">SharedDataTypes.h:72</a></div></div>
@@ -296,7 +316,31 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00044">44</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00048">48</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+
+</div>
+</div>
+<a id="a77bc1ea0a687a78636497073d8a5ed4b" name="a77bc1ea0a687a78636497073d8a5ed4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77bc1ea0a687a78636497073d8a5ed4b">&#9670;&#160;</a></span>_last_worst_latency_timestamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long DrivebrainController::_last_worst_latency_timestamp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00045">45</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
 
 </div>
 </div>
@@ -334,7 +378,31 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00043">43</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00047">47</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+
+</div>
+</div>
+<a id="aea1586b58b7618b869028df6369a6440" name="aea1586b58b7618b869028df6369a6440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea1586b58b7618b869028df6369a6440">&#9670;&#160;</a></span>_worst_latency_so_far</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t DrivebrainController::_worst_latency_so_far</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00046">46</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
 
 </div>
 </div>
@@ -350,7 +418,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00038">38</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00040">40</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
 
 </div>
 </div>
@@ -366,7 +434,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00040">40</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00042">42</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
 
 </div>
 </div>
@@ -382,7 +450,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00039">39</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DrivebrainController_8h_source.html#l00041">41</a> of file <a class="el" href="DrivebrainController_8h_source.html">DrivebrainController.h</a>.</p>
 
 </div>
 </div>
