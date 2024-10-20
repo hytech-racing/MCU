@@ -9,9 +9,6 @@
 using speed_rpm = float;
 using torque_nm = float;
 
-using speed_rpm = float;
-using torque_nm = float;
-
 /// @brief Defines modes of torque limit to be processed in torque limit map for exact values.
 enum class TorqueLimit_e
 {
