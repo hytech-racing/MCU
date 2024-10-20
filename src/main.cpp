@@ -1,6 +1,6 @@
 #ifdef ENABLE_DEBUG_PRINTS
 #define DEBUG_PRINTS true
-#else 
+#else
 #define DEBUG_PRINTS false
 #endif
 
@@ -11,8 +11,7 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-// #include "NativeEthernet.h"
-
+#include "pb.h"
 // /* Interfaces */
 #include "DrivebrainETHInterface.h"
 #include "ProtobufMsgInterface.h"
@@ -53,6 +52,7 @@
 /*
     PARAMETER STRUCTS
 */
+using namespace qindesign::network;
 
 const TelemetryInterfaceReadChannels telem_read_channels = {
     .accel1_channel = MCU15_ACCEL1_CHANNEL,
@@ -312,7 +312,7 @@ TorqueControllerCASEWrapper<CircularBufferType> case_wrapper(&case_system);
 // mode 3
 TorqueControllerSimpleLaunch simple_launch;
 // mode 4
-DrivebrainController db_controller(210, 210);
+DrivebrainController db_controller(210);
 
 TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
                                  static_cast<Controller *>(&tc_vec),
@@ -431,21 +431,23 @@ void loop()
     // single source of truth for the state of the car.
     // no systems or interfaces should write directly to this.
     SharedCarState_s car_state_inst(curr_tick,
-                             steering_system.getSteeringSystemData(),
-                             drivetrain.get_dynamic_data(),
-                             load_cell_interface.getLoadCellForces(),
-                             pedals_system.getPedalsSystemData(),
-                             vn_interface.get_vn_struct(),
-                             db_eth_interface.get_latest_data(),
-                             torque_controller_mux.get_tc_mux_status());
+                                    steering_system.getSteeringSystemData(),
+                                    drivetrain.get_dynamic_data(),
+                                    load_cell_interface.getLoadCellForces(),
+                                    load_cell_interface.get_latest_raw_data(),
+                                    pedals_system.getPedalsSystemData(),
+                                    vn_interface.get_vn_struct(),
+                                    db_eth_interface.get_latest_data(),
+                                    torque_controller_mux.get_tc_mux_status(),
+                                    db_controller.get_timing_failure_status());
 
+    car_state_inst.drivebrain_timing_failure = db_controller.get_timing_failure_status();
     hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
 
     handle_ethernet_interface_comms(curr_tick, out_eth_msg);
 
     tick_all_systems(curr_tick);
-    
-    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_), curr_tick.millis, 100);
+
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
@@ -504,6 +506,9 @@ void loop()
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode));
         Serial.print("Current TC error: ");
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_error));
+        Serial.println();
+        Serial.print("dial state: ");
+        Serial.println(static_cast<int>(dashboard.getDialMode()));
         Serial.println();
         Serial.println();
     }
@@ -587,6 +592,9 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
             torque_controller_mux.get_tc_mux_status().active_error);
+
+        ams_interface.tick(current_system_tick);
+
     }
 
     if (t.trigger50) // 50Hz
@@ -660,9 +668,6 @@ void handle_ethernet_interface_comms(const SysTick_s &systick, const hytech_msgs
 {
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
-    // TODO un fuck this and make it more sane
-    // Serial.println("bruh");
-    // handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
 
     std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
     handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);

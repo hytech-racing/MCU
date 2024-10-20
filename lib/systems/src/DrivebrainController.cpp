@@ -25,9 +25,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
 
     if( (sys_tick.millis - db_input.DB_prev_MCU_recv_millis) > _worst_latency_so_far)
     {
-        
-        _worst_latency_so_far = (sys_tick.millis - db_input.DB_prev_MCU_recv_millis);
-        
+        _worst_latency_so_far = (sys_tick.millis - db_input.DB_prev_MCU_recv_millis);   
     }
     
 
@@ -54,7 +52,8 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     else
     {
         _timing_failure = true;
-        output.command = {{0.0f}, {0.0f}};
+        // output.command = {{0.0f}, {0.0f}};
+        output = _emergency_control.evaluate(state);
     }
     return output;
 }
