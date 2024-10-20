@@ -1,6 +1,5 @@
 #include "DrivebrainController.h"
 
-
 TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &state)
 {
 
@@ -15,10 +14,22 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     // (meaning that the MCU is not sending properly or the drivebrain is not receiving properly or it has 
     // yet to receive from the MCU yet)
     bool drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis < 0);
-
+    // Serial.println("uh");
     // 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high
     bool message_too_latent = (::abs((int)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) > (int)_params.allowed_latency);
-   
+    if((sys_tick.millis - _last_worst_latency_timestamp) > 5000)
+    {    
+        _last_worst_latency_timestamp = sys_tick.millis;
+        _worst_latency_so_far = -1;
+    }
+
+    if( (sys_tick.millis - db_input.DB_prev_MCU_recv_millis) > _worst_latency_so_far)
+    {
+        
+        _worst_latency_so_far = (sys_tick.millis - db_input.DB_prev_MCU_recv_millis);
+        
+    }
+    
 
     bool timing_failure = (message_too_latent || no_messages_received || drivebrain_has_not_received_time);
 

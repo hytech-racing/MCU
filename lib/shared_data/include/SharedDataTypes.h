@@ -120,6 +120,11 @@ struct LoadCellInterfaceOutput_s
     bool FIRSaturated;
 };
 
+struct LoadCellInterfaceRawOutput_s
+{
+    veh_vec<int> raw_load_cell_data;
+};
+
 // Enums
 enum class SteeringSystemStatus_e
 {
@@ -147,6 +152,7 @@ struct SharedCarState_s
     SteeringSystemData_s steering_data;
     DrivetrainDynamicReport_s drivetrain_data;
     LoadCellInterfaceOutput_s loadcell_data;
+    LoadCellInterfaceRawOutput_s raw_loadcell_data;
     PedalsSystemData_s pedals_data;
     VectornavData_s vn_data;
     DrivebrainData_s db_data;
@@ -164,6 +170,28 @@ struct SharedCarState_s
           steering_data(_steering_data),
           drivetrain_data(_drivetrain_data),
           loadcell_data(_loadcell_data),
+          raw_loadcell_data({}),
+          pedals_data(_pedals_data),
+          vn_data(_vn_data),
+          db_data(_db_data),
+          tc_mux_status(_tc_mux_status)
+    {
+        // constructor body (if needed)
+    }
+    SharedCarState_s(const SysTick_s &_systick,
+              const SteeringSystemData_s &_steering_data,
+              const DrivetrainDynamicReport_s &_drivetrain_data,
+              const LoadCellInterfaceOutput_s &_loadcell_data,
+              const LoadCellInterfaceRawOutput_s &_raw_loadcell_data,
+              const PedalsSystemData_s &_pedals_data,
+              const VectornavData_s &_vn_data,
+              const DrivebrainData_s &_db_data,
+              const TorqueControllerMuxStatus &_tc_mux_status)
+        : systick(_systick),
+          steering_data(_steering_data),
+          drivetrain_data(_drivetrain_data),
+          loadcell_data(_loadcell_data),
+          raw_loadcell_data(_raw_loadcell_data),
           pedals_data(_pedals_data),
           vn_data(_vn_data),
           db_data(_db_data),

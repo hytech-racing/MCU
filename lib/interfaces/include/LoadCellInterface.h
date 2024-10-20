@@ -26,6 +26,8 @@ public:
         loadCellForcesFiltered_ = veh_vec<float>();
     }
     void tick(const LoadCellInterfaceTick_s &intake);
+    void update_raw_data(const LoadCellInterfaceTick_s &intake);
+    LoadCellInterfaceRawOutput_s get_latest_raw_data() { return _raw_data; }
     LoadCellInterfaceOutput_s getLoadCellForces();
 private:
     /*
@@ -57,6 +59,7 @@ private:
     veh_vec<AnalogConversion_s> loadCellConversions_;
     veh_vec<float[numFIRTaps_]> loadCellForcesUnfiltered_;
     veh_vec<float> loadCellForcesFiltered_;
+    LoadCellInterfaceRawOutput_s _raw_data;
     bool FIRSaturated_ = false;
 
 };

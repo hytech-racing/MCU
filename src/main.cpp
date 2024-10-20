@@ -11,8 +11,7 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MCU_rev15_defs.h"
-#include "pb.h"
-#include "PrintLogger.h"
+// #include "NativeEthernet.h"
 
 // /* Interfaces */
 #include "DrivebrainETHInterface.h"
@@ -54,8 +53,6 @@
 /*
     PARAMETER STRUCTS
 */
-using namespace qindesign::network;
-
 
 const TelemetryInterfaceReadChannels telem_read_channels = {
     .accel1_channel = MCU15_ACCEL1_CHANNEL,
@@ -347,7 +344,7 @@ void tick_all_systems(const SysTick_s &current_system_tick);
 /* Reset inverters */
 void drivetrain_reset();
 
-void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg);
+void handle_ethernet_interface_comms(const SysTick_s &systick, const hytech_msgs_MCUOutputData &out_msg);
 
 /*
     SETUP
@@ -434,19 +431,21 @@ void loop()
     // single source of truth for the state of the car.
     // no systems or interfaces should write directly to this.
     SharedCarState_s car_state_inst(curr_tick,
-                                    steering_system.getSteeringSystemData(),
-                                    drivetrain.get_dynamic_data(),
-                                    load_cell_interface.getLoadCellForces(),
-                                    pedals_system.getPedalsSystemData(),
-                                    vn_interface.get_vn_struct(),
-                                    db_eth_interface.get_latest_data(),
-                                    torque_controller_mux.get_tc_mux_status());
+                             steering_system.getSteeringSystemData(),
+                             drivetrain.get_dynamic_data(),
+                             load_cell_interface.getLoadCellForces(),
+                             pedals_system.getPedalsSystemData(),
+                             vn_interface.get_vn_struct(),
+                             db_eth_interface.get_latest_data(),
+                             torque_controller_mux.get_tc_mux_status());
 
     hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
 
     handle_ethernet_interface_comms(curr_tick, out_eth_msg);
 
     tick_all_systems(curr_tick);
+    
+    // logger.log_out(static_cast<int>(torque_controller_mux.get_tc_mux_status().current_controller_mode_), curr_tick.millis, 100);
     // inverter procedure before entering state machine
     // reset inverters
     if (dashboard.inverterResetButtonPressed() && drivetrain.drivetrain_error_occured())
@@ -505,9 +504,6 @@ void loop()
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_controller_mode));
         Serial.print("Current TC error: ");
         Serial.println(static_cast<int>(torque_controller_mux.get_tc_mux_status().active_error));
-        Serial.println();
-        Serial.print("dial state: ");
-        Serial.println(static_cast<int>(dashboard.getDialMode()));
         Serial.println();
         Serial.println();
     }
@@ -591,8 +587,6 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             a1.get().conversions[MCU15_BRAKE2_CHANNEL],
             pedals_system.getMechBrakeActiveThreshold(),
             torque_controller_mux.get_tc_mux_status().active_error);
-
-        ams_interface.tick(current_system_tick);
     }
 
     if (t.trigger50) // 50Hz
@@ -614,6 +608,11 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
                 .RLConversion = sab_interface.rlLoadCell.convert(),
                 .RRConversion = sab_interface.rrLoadCell.convert()});
     }
+    load_cell_interface.update_raw_data((LoadCellInterfaceTick_s){
+        .FLConversion = a2.get().conversions[MCU15_FL_LOADCELL_CHANNEL],
+        .FRConversion = a3.get().conversions[MCU15_FR_LOADCELL_CHANNEL],
+        .RLConversion = sab_interface.rlLoadCell.convert(),
+        .RRConversion = sab_interface.rrLoadCell.convert()});
     // // Untriggered
     main_ecu.read_mcu_status(); // should be executed at the same rate as state machine
                                 // DO NOT call in main_ecu.tick()
@@ -655,18 +654,20 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         fsm.get_state(),
         dashboard.startButtonPressed(),
         vn_interface.get_vn_struct().vn_status);
-
 }
 
-void handle_ethernet_interface_comms(const SysTick_s& systick, const hytech_msgs_MCUOutputData& out_msg)
+void handle_ethernet_interface_comms(const SysTick_s &systick, const hytech_msgs_MCUOutputData &out_msg)
 {
     // function that will handle receiving and distributing of all messages to all ethernet interfaces
     // via the union message. this is a little bit cursed ngl.
+    // TODO un fuck this and make it more sane
+    // Serial.println("bruh");
+    // handle_ethernet_socket_receive(&protobuf_recv_socket, &recv_pb_stream_union_msg, ethernet_interfaces);
 
     std::function<void(unsigned long, const uint8_t *, size_t, DrivebrainETHInterface &, const pb_msgdesc_t *)> recv_boi = &recv_pb_stream_msg<hytech_msgs_MCUCommandData, DrivebrainETHInterface>;
     handle_ethernet_socket_receive<1024, hytech_msgs_MCUCommandData>(systick, &protobuf_recv_socket, recv_boi, db_eth_interface, hytech_msgs_MCUCommandData_fields);
 
-    if(systick.triggers.trigger500)
+    if (systick.triggers.trigger1000)
     {
         handle_ethernet_socket_send_pb<hytech_msgs_MCUOutputData, 1024>(EthParams::default_TCU_ip, EthParams::default_protobuf_send_port, &protobuf_send_socket, out_msg, hytech_msgs_MCUOutputData_fields);
     }
