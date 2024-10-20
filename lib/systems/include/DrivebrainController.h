@@ -27,11 +27,7 @@ public:
                          float max_fault_clear_speed_m_s = 1.0,
                          ControllerMode_e assigned_controller_mode = ControllerMode_e::MODE_4)
     {
-<<<<<<< Updated upstream
-        _last_worst_latency_rec_time =0;
-=======
         _last_worst_latency_timestamp = 0;
->>>>>>> Stashed changes
         _worst_latency_so_far = -1;
         _params = {allowed_latency, max_fault_clear_speed_m_s, assigned_controller_mode};
     }
