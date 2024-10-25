@@ -1,5 +1,5 @@
 <map id="SharedCarState_s" name="SharedCarState_s">
-<area shape="rect" id="node1" title="car state struct that contains state of everything about the car including" alt="" coords="777,548,928,647"/>
+<area shape="rect" id="node1" title="car state struct that contains state of everything about the car including" alt="" coords="766,548,939,661"/>
 <area shape="rect" id="node2" href="$structSteeringSystemData__s.html" title=" " alt="" coords="5,321,164,390"/>
 <area shape="rect" id="node3" href="$structDrivetrainDynamicReport__s.html" title=" " alt="" coords="189,299,415,412"/>
 <area shape="rect" id="node4" href="$structLoadCellInterfaceOutput__s.html" title=" " alt="" coords="653,328,834,383"/>

@@ -1,4 +1,7 @@
 <map id="DrivebrainController" name="DrivebrainController">
-<area shape="rect" id="node1" title=" " alt="" coords="5,108,204,309"/>
-<area shape="rect" id="node2" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="57,5,153,60"/>
+<area shape="rect" id="node1" title="Drivebrain Controller for fail&#45;safe pass&#45;through control of the car RESPONSIBILITIES AND DOCUMENTATIO..." alt="" coords="5,460,189,676"/>
+<area shape="rect" id="node2" href="$classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of" alt="" coords="28,137,124,192"/>
+<area shape="rect" id="node3" href="$classTorqueControllerSimple.html" title=" " alt="" coords="113,255,292,397"/>
+<area shape="rect" id="node4" href="$structTorqueControllerOutput__s.html" title="Packages drivetrain command with ready boolean to give feedback on controller successfully evaluating..." alt="" coords="149,137,323,192"/>
+<area shape="rect" id="node5" href="$structDrivetrainCommand__s.html" title="Stores setpoints for a command to the Drivetrain, containing speed and torque setpoints for each moto..." alt="" coords="159,5,313,75"/>
 </map>

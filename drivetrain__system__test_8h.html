@@ -251,17 +251,17 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  179</span>    SysClock clock;</div>
 <div class="line"><span class="lineno">  180</span>    <span class="keyword">auto</span> micros = 1000000;</div>
 <div class="line"><span class="lineno">  181</span>    dt.tick(clock.tick(micros));</div>
-<div class="line"><span class="lineno">  182</span>    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});</div>
+<div class="line"><span class="lineno">  182</span>    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {10.0, 11.0, 12.0, 13.0}});</div>
 <div class="line"><span class="lineno">  183</span>    EXPECT_EQ(inv_fl.<a class="code hl_variable" href="classInverterMock.html#a1c669a095c4361fbe6fdc5b376b5acb8">speed_setpoint_rpm_</a>, 1000.0);</div>
-<div class="line"><span class="lineno">  184</span>    EXPECT_EQ(inv_fl.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 2000.0);</div>
+<div class="line"><span class="lineno">  184</span>    EXPECT_EQ(inv_fl.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 10.0);</div>
 <div class="line"><span class="lineno">  185</span> </div>
-<div class="line"><span class="lineno">  186</span>    EXPECT_EQ(inv_fr.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 2001.0);</div>
+<div class="line"><span class="lineno">  186</span>    EXPECT_EQ(inv_fr.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 11.0);</div>
 <div class="line"><span class="lineno">  187</span>    EXPECT_EQ(inv_fr.<a class="code hl_variable" href="classInverterMock.html#a1c669a095c4361fbe6fdc5b376b5acb8">speed_setpoint_rpm_</a>, 1001.0);</div>
 <div class="line"><span class="lineno">  188</span> </div>
-<div class="line"><span class="lineno">  189</span>    EXPECT_EQ(inv_rl.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 2002.0);</div>
+<div class="line"><span class="lineno">  189</span>    EXPECT_EQ(inv_rl.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 12.0);</div>
 <div class="line"><span class="lineno">  190</span>    EXPECT_EQ(inv_rl.<a class="code hl_variable" href="classInverterMock.html#a1c669a095c4361fbe6fdc5b376b5acb8">speed_setpoint_rpm_</a>, 1002.0);</div>
 <div class="line"><span class="lineno">  191</span> </div>
-<div class="line"><span class="lineno">  192</span>    EXPECT_EQ(inv_rr.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 2003.0);</div>
+<div class="line"><span class="lineno">  192</span>    EXPECT_EQ(inv_rr.<a class="code hl_variable" href="classInverterMock.html#a764a4e1216d52b71f357145248ca42cb">torque_setpoint_nm_</a>, 13.0);</div>
 <div class="line"><span class="lineno">  193</span>    EXPECT_EQ(inv_rr.<a class="code hl_variable" href="classInverterMock.html#a1c669a095c4361fbe6fdc5b376b5acb8">speed_setpoint_rpm_</a>, 1003.0);</div>
 <div class="line"><span class="lineno">  194</span> </div>
 <div class="line"><span class="lineno">  195</span>    <span class="comment">// testing to ensure that these extra general commands dont get through the period filter</span></div>

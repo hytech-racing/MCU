@@ -12,12 +12,12 @@ var searchData=
   ['disable_5finverters_5fpin_9',['disable_inverters_pin',['../classMCUInterface.html#ae20de0d669a80dbd674f5b7b025787e1',1,'MCUInterface::disable_inverters_pin()'],['../classMCUInterface.html#ae20de0d669a80dbd674f5b7b025787e1',1,'MCUInterface::disable_inverters_pin()']]],
   ['disable_5fno_5fpins_10',['disable_no_pins',['../classDrivetrainSystem.html#ac5a471fdad887052cb7cbc633879562c',1,'DrivetrainSystem::disable_no_pins()'],['../classDrivetrainMock.html#a5e98ecabe1c5ed26f4281e312c803e43',1,'DrivetrainMock::disable_no_pins()']]],
   ['done_11',['done',['../classBuzzerController.html#a496b8cc572d56caf75a08a1767f26f0c',1,'BuzzerController']]],
-  ['drivebraincontroller_12',['DrivebrainController',['../classDrivebrainController.html#abf1bfb6db3e5e686cd6f8cdfad5ca812',1,'DrivebrainController']]],
+  ['drivebraincontroller_12',['DrivebrainController',['../classDrivebrainController.html#a878c5e8cb17d40b76af488b5a8f6ff6e',1,'DrivebrainController']]],
   ['drivebrainethinterface_13',['DrivebrainETHInterface',['../classDrivebrainETHInterface.html#a9b22dd9be45a652ab25239a98fd64518',1,'DrivebrainETHInterface']]],
   ['drivetrain_5fenabled_5f_14',['drivetrain_enabled_',['../classDrivetrainSystem.html#a999d889397257fb8f93b9e139ae14354',1,'DrivetrainSystem']]],
   ['drivetrain_5ferror_5foccured_15',['drivetrain_error_occured',['../classDrivetrainMock.html#aeee183300baef99f9b773bda0d71f18a',1,'DrivetrainMock::drivetrain_error_occured()'],['../classDrivetrainSystem.html#a3eefd92d61b78ad1e3c314d455da6b5a',1,'DrivetrainSystem::drivetrain_error_occured()']]],
   ['drivetrain_5fready_5f_16',['drivetrain_ready_',['../classDrivetrainSystem.html#a9a860d084bf8b80c07cdd461171abd3b',1,'DrivetrainSystem']]],
   ['drivetrain_5freset_17',['drivetrain_reset',['../src_2main_8cpp.html#a433468e39ea3e8251555e9f46cf24923',1,'main.cpp']]],
-  ['drivetrainsystem_18',['DrivetrainSystem',['../classDrivetrainSystem.html#a1cd0fb1fbbf782563940cff6bd1e7919',1,'DrivetrainSystem']]],
+  ['drivetrainsystem_18',['DrivetrainSystem',['../classDrivetrainSystem.html#a5a3776c1c360bf01e4ea309211d82a70',1,'DrivetrainSystem']]],
   ['dummy_5fstate_19',['dummy_state',['../state__machine__test_8h.html#ac78674e4c43335e6bc83997ec4dc33bf',1,'state_machine_test.h']]]
 ];

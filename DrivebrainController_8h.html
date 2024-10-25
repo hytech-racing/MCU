@@ -78,62 +78,28 @@ $(function() {
   <div class="headertitle"><div class="title">DrivebrainController.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="TorqueControllers_8h_source.html">TorqueControllers.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="SimpleController_8h_source.html">Controllers/SimpleController.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="DrivebrainData_8h_source.html">DrivebrainData.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="BaseController_8h_source.html">BaseController.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="SharedDataTypes_8h_source.html">SharedDataTypes.h</a>&quot;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for DrivebrainController.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="DrivebrainController_8h__incl.png" border="0" usemap="#alib_2systems_2include_2DrivebrainController_8h" alt=""/></div>
 <map name="alib_2systems_2include_2DrivebrainController_8h" id="alib_2systems_2include_2DrivebrainController_8h">
-<area shape="rect" title=" " alt="" coords="1470,5,1620,45"/>
-<area shape="rect" href="TorqueControllers_8h.html" title=" " alt="" coords="660,93,795,119"/>
-<area shape="rect" href="BaseController_8h.html" title=" " alt="" coords="1046,489,1164,515"/>
-<area shape="rect" href="SharedDataTypes_8h.html" title=" " alt="" coords="962,563,1096,588"/>
-<area shape="rect" href="DrivebrainData_8h.html" title=" " alt="" coords="1788,636,1905,661"/>
-<area shape="rect" href="CASEControllerWrapper_8h.html" title=" " alt="" coords="638,167,817,207"/>
-<area shape="rect" href="LoadCellVectoringController_8h.html" title=" " alt="" coords="1016,167,1210,207"/>
-<area shape="rect" href="LookupLaunchController_8h.html" title=" " alt="" coords="410,167,584,207"/>
-<area shape="rect" href="SimpleLaunchController_8h.html" title=" " alt="" coords="140,255,310,295"/>
-<area shape="rect" href="SimpleController_8h.html" title=" " alt="" coords="894,262,1087,287"/>
-<area shape="rect" href="SlipLaunchController_8h.html" title=" " alt="" coords="116,174,334,199"/>
-<area shape="rect" href="CASESystem_8h.html" title=" " alt="" coords="700,262,811,287"/>
-<area shape="rect" title=" " alt="" coords="1020,636,1084,661"/>
-<area shape="rect" href="Utility_8h.html" title=" " alt="" coords="1752,709,1818,735"/>
-<area shape="rect" title=" " alt="" coords="1302,636,1388,661"/>
-<area shape="rect" title=" " alt="" coords="833,636,996,661"/>
-<area shape="rect" href="PhysicalParameters_8h.html" title=" " alt="" coords="1711,783,1859,808"/>
-<area shape="rect" title=" " alt="" coords="1917,783,1968,808"/>
-<area shape="rect" title=" " alt="" coords="436,343,542,368"/>
-<area shape="rect" title=" " alt="" coords="566,343,718,368"/>
-<area shape="rect" href="PedalsSystem_8h.html" title=" " alt="" coords="562,416,678,441"/>
-<area shape="rect" href="DrivetrainSystem_8h.html" title=" " alt="" coords="1666,489,1797,515"/>
-<area shape="rect" href="SteeringSystem_8h.html" title=" " alt="" coords="228,416,352,441"/>
-<area shape="rect" href="MCUStateMachine_8h.html" title=" " alt="" coords="1223,343,1366,368"/>
-<area shape="rect" title=" " alt="" coords="793,343,950,368"/>
-<area shape="rect" title=" " alt="" coords="974,343,1097,368"/>
-<area shape="rect" title=" " alt="" coords="790,489,852,515"/>
-<area shape="rect" title=" " alt="" coords="554,563,605,588"/>
-<area shape="rect" href="AnalogSensorsInterface_8h.html" title=" " alt="" coords="494,489,665,515"/>
-<area shape="rect" title=" " alt="" coords="450,563,525,588"/>
-<area shape="rect" title=" " alt="" coords="1523,563,1636,588"/>
-<area shape="rect" title=" " alt="" coords="1660,563,1803,588"/>
-<area shape="rect" href="SteeringEncoderInterface_8h.html" title=" " alt="" coords="25,489,204,515"/>
-<area shape="rect" href="Filter__IIR_8h.html" title=" " alt="" coords="114,563,200,588"/>
-<area shape="rect" title=" " alt="" coords="228,489,368,515"/>
-<area shape="rect" title=" " alt="" coords="854,416,926,441"/>
-<area shape="rect" href="Buzzer_8h.html" title=" " alt="" coords="951,416,1022,441"/>
-<area shape="rect" href="TorqueControllerMux_8h.html" title=" " alt="" coords="1444,416,1595,441"/>
-<area shape="rect" href="SafetySystem_8h.html" title=" " alt="" coords="1971,416,2084,441"/>
-<area shape="rect" title=" " alt="" coords="1872,489,1984,515"/>
-<area shape="rect" title=" " alt="" coords="1046,416,1191,441"/>
-<area shape="rect" title=" " alt="" coords="1215,416,1368,441"/>
-<area shape="rect" title=" " alt="" coords="1243,489,1354,515"/>
-<area shape="rect" title=" " alt="" coords="1378,489,1541,515"/>
-<area shape="rect" title=" " alt="" coords="2008,489,2149,515"/>
-<area shape="rect" href="BaseLaunchController_8h.html" title=" " alt="" coords="377,416,537,441"/>
-<area shape="rect" href="accel__lookup_8h.html" title=" " alt="" coords="386,262,494,287"/>
+<area shape="rect" title=" " alt="" coords="328,5,477,45"/>
+<area shape="rect" href="SimpleController_8h.html" title=" " alt="" coords="121,93,314,119"/>
+<area shape="rect" href="BaseController_8h.html" title=" " alt="" coords="204,167,321,192"/>
+<area shape="rect" href="SharedDataTypes_8h.html" title=" " alt="" coords="195,240,330,265"/>
+<area shape="rect" href="DrivebrainData_8h.html" title=" " alt="" coords="443,313,560,339"/>
+<area shape="rect" title=" " alt="" coords="491,93,549,119"/>
+<area shape="rect" title=" " alt="" coords="5,313,69,339"/>
+<area shape="rect" href="Utility_8h.html" title=" " alt="" coords="271,387,337,412"/>
+<area shape="rect" title=" " alt="" coords="145,313,231,339"/>
+<area shape="rect" title=" " alt="" coords="256,313,419,339"/>
+<area shape="rect" href="PhysicalParameters_8h.html" title=" " alt="" coords="169,460,317,485"/>
+<area shape="rect" title=" " alt="" coords="341,460,392,485"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -154,6 +120,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivebrainController.html">DrivebrainController</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drivebrain <a class="el" href="classController.html" title="Base class for all controllers, which define drivetrain command containing different variations of">Controller</a> for fail-safe pass-through control of the car RESPONSIBILITIES AND DOCUMENTATION.  <a href="classDrivebrainController.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

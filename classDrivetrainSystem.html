@@ -94,9 +94,9 @@ Collaboration diagram for DrivetrainSystem&lt; InverterType &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1cd0fb1fbbf782563940cff6bd1e7919"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a1cd0fb1fbbf782563940cff6bd1e7919">DrivetrainSystem</a> (const std::array&lt; InverterType *, 4 &gt; &amp;<a class="el" href="structinverters.html">inverters</a>, <a class="el" href="classMCUInterface.html">MCUInterface</a> *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage=60, int min_cmd_period_ms=1)</td></tr>
-<tr class="memdesc:a1cd0fb1fbbf782563940cff6bd1e7919"><td class="mdescLeft">&#160;</td><td class="mdescRight">order of array: 0: FL, 1: FR, 2: RL, 3: RR  <a href="classDrivetrainSystem.html#a1cd0fb1fbbf782563940cff6bd1e7919">More...</a><br /></td></tr>
-<tr class="separator:a1cd0fb1fbbf782563940cff6bd1e7919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a3776c1c360bf01e4ea309211d82a70"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a5a3776c1c360bf01e4ea309211d82a70">DrivetrainSystem</a> (const std::array&lt; InverterType *, 4 &gt; &amp;<a class="el" href="structinverters.html">inverters</a>, <a class="el" href="classMCUInterface.html">MCUInterface</a> *mcu_interface, int init_time_limit_ms, uint16_t min_hv_voltage=60, int min_cmd_period_ms=1, float max_torque_setpoint_nm=21.42)</td></tr>
+<tr class="memdesc:a5a3776c1c360bf01e4ea309211d82a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">order of array: 0: FL, 1: FR, 2: RL, 3: RR  <a href="classDrivetrainSystem.html#a5a3776c1c360bf01e4ea309211d82a70">More...</a><br /></td></tr>
+<tr class="separator:a5a3776c1c360bf01e4ea309211d82a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f70417c1da9a6f99e9b6ef42cffd075"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a5f70417c1da9a6f99e9b6ef42cffd075">tick</a> (const SysTick_s &amp;tick)</td></tr>
 <tr class="separator:a5f70417c1da9a6f99e9b6ef42cffd075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99a4a69b8d32baebda0c0cc9afa81a8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a99a4a69b8d32baebda0c0cc9afa81a8c">setup_retry</a> ()</td></tr>
@@ -185,14 +185,16 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ad18a988bcc293a394d428c0142fb24af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d008a3a0182fb277e939ea7a3c6342"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDrivetrainDynamicReport__s.html">DrivetrainDynamicReport_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a31d008a3a0182fb277e939ea7a3c6342">dynamic_data_</a></td></tr>
 <tr class="separator:a31d008a3a0182fb277e939ea7a3c6342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3871bccec0bd4a7061f1f9a57f5a5c3e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrivetrainSystem.html#a3871bccec0bd4a7061f1f9a57f5a5c3e">max_torque_setpoint_nm_</a></td></tr>
+<tr class="separator:a3871bccec0bd4a7061f1f9a57f5a5c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename InverterType&gt;<br />
 class DrivetrainSystem&lt; InverterType &gt;</div>
 <p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00013">13</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1cd0fb1fbbf782563940cff6bd1e7919" name="a1cd0fb1fbbf782563940cff6bd1e7919"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cd0fb1fbbf782563940cff6bd1e7919">&#9670;&#160;</a></span>DrivetrainSystem()</h2>
+<a id="a5a3776c1c360bf01e4ea309211d82a70" name="a5a3776c1c360bf01e4ea309211d82a70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a3776c1c360bf01e4ea309211d82a70">&#9670;&#160;</a></span>DrivetrainSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +232,13 @@ template&lt;typename InverterType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>min_cmd_period_ms</em> = <code>1</code>&#160;</td>
+          <td class="paramname"><em>min_cmd_period_ms</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_torque_setpoint_nm</em> = <code>21.42</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -254,7 +262,7 @@ template&lt;typename InverterType &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00018">18</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   19</span>        : <a class="code hl_variable" href="classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189">inverters_</a>(<a class="code hl_struct" href="structinverters.html">inverters</a>), <a class="code hl_variable" href="classDrivetrainSystem.html#a9711a6cf6a3409d31642ab71165c5798">init_time_limit_ms_</a>(init_time_limit_ms), <a class="code hl_variable" href="classDrivetrainSystem.html#a4cdaf1edddbec16dd289f2e14e2e4738">min_hv_voltage_</a>(min_hv_voltage), <a class="code hl_variable" href="classDrivetrainSystem.html#ad6c73f751ff935e5bd8dc792b28d0e7f">min_cmd_period_</a>(min_cmd_period_ms)</div>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>        : <a class="code hl_variable" href="classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189">inverters_</a>(<a class="code hl_struct" href="structinverters.html">inverters</a>), <a class="code hl_variable" href="classDrivetrainSystem.html#a9711a6cf6a3409d31642ab71165c5798">init_time_limit_ms_</a>(init_time_limit_ms), <a class="code hl_variable" href="classDrivetrainSystem.html#a4cdaf1edddbec16dd289f2e14e2e4738">min_hv_voltage_</a>(min_hv_voltage), <a class="code hl_variable" href="classDrivetrainSystem.html#ad6c73f751ff935e5bd8dc792b28d0e7f">min_cmd_period_</a>(min_cmd_period_ms), <a class="code hl_variable" href="classDrivetrainSystem.html#a3871bccec0bd4a7061f1f9a57f5a5c3e">max_torque_setpoint_nm_</a>(max_torque_setpoint_nm)</div>
 <div class="line"><span class="lineno">   20</span>    {</div>
 <div class="line"><span class="lineno">   21</span>        <span class="comment">// values from: https://www.amk-motion.com/amk-dokucd/dokucd/en/content/resources/pdf-dateien/fse/motor_data_sheet_a2370dd_dd5.pdf</span></div>
 <div class="line"><span class="lineno">   22</span>        <a class="code hl_variable" href="classDrivetrainSystem.html#a273b9cb4bc4d54da9d7598e49c7a4e00">motor_pole_pairs_</a> = 5;</div>
@@ -278,6 +286,7 @@ template&lt;typename InverterType &gt; </div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a31d008a3a0182fb277e939ea7a3c6342"><div class="ttname"><a href="classDrivetrainSystem.html#a31d008a3a0182fb277e939ea7a3c6342">DrivetrainSystem::dynamic_data_</a></div><div class="ttdeci">DrivetrainDynamicReport_s dynamic_data_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00096">DrivetrainSystem.h:96</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a342d74c84da9f3766b2d8c24152db537"><div class="ttname"><a href="classDrivetrainSystem.html#a342d74c84da9f3766b2d8c24152db537">DrivetrainSystem::last_reset_cmd_time_</a></div><div class="ttdeci">unsigned long last_reset_cmd_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00092">DrivetrainSystem.h:92</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a37b74637f4d83762bcb70d9aba5e20f4"><div class="ttname"><a href="classDrivetrainSystem.html#a37b74637f4d83762bcb70d9aba5e20f4">DrivetrainSystem::lambda_magnetic_flux_wb_</a></div><div class="ttdeci">float lambda_magnetic_flux_wb_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00071">DrivetrainSystem.h:71</a></div></div>
+<div class="ttc" id="aclassDrivetrainSystem_html_a3871bccec0bd4a7061f1f9a57f5a5c3e"><div class="ttname"><a href="classDrivetrainSystem.html#a3871bccec0bd4a7061f1f9a57f5a5c3e">DrivetrainSystem::max_torque_setpoint_nm_</a></div><div class="ttdeci">float max_torque_setpoint_nm_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00097">DrivetrainSystem.h:97</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a4cdaf1edddbec16dd289f2e14e2e4738"><div class="ttname"><a href="classDrivetrainSystem.html#a4cdaf1edddbec16dd289f2e14e2e4738">DrivetrainSystem::min_hv_voltage_</a></div><div class="ttdeci">uint16_t min_hv_voltage_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00069">DrivetrainSystem.h:69</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a55bea6b5a0ec8a39221c141f1ce20f96"><div class="ttname"><a href="classDrivetrainSystem.html#a55bea6b5a0ec8a39221c141f1ce20f96">DrivetrainSystem::last_general_cmd_time_</a></div><div class="ttdeci">unsigned long last_general_cmd_time_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00092">DrivetrainSystem.h:92</a></div></div>
 <div class="ttc" id="aclassDrivetrainSystem_html_a5a7717176bfeb3038e3f9f62a857a189"><div class="ttname"><a href="classDrivetrainSystem.html#a5a7717176bfeb3038e3f9f62a857a189">DrivetrainSystem::inverters_</a></div><div class="ttdeci">std::array&lt; InverterType *, 4 &gt; inverters_</div><div class="ttdef"><b>Definition:</b> <a href="DrivetrainSystem_8h_source.html#l00066">DrivetrainSystem.h:66</a></div></div>
@@ -1130,6 +1139,32 @@ template&lt;typename InverterType &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00076">76</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
+
+</div>
+</div>
+<a id="a3871bccec0bd4a7061f1f9a57f5a5c3e" name="a3871bccec0bd4a7061f1f9a57f5a5c3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3871bccec0bd4a7061f1f9a57f5a5c3e">&#9670;&#160;</a></span>max_torque_setpoint_nm_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InverterType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="classDrivetrainSystem.html">DrivetrainSystem</a>&lt; InverterType &gt;::max_torque_setpoint_nm_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DrivetrainSystem_8h_source.html#l00097">97</a> of file <a class="el" href="DrivetrainSystem_8h_source.html">DrivetrainSystem.h</a>.</p>
 
 </div>
 </div>
