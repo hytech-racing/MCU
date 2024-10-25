@@ -157,6 +157,7 @@ struct SharedCarState_s
     VectornavData_s vn_data;
     DrivebrainData_s db_data;
     TorqueControllerMuxStatus tc_mux_status;
+    bool drivebrain_timing_failure = false;
     SharedCarState_s() = delete;
     SharedCarState_s(const SysTick_s &_systick,
               const SteeringSystemData_s &_steering_data,
@@ -186,7 +187,8 @@ struct SharedCarState_s
               const PedalsSystemData_s &_pedals_data,
               const VectornavData_s &_vn_data,
               const DrivebrainData_s &_db_data,
-              const TorqueControllerMuxStatus &_tc_mux_status)
+              const TorqueControllerMuxStatus &_tc_mux_status,
+              bool _drivebrain_timing_failure)
         : systick(_systick),
           steering_data(_steering_data),
           drivetrain_data(_drivetrain_data),
@@ -195,7 +197,8 @@ struct SharedCarState_s
           pedals_data(_pedals_data),
           vn_data(_vn_data),
           db_data(_db_data),
-          tc_mux_status(_tc_mux_status)
+          tc_mux_status(_tc_mux_status),
+          drivebrain_timing_failure(_drivebrain_timing_failure)
     {
         // constructor body (if needed)
     }

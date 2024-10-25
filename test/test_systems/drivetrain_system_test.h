@@ -179,17 +179,17 @@ TEST(DrivetrainSystemTesting, test_drivetrain_inverter_comms)
     SysClock clock;
     auto micros = 1000000;
     dt.tick(clock.tick(micros));
-    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {2000.0, 2001.0, 2002.0, 2003.0}});
+    dt.command_drivetrain({{1000.0, 1001.0, 1002.0, 1003.0}, {10.0, 11.0, 12.0, 13.0}});
     EXPECT_EQ(inv_fl.speed_setpoint_rpm_, 1000.0);
-    EXPECT_EQ(inv_fl.torque_setpoint_nm_, 2000.0);
+    EXPECT_EQ(inv_fl.torque_setpoint_nm_, 10.0);
 
-    EXPECT_EQ(inv_fr.torque_setpoint_nm_, 2001.0);
+    EXPECT_EQ(inv_fr.torque_setpoint_nm_, 11.0);
     EXPECT_EQ(inv_fr.speed_setpoint_rpm_, 1001.0);
 
-    EXPECT_EQ(inv_rl.torque_setpoint_nm_, 2002.0);
+    EXPECT_EQ(inv_rl.torque_setpoint_nm_, 12.0);
     EXPECT_EQ(inv_rl.speed_setpoint_rpm_, 1002.0);
 
-    EXPECT_EQ(inv_rr.torque_setpoint_nm_, 2003.0);
+    EXPECT_EQ(inv_rr.torque_setpoint_nm_, 13.0);
     EXPECT_EQ(inv_rr.speed_setpoint_rpm_, 1003.0);
 
     // testing to ensure that these extra general commands dont get through the period filter
