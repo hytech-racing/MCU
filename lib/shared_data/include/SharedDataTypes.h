@@ -8,6 +8,7 @@
 
 using speed_rpm = float;
 using torque_nm = float;
+using distance_m = float;
 
 /// @brief Defines modes of torque limit to be processed in torque limit map for exact values.
 enum class TorqueLimit_e
@@ -140,6 +141,21 @@ struct SteeringSystemData_s
     SteeringSystemStatus_e status;
 };
 
+/// @brief the struct that will be serialized and written into the memory of the eeprom
+struct __attribute__((packed)) EEPROMInterfaceData_s
+{
+    uint32_t current_driven_m;
+};
+
+/// @brief low level stats. will contain things like current session 
+//         driven meters, total faults occured during a session, etc. that will get written directly into the EEPROM
+struct LowLevelStatData_s
+{
+    // this is needed since if we change this struct we need to ensure that we read garbage data from the EEPROM on init 
+    uint16_t low_level_data_size_in_bytes; 
+    distance_m session_distance;
+};
+
 /// @brief car state struct that contains state of everything about the car including
 //         things such as steering, drivetrain, current system time, vectornav / INS data,
 //         etc. an instance of this struct is created in main and updated there by all of the systems
@@ -158,6 +174,7 @@ struct SharedCarState_s
     DrivebrainData_s db_data;
     TorqueControllerMuxStatus tc_mux_status;
     bool drivebrain_timing_failure = false;
+    LowLevelStatData_s low_level_stats = {};
     SharedCarState_s() = delete;
     SharedCarState_s(const SysTick_s &_systick,
               const SteeringSystemData_s &_steering_data,

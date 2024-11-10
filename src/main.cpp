@@ -29,6 +29,7 @@
 #include "SABInterface.h"
 #include "VectornavInterface.h"
 #include "LoadCellInterface.h"
+#include "EEPROMInterface.h"
 
 /* Systems */
 #include "SysClock.h"
@@ -40,6 +41,7 @@
 #include "TorqueControllerMux.h"
 #include "TorqueControllers.h"
 #include "CASESystem.h"
+#include "StatsSystem.h"
 
 // /* State machine */
 #include "MCUStateMachine.h"
@@ -208,6 +210,8 @@ struct inverters
     InvInt_t rr = InvInt_t(&CAN2_txBuffer, ID_MC4_SETPOINTS_COMMAND);
 } inv;
 
+EEPROMInterface eeprom_interface;
+
 // /*
 //     SYSTEMS
 // */
@@ -320,6 +324,8 @@ TCMuxType torque_controller_mux({static_cast<Controller *>(&tc_simple),
                                  static_cast<Controller *>(&simple_launch),
                                  static_cast<Controller *>(&db_controller)},
                                 {false, false, true, false, true});
+
+StatsSystem stats_system;
 
 /* Declare state machine */
 MCUStateMachine<DriveSys_t> fsm(&buzzer, &drivetrain, &dashboard, &pedals_system, &torque_controller_mux, &safety_system);
@@ -444,6 +450,10 @@ void loop()
     car_state_inst.drivebrain_timing_failure = db_controller.get_timing_failure_status();
     hytech_msgs_MCUOutputData out_eth_msg = db_eth_interface.make_db_msg(car_state_inst);
 
+    car_state_inst.low_level_stats = stats_system.get_latest_vehicle_stats(car_state_inst);
+
+    eeprom_interface.update_eeprom(car_state_inst);
+
     handle_ethernet_interface_comms(curr_tick, out_eth_msg);
 
     tick_all_systems(curr_tick);
@@ -545,7 +555,6 @@ void init_all_CAN_devices()
 
 void tick_all_interfaces(const SysTick_s &current_system_tick)
 {
-
     TriggerBits_s t = current_system_tick.triggers;
     if (t.trigger10) // 10Hz
     {
