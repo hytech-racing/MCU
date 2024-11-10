@@ -9,6 +9,7 @@ struct DrivebrainData_s
     int64_t last_receive_time_millis = -1;
     /// @brief the latest MCU last_receive_time_millis that the drivebrain received
     int64_t DB_prev_MCU_recv_millis = -1;
+    int32_t round_trip_time_millis = -1;
     veh_vec<float> torque_limits_nm;
     veh_vec<float> speed_setpoints_rpm;
 };

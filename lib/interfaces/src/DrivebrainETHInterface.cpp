@@ -9,10 +9,12 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
     out.brake_percent = shared_state.pedals_data.regenPercent;
 
     out.has_rpm_data = true;
+
     out.rpm_data.FL = shared_state.drivetrain_data.measuredSpeeds[0];
     out.rpm_data.FR = shared_state.drivetrain_data.measuredSpeeds[1];
     out.rpm_data.RL = shared_state.drivetrain_data.measuredSpeeds[2];
     out.rpm_data.RR = shared_state.drivetrain_data.measuredSpeeds[3];
+
     out.steering_angle_deg = shared_state.steering_data.angle;
     out.MCU_recv_millis = _latest_data.last_receive_time_millis;
     out.load_cell_data = {shared_state.raw_loadcell_data.raw_load_cell_data.FL,
@@ -22,6 +24,7 @@ hytech_msgs_MCUOutputData DrivebrainETHInterface::make_db_msg(const SharedCarSta
     out.has_load_cell_data = true;
 
     out.timing_failure_active = shared_state.drivebrain_timing_failure;
+    out.round_trip_time_millis = shared_state.systick.millis - _latest_data.DB_prev_MCU_recv_millis;
     return out;
 }
 
