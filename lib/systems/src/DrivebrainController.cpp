@@ -13,7 +13,7 @@ TorqueControllerOutput_s DrivebrainController::evaluate(const SharedCarState_s &
     // 2 if the DB_prev_MCU_recv_millis < 0, then the drivebrain has not received a time from the MCU 
     // (meaning that the MCU is not sending properly or the drivebrain is not receiving properly or it has 
     // yet to receive from the MCU yet)
-    bool drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis < 0);
+    bool drivebrain_has_not_received_time = (db_input.DB_prev_MCU_recv_millis <= 0);
     // Serial.println("uh");
     // 3 if the time between the current MCU sys_tick.millis time and the last millis time that the drivebrain received is too high
     bool message_too_latent = (::abs((int)(sys_tick.millis - db_input.DB_prev_MCU_recv_millis)) > (int)_params.allowed_latency);
