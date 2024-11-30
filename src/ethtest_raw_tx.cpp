@@ -16,7 +16,10 @@ constexpr uint16_t kCustomEtherType = 0x8001;
 uint32_t counter;
 EthernetPacket frame;
 int numFrames, framesSent, delayus, frameSize;
+int done = 1;
+unsigned int testnum=999;
 MicroMetro send_timer(100);
+int total_rx_time, total_tx_time;
 
 // Main program setup.
 void setup()
@@ -86,20 +89,27 @@ void sendFrames()
 {
     while (framesSent < numFrames && send_timer.check())
     {
+        int startTime = micros();
         // Get the current time in microseconds
         frame.data.timestamp = (uint32_t) micros();
         frame.data.counter = counter++;
         EthernetFrame.send((const uint8_t *)&frame, 14 + frameSize);
         framesSent++;
+        total_tx_time += micros() - startTime;
         if (framesSent == numFrames)
         {
             Serial.printf("Done\n");
+            done = 1;
+            Serial.printf("Total Tx time: %d us, Total Rx time: %d us\n", total_tx_time, total_rx_time);
+            total_tx_time = 0;
+            total_rx_time = 0;
         }
     }
 }
 
 void readFrames()
 {
+    int startTime = micros();
     int size = EthernetFrame.parseFrame();
     if (size <= 0)
     {
@@ -112,31 +122,53 @@ void readFrames()
     }
 
     const EthernetPacket *pkt = (const EthernetPacket *) EthernetFrame.data();
-
+    total_rx_time += micros() - startTime;
     printf("Frame[%d]: %d us\n", pkt->data.counter, micros()-pkt->data.timestamp);
 }
 
-void readSerial()
-{
-    if (Serial.available())
+// Add this new function to run the tests
+void runTests() {
+    const int sizes[] = {10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 
+                         600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 
+                         1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 
+                         1500};
+    
+    if (testnum < sizeof(sizes) / sizeof(sizes[0]) && done)
     {
+        frameSize = sizes[testnum]; // Set the current test frame size
+        numFrames = 10000; // Set the number of frames to send
+        send_timer.interval(200); // Set 200 microseconds interval
+        framesSent = 0; // Reset the number of frames sent
+        done = 0;
+        Serial.printf("Running test with frame size: %d bytes\n", frameSize);
+        
+        send_timer.reset(); // Reset the timer
+        testnum++;
+    }
+}
+
+void readSerial() {
+    if (Serial.available()) {
         String command = Serial.readStringUntil('\n');
 
-        // Assume user input in format: <frameCount> <delayTimeMicroseconds> <frameSize>
-        int frameCount = 0;
-        unsigned long delayTime = 0;
+        // Check if the command is to run tests
+        if (command.equals("t")) {
+            done = 1;
+            testnum=0;
+        } else {
+            // Assume user input in the format: <frameCount> <delayTimeMicroseconds> <frameSize>
+            int frameCount = 0;
+            unsigned long delayTime = 0;
 
-        if (sscanf(command.c_str(), "%d %lu %d", &frameCount, &delayTime, &frameSize) == 3)
-        {
-            Serial.printf("Sending %d frames with a delay of %lu microseconds and frame size of %d bytes.\r\n", frameCount, delayTime, frameSize);
-            send_timer.interval(delayTime);
-            send_timer.reset();
-            framesSent = 0;
-            numFrames = frameCount;
-        }
-        else
-        {
-            Serial.println("Invalid command format. Please use: <frameCount> <delayTimeMicroseconds> <frameSize>");
+            if (sscanf(command.c_str(), "%d %lu %d", &frameCount, &delayTime, &frameSize) == 3) {
+                Serial.printf("Sending %d frames with a delay of %lu microseconds and frame size of %d bytes.\r\n", frameCount, delayTime, frameSize);
+                send_timer.interval(delayTime);
+                send_timer.reset();
+                framesSent = 0;
+                numFrames = frameCount;
+            } else {
+                Serial.println("Invalid command format. Please use: <frameCount> <delayTimeMicroseconds> <frameSize> or 't' to run tests.");
+            }
         }
     }
 }
@@ -147,4 +179,5 @@ void loop()
     sendFrames();
     readFrames();
     readSerial();
+    runTests();
 }

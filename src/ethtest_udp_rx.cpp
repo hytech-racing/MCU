@@ -13,7 +13,7 @@ unsigned char src[] = {0x0, 0xe0, 0x4c, 0xef, 0xf8, 0x6};
 
 // Custom EtherType constant
 constexpr uint16_t kCustomEtherType = 0x8001;
-    
+
 // Main program setup.
 void setup()
 {
@@ -73,6 +73,7 @@ void setup()
 
 void readFrame()
 {
+    
     int size = EthernetFrame.parseFrame();
     if (size <= 0)
     {
