@@ -9,8 +9,11 @@ namespace EthParams
 {
     uint8_t default_MCU_MAC_address[6] = 
     {0x04, 0xe9, 0xe5, 0x10, 0x1f, 0x22};
+    uint8_t default_VCR_MAC_address[6] = 
+    {0x04, 0xe9, 0xe5, 0x10, 0x1f, 0x23};
 
     const IPAddress default_MCU_ip(192, 168, 1, 30);
+    const IPAddress default_VCR_ip(192, 168, 1, 37);
     const IPAddress default_TCU_ip(192, 168, 1, 69);
 
     const uint16_t default_protobuf_send_port = 2001;

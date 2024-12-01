@@ -6,6 +6,7 @@
 #include <QNEthernet.h>
 
 #include "ethtest.h"
+#include "InterfaceParams.h"
 
 using namespace qindesign::network;
 
@@ -13,6 +14,8 @@ unsigned char src[] = {0x0, 0xe0, 0x4c, 0xef, 0xf8, 0x6};
 
 // Custom EtherType constant
 constexpr uint16_t kCustomEtherType = 0x8001;
+
+EthernetUDP socket(256);
 
 // Main program setup.
 void setup()
@@ -63,29 +66,17 @@ void setup()
     // Initialize Ethernet
     printf("Starting Ethernet%s...\r\n",
            Ethernet.isDHCPEnabled() ? " with DHCP" : "");
-    if (!Ethernet.begin())
-    {
-        printf("Failed to start Ethernet\r\n");
-        return;
-    }
-    EthernetFrame.setReceiveQueueSize(256);
+    Ethernet.begin(EthParams::default_VCR_MAC_address,EthParams::default_VCR_ip);
+    socket.beginWithReuse(2000);
 }
 
 void readFrame()
 {
-    
-    int size = EthernetFrame.parseFrame();
-    if (size <= 0)
-    {
-        return; // No frame received
+    int packetSize = socket.parsePacket();
+    if (packetSize >= 0) {  // non_negative_value >= 0
+        digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ? 0 : 1);
+        socket.send(EthParams::default_MCU_ip, 2000, socket.data(), packetSize);
     }
-
-    // Access the frame's data directly
-    const uint8_t *buf = EthernetFrame.data();
-
-    // Retransmit the frame
-    digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ? 0 : 1);
-    EthernetFrame.send(buf, size);
 }
 
 // Main program loop.

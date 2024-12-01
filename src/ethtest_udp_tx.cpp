@@ -6,23 +6,28 @@
 #include <QNEthernet.h>
 #include "MicroMetro.h"
 #include "ethtest.h"
+#include "InterfaceParams.h"
 
 using namespace qindesign::network;
 
 unsigned char src[] = {0x0, 0xe0, 0x4c, 0xef, 0xf8, 0x6};
 
+EthernetUDP socket(256);
+
 // Custom EtherType constant
 constexpr uint16_t kCustomEtherType = 0x8001;
 uint32_t counter;
-EthernetPacket frame;
+DataPacket data, rx_data;
 int numFrames, framesSent, delayus, frameSize;
 int done = 1;
 unsigned int testnum=999;
 MicroMetro send_timer(100);
+int total_rx_time, total_tx_time;
 
 // Main program setup.
 void setup()
 {
+    pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
     while (!Serial && millis() < 4000)
     {
@@ -68,18 +73,11 @@ void setup()
     // Initialize Ethernet
     printf("Starting Ethernet%s...\r\n",
            Ethernet.isDHCPEnabled() ? " with DHCP" : "");
-    if (!Ethernet.begin())
-    {
-        printf("Failed to start Ethernet\r\n");
-        return;
-    }
-    EthernetFrame.setReceiveQueueSize(256);
+    Ethernet.begin(EthParams::default_MCU_MAC_address ,EthParams::default_MCU_ip);
+    socket.beginWithReuse(2000);
 
     const uint8_t destinationMAC[6] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
     const uint8_t sourceMAC[6] = {0xDE, 0xAD, 0xBE, 0xEF, 0x00, 0x01};
-    memcpy(frame.destinationMAC, destinationMAC, 6);
-    memcpy(frame.sourceMAC, sourceMAC, 6);
-    reverseEndianMemcpy(&(frame.ethertype), &kCustomEtherType, 2);
     frameSize = 64; // Default frame size
 }
 
@@ -88,34 +86,34 @@ void sendFrames()
 {
     while (framesSent < numFrames && send_timer.check())
     {
+        int startTime = micros();
         // Get the current time in microseconds
-        frame.data.timestamp = (uint32_t) micros();
-        frame.data.counter = counter++;
-        EthernetFrame.send((const uint8_t *)&frame, 14 + frameSize);
+        data.timestamp = (uint32_t) micros();
+        data.counter = counter++;
+        socket.send((EthParams::default_VCR_ip), (uint16_t) 2000, (const uint8_t*)&data, (size_t) frameSize);
         framesSent++;
+        total_tx_time += micros() - startTime;
         if (framesSent == numFrames)
         {
             Serial.printf("Done\n");
             done = 1;
+            Serial.printf("Total Tx time: %d us, Total Rx time: %d us\n", total_tx_time, total_rx_time);
+            total_tx_time = 0;
+            total_rx_time = 0;
         }
     }
 }
 
 void readFrames()
 {
-    int size = EthernetFrame.parseFrame();
-    if (size <= 0)
-    {
-        return;
+    int startTime = micros();
+    int packetSize = socket.parsePacket();
+    if (packetSize >= 0) {  // non_negative_value >= 0
+        digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ? 0 : 1);
+        memcpy(&rx_data, socket.data(), packetSize);
+        total_rx_time += micros() - startTime;
+        printf("Frame[%d]: %d us\n", rx_data.counter, micros()-rx_data.timestamp);
     }
-    if (size < EthernetFrame.minFrameLen() - 4)
-    {
-        printf("SHORT Frame[%d] \r\n", size);
-        return;
-    }
-
-    const EthernetPacket *pkt = (const EthernetPacket *) EthernetFrame.data();
-    printf("Frame[%d]: %d us\n", pkt->data.counter, micros()-pkt->data.timestamp);
 }
 
 // Add this new function to run the tests
@@ -129,7 +127,7 @@ void runTests() {
     {
         frameSize = sizes[testnum]; // Set the current test frame size
         numFrames = 10000; // Set the number of frames to send
-        send_timer.interval(300); // Set 200 microseconds interval
+        send_timer.interval(200); // Set 200 microseconds interval
         framesSent = 0; // Reset the number of frames sent
         done = 0;
         Serial.printf("Running test with frame size: %d bytes\n", frameSize);
@@ -137,6 +135,22 @@ void runTests() {
         send_timer.reset(); // Reset the timer
         testnum++;
     }
+    /*
+    const int intervals[] = {10, 15, 20, 25, 30, 40, 50, 100, 150, 200, 300, 400, 500, 1000};
+    
+    if (testnum < sizeof(intervals) / sizeof(intervals[0]) && done)
+    {
+        frameSize = 50; // Set the current test frame size
+        numFrames = 10000; // Set the number of frames to send
+        send_timer.interval(intervals[testnum]); // Set 200 microseconds interval
+        framesSent = 0; // Reset the number of frames sent
+        done = 0;
+        Serial.printf("Running test with interval: %d us\n", intervals[testnum]);
+        
+        send_timer.reset(); // Reset the timer
+        testnum++;
+    }
+    */
 }
 
 void readSerial() {

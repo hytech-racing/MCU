@@ -145,6 +145,22 @@ void runTests() {
         send_timer.reset(); // Reset the timer
         testnum++;
     }
+    /*
+    const int intervals[] = {10, 15, 20, 25, 30, 40, 50, 100, 150, 200, 300, 400, 500, 1000};
+    
+    if (testnum < sizeof(intervals) / sizeof(intervals[0]) && done)
+    {
+        frameSize = 50; // Set the current test frame size
+        numFrames = 10000; // Set the number of frames to send
+        send_timer.interval(intervals[testnum]); // Set 200 microseconds interval
+        framesSent = 0; // Reset the number of frames sent
+        done = 0;
+        Serial.printf("Running test with interval: %d us\n", intervals[testnum]);
+        
+        send_timer.reset(); // Reset the timer
+        testnum++;
+    }
+    */
 }
 
 void readSerial() {
