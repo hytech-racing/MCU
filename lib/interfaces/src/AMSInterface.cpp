@@ -84,6 +84,22 @@ float AMSInterface::initialize_charge() {
     //         Management System (BMS). This is stored in the bms_voltages_
     //         member variable.
 
+    int i = 0;
+
+    float lowest_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+
+    while (lowest_voltage < VOLTAGE_LOOKUP_TABLE[i]){
+
+        i++
+
+    }
+
+    charge_ = ((100-i)/100) * MAX_PACK_CHARGE;
+
+    SoC_ = 100* (charge_/MAX_PACK_CHARGE);
+
+    return charge_;
+
     // Step 3: Use the lowest voltage with the defined VOLTAGE_LOOKUP_TABLE
     //         to determine the approximate percentage charge of the
     //         accumulator.
@@ -92,9 +108,7 @@ float AMSInterface::initialize_charge() {
 
     // Step 5: Initialize the SoC_ member variable.
 
-    // Step 6: Return the current charge, according to the specifications.
-
-    return 0; // TODO: Return the real value
+    // Step 6: Return the current charge, according to the specifications. // TODO: Return the real value
     
 }
 
