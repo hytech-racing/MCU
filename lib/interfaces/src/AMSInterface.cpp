@@ -77,16 +77,33 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 }
 
 float AMSInterface::initialize_charge() {
-    int i = 0;
-    float lowest_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+    // Step 1: Read the function description in AMSInterface.h (be sure to
+    //         read the real AMSInterface.h, not the mock interface!)
 
-    while (lowest_voltage - VOLTAGE_LOOKUP_TABLE[i] < 0) {
-        i++;
+    // Step 2: You will need to retrieve the lowest voltage from our Battery
+    //         Management System (BMS). This is stored in the bms_voltages_
+    //         member variable.
+    
+    // Step 3: Use the lowest voltage with the defined VOLTAGE_LOOKUP_TABLE
+    //         to determine the approximate percentage charge of the
+    //         accumulator.
+
+    // Step 4: Initialize the charge_ member variable to the current charge
+
+    // Step 5: Initialize the SoC_ member variable.
+
+    // Step 6: Return the current charge, according to the specifications.
+
+    for (int i = 0; i < sizeof(VOLTAGE_LOOKUP_TABLE)/sizeof(VOLTAGE_LOOKUP_TABLE[0]); i++) {
+        if (bms_voltages_.low_voltage_ro / 10000.0 >= VOLTAGE_LOOKUP_TABLE[i])
+        {
+            charge_ = (100 - i) / 100.0 * MAX_PACK_CHARGE;
+            SoC_ = charge_ / MAX_PACK_CHARGE * 100;
+            break;
+        }
     }
-    charge_ = ( (100 - i) / 100.0) * MAX_PACK_CHARGE;
-    SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
-
-    return charge_;
+    return charge_; // TODO: Return the real value
+    
 }
 
 void AMSInterface::calculate_SoC_em(const SysTick_s &tick) {

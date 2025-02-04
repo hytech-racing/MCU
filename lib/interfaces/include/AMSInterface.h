@@ -184,6 +184,11 @@ public:
 
 private:
 
+    /**
+     * The approximate voltage of one cell for each particular state of charge.
+     * VOLTAGE_LOOKUP_TABLE[0] is the voltage at 100% charge.
+     * VOLTAGE_LOOKUP_TABLE[100] is the voltage at 0% charge.
+    */
     const float VOLTAGE_LOOKUP_TABLE[101] = {3.972, 3.945, 3.918, 3.891, 3.885, 3.874, 3.864, 3.858, 3.847, 3.836, 3.82, 3.815, 3.815, 3.798, 3.788,
     3.782, 3.771, 3.755, 3.744, 3.744, 3.733, 3.728, 3.723, 3.712, 3.701, 3.695, 3.69, 3.679, 3.679, 3.668, 3.663, 3.657, 3.647,
     3.647, 3.636, 3.625, 3.625, 3.625, 3.614, 3.609, 3.603, 3.603, 3.592, 3.592, 3.592, 3.581, 3.581, 3.571, 3.571, 3.571, 3.56,
