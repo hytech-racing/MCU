@@ -83,7 +83,7 @@ float AMSInterface::initialize_charge() {
     // Step 2: You will need to retrieve the lowest voltage from our Battery
     //         Management System (BMS). This is stored in the bms_voltages_
     //         member variable.
-
+    
     // Step 3: Use the lowest voltage with the defined VOLTAGE_LOOKUP_TABLE
     //         to determine the approximate percentage charge of the
     //         accumulator.
@@ -94,7 +94,15 @@ float AMSInterface::initialize_charge() {
 
     // Step 6: Return the current charge, according to the specifications.
 
-    return 0; // TODO: Return the real value
+    for (int i = 0; i < sizeof(VOLTAGE_LOOKUP_TABLE)/sizeof(VOLTAGE_LOOKUP_TABLE[0]); i++) {
+        if (bms_voltages_.low_voltage_ro / 10000.0 >= VOLTAGE_LOOKUP_TABLE[i])
+        {
+            charge_ = (100 - i) / 100.0 * MAX_PACK_CHARGE;
+            SoC_ = charge_ / MAX_PACK_CHARGE * 100;
+            break;
+        }
+    }
+    return charge_; // TODO: Return the real value
     
 }
 
