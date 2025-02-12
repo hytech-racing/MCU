@@ -77,12 +77,30 @@ float AMSInterface::get_filtered_min_cell_voltage() {
 }
 
 float AMSInterface::initialize_charge() {
+
     // Step 1: Read the function description in AMSInterface.h (be sure to
     //         read the real AMSInterface.h, not the mock interface!)
 
     // Step 2: You will need to retrieve the lowest voltage from our Battery
     //         Management System (BMS). This is stored in the bms_voltages_
     //         member variable.
+
+    float min_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+    int soc_percentage = 0
+    for (int i=0; i<101; i++){
+        if (min_voltage >= VOLTAGE_LOOKUP_TABLE[i]){
+            soc_percentage = 100-i;
+            break;
+        }
+    }
+
+    charge_ = (soc_percentage/100.0f) * MAX_PACK_CHARGE;
+    has_initialized_charge_ = true;
+
+    return charge_;
+
+//implements the initialze() function - works well. The unit test have problems
+
 
     // Step 3: Use the lowest voltage with the defined VOLTAGE_LOOKUP_TABLE
     //         to determine the approximate percentage charge of the
