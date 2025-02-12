@@ -39,7 +39,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
         // Serial.print(" ");
         // Serial.print(data.brakeAndAccelPressedImplausibility);
         // Serial.print(" ");
-        
+
         // Serial.println("accel, brake:");
         // Serial.print(data.accelPercent);
         // Serial.print(" ");
@@ -73,7 +73,7 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             set_state_(CAR_STATE::TRACTIVE_SYSTEM_NOT_ACTIVE, current_millis);
             break;
         }
-        if (dashboard_->startButtonPressed() && (data.brakePressed))
+        if (dashboard_->startButtonPressed() && (data.brake_is_pressed))
         {
             set_state_(CAR_STATE::ENABLING_INVERTERS, current_millis);
             break;
@@ -144,11 +144,11 @@ void MCUStateMachine<DrivetrainSysType>::tick_state_machine(unsigned long curren
             break;
         }
 
-        if (safety_system_->get_software_is_ok() && !data.implausibilityExceededMaxDuration)
+        if (safety_system_->get_software_is_ok() && !data.implausibility_has_exceeded_max_duration)
         {
             drivetrain_->command_drivetrain(controller_mux_->getDrivetrainCommand());
         }
-        else    
+        else
         {
             drivetrain_->command_drivetrain_no_torque();
 
@@ -189,7 +189,7 @@ void MCUStateMachine<DrivetrainSysType>::handle_exit_logic_(CAR_STATE prev_state
     case CAR_STATE::WAITING_READY_TO_DRIVE_SOUND:
         break;
     case CAR_STATE::READY_TO_DRIVE:
-    {   
+    {
         // deactivate buzzer and reset it to turn on again later
         buzzer_->deactivate();
         break;

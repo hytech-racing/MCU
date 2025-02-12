@@ -18,8 +18,8 @@ bool DrivetrainSystem<InverterType>::inverter_init_timeout(unsigned long curr_ti
 template <typename InverterType>
 bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_time)
 {
-    // 1. if system ready 
-    
+    // 1. if system ready
+
     if (drivetrain_ready_() && !check_drivetrain_quit_dc_on_() && !drivetrain_enabled_())
     {
 
@@ -31,7 +31,7 @@ bool DrivetrainSystem<InverterType>::handle_inverter_startup(unsigned long curr_
     }
     else if (drivetrain_ready_() && check_drivetrain_quit_dc_on_() && !drivetrain_enabled_())
     {
-        
+
         request_enable_();
     //     enable_requested_ = true;
         return false;
@@ -94,7 +94,7 @@ template <typename InverterType>
 void DrivetrainSystem<InverterType>::check_reset_condition()
 {
     // if ((curr_system_millis_ - last_reset_pressed_time_) > reset_interval_)
-    // {   
+    // {
     reset_requested_ = false;
     // }
 }
@@ -102,17 +102,17 @@ void DrivetrainSystem<InverterType>::check_reset_condition()
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::reset_drivetrain()
 {
-    
+
         for (auto inv_pointer : inverters_)
         {
             inv_pointer->command_reset();
-        }  
+        }
 
 }
 
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::disable_no_pins()
-{    
+{
     // if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
     // {
         for (auto inv_pointer : inverters_)
@@ -126,7 +126,7 @@ void DrivetrainSystem<InverterType>::disable_no_pins()
 
 template <typename InverterType>
 void DrivetrainSystem<InverterType>::disable()
-{    
+{
     // if ((curr_system_millis_ - last_disable_cmd_time_) > min_cmd_period_)
     // {
         for (auto inv_pointer : inverters_)
@@ -145,12 +145,12 @@ void DrivetrainSystem<InverterType>::command_drivetrain(const DrivetrainCommand_
 {
     // if ((curr_system_millis_ - last_general_cmd_time_) > min_cmd_period_)
     // {
-        int index = 0;
-        for (auto inv_pointer : inverters_)
-        {
-            inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
-            index++;
-        }
+        // int index = 0;
+        // for (auto inv_pointer : inverters_)
+        // {
+        //     inv_pointer->handle_command({data.torqueSetpoints[index], data.speeds_rpm[index]});
+        //     index++;
+        // }
         // last_general_cmd_time_ = curr_system_millis_;
     // }
 }
@@ -227,21 +227,21 @@ bool DrivetrainSystem<InverterType>::drivetrain_enabled_()
 template <typename InverterType>
 DrivetrainDynamicReport_s DrivetrainSystem<InverterType>::get_dynamic_data()
 {
-    
+
     // TODO idk
     dynamic_data_.measuredInverterFLPackVoltage = inverters_[0]->dc_bus_voltage();
-    int inverter_ind = 0;
-    for (auto inv_pointer : inverters_)
-    {
-        auto iq = inv_pointer->get_torque_current(); // iq in A
-        auto id = inv_pointer->get_mag_current();    // id in A
-        dynamic_data_.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
-        dynamic_data_.measuredTorqueCurrents[inverter_ind] = iq;
-        dynamic_data_.measuredMagnetizingCurrents[inverter_ind] = id;
+    // int inverter_ind = 0;
+    // for (auto inv_pointer : inverters_)
+    // {
+    //     auto iq = inv_pointer->get_torque_current(); // iq in A
+    //     auto id = inv_pointer->get_mag_current();    // id in A
+    //     dynamic_data_.measuredSpeeds[inverter_ind] = inv_pointer->get_speed();
+    //     dynamic_data_.measuredTorqueCurrents[inverter_ind] = iq;
+    //     dynamic_data_.measuredMagnetizingCurrents[inverter_ind] = id;
 
-        // TODO
-        // data.measuredTorques[inverter_ind] = inv_pointer->get_actual_torque();
-        inverter_ind++;
-    }
+    //     // TODO
+    //     // data.measuredTorques[inverter_ind] = inv_pointer->get_actual_torque();
+    //     inverter_ind++;
+    // }
     return dynamic_data_;
 }

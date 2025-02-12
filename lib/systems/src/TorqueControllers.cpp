@@ -13,7 +13,7 @@ void TorqueControllerSimple::tick(const SysTick_s &tick, const PedalsSystemData_
     {
         // Both pedals are not pressed and no implausibility has been detected
         // accelRequest goes between 1.0 and -1.0
-        float accelRequest = pedalsData.accelPercent - pedalsData.regenPercent;
+        float accelRequest = pedalsData.accel_percent - pedalsData.regen_percent;
         float torqueRequest;
 
         if (accelRequest >= 0.0)
@@ -130,7 +130,7 @@ void TorqueControllerLoadCellVectoring::tick(
             else
             {
                 // Negative torque request
-                
+
                 torquePool = MAX_REGEN_TORQUE * accelRequest * -4.0;
 
                 writeout_.command.speeds_rpm[FL] = 0.0;
@@ -180,7 +180,7 @@ void BaseLaunchController::tick(
 
         current_millis_ = tick.millis;
 
-        int16_t brake_torque_req = pedalsData.regenPercent * MAX_REGEN_TORQUE;
+        int16_t brake_torque_req = pedalsData.regen_percent * MAX_REGEN_TORQUE;
 
         float max_speed = 0;
         for(int i = 0; i < 4; i++){
@@ -206,8 +206,8 @@ void BaseLaunchController::tick(
                 launch_speed_target_ = 0;
                 time_of_launch_ = tick.millis;
                 // check speed is 0 and pedals not pressed
-                if((pedalsData.accelPercent < launch_ready_accel_threshold)
-                && (pedalsData.brakePercent < launch_ready_brake_threshold)
+                if((pedalsData.accel_percent < launch_ready_accel_threshold)
+                && (pedalsData.brake_percent < launch_ready_brake_threshold)
                 && (max_speed < launch_ready_speed_threshold))
                 {
                     launch_state_ = LaunchStates_e::LAUNCH_READY;
@@ -231,11 +231,11 @@ void BaseLaunchController::tick(
                 time_of_launch_ = current_millis_;
 
                 //check speed is 0 and brake not pressed
-                if ((pedalsData.brakePercent >= launch_ready_brake_threshold)
+                if ((pedalsData.brake_percent >= launch_ready_brake_threshold)
                     || (max_speed >= launch_ready_speed_threshold))
                 {
                     launch_state_ = LaunchStates_e::LAUNCH_NOT_READY;
-                } else if(pedalsData.accelPercent >= launch_go_accel_threshold){
+                } else if(pedalsData.accel_percent >= launch_go_accel_threshold){
 
                     initial_ecef_x_ = vn_data->ecef_coords[0];
                     initial_ecef_y_ = vn_data->ecef_coords[1];
@@ -249,8 +249,8 @@ void BaseLaunchController::tick(
             case LaunchStates_e::LAUNCHING:
                 { // use brackets to ignore 'cross initialization' of secs_since_launch
                 //check accel below launch threshold and brake above
-                if((pedalsData.accelPercent <= launch_stop_accel_threshold)
-                || (pedalsData.brakePercent >= launch_ready_brake_threshold))
+                if((pedalsData.accel_percent <= launch_stop_accel_threshold)
+                || (pedalsData.brake_percent >= launch_ready_brake_threshold))
                 {
                     launch_state_ = LaunchStates_e::LAUNCH_NOT_READY;
                 }
@@ -294,7 +294,7 @@ void TorqueControllerSimpleLaunch::calc_launch_algo(const vector_nav* vn_data) {
 void TorqueControllerSlipLaunch::calc_launch_algo(const vector_nav* vn_data) {
     // accelerate at constant speed for a period of time to get body velocity up
     // may want to make this the ht07 launch algo
-    
+
     // makes sure that the car launches at the target launch speed
     launch_speed_target_ = std::max(launch_speed_target_, (float)DEFAULT_LAUNCH_SPEED_TARGET);
 
@@ -347,7 +347,7 @@ void TorqueControllerCASEWrapper::tick(const TCCaseWrapperTick_s &intake)
         writeout_.command.speeds_rpm[i] = intake.command.speeds_rpm[i];
         writeout_.command.torqueSetpoints[i] = intake.command.torqueSetpoints[i];
     }
-    
+
     writeout_.ready = intake.steeringData.status != SteeringSystemStatus_e::STEERING_SYSTEM_ERROR;
-    
+
 }

@@ -14,17 +14,17 @@
     MOVE ME! - ideally into a TorqueControllerDefs.h file
     to prevent circular dependencies
 */
-enum class TorqueLimit_e
-{
-    TCMUX_LOW_TORQUE = 0,
-    TCMUX_MID_TORQUE = 1,
-    TCMUX_FULL_TORQUE = 2,
-    TCMUX_NUM_TORQUE_LIMITS = 3,
-};
+// enum class TorqueLimit_e
+// {
+//     TCMUX_LOW_TORQUE = 0,
+//     TCMUX_MID_TORQUE = 1,
+//     TCMUX_FULL_TORQUE = 2,
+//     TCMUX_NUM_TORQUE_LIMITS = 3,
+// };
 
 /* Enum for the modes on the dial, corresponds directly to dial index pos. */
 enum class DialMode_e
-{   
+{
     /* No torque vectoring */
     MODE_0,
     /* Normal force torque vectoring */
@@ -138,9 +138,9 @@ public:
         Tick DashboardInterface at 10hz to gather data and send CAN message
     */
     void tick10(MCUInterface* mcu,
-                int car_state, 
-                bool buzzer, 
-                bool drivetrain_error, 
+                int car_state,
+                bool buzzer,
+                bool drivetrain_error,
                 TorqueLimit_e torque,
                 float min_cell_voltage,
                 AnalogConversion_s glv_voltage,
@@ -152,7 +152,7 @@ public:
         @return returns a DialMode_e enum with the current dial position
     */
     DialMode_e getDialMode();
-    
+
     /* gets whether the safety system is ok (wtf is a safety system - rename this)*/
     bool safetySystemOK();
 
@@ -182,7 +182,7 @@ public:
     // LEDs in same order as dash rev. 7 placement
 
     /*!
-        setter for the dash LEDs 
+        setter for the dash LEDs
         @param led DashLED_e enum that corresponds to the LED's value in the LED array
         @param color LEDColors_e enum that corresponds to the color/state of the set LED
     */

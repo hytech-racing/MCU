@@ -28,7 +28,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     // REAL
     // if ( (vn_status < 2) || (vn_data.velocity_x < 0) )
     // {
-    //     if 
+    //     if
     //     in.Vx_B = 0;
     // } else {
     //     in.Vx_B = vn_data.velocity_x;
@@ -40,8 +40,8 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
     } else {
         in.Vx_B = vn_data.velocity_x;
     }
-    
-    
+
+
 
     in.TCSVelThreshold = config_.tcsVelThreshold;
 
@@ -183,7 +183,7 @@ DrivetrainCommand_s CASESystem<message_queue>::evaluate(
 
     in.useNL_TCS_SlipSchedule = config_.useNL_TCS_SlipSchedule;
 
-    
+
 
     case_.setExternalInputs(&in);
     if ((tick.millis - last_eval_time_) >= 1)
@@ -285,7 +285,7 @@ template <typename message_queue>
 float CASESystem<message_queue>::calculate_torque_request(const PedalsSystemData_s &pedals_data, float max_regen_torque, float max_rpm)
 {
     // accelRequest goes between 1.0 and -1.0
-    float accelRequest = pedals_data.accelPercent - pedals_data.regenPercent;
+    float accelRequest = pedals_data.accel_percent - pedals_data.regen_percent;
     float torqueRequest;
 
     if (accelRequest >= 0.0)

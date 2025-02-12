@@ -33,7 +33,7 @@ void MCUInterface::measure_shutdown_circuit_input()
     // TODO: change these back to pins from constructor
     bms_ok_high = digitalRead(DEFAULT_BMS_SENSE_PIN);
     imd_ok_high = digitalRead(DEFAULT_IMD_SENSE_PIN);
-    
+
     bspd_ok_high = digitalRead(pins_.pin_bspd_ok_read);
     software_ok_high = digitalRead(pins_.pin_software_ok_read);
     brb_ok_high = digitalRead(pins_.pin_brb_ok_read);
@@ -96,7 +96,7 @@ bool MCUInterface::get_bots_ok()
 void MCUInterface::enqueue_CAN_mcu_status()
 {
     CAN_message_t msg;
-    
+
     msg.id = Pack_MCU_STATUS_hytech(&mcu_status_, msg.buf, &msg.len, (uint8_t*) &msg.flags.extended);
 
     uint8_t buf[sizeof(CAN_message_t)] = {};
@@ -118,7 +118,7 @@ void MCUInterface::update_mcu_status_CAN()
     mcu_status_.shutdown_c_above_threshold = shutdown_c_above_threshold;
     mcu_status_.shutdown_d_above_threshold = shutdown_d_above_threshold;
     mcu_status_.shutdown_e_above_threshold = shutdown_e_above_threshold;
-    
+
 }
 
 // Main loop
@@ -176,11 +176,11 @@ void MCUInterface::update_mcu_status_CAN_buzzer(bool is_on)
 void MCUInterface::update_mcu_status_CAN_pedals(const PedalsSystemData_s &pedals)
 {
     // PedalSystem returns struct in main loop
-    mcu_status_.brake_pedal_active = pedals.brakePressed;
+    mcu_status_.brake_pedal_active = pedals.brake_is_pressed;
     // mcu_status_.set_mech_brake_active();
-    mcu_status_.no_accel_implausibility = !pedals.accelImplausible;
-    mcu_status_.no_brake_implausibility = !pedals.brakeImplausible;
-    mcu_status_.no_accel_or_brake_implausibility = !(pedals.brakeAndAccelPressedImplausibility);
+    mcu_status_.no_accel_implausibility = !pedals.accel_is_implausible;
+    mcu_status_.no_brake_implausibility = !pedals.brake_is_implausible;
+    mcu_status_.no_accel_or_brake_implausibility = !(pedals.brake_and_accel_pressed_implausibility_high);
 }
 
 void MCUInterface::tick(int fsm_state,
@@ -209,5 +209,5 @@ void MCUInterface::tick(int fsm_state,
     update_mcu_status_CAN();
     // Push into buffer
     enqueue_CAN_mcu_status();
-    set_brake_light(pedals_data.brakePressed);
+    set_brake_light(pedals_data.brake_is_pressed);
 }

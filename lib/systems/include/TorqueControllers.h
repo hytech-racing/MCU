@@ -50,7 +50,8 @@ const float launch_stop_accel_threshold = .5;
 
 const DrivetrainCommand_s TC_COMMAND_NO_TORQUE = {
     .speeds_rpm = {0.0, 0.0, 0.0, 0.0},
-    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}};
+    .torqueSetpoints = {0.0, 0.0, 0.0, 0.0}
+};
 
 struct TorqueControllerOutput_s
 {

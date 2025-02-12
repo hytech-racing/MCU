@@ -449,13 +449,13 @@ void loop()
         Serial.print("Accel 2 raw: ");
         Serial.println(a1.get().conversions[MCU15_ACCEL2_CHANNEL].raw);
         Serial.print("Accel percent: ");
-        Serial.println(pedals_system.getPedalsSystemDataCopy().accelPercent);
+        Serial.println(pedals_system.getPedalsSystemDataCopy().accel_percent);
         Serial.print("Brake 1 raw: ");
         Serial.println(a1.get().conversions[MCU15_BRAKE1_CHANNEL].raw);
         Serial.print("Brake 2 raw: ");
         Serial.println(a1.get().conversions[MCU15_BRAKE2_CHANNEL].raw);
         Serial.print("Brake percent: ");
-        Serial.println(pedals_system.getPedalsSystemDataCopy().brakePercent);
+        Serial.println(pedals_system.getPedalsSystemDataCopy().brake_percent);
         Serial.println();
         Serial.print("Derating factor: ");
         Serial.println(ams_interface.get_acc_derate_factor());
@@ -467,7 +467,7 @@ void loop()
 
         Serial.println();
     }
-    
+
 }
 
 /*
@@ -539,10 +539,10 @@ void tick_all_interfaces(const SysTick_s &current_system_tick)
             &inv.fr,
             &inv.rl,
             &inv.rr,
-            data2.accelImplausible,
-            data2.brakeImplausible,
-            data2.accelPercent,
-            data2.brakePercent,
+            data2.accel_is_implausible,
+            data2.brake_is_implausible,
+            data2.accel_percent,
+            data2.brake_percent,
             a1.get().conversions[MCU15_ACCEL1_CHANNEL],
             a1.get().conversions[MCU15_ACCEL2_CHANNEL],
             a1.get().conversions[MCU15_BRAKE1_CHANNEL],
@@ -591,14 +591,14 @@ void tick_all_systems(const SysTick_s &current_system_tick)
         a1.get().conversions[MCU15_BRAKE1_CHANNEL],
         a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
 
-    // accel 1 only accel 2 dead, brake normal 
+    // accel 1 only accel 2 dead, brake normal
     // pedals_system.tick(
     //     current_system_tick,
     //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
     //     a1.get().conversions[MCU15_ACCEL1_CHANNEL],
     //     a1.get().conversions[MCU15_BRAKE1_CHANNEL],
     //     a1.get().conversions[MCU15_BRAKE2_CHANNEL]);
-    // accel 2 only accel 1 dead, brake normal 
+    // accel 2 only accel 1 dead, brake normal
     // pedals_system.tick(
     //     current_system_tick,
     //     a1.get().conversions[MCU15_ACCEL2_CHANNEL],

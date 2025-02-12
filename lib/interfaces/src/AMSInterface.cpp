@@ -12,7 +12,7 @@ void AMSInterface::enqueue_new_CAN(U* structure, uint32_t (* pack_function)(U*, 
 }
 
 void AMSInterface::init(SysTick_s &initial_tick) {
-    
+
     // Set pin mode
     pinMode(pin_software_ok_, OUTPUT);
 
@@ -30,9 +30,9 @@ void AMSInterface::init(SysTick_s &initial_tick) {
 }
 
 void AMSInterface::set_start_state() {
-    
+
     digitalWrite(pin_software_ok_, HIGH);
-    
+
 }
 
 //SETTERS//
@@ -84,28 +84,46 @@ float AMSInterface::initialize_charge() {
     //         Management System (BMS). This is stored in the bms_voltages_
     //         member variable.
 
+    // tracking index for search in VOLTAGE_LOOKUP_TABLE
+    int i = 0;
+
+    // retrieving the lowest voltage from the member variable.
+    float lowest_voltage = HYTECH_low_voltage_ro_fromS(bms_voltages_.low_voltage_ro);
+
     // Step 3: Use the lowest voltage with the defined VOLTAGE_LOOKUP_TABLE
     //         to determine the approximate percentage charge of the
     //         accumulator.
 
+    // i gives index which can be used to found the percentage charge.
+    while (lowest_voltage < VOLTAGE_LOOKUP_TABLE[i]) {
+        i++;
+    }
+
     // Step 4: Initialize the charge_ member variable to the current charge
+    // using the formula given in the training module.
+    charge_ = (static_cast<float>(100.0f - i) / 100.0f) * MAX_PACK_CHARGE;
+
+
+    // charge_ member variable to current charge. multiply by something
 
     // Step 5: Initialize the SoC_ member variable.
+    // as per the formula given in the training module.
+    SoC_ = 100 - i;
 
     // Step 6: Return the current charge, according to the specifications.
 
-    return 0; // TODO: Return the real value
-    
+    return charge_; // TODO: Return the real value
+
 }
 
 void AMSInterface::calculate_SoC_em(const SysTick_s &tick) {
     unsigned long delta_time_micros = tick.micros - last_tick_.micros;
-    
+
     float current = HYTECH_em_current_ro_fromS(em_measurements_.em_current_ro); // Current in amps
-    
+
     // coulombs = amps * microseconds * (1sec / 1000000 microsec)
     charge_ -= (current * delta_time_micros) / 1000000;
-    
+
     SoC_ = (charge_ / MAX_PACK_CHARGE) * 100;
 }
 
@@ -140,7 +158,7 @@ void AMSInterface::tick(const SysTick_s &tick) {
 
     // If AMSInterface has a valid reading in bms_voltages_ and enough time has passed since init(), then initialize charge
     if (!has_initialized_charge_ && ((tick.millis - timestamp_start_) >= DEFAULT_INITIALIZATION_WAIT_INTERVAL)) {
-    
+
         initialize_charge();
         has_initialized_charge_ = true;
 
@@ -175,7 +193,7 @@ void AMSInterface::retrieve_voltage_CAN(CAN_message_t &can_msg) {
         has_received_bms_voltage_ = true;
         timestamp_start_ = last_tick_.millis;
     }
-    
+
 }
 
 void AMSInterface::retrieve_em_measurement_CAN(CAN_message_t &can_msg) {
@@ -200,13 +218,13 @@ void AMSInterface::calculate_acc_derate_factor() {
     float temp_lim_min = 0.2;
 
     float filtered_min_cell_voltage = get_filtered_min_cell_voltage();
-    //float_map equivalient because new code is bad 
+    //float_map equivalient because new code is bad
     voltage_lim_factor = (filtered_min_cell_voltage - startDerateVoltage) * (voltage_lim_min - voltage_lim_max) / (endDerateVoltage - startDerateVoltage) + voltage_lim_max;
     voltage_lim_factor = max(min(voltage_lim_max, voltage_lim_factor), voltage_lim_min);
 
     temp_lim_factor = (filtered_max_cell_temp - startDerateTemp) * (temp_lim_min - temp_lim_max) / (stopDerateTemp - startDerateTemp) + temp_lim_max;
     temp_lim_factor = max(min(temp_lim_factor, temp_lim_max), temp_lim_min);
-    
+
     acc_derate_factor = min(temp_lim_factor,voltage_lim_factor);
 }
 
