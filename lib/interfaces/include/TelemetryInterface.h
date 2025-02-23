@@ -6,7 +6,7 @@
 #include "HyTech_CAN.h"
 
 #include "MessageQueueDefine.h"
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 #include "SteeringEncoderInterface.h"
 #include "hytech.h"
 #include "InverterInterface.h"

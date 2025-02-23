@@ -2,7 +2,7 @@
 #define __STEERINGSYSTEM_H__
 
 #include "SteeringEncoderInterface.h"
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 #include "Filter_IIR.h"
 #include "SysClock.h"
 #include "TelemetryInterface.h"

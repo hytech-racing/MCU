@@ -4,7 +4,7 @@
 #include <Utility.h>
 #include <DrivetrainSystem.h>
 #include <PedalsSystem.h>
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
 #include "VectornavInterface.h"

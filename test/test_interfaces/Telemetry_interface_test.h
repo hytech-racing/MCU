@@ -8,7 +8,7 @@
 #include "MessageQueueDefine.h"
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 #include "SteeringEncoderInterface.h"
 
 CANBufferType CAN_tx_test;

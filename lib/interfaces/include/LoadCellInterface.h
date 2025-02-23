@@ -3,7 +3,7 @@
 
 #include "Utility.h"
 #include "SysClock.h"
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 
 /* Structs */
 

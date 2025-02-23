@@ -2,7 +2,7 @@
 #define PEDALSSYSTEM
 #include <math.h>
 #include <tuple>
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 
 #include "SysClock.h"
 

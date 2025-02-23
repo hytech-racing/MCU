@@ -10,12 +10,12 @@ enum class AnalogSensorStatus_e
     ANALOG_SENSOR_CLAMPED = 1,
 };
 
-struct AnalogConversion_s
-{
-    int raw;
-    float conversion;
-    AnalogSensorStatus_e status;
-};
+// struct AnalogConversion_s
+// {
+//     int raw;
+//     float conversion;
+//     AnalogSensorStatus_e status;
+// };
 
 template <int N>
 struct AnalogConversionPacket_s

@@ -2,7 +2,7 @@
 #define __LOADCELLINTERFACE_H__
 
 #include "Utility.h"
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 
 /* Structs */
 

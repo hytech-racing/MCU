@@ -5,9 +5,10 @@
 #include "FlexCAN_T4.h"
 #include "HyTech_CAN.h"
 #include "MessageQueueDefine.h"
-#include "AnalogSensorsInterface.h"
-#include "hytech.h"
 #include "Thermistor.h"
+#include "hytech.h"
+#include "SharedFirmwareTypes.h"
+//#include "Thermistor.h"
 
 const int MCU15_NUM_THERMISTORS = 2;
 const int MCU15_THERM_FL_CHANNEL = 0;

@@ -9,7 +9,7 @@
 #include <SteeringSystem.h>
 
 
-#include "AnalogSensorsInterface.h"
+#include "SharedFirmwareTypes.h"
 #include "DashboardInterface.h"
 #include "PhysicalParameters.h"
 #include "TorqueControllers.h"
